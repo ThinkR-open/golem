@@ -1,0 +1,12 @@
+Package: createshinytemplate
+Title: RStudio Project Templates for Shinyapps
+Author: Vincent Guyader
+Maintainer: Vincent Guyader <vincent@thinkr.fr>
+Version: 0.0.1
+Description: Create a shiny project template in Rstudio.
+Depends: R (>= 3.0)
+License: GPL (>= 2)
+Encoding: UTF-8
+LazyData: true
+Imports: devtools
+RoxygenNote: 6.0.1

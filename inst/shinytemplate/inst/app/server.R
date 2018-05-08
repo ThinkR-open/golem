@@ -1,0 +1,1 @@
+shinytemplate:::app_server
