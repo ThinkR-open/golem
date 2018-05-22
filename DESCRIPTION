@@ -1,4 +1,4 @@
-Package: createshinytemplate
+Package: shinytemplate
 Title: RStudio Project Templates for Shinyapps
 Author: Vincent Guyader
 Maintainer: Vincent Guyader <vincent@thinkr.fr>
