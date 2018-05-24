@@ -2,7 +2,7 @@ Package: shinyexample
 Title: A shiny template
 Version: 0.1
 Authors@R: person("Vincent", "Guyader", email = "vincent@thinkr.fr", role = c("aut", "cre"))
-Description: Propose un cadre de construction d'application Shiny. Pour se rendre service, et proposer un code propre le plus prod-ready possible. 
+Description: A template for prod-ready Shiny App.
 License: GPL-3
 Depends:
     R (>= 3.4.3)
