@@ -1,12 +1,14 @@
 Package: shinytemplate
-Title: RStudio Project Templates for Shinyapps
+Title: RStudio Project Templates for Prod-ready Shinyapps
 Author: Vincent Guyader
-Maintainer: Vincent Guyader <vincent@thinkr.fr>
-Version: 0.0.1
-Description: Create a shiny project template in Rstudio.
+Version: 0.0.0.9000
+Description: Create a prod-ready shiny app with this RStudio project template.
 Depends: R (>= 3.0)
-License: GPL (>= 2)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: devtools
 RoxygenNote: 6.0.1
+Authors@R: person('Vincent', 'Guyader', email = 'vincent@thinkr.fr', role = c('cre', 'aut'))
+URL: https://github.com/ThinkR-open/shinytemplate
+BugReports: https://github.com/ThinkR-open/shinytemplate
