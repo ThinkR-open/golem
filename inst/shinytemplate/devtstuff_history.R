@@ -36,11 +36,11 @@ my_desc$set("BugReports", "https://github.com/ThinkR-open/shinytemplate")
 my_desc$write(file = "DESCRIPTION")
 
 # If you want to use the MIT licence, code of conduct, lifecycle badge, and README
-use_mit_license(name = "ThinkR")
-use_code_of_conduct()
-use_lifecycle_badge("Experimental")
-use_news_md()
-use_readme_rmd()
+usethis::use_mit_license(name = "ThinkR")
+usethis::use_readme_rmd()
+usethis::use_code_of_conduct()
+usethis::use_lifecycle_badge("Experimental")
+usethis::use_news_md()
 
 # For data 
 usethis::use_data_raw()
