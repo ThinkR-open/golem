@@ -13,7 +13,7 @@ library(desc)
 # Create and clean desc
 my_desc <- description$new("DESCRIPTION")
 # Set your package name
-my_desc$set("Package", "shinytemplate")
+my_desc$set("Package", "shinyexample")
 
 #Set your name
 my_desc$set("Authors@R", "person('Vincent', 'Guyader', email = 'vincent@thinkr.fr', role = c('cre', 'aut'))")
@@ -30,8 +30,8 @@ my_desc$set(Title = "RStudio Project Templates for Prod-ready Shinyapps")
 my_desc$set(Description = "Create a prod-ready shiny app with this RStudio project template.")
 
 # The urls
-my_desc$set("URL", "https://github.com/ThinkR-open/shinytemplate")
-my_desc$set("BugReports", "https://github.com/ThinkR-open/shinytemplate")
+my_desc$set("URL", "https://github.com/ThinkR-open/shinyexample")
+my_desc$set("BugReports", "https://github.com/ThinkR-open/shinyexample")
 # Save everyting
 my_desc$write(file = "DESCRIPTION")
 
@@ -61,7 +61,7 @@ usethis::use_package("glue")
 usethis::use_tidy_description()
 
 # Vignette
-usethis::use_vignette("shinytemplate")
+usethis::use_vignette("shinyexample")
 devtools::build_vignettes()
 
 # Codecov

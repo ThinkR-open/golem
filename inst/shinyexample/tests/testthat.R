@@ -1,4 +1,4 @@
 library(testthat)
-library(shinytemplate)
+library(shinyexample)
 
-test_check("shinytemplate")
+test_check("shinyexample")
