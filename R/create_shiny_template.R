@@ -19,7 +19,6 @@ create_shiny_template <- function(path, ...) {
   file.copy(from = ll, to = path, overwrite = TRUE, recursive = TRUE)
   
   t <- list.files(path,all.files = TRUE,recursive = TRUE,include.dirs = FALSE,full.names = TRUE)
-  browser() 
   for ( i in t){
     message(i)
     try(replace_word(file =   i,
