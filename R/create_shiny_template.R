@@ -3,6 +3,12 @@
 #' @param path path to create
 #' @param ... not used
 #' @export
+#' 
+# DESCRIPTION
+# inst/app/server.R
+# inst/app/UI.R
+# run_dev_mod
+
 create_shiny_template <- function(path, ...) {
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
   devtools::create(path = path)
@@ -11,4 +17,24 @@ create_shiny_template <- function(path, ...) {
   # remove `..`
   ll <- ll[ ! grepl("\\.\\.$",ll)]
   file.copy(from = ll, to = path, overwrite = TRUE, recursive = TRUE)
-}
+  t <- c("DESCRIPTION",
+         "inst/app/server.R",
+         "inst/app/UI.R",
+         "inst/R/onload.R",
+         "inst/dev/run_dev_mod_csv_fileinput.R"
+         )
+   for ( i in file.path(path,t)){
+    message(i)
+    try(replace_word(file =   i,
+                 pattern = "shinyexample",
+                 replace = basename(path)
+    ))
+  }
+  print("fin")
+  # DESCRIPTION
+  # inst/app/server.R
+  # inst/app/UI.R
+  # run_dev_mod
+  
+  
+  }
