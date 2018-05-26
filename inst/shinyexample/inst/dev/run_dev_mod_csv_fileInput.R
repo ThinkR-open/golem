@@ -8,7 +8,7 @@ devtools::document('.')
 devtools::load_all('.')
 options(app.prod=FALSE) # TRUE = production mode, FALSE = development mode
 
-# example("mod_csv_fileInput",package = "shinytemplate") # PR welcome 
+# example("mod_csv_fileInput",package = "shinyexample") # PR welcome 
 library(shiny)
 library(DT)
 if (interactive()){

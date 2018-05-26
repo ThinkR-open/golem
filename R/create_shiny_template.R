@@ -6,7 +6,7 @@
 create_shiny_template <- function(path, ...) {
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
   devtools::create(path = path)
-  from <- system.file("shinytemplate",package = "shinytemplate")
+  from <- system.file("shinyexample",package = "shinytemplate")
   ll <- list.files(path = from, full.names = TRUE, all.files = TRUE)
   # remove `..`
   ll <- ll[ ! grepl("\\.\\.$",ll)]
