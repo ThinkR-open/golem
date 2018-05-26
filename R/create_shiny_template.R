@@ -17,12 +17,8 @@ create_shiny_template <- function(path, ...) {
   # remove `..`
   ll <- ll[ ! grepl("\\.\\.$",ll)]
   file.copy(from = ll, to = path, overwrite = TRUE, recursive = TRUE)
-  t <- c("DESCRIPTION",
-         "inst/app/server.R",
-         "inst/app/UI.R",
-         "inst/R/onload.R",
-         "inst/dev/run_dev_mod_csv_fileinput.R"
-         )
+  
+  t <- list.files(path,all.files = TRUE,recursive = TRUE,include.dirs = FALSE,full.names = TRUE)
    for ( i in file.path(path,t)){
     message(i)
     try(replace_word(file =   i,
