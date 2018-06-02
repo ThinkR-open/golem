@@ -31,7 +31,7 @@ my_desc$set(Description = "Create a prod-ready shiny app with this RStudio proje
 
 # The urls
 my_desc$set("URL", "https://github.com/ThinkR-open/shinyexample")
-my_desc$set("BugReports", "https://github.com/ThinkR-open/shinyexample")
+my_desc$set("BugReports", "https://github.com/ThinkR-open/shinyexample/issues")
 # Save everyting
 my_desc$write(file = "DESCRIPTION")
 
