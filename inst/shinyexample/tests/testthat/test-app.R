@@ -1,7 +1,7 @@
 context("Application")
 library(shiny)
 test_that("app ui", {
-  ui <- shinytemplate:::app_ui()
+  ui <- shinyexample:::app_ui()
   expect_is(ui, "shiny.tag.list")
 })
 
@@ -19,7 +19,7 @@ test_that("app ui", {
 # 
 #   input <- as.environment(list())
 #   output <- as.environment(list())
-#   serv <- shinytemplate:::app_server(input = input,
+#   serv <- shinyexample:::app_server(input = input,
 #                                      output = output,
 #                                      session = session)
 #   expect_is(serv, "shiny.render.function")

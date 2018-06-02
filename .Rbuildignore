@@ -1,3 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^devtools_history\.R$
+^README\.Rmd$
+^readme_figures$
+^LICENSE\.md$
+^CODE_OF_CONDUCT\.md$
