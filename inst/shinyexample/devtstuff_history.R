@@ -7,6 +7,9 @@
 # install.packages("devtools")
 # install.packages("usethis")
 
+# Hide this file from build
+usethis::use_build_ignore("devstuff_history.R")
+
 # DESCRIPTION 
 
 library(desc)
