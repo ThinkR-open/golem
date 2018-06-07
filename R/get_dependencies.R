@@ -1,6 +1,6 @@
 #' return all package dependencies from current package
 #'
-#' @param path path to the package source folder
+#' @param path path to the DESCRIPTION file
 #' @param dput if FALSE return a vector instead of dput output
 #' @param field DESCRIPTION fied to parse, Import and Depends by default
 #'
@@ -11,8 +11,8 @@
 #' list_imports()
 #' }
 #' @importFrom magrittr %>% 
-get_dependencies <- function(path='.',dput=TRUE,field=c('Depends','Imports')){
-  out <- read.dcf("DESCRIPTION")[,field] %>%
+get_dependencies <- function(path="DESCRIPTION",dput=TRUE,field=c('Depends','Imports')){
+  out <- read.dcf(path)[,field] %>%
     gsub(pattern = "\n",replacement = "") %>%
     strsplit(",") %>%
     unlist() %>% 
