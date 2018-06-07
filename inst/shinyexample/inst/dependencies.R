@@ -2,11 +2,7 @@
 # dependances needed to launch the app ()
 
 # this instruction create the vector you need
-# read.dcf("DESCRIPTION")[,"Imports"] %>%
-#   str_replace_all("\n","") %>% 
-#   str_split(",") %>% 
-#   unlist() %>% 
-#   dput()
+# shinytemplate:::get_dependencies()
 
 
 to_install <- c("DT",
