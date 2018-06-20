@@ -11,6 +11,7 @@
 #' list_imports()
 #' }
 #' @importFrom magrittr %>% 
+#' @importFrom stats setNames
 get_dependencies <- function(path="DESCRIPTION",dput=TRUE,field=c('Depends','Imports')){
   out <- read.dcf(path)[,field] %>%
     gsub(pattern = "\n",replacement = "") %>%

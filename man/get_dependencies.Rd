@@ -4,10 +4,11 @@
 \alias{get_dependencies}
 \title{return all package dependencies from current package}
 \usage{
-get_dependencies(path = ".", dput = TRUE, field = c("Depends", "Imports"))
+get_dependencies(path = "DESCRIPTION", dput = TRUE, field = c("Depends",
+  "Imports"))
 }
 \arguments{
-\item{path}{path to the package source folder}
+\item{path}{path to the DESCRIPTION file}
 
 \item{dput}{if FALSE return a vector instead of dput output}
 

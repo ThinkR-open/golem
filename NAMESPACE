@@ -3,3 +3,4 @@
 export(create_shiny_template)
 export(get_dependencies)
 importFrom(magrittr,"%>%")
+importFrom(stats,setNames)
