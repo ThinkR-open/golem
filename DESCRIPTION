@@ -1,6 +1,6 @@
 Package: golem
 Title: Template for Prod-Ready, Robust Shiny Applications
-Version: 0.0.21
+Version: 0.0.0.9000
 Authors@R: c(
   person('Vincent', 'Guyader', email = 'vincent@thinkr.fr', role = c('cre', 'aut')),
   person('Colin', 'Fay', email = 'contact@colinfay.me', role = c('aut'), comment = c(ORCID = "0000-0001-7343-1846")), 
