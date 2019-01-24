@@ -7,6 +7,7 @@ output: github_document
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  eval = FALSE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
@@ -34,7 +35,7 @@ remotes::install_github("Thinkr-open/golem")
 
 Create a new package with the project template: 
 
-![](readme_figures/b1.png)
+![](readme_figures/golemtemplate.png)
 
 ## Step by step guide 
 
@@ -46,7 +47,7 @@ You can follow it step by step of skip some if you'd like.
 
 `golem::fill_desc()` allows to fill the DESCRIPTION quickly.
 
-```{r eval = FALSE}
+```{r}
 golem::fill_desc(
   pkg_name = , # The Name of the package containing the App 
   pkg_title = , # The Title of the package containing the App 
@@ -113,22 +114,21 @@ There's a series of tools to make your app behave differently whether it's in de
 
 Setting this options at the beginning of your dev process allows to make your app behave in a specific way when you are in dev mode. For example, printing message to the console with `cat_dev()`.
 
-```{r}
+```{r eval = TRUE}
 options( "golem.app.prod" = TRUE)
-cat_dev("hey\n")
+golem::cat_dev("hey\n")
 options( "golem.app.prod" = FALSE)
-cat_dev("hey\n")
+golem::cat_dev("hey\n")
 ```
 
 You can then make any function being "dev-dependant" with the `make_dev()` function: 
 
-```{r}
-log_dev <- make_dev(log)
+```{r eval = TRUE}
+log_dev <- golem::make_dev(log)
 log_dev(10)
 options( "golem.app.prod" = TRUE)
 log_dev(10)
 ```
-
 
 Read our blog post for more info about the content: 
 
