@@ -1,3 +1,8 @@
+#' Make a function dependent to dev mode
+#'
+#' @param fun A function
+#'
+#' @export
 make_dev <- function(fun){
   function(...){
     if ( golem::app_dev() ){
@@ -25,7 +30,7 @@ app_prod <- function(){
 #' @rdname prod
 #' @export
 app_dev <- function(){
-  !app_prod()
+  !golem::app_prod()
 }
 
 #' Run cat when in dev mode
