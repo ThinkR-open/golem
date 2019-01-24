@@ -112,10 +112,7 @@ thisui <- function(id){
   
   )
 }
-    
-#' @importFrom shiny tagList NS
-# mod_server
-# mod_server
+
 this <- function(input, output, session){
   ns <- session$ns
 }
