@@ -1,4 +1,4 @@
 Binding: create_shiny_template
 Title: R package for shiny app
-OpenFiles: DESCRIPTION
-Icon: shiny.png
+OpenFiles: dev/dev_history.R
+Icon: golem.png

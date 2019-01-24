@@ -1,0 +1,90 @@
+# Building a Prod-Ready, Robust Shiny Application.
+# 
+# Each step is optional. 
+# 
+# 1 - On init
+# 
+## 1.1 - Fill the descripion
+## 
+## Add information about the package that will contain your app
+
+golem::fill_desc(
+  pkg_name = , # The Name of the package containing the App 
+  pkg_title = , # The Title of the package containing the App 
+  pkg_description = , # The Description of the package containing the App 
+  author_first_name = , # Your First Name
+  author_last_name = , # Your Last Name
+  author_email = , # Your Email
+  repo_url = ) # The (optional) URL of the GitHub Repo
+
+## 1.2 - Set common Files 
+## 
+## If you want to use the MIT licence, README, code of conduct, lifecycle badge, and news
+
+usethis::use_mit_license(name = "Your Name")
+usethis::use_readme_rmd()
+usethis::use_code_of_conduct()
+usethis::use_lifecycle_badge("Experimental")
+usethis::use_news_md()
+
+## 1.3 - Add a data-raw folder
+## 
+## If you have data in your package
+usethis::use_data_raw()
+
+## 1.4 - Init Tests
+## 
+## Create a template for tests
+
+usethis::use_testthat()
+
+## 1.5 : Use Recommended Package
+
+golem::use_recommended_dep()
+
+## 1. Add various tools
+
+golem::use_utils_ui()
+golem::use_utils_server()
+
+## 1.6 : Create your first module
+## 
+## Add a module file in your R folder
+
+golem::add_module(name = ) #
+
+# 2. All along your project
+
+## 2. Add modules
+## 
+
+golem::add_module( name = )# Name of the module 
+
+## 2. Add dependencies
+
+usethis::use_package("pkg") # To call each time you need a new package
+
+## 2. Add tests
+## 
+golem::use_recommended_tests()
+usethis::use_test("app")
+
+# 3. Documentation
+
+## 3. Vignette
+usethis::use_vignette("shinyexample")
+devtools::build_vignettes()
+
+## 3. Code coverage
+usethis::use_travis()
+usethis::use_appveyor()
+usethis::use_coverage()
+
+# 4. Test my package
+
+devtools::test()
+rhub::check_for_cran()
+
+# 5. Deployment element
+
+golem::add_rconnect_file()

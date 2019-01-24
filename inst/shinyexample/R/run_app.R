@@ -1,17 +1,7 @@
 #' run the Shiny Application
 #'
-#'
 #' @export
-#' @importFrom shiny shinyApp
-#'
-#' @examples
-#'
-#' if (interactive()) {
-#'
-#'   run_app()
-#'
-#' }
-#'
+#' @importFrom shiny runApp
 run_app <- function() {
-  shinyApp(ui = app_ui(), server = app_server)
+  shiny::runApp(system.file("app", package = "shinytemplate"))
 }

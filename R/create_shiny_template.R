@@ -1,6 +1,6 @@
-#' Create a Rstudio Project dedicated to shinyapp
+#' Create a package for Shiny App
 #'
-#' @param path path to create
+#' @param path Where to create the package
 #' @param ... not used
 #' @export
 #' 
@@ -12,7 +12,7 @@
 create_shiny_template <- function(path, ...) {
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
   devtools::create(path = path)
-  from <- system.file("shinyexample",package = "shinytemplate")
+  from <- system.file("shinyexample",package = "golem")
   ll <- list.files(path = from, full.names = TRUE, all.files = TRUE)
   # remove `..`
   ll <- ll[ ! grepl("\\.\\.$",ll)]
@@ -26,11 +26,5 @@ create_shiny_template <- function(path, ...) {
                  replace = basename(path)
     ))
   }
-  print("fin")
-  # DESCRIPTION
-  # inst/app/server.R
-  # inst/app/UI.R
-  # run_dev_mod
-  
-  
-  }
+  print("done")
+}
