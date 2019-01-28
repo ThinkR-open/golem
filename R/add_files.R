@@ -47,9 +47,13 @@ add_module <- function(name, pkg = "."){
 #' @export
 add_rconnect_file <- function(pkg = "."){
   where <- file.path(pkg, "app.R")
+  write_there <- function(..., here = where){
+    write(..., here, append = TRUE)
+  }
   file.create( where )
   usethis::use_build_ignore( where )
-  write("pkgload::load_all()", where)
-  write("run_app()", where)
+  write_there("pkgload::load_all()")
+  write_there("options( \"golem.app.prod\" = TRUE)")
+  write_there("shinyApp(app_ui(), app_server)")
   file.edit( where )
 }
