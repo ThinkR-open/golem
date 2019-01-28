@@ -17,7 +17,8 @@ Imports:
     magrittr,
     usethis,
     glue,
-    desc
+    desc,
+    cli
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0

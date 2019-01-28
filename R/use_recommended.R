@@ -3,6 +3,8 @@
 #' `shiny`, `DT`, `attempt`, `glue`
 #'
 #' @inheritParams add_module
+#' @importFrom cli cat_bullet
+#' 
 #'
 #' @export
 use_recommended_dep <- function(pkg = "."){
@@ -12,6 +14,7 @@ use_recommended_dep <- function(pkg = "."){
   usethis::use_package("DT")
   usethis::use_package("attempt")
   usethis::use_package("glue")
+  cat_bullet("Dependencies added", bullet = "tick", bullet_col = "green")
 }
 
 use_recommended_tests <- function(pkg = "."){

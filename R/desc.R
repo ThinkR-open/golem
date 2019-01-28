@@ -11,7 +11,7 @@
 #' 
 #' @importFrom desc description
 #' @importFrom glue glue
-#'
+#' @importFrom cli cat_bullet
 #' @export
 fill_desc <- function(
   pkg_name, 
@@ -35,6 +35,7 @@ fill_desc <- function(
   if_not_null(repo_url, desc$set("URL", repo_url))
   if_not_null(repo_url, desc$set("BugReports", glue("{repo_url}/issues")))
   desc$write(file = "DESCRIPTION")
+  cat_bullet("DESCRIPTION modified", bullet = "tick", bullet_col = "green")
 }
 
 

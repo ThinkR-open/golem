@@ -5,6 +5,7 @@
 #' 
 #' @export
 #' @importFrom glue glue
+#' @importFrom cli cat_bullet
 
 add_module <- function(name, pkg = "."){
   old <- setwd(normalizePath(pkg))
@@ -37,13 +38,14 @@ add_module <- function(name, pkg = "."){
   write_there("# To be copied in the server")
   write_there(glue('callModule(%name%, "%name%ui")'))
   write_there(" ")
+  cat_bullet("File created", bullet = "tick", bullet_col = "green")
   file.edit(where)
 }
 
 #' Add an app.R at the root of your package to deploy on RStudio Connect
 #'
 #' @inheritParams add_module
-#'
+#' @importFrom cli cat_bullet
 #' @export
 add_rconnect_file <- function(pkg = "."){
   where <- file.path(pkg, "app.R")
@@ -54,6 +56,10 @@ add_rconnect_file <- function(pkg = "."){
   usethis::use_build_ignore( where )
   write_there("pkgload::load_all()")
   write_there("options( \"golem.app.prod\" = TRUE)")
-  write_there("shinyApp(app_ui(), app_server)")
+  write_there("run_app()")
+  cat_bullet("File created", bullet = "tick", bullet_col = "green")
+  cat_bullet("To deploy, run:")
+  cat("rsconnect::deployApp()\n")
   file.edit( where )
+  
 }
