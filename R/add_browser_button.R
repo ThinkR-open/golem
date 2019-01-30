@@ -13,6 +13,7 @@ add_browser_button <- function(){
   cat_line('  browser()')
   cat_line('})')
   cat_line()
-  cat_line("To show this button, open your web browser JavaScript console")
+  cat_line("By default, this button will be hidden.")
+  cat_line("To show it, open your web browser JavaScript console")
   cat_line("And run $('#browser').show();")
 }
