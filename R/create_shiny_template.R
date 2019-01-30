@@ -3,12 +3,6 @@
 #' @param path Where to create the package
 #' @param ... not used
 #' @export
-#' 
-# DESCRIPTION
-# inst/app/server.R
-# inst/app/UI.R
-# run_dev_mod
-
 create_shiny_template <- function(path, ...) {
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
   devtools::create(path = path)
