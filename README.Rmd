@@ -55,7 +55,7 @@ golem::fill_desc(
   author_first_name = , # Your First Name
   author_last_name = , # Your Last Name
   author_email = , # Your Email
-  repo_url = ) # The (optional) URL of the GitHub Repo
+  repo_url = NULL) # The (optional) URL of the GitHub Repo
 ```
 
 ### Set common Files 
@@ -163,9 +163,19 @@ This creates a simple file at the root of the package, to be used to deploy to R
 golem::add_rconnect_file()
 ```
 
+### Tool series 
+
+This package is designed to work well with : 
+
+- {shinipsum} - https://github.com/ThinkR-open/shinipsum
+
 ### Know more 
 
-Read our blog post for more info about the content: 
+#### Building big Shiny Apps : 
+
+- Part 1:  <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
+
+#### Blog post Read our blog post for more info about the content: 
 
 <https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app/?noredirect=en_US>
 
