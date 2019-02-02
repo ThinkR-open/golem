@@ -19,6 +19,6 @@ Return all package dependencies from current package
 }
 \examples{
 \dontrun{
-list_imports()
+get_dependencies()
 }
 }

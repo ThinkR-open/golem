@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right'}}
 
-Create a prod-ready shiny app with this RStudio project template.
+Create a prod-ready Shiny application with this RStudio project template and tools.
 }
 \seealso{
 Useful links:
