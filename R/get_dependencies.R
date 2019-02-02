@@ -8,16 +8,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' list_imports()
+#' get_dependencies()
 #' }
-#' @importFrom magrittr %>% 
 #' @importFrom stats setNames
 get_dependencies <- function(path="DESCRIPTION",dput=TRUE,field=c('Depends','Imports')){
-  out <- read.dcf(path)[,field] %>%
-    gsub(pattern = "\n",replacement = "") %>%
-    strsplit(",") %>%
-    unlist() %>% 
-    setNames(NULL)
+  out <- read.dcf(path)[,field] 
+  out <-  gsub(pattern = "\n",replacement = "", out) 
+  out <- unlist(strsplit(out, ","))
+  out <- setNames(out, NULL)
   
   out <- out[!grepl("^R [(]", out)]
   
