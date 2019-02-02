@@ -8,19 +8,19 @@
 #' @importFrom glue glue
 #' 
 use_utils_ui <- function(pkg = "."){
-  use_utils(file_name = "utils_ui.R", pgk=pkg)
+  use_utils(file_name = "utils_ui.R", pkg=pkg)
 }
 
 #' @export
 #' @rdname utils_files
 use_utils_prod <- function(pkg = "."){
-  use_utils(file_name = "utils_prod.R", pgk=pkg)
+  use_utils(file_name = "utils_prod.R", pkg=pkg)
 }
 
 #' @export
 #' @rdname utils_files
 use_utils_server <- function(pkg = "."){
-  use_utils(file_name = "utils_server.R", pgk=pkg)
+  use_utils(file_name = "utils_server.R", pkg=pkg)
 } 
 
 use_utils <- function(file_name,pkg = "."){
