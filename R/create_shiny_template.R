@@ -1,11 +1,12 @@
 #' Create a package for Shiny App
 #'
 #' @param path Where to create the package
+#' @importFrom usethis create_package
 #' @param ... not used
 #' @export
 create_shiny_template <- function(path, ...) {
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
-  devtools::create(path = path)
+  create_package(path = path)
   from <- system.file("shinyexample",package = "golem")
   ll <- list.files(path = from, full.names = TRUE, all.files = TRUE)
   # remove `..`
