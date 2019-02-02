@@ -4,8 +4,7 @@
 #'
 #' @inheritParams add_module
 #' @importFrom cli cat_bullet
-#' 
-#'
+#' @rdname use_recommended 
 #' @export
 use_recommended_dep <- function(pkg = "."){
   old <- setwd(normalizePath(pkg))
@@ -17,6 +16,9 @@ use_recommended_dep <- function(pkg = "."){
   cat_bullet("Dependencies added", bullet = "tick", bullet_col = "green")
 }
 
+
+#' @rdname use_recommended 
+#' @export
 use_recommended_tests <- function(pkg = "."){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))

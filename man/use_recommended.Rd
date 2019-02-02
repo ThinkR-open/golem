@@ -2,9 +2,12 @@
 % Please edit documentation in R/use_recommended.R
 \name{use_recommended_dep}
 \alias{use_recommended_dep}
+\alias{use_recommended_tests}
 \title{Add recommended dependencies}
 \usage{
 use_recommended_dep(pkg = ".")
+
+use_recommended_tests(pkg = ".")
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is `"."`}
