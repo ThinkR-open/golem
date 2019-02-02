@@ -1,12 +1,12 @@
 Package: golem
-Title: Template for Prod-Ready, Robust Shiny Applications
+Title: Template and tools for Prod-Ready, Robust Shiny Applications
 Version: 0.0.0.9000
 Authors@R: c(
   person('Vincent', 'Guyader', email = 'vincent@thinkr.fr', role = c('cre', 'aut')),
   person('Colin', 'Fay', email = 'contact@colinfay.me', role = c('aut'), comment = c(ORCID = "0000-0001-7343-1846")), 
   person('ThinkR', role = "cph")
   )
-Description: Create a prod-ready shiny app with this RStudio project template.
+Description: Create a prod-ready Shiny application with this RStudio project template and tools.
 License: MIT + file LICENSE
 URL: https://github.com/ThinkR-open/golem
 BugReports: https://github.com/ThinkR-open/golem/issues
@@ -14,7 +14,6 @@ Depends:
     R (>= 3.0)
 Imports: 
     devtools,
-    magrittr,
     usethis,
     glue,
     desc,
