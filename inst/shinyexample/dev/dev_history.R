@@ -9,19 +9,19 @@
 ## Add information about the package that will contain your app
 
 golem::fill_desc(
-  pkg_name = , # The Name of the package containing the App 
-  pkg_title = , # The Title of the package containing the App 
-  pkg_description = , # The Description of the package containing the App 
+  pkg_name = ,          # The Name of the package containing the App 
+  pkg_title = ,         # The Title of the package containing the App 
+  pkg_description = ,   # The Description of the package containing the App 
   author_first_name = , # Your First Name
-  author_last_name = , # Your Last Name
-  author_email = , # Your Email
-  repo_url = ) # The (optional) URL of the GitHub Repo
+  author_last_name = ,  # Your Last Name
+  author_email = ,      # Your Email
+  repo_url = NULL)      # The (optional) URL of the GitHub Repo
 
 ## 1.2 - Set common Files 
 ## 
 ## If you want to use the MIT licence, README, code of conduct, lifecycle badge, and news
 
-usethis::use_mit_license(name = "Your Name")
+usethis::use_mit_license(name = "Your Name")  # You can set another licence here
 usethis::use_readme_rmd()
 usethis::use_code_of_conduct()
 usethis::use_lifecycle_badge("Experimental")
@@ -36,7 +36,7 @@ usethis::use_data_raw()
 ## 
 ## Create a template for tests
 
-usethis::use_testthat()
+golem::use_recommended_tests()
 
 ## 1.5 : Use Recommended Package
 
@@ -49,16 +49,20 @@ golem::use_utils_server()
 
 ## 1.6 : Create your first module
 ## 
-## Add a module file in your R folder
+## Add a module file in your R folder with the recommended structure
 
-golem::add_module(name = ) #
+golem::add_module(name = "my_first_module") #
+
+## 1.7: Add a browser button
+
+golem::add_browser_button()
 
 # 2. All along your project
 
 ## 2. Add modules
 ## 
 
-golem::add_module( name = )# Name of the module 
+golem::add_module( name = "my_other_module")# Name of the module 
 
 ## 2. Add dependencies
 
@@ -85,6 +89,8 @@ usethis::use_coverage()
 devtools::test()
 rhub::check_for_cran()
 
-# 5. Deployment element
+# 5. Deployment elements
 
 golem::add_rconnect_file()
+
+
