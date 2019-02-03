@@ -155,6 +155,24 @@ options( "golem.app.prod" = TRUE)
 log_dev(10)
 ```
 
+### Make observeEvent talkative
+
+You can make a talkative version of observeEvent (calling `cat_dev()` with a message every time you call it) with : 
+
+```{r}
+
+```
+
+Note that the observeEvent has to follow this way of writing: 
+
+```{r}
+observeEvent(input$XX, {
+  do_stuffs()
+})
+```
+
+
+
 ### Deployment tools 
 
 This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.

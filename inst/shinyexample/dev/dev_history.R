@@ -59,18 +59,20 @@ golem::add_browser_button()
 
 # 2. All along your project
 
-## 2. Add modules
-## 
+## 2.1 Add modules
 
-golem::add_module( name = "my_other_module")# Name of the module 
+golem::add_module( name = "my_other_module") # Name of the module 
 
-## 2. Add dependencies
+## 2.2 Add dependencies
 
 usethis::use_package("pkg") # To call each time you need a new package
 
-## 2. Add tests
-## 
-golem::use_recommended_tests()
+## 2.3 Various tools along the way
+
+golem::add_browser_button()
+
+## 2.4 Add tests
+
 usethis::use_test("app")
 
 # 3. Documentation
