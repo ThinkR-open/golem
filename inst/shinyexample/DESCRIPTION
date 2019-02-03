@@ -1,5 +1,5 @@
 Package: shinyexample
-Title: A shiny template
+Title: An Amazing Shiny App
 Version: 0.0.0.9000
 Authors@R: person("Vincent", "Guyader", email = "vincent@thinkr.fr", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
