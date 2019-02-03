@@ -29,6 +29,11 @@ use_favicon <- function(path,pkg = "."){
   #<meta name="msapplication-TileColor" content="#ffffff">
   #<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   #<meta name="theme-color" content="#ffffff">
+  
+  if (missing(path)){
+        path <-  system.file("shinyexample\\inst\\app\\www","favicon.ico",package = "golem")
+  }
+  
   ext <- tools::file_ext(path)
   if ( !(ext %in% c("png",'ico') ) ){
     stop("favicon ust have .ico or .png extension")
