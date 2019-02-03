@@ -4,13 +4,13 @@
 \alias{get_dependencies}
 \title{Return all package dependencies from current package}
 \usage{
-get_dependencies(path = "DESCRIPTION", dput = TRUE,
+get_dependencies(path = "DESCRIPTION", dput = FALSE,
   field = c("Depends", "Imports"))
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file}
 
-\item{dput}{if FALSE return a vector instead of dput output}
+\item{dput}{if TRUE return a dput output instead of character vector}
 
 \item{field}{DESCRIPTION fields to parse. Default is Import and Depends}
 }
@@ -19,6 +19,6 @@ Return all package dependencies from current package
 }
 \examples{
 \dontrun{
-list_imports()
+get_dependencies()
 }
 }
