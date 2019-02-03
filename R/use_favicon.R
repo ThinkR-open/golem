@@ -1,3 +1,16 @@
+#' Add a favicon to your shinyapp
+#'
+#' @param path Path to your favicon file (.ico or .png) 
+#' @param pkg Path to the root of the package. Default is `"."`
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' use_favicon()
+#' use_favicon(path='path/to/your/favicon.ico')
+#' }
 use_favicon <- function(path,pkg = "."){
   #<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
   #<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
