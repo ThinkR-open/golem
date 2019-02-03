@@ -16,5 +16,9 @@ use_utils_server(pkg = ".")
 \item{pkg}{Path to the root of the package. Default is `"."`}
 }
 \description{
-Use the utils files
+\describe{
+  \item{use_utils_ui}{Copies the golem_utils_ui.R to the R folder.}
+  \item{use_utils_prod}{Copies the golem_utils_prod.R to the R folder.}
+  \item{use_utils_server}{Copies the golem_utils_server.R to the R folder.}
+}
 }
