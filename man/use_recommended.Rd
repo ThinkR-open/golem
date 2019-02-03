@@ -3,15 +3,24 @@
 \name{use_recommended_dep}
 \alias{use_recommended_dep}
 \alias{use_recommended_tests}
-\title{Add recommended dependencies}
+\alias{use_recommended_js}
+\title{Add recommended elements}
 \usage{
 use_recommended_dep(pkg = ".")
 
 use_recommended_tests(pkg = ".")
+
+use_recommended_js(pkg = ".", to = "inst/app/www")
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is `"."`}
+
+\item{to}{in case of use_recommended_js, the path to write the JS}
 }
 \description{
-`shiny`, `DT`, `attempt`, `glue`
+\describe{
+  \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue` to dependencies}
+  \item{use_recommended_tests}{Adds a test folder and copy the golem tests}
+  \item{use_recommended_js}{Adds some JavaScript functions}
+}
 }

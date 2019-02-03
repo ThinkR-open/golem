@@ -1,10 +1,17 @@
-#' Add recommended dependencies
+#' Add recommended elements
 #' 
-#' `shiny`, `DT`, `attempt`, `glue`
+#' \describe{
+#'   \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue` to dependencies}
+#'   \item{use_recommended_tests}{Adds a test folder and copy the golem tests}
+#'   \item{use_recommended_js}{Adds some JavaScript functions}
+#' }
 #'
 #' @inheritParams add_module
+#' @param to in case of use_recommended_js, the path to write the JS
+#' 
 #' @importFrom cli cat_bullet
 #' @rdname use_recommended 
+#' 
 #' @export
 use_recommended_dep <- function(pkg = "."){
   old <- setwd(normalizePath(pkg))
@@ -32,3 +39,17 @@ use_recommended_tests <- function(pkg = "."){
     file.path(normalizePath(pkg), "tests", "testthat")
   )
 } 
+
+#' @rdname use_recommended 
+#' @export
+use_recommended_js <- function(pkg = ".", to = "inst/app/www"){
+  old <- setwd(normalizePath(pkg))
+  on.exit(setwd(old))
+
+  file.copy(
+    system.file("utils", "golem-js.js", package = "golem"), 
+    file.path(normalizePath(pkg), to)
+  )
+  
+} 
+
