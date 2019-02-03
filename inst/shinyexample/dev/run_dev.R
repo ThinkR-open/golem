@@ -5,4 +5,4 @@ devtools::install(".", upgrade = "never")
 options(golem.app.prod = TRUE) 
 
 # Run the app
-shiny::runApp(system.file("app", package = "shinyexample"))
+run_app()

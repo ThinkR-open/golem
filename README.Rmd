@@ -92,6 +92,7 @@ These three functions adds one file each which contain a series of functions tha
 golem::use_utils_ui()
 golem::use_utils_server()
 golem::use_utils_prod()
+golem::use_favicon()
 ```
 
 ### Create modules 

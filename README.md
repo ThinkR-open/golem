@@ -85,6 +85,7 @@ UI, in the server, or as prod-dependent tools.
 golem::use_utils_ui()
 golem::use_utils_server()
 golem::use_utils_prod()
+golem::use_favicon()
 ```
 
 ### Create modules
@@ -155,6 +156,19 @@ log_dev(10)
 #> [1] 2.302585
 options( "golem.app.prod" = TRUE)
 log_dev(10)
+```
+
+### Make observeEvent talkative
+
+You can make a talkative version of observeEvent (calling `cat_dev()`
+with a message every time you call it) with :
+
+Note that the observeEvent has to follow this way of writing:
+
+``` r
+observeEvent(input$XX, {
+  do_stuffs()
+})
 ```
 
 ### Deployment tools

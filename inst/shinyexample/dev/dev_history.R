@@ -9,9 +9,9 @@
 ## Add information about the package that will contain your app
 
 golem::fill_desc(
-  pkg_name = ,          # The Name of the package containing the App 
-  pkg_title = ,         # The Title of the package containing the App 
-  pkg_description = ,   # The Description of the package containing the App 
+  pkg_name = "shinyexample", # The Name of the package containing the App 
+  pkg_title = , # The Title of the package containing the App 
+  pkg_description = , # The Description of the package containing the App 
   author_first_name = , # Your First Name
   author_last_name = ,  # Your Last Name
   author_email = ,      # Your Email

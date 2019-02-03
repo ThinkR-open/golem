@@ -19,7 +19,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Vincent Guyader \email{vincent@thinkr.fr}
+\strong{Maintainer}: Vincent Guyader \email{vincent@thinkr.fr} (0000-0003-0671-9270)
 
 Authors:
 \itemize{
