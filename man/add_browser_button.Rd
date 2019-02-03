@@ -10,5 +10,5 @@ add_browser_button()
 Prints the code to the console
 }
 \description{
-Insert an hidden browser button
+See \url{https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/} for more context.
 }
