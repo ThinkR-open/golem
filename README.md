@@ -1,37 +1,37 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 **WORK IN PROGRESS**
 
-# {golem}
+{golem}
+=======
 
-{golem} is a package that provides tools for a better workflow for
-working on shinyapps.
+{golem} is a package that provides tools for a better workflow for working on shinyapps.
 
-## Installation
+Installation
+------------
 
-You can install the development version from
-[GitHub](https://github.com/Thinkr-open/golem) with:
+You can install the development version from [GitHub](https://github.com/Thinkr-open/golem) with:
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("Thinkr-open/golem")
 ```
 
-## Launch the project
+Launch the project
+------------------
 
 Create a new package with the project template:
 
 ![](readme_figures/golemtemplate.png)
 
-## Step by step guide
+Step by step guide
+------------------
 
-After project creation, you’ll land on `dev_history.R`. This file is
-used to keep a track of all the steps you’ve followed to build your app.
+After project creation, you'll land on `dev_history.R`. This file is used to keep a track of all the steps you've followed to build your app.
 
-You can follow it step by step of skip some if you’d like.
+You can follow it step by step of skip some if you'd like.
 
 ### Fill the description
 
@@ -68,8 +68,7 @@ usethis::use_data_raw()
 
 ### Use Recommended Package
 
-This adds a series of packages as dependecies to your app. See
-`?golem::use_recommended_dep` for the list.
+This adds a series of packages as dependecies to your app. See `?golem::use_recommended_dep` for the list.
 
 ``` r
 golem::use_recommended_dep()
@@ -77,20 +76,18 @@ golem::use_recommended_dep()
 
 ### Add various tools
 
-These three functions adds one file each which contain a series of
-functions that can be useful for building your app. To be used in the
-UI, in the server, or as prod-dependent tools.
+These three functions adds one file each which contain a series of functions that can be useful for building your app. To be used in the UI, in the server, or as prod-dependent tools.
 
 ``` r
 golem::use_utils_ui()
 golem::use_utils_server()
 golem::use_utils_prod()
+golem::use_favicon()
 ```
 
 ### Create modules
 
-This function takes a name xxx and creates a module called `mod_xxx.R`
-in the R folder.
+This function takes a name xxx and creates a module called `mod_xxx.R` in the R folder.
 
 ``` r
 golem::add_module(name = "this")
@@ -129,14 +126,9 @@ golem::use_recommended_tests()
 
 ### app\_prod
 
-There’s a series of tools to make your app behave differently whether
-it’s in dev or prod mode. Notably, the `app_prod()` and `app_dev()`
-function tests for `options( "golem.app.prod")` (or return TRUE if this
-option doesn’t exist).
+There's a series of tools to make your app behave differently whether it's in dev or prod mode. Notably, the `app_prod()` and `app_dev()` function tests for `options( "golem.app.prod")` (or return TRUE if this option doesn't exist).
 
-Setting this options at the beginning of your dev process allows to make
-your app behave in a specific way when you are in dev mode. For example,
-printing message to the console with `cat_dev()`.
+Setting this options at the beginning of your dev process allows to make your app behave in a specific way when you are in dev mode. For example, printing message to the console with `cat_dev()`.
 
 ``` r
 options( "golem.app.prod" = TRUE)
@@ -146,8 +138,7 @@ golem::cat_dev("hey\n")
 #> hey
 ```
 
-You can then make any function being “dev-dependant” with the
-`make_dev()` function:
+You can then make any function being "dev-dependant" with the `make_dev()` function:
 
 ``` r
 log_dev <- golem::make_dev(log)
@@ -159,8 +150,7 @@ log_dev(10)
 
 ### Deployment tools
 
-This creates a simple file at the root of the package, to be used to
-deploy to RStudio Connect.
+This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.
 
 ``` r
 golem::add_rconnect_file()
@@ -168,13 +158,11 @@ golem::add_rconnect_file()
 
 ### Know more
 
-Read our blog post for more info about the
-content:
+Read our blog post for more info about the content:
 
 <https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app/?noredirect=en_US>
 
-## CoC
+CoC
+---
 
-Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
