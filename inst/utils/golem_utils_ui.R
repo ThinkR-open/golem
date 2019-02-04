@@ -180,3 +180,25 @@ enurl <- function(url, text){
 }
 
 
+#' Columns 12, 6 and 4
+#' 
+#' Most shiny columns are 12, 6 or 4 of width. 
+#' These are convenient wrappers around 
+#' `column(12, ...)`, `column(6, ...)` and `column(4, ...)`.
+#' 
+#' @export
+#' @rdname columns
+col_12 <- function(...){
+  shiny::column(12, ...)
+}
+
+#' @export
+#' @rdname columns
+col_6 <- function(...){
+  shiny::column(6, ...)
+}
+#' @export
+#' @rdname columns
+col_4 <- function(...){
+  shiny::column(4, ...)
+}
