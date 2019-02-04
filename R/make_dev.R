@@ -23,7 +23,7 @@ make_dev <- function(fun){
 #' @rdname prod
 
 app_prod <- function(){
-  getOption( "golem.app.prod") %||% FALSE
+  getOption( "golem.app.prod" ) %||% FALSE
 }
 
 # Well, this one does the opposite ¯\_(ツ)_/¯ 
