@@ -86,6 +86,7 @@ golem::use_utils_ui()
 golem::use_utils_server()
 golem::use_utils_prod()
 golem::use_favicon()
+golem::use_recommended_js()
 ```
 
 ### Create modules
@@ -158,19 +159,6 @@ options( "golem.app.prod" = TRUE)
 log_dev(10)
 ```
 
-### Make observeEvent talkative
-
-You can make a talkative version of observeEvent (calling `cat_dev()`
-with a message every time you call it) with :
-
-Note that the observeEvent has to follow this way of writing:
-
-``` r
-observeEvent(input$XX, {
-  do_stuffs()
-})
-```
-
 ### Deployment tools
 
 This creates a simple file at the root of the package, to be used to
@@ -187,6 +175,10 @@ This package is designed to work well with :
   - {shinipsum} - <https://github.com/ThinkR-open/shinipsum>
 
 ### Know more
+
+#### The Book :
+
+  - <https://thinkr-open.github.io/building-shiny-apps-workflow/>
 
 #### Building big Shiny Apps :
 
