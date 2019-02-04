@@ -28,6 +28,7 @@ add_module <- function(name, pkg = "."){
   write_there("#' @param id shiny id")
   write_there("#'")
   write_there("#' @export ") 
+  write_there("#' @importFrom shiny NS tagList ") 
   write_there("#' @examples ") 
   
   write_there(glue("%name%ui <- function(id){"))
