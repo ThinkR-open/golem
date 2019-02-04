@@ -10,7 +10,7 @@ use_recommended_dep(pkg = ".")
 
 use_recommended_tests(pkg = ".")
 
-use_recommended_js(pkg = ".", to = "inst/app/www")
+use_recommended_js(pkg = ".", to = "inst/app/www/")
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is `"."`}
