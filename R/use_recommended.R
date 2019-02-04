@@ -42,7 +42,7 @@ use_recommended_tests <- function(pkg = "."){
 
 #' @rdname use_recommended 
 #' @export
-use_recommended_js <- function(pkg = ".", to = "inst/app/www"){
+use_recommended_js <- function(pkg = ".", to = "inst/app/www/"){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
 
