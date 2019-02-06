@@ -1,6 +1,5 @@
-$(document).on('shiny:sessioninitialized', function(event) {
-  
-  Shiny.addCustomMessageHandler('showid', function(what) {
+$( document ).ready(function() {
+      Shiny.addCustomMessageHandler('showid', function(what) {
     $("#" + what).show()
   });
 
@@ -8,7 +7,7 @@ $(document).on('shiny:sessioninitialized', function(event) {
     $("#" + what).hide()
   });
 
-  Shiny.addCustomMessageHandler('showclass', function(what) {
+  ('showclass', function(what) {
     $("." + what).show()
   });
 
@@ -17,8 +16,8 @@ $(document).on('shiny:sessioninitialized', function(event) {
   });
   
   Shiny.addCustomMessageHandler('clickon', function(what) {
-    console.log(what)
     $(what).click()
   });
-);
+});
+
 
