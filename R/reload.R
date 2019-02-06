@@ -17,6 +17,8 @@ detach_all_attached <- function(){
 }
 
 
+
+
 #' Document and reload your package
 #'
 #' @inheritParams add_module

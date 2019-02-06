@@ -30,7 +30,7 @@ use_favicon <- function(path, pkg = "."){
   #<meta name="theme-color" content="#ffffff">
   
   if (missing(path)){
-        path <-  system.file("shinyexample\\inst\\app\\www","favicon.ico",package = "golem")
+    path <- system.file("shinyexample/inst/app/www", "favicon.ico", package = "golem")
   }
   
   ext <- tools::file_ext(path)
