@@ -46,6 +46,13 @@ golem::use_recommended_dep()
 
 golem::use_utils_ui()
 golem::use_utils_server()
+golem::use_utils_prod()
+golem::use_favicon()
+golem::use_recommended_js()
+
+# The JS functions can also be put inside the app with 
+
+golem::js()
 
 ## 1.6 : Create your first module
 ## 

@@ -197,6 +197,7 @@ col_12 <- function(...){
 col_6 <- function(...){
   shiny::column(6, ...)
 }
+
 #' @export
 #' @rdname columns
 col_4 <- function(...){

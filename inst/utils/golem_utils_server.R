@@ -15,6 +15,7 @@ drop_nulls <- function(x){
     x
   }
 }
+
 "%|NA|%" <- function(x, y){
   if (is.na(x)) {
     y
