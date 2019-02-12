@@ -3,22 +3,8 @@ Title: pkg_title
 Version: 0.0.0.9000
 Authors@R: person('author_first_name', 'author_last_name', email = 'author_email', role = c('cre', 'aut'))
 Description: Package Description.
-License: GPL-3
-Depends:
-    R (>= 3.4.3)
-Imports:
-    DT,
-    glue,
-    graphics,
-    shiny,
-    stats
-Suggests:
-    testthat,
-    knitr,
-    rmarkdown
+License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
-VignetteBuilder: knitr
 URL: http://repo_url.com
 BugReports: http://repo_url.com/issues

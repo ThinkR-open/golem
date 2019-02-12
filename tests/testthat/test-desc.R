@@ -2,9 +2,10 @@ context("test-desc")
 
 test_that("desc works", {
   tpdir <- tempdir()
-  file.copy(
-    system.file("shinyexample/DESCRIPTION", package = "shinytemplate"), 
-    file.path(tpdir, "DESCRIPTION")
+  descr <- file.path(tpdir, "DESCRIPTION")
+  file.copy(overwrite = TRUE,
+    system.file("shinyexample/DESCRIPTION", package = "golem"), 
+    descr
   )
   fill_desc(
     "pkg_name", 
@@ -14,6 +15,6 @@ test_that("desc works", {
     "author_last_name", 
     "author_email", 
     "http://repo_url.com",
-    pkg = file.path(tpdir, "DESCRIPTION")
+    pkg = dirname(descr)
   )
 })
