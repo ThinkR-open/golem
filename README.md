@@ -3,8 +3,6 @@
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
-**WORK IN PROGRESS**
-
 # {golem}
 
 {golem} is a package that provides tools for a better workflow for
@@ -89,6 +87,24 @@ golem::use_favicon()
 golem::use_recommended_js()
 ```
 
+The JS functions here can also be used inside your shiny app with:
+
+``` r
+golem::js()
+```
+
+See `?golem::js` for the list.
+
+### Add a browser button
+
+``` r
+golem::add_browser_button()
+```
+
+See [A little trick for debugging
+Shiny](https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/)
+for more info about this method.
+
 ### Create modules
 
 This function takes a name xxx and creates a module called `mod_xxx.R`
@@ -170,9 +186,12 @@ golem::add_rconnect_file()
 
 ### Tool series
 
-This package is designed to work well with :
+This package is part of a series of tools for Shiny, which includes:
 
+  - {golem} - <https://github.com/ThinkR-open/golem>
   - {shinipsum} - <https://github.com/ThinkR-open/shinipsum>
+  - {fakir} - <https://github.com/ThinkR-open/fakir>
+  - {shinysnippets} - <https://github.com/ThinkR-open/shinysnippets>
 
 ### Know more
 
@@ -185,9 +204,9 @@ This package is designed to work well with :
   - Part 1:
     <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
 
-#### Blog post Read our blog post for more info about the content:
+#### Blog post :
 
-<https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app/?noredirect=en_US>
+<https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app>
 
 ## CoC
 
