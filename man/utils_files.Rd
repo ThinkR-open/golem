@@ -13,7 +13,7 @@ use_utils_prod(pkg = ".")
 use_utils_server(pkg = ".")
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is `"."`}
+\item{pkg}{Path to the root of the package. Default is `"."`.}
 }
 \description{
 \describe{

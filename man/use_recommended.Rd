@@ -13,13 +13,13 @@ use_recommended_tests(pkg = ".")
 use_recommended_js(pkg = ".", to = "inst/app/www/")
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is `"."`}
+\item{pkg}{Path to the root of the package. Default is `"."`.}
 
 \item{to}{in case of use_recommended_js, the path to write the JS}
 }
 \description{
 \describe{
-  \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue` to dependencies}
+  \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue`, `golem` to dependencies}
   \item{use_recommended_tests}{Adds a test folder and copy the golem tests}
   \item{use_recommended_js}{Adds some JavaScript functions}
 }

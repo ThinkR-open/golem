@@ -7,7 +7,7 @@
 add_browser_button()
 }
 \value{
-Prints the code to the console
+Prints the code to the console.
 }
 \description{
 See \url{https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/} for more context.

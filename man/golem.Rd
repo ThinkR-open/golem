@@ -6,9 +6,7 @@
 \alias{golem-package}
 \title{A package for building Shiny App}
 \description{
-\if{html}{\figure{logo.png}{options: align='right'}}
-
-Create a prod-ready Shiny application with this RStudio project template and tools.
+Read more about building big shiny apps at [https://thinkr-open.github.io/building-shiny-apps-workflow/](https://thinkr-open.github.io/building-shiny-apps-workflow/).
 }
 \seealso{
 Useful links:

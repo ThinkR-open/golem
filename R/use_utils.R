@@ -15,18 +15,21 @@
 #' @importFrom glue glue
 use_utils_ui <- function(pkg = "."){
   use_utils(file_name = "golem_utils_ui.R", pkg=pkg)
+  cat_bullet("Utils UI added", bullet = "tick", bullet_col = "green")
 }
 
 #' @export
 #' @rdname utils_files
 use_utils_prod <- function(pkg = "."){
   use_utils(file_name = "golem_utils_prod.R", pkg=pkg)
+  cat_bullet("Utils prod added", bullet = "tick", bullet_col = "green")
 }
 
 #' @export
 #' @rdname utils_files
 use_utils_server <- function(pkg = "."){
   use_utils(file_name = "golem_utils_server.R", pkg=pkg)
+  cat_bullet("Utils server added", bullet = "tick", bullet_col = "green")
 } 
 
 use_utils <- function(file_name,pkg = "."){

@@ -1,4 +1,7 @@
 #' Make a function dependent to dev mode
+#' 
+#' The function returned will be run only if `golem::app_dev()`
+#'     returns TRUE.
 #'
 #' @param fun A function
 #'
@@ -26,15 +29,32 @@ app_prod <- function(){
   getOption( "golem.app.prod" ) %||% FALSE
 }
 
-# Well, this one does the opposite ¯\_(ツ)_/¯ 
+# Well, this one does the opposite 
 #' @rdname prod
 #' @export
 app_dev <- function(){
   !golem::app_prod()
 }
 
-#' Run cat when in dev mode
+#' Functions already made dev devependant
 #'
+#' @rdname made_dev
+#' @inheritParams base::cat
 #' @export 
 cat_dev <- make_dev(cat)
+
+#' @rdname made_dev
+#' @export 
+#' @inheritParams base::print
+print_dev <- make_dev(print)
+
+#' @rdname made_dev
+#' @export 
+#' @inheritParams base::message
+message_dev <- make_dev(message)
+
+#' @rdname made_dev
+#' @export 
+#' @inheritParams base::warning 
+warning_dev <- make_dev(warning)
 

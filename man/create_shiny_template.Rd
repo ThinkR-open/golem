@@ -7,7 +7,8 @@
 create_shiny_template(path, ...)
 }
 \arguments{
-\item{path}{Where to create the package}
+\item{path}{Name of the folder to create the package in. This will also be 
+used as the package name.}
 
 \item{...}{not used}
 }

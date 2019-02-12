@@ -1,11 +1,15 @@
 #' Create a module
 #' 
-#' @param name The name of the module
-#' @param pkg Path to the root of the package. Default is `"."`
+#' This function creates a module inside the `R/` folder, based 
+#' on a specific module structure. 
 #' 
+#' @param name The name of the module
+#' @param pkg Path to the root of the package. Default is `"."`.
+#' @note This function will prefix the `name` argument with `mod_`.
 #' @export
 #' @importFrom glue glue
 #' @importFrom cli cat_bullet
+#' @importFrom utils file.edit
 
 add_module <- function(name, pkg = "."){
   old <- setwd(normalizePath(pkg))
@@ -20,7 +24,7 @@ add_module <- function(name, pkg = "."){
   glue <- function(...){
     glue::glue(..., .open = "%", .close = "%")
   }
-  write_there("# mod_UI")
+  write_there("# Module UI")
   
   write_there(glue("#' @title   %name%ui and %name%"))
   write_there("#' @description  A shiny Module that ...")
@@ -39,6 +43,8 @@ add_module <- function(name, pkg = "."){
   write_there("}")
   write_there("    ")
   
+  write_there("# Module server")
+  
   write_there(glue("#' %name% server function"))
   write_there("#'")
   write_there("#' @param input internal")
@@ -47,7 +53,7 @@ add_module <- function(name, pkg = "."){
   write_there("#'")
   write_there("#' @export")
   write_there(glue("#' @rdname %name%ui"))
-  
+  write_there("    ")
   
   write_there(glue("%name% <- function(input, output, session){"))
   write_there("  ns <- session$ns")

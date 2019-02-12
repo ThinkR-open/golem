@@ -7,7 +7,7 @@
 document_and_reload(pkg = ".")
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is `"."`}
+\item{pkg}{Path to the root of the package. Default is `"."`.}
 }
 \description{
 Document and reload your package

@@ -9,8 +9,12 @@ add_module(name, pkg = ".")
 \arguments{
 \item{name}{The name of the module}
 
-\item{pkg}{Path to the root of the package. Default is `"."`}
+\item{pkg}{Path to the root of the package. Default is `"."`.}
 }
 \description{
-Create a module
+This function creates a module inside the `R/` folder, based 
+on a specific module structure.
+}
+\note{
+This function will prefix the `name` argument with `mod_`.
 }

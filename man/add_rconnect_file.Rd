@@ -7,7 +7,7 @@
 add_rconnect_file(pkg = ".")
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is `"."`}
+\item{pkg}{Path to the root of the package. Default is `"."`.}
 }
 \description{
 Add an app.R at the root of your package to deploy on RStudio Connect

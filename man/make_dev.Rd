@@ -10,5 +10,6 @@ make_dev(fun)
 \item{fun}{A function}
 }
 \description{
-Make a function dependent to dev mode
+The function returned will be run only if `golem::app_dev()`
+    returns TRUE.
 }
