@@ -2,23 +2,23 @@
 % Please edit documentation in R/get_dependencies.R
 \name{get_dependencies}
 \alias{get_dependencies}
-\title{return all package dependencies from current package}
+\title{Return all package dependencies from current package}
 \usage{
-get_dependencies(path = "DESCRIPTION", dput = TRUE, field = c("Depends",
-  "Imports"))
+get_dependencies(path = "DESCRIPTION", dput = FALSE,
+  field = c("Depends", "Imports"))
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file}
 
-\item{dput}{if FALSE return a vector instead of dput output}
+\item{dput}{if TRUE return a dput output instead of character vector}
 
-\item{field}{DESCRIPTION fied to parse, Import and Depends by default}
+\item{field}{DESCRIPTION fields to parse. Default is Import and Depends}
 }
 \description{
-return all package dependencies from current package
+Return all package dependencies from current package
 }
 \examples{
 \dontrun{
-list_imports()
+get_dependencies()
 }
 }

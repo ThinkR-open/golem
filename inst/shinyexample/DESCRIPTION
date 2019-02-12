@@ -1,22 +1,8 @@
 Package: shinyexample
-Title: A shiny template
-Version: 0.1.2
+Title: An Amazing Shiny App
+Version: 0.0.0.9000
 Authors@R: person("Vincent", "Guyader", email = "vincent@thinkr.fr", role = c("aut", "cre"))
-Description: A template for prod-ready Shiny App.
-License: GPL-3
-Depends:
-    R (>= 3.4.3)
-Imports:
-    DT,
-    glue,
-    graphics,
-    shiny,
-    stats
-Suggests:
-    testthat,
-    knitr,
-    rmarkdown
+Description: What the package does (one paragraph).
+License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
-VignetteBuilder: knitr

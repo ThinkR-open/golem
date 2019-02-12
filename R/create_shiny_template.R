@@ -1,18 +1,28 @@
-#' Create a Rstudio Project dedicated to shinyapp
+#' Create a package for Shiny App
 #'
-#' @param path path to create
+#' @param path Name of the folder to create the package in. This will also be 
+#'     used as the package name.
+#' @importFrom yesno yesno
+#' @importFrom cli cat_rule
+#' @importFrom utils getFromNamespace
 #' @param ... not used
 #' @export
-#' 
-# DESCRIPTION
-# inst/app/server.R
-# inst/app/UI.R
-# run_dev_mod
-
 create_shiny_template <- function(path, ...) {
+  #browser()
+  check_package_name <- getFromNamespace("check_package_name", "usethis")
+  check_package_name(path)
+  
+  if (dir.exists(path)){
+    res <- yesno::yesno(
+      paste("The path", path, "already exists, override?")
+    )
+    if (!res){
+      return(invisible(NULL))
+    }
+  }
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
-  devtools::create(path = path)
-  from <- system.file("shinyexample",package = "shinytemplate")
+  #create_package(path = path)
+  from <- system.file("shinyexample",package = "golem")
   ll <- list.files(path = from, full.names = TRUE, all.files = TRUE)
   # remove `..`
   ll <- ll[ ! grepl("\\.\\.$",ll)]
@@ -20,17 +30,12 @@ create_shiny_template <- function(path, ...) {
   
   t <- list.files(path,all.files = TRUE,recursive = TRUE,include.dirs = FALSE,full.names = TRUE)
   for ( i in t){
-    message(i)
+    #message(i)
     try(replace_word(file =   i,
                  pattern = "shinyexample",
                  replace = basename(path)
     ))
   }
-  print("fin")
-  # DESCRIPTION
-  # inst/app/server.R
-  # inst/app/UI.R
-  # run_dev_mod
-  
-  
-  }
+  cat_rule("Created")
+  return(invisible(path))
+}
