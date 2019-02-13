@@ -65,7 +65,7 @@ add_module <- function(name, pkg = "."){
   write_there("## To be copied in the server")
   write_there(glue('#callModule(%name%, "%name%ui")'))
   write_there(" ")
-  cat_bullet("File created", bullet = "tick", bullet_col = "green")
+  cat_bullet(glue("File created at {where}"), bullet = "tick", bullet_col = "green")
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
@@ -88,7 +88,7 @@ add_rconnect_file <- function(pkg = "."){
   write_there("pkgload::load_all()")
   write_there("options( \"golem.app.prod\" = TRUE)")
   write_there("run_app()")
-  cat_bullet("File created", bullet = "tick", bullet_col = "green")
+  cat_bullet(glue("File created at {where}"), bullet = "tick", bullet_col = "green")
   cat_bullet("To deploy, run:")
   cat("rsconnect::deployApp()\n")
   file.edit( where )
