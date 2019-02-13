@@ -66,7 +66,11 @@ add_module <- function(name, pkg = "."){
   write_there(glue('callModule(%name%, "%name%ui")'))
   write_there(" ")
   cat_bullet("File created", bullet = "tick", bullet_col = "green")
-  file.edit(where)
+  if (rstudioapi::isAvailable()){
+    rstudioapi::navigateToFile(where)
+  } else {
+    file.edit(where)
+  }
 }
 
 #' Add an app.R at the root of your package to deploy on RStudio Connect

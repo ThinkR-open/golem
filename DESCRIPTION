@@ -32,7 +32,8 @@ Imports:
     pkgload,
     usethis,
     utils,
-    yesno
+    yesno,
+    rstudioapi
 Suggests: 
     testthat
 Encoding: UTF-8
