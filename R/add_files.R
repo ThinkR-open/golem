@@ -17,6 +17,11 @@ add_module <- function(name, pkg = "."){
   where <- file.path(
     "R", paste0("mod_", name, ".R")
   )
+  if (file.exists(where)){
+    if (!yesno("File already exists, override?")){
+      return(invisible(NULL))
+    }
+  }
   file.create(where)
   write_there <- function(...){
     write(..., file = where, append = TRUE)
