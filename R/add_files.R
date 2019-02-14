@@ -35,7 +35,7 @@ add_module <- function(name, pkg = "."){
   write_there("#' @importFrom shiny NS tagList ") 
   write_there("#' @examples ") 
   
-  write_there(glue("%name%ui <- function(id){"))
+  write_there(glue("mod_%name%ui <- function(id){"))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
   write_there("  ")
@@ -52,21 +52,26 @@ add_module <- function(name, pkg = "."){
   write_there("#' @param session internal")
   write_there("#'")
   write_there("#' @export")
-  write_there(glue("#' @rdname %name%ui"))
   write_there("    ")
   
-  write_there(glue("%name% <- function(input, output, session){"))
+  write_there(glue("mod_%name% <- function(input, output, session){"))
   write_there("  ns <- session$ns")
   write_there("}")
   write_there("    ")
   write_there("# To be copied in the UI")
-  write_there(glue('%name%ui("%name%ui")'))
+  write_there(glue('mod_%name%ui("mod_%name%ui")'))
   write_there("    ")
   write_there("# To be copied in the server")
-  write_there(glue('callModule(%name%, "%name%ui")'))
+  write_there(glue('callModule(mod_%name%, "mod_%name%ui")'))
   write_there(" ")
   cat_bullet("File created", bullet = "tick", bullet_col = "green")
-  file.edit(where)
+  if (rstudioapi::isAvailable()){
+    rstudioapi::navigateToFile(where)
+  } else {
+    cat_bullet(glue::glue("Go to {where}"), 
+               bullet = "square_small_filled", 
+               bullet_col = "red")
+  }
 }
 
 #' Add an app.R at the root of your package to deploy on RStudio Connect
