@@ -76,9 +76,9 @@ named_to_li <- function(list, class = NULL){
 #' a <- tags$p(src = "plop", "pouet")
 #' tagRemoveAttributes(a, "src")
 
-tagRemoveAttributes <- function(tag, ...){
+tagRemoveAttributes <- function(tag, ...) {
   attrs <- as.character(list(...))
-  for (i in seq_along(attrs)){
+  for (i in seq_along(attrs)) {
     tag$attribs[[ attrs[i] ]] <- NULL
   }
   tag
@@ -94,28 +94,44 @@ tagRemoveAttributes <- function(tag, ...){
 #' @importFrom htmltools tagList
 #'
 #' @examples
+#' ## Hide
 #' a <- tags$p(src = "plop", "pouet")
 #' undisplay(a)
-#'
+#' b <- actionButton("go_filter", "go")
+#' undisplay(b)
 #' @rdname display
 
-undisplay <- function(tag){
-  tags$span(
-    style = "display: none;",
-    tag
-  )
+undisplay <- function(tag) {
+  # if not already hidden
+  if (!is.null(tag$attribs$style) && !grepl("display:\\s+none", tag$attribs$style)) {
+    tag$attribs$style <- paste("display: none;", tag$attribs$style)
+  } else {
+    tag$attribs$style <- "display: none;"
+  }
+  tag
 }
 
 #' @rdname display
 #' @importFrom htmltools tagList
+#'
+#' @examples
+#'
+#' ## Show
+#' a <- tags$p(src = "plop", "pouet")
+#' a_hidden <- undisplay(a)
+#' display(a_hidden)
+#' # do not change not hidden tags
+#' b_show <- actionButton("go_filter", "go")
+#' display(b_show)
+#' # Keep other attributes
+#' b_show$attribs$style <- 'display: none; background: red'
+#' display(b_show)
 
-display <- function(tag){
-  if ( grepl("display: none;", b$attribs$style) ){
-    tagList(tag$children)
-  } else {
-    tag
+display <- function(tag) {
+  if (!is.null(tag$attribs$style) && grepl("display:\\s+none", tag$attribs$style)) {
+    tag$attribs$style <- gsub("(\\s)*display:(\\s)*none(\\s)*(;)*(\\s)*", "", tag$attribs$style)
   }
-  
+  tag
 }
 
 #' Add a red star at the end of the text
