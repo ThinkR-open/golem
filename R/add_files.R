@@ -65,7 +65,7 @@ add_module <- function(name, pkg = "."){
   write_there("## To be copied in the server")
   write_there(glue('# callModule(%name%, "%name%ui")'))
   write_there(" ")
-  cat_bullet(glue("File created at {where}"), bullet = "tick", bullet_col = "green")
+  cat_bullet(glue("File created at %where%"), bullet = "tick", bullet_col = "green")
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
