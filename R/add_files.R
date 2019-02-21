@@ -26,7 +26,7 @@ add_module <- function(name, pkg = "."){
   }
   write_there("# Module UI")
   
-  write_there(glue("#' @title   %name%ui and %name%"))
+  write_there(glue("#' @title   mod_%name%ui and mod_%name%"))
   write_there("#' @description  A shiny Module that ...")
   write_there("#'")
   write_there("#' @param id shiny id")
@@ -35,7 +35,7 @@ add_module <- function(name, pkg = "."){
   write_there("#' @importFrom shiny NS tagList ") 
   write_there("#' @examples ") 
   
-  write_there(glue("%name%ui <- function(id){"))
+  write_there(glue("mod_%name%ui <- function(id){"))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
   write_there("  ")
@@ -45,25 +45,25 @@ add_module <- function(name, pkg = "."){
   
   write_there("# Module server")
   
-  write_there(glue("#' %name% server function"))
+  write_there(glue("#' mod_%name% server function"))
   write_there("#'")
   write_there("#' @param input internal")
   write_there("#' @param output internal")
   write_there("#' @param session internal")
   write_there("#'")
   write_there("#' @export")
-  write_there(glue("#' @rdname %name%ui"))
+  write_there(glue("#' @rdname mod_%name%ui"))
   write_there("    ")
   
-  write_there(glue("%name% <- function(input, output, session){"))
+  write_there(glue("mod_%name% <- function(input, output, session){"))
   write_there("  ns <- session$ns")
   write_there("}")
   write_there("    ")
   write_there("## To be copied in the UI")
-  write_there(glue('# %name%ui("%name%ui")'))
+  write_there(glue('# mod_%name%ui("mod_%name%ui")'))
   write_there("    ")
   write_there("## To be copied in the server")
-  write_there(glue('# callModule(%name%, "%name%ui")'))
+  write_there(glue('# callModule(mod_%name%, mod_"%name%ui")'))
   write_there(" ")
   cat_bullet(glue("File created at %where%"), bullet = "tick", bullet_col = "green")
   if (rstudioapi::isAvailable()){
