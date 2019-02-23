@@ -57,14 +57,19 @@ use_favicon <- function(path, pkg = "."){
   }
   write_there("#' Add favicon to your app")
   write_there("#' ")
-  write_there("#' This function adds the favicon from `www/favicon.png` to your shiny app.")
-  write_there("#' @export")
+  write_there(glue("#' This function adds the favicon from `www/favicon.%ext%` to your shiny app."))
+  # write_there("#' @export")
   write_there("#' @importFrom htmltools tags")
+  write_there("#' @importFrom shiny addResourcePath")
   write_there("favicon <- function(){")
-  write_there("tags$head(tags$link(rel='shortcut icon', href='www/favicon.png'))")
+  write_there(glue("shiny::addResourcePath('www', system.file('app/www', package = '%read.dcf(file.path(pkg,\'DESCRIPTION\'))[1]%'))"))
+  write_there(glue("tags$head(tags$link(rel='shortcut icon', href='www/favicon.%ext%'))"))
   write_there("}")
   write_there("")
+  cat_bullet(glue("File created at %where%"), bullet = "tick", bullet_col = "green")
+  usethis::use_package("htmltools")
   
+  file creater
   
   
 }
