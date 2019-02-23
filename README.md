@@ -118,22 +118,22 @@ The new file will contain:
 
 ``` r
 # mod_UI
-thisui <- function(id){
+mod_thisui <- function(id){
   ns <- NS(id)
   tagList(
   
   )
 }
 
-this <- function(input, output, session){
+mod_this <- function(input, output, session){
   ns <- session$ns
 }
     
-# To be copied in the UI
-thisui("thisui")
+## To be copied in the UI
+# mod_thisui("thisui")
     
-# To be copied in the server
-callModule(this, "thisui")
+## To be copied in the server
+# mod_callModule(this, "thisui")
  
 ```
 

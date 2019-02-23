@@ -133,11 +133,11 @@ this <- function(input, output, session){
   ns <- session$ns
 }
     
-# To be copied in the UI
-thisui("thisui")
+## To be copied in the UI
+# mod_thisui("thisui")
     
-# To be copied in the server
-callModule(this, "thisui")
+## To be copied in the server
+# mod_callModule(this, "thisui")
  
 ```
 
