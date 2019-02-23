@@ -16,7 +16,9 @@
 use_utils_ui <- function(pkg = "."){
   use_utils(file_name = "golem_utils_ui.R", pkg=pkg)
   cat_bullet("Utils UI added", bullet = "tick", bullet_col = "green")
-}
+  usethis::use_package("htmltools") # utiliser attachment pour trouver les dependances
+  # automatiquement dans le fichier deplace
+  }
 
 #' @export
 #' @rdname utils_files
