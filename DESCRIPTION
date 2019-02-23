@@ -1,6 +1,6 @@
 Package: golem
 Title: Template for Prod-Ready, Robust Shiny Applications
-Version: 0.0.1.0002
+Version: 0.0.1.0003
 Authors@R: 
     c(person(given = "Vincent",
              family = "Guyader",
