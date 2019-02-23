@@ -92,12 +92,24 @@ add_rconnect_file <- function(pkg = "."){
   }
   file.create( where )
   usethis::use_build_ignore( where )
+  write_there("# To deploy, run: rsconnect::deployApp()")
+  write_there("")
   write_there("pkgload::load_all()")
   write_there("options( \"golem.app.prod\" = TRUE)")
   write_there("run_app()")
+  usethis::use_build_ignore(where)
+  usethis::use_package("pkgload",type = "suggests")
   cat_bullet(glue("File created at {where}"), bullet = "tick", bullet_col = "green")
   cat_bullet("To deploy, run:")
   cat("rsconnect::deployApp()\n")
-  file.edit( where )
+  
+  
+  if (rstudioapi::isAvailable()){
+    rstudioapi::navigateToFile(where)
+  } else {
+    cat_bullet(glue::glue("Go to {where}"), 
+               bullet = "square_small_filled", 
+               bullet_col = "red")
+  }
   
 }
