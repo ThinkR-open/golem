@@ -26,6 +26,16 @@ $( document ).ready(function() {
   Shiny.addCustomMessageHandler('clickon', function(what) {
     $(what).click()
   });
+  
+    
+  Shiny.addCustomMessageHandler('disable', function(what) {
+    $(what).attr('disabled', 'disabled')
+  });
+  
+  Shiny.addCustomMessageHandler('reable', function(what) {
+    $(what).removeAttr('disabled')
+  });
+  
 });
 
 

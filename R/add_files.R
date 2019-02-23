@@ -31,7 +31,7 @@ add_module <- function(name, pkg = "."){
   }
   write_there("# Module UI")
   
-  write_there(glue("#' @title   %name%ui and %name%"))
+  write_there(glue("#' @title   mod_%name%ui and mod_%name%"))
   write_there("#' @description  A shiny Module that ...")
   write_there("#'")
   write_there("#' @param id shiny id")
@@ -50,13 +50,17 @@ add_module <- function(name, pkg = "."){
   
   write_there("# Module server")
   
-  write_there(glue("#' %name% server function"))
+  write_there(glue("#' mod_%name% server function"))
   write_there("#'")
   write_there("#' @param input internal")
   write_there("#' @param output internal")
   write_there("#' @param session internal")
   write_there("#'")
   write_there("#' @export")
+<<<<<<< HEAD
+=======
+  write_there(glue("#' @rdname mod_%name%ui"))
+>>>>>>> f5bc44b195c18702f1114e7343cb04935c1456d9
   write_there("    ")
   
   write_there(glue("mod_%name% <- function(input, output, session){"))
