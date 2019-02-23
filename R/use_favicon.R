@@ -34,18 +34,46 @@ use_favicon <- function(path, pkg = "."){
   cat_bullet(glue::glue("favicon.{ext} created at {to}"), bullet = "tick", bullet_col = "green")
   
   cat_rule("To be copied in your UI")
-  cat_line('golem::favicon()')
+  # cat_line('tags$head(tags$link(rel="shortcut icon", href="www/favicon.png"))')
+  cat_line('# favicon()')
   cat_line()
+  
+  
+  # TODO factoriser
+  old <- setwd(normalizePath(pkg))
+  on.exit(setwd(old))
+  where <- file.path( "R", "favicon.R")
+  if (file.exists(where)){
+    if (!yesno("File already exists, override?")){
+      return(invisible(NULL))
+    }
+  }
+  file.create(where)
+  write_there <- function(...){
+    write(..., file = where, append = TRUE)
+  }
+  glue <- function(...){
+    glue::glue(..., .open = "%", .close = "%")
+  }
+  write_there("#' Add favicon to your app")
+  write_there("#' ")
+  write_there("#' This function adds the favicon from `www/favicon.png` to your shiny app.")
+  write_there("#' @export")
+  write_there("#' @importFrom htmltools tags")
+  write_there("favicon <- function(){")
+  write_there("tags$head(tags$link(rel='shortcut icon', href='www/favicon.png'))")
+  write_there("}")
+  write_there("")
   
   
   
 }
 
-#' Add favicon to your app
-#' 
-#' This function adds the favicon from `www/favicon.png` to your shiny app. 
-#' @export
-#' @importFrom htmltools tags
-favicon <- function(){
-  tags$head(tags$link(rel="shortcut icon", href="www/favicon.png"))
-}
+# #' Add favicon to your app
+# #' 
+# #' This function adds the favicon from `www/favicon.png` to your shiny app. 
+# #' @export
+# #' @importFrom htmltools tags
+# favicon <- function(){
+#  tags$head(tags$link(rel="shortcut icon", href="www/favicon.png"))
+# }
