@@ -17,6 +17,11 @@ add_module <- function(name, pkg = "."){
   where <- file.path(
     "R", paste0("mod_", name, ".R")
   )
+  if (file.exists(where)){
+    if (!yesno("File already exists, override?")){
+      return(invisible(NULL))
+    }
+  }
   file.create(where)
   write_there <- function(...){
     write(..., file = where, append = TRUE)
@@ -35,7 +40,7 @@ add_module <- function(name, pkg = "."){
   write_there("#' @importFrom shiny NS tagList ") 
   write_there("#' @examples ") 
   
-  write_there(glue("%name%ui <- function(id){"))
+  write_there(glue("mod_%name%ui <- function(id){"))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
   write_there("  ")
@@ -52,24 +57,26 @@ add_module <- function(name, pkg = "."){
   write_there("#' @param session internal")
   write_there("#'")
   write_there("#' @export")
-  write_there(glue("#' @rdname %name%ui"))
   write_there("    ")
   
-  write_there(glue("%name% <- function(input, output, session){"))
+  write_there(glue("mod_%name% <- function(input, output, session){"))
   write_there("  ns <- session$ns")
   write_there("}")
   write_there("    ")
-  write_there("## To be copied in the UI")
-  write_there(glue('#%name%ui("%name%ui")'))
+
+  write_there("# To be copied in the UI")
+  write_there(glue('mod_%name%ui("mod_%name%ui")'))
   write_there("    ")
-  write_there("## To be copied in the server")
-  write_there(glue('#callModule(%name%, "%name%ui")'))
+  write_there("# To be copied in the server")
+  write_there(glue('callModule(mod_%name%, "mod_%name%ui")'))
   write_there(" ")
   cat_bullet(glue("File created at %where%"), bullet = "tick", bullet_col = "green")
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
-    file.edit(where)
+    cat_bullet(glue::glue("Go to {where}"), 
+               bullet = "square_small_filled", 
+               bullet_col = "red")
   }
 }
 
