@@ -11,7 +11,7 @@
 create_shiny_template <- function(path, ...) {
   #browser()
   check_package_name <- getFromNamespace("check_package_name", "usethis")
-  check_package_name(path)
+  check_package_name(basename(path))
   
   if (dir.exists(path)){
     res <- yesno::yesno(
