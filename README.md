@@ -114,23 +114,30 @@ The new file will contain:
 
 ``` r
 # mod_UI
-thisui <- function(id){
+mod_thisui <- function(id){
   ns <- NS(id)
   tagList(
   
   )
 }
 
-this <- function(input, output, session){
+mod_this <- function(input, output, session){
   ns <- session$ns
 }
     
-# To be copied in the UI
-thisui("thisui")
+## To be copied in the UI
+# mod_thisui("thisui")
     
-# To be copied in the server
-callModule(this, "thisui")
+## To be copied in the server
+# mod_callModule(this, "thisui")
  
+```
+
+### Add favicon
+
+``` r
+golem::use_favicon()
+golem::use_favicon(path = "path/to/your/favicon.ico")
 ```
 
 ### Add tests
@@ -167,10 +174,20 @@ log_dev(10)
 
 ### Deployment tools
 
+rsconnect
+---------
+
 This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.
 
 ``` r
 golem::add_rconnect_file()
+```
+
+docker ( for shinyproxy )
+-------------------------
+
+``` r
+golem::gen_dockerfile()
 ```
 
 ### Tool series
