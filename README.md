@@ -126,10 +126,10 @@ mod_this <- function(input, output, session){
 }
     
 ## To be copied in the UI
-# mod_thisui("thisui")
+# mod_thisui("plop")
     
 ## To be copied in the server
-# mod_callModule(this, "thisui")
+# callModule(mod_this, "plop")
  
 ```
 

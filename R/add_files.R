@@ -66,10 +66,10 @@ add_module <- function(name, pkg = "."){
   write_there("    ")
 
   write_there("## To be copied in the UI")
-  write_there(glue('# mod_%name%ui("mod_%name%ui")'))
+  write_there(glue('# mod_%name%ui("m1")'))
   write_there("    ")
   write_there("## To be copied in the server")
-  write_there(glue('# callModule(mod_%name%, "mod_%name%ui")'))
+  write_there(glue('# callModule(mod_%name%, "m1")'))
   write_there(" ")
   cat_bullet(glue("File created at %where%"), bullet = "tick", bullet_col = "green")
   if (rstudioapi::isAvailable()){
