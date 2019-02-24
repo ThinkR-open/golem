@@ -20,10 +20,3 @@ A character vector with packages names
 \description{
 Return all package dependencies from current package
 }
-\examples{
-
-dummypackage <- system.file("dummypackage",package = "attachment")
-# browseURL(dummypackage)
-att_from_description(path = file.path(dummypackage,"DESCRIPTION"))
-
-}

@@ -6,15 +6,10 @@
 #'
 #' @return A character vector with packages names
 #'
-#' @export
 #' @importFrom stringr str_replace_all str_trim
+#' @importFrom magrittr %>%
 #'
-#' @examples
-#'
-#' dummypackage <- system.file("dummypackage",package = "attachment")
-#' # browseURL(dummypackage)
-#' att_from_description(path = file.path(dummypackage,"DESCRIPTION"))
-#'
+
 att_from_description <- function(path = "DESCRIPTION", dput = FALSE,
                                  field = c("Depends", "Imports", "Suggests")) {
   out <- read.dcf(path)

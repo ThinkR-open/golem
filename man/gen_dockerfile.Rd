@@ -15,5 +15,7 @@ gen_dockerfile(path = "DESCRIPTION", output = "Dockerfile")
 build a container containing your shiny app
 }
 \examples{
-\dontrun(gen_dockerfile())
+\dontrun{
+gen_dockerfile()
+}
 }

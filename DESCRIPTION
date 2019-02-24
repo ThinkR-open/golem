@@ -33,7 +33,9 @@ Imports:
     usethis,
     utils,
     yesno,
-    rstudioapi
+    rstudioapi,
+    stringr,
+    magrittr
 Suggests: 
     testthat
 Encoding: UTF-8

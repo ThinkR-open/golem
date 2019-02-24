@@ -68,10 +68,6 @@ use_favicon <- function(path, pkg = "."){
   write_there("")
   cat_bullet(glue("File created at %where%"), bullet = "tick", bullet_col = "green")
   usethis::use_package("htmltools")
-  
-  file creater
-  
-  
 }
 
 # #' Add favicon to your app
