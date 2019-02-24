@@ -6,5 +6,7 @@ Description: Package Description.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Imports: 
+    shiny
 URL: http://repo_url.com
 BugReports: http://repo_url.com/issues
