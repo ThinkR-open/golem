@@ -38,7 +38,7 @@ remotes::install_github("Thinkr-open/golem")
 
 Create a new package with the project template: 
 
-```{r, echo=FALSE, out.width="80%"}
+```{r, echo=FALSE, out.width="80%", eval=TRUE}
 knitr::include_graphics("https://github.com/ThinkR-open/golem/blob/master/inst/img/golemtemplate.png?raw=true")
 ```
 

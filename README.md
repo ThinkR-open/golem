@@ -24,6 +24,8 @@ Launch the project
 
 Create a new package with the project template:
 
+<img src="https://github.com/ThinkR-open/golem/blob/master/inst/img/golemtemplate.png?raw=true" width="80%" style="display: block; margin: auto;" />
+
 Step by step guide
 ------------------
 
