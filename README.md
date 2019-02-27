@@ -24,10 +24,10 @@ Launch the project
 
 Create a new package with the project template:
 
-![](inst/img/golemtemplate.png)
-
 Step by step guide
 ------------------
+
+See full documentation in the {pkgdown} website: <https://thinkr-open.github.io/golem/index.html>
 
 After project creation, you'll land on `dev_history.R`. This file is used to keep a track of all the steps you've followed to build your app.
 

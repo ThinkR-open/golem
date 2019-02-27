@@ -24,6 +24,7 @@ usethis::use_vignette("build-app-package")
 # pkgdown
 usethis::use_pkgdown()
 usethis::use_git_ignore("docs")
+usethis::use_build_ignore("reference")
 pkgdown::build_site()
 
 # Dev
