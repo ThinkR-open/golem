@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/ThinkR-open/golem.svg?branch=master)](https://travis-ci.org/ThinkR-open/golem)
 
 <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" width=250px>
 
@@ -173,6 +173,15 @@ log_dev(10)
 ```
 
 ### Deployment tools
+
+direct
+------
+
+Once the package (*e.g.* mypkg) is installed, the application can be launch with the following command.
+
+``` r
+mypkg::run_app()
+```
 
 rsconnect
 ---------

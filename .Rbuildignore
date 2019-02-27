@@ -1,3 +1,6 @@
+^docs$
+^_pkgdown\.yml$
+^\.travis\.yml$
 ^Dockerfile$
 ^data-raw$
 ^.*\.Rproj$
