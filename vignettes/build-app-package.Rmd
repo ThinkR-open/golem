@@ -1,33 +1,40 @@
+---
+title: "Build a Shiny app in a package with golem"
+author: "ThinkR"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{01-Build a Shiny app in a package with golem}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![Travis build status](https://travis-ci.org/ThinkR-open/golem.svg?branch=master)](https://travis-ci.org/ThinkR-open/golem)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  eval = FALSE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
-<img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" width=250px>
 
-{golem}
-=======
+# {golem}
 
 {golem} is a package that provides tools for a better workflow for working on shinyapps.
 
-Installation
-------------
+## Launch the project
 
-You can install the development version from [GitHub](https://github.com/Thinkr-open/golem) with:
+Create a new package with the project template: 
 
-``` r
-# install.packages("remotes")
-remotes::install_github("Thinkr-open/golem")
+```{r, echo=FALSE, eval=TRUE}
+silent <- file.copy(
+  system.file("img", "golemtemplate.png", package = "golem"), "golemtemplate.png")
+knitr::include_graphics("golemtemplate.png")
 ```
 
-Launch the project
-------------------
-
-Create a new package with the project template:
-
-![](inst/img/golemtemplate.png)
-
-Step by step guide
-------------------
+## Step by step guide 
 
 After project creation, you'll land on `dev_history.R`. This file is used to keep a track of all the steps you've followed to build your app.
 
@@ -37,7 +44,7 @@ You can follow it step by step of skip some if you'd like.
 
 `golem::fill_desc()` allows to fill the DESCRIPTION quickly.
 
-``` r
+```{r}
 golem::fill_desc(
   pkg_name = , # The Name of the package containing the App 
   pkg_title = , # The Title of the package containing the App 
@@ -48,11 +55,11 @@ golem::fill_desc(
   repo_url = NULL) # The (optional) URL of the GitHub Repo
 ```
 
-### Set common Files
+### Set common Files 
 
 Call the {usethis} package to set a list of elements:
 
-``` r
+```{r}
 usethis::use_mit_license(name = "Your Name")
 usethis::use_readme_rmd()
 usethis::use_code_of_conduct()
@@ -62,7 +69,7 @@ usethis::use_news_md()
 
 If you have data in your app:
 
-``` r
+```{r}
 usethis::use_data_raw()
 ```
 
@@ -70,7 +77,7 @@ usethis::use_data_raw()
 
 This adds a series of packages as dependecies to your app. See `?golem::use_recommended_dep` for the list.
 
-``` r
+```{r}
 golem::use_recommended_dep()
 ```
 
@@ -78,7 +85,7 @@ golem::use_recommended_dep()
 
 These three functions adds one file each which contain a series of functions that can be useful for building your app. To be used in the UI, in the server, or as prod-dependent tools.
 
-``` r
+```{r}
 golem::use_utils_ui()
 golem::use_utils_server()
 golem::use_utils_prod()
@@ -86,33 +93,33 @@ golem::use_favicon()
 golem::use_recommended_js()
 ```
 
-The JS functions here can also be used inside your shiny app with:
+The JS functions here can also be used inside your shiny app with: 
 
-``` r
+```{r}
 golem::js()
 ```
 
 See `?golem::js` for the list.
 
-### Add a browser button
+### Add a browser button 
 
-``` r
+```{r}
 golem::add_browser_button()
 ```
 
 See [A little trick for debugging Shiny](https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/) for more info about this method.
 
-### Create modules
+### Create modules 
 
-This function takes a name xxx and creates a module called `mod_xxx.R` in the R folder.
+This function takes a name xxx and creates a module called `mod_xxx.R` in the R folder. 
 
-``` r
+```{r}
 golem::add_module(name = "this")
 ```
 
 The new file will contain:
 
-``` r
+```{r}
 # mod_UI
 mod_thisui <- function(id){
   ns <- NS(id)
@@ -135,94 +142,87 @@ mod_this <- function(input, output, session){
 
 ### Add favicon
 
-``` r
+```{r}
 golem::use_favicon()
 golem::use_favicon(path = "path/to/your/favicon.ico")
 ```
+
 
 ### Add tests
 
 Adds the recommended tests for a shiny app.
 
-``` r
+```{r}
 golem::use_recommended_tests()
 ```
 
-### app\_prod
+### app_prod
 
-There's a series of tools to make your app behave differently whether it's in dev or prod mode. Notably, the `app_prod()` and `app_dev()` function tests for `options( "golem.app.prod")` (or return TRUE if this option doesn't exist).
+There's a series of tools to make your app behave differently whether it's in dev or prod mode. Notably, the `app_prod()` and `app_dev()` function tests for `options( "golem.app.prod")` (or return TRUE if this option doesn't exist). 
 
 Setting this options at the beginning of your dev process allows to make your app behave in a specific way when you are in dev mode. For example, printing message to the console with `cat_dev()`.
 
-``` r
+```{r eval = TRUE}
 options( "golem.app.prod" = TRUE)
 golem::cat_dev("hey\n")
 options( "golem.app.prod" = FALSE)
 golem::cat_dev("hey\n")
-#> hey
 ```
 
-You can then make any function being "dev-dependant" with the `make_dev()` function:
+You can then make any function being "dev-dependant" with the `make_dev()` function: 
 
-``` r
+```{r eval = TRUE}
 log_dev <- golem::make_dev(log)
 log_dev(10)
-#> [1] 2.302585
 options( "golem.app.prod" = TRUE)
 log_dev(10)
 ```
 
-Deployment tools
-----------------
+
+## Deployment tools 
 
 ### direct
 
 Once the package (*e.g.* mypkg) is installed, the application can be launch with the following command.
 
-``` r
+```{r}
 mypkg::run_app()
 ```
+
 
 ### rsconnect
 
 This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.
 
-``` r
+```{r}
 golem::add_rconnect_file()
 ```
 
 ### docker ( for shinyproxy )
 
-``` r
+```{r}
 golem::gen_dockerfile()
 ```
 
-Tool series
------------
+## Tool series 
 
-This package is part of a series of tools for Shiny, which includes:
+This package is part of a series of tools for Shiny, which includes: 
 
--   {golem} - <https://github.com/ThinkR-open/golem>
--   {shinipsum} - <https://github.com/ThinkR-open/shinipsum>
--   {fakir} - <https://github.com/ThinkR-open/fakir>
--   {shinysnippets} - <https://github.com/ThinkR-open/shinysnippets>
+- {golem} - https://github.com/ThinkR-open/golem
+- {shinipsum} - https://github.com/ThinkR-open/shinipsum
+- {fakir} - https://github.com/ThinkR-open/fakir
+- {shinysnippets} - https://github.com/ThinkR-open/shinysnippets
 
-Know more
----------
+## Know more 
 
-### The Book :
+### The Book : 
 
--   <https://thinkr-open.github.io/building-shiny-apps-workflow/>
+- <https://thinkr-open.github.io/building-shiny-apps-workflow/>
 
-### Building big Shiny Apps :
+### Building big Shiny Apps : 
 
--   Part 1: <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
+- Part 1:  <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
 
-### Blog post :
+### Blog post : 
 
 <https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app>
-
-CoC
----
-
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.

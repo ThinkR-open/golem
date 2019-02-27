@@ -24,7 +24,7 @@ glue::glue("COPY {read.dcf(path)[1]}_*.tar.gz  /app.tar.gz"),
 glue::glue("CMD [\"R\", \"-e options('shiny.port'=3838,shiny.host='0.0.0.0');{read.dcf(path)[1]}::run_app()\"]"))
 docker <- paste(docker,collapse = " \n")
 cat(docker,file=output)
-cat_bullet(glue::glue("Be sure to put your {read.dcf(path)[1]}_{read.dcf('DESCRIPTION')[1,][['Version']]}.tar.gz file (generated using devtool::build() ) in the same folder as the {basename(output)} file generated"))
+cat_bullet(glue::glue("Be sure to put your {read.dcf(path)[1]}_{read.dcf('DESCRIPTION')[1,][['Version']]}.tar.gz file (generated using devtools::build() ) in the same folder as the {basename(output)} file generated"))
 usethis::use_build_ignore(files = output)
 
 invisible(output)

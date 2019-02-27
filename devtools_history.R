@@ -14,3 +14,21 @@ use_lifecycle_badge("Experimental")
 
 usethis::use_test()
 usethis::use_test("desc")
+
+# Travis
+usethis::use_travis()
+
+# Documentation
+usethis::use_vignette("build-app-package")
+
+# pkgdown
+usethis::use_pkgdown()
+usethis::use_git_ignore("docs")
+pkgdown::build_site()
+
+# Dev
+attachment::att_to_description(extra.suggests = c("pkgdown", "rcmdcheck"), pkg_ignore = c("mypkg"))
+devtools::check()
+
+
+

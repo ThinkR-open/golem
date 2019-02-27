@@ -37,7 +37,7 @@ remotes::install_github("Thinkr-open/golem")
 
 Create a new package with the project template: 
 
-![](readme_figures/golemtemplate.png)
+![](inst/img/golemtemplate.png)
 
 ## Step by step guide 
 
@@ -184,9 +184,9 @@ log_dev(10)
 ```
 
 
-### Deployment tools 
+## Deployment tools 
 
-## direct
+### direct
 
 Once the package (*e.g.* mypkg) is installed, the application can be launch with the following command.
 
@@ -195,7 +195,7 @@ mypkg::run_app()
 ```
 
 
-## rsconnect
+### rsconnect
 
 This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.
 
@@ -203,13 +203,13 @@ This creates a simple file at the root of the package, to be used to deploy to R
 golem::add_rconnect_file()
 ```
 
-## docker ( for shinyproxy )
+### docker ( for shinyproxy )
 
 ```{r}
 golem::gen_dockerfile()
 ```
 
-### Tool series 
+## Tool series 
 
 This package is part of a series of tools for Shiny, which includes: 
 
@@ -218,17 +218,17 @@ This package is part of a series of tools for Shiny, which includes:
 - {fakir} - https://github.com/ThinkR-open/fakir
 - {shinysnippets} - https://github.com/ThinkR-open/shinysnippets
 
-### Know more 
+## Know more 
 
-#### The Book : 
+### The Book : 
 
 - <https://thinkr-open.github.io/building-shiny-apps-workflow/>
 
-#### Building big Shiny Apps : 
+### Building big Shiny Apps : 
 
 - Part 1:  <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
 
-#### Blog post : 
+### Blog post : 
 
 <https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app>
 
