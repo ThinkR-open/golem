@@ -73,7 +73,7 @@ named_to_li <- function(list, class = NULL){
 #' @export
 #'
 #' @examples
-#' a <- tags$p(src = "plop", "pouet")
+#' a <- shiny::tags$p(src = "plop", "pouet")
 #' tagRemoveAttributes(a, "src")
 
 tagRemoveAttributes <- function(tag, ...) {
