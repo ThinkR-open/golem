@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add recommended elements — use_recommended_dep • golem</title>
+<title>Add favicon to your app — favicon • golem</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,9 @@
 
 
 
-<meta property="og:title" content="Add recommended elements — use_recommended_dep" />
+<meta property="og:title" content="Add favicon to your app — favicon" />
 
-<meta property="og:description" content="
-  use_recommended_depAdds `shiny`, `DT`, `attempt`, `glue`, `golem`, `htmltools` to dependencies
-  use_recommended_testsAdds a test folder and copy the golem tests
-" />
+<meta property="og:description" content="This function adds the favicon from `ico` to your shiny app." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -119,35 +116,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add recommended elements</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/use_recommended.R'><code>R/use_recommended.R</code></a></small>
-    <div class="hidden name"><code>use_recommended.Rd</code></div>
+    <h1>Add favicon to your app</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/use_favicon.R'><code>R/use_favicon.R</code></a></small>
+    <div class="hidden name"><code>favicon.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <dl class='dl-horizontal'>
-  <dt>use_recommended_dep</dt><dd><p>Adds `shiny`, `DT`, `attempt`, `glue`, `golem`, `htmltools` to dependencies</p></dd>
-  <dt>use_recommended_tests</dt><dd><p>Adds a test folder and copy the golem tests</p></dd>
-</dl>
+    <p>This function adds the favicon from `ico` to your shiny app.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>use_recommended_dep</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>recommended</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"shiny"</span>, <span class='st'>"DT"</span>,
-  <span class='st'>"attempt"</span>, <span class='st'>"glue"</span>, <span class='st'>"htmltools"</span>, <span class='st'>"golem"</span>))
-
-<span class='fu'>use_recommended_tests</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>favicon</span>(<span class='kw'>ico</span> <span class='kw'>=</span> <span class='st'>"www/favicon.ico"</span>, <span class='kw'>rel</span> <span class='kw'>=</span> <span class='st'>"shortcut icon"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pkg</th>
-      <td><p>Path to the root of the package. Default is `"."`.</p></td>
+      <th>ico</th>
+      <td><p>path to favicon file</p></td>
     </tr>
     <tr>
-      <th>recommended</th>
-      <td><p>A vector of recommended packages.</p></td>
+      <th>rel</th>
+      <td><p>rel</p></td>
     </tr>
     </table>
     
