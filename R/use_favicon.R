@@ -35,7 +35,7 @@ use_favicon <- function(path, pkg = "."){
   
   cat_rule("To be copied in your UI")
   # cat_line('tags$head(tags$link(rel="shortcut icon", href="www/favicon.png"))')
-  cat_line('# favicon()')
+  cat_line(darkgrey('favicon()'))
   cat_line()
   
   
