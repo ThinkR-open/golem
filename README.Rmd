@@ -208,7 +208,7 @@ This creates a simple file at the root of the package, to be used to deploy to R
 golem::add_rconnect_file()
 ```
 
-### docker ( for shinyproxy )
+### docker ( for shinyproxy and other )
 
 ```{r}
 golem::gen_dockerfile()
