@@ -39,7 +39,8 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno
+    yesno,
+    crayon
 Suggests: 
     knitr,
     pkgdown,

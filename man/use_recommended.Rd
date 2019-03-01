@@ -6,7 +6,8 @@
 \alias{use_recommended_js}
 \title{Add recommended elements}
 \usage{
-use_recommended_dep(pkg = ".")
+use_recommended_dep(pkg = ".", recommended = c("shiny", "DT",
+  "attempt", "glue", "golem", "htmltools"))
 
 use_recommended_tests(pkg = ".")
 

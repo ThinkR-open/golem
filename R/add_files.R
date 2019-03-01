@@ -102,7 +102,7 @@ add_rconnect_file <- function(pkg = "."){
   usethis::use_package("pkgload")
   cat_bullet(glue("File created at {where}"), bullet = "tick", bullet_col = "green")
   cat_bullet("To deploy, run:")
-  cat("rsconnect::deployApp()\n")
+  cat(darkgrey("rsconnect::deployApp()\n"))
   
   
   if (rstudioapi::isAvailable()){

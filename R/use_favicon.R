@@ -35,7 +35,7 @@ use_favicon <- function(path, pkg = "."){
   
   cat_rule("Change / Add in the app_ui function")
   # cat_line('tags$head(tags$link(rel="shortcut icon", href="www/favicon.png"))')
-  cat_line(glue('golem::favicon("favicon.{ext}")'))
+  cat_line(darkgrey(glue('golem::favicon("favicon.{ext}")')))
   cat_line()
 }
 
