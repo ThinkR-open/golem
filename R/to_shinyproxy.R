@@ -6,12 +6,11 @@
 #' @param output path to Dockerfile
 #'
 #' @export
-#'
 #' @examples
 #' \dontrun{
 #' gen_dockerfile()
 #' }
-gen_dockerfile <- function(path="DESCRIPTION",output="Dockerfile"){
+gen_dockerfile <- function(path="DESCRIPTION", output="Dockerfile"){
 docker <- c(
 glue::glue("FROM rocker/tidyverse:{major}.{minor}",major= R.Version()$major,minor= R.Version()$minor),
 glue::glue('RUN R -e "install.packages(\'remotes\')"'),

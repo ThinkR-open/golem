@@ -13,14 +13,13 @@
 #' @rdname use_recommended 
 #' 
 #' @export
-use_recommended_dep <- function(pkg = "."){
+use_recommended_dep <- function(pkg = ".",
+                                recommended = c("shiny","DT","attempt","glue","golem","htmltools")){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
-  usethis::use_package("shiny")
-  usethis::use_package("DT")
-  usethis::use_package("attempt")
-  usethis::use_package("glue")
-  usethis::use_package("golem")
+  for ( i in recommended){
+       try(usethis::use_package(i))
+  }
   cat_bullet("Dependencies added", bullet = "tick", bullet_col = "green")
 }
 
