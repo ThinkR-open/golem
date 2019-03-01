@@ -8,13 +8,13 @@
 #' @importFrom cli cat_rule cat_line
 add_browser_button <- function(){
   cat_rule("To be copied in your UI")
-  cat_line('actionButton("browser", "browser"),')
-  cat_line('tags$script("$(\'#browser\').hide();")')
+  cat_line(darkgrey('actionButton("browser", "browser"),'))
+  cat_line(darkgrey('tags$script("$(\'#browser\').hide();")'))
   cat_line()
   cat_rule("To be copied in your server")
-  cat_line('observeEvent(input$browser,{')
-  cat_line('  browser()')
-  cat_line('})')
+  cat_line(darkgrey('observeEvent(input$browser,{'))
+  cat_line(darkgrey('  browser()'))
+  cat_line(darkgrey('})'))
   cat_line()
   cat_line("By default, this button will be hidden.")
   cat_line("To show it, open your web browser JavaScript console")
