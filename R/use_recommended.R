@@ -6,14 +6,14 @@
 #' }
 #'
 #' @inheritParams add_module
-#' @param to in case of use_recommended_js, the path to write the JS
+#' @param recommended A vector of recommended packages.
 #' 
 #' @importFrom cli cat_bullet
 #' @rdname use_recommended 
 #' 
 #' @export
 use_recommended_dep <- function(pkg = ".",
-                                recommended = c("shiny","DT","attempt","glue","golem","htmltools")){
+                                recommended = c("shiny","DT","attempt","glue","htmltools")){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   for ( i in recommended){

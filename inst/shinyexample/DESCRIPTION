@@ -8,3 +8,5 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     shiny
+Remotes: 
+    Thinkr-open/golem
