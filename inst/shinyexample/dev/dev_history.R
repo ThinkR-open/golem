@@ -47,12 +47,10 @@ golem::use_recommended_dep()
 golem::use_utils_ui()
 golem::use_utils_server()
 golem::use_utils_prod()
-golem::use_favicon()
-golem::use_recommended_js()
 
-# The JS functions can also be put inside the app with 
+# If you want to change the default favicon
+golem::use_favicon( path = "path/to/favicon")
 
-golem::js()
 
 ## 1.6 : Create your first module
 ## 

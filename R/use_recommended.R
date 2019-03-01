@@ -42,18 +42,18 @@ use_recommended_tests <- function(pkg = "."){
   cat_bullet("Tests added", bullet = "tick", bullet_col = "green")
 } 
 
-#' @rdname use_recommended 
-#' @export
-use_recommended_js <- function(pkg = ".", to = "inst/app/www/"){
-  old <- setwd(normalizePath(pkg))
-  on.exit(setwd(old))
-
-  file.copy(
-    system.file("utils", "golem-js.js", package = "golem"), 
-    file.path(normalizePath(pkg), to)
-  )
-  
-  cat_bullet("JS added", bullet = "tick", bullet_col = "green")
-  
-} 
+#' #' @rdname use_recommended 
+#' #' @export
+#' use_recommended_js <- function(pkg = ".", to = "inst/app/www/"){
+#'   old <- setwd(normalizePath(pkg))
+#'   on.exit(setwd(old))
+#' 
+#'   file.copy(
+#'     system.file("utils", "golem-js.js", package = "golem"), 
+#'     file.path(normalizePath(pkg), to)
+#'   )
+#'   
+#'   cat_bullet("JS added", bullet = "tick", bullet_col = "green")
+#'   
+#' } 
 
