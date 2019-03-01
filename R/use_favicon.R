@@ -43,6 +43,9 @@ use_favicon <- function(path, pkg = "."){
 #'
 #' This function adds the favicon from `ico` to your shiny app.
 #' 
+#' @param ico path to favicon file
+#' @param rel rel
+#'
 #' @export
 #' @importFrom htmltools tags
 favicon <- function( ico = "www/favicon.ico", rel="shortcut icon"){
