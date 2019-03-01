@@ -73,7 +73,7 @@ usethis::use_data_raw()
 This adds a series of packages as dependecies to your app. See `?golem::use_recommended_dep` for the list.
 
 ``` r
-golem::use_recommended_dep()
+golem::use_recommended_dep(recommended = c("shiny","DT","attempt","glue","htmltools","golem"))
 ```
 
 ### Add various tools
@@ -84,11 +84,9 @@ These three functions adds one file each which contain a series of functions tha
 golem::use_utils_ui()
 golem::use_utils_server()
 golem::use_utils_prod()
-golem::use_favicon()
-golem::use_recommended_js()
 ```
 
-The JS functions here can also be used inside your shiny app with:
+Somes JS functions can also be used inside your shiny app with:
 
 ``` r
 golem::js()
@@ -128,14 +126,14 @@ mod_this <- function(input, output, session){
 }
     
 ## To be copied in the UI
-# mod_thisui("plop")
+# mod_thisui("this1")
     
 ## To be copied in the server
-# callModule(mod_this, "plop")
+# callModule(mod_this, "this1")
  
 ```
 
-### Add favicon
+### Add or change favicon
 
 ``` r
 golem::use_favicon()
