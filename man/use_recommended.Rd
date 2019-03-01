@@ -6,19 +6,18 @@
 \title{Add recommended elements}
 \usage{
 use_recommended_dep(pkg = ".", recommended = c("shiny", "DT",
-  "attempt", "glue", "golem", "htmltools"))
+  "attempt", "glue", "htmltools", "golem"))
 
 use_recommended_tests(pkg = ".")
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is `"."`.}
 
-\item{to}{in case of use_recommended_js, the path to write the JS}
+\item{recommended}{A vector of recommended packages.}
 }
 \description{
 \describe{
-  \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue`, `golem` to dependencies}
+  \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue`, `golem`, `htmltools` to dependencies}
   \item{use_recommended_tests}{Adds a test folder and copy the golem tests}
-  \item{use_recommended_js}{Adds some JavaScript functions}
 }
 }
