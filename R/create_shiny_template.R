@@ -35,7 +35,6 @@ create_shiny_template <- function(path, ...) {
   
   
  for ( i in t){
-    message(i)
    file.rename(from = i,
    to = i %>% str_remove_all("REMOVEME"))
    
