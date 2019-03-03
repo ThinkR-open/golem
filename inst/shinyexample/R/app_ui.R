@@ -5,7 +5,7 @@ app_ui <- function() {
     # from inst/app/www
     golem_add_external_resources(),
     golem::js(),
-    golem::favicon("shinyexample"),
+    golem::favicon(),
     h1("shinyexample")
   )
   # List the first level UI elements here
