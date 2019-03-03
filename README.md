@@ -172,6 +172,22 @@ options( "golem.app.prod" = TRUE)
 log_dev(10)
 ```
 
+Quick reload and show application
+---------------------------------
+
+*see the `run_dev.R` file in the dev directory*
+
+``` r
+
+# Detach all loaded packages and clean your environment
+golem::detach_all_attached()
+# rm(list=ls(all.names = TRUE))
+
+# Document and reload your package
+golem::document_and_reload()
+mypkg::run_app()
+```
+
 Deployment tools
 ----------------
 
