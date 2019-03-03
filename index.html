@@ -214,6 +214,19 @@
 <a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw">log_dev</span>(<span class="dv">10</span>)</a></code></pre></div>
 </div>
 </div>
+<div id="quick-reload-and-show-application" class="section level2">
+<h2 class="hasAnchor">
+<a href="#quick-reload-and-show-application" class="anchor"></a>Quick reload and show application</h2>
+<p><em>see the <code>run_dev.R</code> file in the dev directory</em></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co"># Detach all loaded packages and clean your environment</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/detach_all_attached">detach_all_attached</a></span>()</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co"># rm(list=ls(all.names = TRUE))</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co"># Document and reload your package</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/document_and_reload">document_and_reload</a></span>()</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">mypkg<span class="op">::</span><span class="kw">run_app</span>()</a></code></pre></div>
+</div>
 <div id="deployment-tools" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deployment-tools" class="anchor"></a>Deployment tools</h2>
@@ -221,18 +234,18 @@
 <h3 class="hasAnchor">
 <a href="#direct" class="anchor"></a>direct</h3>
 <p>Once the package (<em>e.g.</em> mypkg) is installed, the application can be launch with the following command.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">mypkg<span class="op">::</span><span class="kw">run_app</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">mypkg<span class="op">::</span><span class="kw">run_app</span>()</a></code></pre></div>
 </div>
 <div id="rsconnect" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rsconnect" class="anchor"></a>rsconnect</h3>
 <p>This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/add_rconnect_file">add_rconnect_file</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/add_rconnect_file">add_rconnect_file</a></span>()</a></code></pre></div>
 </div>
 <div id="docker-for-shinyproxy-and-other" class="section level3">
 <h3 class="hasAnchor">
 <a href="#docker-for-shinyproxy-and-other" class="anchor"></a>docker ( for shinyproxy and other )</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/gen_dockerfile">gen_dockerfile</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/gen_dockerfile">gen_dockerfile</a></span>()</a></code></pre></div>
 </div>
 </div>
 <div id="tool-series" class="section level2">
