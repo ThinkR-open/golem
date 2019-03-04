@@ -3,20 +3,17 @@
 \name{use_recommended_dep}
 \alias{use_recommended_dep}
 \alias{use_recommended_tests}
-\alias{use_recommended_js}
 \title{Add recommended elements}
 \usage{
 use_recommended_dep(pkg = ".", recommended = c("shiny", "DT",
-  "attempt", "glue", "golem", "htmltools"))
+  "attempt", "glue", "htmltools"))
 
 use_recommended_tests(pkg = ".")
-
-use_recommended_js(pkg = ".", to = "inst/app/www/")
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is `"."`.}
 
-\item{to}{in case of use_recommended_js, the path to write the JS}
+\item{recommended}{A vector of recommended packages.}
 }
 \description{
 \describe{
