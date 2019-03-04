@@ -6,7 +6,7 @@
 \title{Add recommended elements}
 \usage{
 use_recommended_dep(pkg = ".", recommended = c("shiny", "DT",
-  "attempt", "glue", "htmltools"))
+  "attempt", "glue", "htmltools", "golem"))
 
 use_recommended_tests(pkg = ".")
 }
@@ -17,8 +17,7 @@ use_recommended_tests(pkg = ".")
 }
 \description{
 \describe{
-  \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue`, `golem` to dependencies}
+  \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue`, `golem`, `htmltools` to dependencies}
   \item{use_recommended_tests}{Adds a test folder and copy the golem tests}
-  \item{use_recommended_js}{Adds some JavaScript functions}
 }
 }

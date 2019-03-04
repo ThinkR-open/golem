@@ -35,7 +35,7 @@ use_favicon <- function(path, pkg = "."){
   
   cat_rule("Change / Add in the app_ui function")
   # cat_line('tags$head(tags$link(rel="shortcut icon", href="www/favicon.png"))')
-  cat_line(darkgrey(glue('golem::favicon("favicon.{ext}")')))
+  cat_line(darkgrey(glue('golem::favicon("www/favicon.{ext}")')))
   cat_line()
 }
 
@@ -43,6 +43,9 @@ use_favicon <- function(path, pkg = "."){
 #'
 #' This function adds the favicon from `ico` to your shiny app.
 #' 
+#' @param ico path to favicon file
+#' @param rel rel
+#'
 #' @export
 #' @importFrom htmltools tags
 favicon <- function( ico = "www/favicon.ico", rel="shortcut icon"){
