@@ -10,3 +10,4 @@ Imports:
     shiny
 Remotes: 
     Thinkr-open/golem
+RoxygenNote: 6.1.0
