@@ -1,4 +1,4 @@
 Binding: create_shiny_template
 Title: Package for Shiny App using golem
-OpenFiles: dev/01_init.R
+OpenFiles: dev/01_start.R
 Icon: golem.png
