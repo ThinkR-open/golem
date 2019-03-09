@@ -1,3 +1,18 @@
+# golem 0.0.1.5000
+
+## Changes 
+
+* The dev files are now splitted in three - start / dev / deploy
+* Module elements are now name `mod_x_ui` and `mod_x_server`, for consistency
+
+## New funs
+
+* Added `add_dockerfile()` creates a Dockerfile from a
+
+## Removed
+
+* `use_utils_prod` is now included in golem so you don't have to explicitely include them
+
 # golem 0.0.1.0002
 
 Last round of functions, and some documentation cleanup.
