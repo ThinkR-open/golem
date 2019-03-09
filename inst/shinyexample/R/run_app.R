@@ -1,4 +1,4 @@
-#' run the Shiny Application
+#' Run the Shiny Application
 #'
 #' @export
 #' @importFrom shiny runApp
