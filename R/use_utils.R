@@ -2,7 +2,6 @@
 #' 
 #' \describe{
 #'   \item{use_utils_ui}{Copies the golem_utils_ui.R to the R folder.}
-#'   \item{use_utils_prod}{Copies the golem_utils_prod.R to the R folder.}
 #'   \item{use_utils_server}{Copies the golem_utils_server.R to the R folder.}
 #' }
 #'
@@ -19,14 +18,6 @@ use_utils_ui <- function(pkg = "."){
   cat_bullet("Utils UI added", bullet = "tick", bullet_col = "green")
   # automatiquement dans le fichier deplace
   }
-
-#' @export
-#' @rdname utils_files
-use_utils_prod <- function(pkg = "."){
-  use_utils(file_name = "golem_utils_prod.R", pkg=pkg)
-  cat_bullet("Utils prod added", bullet = "tick", bullet_col = "green")
-}
-
 #' @export
 #' @rdname utils_files
 use_utils_server <- function(pkg = "."){
