@@ -31,7 +31,7 @@ add_module <- function(name, pkg = "."){
   }
   write_there("# Module UI")
   
-  write_there(glue("#' @title   mod_%name%_ui and mod_%name%"))
+  write_there(glue("#' @title   mod_%name%_ui and mod_%name%_server"))
   write_there("#' @description  A shiny Module.")
   write_there("#'")
   write_there("#' @param id shiny id")
@@ -44,7 +44,7 @@ add_module <- function(name, pkg = "."){
   write_there("#' @importFrom shiny NS tagList ") 
   
   
-  write_there(glue("mod_%name%°ui <- function(id){"))
+  write_there(glue("mod_%name%_ui <- function(id){"))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
   write_there("  ")
@@ -55,7 +55,7 @@ add_module <- function(name, pkg = "."){
   write_there("#' @export")
   write_there("#' @keywords internal")
   write_there("    ")
-  write_there(glue("mod_%name% <- function(input, output, session){"))
+  write_there(glue("mod_%name%_server <- function(input, output, session){"))
   write_there("  ns <- session$ns")
   write_there("}")
   write_there("    ")
