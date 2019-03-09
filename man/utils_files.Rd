@@ -2,13 +2,10 @@
 % Please edit documentation in R/use_utils.R
 \name{use_utils_ui}
 \alias{use_utils_ui}
-\alias{use_utils_prod}
 \alias{use_utils_server}
 \title{Use the utils files}
 \usage{
 use_utils_ui(pkg = ".")
-
-use_utils_prod(pkg = ".")
 
 use_utils_server(pkg = ".")
 }
@@ -18,7 +15,6 @@ use_utils_server(pkg = ".")
 \description{
 \describe{
   \item{use_utils_ui}{Copies the golem_utils_ui.R to the R folder.}
-  \item{use_utils_prod}{Copies the golem_utils_prod.R to the R folder.}
   \item{use_utils_server}{Copies the golem_utils_server.R to the R folder.}
 }
 }
