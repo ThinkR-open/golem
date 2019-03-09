@@ -3,7 +3,6 @@
 ## Changes 
 
 * The dev files are now splitted in three - start / dev / deploy
-* Module elements are now name `mod_x_ui` and `mod_x_server`, for consistency
 
 ## New funs
 
