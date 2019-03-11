@@ -2,17 +2,17 @@
 % Please edit documentation in R/deploy_helpers.R
 \name{add_dockerfile}
 \alias{add_dockerfile}
-\title{Create a proper Dockerfile}
+\title{Create a Dockerfile for  Shiny App}
 \usage{
-add_dockerfile(path = "DESCRIPTION", output = "Dockerfile")
+add_dockerfile(input = "DESCRIPTION", output = "Dockerfile")
 }
 \arguments{
-\item{from}{path to the DESCRIPTION file.}
+\item{input}{path to the DESCRIPTION file to use as an input.}
 
-\item{filename}{path to Dockerfile}
+\item{output}{name of the Dockerfile output.}
 }
 \description{
-build a container containing your shiny app
+Build a container containing your Shiny App.
 }
 \examples{
 \dontrun{

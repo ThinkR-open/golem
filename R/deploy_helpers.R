@@ -34,19 +34,19 @@ add_rconnect_file <- function(pkg = "."){
   
 }
 
-#' Create a proper Dockerfile 
+#' Create a Dockerfile for  Shiny App 
 #' 
-#' build a container containing your shiny app
+#' Build a container containing your Shiny App.
 #'
-#' @param from path to the DESCRIPTION file.
-#' @param filename path to Dockerfile
+#' @param input path to the DESCRIPTION file to use as an input.
+#' @param output name of the Dockerfile output.
 #'
 #' @export
 #' @examples
 #' \dontrun{
 #' add_dockerfile()
 #'}
-add_dockerfile <- function( path = "DESCRIPTION", output = "Dockerfile" ){
+add_dockerfile <- function( input = "DESCRIPTION", output = "Dockerfile" ){
   docker <- c(
     glue::glue("FROM rocker/tidyverse:{major}.{minor}",major= R.Version()$major,minor= R.Version()$minor),
     glue::glue('RUN R -e "install.packages(\'remotes\')"'),
