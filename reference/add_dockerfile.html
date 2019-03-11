@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a proper Dockerfile — gen_dockerfile • golem</title>
+<title>Create a Dockerfile for  Shiny App — add_dockerfile • golem</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Create a proper Dockerfile — gen_dockerfile" />
+<meta property="og:title" content="Create a Dockerfile for  Shiny App — add_dockerfile" />
 
-<meta property="og:description" content="build a container containing your shiny app" />
+<meta property="og:description" content="Build a container containing your Shiny App." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5000</span>
       </span>
     </div>
 
@@ -116,36 +116,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a proper Dockerfile</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/to_shinyproxy.R'><code>R/to_shinyproxy.R</code></a></small>
-    <div class="hidden name"><code>gen_dockerfile.Rd</code></div>
+    <h1>Create a Dockerfile for  Shiny App</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/deploy_helpers.R'><code>R/deploy_helpers.R</code></a></small>
+    <div class="hidden name"><code>add_dockerfile.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>build a container containing your shiny app</p>
+    <p>Build a container containing your Shiny App.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gen_dockerfile</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>)</pre>
+    <pre class="usage"><span class='fu'>add_dockerfile</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>path to DESCRIPTION file</p></td>
+      <th>input</th>
+      <td><p>path to the DESCRIPTION file to use as an input.</p></td>
     </tr>
     <tr>
       <th>output</th>
-      <td><p>path to Dockerfile</p></td>
+      <td><p>name of the Dockerfile output.</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>gen_dockerfile</span>()
+<span class='fu'>add_dockerfile</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

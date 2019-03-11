@@ -5,13 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Template for Prod-Ready, Robust Shiny Applications • golem</title>
+<title>A Framework for Robust Shiny Applications • golem</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Template for Prod-Ready, Robust Shiny Applications">
-<meta property="og:description" content="Create a prod-ready Shiny application with this
-    RStudio project template and tools.">
+<script src="pkgdown.js"></script><meta property="og:title" content="A Framework for Robust Shiny Applications">
+<meta property="og:description" content="An opinionated framework for building a production-ready 
+    'Shiny' application. This package contains a series of tools for 
+    building a robust 'Shiny' application from start to finish. ">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -32,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5000</span>
       </span>
     </div>
 
@@ -148,7 +149,7 @@
 <p>These three functions adds one file each which contain a series of functions that can be useful for building your app. To be used in the UI, in the server, or as prod-dependent tools.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_ui</a></span>()</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_server</a></span>()</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_prod</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb6-3" data-line-number="3">golem<span class="op">::</span><span class="kw">use_utils_prod</span>()</a></code></pre></div>
 <p>Somes JS functions can also be used inside your shiny app with:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/js">js</a></span>()</a></code></pre></div>
 <p>See <code><a href="reference/js.html">?golem::js</a></code> for the list.</p>
@@ -245,7 +246,7 @@
 <div id="docker-for-shinyproxy-and-other" class="section level3">
 <h3 class="hasAnchor">
 <a href="#docker-for-shinyproxy-and-other" class="anchor"></a>docker ( for shinyproxy and other )</h3>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/gen_dockerfile">gen_dockerfile</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">golem<span class="op">::</span><span class="kw">gen_dockerfile</span>()</a></code></pre></div>
 </div>
 </div>
 <div id="tool-series" class="section level2">
