@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5001</span>
       </span>
     </div>
 
@@ -120,12 +120,14 @@
 
     <div id="golem-0-0-1-5000" class="section level1">
 <h1 class="page-header">
-<a href="#golem-0-0-1-5000" class="anchor"></a>golem 0.0.1.5000</h1>
+<a href="#golem-0-0-1-5000" class="anchor"></a>golem 0.0.1.5000+</h1>
 <div id="changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes" class="anchor"></a>Changes</h2>
 <ul>
-<li>The dev files are now splitted in three - start / dev / deploy</li>
+<li><p>The dev files are now splitted in three - start / dev / deploy</p></li>
+<li><p>Every function that adds a file now check if the file already exists, and ask the user if they want to overwrite it (<a href='https://github.com/ThinkR-open/golem/issues/15'>#15</a>)</p></li>
+<li><p>Every module is now named mod_x_ui / mod_x_server, for consistency.</p></li>
 </ul>
 </div>
 <div id="new-funs" class="section level2">
