@@ -25,14 +25,18 @@ use_utils_server <- function(pkg = "."){
   cat_bullet("Utils server added", bullet = "tick", bullet_col = "green")
 } 
 
-use_utils <- function(file_name,pkg = "."){
+use_utils <- function(file_name, pkg = "."){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
+  where <- file.path(normalizePath(pkg), "R", file_name)
+  if ( !check_file_exist(where) ) {
+    return(invisible(FALSE))
+  } 
   file.copy(
-    system.file("utils", file_name, package = "golem"), 
-    to <- file.path(normalizePath(pkg), "R", file_name)
+    from = system.file("utils", file_name, package = "golem"), 
+    to = where
   )
-  cat_bullet(glue::glue("File created at {to}"), bullet = "tick", bullet_col = "green")
+  cat_bullet(glue::glue("File created at {where}"), bullet = "tick", bullet_col = "green")
 } 
 
 # "utils_server.R"

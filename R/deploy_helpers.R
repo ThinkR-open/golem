@@ -4,7 +4,13 @@
 #' @importFrom cli cat_bullet
 #' @export
 add_rconnect_file <- function(pkg = "."){
+  
   where <- file.path(pkg, "app.R")
+  
+  if ( !check_file_exist(where) ) {
+    return(invisible(FALSE))
+  } 
+  
   write_there <- function(..., here = where){
     write(..., here, append = TRUE)
   }
@@ -47,6 +53,12 @@ add_rconnect_file <- function(pkg = "."){
 #' add_dockerfile()
 #'}
 add_dockerfile <- function( input = "DESCRIPTION", output = "Dockerfile" ){
+  where <- file.path(output)
+  
+  if ( !check_file_exist(where) ) {
+    return(invisible(FALSE))
+  } 
+  
   docker <- c(
     glue::glue("FROM rocker/tidyverse:{major}.{minor}",major= R.Version()$major,minor= R.Version()$minor),
     glue::glue('RUN R -e "install.packages(\'remotes\')"'),
