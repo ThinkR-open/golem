@@ -1,8 +1,12 @@
-# golem 0.0.1.5000
+# golem 0.0.1.5000+
 
 ## Changes 
 
 * The dev files are now splitted in three - start / dev / deploy
+
+* Every function that adds a file now check if the file already exists, and ask the user if they want to overwrite it (#15)
+
+* Every module is now named mod_x_ui / mod_x_server, for consistency.
 
 ## New funs
 
