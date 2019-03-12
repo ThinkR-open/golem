@@ -57,7 +57,7 @@ add_module <- function(name, pkg = "."){
   write_there("#' @export")
   write_there("#' @keywords internal")
   write_there("    ")
-  write_there(glue("mod_%name% <- function(input, output, session){"))
+  write_there(glue("mod_%name%_server <- function(input, output, session){"))
   write_there("  ns <- session$ns")
   write_there("}")
   write_there("    ")
@@ -66,7 +66,7 @@ add_module <- function(name, pkg = "."){
   write_there(glue('# mod_%name%_ui("%name%_ui_1")'))
   write_there("    ")
   write_there("## To be copied in the server")
-  write_there(glue('# callModule(mod_%name%, "%name%_ui_1")'))
+  write_there(glue('# callModule(mod_%name%_server, "%name%_ui_1")'))
   write_there(" ")
   cat_bullet(glue("File created at %where%"), bullet = "tick", bullet_col = "green")
   if (rstudioapi::isAvailable()){
