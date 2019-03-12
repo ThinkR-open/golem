@@ -167,22 +167,22 @@
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/add_module">add_module</a></span>(<span class="dt">name =</span> <span class="st">"this"</span>)</a></code></pre></div>
 <p>The new file will contain:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># mod_UI</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">mod_thisui &lt;-<span class="st"> </span><span class="cf">function</span>(id){</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">mod_this_ui &lt;-<span class="st"> </span><span class="cf">function</span>(id){</a>
 <a class="sourceLine" id="cb10-3" data-line-number="3">  ns &lt;-<span class="st"> </span><span class="kw">NS</span>(id)</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="kw">tagList</span>(</a>
 <a class="sourceLine" id="cb10-5" data-line-number="5">  </a>
 <a class="sourceLine" id="cb10-6" data-line-number="6">  )</a>
 <a class="sourceLine" id="cb10-7" data-line-number="7">}</a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9">mod_this &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session){</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">mod_this_server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session){</a>
 <a class="sourceLine" id="cb10-10" data-line-number="10">  ns &lt;-<span class="st"> </span>session<span class="op">$</span>ns</a>
 <a class="sourceLine" id="cb10-11" data-line-number="11">}</a>
 <a class="sourceLine" id="cb10-12" data-line-number="12">    </a>
 <a class="sourceLine" id="cb10-13" data-line-number="13">## To be copied in the UI</a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co"># mod_thisui("this1")</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co"># mod_this_ui("this1")</span></a>
 <a class="sourceLine" id="cb10-15" data-line-number="15">    </a>
 <a class="sourceLine" id="cb10-16" data-line-number="16">## To be copied in the server</a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co"># callModule(mod_this, "this1")</span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co"># callModule(mod_this_server, "this1")</span></a>
 <a class="sourceLine" id="cb10-18" data-line-number="18"> </a></code></pre></div>
 </div>
 <div id="add-or-change-favicon" class="section level3">
