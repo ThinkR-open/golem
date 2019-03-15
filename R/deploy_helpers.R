@@ -68,8 +68,7 @@ add_dockerfile <- function( input = "DESCRIPTION", output = "Dockerfile" ){
     "RUN R -e \"install.packages('/app.tar.gz', repos = NULL, type = 'source')\"",
     
     "EXPOSE 3838",
-    glue::glue("CMD [\"R\", \"-e options('shiny.port'=3838,shiny.host='0.0.0.0');{read.dcf(
-)[1]}::run_app()\"]"))
+    glue::glue("CMD [\"R\", \"-e options('shiny.port'=3838,shiny.host='0.0.0.0');{read.dcf(input)[1]}::run_app()\"]"))
   docker <- paste(docker,collapse = " \n")
   cat(docker,file=output)
   cat_bullet(glue::glue("Be sure to put your {read.dcf(input)[1]}_{read.dcf('DESCRIPTION')[1,][['Version']]}.tar.gz file (generated using devtools::build() ) in the same folder as the {basename(output)} file generated"))
