@@ -63,7 +63,7 @@ add_dockerfile <- function( input = "DESCRIPTION", output = "Dockerfile" ){
     glue::glue("FROM rocker/tidyverse:{major}.{minor}",major= R.Version()$major,minor= R.Version()$minor),
     glue::glue('RUN R -e "install.packages(\'remotes\')"'),
     glue::glue('RUN R -e "remotes::install_cran(\'{hop}\')"',
-               hop =att_from_description(path = path)),
+               hop =att_from_description(path = input)),
     glue::glue("COPY {read.dcf(path)[1]}_*.tar.gz  /app.tar.gz"),
     "RUN R -e \"install.packages('/app.tar.gz', repos = NULL, type = 'source')\"",
     
