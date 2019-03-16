@@ -98,7 +98,6 @@ These three functions adds one file each which contain a series of functions tha
 ```{r eval=FALSE}
 golem::use_utils_ui()
 golem::use_utils_server()
-golem::use_utils_prod()
 ```
 
 Somes JS functions can also be used inside your shiny app with: 
