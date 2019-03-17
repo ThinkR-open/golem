@@ -45,7 +45,7 @@ golem::use_recommended_dep()
 ## 1. Add various tools
 
 golem::use_utils_ui()
-golem::use_utils_prod()
+golem::use_utils_server()
 
 # If you want to change the default favicon
 golem::use_favicon( path = "path/to/favicon")
