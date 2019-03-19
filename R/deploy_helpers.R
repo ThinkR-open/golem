@@ -81,7 +81,7 @@ add_dockerfile <- function( input = "DESCRIPTION", output = "Dockerfile" ){
     "EXPOSE 3838",
     glue::glue(
       "CMD [\"R\", \"-e options('shiny.port'=3838,shiny.host='0.0.0.0');
-      {read.dcf(path)[1]}::run_app()\"]"
+      {read.dcf(input)[1]}::run_app()\"]"
     )
   )
   docker <- paste(docker,collapse = " \n")
