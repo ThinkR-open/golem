@@ -91,7 +91,6 @@ UI, in the server, or as prod-dependent tools.
 ``` r
 golem::use_utils_ui()
 golem::use_utils_server()
-golem::use_utils_prod()
 ```
 
 Somes JS functions can also be used inside your shiny app with:
@@ -227,7 +226,7 @@ golem::add_rconnect_file()
 ### docker ( for shinyproxy and other )
 
 ``` r
-golem::gen_dockerfile()
+golem::add_dockerfile()
 ```
 
 ## Tool series
@@ -249,6 +248,8 @@ This package is part of a series of tools for Shiny, which includes:
 
   - Part 1:
     <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
+  - Part 2:
+    <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/>
 
 ### Blog post :
 
