@@ -13,6 +13,22 @@ replace_word <- function(file,pattern, replace){
   writeLines(tx2, con=file)
 }
 
+cat_green_tick <- function(...){
+  cat_bullet(
+    ..., 
+    bullet = "tick", 
+    bullet_col = "green"
+  )
+}
+
+cat_red_bullet <- function(...){
+  cat_bullet(
+    ..., 
+    bullet = "bullet",
+    bullet_col = "red"
+  )
+}
+
 # From {dockerfiler}, in wait for the version to be on CRAN
 # 
 dock_from_desc <- function(
