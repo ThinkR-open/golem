@@ -8,9 +8,13 @@
 
 * Every module is now named mod_x_ui / mod_x_server, for consistency.
 
+* You can now create package with "illegal" names, using the command line `golem::create_shiny_template()`
+
 ## New funs
 
-* Added `add_dockerfile()` creates a Dockerfile from a
+* Added `add_dockerfile()` to create a Dockerfile from a DESCRIPTION.
+
+* `add_css_file()`, `add_js_file()` and `add_js_handler()` create a CSS, JS, and JS with Shiny custom handler files.
 
 ## Removed
 
