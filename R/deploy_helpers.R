@@ -4,8 +4,9 @@
 #' @inheritParams add_module
 #' @importFrom cli cat_bullet
 #' @export
-add_rconnect_file <- function(pkg = "."){
-  
+add_rconnect_file <- function(
+  pkg = "."
+){
   where <- file.path(pkg, "app.R")
   
   if ( !check_file_exist(where) ) {
@@ -47,13 +48,19 @@ add_rconnect_file <- function(pkg = "."){
 #'
 #' @param input path to the DESCRIPTION file to use as an input.
 #' @param output name of the Dockerfile output.
+#' @param from The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
+#'     with `R.Version()$major` and `R.Version()$minor`.
 #'
 #' @export
 #' @examples
 #' \dontrun{
 #' add_dockerfile()
 #'}
-add_dockerfile <- function( input = "DESCRIPTION", output = "Dockerfile" ){
+add_dockerfile <- function( 
+  input = "DESCRIPTION", 
+  output = "Dockerfile", 
+  from = paste0("FROM rocker/tidyverse:", R.Version()$major,".", R.Version()$minor)
+){
   where <- file.path(output)
   
   if ( !check_file_exist(where) ) {
@@ -61,11 +68,7 @@ add_dockerfile <- function( input = "DESCRIPTION", output = "Dockerfile" ){
   } 
   
   docker <- c(
-    glue::glue(
-      "FROM rocker/tidyverse:{major}.{minor}",
-      major= R.Version()$major,
-      minor= R.Version()$minor
-    ),
+    from,
     glue::glue(
       'RUN R -e "install.packages(\'remotes\')"'
     ),
@@ -76,7 +79,7 @@ add_dockerfile <- function( input = "DESCRIPTION", output = "Dockerfile" ){
     glue::glue(
       "COPY {read.dcf(input)[1]}_*.tar.gz  /app.tar.gz"
     ),
-
+    
     "RUN R -e \"install.packages('/app.tar.gz', repos = NULL, type = 'source')\"",
     "EXPOSE 3838",
     glue::glue(
