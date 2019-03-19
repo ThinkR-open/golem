@@ -54,9 +54,9 @@ add_rconnect_file <- function(
 #' @export
 #' @examples
 #' \dontrun{
-#' add_dockerfile()
+#' add_shinyproxy_dockerfile()
 #'}
-add_dockerfile <- function( 
+add_shinyproxy_dockerfile <- function( 
   input = "DESCRIPTION", 
   output = "Dockerfile", 
   from = paste0("FROM rocker/tidyverse:", R.Version()$major,".", R.Version()$minor)
@@ -74,6 +74,10 @@ add_dockerfile <- function(
     ),
     glue::glue(
       'RUN R -e "remotes::install_cran(\'{hop}\')"',
+      hop = att_from_description( path = input )
+    ),
+    glue::glue(
+      'RUN R -e "remotes::install_github(\'{hop}\')"',
       hop = att_from_description( path = input )
     ),
     glue::glue(
