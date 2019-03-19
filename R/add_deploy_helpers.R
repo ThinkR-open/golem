@@ -139,7 +139,7 @@ add_heroku_dockerfile <- function(
     glue("heroku container:release web --app {apps_h}")
   )
   cat_line(
-    glue("heroku open {apps_h}")
+    glue("heroku open --app {apps_h}")
   )
   cat_red_bullet("Be sure to have the heroku CLI installed.")
   cat_red_bullet(
