@@ -80,8 +80,7 @@ add_dockerfile <- function( input = "DESCRIPTION", output = "Dockerfile" ){
     "RUN R -e \"install.packages('/app.tar.gz', repos = NULL, type = 'source')\"",
     "EXPOSE 3838",
     glue::glue(
-      "CMD [\"R\", \"-e options('shiny.port'=3838,shiny.host='0.0.0.0');
-      {read.dcf(input)[1]}::run_app()\"]"
+      "CMD [\"R\", \"-e options('shiny.port'=3838,shiny.host='0.0.0.0'); {read.dcf(input)[1]}::run_app()\"]"
     )
   )
   docker <- paste(docker,collapse = " \n")
