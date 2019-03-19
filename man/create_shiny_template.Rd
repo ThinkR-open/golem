@@ -4,11 +4,14 @@
 \alias{create_shiny_template}
 \title{Create a package for Shiny App}
 \usage{
-create_shiny_template(path, ...)
+create_shiny_template(path, check_name = TRUE, ...)
 }
 \arguments{
 \item{path}{Name of the folder to create the package in. This will also be 
 used as the package name.}
+
+\item{check_name}{When using this function in the console, you can prevent 
+the package name from being checked.}
 
 \item{...}{not used}
 }
