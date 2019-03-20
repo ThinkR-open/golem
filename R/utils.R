@@ -30,7 +30,7 @@ cat_red_bullet <- function(...){
 }
 
 # From {dockerfiler}, in wait for the version to be on CRAN
-# 
+#' @importFrom utils installed.packages
 dock_from_desc <- function(
   path = "DESCRIPTION",
   FROM = "rocker/r-base",
