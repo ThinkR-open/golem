@@ -26,18 +26,16 @@ add_rconnect_file <- function(
   write_there("shiny::shinyApp(ui = app_ui(), server = app_server)")
   usethis::use_build_ignore(where)
   usethis::use_package("pkgload")
-  cat_bullet(glue("File created at {where}"), bullet = "tick", bullet_col = "green")
-  cat_bullet("To deploy, run:")
-  cat(darkgrey("rsconnect::deployApp()\n"))
+  cat_green_tick(glue("File created at {where}"))
+  cat_line("To deploy, run:")
+  cat_bullet(darkgrey("rsconnect::deployApp()\n"))
   
   
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
-    cat_bullet(
-      glue::glue("Go to {where}"), 
-      bullet = "square_small_filled", 
-      bullet_col = "red"
+    cat_red_bullet(
+      glue::glue("Go to {where}")
     )
   }
   
@@ -115,7 +113,7 @@ add_heroku_dockerfile <- function(
   dock <- dock_from_desc(input, FROM = from, AS = as)
   
   dock$CMD(glue::glue(
-    " [\"R\", \"-e options('shiny.port'=$PORT,shiny.host='0.0.0.0'); {read.dcf(input)[1]}::run_app()\"]"
+    "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');{read.dcf(input)[1]}::run_app()\""
   ))
   dock$write(output)
   
@@ -123,7 +121,10 @@ add_heroku_dockerfile <- function(
     glue("Dockerfile created at {output}")
   )
   
-  apps_h <- gsub("\\.", "-", glue("{read.dcf(input)[1]}-{read.dcf('DESCRIPTION')[1,][['Version']]}"))
+  apps_h <- gsub(
+    "\\.", "-", 
+    glue("{read.dcf(input)[1]}-{read.dcf('DESCRIPTION')[1,][['Version']]}")
+  )
   
   alert_build(input, output)
   
