@@ -223,10 +223,19 @@ deploy to RStudio Connect.
 golem::add_rconnect_file()
 ```
 
-### docker ( for shinyproxy and other )
+### Docker
+
+You can create an “agnostic” Dockerfile with:
 
 ``` r
 golem::add_dockerfile()
+```
+
+If you’re more interested in plateform specific Dockerfile, you can use:
+
+``` r
+golem::add_dockerfile_shinyproxy()
+golem::add_dockerfile_heroku()
 ```
 
 ## Tool series
