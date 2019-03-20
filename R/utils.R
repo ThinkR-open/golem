@@ -55,8 +55,21 @@ dock_from_desc <- function(
     # And shouldn't be installed
     reco <- rownames(installed.packages(priority="base"))
     
+    # And Remotes package, which will be handled 
+    # by install_local
+    rem <- attempt::attempt({
+      desc[, "Remotes"]
+    }, silent = TRUE)
+    
+    if (class(rem)[1] != "try-error"){
+      rem <- strsplit(rem, "\n")[[1]]
+      rem <- vapply(rem, function(x){
+        strsplit(x, "/")[[1]][2]
+      }, character(1))
+      reco <- c(reco, unname(rem))
+    }
+    
     if (length(imp) > 0) {
-      
       imp <- gsub(",", "", imp)
       imp <- strsplit(imp, "\n")[[1]]
       for (i in seq_along(imp)){
