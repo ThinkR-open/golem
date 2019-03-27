@@ -17,6 +17,7 @@ usethis::use_test("desc")
 
 # Travis
 usethis::use_travis()
+usethis::use_coverage()
 
 # Documentation
 usethis::use_vignette("build-app-package")
