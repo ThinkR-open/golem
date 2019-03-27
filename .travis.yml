@@ -18,3 +18,7 @@ deploy:
   local-dir: docs
   on:
     branch: master
+
+before_install:
+  - Rscript -e 'update.packages(ask = FALSE)'
+  
