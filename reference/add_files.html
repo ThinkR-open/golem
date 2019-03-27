@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add an app.R at the root of your package to deploy on RStudio Connect — add_rconnect_file • golem</title>
+<title>Create a module — add_js_file • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -29,9 +29,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Add an app.R at the root of your package to deploy on RStudio Connect — add_rconnect_file" />
+<meta property="og:title" content="Create a module — add_js_file" />
 
-<meta property="og:description" content="Add an app.R at the root of your package to deploy on RStudio Connect" />
+<meta property="og:description" content="These functions create files inside the `inst/app/www` folder." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -138,25 +138,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add an app.R at the root of your package to deploy on RStudio Connect</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/add_deploy_helpers.R'><code>R/add_deploy_helpers.R</code></a></small>
-    <div class="hidden name"><code>add_rconnect_file.Rd</code></div>
+    <h1>Create a module</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/add_files.R'><code>R/add_files.R</code></a></small>
+    <div class="hidden name"><code>add_files.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Add an app.R at the root of your package to deploy on RStudio Connect</p>
+    <p>These functions create files inside the `inst/app/www` folder.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>add_rconnect_file</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>add_js_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)
+
+<span class='fu'>add_js_handler</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)
+
+<span class='fu'>add_css_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>name</th>
+      <td><p>The name of the module</p></td>
+    </tr>
+    <tr>
       <th>pkg</th>
-      <td><p>Where to put the app.R.</p></td>
+      <td><p>Path to the root of the package. Default is `"."`.</p></td>
     </tr>
     </table>
     
