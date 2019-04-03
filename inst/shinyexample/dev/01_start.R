@@ -51,13 +51,7 @@ golem::use_utils_server()
 golem::use_favicon( path = "path/to/favicon")
 
 
-## 1.6 : Create your first module
-## 
-## Add a module file in your R folder with the recommended structure
-
-golem::add_module(name = "my_first_module") #
-
-## 1.7: Add a browser button
-
-golem::add_browser_button()
+# You're now set! 
+# go to dev/02_dev.R
+rstudioapi::navigateToFile("dev/02_dev.R")
 
