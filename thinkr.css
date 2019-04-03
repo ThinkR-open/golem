@@ -30,9 +30,21 @@ h2 {
     color: #15b7d6;
 }
 
+.navbar-default {
+    background-color: #3b4450;
+    border-color: #3b4450;
+}
+
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     background-color: #DE633C;
     border-radius: 3px;
+}
+.navbar-default .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #15b7d6;
+}
+.navbar .version.label.label-default {
+    border-radius: 3px;
+    background-color: #222;
 }
 
 .navbar-brand {
@@ -41,4 +53,8 @@ h2 {
     background-repeat: no-repeat;
     background-position: 15px center;
     padding-left: 55px;
+}
+
+.btn-xs, .btn-group-xs > .btn {
+    border-radius: 3px;
 }
