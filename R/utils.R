@@ -41,7 +41,7 @@ dock_from_desc <- function(
   x$RUN("R -e 'install.packages(\"remotes\")'")
   
   # We need to be sure install_cran is there
-  x$RUN("R -e 'remotes::install_github(\"r-lib/remotes\", ref = \"6c8fdaa\")'")
+  x$RUN("R -e 'remotes::install_github(\"r-lib/remotes\", ref = \"97bbf81\")'")
   
   desc <- read.dcf(path)
   
