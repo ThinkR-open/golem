@@ -43,6 +43,7 @@ Imports:
     yesno,
     crayon
 Suggests: 
+    covr,
     knitr,
     pkgdown,
     rcmdcheck,
