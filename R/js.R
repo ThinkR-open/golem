@@ -7,13 +7,17 @@
 #'     from the server side. 
 #' 
 #' \describe{
+#'   \item{show}{Show an element with the jQuery selector provided.}
+#'   \item{hide}{Hide an element with the jQuery selector provided.}
 #'   \item{showid}{Show an element with the id provided.}
 #'   \item{hideid}{Hide an element with the id provided.}
 #'   \item{showclass}{Same as showid, but with class.}
 #'   \item{hideclass}{Same as hideid, but with class.}
 #'   \item{showhref}{Same as showid, but with `a[href*=`}
 #'   \item{hidehref}{Same as hideid, but with `a[href*=`}
-#'   \item{clickon}{Click on an element. The full Jquery selector has to be used.}
+#'   \item{clickon}{Click on an element. The full jQuery selector has to be used.}
+#'   \item{disable}{Add "disabled" to an element. The full jQuery selector has to be used.}
+#'   \item{reable}{Remove "disabled" from an element. The full jQuery selector has to be used.}
 #' }
 #'
 #' @return A script
