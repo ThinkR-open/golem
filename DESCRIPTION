@@ -43,7 +43,8 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno
+    yesno,
+    attachment (>= 0.0.5)
 Suggests: 
     knitr,
     pkgdown,
@@ -55,3 +56,5 @@ VignetteBuilder:
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Remotes:  
+    ThinkR-open/attachment
