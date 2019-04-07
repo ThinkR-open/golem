@@ -14,6 +14,32 @@ status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](
 {golem} is a package that provides tools for a better workflow for
 working on shinyapps.
 
+## Tool series
+
+This package is part of a series of tools for Shiny, which includes:
+
+  - `{golem}` - <https://github.com/ThinkR-open/golem>
+  - `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
+  - `{fakir}` - <https://github.com/ThinkR-open/fakir>
+  - `{shinysnippets}` - <https://github.com/ThinkR-open/shinysnippets>
+
+## Know more
+
+### The Book :
+
+  - <https://thinkr-open.github.io/building-shiny-apps-workflow/>
+
+### Building big Shiny Apps :
+
+  - Part 1:
+    <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
+  - Part 2:
+    <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/>
+
+### Blog post :
+
+<https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app>
+
 ## Installation
 
 You can install the development version from
@@ -36,10 +62,13 @@ template:
 See full documentation in the {pkgdown} website:
 <https://thinkr-open.github.io/golem/index.html>
 
-After project creation, you’ll land on `dev_history.R`. This file is
-used to keep a track of all the steps you’ve followed to build your app.
+After project creation, you’ll land on `dev/01_start.R`. There are also
+`dev/02_dev.R` and `dev/03_deploy.R`
 
-You can follow it step by step of skip some if you’d like.
+These files arer used to keep a track of all the steps you’ve followed
+to build your app.
+
+You can follow them step by step of skip some if you’d like.
 
 ### Fill the description
 
@@ -86,7 +115,7 @@ golem::use_recommended_dep(recommended = c("shiny","DT","attempt","glue","htmlto
 
 ### Add various tools
 
-These three functions adds one file each which contain a series of
+These two functions adds one file each which contain a series of
 functions that can be useful for building your app. To be used in the
 UI, in the server, or as prod-dependent tools.
 
@@ -232,32 +261,6 @@ golem::add_rconnect_file()
 ``` r
 golem::add_dockerfile()
 ```
-
-## Tool series
-
-This package is part of a series of tools for Shiny, which includes:
-
-  - `{golem}` - <https://github.com/ThinkR-open/golem>
-  - `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
-  - `{fakir}` - <https://github.com/ThinkR-open/fakir>
-  - `{shinysnippets}` - <https://github.com/ThinkR-open/shinysnippets>
-
-## Know more
-
-### The Book :
-
-  - <https://thinkr-open.github.io/building-shiny-apps-workflow/>
-
-### Building big Shiny Apps :
-
-  - Part 1:
-    <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
-  - Part 2:
-    <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/>
-
-### Blog post :
-
-<https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app>
 
 ## CoC
 
