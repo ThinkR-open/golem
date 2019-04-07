@@ -162,11 +162,14 @@ golem::use_utils_server()
 golem::use_favicon( path = "path/to/favicon")
 ```
 
+## Try the app
+
+To run the app, go to the `dev/run_dev.R` file, and launch the all thing.
+
 You're now set! You've successfully initiated the project and can go to dev/02_dev.R.
 
 ```{r}
 rstudioapi::navigateToFile("dev/02_dev.R")
 ```
-
 
 

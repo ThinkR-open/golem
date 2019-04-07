@@ -1,0 +1,41 @@
+---
+title: "Deploying Apps with {golem}"
+author: "Colin Fay"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{03_deploy}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Deploying Apps with `{golem}`
+
+The `dev/03_deploy.R` file contains function for deploying on various plateforms. 
+
+### RStudio Connect
+
+```{r}
+golem::add_rconnect_file()
+```
+
+### Docker 
+
+```{r}
+# If you want to deploy via a generic Dockerfile
+golem::add_dockerfile()
+
+# If you want to deploy to ShinyProxy
+golem::add_shinyproxy_dockerfile()
+
+# If you want to deploy to Heroku
+golem::add_heroku_dockerfile()
+```
+
