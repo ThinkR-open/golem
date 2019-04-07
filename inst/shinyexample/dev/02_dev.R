@@ -22,6 +22,12 @@ usethis::use_test("app")
 
 golem::add_browser_button()
 
+## 2.5 Add external files
+
+golem::add_js_file("script")
+golem::add_js_handler("script")
+golem::add_css_file("custom")
+
 # 3. Documentation
 
 ## 3. Vignette
