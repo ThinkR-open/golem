@@ -211,6 +211,7 @@ Once the package (*e.g.* mypkg) is installed, the application can be launch with
 mypkg::run_app()
 ```
 
+Or by running the `dev/run_dev.R` file.
 
 ### rsconnect
 
@@ -230,10 +231,10 @@ golem::add_dockerfile()
 
 This package is part of a series of tools for Shiny, which includes: 
 
-- {golem} - https://github.com/ThinkR-open/golem
-- {shinipsum} - https://github.com/ThinkR-open/shinipsum
-- {fakir} - https://github.com/ThinkR-open/fakir
-- {shinysnippets} - https://github.com/ThinkR-open/shinysnippets
+- `{golem}` - https://github.com/ThinkR-open/golem
+- `{shinipsum}` - https://github.com/ThinkR-open/shinipsum
+- `{fakir}` - https://github.com/ThinkR-open/fakir
+- `{shinysnippets}` - https://github.com/ThinkR-open/shinysnippets
 
 ## Know more 
 

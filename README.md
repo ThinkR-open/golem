@@ -216,6 +216,8 @@ launch with the following command.
 mypkg::run_app()
 ```
 
+Or by running the `dev/run_dev.R` file.
+
 ### rsconnect
 
 This creates a simple file at the root of the package, to be used to
@@ -235,10 +237,10 @@ golem::add_dockerfile()
 
 This package is part of a series of tools for Shiny, which includes:
 
-  - {golem} - <https://github.com/ThinkR-open/golem>
-  - {shinipsum} - <https://github.com/ThinkR-open/shinipsum>
-  - {fakir} - <https://github.com/ThinkR-open/fakir>
-  - {shinysnippets} - <https://github.com/ThinkR-open/shinysnippets>
+  - `{golem}` - <https://github.com/ThinkR-open/golem>
+  - `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
+  - `{fakir}` - <https://github.com/ThinkR-open/fakir>
+  - `{shinysnippets}` - <https://github.com/ThinkR-open/shinysnippets>
 
 ## Know more
 
