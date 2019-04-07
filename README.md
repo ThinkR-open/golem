@@ -135,7 +135,7 @@ See `?golem::js` for the list.
 ### Add a browser button
 
 ``` r
-golem::add_browser_button()
+golem::browser_button()
 ```
 
 See [A little trick for debugging

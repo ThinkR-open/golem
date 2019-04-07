@@ -10,6 +10,8 @@
 
 * You can now create package with "illegal" names, using the command line `golem::create_shiny_template()`
 
+* `add_browser_button()` is now named `browser_button()`, so that all the `add_*` function are only reserved for function adding files to the `golem`.
+
 ## New funs
 
 * Added `add_dockerfile()` to create a Dockerfile from a DESCRIPTION.

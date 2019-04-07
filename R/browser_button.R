@@ -6,7 +6,7 @@
 #' @export
 #' 
 #' @importFrom cli cat_rule cat_line
-add_browser_button <- function(){
+browser_button <- function(){
   cat_rule("To be copied in your UI")
   cat_line(darkgrey('actionButton("browser", "browser"),'))
   cat_line(darkgrey('tags$script("$(\'#browser\').hide();")'))
