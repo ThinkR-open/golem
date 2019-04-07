@@ -1,0 +1,9 @@
+pandoc: '2.4'
+pkgdown: 1.1.0
+pkgdown_sha: ~
+articles:
+  01_start: 01_start.html
+  02_dev: 02_dev.html
+  03_deploy: 03_deploy.html
+  04_js: 04_js.html
+
