@@ -237,8 +237,13 @@ dock_from_desc <- function(
       imp <- gsub(",", "", imp)
       imp <- strsplit(imp, "\n")[[1]]
       for (i in seq_along(imp)){
-        if (!(imp[i] %in% reco)){
-          x$RUN(paste0("R -e 'remotes::install_cran(\"", imp[i], "\")'"))
+        gg <- gsub(" \\(.*", "", imp[i])
+        if (!(gg %in% reco)){
+          # Specific versions can cause pblm in Docker (which have a specific date)
+          # And will be handled by install_local so we don't add them
+          if (!grepl("\\(", imp[i]) ){
+            x$RUN(paste0("R -e 'remotes::install_cran(\"", imp[i], "\")'"))
+          }
         }
       }
     }
