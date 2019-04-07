@@ -138,7 +138,7 @@ See `?golem::js` for the list.
 ### Add a browser button 
 
 ```{r}
-golem::add_browser_button()
+golem::browser_button()
 ```
 
 See [A little trick for debugging Shiny](https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/) for more info about this method.

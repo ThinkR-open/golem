@@ -20,7 +20,7 @@ usethis::use_test("app")
 
 ## 2.4 Add a browser button
 
-golem::add_browser_button()
+golem::browser_button()
 
 ## 2.5 Add external files
 

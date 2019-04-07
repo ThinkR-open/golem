@@ -82,7 +82,7 @@ usethis::use_test("app")
 Learn more about this: https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/
 
 ```{r}
-golem::add_browser_button()
+golem::browser_button()
 ```
 
 ### Add external files
