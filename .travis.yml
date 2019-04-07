@@ -1,5 +1,4 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
 language: R
 sudo: false
 cache: packages
@@ -7,14 +6,32 @@ cache: packages
 r_github_packages:
   - ThinkR-open/golem  # pre-install to avoid vignette package errors
 
-after_success:
-  - Rscript -e 'pkgdown::build_site()'
+# build matrix; turn on vdiffr only on r release
+matrix:
+  include:
+  - r: devel
+  - r: release
+    env: VDIFFR_RUN_TESTS=true
+    before_cache:
+    - Rscript -e 'remotes::install_cran("pkgdown")'
+    - Rscript -e 'remotes::install_github("ThinkR-open/thinkrtemplate")'
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: $GITHUB_PAT
+      keep-history: true
+      local-dir: docs
+      on:
+        branch: master
+      skip_cleanup: true
+  - r: oldrel
+  - r: 3.3
+  - r: 3.4
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_PAT
-  keep-history: true
-  local-dir: docs
-  on:
-    branch: master
+before_install:
+  - Rscript -e 'update.packages(ask = FALSE)'
+  
+after_success:
+  - Rscript -e 'covr::codecov()'
+  - Rscript -e 'pkgdown::build_site()'
+  

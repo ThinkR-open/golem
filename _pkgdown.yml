@@ -1,2 +1,4 @@
+template:
+  package: thinkrtemplate
 hexURL:
   https://github.com/ThinkR-open/golem/blob/master/inst/rstudio/templates/project/golem.png?raw=true

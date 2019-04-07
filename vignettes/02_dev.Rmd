@@ -1,0 +1,137 @@
+---
+title: "Day to Day Dev with {golem}"
+author: "Colin Fay"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{02_dev}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  eval = FALSE
+)
+```
+
+## Day to day development with `{golem}`
+
+Now that you're all set with your project init, time to move to development :) 
+
+App development should happen through the `dev/02_dev.R` file, which contains common commands for developping. 
+
+## Launching the app
+
+To run the app, go to the `dev/run_dev.R` file, and run the all thing.
+
+## `dev/02_dev.R`
+
+### Add modules
+
+The `golem::add_module()` functions creates a module in the `R` folder. The file and the modules will be named after the `name` parameter, by adding `mod_` to the R file, and `mod_*_ui` and `mod_*_server` to the UI and server functions.
+
+```{r}
+golem::add_module(name = "my_first_module") # Name of the module
+```
+
+The new file will contain:
+
+```{r}
+# mod_UI
+mod_my_first_module_ui <- function(id){
+  ns <- NS(id)
+  tagList(
+  
+  )
+}
+
+mod_my_first_module_server <- function(input, output, session){
+  ns <- session$ns
+}
+    
+## To be copied in the UI
+# mod_my_first_module_ui("my_first_module_1")
+    
+## To be copied in the server
+# callModule(mod_my_first_module_server, "my_first_module_1")
+```
+
+In order not to make errors when putting these into your app, the end of the file will contain code that has to be copied and pasted inside your UI and server functions. 
+
+### Add dependencies
+
+To be called each time you need a new package as a dependency:
+
+```{r}
+usethis::use_package("pkg")
+```
+
+### Add tests
+
+Add more tests to your application:
+
+```{r}
+usethis::use_test("app")
+```
+
+### Add a browser button
+
+Learn more about this: https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/
+
+```{r}
+golem::add_browser_button()
+```
+
+### Add external files
+
+These functions create external dependencies (JavaScript and CSS). `add_js_file()` creates a simple JavaScript file, while `add_js_handler()` adds a file with a skeleton for shiny custom handlers.
+
+```{r}
+golem::add_js_file("script")
+golem::add_js_handler("script")
+golem::add_css_file("custom")
+```
+
+
+## Documentation
+
+### Vignette
+
+```{r}
+usethis::use_vignette("shinyexample")
+devtools::build_vignettes()
+```
+
+### Code coverage
+
+```{r}
+usethis::use_travis()
+usethis::use_appveyor()
+usethis::use_coverage()
+```
+
+## Using `{golem}` dev functions
+
+There's a series of tools to make your app behave differently whether it's in dev or prod mode. Notably, the `app_prod()` and `app_dev()` function tests for `options( "golem.app.prod")` (or return TRUE if this option doesn't exist). 
+
+Setting this options at the beginning of your dev process allows to make your app behave in a specific way when you are in dev mode. For example, printing message to the console with `cat_dev()`.
+
+```{r eval = TRUE}
+options( "golem.app.prod" = TRUE)
+golem::cat_dev("hey\n")
+options( "golem.app.prod" = FALSE)
+golem::cat_dev("hey\n")
+```
+
+You can then make any function being "dev-dependant" with the `make_dev()` function: 
+
+```{r eval = TRUE}
+log_dev <- golem::make_dev(log)
+log_dev(10)
+options( "golem.app.prod" = TRUE)
+log_dev(10)
+```
+

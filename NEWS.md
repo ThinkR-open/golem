@@ -12,7 +12,7 @@
 
 ## New funs
 
-* Added `add_dockerfile()` to create a Dockerfile from a DESCRIPTION.
+* Added `add_shinyproxy_dockerfile()` to create a Dockerfile from a DESCRIPTION, to be used in Shiny Proxy.
 
 * `add_css_file()`, `add_js_file()` and `add_js_handler()` create a CSS, JS, and JS with Shiny custom handler files.
 

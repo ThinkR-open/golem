@@ -4,6 +4,8 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.org/ThinkR-open/golem.svg?branch=master)](https://travis-ci.org/ThinkR-open/golem)
+[![Coverage
+status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](https://codecov.io/github/ThinkR-open/golem?branch=master)
 
 <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" width=250px>
 
@@ -11,6 +13,32 @@ status](https://travis-ci.org/ThinkR-open/golem.svg?branch=master)](https://trav
 
 {golem} is a package that provides tools for a better workflow for
 working on shinyapps.
+
+## Tool series
+
+This package is part of a series of tools for Shiny, which includes:
+
+  - `{golem}` - <https://github.com/ThinkR-open/golem>
+  - `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
+  - `{fakir}` - <https://github.com/ThinkR-open/fakir>
+  - `{shinysnippets}` - <https://github.com/ThinkR-open/shinysnippets>
+
+## Know more
+
+### The Book :
+
+  - <https://thinkr-open.github.io/building-shiny-apps-workflow/>
+
+### Building big Shiny Apps :
+
+  - Part 1:
+    <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
+  - Part 2:
+    <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/>
+
+### Blog post :
+
+<https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app>
 
 ## Installation
 
@@ -34,10 +62,13 @@ template:
 See full documentation in the {pkgdown} website:
 <https://thinkr-open.github.io/golem/index.html>
 
-After project creation, you’ll land on `dev_history.R`. This file is
-used to keep a track of all the steps you’ve followed to build your app.
+After project creation, you’ll land on `dev/01_start.R`. There are also
+`dev/02_dev.R` and `dev/03_deploy.R`
 
-You can follow it step by step of skip some if you’d like.
+These files arer used to keep a track of all the steps you’ve followed
+to build your app.
+
+You can follow them step by step of skip some if you’d like.
 
 ### Fill the description
 
@@ -84,7 +115,7 @@ golem::use_recommended_dep(recommended = c("shiny","DT","attempt","glue","htmlto
 
 ### Add various tools
 
-These three functions adds one file each which contain a series of
+These two functions adds one file each which contain a series of
 functions that can be useful for building your app. To be used in the
 UI, in the server, or as prod-dependent tools.
 
@@ -214,6 +245,8 @@ launch with the following command.
 mypkg::run_app()
 ```
 
+Or by running the `dev/run_dev.R` file.
+
 ### rsconnect
 
 This creates a simple file at the root of the package, to be used to
@@ -237,32 +270,6 @@ If you’re more interested in plateform specific Dockerfile, you can use:
 golem::add_dockerfile_shinyproxy()
 golem::add_dockerfile_heroku()
 ```
-
-## Tool series
-
-This package is part of a series of tools for Shiny, which includes:
-
-  - {golem} - <https://github.com/ThinkR-open/golem>
-  - {shinipsum} - <https://github.com/ThinkR-open/shinipsum>
-  - {fakir} - <https://github.com/ThinkR-open/fakir>
-  - {shinysnippets} - <https://github.com/ThinkR-open/shinysnippets>
-
-## Know more
-
-### The Book :
-
-  - <https://thinkr-open.github.io/building-shiny-apps-workflow/>
-
-### Building big Shiny Apps :
-
-  - Part 1:
-    <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
-  - Part 2:
-    <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/>
-
-### Blog post :
-
-<https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app>
 
 ## CoC
 

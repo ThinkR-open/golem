@@ -13,6 +13,7 @@ app_ui <- function() {
   )
 }
 
+#' @import shiny
 golem_add_external_resources <- function(){
   
   addResourcePath(

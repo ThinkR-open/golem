@@ -1,8 +1,5 @@
-# Building a Prod-Ready, Robust Shiny Application.
+# Deploy a Prod-Ready, Robust Shiny Application.
 # 
-# Each step is optional. 
-# 
-
 # 4. Test my package
 
 devtools::test()
@@ -13,5 +10,11 @@ rhub::check_for_cran()
 ## 5.1 If you want to deploy on RStudio related platforms
 golem::add_rconnect_file()
 
-## 5.2 If you want to deploy via a Dockerfile
+## 5.2 If you want to deploy via a generic Dockerfile
 golem::add_dockerfile()
+
+## 5.2 If you want to deploy to ShinyProxy
+golem::add_shinyproxy_dockerfile()
+
+## 5.2 If you want to deploy to Heroku
+golem::add_heroku_dockerfile()

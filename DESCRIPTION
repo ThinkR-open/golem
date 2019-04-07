@@ -46,6 +46,7 @@ Imports:
     yesno,
     attachment (>= 0.0.5)
 Suggests: 
+    covr,
     knitr,
     pkgdown,
     rcmdcheck,

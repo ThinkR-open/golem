@@ -1,4 +1,12 @@
 $( document ).ready(function() {
+  Shiny.addCustomMessageHandler('show', function(what) {
+    $(what).show()
+  });
+
+  Shiny.addCustomMessageHandler('hide', function(what) {
+    $(what).hide()
+  });
+  
   Shiny.addCustomMessageHandler('showid', function(what) {
     $("#" + what).show()
   });

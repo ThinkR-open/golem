@@ -1,0 +1,64 @@
+---
+title: "Using {golem} js functions"
+author: "Colin Fay"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{03_deploy}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Using `{golem}` js functions
+
+`{golem}` comes with a series of JavaScript functions that you can call from the server. These functions are added by default with `golem::js()` in `app_ui`.
+
+
+Then they arer called with `session$sendCustomMessage("fonction", "ui_element")`.
+
+This `ui_element` define the UI element to interact with. It can be a full jQuery selector, an id or a class.
+
+### `golem::js()`
+
++ `showid` & `hideid`, `showclass` & `hideclass` show and hide elements through their id or class.
+
+```{r eval = FALSE}
+session$sendCustomMessage("showid", ns("plot"))
+```
+
++ `showhref` & `hidehref` hide and show a link by trying to match the `href` content.
+
+```{r eval = FALSE}
+session$sendCustomMessage("showhref", "panel2")
+```
+
++ `clickon` click on the element. You have to use the full jQuery selector. 
+
++ `show` & `hide` show and hide elements, using the full jQuery selector.
+
+### About jQuery selectors
+
++ `#plop`: the element with the id `plop`
+
++ `.pouet`: elements of class `pouet`
+
++ `"button:contains('this')"`: buttons with a text containing `'this'`
+
+Note that in html, tags contains attributes. For example:
+
+``` html
+<a href = "https://thinkr.fr" data-value = "panel2">ThinkR</a>
+```
+
+contains `href` & `data-value`. You can refer to these attributes with `[]` after the tag name.
+
++ `a[href = "https://thinkr.fr"]`: link with `href` being `https://thinkr.fr`
+
++ `a[data-value="panel2"]`: link with  `data-value` being `"panel2"`
