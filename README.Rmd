@@ -238,6 +238,7 @@ Once the package (*e.g.* mypkg) is installed, the application can be launch with
 mypkg::run_app()
 ```
 
+
 Or by running the `dev/run_dev.R` file.
 
 ### rsconnect
@@ -248,11 +249,21 @@ This creates a simple file at the root of the package, to be used to deploy to R
 golem::add_rconnect_file()
 ```
 
-### docker ( for shinyproxy and other )
+### Docker 
+
+You can create an "agnostic" Dockerfile with:
 
 ```{r}
 golem::add_dockerfile()
 ```
+
+If you're more interested in plateform specific Dockerfile, you can use: 
+
+```{r}
+golem::add_dockerfile_shinyproxy()
+golem::add_dockerfile_heroku()
+```
+
 ## CoC 
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
