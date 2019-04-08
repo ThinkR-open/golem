@@ -11,9 +11,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A Framework for Robust Shiny Applications">
-<meta property="og:description" content="An opinionated framework for building a production-ready 
-    'Shiny' application. This package contains a series of tools for 
-    building a robust 'Shiny' application from start to finish. ">
+<meta property="og:description" content="An opinionated framework for building a
+    production-ready 'Shiny' application. This package contains a series
+    of tools for building a robust 'Shiny' application from start to
+    finish.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax
@@ -50,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5003</span>
       </span>
     </div>
 
@@ -73,7 +74,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/build-app-package.html">Build a Shiny app in a package with golem</a>
+      <a href="articles/a_start.html">Getting Started with {golem}</a>
+    </li>
+    <li>
+      <a href="articles/b_dev.html">Day to Day Dev with {golem}</a>
+    </li>
+    <li>
+      <a href="articles/c_deploy.html">Deploying Apps with {golem}</a>
+    </li>
+    <li>
+      <a href="articles/d_js.html">Using {golem} js functions</a>
     </li>
   </ul>
 </li>
@@ -118,6 +128,51 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#golem" class="anchor"></a>{golem}</h1></div>
 <p>{golem} is a package that provides tools for a better workflow for working on shinyapps.</p>
+<div id="tool-series" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tool-series" class="anchor"></a>Tool series</h2>
+<p>This package is part of a series of tools for Shiny, which includes:</p>
+<ul>
+<li>
+<code>{golem}</code> - <a href="https://github.com/ThinkR-open/golem" class="uri">https://github.com/ThinkR-open/golem</a>
+</li>
+<li>
+<code>{shinipsum}</code> - <a href="https://github.com/ThinkR-open/shinipsum" class="uri">https://github.com/ThinkR-open/shinipsum</a>
+</li>
+<li>
+<code>{fakir}</code> - <a href="https://github.com/ThinkR-open/fakir" class="uri">https://github.com/ThinkR-open/fakir</a>
+</li>
+<li>
+<code>{shinysnippets}</code> - <a href="https://github.com/ThinkR-open/shinysnippets" class="uri">https://github.com/ThinkR-open/shinysnippets</a>
+</li>
+</ul>
+</div>
+<div id="know-more" class="section level2">
+<h2 class="hasAnchor">
+<a href="#know-more" class="anchor"></a>Know more</h2>
+<div id="the-book" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-book" class="anchor"></a>The Book :</h3>
+<ul>
+<li><a href="https://thinkr-open.github.io/building-shiny-apps-workflow/" class="uri">https://thinkr-open.github.io/building-shiny-apps-workflow/</a></li>
+</ul>
+</div>
+<div id="building-big-shiny-apps" class="section level3">
+<h3 class="hasAnchor">
+<a href="#building-big-shiny-apps" class="anchor"></a>Building big Shiny Apps :</h3>
+<ul>
+<li>Part 1: <a href="https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/" class="uri">https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/</a>
+</li>
+<li>Part 2: <a href="https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/" class="uri">https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/</a>
+</li>
+</ul>
+</div>
+<div id="blog-post" class="section level3">
+<h3 class="hasAnchor">
+<a href="#blog-post" class="anchor"></a>Blog post :</h3>
+<p><a href="https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app" class="uri">https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app</a></p>
+</div>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -135,8 +190,9 @@
 <h2 class="hasAnchor">
 <a href="#step-by-step-guide" class="anchor"></a>Step by step guide</h2>
 <p>See full documentation in the {pkgdown} website: <a href="https://thinkr-open.github.io/golem/index.html" class="uri">https://thinkr-open.github.io/golem/index.html</a></p>
-<p>After project creation, you’ll land on <code>dev_history.R</code>. This file is used to keep a track of all the steps you’ve followed to build your app.</p>
-<p>You can follow it step by step of skip some if you’d like.</p>
+<p>After project creation, you’ll land on <code>dev/01_start.R</code>. There are also <code>dev/02_dev.R</code> and <code>dev/03_deploy.R</code></p>
+<p>These files arer used to keep a track of all the steps you’ve followed to build your app.</p>
+<p>You can follow them step by step of skip some if you’d like.</p>
 <div id="fill-the-description" class="section level3">
 <h3 class="hasAnchor">
 <a href="#fill-the-description" class="anchor"></a>Fill the description</h3>
@@ -154,13 +210,13 @@
 <h3 class="hasAnchor">
 <a href="#set-common-files" class="anchor"></a>Set common Files</h3>
 <p>Call the {usethis} package to set a list of elements:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/licenses">use_mit_license</a></span>(<span class="dt">name =</span> <span class="st">"Your Name"</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/use_readme_rmd">use_readme_rmd</a></span>()</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/use_code_of_conduct">use_code_of_conduct</a></span>()</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/badges">use_lifecycle_badge</a></span>(<span class="st">"Experimental"</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/use_news_md">use_news_md</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/licenses.html">use_mit_license</a></span>(<span class="dt">name =</span> <span class="st">"Your Name"</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_readme_rmd.html">use_readme_rmd</a></span>()</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_code_of_conduct.html">use_code_of_conduct</a></span>()</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/badges.html">use_lifecycle_badge</a></span>(<span class="st">"Experimental"</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_news_md.html">use_news_md</a></span>()</a></code></pre></div>
 <p>If you have data in your app:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/usethis/topics/use_data">use_data_raw</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data_raw</a></span>()</a></code></pre></div>
 </div>
 <div id="use-recommended-package" class="section level3">
 <h3 class="hasAnchor">
@@ -171,7 +227,7 @@
 <div id="add-various-tools" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-various-tools" class="anchor"></a>Add various tools</h3>
-<p>These three functions adds one file each which contain a series of functions that can be useful for building your app. To be used in the UI, in the server, or as prod-dependent tools.</p>
+<p>These two functions adds one file each which contain a series of functions that can be useful for building your app. To be used in the UI, in the server, or as prod-dependent tools.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_ui</a></span>()</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_server</a></span>()</a></code></pre></div>
 <p>Somes JS functions can also be used inside your shiny app with:</p>
@@ -181,7 +237,7 @@
 <div id="add-a-browser-button" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-a-browser-button" class="anchor"></a>Add a browser button</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/add_browser_button">add_browser_button</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/browser_button">browser_button</a></span>()</a></code></pre></div>
 <p>See <a href="https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/">A little trick for debugging Shiny</a> for more info about this method.</p>
 </div>
 <div id="create-modules" class="section level3">
@@ -260,6 +316,7 @@
 <a href="#direct" class="anchor"></a>direct</h3>
 <p>Once the package (<em>e.g.</em> mypkg) is installed, the application can be launch with the following command.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">mypkg<span class="op">::</span><span class="kw">run_app</span>()</a></code></pre></div>
+<p>Or by running the <code>dev/run_dev.R</code> file.</p>
 </div>
 <div id="rsconnect" class="section level3">
 <h3 class="hasAnchor">
@@ -267,51 +324,14 @@
 <p>This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/add_rconnect_file">add_rconnect_file</a></span>()</a></code></pre></div>
 </div>
-<div id="docker-for-shinyproxy-and-other" class="section level3">
+<div id="docker" class="section level3">
 <h3 class="hasAnchor">
-<a href="#docker-for-shinyproxy-and-other" class="anchor"></a>docker ( for shinyproxy and other )</h3>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">golem<span class="op">::</span><span class="kw">add_dockerfile</span>()</a></code></pre></div>
-</div>
-</div>
-<div id="tool-series" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tool-series" class="anchor"></a>Tool series</h2>
-<p>This package is part of a series of tools for Shiny, which includes:</p>
-<ul>
-<li>{golem} - <a href="https://github.com/ThinkR-open/golem" class="uri">https://github.com/ThinkR-open/golem</a>
-</li>
-<li>{shinipsum} - <a href="https://github.com/ThinkR-open/shinipsum" class="uri">https://github.com/ThinkR-open/shinipsum</a>
-</li>
-<li>{fakir} - <a href="https://github.com/ThinkR-open/fakir" class="uri">https://github.com/ThinkR-open/fakir</a>
-</li>
-<li>{shinysnippets} - <a href="https://github.com/ThinkR-open/shinysnippets" class="uri">https://github.com/ThinkR-open/shinysnippets</a>
-</li>
-</ul>
-</div>
-<div id="know-more" class="section level2">
-<h2 class="hasAnchor">
-<a href="#know-more" class="anchor"></a>Know more</h2>
-<div id="the-book" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-book" class="anchor"></a>The Book :</h3>
-<ul>
-<li><a href="https://thinkr-open.github.io/building-shiny-apps-workflow/" class="uri">https://thinkr-open.github.io/building-shiny-apps-workflow/</a></li>
-</ul>
-</div>
-<div id="building-big-shiny-apps" class="section level3">
-<h3 class="hasAnchor">
-<a href="#building-big-shiny-apps" class="anchor"></a>Building big Shiny Apps :</h3>
-<ul>
-<li>Part 1: <a href="https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/" class="uri">https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/</a>
-</li>
-<li>Part 2: <a href="https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/" class="uri">https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/</a>
-</li>
-</ul>
-</div>
-<div id="blog-post" class="section level3">
-<h3 class="hasAnchor">
-<a href="#blog-post" class="anchor"></a>Blog post :</h3>
-<p><a href="https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app" class="uri">https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app</a></p>
+<a href="#docker" class="anchor"></a>Docker</h3>
+<p>You can create an “agnostic” Dockerfile with:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/dockerfiles">add_dockerfile</a></span>()</a></code></pre></div>
+<p>If you’re more interested in plateform specific Dockerfile, you can use:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/dockerfiles">add_dockerfile_shinyproxy</a></span>()</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/dockerfiles">add_dockerfile_heroku</a></span>()</a></code></pre></div>
 </div>
 </div>
 <div id="coc" class="section level2">

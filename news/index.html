@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5003</span>
       </span>
     </div>
 
@@ -105,7 +105,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/build-app-package.html">Build a Shiny app in a package with golem</a>
+      <a href="../articles/a_start.html">Getting Started with {golem}</a>
+    </li>
+    <li>
+      <a href="../articles/b_dev.html">Day to Day Dev with {golem}</a>
+    </li>
+    <li>
+      <a href="../articles/c_deploy.html">Deploying Apps with {golem}</a>
+    </li>
+    <li>
+      <a href="../articles/d_js.html">Using {golem} js functions</a>
     </li>
   </ul>
 </li>
@@ -151,13 +160,16 @@
 <li><p>Every function that adds a file now check if the file already exists, and ask the user if they want to overwrite it (<a href='https://github.com/ThinkR-open/golem/issues/15'>#15</a>)</p></li>
 <li><p>Every module is now named mod_x_ui / mod_x_server, for consistency.</p></li>
 <li><p>You can now create package with “illegal” names, using the command line <code><a href="../reference/create_shiny_template.html">golem::create_shiny_template()</a></code></p></li>
+<li><p><code>add_browser_button()</code> is now named <code><a href="../reference/browser_button.html">browser_button()</a></code>, so that all the <code>add_*</code> function are only reserved for function adding files to the <code>golem</code>.</p></li>
 </ul>
 </div>
 <div id="new-funs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-funs" class="anchor"></a>New funs</h2>
 <ul>
-<li><p>Added <code><a href="../reference/add_shinyproxy_dockerfile.html">add_shinyproxy_dockerfile()</a></code> to create a Dockerfile from a DESCRIPTION, to be used in Shiny Proxy.</p></li>
+<li><p>Added <code><a href="../reference/dockerfiles.html">add_dockerfile()</a></code> to create a Dockerfile from a DESCRIPTION.</p></li>
+<li><p>Added <code><a href="../reference/dockerfiles.html">add_dockerfile_shinyproxy()</a></code> to create a Dockerfile from a DESCRIPTION, to be used in Shiny Proxy.</p></li>
+<li><p>Added <code><a href="../reference/dockerfiles.html">add_dockerfile_heroku()</a></code> to create a Dockerfile from a DESCRIPTION, to be used with Heroku.</p></li>
 <li><p><code><a href="../reference/add_files.html">add_css_file()</a></code>, <code><a href="../reference/add_files.html">add_js_file()</a></code> and <code><a href="../reference/add_files.html">add_js_handler()</a></code> create a CSS, JS, and JS with Shiny custom handler files.</p></li>
 </ul>
 </div>
@@ -167,6 +179,13 @@
 <ul>
 <li>
 <code>use_utils_prod</code> is now included in golem so you don’t have to explicitely include them</li>
+</ul>
+</div>
+<div id="docs" class="section level2">
+<h2 class="hasAnchor">
+<a href="#docs" class="anchor"></a>Docs</h2>
+<ul>
+<li>Golem now has four vignettes</li>
 </ul>
 </div>
 </div>

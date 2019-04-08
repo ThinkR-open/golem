@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a Dockerfile for  Shiny App — add_shinyproxy_dockerfile • golem</title>
+<title>Create a Dockerfile for  Shiny App — add_dockerfile • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -29,9 +29,11 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Create a Dockerfile for  Shiny App — add_shinyproxy_dockerfile" />
+<meta property="og:title" content="Create a Dockerfile for  Shiny App — add_dockerfile" />
 
-<meta property="og:description" content="Build a container containing your Shiny App." />
+<meta property="og:description" content="Build a container containing your Shiny App. `add_dockerfile()` creates 
+a &quot;generalistic&quot; Dockerfile, while `add_shinyproxy_dockerfile()` and 
+`add_heroku_dockerfile()` creates plateform specific Dockerfile." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -84,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5003</span>
       </span>
     </div>
 
@@ -107,7 +109,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/build-app-package.html">Build a Shiny app in a package with golem</a>
+      <a href="../articles/a_start.html">Getting Started with {golem}</a>
+    </li>
+    <li>
+      <a href="../articles/b_dev.html">Day to Day Dev with {golem}</a>
+    </li>
+    <li>
+      <a href="../articles/c_deploy.html">Deploying Apps with {golem}</a>
+    </li>
+    <li>
+      <a href="../articles/d_js.html">Using {golem} js functions</a>
     </li>
   </ul>
 </li>
@@ -140,18 +151,28 @@
     <div class="page-header">
     <h1>Create a Dockerfile for  Shiny App</h1>
     <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/add_deploy_helpers.R'><code>R/add_deploy_helpers.R</code></a></small>
-    <div class="hidden name"><code>add_shinyproxy_dockerfile.Rd</code></div>
+    <div class="hidden name"><code>dockerfiles.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Build a container containing your Shiny App.</p>
+    <p>Build a container containing your Shiny App. `add_dockerfile()` creates 
+a "generalistic" Dockerfile, while `add_shinyproxy_dockerfile()` and 
+`add_heroku_dockerfile()` creates plateform specific Dockerfile.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>add_shinyproxy_dockerfile</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
-  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"FROM rocker/tidyverse:"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>,
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>))</pre>
+    <pre class="usage"><span class='fu'>add_dockerfile</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
+  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>,
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>80</span>, <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"0.0.0.0"</span>)
+
+<span class='fu'>add_dockerfile_shinyproxy</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
+  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>,
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>add_dockerfile_heroku</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
+  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>,
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -169,12 +190,28 @@
       <td><p>The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
 with `R.Version()$major` and `R.Version()$minor`.</p></td>
     </tr>
+    <tr>
+      <th>as</th>
+      <td><p>The AS of the Dockerfile. Default it NULL.</p></td>
+    </tr>
+    <tr>
+      <th>port</th>
+      <td><p>The `options('shiny.port')` on which to run the Shiny App.
+Default is 80.</p></td>
+    </tr>
+    <tr>
+      <th>host</th>
+      <td><p>The `options('shiny.host')` on which to run the Shiny App.
+Default is 0.0.0.0.</p></td>
+    </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>add_dockerfile</span>()
 <span class='fu'>add_shinyproxy_dockerfile</span>()
+<span class='fu'>add_heroku_dockerfile</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
