@@ -2,10 +2,7 @@
 app_ui <- function() {
   tagList(
     # Leave this function for adding external resources
-    # from inst/app/www
     golem_add_external_resources(),
-    golem::js(),
-    golem::favicon(),
     # List the first level UI elements here 
     fluidPage(
       h1("shinyexample")
@@ -20,9 +17,12 @@ golem_add_external_resources <- function(){
     'www', system.file('app/www', package = 'shinyexample')
   )
  
-  tagList(
+  tags$head(
+    golem::js(),
+    golem::favicon()
     # Add here all the external resources
     # If you have a custom.css in the inst/app/www
+    # Or for example, you can add shinyalert::useShinyalert() here
     #tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
   )
 }
