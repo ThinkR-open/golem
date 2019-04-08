@@ -4,7 +4,7 @@ author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{04_js}
+  %\VignetteIndexEntry{d_js}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
