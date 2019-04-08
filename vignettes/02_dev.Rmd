@@ -96,6 +96,22 @@ golem::add_css_file("custom")
 ```
 
 
+## Adding these external resources to your app
+
+You can add any external resource (JS, css) into `inst/app/www`. 
+
+Then, You'll need to point to these external resources in `golem_add_external_resources()`. For example, if you've created a CSS file with `golem::add_css_file("custom")`, you can add the file with:
+
+``` r
+tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
+```
+
+Also, you can list here the use of other packages, for example `useShinyalert()` from the `{shinyalert}` package.
+
+Note: we've chosen to leave it "raw", in the sense that there is a `addResourcePath` and a `tags$head`. If you're comfortable with `{htmltools}`, you can build a `htmltools::htmlDependency`. 
+
+Once these elements 
+
 ## Documentation
 
 ### Vignette
