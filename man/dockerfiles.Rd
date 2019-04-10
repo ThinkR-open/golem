@@ -3,7 +3,7 @@
 \name{add_dockerfile}
 \alias{add_dockerfile}
 \alias{add_dockerfile_shinyproxy}
-\alias{add_dockerfile_heroku}
+\alias{dadd_dockerfile_heroku}
 \title{Create a Dockerfile for  Shiny App}
 \usage{
 add_dockerfile(input = "DESCRIPTION", output = "Dockerfile",
@@ -14,7 +14,7 @@ add_dockerfile_shinyproxy(input = "DESCRIPTION", output = "Dockerfile",
   from = paste0("rocker/tidyverse:", R.Version()$major, ".",
   R.Version()$minor), as = NULL)
 
-add_dockerfile_heroku(input = "DESCRIPTION", output = "Dockerfile",
+dadd_dockerfile_heroku(input = "DESCRIPTION", output = "Dockerfile",
   from = paste0("rocker/tidyverse:", R.Version()$major, ".",
   R.Version()$minor), as = NULL)
 }

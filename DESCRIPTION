@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.0.1.5003
+Version: 0.0.1.5004
 Authors@R: 
     c(person(given = "Vincent",
              family = "Guyader",
@@ -24,6 +24,7 @@ BugReports: https://github.com/ThinkR-open/golem/issues
 Depends: 
     R (>= 3.0)
 Imports: 
+    attachment (>= 0.0.5),
     attempt,
     cli,
     crayon,
@@ -43,8 +44,7 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno,
-    attachment (>= 0.0.5)
+    yesno
 Suggests: 
     covr,
     knitr,
@@ -54,8 +54,8 @@ Suggests:
     testthat
 VignetteBuilder: 
     knitr
+Remotes: 
+    ThinkR-open/attachment
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Remotes:  
-    ThinkR-open/attachment

@@ -53,7 +53,6 @@ add_rconnect_file <- function(
 #'     Default is 80.  
 #' @param host The `options('shiny.host')` on which to run the Shiny App.
 #'    Default is 0.0.0.0.  
-#' @importFrom dockerfiler dock_from_desc
 #' @export
 #' @rdname dockerfiles
 #' @examples
@@ -126,7 +125,7 @@ add_dockerfile_shinyproxy <- function(
 
 #' @export
 #' @rdname dockerfiles
-add_dockerfile_heroku <- function( 
+dadd_dockerfile_heroku <- function( 
   input = "DESCRIPTION", 
   output = "Dockerfile", 
   from = paste0(
