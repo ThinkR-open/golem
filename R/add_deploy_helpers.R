@@ -125,7 +125,7 @@ add_dockerfile_shinyproxy <- function(
 
 #' @export
 #' @rdname dockerfiles
-dadd_dockerfile_heroku <- function( 
+add_dockerfile_heroku <- function( 
   input = "DESCRIPTION", 
   output = "Dockerfile", 
   from = paste0(
