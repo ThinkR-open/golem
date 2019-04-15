@@ -32,7 +32,6 @@ create_shiny_template <- function(path, check_name = TRUE,...) {
   from <- system.file("shinyexample",package = "golem")
   ll <- list.files(path = from, full.names = TRUE, all.files = TRUE,no.. = TRUE)
   # remove `..`
-  
   file.copy(from = ll, to = path, overwrite = TRUE, recursive = TRUE)
   
   t <- list.files(
@@ -41,7 +40,7 @@ create_shiny_template <- function(path, check_name = TRUE,...) {
     recursive = TRUE,
     include.dirs = FALSE,
     full.names = TRUE
-  )
+  )%>% grep(pattern = "ico$",invert = TRUE,value = TRUE) # on supprime favicon.ico
   
   
   for ( i in t ){
