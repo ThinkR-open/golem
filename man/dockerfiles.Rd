@@ -3,7 +3,7 @@
 \name{add_dockerfile}
 \alias{add_dockerfile}
 \alias{add_dockerfile_shinyproxy}
-\alias{dadd_dockerfile_heroku}
+\alias{add_dockerfile_heroku}
 \title{Create a Dockerfile for  Shiny App}
 \usage{
 add_dockerfile(input = "DESCRIPTION", output = "Dockerfile",
@@ -14,7 +14,7 @@ add_dockerfile_shinyproxy(input = "DESCRIPTION", output = "Dockerfile",
   from = paste0("rocker/tidyverse:", R.Version()$major, ".",
   R.Version()$minor), as = NULL)
 
-dadd_dockerfile_heroku(input = "DESCRIPTION", output = "Dockerfile",
+add_dockerfile_heroku(input = "DESCRIPTION", output = "Dockerfile",
   from = paste0("rocker/tidyverse:", R.Version()$major, ".",
   R.Version()$minor), as = NULL)
 }
@@ -36,13 +36,13 @@ Default is 0.0.0.0.}
 }
 \description{
 Build a container containing your Shiny App. `add_dockerfile()` creates 
-a "generalistic" Dockerfile, while `add_shinyproxy_dockerfile()` and 
-`add_heroku_dockerfile()` creates plateform specific Dockerfile.
+a "generalistic" Dockerfile, while `add_dockerfile_shinyproxy()` and 
+`add_dockerfile_heroku()` creates plateform specific Dockerfile.
 }
 \examples{
 \dontrun{
 add_dockerfile()
-add_shinyproxy_dockerfile()
-add_heroku_dockerfile()
+add_dockerfile_shinyproxy()
+add_dockerfile_heroku()
 }
 }

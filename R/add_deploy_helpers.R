@@ -41,8 +41,8 @@ add_rconnect_file <- function(
 #' Create a Dockerfile for  Shiny App 
 #' 
 #' Build a container containing your Shiny App. `add_dockerfile()` creates 
-#' a "generalistic" Dockerfile, while `add_shinyproxy_dockerfile()` and 
-#' `add_heroku_dockerfile()` creates plateform specific Dockerfile.
+#' a "generalistic" Dockerfile, while `add_dockerfile_shinyproxy()` and 
+#' `add_dockerfile_heroku()` creates plateform specific Dockerfile.
 #'
 #' @param input path to the DESCRIPTION file to use as an input.
 #' @param output name of the Dockerfile output.
@@ -58,8 +58,8 @@ add_rconnect_file <- function(
 #' @examples
 #' \dontrun{
 #' add_dockerfile()
-#' add_shinyproxy_dockerfile()
-#' add_heroku_dockerfile()
+#' add_dockerfile_shinyproxy()
+#' add_dockerfile_heroku()
 #'}
 
 add_dockerfile <- function(
@@ -125,7 +125,7 @@ add_dockerfile_shinyproxy <- function(
 
 #' @export
 #' @rdname dockerfiles
-dadd_dockerfile_heroku <- function( 
+add_dockerfile_heroku <- function( 
   input = "DESCRIPTION", 
   output = "Dockerfile", 
   from = paste0(

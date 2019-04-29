@@ -14,7 +14,7 @@ golem::add_rconnect_file()
 golem::add_dockerfile()
 
 ## 5.2 If you want to deploy to ShinyProxy
-golem::add_shinyproxy_dockerfile()
+golem::add_dockerfile_shinyproxy()
 
 ## 5.2 If you want to deploy to Heroku
-golem::add_heroku_dockerfile()
+golem::add_dockerfile_heroku()
