@@ -8,11 +8,14 @@
 #' @return A testthat result
 #' @export
 #' @rdname testhelpers
+#' 
+#' @importFrom testthat quasi_label
+#' @importFrom rlang enquo
 #'
 #' @examples
 #' expect_shinytag(1)
 expect_shinytag <- function(object) {
-  act <- testthat::quasi_label(rlang::enquo(object), arg = "object")
+  act <- quasi_label(enquo(object), arg = "object")
   act$class <- class(object)
   expect(
     act$class == "shiny.tag",
@@ -24,7 +27,7 @@ expect_shinytag <- function(object) {
 #' @export
 #' @rdname testhelpers
 expect_shinytaglist <- function(object) {
-  act <- testthat::quasi_label(rlang::enquo(object), arg = "object")
+  act <- quasi_label(enquo(object), arg = "object")
   act$class <- class(object)
   expect(
     act$class == "shiny.tag.list",

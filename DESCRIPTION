@@ -45,7 +45,8 @@ Imports:
     usethis,
     utils,
     yesno,
-    testthat
+    testthat,
+    rlang
 Suggests: 
     covr,
     knitr,
