@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.0.1.5004
+Version: 0.0.1.5003
 Authors@R: 
     c(person(given = "Vincent",
              family = "Guyader",
@@ -44,14 +44,14 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno
+    yesno,
+    testthat
 Suggests: 
     covr,
     knitr,
     pkgdown,
     rcmdcheck,
-    rmarkdown,
-    testthat
+    rmarkdown
 VignetteBuilder: 
     knitr
 Remotes: 
