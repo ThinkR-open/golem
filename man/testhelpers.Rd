@@ -3,11 +3,14 @@
 \name{expect_shinytag}
 \alias{expect_shinytag}
 \alias{expect_shinytaglist}
+\alias{expect_html_equal}
 \title{Test helpers}
 \usage{
 expect_shinytag(object)
 
 expect_shinytaglist(object)
+
+expect_html_equal(ui, html)
 }
 \arguments{
 \item{object}{the object to test}
