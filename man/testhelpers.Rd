@@ -14,6 +14,10 @@ expect_html_equal(ui, html)
 }
 \arguments{
 \item{object}{the object to test}
+
+\item{ui}{output of an UI function}
+
+\item{html}{html file to compare to ui}
 }
 \value{
 A testthat result
@@ -23,5 +27,6 @@ These functions are designed to be used inside the tests
 in your Shiny app package.
 }
 \examples{
-expect_shinytag(1)
+expect_shinytag(shiny::tags$span("1"))
+expect_shinytaglist(shiny::tagList(1))
 }

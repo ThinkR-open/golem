@@ -13,13 +13,13 @@
 #' @importFrom rlang enquo
 #'
 #' @examples
-#' expect_shinytag(1)
+#' expect_shinytag(shiny::tags$span("1"))
 expect_shinytag <- function(object) {
   act <- quasi_label(enquo(object), arg = "object")
   act$class <- class(object)
   expect(
-    act$class == "shiny.tag",
-    sprintf("%s has class %s, not class 'shiny.tag'.", act$lab, act$class)
+    "shiny.tag" %in% act$class,
+    sprintf("%s has class %s, not class 'shiny.tag'.", act$lab, paste(act$class, collapse = ", "))
   )
   invisible(act$val)
 }
@@ -28,18 +28,22 @@ expect_shinytag <- function(object) {
 #' @rdname testhelpers
 #' @importFrom testthat quasi_label expect
 #' @importFrom rlang enquo
+#' @examples
+#' expect_shinytaglist(shiny::tagList(1))
 expect_shinytaglist <- function(object) {
   act <- quasi_label(enquo(object), arg = "object")
   act$class <- class(object)
   expect(
-    act$class == "shiny.tag.list",
-    sprintf("%s has class %s, not class 'shiny.tag.list'.", act$lab, act$class)
+    "shiny.tag.list" %in% act$class,
+    sprintf("%s has class '%s', not class 'shiny.tag.list'.", act$lab, paste(act$class, collapse = ", "))
   )
   invisible(act$val)
 }
 
 #' @export
 #' @rdname testhelpers
+#' @param ui output of an UI function
+#' @param html html file to compare to ui 
 #' @importFrom htmltools save_html
 #' @importFrom attempt stop_if_not
 #' @importFrom testthat expect_equal quasi_label expect

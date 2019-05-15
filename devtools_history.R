@@ -29,7 +29,7 @@ usethis::use_build_ignore("reference")
 pkgdown::build_site()
 
 # Dev
-attachment::att_to_description(extra.suggests = c("pkgdown", "rcmdcheck"), pkg_ignore = c("mypkg"))
+attachment::att_to_description(extra.suggests = c("pkgdown", "rcmdcheck", "covr"), pkg_ignore = c("mypkg"))
 devtools::check()
 
 

@@ -34,13 +34,14 @@ create_shiny_template <- function(path, check_name = TRUE,...) {
   # remove `..`
   file.copy(from = ll, to = path, overwrite = TRUE, recursive = TRUE)
   
-  t <- list.files(
+  t1 <- list.files(
     path,
     all.files = TRUE,
     recursive = TRUE,
     include.dirs = FALSE,
     full.names = TRUE
-  )%>% grep(pattern = "ico$",invert = TRUE,value = TRUE) # on supprime favicon.ico
+  )
+  t <- grep(x = t1, pattern = "ico$",invert = TRUE,value = TRUE) # on supprime favicon.ico
   
   
   for ( i in t ){
