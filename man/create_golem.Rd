@@ -4,7 +4,7 @@
 \alias{create_golem}
 \title{Create a package for Shiny App using golem}
 \usage{
-create_golem(path, check_name = TRUE, ...)
+create_golem(path, check_name = TRUE, open = TRUE, ...)
 }
 \arguments{
 \item{path}{Name of the folder to create the package in. This will also be 
@@ -12,6 +12,8 @@ used as the package name.}
 
 \item{check_name}{When using this function in the console, you can prevent 
 the package name from being checked.}
+
+\item{open}{booleen open the created project}
 
 \item{...}{not used}
 }

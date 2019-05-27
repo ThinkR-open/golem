@@ -65,11 +65,16 @@ create_golem <- function(path, check_name = TRUE, open =TRUE,...) {
 
   
   if ( 
-    !is.element("force",names(list(...))) &# tricks not detect Rstudio template creation GUI usage
+    # !is.element("force",names(list(...))) &# tricks not detect Rstudio template creation GUI usage
     open & rstudioapi::isAvailable()) { 
     rstudioapi::openProject(path = path)
   }
   
   
   return( invisible(path) )
+}
+
+# to be used in Rstudio "new project" GUI
+create_golem_gui <- function(path,...){
+   create_golem(path=path,open=FALSE)
 }

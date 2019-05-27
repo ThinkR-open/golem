@@ -1,6 +1,4 @@
-Binding: create_golem
+Binding: create_golem_gui
 Title: Package for Shiny App using golem
 OpenFiles: dev/01_start.R
 Icon: golem.png
-Parameter: force
-Widget: CheckboxInput
