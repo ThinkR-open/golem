@@ -1,18 +1,20 @@
-#' Create a package for Shiny App
+#' Create a package for Shiny App using golem
 #'
 #' @param path Name of the folder to create the package in. This will also be 
 #'     used as the package name.
 #' @param check_name When using this function in the console, you can prevent 
 #'      the package name from being checked. 
+#' @param open booleen open the created project
 #' @param ... not used
+#'
 #' @importFrom yesno yesno
 #' @importFrom cli cat_rule
 #' @importFrom utils getFromNamespace
 #' @importFrom stringr str_remove_all
-
+#' @importFrom rstudioapi isAvailable
+#' @importFrom rstudioapi openProject
 #' @export
-create_shiny_template <- function(path, check_name = TRUE,...) {
-  #browser()
+create_golem <- function(path, check_name = TRUE, open =TRUE,...) {
   
   if (check_name){
     check_package_name <- getFromNamespace("check_package_name", "usethis")
@@ -60,5 +62,14 @@ create_shiny_template <- function(path, check_name = TRUE,...) {
     silent=TRUE)
   }
   cat_rule("Created")
+
+  
+  if ( 
+    !is.element("force",names(list(...))) &# tricks not detect Rstudio template creation GUI usage
+    open & rstudioapi::isAvailable()) { 
+    rstudioapi::openProject(path = path)
+  }
+  
+  
   return( invisible(path) )
 }
