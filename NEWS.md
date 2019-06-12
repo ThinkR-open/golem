@@ -14,6 +14,8 @@
 
 ## New funs
 
+* Added `set_golem_options()` to add local options used internally by {golem} && added it to the `01_start.R`.
+
 * Added `add_dockerfile()` to create a Dockerfile from a DESCRIPTION.
 
 * Added `add_dockerfile_shinyproxy()` to create a Dockerfile from a DESCRIPTION, to be used in Shiny Proxy.

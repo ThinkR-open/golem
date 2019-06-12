@@ -4,7 +4,7 @@
 # 
 # 1 - On init
 # 
-## 1.1 - Fill the descripion
+## 1.1 - Fill the descripion & set options
 ## 
 ## Add information about the package that will contain your app
 
@@ -16,6 +16,10 @@ golem::fill_desc(
   author_last_name = ,  # Your Last Name
   author_email = ,      # Your Email
   repo_url = NULL)      # The (optional) URL of the GitHub Repo
+
+## Use this desc to set {golem} options
+
+golem::set_golem_options()
 
 ## 1.2 - Set common Files 
 ## 
