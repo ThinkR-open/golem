@@ -58,3 +58,8 @@ message_dev <- make_dev(message)
 #' @inheritParams base::warning 
 warning_dev <- make_dev(warning)
 
+#' @rdname made_dev
+#' @export 
+#' @inheritParams base::browser 
+browser_dev <- make_dev(browser)
+

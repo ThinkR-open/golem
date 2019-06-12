@@ -16,6 +16,8 @@
 
 ## New funs
 
+* You now have a `browser_dev()` function that behaves like `warning_dev` and friends. #46
+
 * Added `set_golem_options()` to add local options used internally by {golem} && added it to the `01_start.R`. #49
 
 * Added `add_dockerfile()` to create a Dockerfile from a DESCRIPTION.
