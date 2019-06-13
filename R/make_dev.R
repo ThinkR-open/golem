@@ -18,7 +18,7 @@ make_dev <- function(fun){
   if (is.null(x)) y else x
 }
 
-#' Is the app in dev mode or prof mode?
+#' Is the app in dev mode or prod mode?
 #'
 #' @return `TRUE` or `FALSE` depending on the status of `getOption( "golem.app.prod")`
 #' @export
