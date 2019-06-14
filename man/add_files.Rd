@@ -6,11 +6,11 @@
 \alias{add_css_file}
 \title{Create a module}
 \usage{
-add_js_file(name, pkg = ".")
+add_js_file(name, pkg = ".", dir = "inst/app/www")
 
-add_js_handler(name, pkg = ".")
+add_js_handler(name, pkg = ".", dir = "inst/app/www")
 
-add_css_file(name, pkg = ".")
+add_css_file(name, pkg = ".", dir = "inst/app/www")
 }
 \arguments{
 \item{name}{The name of the module}

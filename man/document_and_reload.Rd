@@ -10,5 +10,6 @@ document_and_reload(pkg = ".")
 \item{pkg}{Path to the root of the package. Default is `"."`.}
 }
 \description{
-Document and reload your package
+This function calls \code{rstudioapi::documentSaveAll()}, 
+\code{roxygen2::roxygenise()} and \code{pkgload::load_all()}.
 }
