@@ -35,12 +35,12 @@ add_js_file <- function(
   
   file.create(where)
   
-  cat_green_tick(glue("File created at {where}"))
+  cat_green_tick(glue::glue("File created at {where}"))
   
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
-    cat_red_bullet(glue("Go to {where}"))
+    cat_red_bullet(glue::glue("Go to {where}"))
   }
 }
 
@@ -83,12 +83,12 @@ add_js_handler <- function(
   write_there("  }")
   write_there("});")
   
-  cat_green_tick(glue("File created at {where}"))
+  cat_green_tick(glue::glue("File created at {where}"))
   
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
-    cat_red_bullet(glue("Go to {where}"))
+    cat_red_bullet(glue::glue("Go to {where}"))
   }
 }
 
@@ -119,11 +119,11 @@ add_css_file <- function(
   
   file.create(where)
   
-  cat_green_tick(glue("File created at {where}"))
+  cat_green_tick(glue::glue("File created at {where}"))
   
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
-    cat_red_bullet(glue("Go to {where}"))
+    cat_red_bullet(glue::glue("Go to {where}"))
   }
 }
