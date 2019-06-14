@@ -15,7 +15,7 @@
 use_favicon <- function(path, pkg = "."){
   
   if (missing(path)){
-    path <- system.file("shinyexample/inst/app/www", "favicon.ico", package = "golem")
+    path <- golem_sys("shinyexample/inst/app/www", "favicon.ico")
   }
   
   ext <- tools::file_ext(path)

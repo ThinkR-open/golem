@@ -33,7 +33,7 @@ use_utils <- function(file_name, pkg = "."){
     return(invisible(FALSE))
   } 
   file.copy(
-    from = system.file("utils", file_name, package = "golem"), 
+    from = golem_sys("utils", file_name), 
     to = where
   )
   cat_bullet(glue::glue("File created at {where}"), bullet = "tick", bullet_col = "green")

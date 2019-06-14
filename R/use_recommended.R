@@ -34,7 +34,7 @@ use_recommended_tests <- function(pkg = "."){
     usethis::use_testthat()
   }
   file.copy(
-    system.file("utils", "test-golem-recommended.R", package = "golem"), 
+    golem_sys("utils", "test-golem-recommended.R"), 
     file.path(normalizePath(pkg), "tests", "testthat")
   )
   cat_bullet("Tests added", bullet = "tick", bullet_col = "green")

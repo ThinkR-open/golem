@@ -22,8 +22,7 @@ create_golem <- function(path,
                          ...) {
   
   if (check_name){
-    check_package_name <- getFromNamespace("check_package_name", "usethis")
-    check_package_name(package_name)
+    getFromNamespace("check_package_name", "usethis")(package_name)
   }
   
   if (dir.exists(path)){
@@ -36,7 +35,7 @@ create_golem <- function(path,
   }
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
   
-  from <- system.file("shinyexample",package = "golem")
+  from <- golem_sys("shinyexample")
   ll <- list.files(path = from, full.names = TRUE, all.files = TRUE,no.. = TRUE)
   # remove `..`
   file.copy(from = ll, to = path, overwrite = TRUE, recursive = TRUE)
@@ -48,7 +47,12 @@ create_golem <- function(path,
     include.dirs = FALSE,
     full.names = TRUE
   )
-  t <- grep(x = t1, pattern = "ico$",invert = TRUE,value = TRUE) # on supprime favicon.ico
+  t <- grep(
+    x = t1, 
+    pattern = "ico$",
+    invert = TRUE,
+    value = TRUE
+  ) 
   
   
   for ( i in t ){
@@ -67,11 +71,9 @@ create_golem <- function(path,
     silent=TRUE)
   }
   cat_rule("Created")
-
   
-  if ( 
-    # !is.element("force",names(list(...))) &# tricks not detect Rstudio template creation GUI usage
-    open & rstudioapi::isAvailable()) { 
+  
+  if ( open & rstudioapi::isAvailable() ) { 
     rstudioapi::openProject(path = path)
   }
   
@@ -81,5 +83,5 @@ create_golem <- function(path,
 
 # to be used in Rstudio "new project" GUI
 create_golem_gui <- function(path,...){
-   create_golem(path=path,open=FALSE)
+  create_golem(path=path,open=FALSE)
 }
