@@ -5,6 +5,7 @@
 #' @param check_name When using this function in the console, you can prevent 
 #'      the package name from being checked. 
 #' @param open booleen open the created project
+#' @param package_name package name to use
 #' @param ... not used
 #'
 #' @importFrom yesno yesno
@@ -14,11 +15,15 @@
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi openProject
 #' @export
-create_golem <- function(path, check_name = TRUE, open =TRUE,...) {
+create_golem <- function(path, 
+                         check_name = TRUE,
+                         open =TRUE,
+                         package_name = basename(path),
+                         ...) {
   
   if (check_name){
     check_package_name <- getFromNamespace("check_package_name", "usethis")
-    check_package_name(basename(path))
+    check_package_name(package_name)
   }
   
   if (dir.exists(path)){
@@ -56,7 +61,7 @@ create_golem <- function(path, check_name = TRUE, open =TRUE,...) {
       replace_word(
         file =   i,
         pattern = "shinyexample",
-        replace = basename(path)
+        replace = package_name
       )
     },
     silent=TRUE)
