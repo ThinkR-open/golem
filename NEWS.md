@@ -2,8 +2,12 @@
 
 ## Changes 
 
-* change create_shiny_template to create_golem
-* create_golem now switch to the new created project
+* `create_golem()` now switch to the new created project
+
+## Breaking changes 
+
+* Renamed `add_rconnect_file()` to `add_rstudioconnect_file()`
+* Renamed `create_shiny_template()` to `create_golem()`
 
 # golem 0.0.1.5000
 

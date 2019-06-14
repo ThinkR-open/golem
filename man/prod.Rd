@@ -3,7 +3,7 @@
 \name{app_prod}
 \alias{app_prod}
 \alias{app_dev}
-\title{Is the app in dev mode or prof mode?}
+\title{Is the app in dev mode or prod mode?}
 \usage{
 app_prod()
 
@@ -13,5 +13,5 @@ app_dev()
 `TRUE` or `FALSE` depending on the status of `getOption( "golem.app.prod")`
 }
 \description{
-Is the app in dev mode or prof mode?
+Is the app in dev mode or prod mode?
 }

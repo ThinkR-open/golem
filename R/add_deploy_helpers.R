@@ -1,10 +1,14 @@
 #' Add an app.R at the root of your package to deploy on RStudio Connect
 #'
+#' @note 
+#' In previous versions, this function was called add_rconnect_file.
+#'
 #' @param pkg Where to put the app.R.
 #' @inheritParams add_module
 #' @importFrom cli cat_bullet
+#' @aliases add_rconnect_file add_rstudioconnect_file
 #' @export
-add_rconnect_file <- function(
+add_rstudioconnect_file <- function(
   pkg = "."
 ){
   where <- file.path(pkg, "app.R")
