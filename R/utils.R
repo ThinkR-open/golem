@@ -10,6 +10,13 @@ check_file_exist <- function(file){
   }
   return(res)
 }
+check_dir_exist <- function(dir){
+  res <- TRUE
+  if (!dir.exists(dir)){
+    res <- yesno::yesno(sprintf("The %s does not exists, create?", dir))
+  }
+  return(res)
+}
 
 # internal
 replace_word <- function(file,pattern, replace){

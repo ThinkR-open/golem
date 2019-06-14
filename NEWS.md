@@ -15,11 +15,17 @@
 
 * Every module is now named mod_x_ui / mod_x_server, for consistency.
 
-* You can now create package with "illegal" names, using the command line `golem::create_shiny_template()`
+* You can now create package with "illegal" names, using the command line `golem::create_shiny_template()`. #18
 
 * `add_browser_button()` is now named `browser_button()`, so that all the `add_*` function are only reserved for function adding files to the `golem`.
 
++ `add_*_files` now check if the folder exists, if not suggests to create it. #36
+
 ## New funs
+
+* You now have a `browser_dev()` function that behaves like `warning_dev` and friends. #46
+
+* Added `set_golem_options()` to add local options used internally by {golem} && added it to the `01_start.R`. #49
 
 * Added `add_dockerfile()` to create a Dockerfile from a DESCRIPTION.
 
@@ -31,7 +37,7 @@
 
 ## Removed
 
-* `use_utils_prod` is now included in golem so you don't have to explicitely include them
+* `use_utils_prod` is now included in golem so you don't have to explicitely include the functions.
 
 ## Docs 
 

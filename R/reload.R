@@ -23,12 +23,20 @@ detach_all_attached <- function(){
 
 
 #' Document and reload your package
+#' 
+#' This function calls \code{rstudioapi::documentSaveAll()}, 
+#' \code{roxygen2::roxygenise()} and \code{pkgload::load_all()}.
 #'
 #' @inheritParams add_module
-#' @importFrom devtools document
+#' @importFrom roxygen2 roxygenise
 #' @importFrom pkgload load_all
 #' @export
-document_and_reload <- function(pkg = "."){
-  document(pkg)
+document_and_reload <- function(
+  pkg = "."
+){
+  if (rstudioapi::hasFun("documentSaveAll")) {
+    rstudioapi::documentSaveAll()
+  }
+  roxygenise(package.dir = pkg)
   load_all(pkg)
 }

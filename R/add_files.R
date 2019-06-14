@@ -10,43 +10,61 @@
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 
-add_js_file <- function(name, pkg = "."){
+add_js_file <- function(
+  name, 
+  pkg = ".", 
+  dir = "inst/app/www"
+){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
+  dir <- file.path(pkg, dir)
+  
+  if ( !check_dir_exist(dir) ) {
+    return(invisible(FALSE))
+  }  else {
+    dir.create(dir, recursive = TRUE)
+  }
+  
   where <- file.path(
-    pkg, "inst", "app", "www", glue::glue("{name}.js")
+    pkg, dir, glue::glue("{name}.js")
   )
   if ( !check_file_exist(where) ) {
     return(invisible(FALSE))
   } 
+  
   file.create(where)
   
-  cat_bullet(
-    glue("File created at {where}"), 
-    bullet = "tick", 
-    bullet_col = "green"
-  )
+  cat_green_tick(glue("File created at {where}"))
+  
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
-    cat_bullet(
-      glue("Go to {where}"), 
-      bullet = "square_small_filled", 
-      bullet_col = "red"
-    )
+    cat_red_bullet(glue("Go to {where}"))
   }
 }
 
 #' @export
 #' @rdname add_files
 
-add_js_handler <- function(name, pkg = "."){
+add_js_handler <- function(
+  name, 
+  pkg = ".", 
+  dir = "inst/app/www"
+){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
+  dir <- file.path(pkg, dir)
+  
+  if ( !check_dir_exist(dir) ) {
+    return(invisible(FALSE))
+  }  else {
+    dir.create(dir, recursive = TRUE)
+  }
+  
   where <- file.path(
-    pkg, "inst", "app", "www", glue::glue("{name}.js")
+    pkg, dir, glue::glue("{name}.js")
   )
   if ( !check_file_exist(where) ) {
     return(invisible(FALSE))
@@ -65,48 +83,47 @@ add_js_handler <- function(name, pkg = "."){
   write_there("  }")
   write_there("});")
   
-  cat_bullet(
-    glue("File created at {where}"), 
-    bullet = "tick",
-    bullet_col = "green"
-  )
+  cat_green_tick(glue("File created at {where}"))
+  
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
-    cat_bullet(
-      glue("Go to {where}"), 
-      bullet = "square_small_filled", 
-      bullet_col = "red"
-    )
+    cat_red_bullet(glue("Go to {where}"))
   }
 }
 
 #' @export
 #' @rdname add_files
-add_css_file <- function(name, pkg = "."){
+add_css_file <- function(
+  name, 
+  pkg = ".", 
+  dir = "inst/app/www"
+){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
+  dir <- file.path(pkg, dir)
+  
+  if ( !check_dir_exist(dir) ) {
+    return(invisible(FALSE))
+  }  else {
+    dir.create(dir, recursive = TRUE)
+  }
+  
   where <- file.path(
-    pkg, "inst", "app", "www", glue::glue("{name}.css")
+    pkg, dir, glue::glue("{name}.css")
   )
   if ( !check_file_exist(where) ) {
     return(invisible(FALSE))
   } 
+  
   file.create(where)
   
-  cat_bullet(
-    glue("File created at {where}"), 
-    bullet = "tick", 
-    bullet_col = "green"
-  )
+  cat_green_tick(glue("File created at {where}"))
+  
   if (rstudioapi::isAvailable()){
     rstudioapi::navigateToFile(where)
   } else {
-    cat_bullet(
-      glue("Go to {where}"), 
-      bullet = "square_small_filled", 
-      bullet_col = "red"
-    )
+    cat_red_bullet(glue("Go to {where}"))
   }
 }
