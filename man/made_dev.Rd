@@ -5,6 +5,7 @@
 \alias{print_dev}
 \alias{message_dev}
 \alias{warning_dev}
+\alias{browser_dev}
 \title{Functions already made dev devependant}
 \usage{
 cat_dev(...)
@@ -14,6 +15,8 @@ print_dev(...)
 message_dev(...)
 
 warning_dev(...)
+
+browser_dev(...)
 }
 \arguments{
 \item{...}{\R objects (see \sQuote{Details} for the types of objects

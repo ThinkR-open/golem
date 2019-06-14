@@ -2,7 +2,7 @@
 # 
 # test_that("created package is valid", {
 #   temp <- file.path(tempdir(),"plop")
-#   create_shiny_template(path = temp)
+#   create_golem(path = temp)
 #   old <- setwd(normalizePath(temp))
 #   on.exit(setwd(old))
 #   devtools::document()

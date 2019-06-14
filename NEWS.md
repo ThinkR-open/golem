@@ -1,4 +1,11 @@
-# golem 0.0.1.5000+
+# golem 0.0.1.6000+
+
+## Changes 
+
+* change create_shiny_template to create_golem
+* create_golem now switch to the new created project
+
+# golem 0.0.1.5000
 
 ## Changes 
 

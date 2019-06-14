@@ -7,6 +7,10 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    shiny
+    shiny, 
+    golem
+Remotes: 
+    Thinkr-open/golem
+RoxygenNote: 6.1.0
 URL: http://repo_url.com
 BugReports: http://repo_url.com/issues

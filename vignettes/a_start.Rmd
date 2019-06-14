@@ -42,7 +42,7 @@ Once the package is installed, you can got to File > New Project... in RStudio, 
 If you want to do it through command line, you can use:
 
 ```{r}
-golem::create_shiny_template(path = "path/to/package")
+golem::create_golem(path = "path/to/package")
 ```
 
 This command allows you to create "illegally-named" package (for example, `1234`) by passing the `check_name` argument to `FALSE`. Note that this is not recommanded and __should only be done if you know what you are doing__.
