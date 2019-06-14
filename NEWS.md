@@ -8,6 +8,7 @@
 
 * Renamed `add_rconnect_file()` to `add_rstudioconnect_file()`
 * Renamed `create_shiny_template()` to `create_golem()`
+* Renamed `js()` to `activate_js()`
 
 ## New functions 
 

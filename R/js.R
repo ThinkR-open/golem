@@ -1,6 +1,6 @@
 #' Interact with JavaScript built-in Functions
 #' 
-#' \code{js} is used in your UI to insert directly the JavaScript 
+#' \code{activate_js} is used in your UI to insert directly the JavaScript 
 #' functions contained in golem. These functions can be called from 
 #' the server with \code{invoke_js}. \code{invoke_js} can also be used 
 #' to lauch any JS function created inside a Shiny JavaScript handler. 
@@ -28,7 +28,7 @@
 #' @rdname golem_js
 #' @importFrom htmltools includeScript
 
-js <- function(){
+activate_js <- function(){
   includeScript(
     system.file("utils/golem-js.js", package = "golem")
   )
