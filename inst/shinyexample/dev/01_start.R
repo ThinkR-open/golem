@@ -53,9 +53,8 @@ golem::use_recommended_dep()
 golem::use_utils_ui()
 golem::use_utils_server()
 
-# If you want to change the default favicon
-golem::use_favicon( path = "path/to/favicon")
-
+# If you want to change the favicon (default is golem's one)
+golem::use_favicon( path = "inst/app/www/favicon.ico")
 
 # You're now set! 
 # go to dev/02_dev.R
