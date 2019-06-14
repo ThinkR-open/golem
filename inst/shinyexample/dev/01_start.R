@@ -11,10 +11,10 @@
 golem::fill_desc(
   pkg_name = "shinyexample", # The Name of the package containing the App 
   pkg_title = "PKG_TITLE", # The Title of the package containing the App 
-  pkg_description = "PKG_DESC", # The Description of the package containing the App 
+  pkg_description = "PKG_DESC.", # The Description of the package containing the App 
   author_first_name = "AUTHOR_FIRST", # Your First Name
   author_last_name = "AUTHOR_LAST",  # Your Last Name
-  author_email = "AUTHOR_MAIL",      # Your Email
+  author_email = "AUTHOR@MAIL.COM",      # Your Email
   repo_url = NULL # The (optional) URL of the GitHub Repo
 )     
 
