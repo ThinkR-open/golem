@@ -9,6 +9,10 @@
 * Renamed `add_rconnect_file()` to `add_rstudioconnect_file()`
 * Renamed `create_shiny_template()` to `create_golem()`
 
+## New functions 
+
+* `invoke_js()` allows to call JS functions from server side.
+
 # golem 0.0.1.5000
 
 ## Changes 

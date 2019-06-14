@@ -1,10 +1,13 @@
-#' Add JS code Straight to your app (instead of a dependency)
+#' Interact with JavaScript built-in Functions
 #' 
-#' This function can be used in your UI to insert directly the JavaScript 
-#' functions contained in golem.
+#' \code{js} is used in your UI to insert directly the JavaScript 
+#' functions contained in golem. These functions can be called from 
+#' the server with \code{invoke_js}
 #' 
-#' @details These functions are meant to be used with `session$sendCustomMessage` 
-#'     from the server side. 
+#' @param fun JS function to be invoked.
+#' @param ui_ref The UI reference to call the JS function on.
+#' @param session The shiny session within which to call \code{sendCustomMessage}.
+#' 
 #' 
 #' \describe{
 #'   \item{show}{Show an element with the jQuery selector provided.}
@@ -20,8 +23,8 @@
 #'   \item{reable}{Remove "disabled" from an element. The full jQuery selector has to be used.}
 #' }
 #'
-#' @return A script
 #' @export
+#' @rdname golem_js
 #' @importFrom htmltools includeScript
 
 js <- function(){
@@ -29,3 +32,17 @@ js <- function(){
     system.file("utils/golem-js.js", package = "golem")
   )
 }
+
+#' @export
+#' @rdname golem_js
+invoke_js <- function( 
+  fun = c("show", "hide", "showid", "hideid", 
+          "showclass", "hideclass", "showref", 
+          "hideref", "clickon", "disable", "reable"), 
+  ui_ref, 
+  session = shiny::getDefaultReactiveDomain() 
+){
+  fun <- match.arg(fun)
+  session$sendCustomMessage(fun, ui_ref)
+}
+
