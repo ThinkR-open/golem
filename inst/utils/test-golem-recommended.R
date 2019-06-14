@@ -16,7 +16,11 @@ test_that("app server", {
 # See: 
 test_that(
   "app launches",{
-    x <- process$new(
+    skip_if_not_installed("processx")
+    skip_on_cran("processx")
+    skip_on_travis("processx")
+    skip_on_appveyor("processx")
+    x <- processx::process$new(
       "R", 
       c(
         "-e", 
@@ -28,6 +32,11 @@ test_that(
     x$kill()
   }
 )
+
+
+
+
+
 
 
 

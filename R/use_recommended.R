@@ -19,7 +19,7 @@ use_recommended_dep <- function(pkg = ".",
   for ( i in recommended){
        try(usethis::use_package(i))
   }
-  cat_bullet("Dependencies added", bullet = "tick", bullet_col = "green")
+  cat_green_tick("Dependencies added")
 }
 
 
@@ -37,7 +37,7 @@ use_recommended_tests <- function(pkg = "."){
     golem_sys("utils", "test-golem-recommended.R"), 
     file.path(normalizePath(pkg), "tests", "testthat")
   )
-  cat_bullet("Tests added", bullet = "tick", bullet_col = "green")
+  cat_green_tick("Tests added")
 } 
 
 
