@@ -49,13 +49,14 @@ golem::use_recommended_tests()
 
 golem::use_recommended_dep()
 
-## 1. Add various tools
-
-golem::use_utils_ui()
-golem::use_utils_server()
+## 1.6 Add various tools
 
 # If you want to change the favicon (default is golem's one)
 golem::use_favicon( path = "inst/app/www/favicon.ico" )
+
+# Add helper functions 
+golem::use_utils_ui()
+golem::use_utils_server()
 
 # You're now set! 
 # go to dev/02_dev.R
