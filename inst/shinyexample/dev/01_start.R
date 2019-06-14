@@ -26,6 +26,7 @@ golem::set_golem_options()
 ## 
 ## If you want to use the MIT licence, README, code of conduct, lifecycle badge, and news
 
+usethis::use_git()
 usethis::use_mit_license(name = "Your Name")  # You can set another licence here
 usethis::use_readme_rmd()
 usethis::use_code_of_conduct()
