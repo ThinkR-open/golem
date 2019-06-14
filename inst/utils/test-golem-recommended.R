@@ -13,13 +13,11 @@ test_that("app server", {
 })
 
 # Configure this test to fit your need
-# See: 
 test_that(
   "app launches",{
-    skip_if_not_installed("processx")
-    skip_on_cran("processx")
-    skip_on_travis("processx")
-    skip_on_appveyor("processx")
+    skip_on_cran()
+    skip_on_travis()
+    skip_on_appveyor()
     x <- processx::process$new(
       "R", 
       c(

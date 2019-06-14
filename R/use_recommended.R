@@ -33,6 +33,7 @@ use_recommended_tests <- function(pkg = "."){
   )){
     usethis::use_testthat()
   }
+  usethis::use_package("processx")
   file.copy(
     golem_sys("utils", "test-golem-recommended.R"), 
     file.path(normalizePath(pkg), "tests", "testthat")
