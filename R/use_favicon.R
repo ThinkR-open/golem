@@ -16,27 +16,32 @@ use_favicon <- function(path, pkg = "."){
   
   if (missing(path)){
     path <- golem_sys("shinyexample/inst/app/www", "favicon.ico")
-  }
+  } 
   
   ext <- tools::file_ext(path)
-  stop_if_not(ext, ~ .x %in% c("png",'ico'), "favicon must have .ico or .png extension")
+  stop_if_not(ext, ~ .x %in% c("png",'ico'), 
+              "favicon must have .ico or .png extension")
   
   path <- normalizePath(path)
   
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
-  file.copy(overwrite = TRUE,
-    path, 
-    to <- file.path(normalizePath(pkg), "inst/app/www", glue::glue("favicon.{ext}"))
-  )
+  to <- file.path(normalizePath(pkg), "inst/app/www", glue::glue("favicon.{ext}"))
   
-  cat_bullet(glue::glue("favicon.{ext} created at {to}"), bullet = "tick", bullet_col = "green")
+  if (! (path == to)) {
+    file.copy(
+      overwrite = TRUE,
+      path, 
+      to
+    )
+    cat_green_tick(glue::glue("favicon.{ext} created at {to}"))
+  }
   
   cat_rule("Change / Add in the app_ui function")
-  # cat_line('tags$head(tags$link(rel="shortcut icon", href="www/favicon.png"))')
   cat_line(darkgrey(glue('golem::favicon("www/favicon.{ext}")')))
   cat_line()
+  
 }
 
 #' Add favicon to your app
