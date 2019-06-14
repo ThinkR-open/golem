@@ -2,7 +2,8 @@
 #' 
 #' \code{js} is used in your UI to insert directly the JavaScript 
 #' functions contained in golem. These functions can be called from 
-#' the server with \code{invoke_js}
+#' the server with \code{invoke_js}. \code{invoke_js} can also be used 
+#' to lauch any JS function created inside a Shiny JavaScript handler. 
 #' 
 #' @param fun JS function to be invoked.
 #' @param ui_ref The UI reference to call the JS function on.
@@ -36,13 +37,10 @@ js <- function(){
 #' @export
 #' @rdname golem_js
 invoke_js <- function( 
-  fun = c("show", "hide", "showid", "hideid", 
-          "showclass", "hideclass", "showref", 
-          "hideref", "clickon", "disable", "reable"), 
+  fun, 
   ui_ref, 
   session = shiny::getDefaultReactiveDomain() 
 ){
-  fun <- match.arg(fun)
   session$sendCustomMessage(fun, ui_ref)
 }
 

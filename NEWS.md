@@ -11,7 +11,7 @@
 
 ## New functions 
 
-* `invoke_js()` allows to call JS functions from server side.
+* `invoke_js()` allows to call JS functions from the server side. #52
 
 # golem 0.0.1.5000
 
