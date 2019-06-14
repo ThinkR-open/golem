@@ -16,7 +16,7 @@ use_recommended_dep <- function(pkg = ".",
                                 recommended = c("shiny","DT","attempt","glue","htmltools","golem")){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
-  for ( i in recommended){
+  for ( i in sort(recommended)){
        try(usethis::use_package(i))
   }
   cat_green_tick("Dependencies added")
