@@ -8,6 +8,7 @@
 #' @importFrom cli cat_bullet
 #' @aliases add_rconnect_file add_rstudioconnect_file
 #' @export
+#' @rdname rstudio_deploy
 add_rstudioconnect_file <- function(
   pkg = "."
 ){
@@ -19,7 +20,7 @@ add_rstudioconnect_file <- function(
     write(..., here, append = TRUE)
   }
   file.create( where )
-  usethis::use_build_ignore( where )
+  usethis::use_build_ignore( basename(where) )
   write_there("# To deploy, run: rsconnect::deployApp()")
   write_there("")
   write_there("pkgload::load_all()")
@@ -39,7 +40,6 @@ add_rstudioconnect_file <- function(
       glue::glue("Go to {where}")
     )
   }
-  
 }
 
 #' Create a Dockerfile for  Shiny App 
