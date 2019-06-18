@@ -51,7 +51,8 @@ Suggests:
     knitr,
     pkgdown,
     rcmdcheck,
-    rmarkdown
+    rmarkdown,
+    withr
 VignetteBuilder: 
     knitr
 Remotes: 
