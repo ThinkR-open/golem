@@ -4,7 +4,6 @@ test_that("add_dockerfile", {
   with_dir(pkg, {
     output <- testthat::capture_output(add_dockerfile())
     expect_true(file.exists("Dockerfile"))
-    ok <- file.exists("Dockerfile")
     test <-
       stringr::str_detect(output, "Dockerfile created at Dockerfile")
     expect_true(test)

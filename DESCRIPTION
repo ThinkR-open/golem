@@ -12,6 +12,16 @@ Authors@R:
              role = "aut",
              email = "contact@colinfay.me",
              comment = structure("0000-0001-7343-1846", .Names = "ORCID")),
+      person(given = "Sébastien",
+             family = "Rochette",
+             role = "aut",
+             email = "sebastien@thinkr.fr",
+             comment = structure("0000-0002-1565-9313", .Names = "ORCID")),
+      person(given = "Cervan",
+             family = "Girard",
+             role = "aut",
+             email = "cervan@thinkr.fr",
+             comment = structure("0000-0002-4816-4624", .Names = "ORCID")),
       person(given = "ThinkR",
              role = "cph"))
 Description: An opinionated framework for building a

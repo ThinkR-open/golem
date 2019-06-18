@@ -18,6 +18,7 @@ usethis::use_test("add_function")
 usethis::use_test("add_module")
 usethis::use_test("add_dockerfile")
 usethis::use_test("dev_function")
+usethis::use_test("use_recomended")
 
 # Travis
 usethis::use_travis()
