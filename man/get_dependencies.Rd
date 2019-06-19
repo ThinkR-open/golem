@@ -5,14 +5,14 @@
 \title{Return all package dependencies from current package}
 \usage{
 get_dependencies(path = "DESCRIPTION", dput = FALSE,
-  field = c("Depends", "Imports"))
+  field = c("Imports"))
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file}
 
 \item{dput}{if TRUE return a dput output instead of character vector}
 
-\item{field}{DESCRIPTION fields to parse. Default is Import and Depends}
+\item{field}{DESCRIPTION fields to parse. Default is Import}
 }
 \description{
 Return all package dependencies from current package

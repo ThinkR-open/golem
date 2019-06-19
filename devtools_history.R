@@ -23,6 +23,9 @@ usethis::use_test("favicon")
 usethis::use_test("use_utils")
 usethis::use_test("expect_function")
 usethis::use_test("reload")
+usethis::use_test("js")
+usethis::use_test("aaadependencies")
+usethis::use_test("create_golem")
 
 # Travis
 usethis::use_travis()

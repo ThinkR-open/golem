@@ -2,7 +2,7 @@
 #'
 #' @param path path to the DESCRIPTION file
 #' @param dput if TRUE return a dput output instead of character vector
-#' @param field DESCRIPTION fields to parse. Default is Import and Depends
+#' @param field DESCRIPTION fields to parse. Default is Import
 #'
 #' @export
 #'
@@ -11,7 +11,7 @@
 #' get_dependencies()
 #' }
 #' @importFrom stats setNames
-get_dependencies <- function(path="DESCRIPTION",dput=FALSE,field=c('Depends','Imports')){
+get_dependencies <- function(path="DESCRIPTION",dput=FALSE,field=c('Imports')){
   out <- read.dcf(path)[,field] 
   out <- gsub(pattern = "\n",replacement = "", out)
   out <-  unlist(strsplit(out, ",")) 

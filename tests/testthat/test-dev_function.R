@@ -37,3 +37,20 @@ test_that("test print_dev",{
     expect_is(print_dev("test"), "character")
   })
 })
+
+
+test_that("test browser_button",{
+ 
+    output <- capture_output(browser_button())
+    normal_text <- readRDS("txt_browser_button.rds")
+    expect_equal(output,normal_text)
+})
+
+test_that("test set_option",{
+  with_dir(pkg,{
+  set_golem_options()
+  expect_equal(getOption("golem.pkg.name"), "pkgtest")
+  # expect_equal(getOption("golem.pkg.version"), "0.0.0.9000")
+  expect_equal(getOption("golem.app.prod"), FALSE)
+  })
+})
