@@ -41,8 +41,8 @@ test_that("test print_dev",{
 
 test_that("test browser_button",{
  
-    output <- capture_output(browser_button())
-    normal_text <- readRDS("txt_browser_button.rds")
+    output <- capture_output_lines(browser_button())
+    normal_text <- readLines("browser_button.txt")
     expect_equal(output,normal_text)
 })
 
