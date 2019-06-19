@@ -1,6 +1,5 @@
 context("tests use_recomended functions")
 
-
 test_that("test use_recommended_deps",{
   with_dir(pkg,{
     use_recommended_deps()

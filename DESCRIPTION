@@ -58,6 +58,7 @@ Imports:
     yesno
 Suggests: 
     covr,
+    DT,
     knitr,
     pkgdown,
     purrr,
