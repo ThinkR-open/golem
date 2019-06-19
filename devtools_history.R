@@ -19,6 +19,10 @@ usethis::use_test("add_module")
 usethis::use_test("add_dockerfile")
 usethis::use_test("dev_function")
 usethis::use_test("use_recomended")
+usethis::use_test("favicon")
+usethis::use_test("use_utils")
+usethis::use_test("expect_function")
+usethis::use_test("reload")
 
 # Travis
 usethis::use_travis()

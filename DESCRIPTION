@@ -60,6 +60,7 @@ Suggests:
     covr,
     knitr,
     pkgdown,
+    purrr,
     rcmdcheck,
     rmarkdown,
     withr

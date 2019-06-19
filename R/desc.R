@@ -30,6 +30,7 @@ fill_desc <- function(
   desc$set("Authors@R", glue("person('{author_first_name}', '{author_last_name}', email = '{author_email}', role = c('cre', 'aut'))"))
   desc$del("Maintainer")
   desc$set_version("0.0.0.9000")
+  desc$set(Package = pkg_name)
   desc$set(Title = pkg_title)
   desc$set(Description = pkg_description)
   if_not_null(repo_url, desc$set("URL", repo_url))
