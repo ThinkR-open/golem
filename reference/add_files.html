@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.6000</span>
       </span>
     </div>
 
@@ -158,11 +158,11 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>add_js_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)
+    <pre class="usage"><span class='fu'>add_js_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>)
 
-<span class='fu'>add_js_handler</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)
+<span class='fu'>add_js_handler</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>)
 
-<span class='fu'>add_css_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+<span class='fu'>add_css_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,6 +174,10 @@
     <tr>
       <th>pkg</th>
       <td><p>Path to the root of the package. Default is `"."`.</p></td>
+    </tr>
+    <tr>
+      <th>dir</th>
+      <td><p>Path to the dir of the file</p></td>
     </tr>
     </table>
     
@@ -195,7 +199,7 @@
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay.
+    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

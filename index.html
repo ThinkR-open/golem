@@ -51,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.6000</span>
       </span>
     </div>
 
@@ -221,8 +221,8 @@
 <div id="use-recommended-package" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-recommended-package" class="anchor"></a>Use Recommended Package</h3>
-<p>This adds a series of packages as dependecies to your app. See <code><a href="reference/use_recommended.html">?golem::use_recommended_dep</a></code> for the list.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/use_recommended">use_recommended_dep</a></span>(<span class="dt">recommended =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"shiny"</span>,<span class="st">"DT"</span>,<span class="st">"attempt"</span>,<span class="st">"glue"</span>,<span class="st">"htmltools"</span>,<span class="st">"golem"</span>))</a></code></pre></div>
+<p>This adds a series of packages as dependecies to your app. See <code>?golem::use_recommended_dep</code> for the list.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw">use_recommended_dep</span>(<span class="dt">recommended =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"shiny"</span>,<span class="st">"DT"</span>,<span class="st">"attempt"</span>,<span class="st">"glue"</span>,<span class="st">"htmltools"</span>,<span class="st">"golem"</span>))</a></code></pre></div>
 </div>
 <div id="add-various-tools" class="section level3">
 <h3 class="hasAnchor">
@@ -231,8 +231,8 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_ui</a></span>()</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_server</a></span>()</a></code></pre></div>
 <p>Somes JS functions can also be used inside your shiny app with:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/js">js</a></span>()</a></code></pre></div>
-<p>See <code><a href="reference/js.html">?golem::js</a></code> for the list.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">golem<span class="op">::</span><span class="kw">js</span>()</a></code></pre></div>
+<p>See <code>?golem::js</code> for the list.</p>
 </div>
 <div id="add-a-browser-button" class="section level3">
 <h3 class="hasAnchor">
@@ -322,7 +322,7 @@
 <h3 class="hasAnchor">
 <a href="#rsconnect" class="anchor"></a>rsconnect</h3>
 <p>This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/add_rconnect_file">add_rconnect_file</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/rstudio_deploy">add_rconnect_file</a></span>()</a></code></pre></div>
 </div>
 <div id="docker" class="section level3">
 <h3 class="hasAnchor">
@@ -364,6 +364,8 @@
 <ul class="list-unstyled">
 <li>Vincent Guyader <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0003-0671-9270" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
 <li>Colin Fay <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7343-1846" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Sébastien Rochette <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-1565-9313" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Cervan Girard <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4816-4624" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
@@ -387,7 +389,7 @@
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay.
+    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

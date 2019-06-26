@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.6000</span>
       </span>
     </div>
 
@@ -178,21 +178,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="add_rconnect_file.html">add_rconnect_file()</a></code> </p>
-        </td>
-        <td><p>Add an app.R at the root of your package to deploy on RStudio Connect</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="browser_button.html">browser_button()</a></code> </p>
         </td>
         <td><p>Insert an hidden browser button</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="create_shiny_template.html">create_shiny_template()</a></code> </p>
+          <p><code><a href="create_golem.html">create_golem()</a></code> </p>
         </td>
-        <td><p>Create a package for Shiny App</p></td>
+        <td><p>Create a package for Shiny App using golem</p></td>
       </tr><tr>
         
         <td>
@@ -238,13 +232,13 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="js.html">js()</a></code> </p>
+          <p><code><a href="golem_js.html">activate_js()</a></code> <code><a href="golem_js.html">invoke_js()</a></code> </p>
         </td>
-        <td><p>Add JS code Straight to your app (instead of a dependency)</p></td>
+        <td><p>Interact with JavaScript built-in Functions</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="made_dev.html">cat_dev()</a></code> <code><a href="made_dev.html">print_dev()</a></code> <code><a href="made_dev.html">message_dev()</a></code> <code><a href="made_dev.html">warning_dev()</a></code> </p>
+          <p><code><a href="made_dev.html">cat_dev()</a></code> <code><a href="made_dev.html">print_dev()</a></code> <code><a href="made_dev.html">message_dev()</a></code> <code><a href="made_dev.html">warning_dev()</a></code> <code><a href="made_dev.html">browser_dev()</a></code> </p>
         </td>
         <td><p>Functions already made dev devependant</p></td>
       </tr><tr>
@@ -258,7 +252,19 @@
         <td>
           <p><code><a href="prod.html">app_prod()</a></code> <code><a href="prod.html">app_dev()</a></code> </p>
         </td>
-        <td><p>Is the app in dev mode or prof mode?</p></td>
+        <td><p>Is the app in dev mode or prod mode?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="rstudio_deploy.html">add_rstudioconnect_file()</a></code> </p>
+        </td>
+        <td><p>Add an app.R at the root of your package to deploy on RStudio Connect</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_golem_options.html">set_golem_options()</a></code> </p>
+        </td>
+        <td><p>golem options</p></td>
       </tr><tr>
         
         <td>
@@ -274,7 +280,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="use_recommended.html">use_recommended_dep()</a></code> <code><a href="use_recommended.html">use_recommended_tests()</a></code> </p>
+          <p><code><a href="use_recommended.html">use_recommended_deps()</a></code> <code><a href="use_recommended.html">use_recommended_tests()</a></code> </p>
         </td>
         <td><p>Add recommended elements</p></td>
       </tr><tr>
@@ -303,7 +309,7 @@
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay.
+    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

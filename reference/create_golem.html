@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a package for Shiny App — create_shiny_template • golem</title>
+<title>Create a package for Shiny App using golem — create_golem • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -29,9 +29,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Create a package for Shiny App — create_shiny_template" />
+<meta property="og:title" content="Create a package for Shiny App using golem — create_golem" />
 
-<meta property="og:description" content="Create a package for Shiny App" />
+<meta property="og:description" content="Create a package for Shiny App using golem" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.5005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.6000</span>
       </span>
     </div>
 
@@ -147,18 +147,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a package for Shiny App</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/create_shiny_template.R'><code>R/create_shiny_template.R</code></a></small>
-    <div class="hidden name"><code>create_shiny_template.Rd</code></div>
+    <h1>Create a package for Shiny App using golem</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/create_golem.R'><code>R/create_golem.R</code></a></small>
+    <div class="hidden name"><code>create_golem.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create a package for Shiny App</p>
+    <p>Create a package for Shiny App using golem</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>create_shiny_template</span>(<span class='no'>path</span>, <span class='kw'>check_name</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>create_golem</span>(<span class='no'>path</span>, <span class='kw'>check_name</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>package_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/basename'>basename</a></span>(<span class='no'>path</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,6 +173,14 @@ used as the package name.</p></td>
       <th>check_name</th>
       <td><p>When using this function in the console, you can prevent 
 the package name from being checked.</p></td>
+    </tr>
+    <tr>
+      <th>open</th>
+      <td><p>booleen open the created project</p></td>
+    </tr>
+    <tr>
+      <th>package_name</th>
+      <td><p>package name to use</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -197,7 +206,7 @@ the package name from being checked.</p></td>
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay.
+    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

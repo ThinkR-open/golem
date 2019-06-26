@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fill your description — fill_desc • golem</title>
+<title>golem options — set_golem_options • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -29,9 +29,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Fill your description — fill_desc" />
+<meta property="og:title" content="golem options — set_golem_options" />
 
-<meta property="og:description" content="Fill your description" />
+<meta property="og:description" content="Set a series of options to be used internally by golem." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -147,54 +147,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fill your description</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/desc.R'><code>R/desc.R</code></a></small>
-    <div class="hidden name"><code>fill_desc.Rd</code></div>
+    <h1>golem options</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/options.R'><code>R/options.R</code></a></small>
+    <div class="hidden name"><code>set_golem_options.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Fill your description</p>
+    <p>Set a series of options to be used internally by golem.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>fill_desc</span>(<span class='no'>pkg_name</span>, <span class='no'>pkg_title</span>, <span class='no'>pkg_description</span>, <span class='no'>author_first_name</span>,
-  <span class='no'>author_last_name</span>, <span class='no'>author_email</span>, <span class='kw'>repo_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>set_golem_options</span>(<span class='kw'>pkg_name</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/pkgload/topics/packages'>pkg_name</a></span>(),
+  <span class='kw'>pkg_version</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/pkgload/topics/packages'>pkg_version</a></span>(), <span class='kw'>pkg_path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/pkgload/topics/packages'>pkg_path</a></span>(),
+  <span class='kw'>app_prod</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pkg_name</th>
-      <td><p>The name of the package</p></td>
+      <td><p>Name of the current golem.</p></td>
     </tr>
     <tr>
-      <th>pkg_title</th>
-      <td><p>The title of the package</p></td>
+      <th>pkg_version</th>
+      <td><p>Version of the current golem.</p></td>
     </tr>
     <tr>
-      <th>pkg_description</th>
-      <td><p>Description of the package</p></td>
+      <th>pkg_path</th>
+      <td><p>Name of the current golem.</p></td>
     </tr>
     <tr>
-      <th>author_first_name</th>
-      <td><p>First Name of the author</p></td>
-    </tr>
-    <tr>
-      <th>author_last_name</th>
-      <td><p>Last Name of the author</p></td>
-    </tr>
-    <tr>
-      <th>author_email</th>
-      <td><p>Email of the author</p></td>
-    </tr>
-    <tr>
-      <th>repo_url</th>
-      <td><p>URL (if needed)</p></td>
-    </tr>
-    <tr>
-      <th>pkg</th>
-      <td><p>Path to look for the DESCRIPTION</p></td>
+      <th>app_prod</th>
+      <td><p>Is the golem in prod mode?</p></td>
     </tr>
     </table>
     
