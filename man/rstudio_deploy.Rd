@@ -4,11 +4,14 @@
 \alias{add_rstudioconnect_file}
 \alias{add_rconnect_file}
 \alias{add_shinyappsio_file}
+\alias{add_shinyserver_file}
 \title{Add an app.R at the root of your package to deploy on RStudio Connect}
 \usage{
 add_rstudioconnect_file(pkg = ".")
 
 add_shinyappsio_file(pkg = ".")
+
+add_shinyserver_file(pkg = ".")
 }
 \arguments{
 \item{pkg}{Where to put the app.R.}

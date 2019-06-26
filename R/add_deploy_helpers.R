@@ -50,6 +50,12 @@ add_shinyappsio_file <- function(pkg = "."){
   add_rstudioconnect_file(pkg = pkg)
 }
 
+#' @rdname rstudio_deploy
+#' @export
+add_shinyserver_file <- function(pkg = "."){
+  add_rstudioconnect_file(pkg = pkg)
+}
+
 #' Create a Dockerfile for  Shiny App 
 #' 
 #' Build a container containing your Shiny App. `add_dockerfile()` creates 
