@@ -21,11 +21,13 @@ add_rstudioconnect_file <- function(
   }
   file.create( where )
   usethis::use_build_ignore( basename(where) )
+  write_there("# Launch the ShinyApp (Do not remove this comment)")
   write_there("# To deploy, run: rsconnect::deployApp()")
+  write_there("# Or use the blue button on top of this file")
   write_there("")
   write_there("pkgload::load_all()")
   write_there("options( \"golem.app.prod\" = TRUE)")
-  write_there("shiny::shinyApp(ui = app_ui(), server = app_server)")
+  write_there("run_app() #add parameters here (if any)")
   usethis::use_build_ignore(where)
   usethis::use_package("pkgload")
   cat_green_tick(glue("File created at {where}"))
@@ -40,6 +42,12 @@ add_rstudioconnect_file <- function(
       glue::glue("Go to {where}")
     )
   }
+}
+
+#' @rdname rstudio_deploy
+#' @export
+add_shinyappsio_file <- function(pkg = "."){
+  add_rstudioconnect_file(pkg = pkg)
 }
 
 #' Create a Dockerfile for  Shiny App 
