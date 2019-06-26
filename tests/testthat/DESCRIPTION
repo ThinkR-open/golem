@@ -1,8 +1,8 @@
 Package: shinyexample
-Title: pkg_title
+Title: newtitle
 Version: 0.0.0.9000
-Authors@R: person('author_first_name', 'author_last_name', email = 'author_email', role = c('cre', 'aut'))
-Description: Package Description.
+Authors@R: person('firstname', 'lastname', email = 'name@test.com', role = c('cre', 'aut'))
+Description: Newdescription.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

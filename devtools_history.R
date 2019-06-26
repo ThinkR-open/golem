@@ -14,6 +14,18 @@ use_lifecycle_badge("Experimental")
 
 usethis::use_test()
 usethis::use_test("desc")
+usethis::use_test("add_function")
+usethis::use_test("add_module")
+usethis::use_test("add_dockerfile")
+usethis::use_test("dev_function")
+usethis::use_test("use_recomended")
+usethis::use_test("favicon")
+usethis::use_test("use_utils")
+usethis::use_test("expect_function")
+usethis::use_test("reload")
+usethis::use_test("js")
+usethis::use_test("aaadependencies")
+usethis::use_test("create_golem")
 
 # Travis
 usethis::use_travis()
@@ -30,7 +42,5 @@ pkgdown::build_site()
 
 # Dev
 attachment::att_to_description(extra.suggests = c("pkgdown", "rcmdcheck", "covr"), pkg_ignore = c("mypkg"))
-devtools::check()
-
 
 

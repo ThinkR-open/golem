@@ -3,7 +3,7 @@
 #' These functions create files inside the `inst/app/www` folder. 
 #' 
 #' @inheritParams  add_module
-#' 
+#' @param dir Path to the dir of the file
 #' @export
 #' @rdname add_files
 #' @importFrom glue glue

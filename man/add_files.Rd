@@ -16,6 +16,8 @@ add_css_file(name, pkg = ".", dir = "inst/app/www")
 \item{name}{The name of the module}
 
 \item{pkg}{Path to the root of the package. Default is `"."`.}
+
+\item{dir}{Path to the dir of the file}
 }
 \description{
 These functions create files inside the `inst/app/www` folder.
