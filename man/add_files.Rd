@@ -6,11 +6,11 @@
 \alias{add_css_file}
 \title{Create a module}
 \usage{
-add_js_file(name, pkg = ".", dir = "inst/app/www")
+add_js_file(name, pkg = ".", dir = "inst/app/www", open = TRUE)
 
-add_js_handler(name, pkg = ".", dir = "inst/app/www")
+add_js_handler(name, pkg = ".", dir = "inst/app/www", open = TRUE)
 
-add_css_file(name, pkg = ".", dir = "inst/app/www")
+add_css_file(name, pkg = ".", dir = "inst/app/www", open = TRUE)
 }
 \arguments{
 \item{name}{The name of the module}
@@ -18,6 +18,8 @@ add_css_file(name, pkg = ".", dir = "inst/app/www")
 \item{pkg}{Path to the root of the package. Default is `"."`.}
 
 \item{dir}{Path to the dir of the file}
+
+\item{open}{Open the file}
 }
 \description{
 These functions create files inside the `inst/app/www` folder.

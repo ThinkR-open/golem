@@ -13,7 +13,8 @@
 add_js_file <- function(
   name, 
   pkg = ".", 
-  dir = "inst/app/www"
+  dir = "inst/app/www",
+  open = TRUE
 ){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
@@ -37,7 +38,7 @@ add_js_file <- function(
   
   cat_green_tick(glue::glue("File created at {where}"))
   
-  if (rstudioapi::isAvailable()){
+  if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
   } else {
     cat_red_bullet(glue::glue("Go to {where}"))
@@ -50,7 +51,8 @@ add_js_file <- function(
 add_js_handler <- function(
   name, 
   pkg = ".", 
-  dir = "inst/app/www"
+  dir = "inst/app/www",
+  open = TRUE
 ){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
@@ -85,7 +87,7 @@ add_js_handler <- function(
   
   cat_green_tick(glue::glue("File created at {where}"))
   
-  if (rstudioapi::isAvailable()){
+  if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
   } else {
     cat_red_bullet(glue::glue("Go to {where}"))
@@ -97,7 +99,8 @@ add_js_handler <- function(
 add_css_file <- function(
   name, 
   pkg = ".", 
-  dir = "inst/app/www"
+  dir = "inst/app/www",
+  open = TRUE
 ){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
@@ -121,7 +124,7 @@ add_css_file <- function(
   
   cat_green_tick(glue::glue("File created at {where}"))
   
-  if (rstudioapi::isAvailable()){
+  if (rstudioapi::isAvailable() & open ){
     rstudioapi::navigateToFile(where)
   } else {
     cat_red_bullet(glue::glue("Go to {where}"))

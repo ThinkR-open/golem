@@ -5,13 +5,14 @@
 #' 
 #' @param name The name of the module
 #' @param pkg Path to the root of the package. Default is `"."`.
+#' @param open Open the file
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export
 #' @importFrom glue glue
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 
-add_module <- function(name, pkg = "."){
+add_module <- function(name, pkg = ".", open = TRUE ){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   where <- file.path(
@@ -69,7 +70,7 @@ add_module <- function(name, pkg = "."){
   write_there(glue('# callModule(mod_%name%_server, "%name%_ui_1")'))
   write_there(" ")
   cat_bullet(glue("File created at %where%"), bullet = "tick", bullet_col = "green")
-  if (rstudioapi::isAvailable()){
+  if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
   } else {
     cat_bullet(
