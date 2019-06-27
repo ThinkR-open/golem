@@ -95,14 +95,14 @@ add_dockerfile <- function(
   host = "0.0.0.0"
 ) {
   
-  where <- file.path(output)
+  where <- file.path(output) 
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(where)
   dock <- dock_from_desc(input, FROM = from, AS = as)
   dock$EXPOSE(port)
   dock$CMD(
     glue::glue(
-      "R -e \"options('shiny.port'={port},shiny.host={host});{read.dcf(input)[1]}::run_app()\""
+      "R -e \"options('shiny.port'={port},shiny.host='{host}');{read.dcf(input)[1]}::run_app()\""
     )
   )
   dock$write(output)
