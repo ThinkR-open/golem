@@ -100,6 +100,12 @@ display <- function(tag) {
   tag
 }
 
+# Hide an elements by calling jquery hide on it
+#' @importFrom htmltools tags
+jq_hide <- function(id) {
+  tags$script(sprintf("$('#%s').hide()", id))
+}
+
 # Add a red star at the end of the text
 #
 # Adds a red star at the end of the text
