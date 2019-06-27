@@ -16,11 +16,11 @@ check_file_exist <- function(file){
 }
 check_dir_exist <- function(dir){
   if (! dir.exists(dir) ) {
-    cli::cat_rule("The dir path doesn't exist.")
+    cli::cat_rule("This directory doesn't exist, creating...")
     dir.create(dir, recursive = TRUE)
     cat_green_tick(
       sprintf(
-        "Folder created at %s", 
+        "Directory created at %s", 
         dir
       )
     )
