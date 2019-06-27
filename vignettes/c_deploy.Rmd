@@ -24,7 +24,7 @@ The `dev/03_deploy.R` file contains function for deploying on various plateforms
 ### RStudio Connect
 
 ```{r}
-golem::add_rconnect_file()
+golem::add_rstudioconnect_file()
 ```
 
 ### Docker 

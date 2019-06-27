@@ -112,10 +112,10 @@ usethis::use_data_raw()
 
 ### Use Recommended Package
 
-This adds a series of packages as dependecies to your app. See `?golem::use_recommended_dep` for the list.
+This adds a series of packages as dependecies to your app. See `?golem::use_recommended_deps` for the list.
 
 ```{r}
-golem::use_recommended_dep(recommended = c("shiny","DT","attempt","glue","htmltools","golem"))
+golem::use_recommended_deps(recommended = c("shiny","DT","attempt","glue","htmltools","golem"))
 ```
 
 ### Add various tools
@@ -130,10 +130,10 @@ golem::use_utils_server()
 Somes JS functions can also be used inside your shiny app with: 
 
 ```{r}
-golem::js()
+golem::activate_js()
 ```
 
-See `?golem::js` for the list.
+See `?golem::activite_js` for the list.
 
 ### Add a browser button 
 
@@ -241,13 +241,16 @@ mypkg::run_app()
 
 Or by running the `dev/run_dev.R` file.
 
-### rsconnect
+### Rstudio products
+
+#### Rstudio Connect
 
 This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.
 
 ```{r}
-golem::add_rconnect_file()
+golem::add_rstudioconnect_file()
 ```
+
 
 ### Docker 
 

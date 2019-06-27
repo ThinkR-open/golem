@@ -4,13 +4,15 @@
 #' In previous versions, this function was called add_rconnect_file.
 #'
 #' @param pkg Where to put the app.R.
+#' @param open Open the file
 #' @inheritParams add_module
 #' @importFrom cli cat_bullet
 #' @aliases add_rconnect_file add_rstudioconnect_file
 #' @export
 #' @rdname rstudio_deploy
 add_rstudioconnect_file <- function(
-  pkg = "."
+  pkg = ".",
+  open = TRUE
 ){
   where <- file.path(pkg, "app.R")
   
@@ -35,7 +37,7 @@ add_rstudioconnect_file <- function(
   cat_bullet(darkgrey("rsconnect::deployApp()\n"))
   
   
-  if (rstudioapi::isAvailable()){
+  if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
   } else {
     cat_red_bullet(
@@ -46,14 +48,14 @@ add_rstudioconnect_file <- function(
 
 #' @rdname rstudio_deploy
 #' @export
-add_shinyappsio_file <- function(pkg = "."){
-  add_rstudioconnect_file(pkg = pkg)
+add_shinyappsio_file <- function(pkg = ".", open = TRUE){
+  add_rstudioconnect_file(pkg = pkg, open = open)
 }
 
 #' @rdname rstudio_deploy
 #' @export
-add_shinyserver_file <- function(pkg = "."){
-  add_rstudioconnect_file(pkg = pkg)
+add_shinyserver_file <- function(pkg = ".", open = TRUE){
+  add_rstudioconnect_file(pkg = pkg, open = open)
 }
 
 #' Create a Dockerfile for  Shiny App 
@@ -95,7 +97,7 @@ add_dockerfile <- function(
   
   where <- file.path(output)
   if ( !check_file_exist(where) ) return(invisible(FALSE))
-  
+  usethis::use_build_ignore(where)
   dock <- dock_from_desc(input, FROM = from, AS = as)
   dock$EXPOSE(port)
   dock$CMD(
@@ -124,7 +126,7 @@ add_dockerfile_shinyproxy <- function(
   where <- file.path(output)
   
   if ( !check_file_exist(where) ) return(invisible(FALSE))
-  
+  usethis::use_build_ignore(where)
   dock <- dock_from_desc(input, FROM = from, AS = as)
   
   dock$EXPOSE(3838)
@@ -158,7 +160,7 @@ add_dockerfile_heroku <- function(
   if ( !check_file_exist(where) ) {
     return(invisible(FALSE))
   } 
-  
+  usethis::use_build_ignore(where)
   dock <- dock_from_desc(input, FROM = from, AS = as)
   
   dock$CMD(

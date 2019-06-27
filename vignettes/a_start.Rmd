@@ -137,12 +137,12 @@ golem::use_recommended_tests()
 ```
 
 
-### Use Recommended Package
+### Use Recommended Packages
 
 This will add "shiny", "DT", "attempt", "glue", "htmltools", and "golem" as a dependecy to your package.
 
 ```{r}
-golem::use_recommended_dep("")
+golem::use_recommended_deps("")
 ```
 
 ### Add various tools

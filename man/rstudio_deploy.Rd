@@ -7,14 +7,16 @@
 \alias{add_shinyserver_file}
 \title{Add an app.R at the root of your package to deploy on RStudio Connect}
 \usage{
-add_rstudioconnect_file(pkg = ".")
+add_rstudioconnect_file(pkg = ".", open = TRUE)
 
-add_shinyappsio_file(pkg = ".")
+add_shinyappsio_file(pkg = ".", open = TRUE)
 
-add_shinyserver_file(pkg = ".")
+add_shinyserver_file(pkg = ".", open = TRUE)
 }
 \arguments{
 \item{pkg}{Where to put the app.R.}
+
+\item{open}{Open the file}
 }
 \description{
 Add an app.R at the root of your package to deploy on RStudio Connect

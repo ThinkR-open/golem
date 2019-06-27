@@ -4,12 +4,14 @@
 \alias{add_module}
 \title{Create a module}
 \usage{
-add_module(name, pkg = ".")
+add_module(name, pkg = ".", open = TRUE)
 }
 \arguments{
 \item{name}{The name of the module}
 
 \item{pkg}{Path to the root of the package. Default is `"."`.}
+
+\item{open}{Open the file}
 }
 \description{
 This function creates a module inside the `R/` folder, based 
