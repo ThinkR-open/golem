@@ -41,6 +41,10 @@ invoke_js <- function(
   ui_ref, 
   session = shiny::getDefaultReactiveDomain() 
 ){
-  session$sendCustomMessage(fun, ui_ref)
+  res <- mapply(function(x, y){
+    session$sendCustomMessage(x, y)
+  }, x = fun, y = ui_ref)
+  invisible(res)
+  #session$sendCustomMessage(fun, ui_ref)
 }
 
