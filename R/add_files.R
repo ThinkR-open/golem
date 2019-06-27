@@ -16,23 +16,23 @@ add_js_file <- function(
   dir = "inst/app/www",
   open = TRUE
 ){
-  old <- setwd(normalizePath(pkg))
+  pkg <- normalizePath(pkg)
+  old <- setwd(pkg) 
   on.exit(setwd(old))
   
   dir <- file.path(pkg, dir)
   
-  if ( !check_dir_exist(dir) ) {
-    return(invisible(FALSE))
-  }  else {
-    dir.create(dir, recursive = TRUE)
-  }
+  check_dir_exist(dir)
   
   where <- file.path(
-    pkg, dir, glue::glue("{name}.js")
+    dir, 
+    glue::glue("{name}.js")
   )
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
+  
+  if (file.exists(where) ){
+    res <- yesno::yesno("This file already exists, override?")
+    if (!res) return(FALSE)
+  }
   
   file.create(where)
   
@@ -54,24 +54,26 @@ add_js_handler <- function(
   dir = "inst/app/www",
   open = TRUE
 ){
-  old <- setwd(normalizePath(pkg))
+  pkg <- normalizePath(pkg)
+  old <- setwd(pkg) 
   on.exit(setwd(old))
   
   dir <- file.path(pkg, dir)
   
-  if ( !check_dir_exist(dir) ) {
-    return(invisible(FALSE))
-  }  else {
-    dir.create(dir, recursive = TRUE)
-  }
+  check_dir_exist(dir)
   
   where <- file.path(
-    pkg, dir, glue::glue("{name}.js")
+    dir, 
+    glue::glue("{name}.js")
   )
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
+  
+  if (file.exists(where) ){
+    res <- yesno::yesno("This file already exists, override?")
+    if (!res) return(FALSE)
+  }
+  
   file.create(where)
+  
   
   write_there <- function(...){
     write(..., file = where, append = TRUE)
@@ -102,23 +104,23 @@ add_css_file <- function(
   dir = "inst/app/www",
   open = TRUE
 ){
-  old <- setwd(normalizePath(pkg))
+  pkg <- normalizePath(pkg)
+  old <- setwd(pkg) 
   on.exit(setwd(old))
   
   dir <- file.path(pkg, dir)
   
-  if ( !check_dir_exist(dir) ) {
-    return(invisible(FALSE))
-  }  else {
-    dir.create(dir, recursive = TRUE)
-  }
+  check_dir_exist(dir)
   
   where <- file.path(
-    pkg, dir, glue::glue("{name}.css")
+    dir, 
+    glue::glue("{name}.css")
   )
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
+  
+  if (file.exists(where) ){
+    res <- yesno::yesno("This file already exists, override?")
+    if (!res) return(FALSE)
+  }
   
   file.create(where)
   

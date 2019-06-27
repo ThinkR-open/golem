@@ -8,18 +8,23 @@ darkgrey <- function(x) {
 }
 
 check_file_exist <- function(file){
-  res <- TRUE
+  res <- TRUE 
   if (file.exists(file)){
     res <- yesno::yesno("This file already exists, override?")
   }
   return(res)
 }
 check_dir_exist <- function(dir){
-  res <- TRUE
-  if (!dir.exists(dir)){
-    res <- yesno::yesno(sprintf("The %s does not exists, create?", dir))
+  if (! dir.exists(dir) ) {
+    cli::cat_rule("The dir path doesn't exist.")
+    dir.create(dir, recursive = TRUE)
+    cat_green_tick(
+      sprintf(
+        "Folder created at %s", 
+        dir
+      )
+    )
   }
-  return(res)
 }
 
 # internal
