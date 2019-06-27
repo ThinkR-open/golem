@@ -18,14 +18,14 @@ knitr::opts_chunk$set(
 
 ## Using `{golem}` js functions
 
-`{golem}` comes with a series of JavaScript functions that you can call from the server. These functions are added by default with `golem::js()` in `app_ui`.
+`{golem}` comes with a series of JavaScript functions that you can call from the server. These functions are added by default with `golem::activate_js()` in `app_ui`.
 
 
 Then they arer called with `session$sendCustomMessage("fonction", "ui_element")`.
 
 This `ui_element` define the UI element to interact with. It can be a full jQuery selector, an id or a class.
 
-### `golem::js()`
+### `golem::activate_js()`
 
 + `showid` & `hideid`, `showclass` & `hideclass` show and hide elements through their id or class.
 
