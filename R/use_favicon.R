@@ -2,7 +2,7 @@
 #'
 #' @param path Path to your favicon file (.ico or .png) 
 #' @param pkg Path to the root of the package. Default is `"."`
-#'
+#' @rdname favicon
 #' @export
 #' 
 #' @importFrom attempt stop_if_not
@@ -44,6 +44,29 @@ use_favicon <- function(path, pkg = "."){
   
 }
 
+#' @rdname favicon
+#' @export
+remove_favicon <- function(
+  path = "inst/app/www/favicon.ico"
+){
+  if (file.exists(path)){
+    cat_green_tick(
+      sprintf(
+        "Removing favicon at %s", 
+        path
+      )
+    )
+    unlink(path)
+  } else {
+    cat_red_bullet(
+      sprintf(
+        "No file found at %s", 
+        path
+      )
+    )
+  }
+}
+
 #' Add favicon to your app
 #'
 #' This function adds the favicon from `ico` to your shiny app.
@@ -53,6 +76,6 @@ use_favicon <- function(path, pkg = "."){
 #'
 #' @export
 #' @importFrom htmltools tags
-favicon <- function( ico = "www/favicon.ico", rel="shortcut icon"){
+favicon <- function( ico = "www/favicon.ico", rel="shortcut icon" ){
   tags$head(tags$link(rel= rel, href= ico))
 }

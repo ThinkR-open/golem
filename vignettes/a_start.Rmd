@@ -169,8 +169,13 @@ golem::use_recommended_deps("")
 + If you want to change the default favicon
 
 ```{r}
+# Remove current favicon
+golem::remove_favicon()
+# Add a new one
 golem::use_favicon( path = "path/to/favicon")
 ```
+
+Note that you can add an url, and the favicon will be downloaded to the `inst/app/www` folder. 
 
 + Utils
 
