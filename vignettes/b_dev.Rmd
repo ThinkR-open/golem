@@ -22,7 +22,6 @@ knitr::opts_chunk$set(
 Now that you're all set with your project init, time to move to development :) 
 
 App development should happen through the `dev/02_dev.R` file, which contains common commands for developping. 
-
 ## Launching the app
 
 To run the app, go to the `dev/run_dev.R` file, and run the all thing.
@@ -34,7 +33,7 @@ To run the app, go to the `dev/run_dev.R` file, and run the all thing.
 The `golem::add_module()` functions creates a module in the `R` folder. The file and the modules will be named after the `name` parameter, by adding `mod_` to the R file, and `mod_*_ui` and `mod_*_server` to the UI and server functions.
 
 ```{r}
-golem::add_module(name = "my_first_module") # Name of the module
+golem::add_module( name = "my_first_module" ) # Name of the module
 ```
 
 The new file will contain:
@@ -74,7 +73,7 @@ usethis::use_package("pkg")
 Add more tests to your application:
 
 ```{r}
-usethis::use_test("app")
+usethis::use_test( "app" )
 ```
 
 ### Add a browser button
@@ -106,11 +105,11 @@ Then, You'll need to point to these external resources in `golem_add_external_re
 tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
 ```
 
-Also, you can list here the use of other packages, for example `useShinyalert()` from the `{shinyalert}` package.
+Put these links into `R/app_ui.R`, in the `golem_add_external_resources()` function.
 
-Note: we've chosen to leave it "raw", in the sense that there is a `addResourcePath` and a `tags$head`. If you're comfortable with `{htmltools}`, you can build a `htmltools::htmlDependency`. 
+You can also list here the use of other packages, for example `useShinyalert()` from the `{shinyalert}` package.
 
-Once these elements 
+> Note: we've chosen to leave it "raw", in the sense that there is a `addResourcePath` and a `tags$head`. If you're comfortable with `{htmltools}`, you can build a `htmltools::htmlDependency`. 
 
 ## Documentation
 
@@ -150,4 +149,5 @@ log_dev(10)
 options( "golem.app.prod" = TRUE)
 log_dev(10)
 ```
+
 

@@ -26,7 +26,7 @@ golem::set_golem_options()
 ## 
 ## If you want to use the MIT licence, README, code of conduct, lifecycle badge, and news
 
-usethis::use_mit_license( name = "Your Name" )  # You can set another licence here
+usethis::use_mit_license( name = "Golem User" )  # You can set another licence here
 usethis::use_readme_rmd( open = FALSE )
 usethis::use_code_of_conduct()
 usethis::use_lifecycle_badge( "Experimental" )
@@ -47,7 +47,7 @@ golem::use_recommended_tests()
 
 ## 1.5 : Use Recommended Package
 
-golem::use_recommended_dep()
+golem::use_recommended_deps()
 
 ## 1.6 Add various tools
 

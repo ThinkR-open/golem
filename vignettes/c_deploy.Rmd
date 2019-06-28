@@ -17,15 +17,43 @@ knitr::opts_chunk$set(
 )
 ```
 
+## About the `run_app()` function
+
+When launching the app, you might have noticed that the `dev/run_dev.R` function calls `run_app()`, which has the following structure:
+
+```{r}
+run_app <- function(...) {
+  with_golem_options(
+    app = shinyApp(ui = app_ui(), server = app_server), 
+    golem_opts = list(...)
+  )
+}
+```
+
+This function might looks a little bit weird, but there's a long story behing it, and you can read more about it [there]().
+
+But long story short, this combination of `with_golem_options` & `golem_opts = list(...)` allows you to pass argument to the function to be used inside the application, from UI or from server side, which you can get with `get_golem_options()`.
+
+```{r}
+run_app(this = "that")
+# And in the app 
+this <- get_golem_options("this")
+```
+
+The idea is to provide more flexibility for deployment on each platform you want to run your app on.
+
 ## Deploying Apps with `{golem}`
 
 The `dev/03_deploy.R` file contains function for deploying on various plateforms. 
 
-### RStudio Connect
+### RStudio Products
 
 ```{r}
 golem::add_rstudioconnect_file()
+golem::add_shinyappsio_file()
+golem::add_shinyserver_file()
 ```
+
 
 ### Docker 
 

@@ -20,28 +20,31 @@ knitr::opts_chunk$set(
 
 `{golem}` comes with a series of JavaScript functions that you can call from the server. These functions are added by default with `golem::activate_js()` in `app_ui`.
 
-
-Then they arer called with `session$sendCustomMessage("fonction", "ui_element")`.
+Then they are called with `golem::invoke_js("fonction", "ui_element")`.
 
 This `ui_element` define the UI element to interact with. It can be a full jQuery selector, an id or a class.
 
-### `golem::activate_js()`
+Note that `invoke_js` can be used with any function defined in a [JavaScript Custom Handler]()
+
+### `golem::invoke_js()`
 
 + `showid` & `hideid`, `showclass` & `hideclass` show and hide elements through their id or class.
 
 ```{r eval = FALSE}
-session$sendCustomMessage("showid", ns("plot"))
+golem::invoke_js("showid", ns("plot"))
 ```
 
 + `showhref` & `hidehref` hide and show a link by trying to match the `href` content.
 
 ```{r eval = FALSE}
-session$sendCustomMessage("showhref", "panel2")
+golem::invoke_js("showhref", "panel2")
 ```
 
 + `clickon` click on the element. You have to use the full jQuery selector. 
 
 + `show` & `hide` show and hide elements, using the full jQuery selector.
+
++ `disable` & `reable` able and disable specific element, using the full jQuery selector.
 
 ### About jQuery selectors
 
