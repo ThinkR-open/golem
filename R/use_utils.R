@@ -14,10 +14,12 @@
 #' @importFrom glue glue
 use_utils_ui <- function(pkg = "."){
   use_utils(file_name = "golem_utils_ui.R", pkg=pkg)
-  usethis::use_package("htmltools") # utiliser attachment pour trouver les dependances
-  cat_bullet("Utils UI added", bullet = "tick", bullet_col = "green")
+  capture.output(
+    usethis::use_package("htmltools")
+  )
+  cat_green_tick("Utils UI added")
   # automatiquement dans le fichier deplace
-  }
+}
 #' @export
 #' @rdname utils_files
 use_utils_server <- function(pkg = "."){
