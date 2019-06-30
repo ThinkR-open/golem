@@ -9,9 +9,10 @@ remove_file <- function(path){
 }
 
 ## fake package
+fakename <- paste0(sample(letters, 10, TRUE), collapse = "")
 tpdir <- tempdir()
-if(!dir.exists(file.path(tpdir,"pkgtest"))){
-  create_golem(file.path(tpdir, "pkgtest"), open = FALSE)
+if(!dir.exists(file.path(tpdir,fakename))){
+  create_golem(file.path(tpdir, fakename), open = FALSE)
 }
-pkg <- file.path(tpdir, "pkgtest")
+pkg <- file.path(tpdir, fakename)
 

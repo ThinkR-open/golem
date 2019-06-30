@@ -3,7 +3,7 @@ context("function add_module")
 
 test_that("add_module", {
   with_dir(pkg, {
-    add_module("test")
+    add_module("test", open = FALSE)
     expect_true(file.exists("R/mod_test.R"))
     script <- list.files("R", pattern = "mod_test")
     expect_equal(tools::file_ext(script),

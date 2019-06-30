@@ -2,7 +2,7 @@ context("test-add_file function")
 
 test_that("add_css_file", {
   with_dir(pkg, {
-    expect_warning(add_css_file("style"))
+    add_css_file("style", open = FALSE)
     expect_true(file.exists("inst/app/www/style.css"))
     style <-
       list.files("inst/app/www/", pattern = "style")
@@ -13,7 +13,7 @@ test_that("add_css_file", {
 
 test_that("add_js_file", {
   with_dir(pkg, {
-    expect_warning(add_js_file("script"))
+    add_js_file("script", open = FALSE)
     expect_true(file.exists("inst/app/www/script.js"))
     script <-
       list.files("inst/app/www/", pattern = "script")
@@ -24,7 +24,7 @@ test_that("add_js_file", {
 
 test_that("add_js_handler", {
   with_dir(pkg, {
-    expect_warning(add_js_handler("handler"))
+    add_js_handler("handler", open = FALSE)
     expect_true(file.exists("inst/app/www/handler.js"))
     script <-
       list.files("inst/app/www/", pattern = "handler")

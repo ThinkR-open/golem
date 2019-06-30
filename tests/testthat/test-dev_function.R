@@ -49,7 +49,7 @@ test_that("test browser_button",{
 test_that("test set_option",{
   with_dir(pkg,{
   set_golem_options()
-  expect_equal(getOption("golem.pkg.name"), "pkgtest")
+  expect_equal(getOption("golem.pkg.name"), fakename)
   # expect_equal(getOption("golem.pkg.version"), "0.0.0.9000")
   expect_equal(getOption("golem.app.prod"), FALSE)
   })

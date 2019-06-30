@@ -3,7 +3,7 @@ context("test-desc")
 test_that("desc works", {
   with_dir(pkg,{
  output <-  capture_output(fill_desc(
-    "pkgtest", 
+   fakename, 
     "newtitle", 
     "Newdescription.",
     "firstname", 
@@ -11,7 +11,7 @@ test_that("desc works", {
     "name@test.com", 
     "http://repo_url.com"
   ))
-  add_desc <- c("pkgtest", "newtitle", "Newdescription.",
+  add_desc <- c(fakename, "newtitle", "Newdescription.",
                 "firstname", "lastname", "name@test.com", 
                 "http://repo_url.com")
   desc <- readLines("DESCRIPTION")
