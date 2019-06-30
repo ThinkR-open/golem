@@ -7,24 +7,22 @@ darkgrey <- function(x) {
   x <- crayon::make_style("darkgrey")(x)
 }
 
+dir_not_exist <- Negate(dir.exists)
+file_not_exist <- Negate(file.exists)
+
 check_file_exist <- function(file){
-  res <- TRUE 
+  res <- TRUE
   if (file.exists(file)){
     res <- yesno::yesno("This file already exists, override?")
   }
   return(res)
 }
 check_dir_exist <- function(dir){
-  if (! dir.exists(dir) ) {
-    cli::cat_rule("This directory doesn't exist, creating...")
-    dir.create(dir, recursive = TRUE)
-    cat_green_tick(
-      sprintf(
-        "Directory created at %s", 
-        dir
-      )
-    )
+  res <- TRUE
+  if (!dir.exists(dir)){ 
+    res <- yesno::yesno(sprintf("The %s does not exists, create?", dir))
   }
+  return(res)
 }
 
 # internal

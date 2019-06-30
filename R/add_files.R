@@ -16,23 +16,36 @@ add_js_file <- function(
   dir = "inst/app/www",
   open = TRUE
 ){
-  pkg <- normalizePath(pkg)
-  old <- setwd(pkg) 
+  old <- setwd(normalizePath(pkg))  
   on.exit(setwd(old))
   
   dir <- file.path(pkg, dir)
   
-  check_dir_exist(dir)
+  if (dir_not_exist(dir)){
+    if (
+      yesno::yesno(
+        sprintf("%s does not exists, create?", dir)
+        )
+    ) {
+      dir.create(dir, recursive = TRUE)
+    } else {
+      cat_red_bullet(
+        "File not added (needs a valid directory)"
+      )
+      return(FALSE)
+    }
+  }
+  
+  if ( !check_dir_exist(dir) ) {
+    return(invisible(FALSE))
+  }  
   
   where <- file.path(
-    dir, 
-    glue::glue("{name}.js")
+    pkg, dir, glue::glue("{name}.js")
   )
-  
-  if (file.exists(where) ){
-    res <- yesno::yesno("This file already exists, override?")
-    if (!res) return(FALSE)
-  }
+  if ( !check_file_exist(where) ) {
+    return(invisible(FALSE))
+  } 
   
   file.create(where)
   
@@ -54,26 +67,34 @@ add_js_handler <- function(
   dir = "inst/app/www",
   open = TRUE
 ){
-  pkg <- normalizePath(pkg)
-  old <- setwd(pkg) 
+  old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
   dir <- file.path(pkg, dir)
   
-  check_dir_exist(dir)
-  
-  where <- file.path(
-    dir, 
-    glue::glue("{name}.js")
-  )
-  
-  if (file.exists(where) ){
-    res <- yesno::yesno("This file already exists, override?")
-    if (!res) return(FALSE)
+  if (dir_not_exist(dir)){
+    if (
+      yesno::yesno(
+        sprintf("%s does not exists, create?", dir)
+      )
+    ) {
+      dir.create(dir, recursive = TRUE)
+    } else {
+      cat_red_bullet(
+        "File not added (needs a valid directory)"
+      )
+      return(FALSE)
+    }
   }
   
-  file.create(where)
+  where <- file.path(
+    pkg, dir, glue::glue("{name}.js")
+  )
   
+  if ( !check_file_exist(where) ) {
+    return(invisible(FALSE))
+  } 
+  file.create(where)
   
   write_there <- function(...){
     write(..., file = where, append = TRUE)
@@ -104,23 +125,32 @@ add_css_file <- function(
   dir = "inst/app/www",
   open = TRUE
 ){
-  pkg <- normalizePath(pkg)
-  old <- setwd(pkg) 
+  old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
   dir <- file.path(pkg, dir)
   
-  check_dir_exist(dir)
+  if (dir_not_exist(dir)){
+    if (
+      yesno::yesno(
+        sprintf("%s does not exists, create?", dir)
+      )
+    ) {
+      dir.create(dir, recursive = TRUE)
+    } else {
+      cat_red_bullet(
+        "File not added (needs a valid directory)"
+      )
+      return(FALSE)
+    }
+  }
   
   where <- file.path(
-    dir, 
-    glue::glue("{name}.css")
+    pkg, dir, glue::glue("{name}.css")
   )
-  
-  if (file.exists(where) ){
-    res <- yesno::yesno("This file already exists, override?")
-    if (!res) return(FALSE)
-  }
+  if ( !check_file_exist(where) ) {
+    return(invisible(FALSE))
+  } 
   
   file.create(where)
   
