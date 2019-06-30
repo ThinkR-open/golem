@@ -12,6 +12,7 @@
 #' 
 #' @importFrom cli cat_bullet
 #' @importFrom glue glue
+#' @importFrom utils capture.output
 use_utils_ui <- function(pkg = "."){
   use_utils(file_name = "golem_utils_ui.R", pkg=pkg)
   capture.output(
