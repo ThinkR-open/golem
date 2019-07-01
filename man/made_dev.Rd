@@ -6,7 +6,7 @@
 \alias{message_dev}
 \alias{warning_dev}
 \alias{browser_dev}
-\title{Functions already made dev devependant}
+\title{Functions already made dev dependant}
 \usage{
 cat_dev(...)
 
@@ -23,5 +23,6 @@ browser_dev(...)
     allowed).}
 }
 \description{
-Functions already made dev devependant
+This functions will be run only if \code{golem::app_dev()}
+returns TRUE.
 }

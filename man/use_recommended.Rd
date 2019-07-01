@@ -17,7 +17,7 @@ use_recommended_tests(pkg = ".")
 }
 \description{
 \describe{
-\item{use_recommended_dep}{Adds \code{shiny}, \code{DT}, \code{attempt}, \code{glue}, \code{golem}, \code{htmltools} to dependencies}
+\item{use_recommended_deps}{Adds \code{shiny}, \code{DT}, \code{attempt}, \code{glue}, \code{golem}, \code{htmltools} to dependencies}
 \item{use_recommended_tests}{Adds a test folder and copy the golem tests}
 }
 }
