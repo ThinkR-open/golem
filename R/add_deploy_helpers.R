@@ -12,8 +12,10 @@
 #' @rdname rstudio_deploy
 add_rstudioconnect_file <- function(
   pkg = ".",
-  open = TRUE
+  open = TRUE, 
+  service = c("RStudio Connect", "Shiny Server", "ShinyApps.io")
 ){
+  service <- match.arg(service)
   where <- file.path(pkg, "app.R")
   
   if ( !check_file_exist(where) ) return(invisible(FALSE))
@@ -40,6 +42,11 @@ add_rstudioconnect_file <- function(
   cat_green_tick(glue("File created at {where}"))
   cat_line("To deploy, run:")
   cat_bullet(darkgrey("rsconnect::deployApp()\n"))
+  cat_red_bullet(
+    sprintf(
+      "Note that you'll need to upload the whole package to %s",
+      service)
+  )
   
   
   if (rstudioapi::isAvailable() & open){
@@ -54,13 +61,13 @@ add_rstudioconnect_file <- function(
 #' @rdname rstudio_deploy
 #' @export
 add_shinyappsio_file <- function(pkg = ".", open = TRUE){
-  add_rstudioconnect_file(pkg = pkg, open = open)
+  add_rstudioconnect_file(pkg = pkg, open = open, service = "ShinyApps.io")
 }
 
 #' @rdname rstudio_deploy
 #' @export
 add_shinyserver_file <- function(pkg = ".", open = TRUE){
-  add_rstudioconnect_file(pkg = pkg, open = open)
+  add_rstudioconnect_file(pkg = pkg, open = open, service = "Shiny Server")
 }
 
 #' Create a Dockerfile for  Shiny App 

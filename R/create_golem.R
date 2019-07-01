@@ -78,7 +78,11 @@ create_golem <- function(path,
   }
   
   
-  return( invisible(path) )
+  return( 
+    invisible(
+      normalizePath(path)
+    ) 
+  )
 }
 
 # to be used in Rstudio "new project" GUI
