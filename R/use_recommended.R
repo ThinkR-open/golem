@@ -8,7 +8,7 @@
 #' @inheritParams add_module
 #' @param recommended A vector of recommended packages.
 #' 
-#' @importFrom cli cat_bullet
+#' @importFrom usethis use_testthat use_package
 #' @rdname use_recommended 
 #' 
 #' @export
@@ -19,7 +19,7 @@ use_recommended_deps <- function(
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   for ( i in sort(recommended)){
-    try(usethis::use_package(i))
+    try(use_package(i))
   }
   cat_green_tick("Dependencies added")
 }
@@ -27,15 +27,20 @@ use_recommended_deps <- function(
 
 #' @rdname use_recommended 
 #' @export
-use_recommended_tests <- function(pkg = "."){
+#' @importFrom usethis use_testthat use_package
+#' @importFrom utils capture.output
+#' @importFrom attempt without_warning
+use_recommended_tests <- function
+(pkg = "."
+ ){
   old <- setwd(normalizePath(pkg))
-  on.exit(setwd(old))
+  on.exit(setwd(old)) 
   if (!dir.exists(
     file.path(normalizePath(pkg), "tests")
   )){
-    usethis::use_testthat()
+    without_warning(use_testthat)()
   }
-  usethis::use_package("processx")
+  x <- capture.output(use_package("processx"))
   file.copy(
     golem_sys("utils", "test-golem-recommended.R"), 
     file.path(normalizePath(pkg), "tests", "testthat")
