@@ -14,34 +14,28 @@ add_js_file <- function(
   name, 
   pkg = ".", 
   dir = "inst/app/www",
-  open = TRUE
+  open = TRUE, 
+  dir_create = TRUE
 ){
   old <- setwd(normalizePath(pkg))  
   on.exit(setwd(old))
   
-  dir <- file.path(pkg, dir)
+  dir_created <- create_dir_if_needed(
+    dir, 
+    dir_create
+  )
   
-  if (dir_not_exist(dir)){
-    if (
-      yesno::yesno(
-        sprintf("%s does not exists, create?", dir)
-        )
-    ) {
-      dir.create(dir, recursive = TRUE)
-    } else {
-      cat_red_bullet(
-        "File not added (needs a valid directory)"
-      )
-      return(FALSE)
-    }
+  if (!dir_created){
+    cat_red_bullet(
+      "File not added (needs a valid directory)"
+    )
+    return(invisible(FALSE))
   }
   
-  if ( !check_dir_exist(dir) ) {
-    return(invisible(FALSE))
-  }  
+  dir <- normalizePath(dir) 
   
   where <- file.path(
-    pkg, dir, glue::glue("{name}.js")
+    dir, glue::glue("{name}.js")
   )
   if ( !check_file_exist(where) ) {
     return(invisible(FALSE))
@@ -65,30 +59,28 @@ add_js_handler <- function(
   name, 
   pkg = ".", 
   dir = "inst/app/www",
-  open = TRUE
+  open = TRUE, 
+  dir_create = TRUE
 ){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
-  dir <- file.path(pkg, dir)
+  dir_created <- create_dir_if_needed(
+    dir, 
+    dir_create
+  )
   
-  if (dir_not_exist(dir)){
-    if (
-      yesno::yesno(
-        sprintf("%s does not exists, create?", dir)
-      )
-    ) {
-      dir.create(dir, recursive = TRUE)
-    } else {
-      cat_red_bullet(
-        "File not added (needs a valid directory)"
-      )
-      return(FALSE)
-    }
+  if (!dir_created){
+    cat_red_bullet(
+      "File not added (needs a valid directory)"
+    )
+    return(invisible(FALSE))
   }
   
+  dir <- normalizePath(dir) 
+  
   where <- file.path(
-    pkg, dir, glue::glue("{name}.js")
+    dir, glue::glue("{name}.js")
   )
   
   if ( !check_file_exist(where) ) {
@@ -123,31 +115,30 @@ add_css_file <- function(
   name, 
   pkg = ".", 
   dir = "inst/app/www",
-  open = TRUE
+  open = TRUE, 
+  dir_create = TRUE
 ){
-  old <- setwd(normalizePath(pkg))
+  old <- setwd(normalizePath(pkg)) 
   on.exit(setwd(old))
   
-  dir <- file.path(pkg, dir)
+  dir_created <- create_dir_if_needed(
+    dir, 
+    dir_create
+  )
   
-  if (dir_not_exist(dir)){
-    if (
-      yesno::yesno(
-        sprintf("%s does not exists, create?", dir)
-      )
-    ) {
-      dir.create(dir, recursive = TRUE)
-    } else {
-      cat_red_bullet(
-        "File not added (needs a valid directory)"
-      )
-      return(FALSE)
-    }
+  if (!dir_created){
+    cat_red_bullet(
+      "File not added (needs a valid directory)"
+    )
+    return(invisible(FALSE))
   }
   
+  dir <- normalizePath(dir) 
+  
   where <- file.path(
-    pkg, dir, glue::glue("{name}.css")
+    dir, glue::glue("{name}.css")
   )
+  
   if ( !check_file_exist(where) ) {
     return(invisible(FALSE))
   } 

@@ -23,7 +23,7 @@ test_that("add_js_file", {
     add_js_file("script", open = FALSE)
     expect_true(file.exists("inst/app/www/script.js"))
     
-    add_js_file("script", open = FALSE, dir = fp)
+    add_js_file("script", open = FALSE, dir = normalizePath(fp))
     expect_true(
       file.exists(
         file.path(fp, "script.js")
@@ -41,7 +41,7 @@ test_that("add_js_handler", {
     add_js_handler("handler", open = FALSE)
     expect_true(file.exists("inst/app/www/handler.js"))
     
-    add_js_handler("handler", open = FALSE, dir = fp)
+    add_js_handler("handler", open = FALSE, dir = normalizePath(fp))
     expect_true(
       file.exists(
         file.path(fp, "handler.js")
