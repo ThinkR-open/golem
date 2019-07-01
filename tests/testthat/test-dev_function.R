@@ -42,8 +42,7 @@ test_that("test print_dev",{
 test_that("test browser_button",{
  
     output <- capture_output_lines(browser_button())
-    normal_text <- readLines("browser_button.txt")
-    expect_equal(output,normal_text)
+    expect_equal_to_reference(output,"browser_button.test")
 })
 
 test_that("test set_option",{
