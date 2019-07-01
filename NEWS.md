@@ -1,14 +1,40 @@
+# golem 0.0.1.9999 - CRAN release candidate
+
+## Changes in the way run_app and deploy files are build
+
++ There is now a unique framework for run_app, that allows to deploy anywhere and can accept arguments. These arguments can then be retrieved with `get_golem_options()`. #
+
+> See https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/
+
+## Breaking Changes
+
++ There is no need for `ui.R` and `server.R` to exist by default. Removed. Can be recreated with `add_ui_server_files()`
+
+## New function
+
++ There is now `add_shinyserver_file` & `add_shinyappsio_file`, #40
++ `add_ui_server_files()` creates an ui & server.R files.
+
+## Small functions updates 
+
++ Functions that create file(s) now automatically create folder if it's not there. Can be prevented with `dir_create = FALSE`
++ Functions that create file(s) can now be prevented from opening with `open = FALSE`, #75
++ We have explicited how to add external files (css & js) to the app, #78
++ Launch test is now included in the default tests #48
+
 # golem 0.0.1.6000+
 
 ## Changes 
 
-* `create_golem()` now switch to the new created project
+* `create_golem()` now switch to the newly created project
+* `use_git()` is not listed in `dev/01_start.R`
 
 ## Breaking changes 
 
 * Renamed `add_rconnect_file()` to `add_rstudioconnect_file()`
 * Renamed `create_shiny_template()` to `create_golem()`
 * Renamed `js()` to `activate_js()`
+* Renamed `use_recommended_dep()` to `use_recommended_deps()`
 
 ## New functions 
 
