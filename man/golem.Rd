@@ -6,7 +6,7 @@
 \alias{golem-package}
 \title{A package for building Shiny App}
 \description{
-Read more about building big shiny apps at [https://thinkr-open.github.io/building-shiny-apps-workflow/](https://thinkr-open.github.io/building-shiny-apps-workflow/).
+Read more about building big shiny apps at \url{https://thinkr-open.github.io/building-shiny-apps-workflow/}.
 }
 \seealso{
 Useful links:

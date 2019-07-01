@@ -18,7 +18,7 @@ a shiny.appObj object
 Add Golem options to a Shiny App
 }
 \note{
-You'll probably never have to write this function 
-as it is included in the golem template created on 
+You'll probably never have to write this function
+as it is included in the golem template created on
 launch.
 }

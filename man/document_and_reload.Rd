@@ -7,9 +7,9 @@
 document_and_reload(pkg = ".")
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is `"."`.}
+\item{pkg}{Path to the root of the package. Default is \code{"."}.}
 }
 \description{
-This function calls \code{rstudioapi::documentSaveAll()}, 
+This function calls \code{rstudioapi::documentSaveAll()},
 \code{roxygen2::roxygenise()} and \code{pkgload::load_all()}.
 }

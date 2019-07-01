@@ -24,20 +24,20 @@ add_dockerfile_heroku(input = "DESCRIPTION", output = "Dockerfile",
 \item{output}{name of the Dockerfile output.}
 
 \item{from}{The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
-with `R.Version()$major` and `R.Version()$minor`.}
+with \code{R.Version()$major} and \code{R.Version()$minor}.}
 
 \item{as}{The AS of the Dockerfile. Default it NULL.}
 
-\item{port}{The `options('shiny.port')` on which to run the Shiny App.
+\item{port}{The \code{options('shiny.port')} on which to run the Shiny App.
 Default is 80.}
 
-\item{host}{The `options('shiny.host')` on which to run the Shiny App.
+\item{host}{The \code{options('shiny.host')} on which to run the Shiny App.
 Default is 0.0.0.0.}
 }
 \description{
-Build a container containing your Shiny App. `add_dockerfile()` creates 
-a "generalistic" Dockerfile, while `add_dockerfile_shinyproxy()` and 
-`add_dockerfile_heroku()` creates plateform specific Dockerfile.
+Build a container containing your Shiny App. \code{add_dockerfile()} creates
+a "generalistic" Dockerfile, while \code{add_dockerfile_shinyproxy()} and
+\code{add_dockerfile_heroku()} creates plateform specific Dockerfile.
 }
 \examples{
 \dontrun{

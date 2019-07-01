@@ -10,11 +10,11 @@ use_utils_ui(pkg = ".")
 use_utils_server(pkg = ".")
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is `"."`.}
+\item{pkg}{Path to the root of the package. Default is \code{"."}.}
 }
 \description{
 \describe{
-  \item{use_utils_ui}{Copies the golem_utils_ui.R to the R folder.}
-  \item{use_utils_server}{Copies the golem_utils_server.R to the R folder.}
+\item{use_utils_ui}{Copies the golem_utils_ui.R to the R folder.}
+\item{use_utils_server}{Copies the golem_utils_server.R to the R folder.}
 }
 }

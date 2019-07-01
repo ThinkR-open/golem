@@ -10,6 +10,6 @@ make_dev(fun)
 \item{fun}{A function}
 }
 \description{
-The function returned will be run only if `golem::app_dev()`
-    returns TRUE.
+The function returned will be run only if \code{golem::app_dev()}
+returns TRUE.
 }

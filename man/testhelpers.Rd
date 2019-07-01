@@ -23,7 +23,7 @@ expect_html_equal(ui, html)
 A testthat result
 }
 \description{
-These functions are designed to be used inside the tests 
+These functions are designed to be used inside the tests
 in your Shiny app package.
 }
 \examples{

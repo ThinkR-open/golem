@@ -10,7 +10,7 @@ get_golem_options(which = NULL)
 \item{which}{NULL (default), or the name of an option}
 }
 \description{
-This function is to be used inside the 
-server and UI from your app, in order to call the 
+This function is to be used inside the
+server and UI from your app, in order to call the
 parameters passed to \code{run_app()}.
 }

@@ -15,14 +15,14 @@ favicon(ico = "www/favicon.ico", rel = "shortcut icon")
 \arguments{
 \item{path}{Path to your favicon file (.ico or .png)}
 
-\item{pkg}{Path to the root of the package. Default is `"."`}
+\item{pkg}{Path to the root of the package. Default is \code{"."}}
 
 \item{ico}{path to favicon file}
 
 \item{rel}{rel}
 }
 \description{
-This function adds the favicon from `ico` to your shiny app.
+This function adds the favicon from \code{ico} to your shiny app.
 }
 \examples{
 \dontrun{

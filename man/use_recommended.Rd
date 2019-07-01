@@ -11,13 +11,13 @@ use_recommended_deps(pkg = ".", recommended = c("shiny", "DT",
 use_recommended_tests(pkg = ".")
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is `"."`.}
+\item{pkg}{Path to the root of the package. Default is \code{"."}.}
 
 \item{recommended}{A vector of recommended packages.}
 }
 \description{
 \describe{
-  \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue`, `golem`, `htmltools` to dependencies}
-  \item{use_recommended_tests}{Adds a test folder and copy the golem tests}
+\item{use_recommended_dep}{Adds \code{shiny}, \code{DT}, \code{attempt}, \code{glue}, \code{golem}, \code{htmltools} to dependencies}
+\item{use_recommended_tests}{Adds a test folder and copy the golem tests}
 }
 }

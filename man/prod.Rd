@@ -10,7 +10,7 @@ app_prod()
 app_dev()
 }
 \value{
-`TRUE` or `FALSE` depending on the status of `getOption( "golem.app.prod")`
+\code{TRUE} or \code{FALSE} depending on the status of \code{getOption( "golem.app.prod")}
 }
 \description{
 Is the app in dev mode or prod mode?

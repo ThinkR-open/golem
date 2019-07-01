@@ -4,19 +4,21 @@
 \alias{add_module}
 \title{Create a module}
 \usage{
-add_module(name, pkg = ".", open = TRUE)
+add_module(name, pkg = ".", open = TRUE, dir_create = TRUE)
 }
 \arguments{
 \item{name}{The name of the module}
 
-\item{pkg}{Path to the root of the package. Default is `"."`.}
+\item{pkg}{Path to the root of the package. Default is \code{"."}.}
 
-\item{open}{Open the file}
+\item{open}{Should the file be opened?}
+
+\item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 }
 \description{
-This function creates a module inside the `R/` folder, based 
+This function creates a module inside the \code{R/} folder, based
 on a specific module structure.
 }
 \note{
-This function will prefix the `name` argument with `mod_`.
+This function will prefix the \code{name} argument with \code{mod_}.
 }
