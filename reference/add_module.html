@@ -31,7 +31,7 @@
 
 <meta property="og:title" content="Create a module — add_module" />
 
-<meta property="og:description" content="This function creates a module inside the `R/` folder, based 
+<meta property="og:description" content="This function creates a module inside the R/ folder, based
 on a specific module structure." />
 
 <meta property="og:image" content="/logo.png" />
@@ -85,7 +85,7 @@ on a specific module structure." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7050</span>
       </span>
     </div>
 
@@ -155,12 +155,12 @@ on a specific module structure." />
 
     <div class="ref-description">
     
-    <p>This function creates a module inside the `R/` folder, based 
+    <p>This function creates a module inside the <code>R/</code> folder, based
 on a specific module structure.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>add_module</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>add_module</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,17 +171,21 @@ on a specific module structure.</p>
     </tr>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is `"."`.</p></td>
+      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
     </tr>
     <tr>
       <th>open</th>
-      <td><p>Open the file</p></td>
+      <td><p>Should the file be opened?</p></td>
+    </tr>
+    <tr>
+      <th>dir_create</th>
+      <td><p>Creates the directory if it doesn't exist, default is <code>TRUE</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>This function will prefix the `name` argument with `mod_`.</p>
+    <p>This function will prefix the <code>name</code> argument with <code>mod_</code>.</p>
     
 
   </div>

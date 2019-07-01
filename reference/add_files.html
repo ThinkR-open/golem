@@ -31,7 +31,7 @@
 
 <meta property="og:title" content="Create a module — add_js_file" />
 
-<meta property="og:description" content="These functions create files inside the `inst/app/www` folder." />
+<meta property="og:description" content="These functions create files inside the inst/app/www folder." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -84,7 +84,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7050</span>
       </span>
     </div>
 
@@ -154,15 +154,18 @@
 
     <div class="ref-description">
     
-    <p>These functions create files inside the `inst/app/www` folder.</p>
+    <p>These functions create files inside the <code>inst/app/www</code> folder.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>add_js_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>add_js_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>add_js_handler</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>add_js_handler</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>add_css_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>add_css_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,7 +176,7 @@
     </tr>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is `"."`.</p></td>
+      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
     </tr>
     <tr>
       <th>dir</th>
@@ -181,7 +184,11 @@
     </tr>
     <tr>
       <th>open</th>
-      <td><p>Open the file</p></td>
+      <td><p>Should the file be opened?</p></td>
+    </tr>
+    <tr>
+      <th>dir_create</th>
+      <td><p>Creates the directory if it doesn't exist, default is <code>TRUE</code>.</p></td>
     </tr>
     </table>
     

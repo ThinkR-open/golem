@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7050</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@
       <h1>Using {golem} js functions</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2019-06-27</h4>
+            <h4 class="date">2019-07-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/d_js.Rmd"><code>vignettes/d_js.Rmd</code></a></small>
       <div class="hidden name"><code>d_js.Rmd</code></div>
@@ -131,25 +131,27 @@
 <h2 class="hasAnchor">
 <a href="#using-golem-js-functions" class="anchor"></a>Using <code>{golem}</code> js functions</h2>
 <p><code>{golem}</code> comes with a series of JavaScript functions that you can call from the server. These functions are added by default with <code><a href="../reference/golem_js.html">golem::activate_js()</a></code> in <code>app_ui</code>.</p>
-<p>Then they arer called with <code>session$sendCustomMessage("fonction", "ui_element")</code>.</p>
+<p>Then they are called with <code><a href="../reference/golem_js.html">golem::invoke_js("fonction", "ui_element")</a></code>.</p>
 <p>This <code>ui_element</code> define the UI element to interact with. It can be a full jQuery selector, an id or a class.</p>
-<div id="golemactivate_js" class="section level3">
+<p>Note that <code>invoke_js</code> can be used with any function defined in a <a href="">JavaScript Custom Handler</a></p>
+<div id="goleminvoke_js" class="section level3">
 <h3 class="hasAnchor">
-<a href="#golemactivate_js" class="anchor"></a><code><a href="../reference/golem_js.html">golem::activate_js()</a></code>
+<a href="#goleminvoke_js" class="anchor"></a><code><a href="../reference/golem_js.html">golem::invoke_js()</a></code>
 </h3>
 <ul>
 <li>
 <code>showid</code> &amp; <code>hideid</code>, <code>showclass</code> &amp; <code>hideclass</code> show and hide elements through their id or class.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">session<span class="op">$</span><span class="kw">sendCustomMessage</span>(<span class="st">"showid"</span>, <span class="kw">ns</span>(<span class="st">"plot"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/golem_js">invoke_js</a></span>(<span class="st">"showid"</span>, <span class="kw">ns</span>(<span class="st">"plot"</span>))</a></code></pre></div>
 <ul>
 <li>
 <code>showhref</code> &amp; <code>hidehref</code> hide and show a link by trying to match the <code>href</code> content.</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">session<span class="op">$</span><span class="kw">sendCustomMessage</span>(<span class="st">"showhref"</span>, <span class="st">"panel2"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/golem_js">invoke_js</a></span>(<span class="st">"showhref"</span>, <span class="st">"panel2"</span>)</a></code></pre></div>
 <ul>
 <li><p><code>clickon</code> click on the element. You have to use the full jQuery selector.</p></li>
 <li><p><code>show</code> &amp; <code>hide</code> show and hide elements, using the full jQuery selector.</p></li>
+<li><p><code>disable</code> &amp; <code>reable</code> able and disable specific element, using the full jQuery selector.</p></li>
 </ul>
 </div>
 <div id="about-jquery-selectors" class="section level3">

@@ -31,9 +31,9 @@
 
 <meta property="og:title" content="Create a Dockerfile for  Shiny App — add_dockerfile" />
 
-<meta property="og:description" content="Build a container containing your Shiny App. `add_dockerfile()` creates 
-a &quot;generalistic&quot; Dockerfile, while `add_dockerfile_shinyproxy()` and 
-`add_dockerfile_heroku()` creates plateform specific Dockerfile." />
+<meta property="og:description" content="Build a container containing your Shiny App. add_dockerfile() creates
+a &quot;generalistic&quot; Dockerfile, while add_dockerfile_shinyproxy() and
+add_dockerfile_heroku() creates plateform specific Dockerfile." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -86,7 +86,7 @@ a &quot;generalistic&quot; Dockerfile, while `add_dockerfile_shinyproxy()` and
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7050</span>
       </span>
     </div>
 
@@ -156,9 +156,9 @@ a &quot;generalistic&quot; Dockerfile, while `add_dockerfile_shinyproxy()` and
 
     <div class="ref-description">
     
-    <p>Build a container containing your Shiny App. `add_dockerfile()` creates 
-a "generalistic" Dockerfile, while `add_dockerfile_shinyproxy()` and 
-`add_dockerfile_heroku()` creates plateform specific Dockerfile.</p>
+    <p>Build a container containing your Shiny App. <code>add_dockerfile()</code> creates
+a "generalistic" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
+<code>add_dockerfile_heroku()</code> creates plateform specific Dockerfile.</p>
     
     </div>
 
@@ -188,7 +188,7 @@ a "generalistic" Dockerfile, while `add_dockerfile_shinyproxy()` and
     <tr>
       <th>from</th>
       <td><p>The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
-with `R.Version()$major` and `R.Version()$minor`.</p></td>
+with <code>R.Version()$major</code> and <code>R.Version()$minor</code>.</p></td>
     </tr>
     <tr>
       <th>as</th>
@@ -196,12 +196,12 @@ with `R.Version()$major` and `R.Version()$minor`.</p></td>
     </tr>
     <tr>
       <th>port</th>
-      <td><p>The `options('shiny.port')` on which to run the Shiny App.
+      <td><p>The <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('shiny.port')</a></code> on which to run the Shiny App.
 Default is 80.</p></td>
     </tr>
     <tr>
       <th>host</th>
-      <td><p>The `options('shiny.host')` on which to run the Shiny App.
+      <td><p>The <code><a href='https://www.rdocumentation.org/packages/base/topics/options'>options('shiny.host')</a></code> on which to run the Shiny App.
 Default is 0.0.0.0.</p></td>
     </tr>
     </table>

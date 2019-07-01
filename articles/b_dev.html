@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7050</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@
       <h1>Day to Day Dev with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2019-06-27</h4>
+            <h4 class="date">2019-07-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/b_dev.Rmd"><code>vignettes/b_dev.Rmd</code></a></small>
       <div class="hidden name"><code>b_dev.Rmd</code></div>
@@ -132,11 +132,7 @@
 <a href="#day-to-day-development-with-golem" class="anchor"></a>Day to day development with <code>{golem}</code>
 </h2>
 <p>Now that you’re all set with your project init, time to move to development :)</p>
-<p>App development should happen through the <code>dev/02_dev.R</code> file, which contains common commands for developping.</p>
-</div>
-<div id="launching-the-app" class="section level2">
-<h2 class="hasAnchor">
-<a href="#launching-the-app" class="anchor"></a>Launching the app</h2>
+<p>App development should happen through the <code>dev/02_dev.R</code> file, which contains common commands for developping. ## Launching the app</p>
 <p>To run the app, go to the <code>dev/run_dev.R</code> file, and run the all thing.</p>
 </div>
 <div id="dev02_dev-r" class="section level2">
@@ -147,7 +143,7 @@
 <h3 class="hasAnchor">
 <a href="#add-modules" class="anchor"></a>Add modules</h3>
 <p>The <code><a href="../reference/add_module.html">golem::add_module()</a></code> functions creates a module in the <code>R</code> folder. The file and the modules will be named after the <code>name</code> parameter, by adding <code>mod_</code> to the R file, and <code>mod_*_ui</code> and <code>mod_*_server</code> to the UI and server functions.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/add_module">add_module</a></span>(<span class="dt">name =</span> <span class="st">"my_first_module"</span>) <span class="co"># Name of the module</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/add_module">add_module</a></span>( <span class="dt">name =</span> <span class="st">"my_first_module"</span> ) <span class="co"># Name of the module</span></a></code></pre></div>
 <p>The new file will contain:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># mod_UI</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">mod_my_first_module_ui &lt;-<span class="st"> </span><span class="cf">function</span>(id){</a>
@@ -178,7 +174,7 @@
 <h3 class="hasAnchor">
 <a href="#add-tests" class="anchor"></a>Add tests</h3>
 <p>Add more tests to your application:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_testthat.html">use_test</a></span>(<span class="st">"app"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_testthat.html">use_test</a></span>( <span class="st">"app"</span> )</a></code></pre></div>
 </div>
 <div id="add-a-browser-button" class="section level3">
 <h3 class="hasAnchor">
@@ -201,9 +197,11 @@
 <p>You can add any external resource (JS, css) into <code>inst/app/www</code>.</p>
 <p>Then, You’ll need to point to these external resources in <code>golem_add_external_resources()</code>. For example, if you’ve created a CSS file with <code><a href="../reference/add_files.html">golem::add_css_file("custom")</a></code>, you can add the file with:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tags<span class="op">$</span><span class="kw">link</span>(<span class="dt">rel=</span><span class="st">"stylesheet"</span>, <span class="dt">type=</span><span class="st">"text/css"</span>, <span class="dt">href=</span><span class="st">"www/custom.css"</span>)</a></code></pre></div>
-<p>Also, you can list here the use of other packages, for example <code>useShinyalert()</code> from the <code>{shinyalert}</code> package.</p>
+<p>Put these links into <code>R/app_ui.R</code>, in the <code>golem_add_external_resources()</code> function.</p>
+<p>You can also list here the use of other packages, for example <code>useShinyalert()</code> from the <code>{shinyalert}</code> package.</p>
+<blockquote>
 <p>Note: we’ve chosen to leave it “raw”, in the sense that there is a <code>addResourcePath</code> and a <code>tags$head</code>. If you’re comfortable with <code>{htmltools}</code>, you can build a <code><a href="https://www.rdocumentation.org/packages/htmltools/topics/htmlDependency">htmltools::htmlDependency</a></code>.</p>
-<p>Once these elements</p>
+</blockquote>
 </div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
@@ -247,7 +245,6 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#day-to-day-development-with-golem">Day to day development with <code>{golem}</code></a></li>
-      <li><a href="#launching-the-app">Launching the app</a></li>
       <li><a href="#dev02_dev-r"><code>dev/02_dev.R</code></a></li>
       <li><a href="#adding-these-external-resources-to-your-app">Adding these external resources to your app</a></li>
       <li><a href="#documentation">Documentation</a></li>

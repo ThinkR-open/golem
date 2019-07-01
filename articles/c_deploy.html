@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7050</span>
       </span>
     </div>
 
@@ -118,7 +118,7 @@
       <h1>Deploying Apps with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2019-06-27</h4>
+            <h4 class="date">2019-07-01</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/c_deploy.Rmd"><code>vignettes/c_deploy.Rmd</code></a></small>
       <div class="hidden name"><code>c_deploy.Rmd</code></div>
@@ -127,27 +127,46 @@
 
     
     
+<div id="about-the-run_app-function" class="section level2">
+<h2 class="hasAnchor">
+<a href="#about-the-run_app-function" class="anchor"></a>About the <code>run_app()</code> function</h2>
+<p>When launching the app, you might have noticed that the <code>dev/run_dev.R</code> function calls <code>run_app()</code>, which has the following structure:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">run_app &lt;-<span class="st"> </span><span class="cf">function</span>(...) {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw"><a href="../reference/with_golem_options.html">with_golem_options</a></span>(</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="dt">app =</span> <span class="kw">shinyApp</span>(<span class="dt">ui =</span> <span class="kw">app_ui</span>(), <span class="dt">server =</span> app_server), </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="dt">golem_opts =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(...)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  )</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">}</a></code></pre></div>
+<p>This function might looks a little bit weird, but there’s a long story behing it, and you can read more about it <a href="">there</a>.</p>
+<p>But long story short, this combination of <code>with_golem_options</code> &amp; <code>golem_opts = list(...)</code> allows you to pass argument to the function to be used inside the application, from UI or from server side, which you can get with <code><a href="../reference/get_golem_options.html">get_golem_options()</a></code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">run_app</span>(<span class="dt">this =</span> <span class="st">"that"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># And in the app </span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">this &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_golem_options.html">get_golem_options</a></span>(<span class="st">"this"</span>)</a></code></pre></div>
+<p>The idea is to provide more flexibility for deployment on each platform you want to run your app on.</p>
+</div>
 <div id="deploying-apps-with-golem" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deploying-apps-with-golem" class="anchor"></a>Deploying Apps with <code>{golem}</code>
 </h2>
 <p>The <code>dev/03_deploy.R</code> file contains function for deploying on various plateforms.</p>
-<div id="rstudio-connect" class="section level3">
+<div id="rstudio-products" class="section level3">
 <h3 class="hasAnchor">
-<a href="#rstudio-connect" class="anchor"></a>RStudio Connect</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/rstudio_deploy">add_rstudioconnect_file</a></span>()</a></code></pre></div>
+<a href="#rstudio-products" class="anchor"></a>RStudio Products</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/rstudio_deploy">add_rstudioconnect_file</a></span>()</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/rstudio_deploy">add_shinyappsio_file</a></span>()</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/rstudio_deploy">add_shinyserver_file</a></span>()</a></code></pre></div>
 </div>
 <div id="docker" class="section level3">
 <h3 class="hasAnchor">
 <a href="#docker" class="anchor"></a>Docker</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># If you want to deploy via a generic Dockerfile</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/dockerfiles">add_dockerfile</a></span>()</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># If you want to deploy to ShinyProxy</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">golem<span class="op">::</span><span class="kw">add_shinyproxy_dockerfile</span>()</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># If you want to deploy to Heroku</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">golem<span class="op">::</span><span class="kw">add_heroku_dockerfile</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># If you want to deploy via a generic Dockerfile</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/dockerfiles">add_dockerfile</a></span>()</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># If you want to deploy to ShinyProxy</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">golem<span class="op">::</span><span class="kw">add_shinyproxy_dockerfile</span>()</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># If you want to deploy to Heroku</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">golem<span class="op">::</span><span class="kw">add_heroku_dockerfile</span>()</a></code></pre></div>
 </div>
 </div>
   </div>
@@ -157,7 +176,8 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#deploying-apps-with-golem">Deploying Apps with <code>{golem}</code></a></li>
+<li><a href="#about-the-run_app-function">About the <code>run_app()</code> function</a></li>
+      <li><a href="#deploying-apps-with-golem">Deploying Apps with <code>{golem}</code></a></li>
       </ul>
 </div>
       </div>
