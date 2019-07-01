@@ -127,7 +127,7 @@
 <div id="golem" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#golem" class="anchor"></a>{golem}</h1></div>
-<p>{golem} is a package that provides tools for a better workflow for working on shinyapps.</p>
+<p><code>{golem}</code> is an opiniated framework for building production-grade shiny applications.</p>
 <div id="tool-series" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tool-series" class="anchor"></a>Tool series</h2>
@@ -147,9 +147,9 @@
 </li>
 </ul>
 </div>
-<div id="know-more" class="section level2">
+<div id="resources" class="section level2">
 <h2 class="hasAnchor">
-<a href="#know-more" class="anchor"></a>Know more</h2>
+<a href="#resources" class="anchor"></a>Resources</h2>
 <div id="the-book" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-book" class="anchor"></a>The Book :</h3>
@@ -157,9 +157,10 @@
 <li><a href="https://thinkr-open.github.io/building-shiny-apps-workflow/" class="uri">https://thinkr-open.github.io/building-shiny-apps-workflow/</a></li>
 </ul>
 </div>
-<div id="building-big-shiny-apps" class="section level3">
+<div id="blog-posts" class="section level3">
 <h3 class="hasAnchor">
-<a href="#building-big-shiny-apps" class="anchor"></a>Building big Shiny Apps :</h3>
+<a href="#blog-posts" class="anchor"></a>Blog posts :</h3>
+<p><em>Building Big Shiny Apps</em></p>
 <ul>
 <li>Part 1: <a href="https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/" class="uri">https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/</a>
 </li>
@@ -167,10 +168,19 @@
 </li>
 </ul>
 </div>
-<div id="blog-post" class="section level3">
+<div id="slide-decks" class="section level3">
 <h3 class="hasAnchor">
-<a href="#blog-post" class="anchor"></a>Blog post :</h3>
-<p><a href="https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app" class="uri">https://rtask.thinkr.fr/blog/our-shiny-template-to-design-a-prod-ready-app</a></p>
+<a href="#slide-decks" class="anchor"></a>Slide decks</h3>
+<ul>
+<li><a href="https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem">Production-grade Shiny Apps with {golem}</a></li>
+</ul>
+</div>
+<div id="video" class="section level3">
+<h3 class="hasAnchor">
+<a href="#video" class="anchor"></a>Video</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=OU1-CkSVdTI">{golem} and Effective Shiny Development Methods</a></li>
+</ul>
 </div>
 </div>
 <div id="installation" class="section level2">
@@ -191,151 +201,21 @@
 <a href="#step-by-step-guide" class="anchor"></a>Step by step guide</h2>
 <p>See full documentation in the {pkgdown} website: <a href="https://thinkr-open.github.io/golem/index.html" class="uri">https://thinkr-open.github.io/golem/index.html</a></p>
 <p>After project creation, you’ll land on <code>dev/01_start.R</code>. There are also <code>dev/02_dev.R</code> and <code>dev/03_deploy.R</code></p>
-<p>These files arer used to keep a track of all the steps you’ve followed to build your app.</p>
-<p>You can follow them step by step of skip some if you’d like.</p>
-<div id="fill-the-description" class="section level3">
+<p>These files are used to keep a track of all the steps you’ll be following while building your app.</p>
+<div id="step-1-getting-started" class="section level3">
 <h3 class="hasAnchor">
-<a href="#fill-the-description" class="anchor"></a>Fill the description</h3>
-<p><code><a href="reference/fill_desc.html">golem::fill_desc()</a></code> allows to fill the DESCRIPTION quickly.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/fill_desc">fill_desc</a></span>(</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="dt">pkg_name =</span> , <span class="co"># The Name of the package containing the App </span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">pkg_title =</span> , <span class="co"># The Title of the package containing the App </span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="dt">pkg_description =</span> , <span class="co"># The Description of the package containing the App </span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="dt">author_first_name =</span> , <span class="co"># Your First Name</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="dt">author_last_name =</span> , <span class="co"># Your Last Name</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="dt">author_email =</span> , <span class="co"># Your Email</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">  <span class="dt">repo_url =</span> <span class="ot">NULL</span>) <span class="co"># The (optional) URL of the GitHub Repo</span></a></code></pre></div>
+<a href="#step-1-getting-started" class="anchor"></a>Step 1 : Getting Started</h3>
+<p>Read <a href="https://thinkr-open.github.io/golem/articles/a_start.html">the Getting Started</a> Vignette for a detailed walkthrough.</p>
 </div>
-<div id="set-common-files" class="section level3">
+<div id="step-2-day-to-day-dev" class="section level3">
 <h3 class="hasAnchor">
-<a href="#set-common-files" class="anchor"></a>Set common Files</h3>
-<p>Call the {usethis} package to set a list of elements:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/licenses.html">use_mit_license</a></span>(<span class="dt">name =</span> <span class="st">"Your Name"</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_readme_rmd.html">use_readme_rmd</a></span>()</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_code_of_conduct.html">use_code_of_conduct</a></span>()</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/badges.html">use_lifecycle_badge</a></span>(<span class="st">"Experimental"</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_news_md.html">use_news_md</a></span>()</a></code></pre></div>
-<p>If you have data in your app:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data_raw</a></span>()</a></code></pre></div>
+<a href="#step-2-day-to-day-dev" class="anchor"></a>Step 2 : Day to Day Dev</h3>
+<p>Read <a href="https://thinkr-open.github.io/golem/articles/b_dev.html">Day to Day Dev</a> Vignette for a detailed walkthrough.</p>
 </div>
-<div id="use-recommended-package" class="section level3">
+<div id="step-3-deploy" class="section level3">
 <h3 class="hasAnchor">
-<a href="#use-recommended-package" class="anchor"></a>Use Recommended Package</h3>
-<p>This adds a series of packages as dependecies to your app. See <code><a href="reference/use_recommended.html">?golem::use_recommended_deps</a></code> for the list.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/use_recommended">use_recommended_deps</a></span>(<span class="dt">recommended =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"shiny"</span>,<span class="st">"DT"</span>,<span class="st">"attempt"</span>,<span class="st">"glue"</span>,<span class="st">"htmltools"</span>,<span class="st">"golem"</span>))</a></code></pre></div>
-</div>
-<div id="add-various-tools" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-various-tools" class="anchor"></a>Add various tools</h3>
-<p>These two functions adds one file each which contain a series of functions that can be useful for building your app. To be used in the UI, in the server, or as prod-dependent tools.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_ui</a></span>()</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_server</a></span>()</a></code></pre></div>
-<p>Somes JS functions can also be used inside your shiny app with:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/golem_js">activate_js</a></span>()</a></code></pre></div>
-<p>See <code>?golem::activite_js</code> for the list.</p>
-</div>
-<div id="add-a-browser-button" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-a-browser-button" class="anchor"></a>Add a browser button</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/browser_button">browser_button</a></span>()</a></code></pre></div>
-<p>See <a href="https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/">A little trick for debugging Shiny</a> for more info about this method.</p>
-</div>
-<div id="create-modules" class="section level3">
-<h3 class="hasAnchor">
-<a href="#create-modules" class="anchor"></a>Create modules</h3>
-<p>This function takes a name xxx and creates a module called <code>mod_xxx.R</code> in the R folder.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/add_module">add_module</a></span>(<span class="dt">name =</span> <span class="st">"this"</span>)</a></code></pre></div>
-<p>The new file will contain:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># mod_UI</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">mod_this_ui &lt;-<span class="st"> </span><span class="cf">function</span>(id){</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">  ns &lt;-<span class="st"> </span><span class="kw">NS</span>(id)</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">  <span class="kw">tagList</span>(</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9">mod_this_server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session){</a>
-<a class="sourceLine" id="cb10-10" data-line-number="10">  ns &lt;-<span class="st"> </span>session<span class="op">$</span>ns</a>
-<a class="sourceLine" id="cb10-11" data-line-number="11">}</a>
-<a class="sourceLine" id="cb10-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb10-13" data-line-number="13">## To be copied in the UI</a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co"># mod_this_ui("this1")</span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15">    </a>
-<a class="sourceLine" id="cb10-16" data-line-number="16">## To be copied in the server</a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co"># callModule(mod_this_server, "this1")</span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"> </a></code></pre></div>
-</div>
-<div id="add-or-change-favicon" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-or-change-favicon" class="anchor"></a>Add or change favicon</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/favicon">use_favicon</a></span>()</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/favicon">use_favicon</a></span>(<span class="dt">path =</span> <span class="st">"path/to/your/favicon.ico"</span>)</a></code></pre></div>
-</div>
-<div id="add-tests" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-tests" class="anchor"></a>Add tests</h3>
-<p>Adds the recommended tests for a shiny app.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/use_recommended">use_recommended_tests</a></span>()</a></code></pre></div>
-</div>
-<div id="app_prod" class="section level3">
-<h3 class="hasAnchor">
-<a href="#app_prod" class="anchor"></a>app_prod</h3>
-<p>There’s a series of tools to make your app behave differently whether it’s in dev or prod mode. Notably, the <code><a href="reference/prod.html">app_prod()</a></code> and <code><a href="reference/prod.html">app_dev()</a></code> function tests for <code><a href="https://www.rdocumentation.org/packages/base/topics/options">options( "golem.app.prod")</a></code> (or return TRUE if this option doesn’t exist).</p>
-<p>Setting this options at the beginning of your dev process allows to make your app behave in a specific way when you are in dev mode. For example, printing message to the console with <code><a href="reference/made_dev.html">cat_dev()</a></code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/made_dev">cat_dev</a></span>(<span class="st">"hey</span><span class="ch">\n</span><span class="st">"</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/made_dev">cat_dev</a></span>(<span class="st">"hey</span><span class="ch">\n</span><span class="st">"</span>)</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; hey</span></a></code></pre></div>
-<p>You can then make any function being “dev-dependant” with the <code><a href="reference/make_dev.html">make_dev()</a></code> function:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">log_dev &lt;-<span class="st"> </span>golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/make_dev">make_dev</a></span>(log)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">log_dev</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt; [1] 2.302585</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw">log_dev</span>(<span class="dv">10</span>)</a></code></pre></div>
-</div>
-</div>
-<div id="quick-reload-and-show-application" class="section level2">
-<h2 class="hasAnchor">
-<a href="#quick-reload-and-show-application" class="anchor"></a>Quick reload and show application</h2>
-<p><em>see the <code>run_dev.R</code> file in the dev directory</em></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co"># Detach all loaded packages and clean your environment</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/detach_all_attached">detach_all_attached</a></span>()</a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co"># rm(list=ls(all.names = TRUE))</span></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co"># Document and reload your package</span></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/document_and_reload">document_and_reload</a></span>()</a>
-<a class="sourceLine" id="cb15-8" data-line-number="8">mypkg<span class="op">::</span><span class="kw">run_app</span>()</a></code></pre></div>
-</div>
-<div id="deployment-tools" class="section level2">
-<h2 class="hasAnchor">
-<a href="#deployment-tools" class="anchor"></a>Deployment tools</h2>
-<div id="direct" class="section level3">
-<h3 class="hasAnchor">
-<a href="#direct" class="anchor"></a>direct</h3>
-<p>Once the package (<em>e.g.</em> mypkg) is installed, the application can be launch with the following command.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">mypkg<span class="op">::</span><span class="kw">run_app</span>()</a></code></pre></div>
-<p>Or by running the <code>dev/run_dev.R</code> file.</p>
-</div>
-<div id="rstudio-products" class="section level3">
-<h3 class="hasAnchor">
-<a href="#rstudio-products" class="anchor"></a>Rstudio products</h3>
-<div id="rstudio-connect" class="section level4">
-<h4 class="hasAnchor">
-<a href="#rstudio-connect" class="anchor"></a>Rstudio Connect</h4>
-<p>This creates a simple file at the root of the package, to be used to deploy to RStudio Connect.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/rstudio_deploy">add_rstudioconnect_file</a></span>()</a></code></pre></div>
-</div>
-</div>
-<div id="docker" class="section level3">
-<h3 class="hasAnchor">
-<a href="#docker" class="anchor"></a>Docker</h3>
-<p>You can create an “agnostic” Dockerfile with:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/dockerfiles">add_dockerfile</a></span>()</a></code></pre></div>
-<p>If you’re more interested in plateform specific Dockerfile, you can use:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/dockerfiles">add_dockerfile_shinyproxy</a></span>()</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/dockerfiles">add_dockerfile_heroku</a></span>()</a></code></pre></div>
+<a href="#step-3-deploy" class="anchor"></a>Step 3: deploy</h3>
+<p>Read <a href="https://thinkr-open.github.io/golem/articles/c_deploy.html">Deploying Apps with {golem}</a> Vignette for a detailed walkthrough.</p>
 </div>
 </div>
 <div id="coc" class="section level2">
