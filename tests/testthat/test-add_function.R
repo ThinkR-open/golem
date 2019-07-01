@@ -53,3 +53,27 @@ test_that("add_js_handler", {
                  "js")
   })
 })
+
+test_that("add_js_handler", {
+  with_dir(pkg, {
+    add_ui_server_files()
+    expect_true(file.exists("inst/app/ui.R"))    
+    expect_true(file.exists("inst/app/server.R"))    
+    
+    add_ui_server_files(dir = normalizePath(fp))
+    expect_true(
+      file.exists(
+        file.path(fp, "ui.R")
+      )
+    )
+    expect_true(
+      file.exists(
+        file.path(fp, "server.R")
+      )
+    )
+    script <- list.files("inst/app/", pattern = "ui")
+    expect_equal(tools::file_ext(script), "R")
+    script <- list.files("inst/app/", pattern = "server")
+    expect_equal(tools::file_ext(script), "R")
+  })
+})
