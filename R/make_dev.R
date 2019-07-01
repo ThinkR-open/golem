@@ -36,8 +36,10 @@ app_dev <- function(){
   !golem::app_prod()
 }
 
-#' Functions already made dev devependant
-#'
+#' Functions already made dev dependant
+#' 
+#' This functions will be run only if `golem::app_dev()`
+#'     returns TRUE.
 #' @rdname made_dev
 #' @inheritParams base::cat
 #' @export 
