@@ -7,7 +7,8 @@
 \alias{add_shinyserver_file}
 \title{Add an app.R at the root of your package to deploy on RStudio Connect}
 \usage{
-add_rstudioconnect_file(pkg = ".", open = TRUE)
+add_rstudioconnect_file(pkg = ".", open = TRUE,
+  service = c("RStudio Connect", "Shiny Server", "ShinyApps.io"))
 
 add_shinyappsio_file(pkg = ".", open = TRUE)
 
