@@ -35,8 +35,8 @@ add_rstudioconnect_file <- function(
     sprintf(
       "%s::run_app() # add parameters here (if any)", 
       getOption("golem.app.name", pkgload::pkg_name())
-      )
     )
+  )
   usethis::use_build_ignore(where)
   usethis::use_package("pkgload")
   cat_green_tick(glue("File created at {where}"))
