@@ -102,7 +102,7 @@ add_js_handler <- function(
   write_there("$( document ).ready(function() {")
   write_there("  Shiny.addCustomMessageHandler('fun', function(arg) {")
   write_there("  ")
-  write_there("  }")
+  write_there("  })")
   write_there("});")
   
   cat_green_tick(glue::glue("File created at {where}"))
