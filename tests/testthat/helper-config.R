@@ -2,10 +2,7 @@
 library(withr)
 
 remove_file <- function(path){
-  ok <- file.exists(path)
-  if (ok) {
-    file.remove(path)
-  }
+  if (file.exists(path)) file.remove(path)
 }
 
 ## fake package
@@ -15,4 +12,9 @@ if(!dir.exists(file.path(tpdir,fakename))){
   create_golem(file.path(tpdir, fakename), open = FALSE)
 }
 pkg <- file.path(tpdir, fakename)
+
+## random dir
+randir <- paste0(sample(letters, 10, TRUE), collapse = "")
+fp <- file.path("inst/app", randir)
+dir.create(file.path(pkg, fp), recursive = TRUE)
 

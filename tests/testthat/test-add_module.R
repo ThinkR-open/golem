@@ -13,7 +13,7 @@ test_that("add_module", {
     if (ok) {
       file.remove("R/mod_output.R")
     }
-    output <- testthat::capture_output(add_module("output"))
+    output <- testthat::capture_output(add_module("output", open = FALSE))
     test <-
       stringr::str_detect(output, "File created at R/mod_output.R")
     expect_true(test)

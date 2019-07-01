@@ -5,8 +5,8 @@ test_that("test use_favicon",{
     use_favicon()
     expect_true(file.exists("inst/app/www/favicon.ico"))
     purrr::map(c("test.jpeg","test.bmp","test.gif","test.tiff"),~ expect_error(use_favicon(path = .x)))
-    # download.file("https://upload.wikimedia.org/wikipedia/commons/9/92/The_death.png","img.png")
-    # golem::use_favicon("img.png")
+    golem::remove_favicon()
+    expect_false(file.exists("inst/app/www/favicon.ico"))
     })
   })
 
