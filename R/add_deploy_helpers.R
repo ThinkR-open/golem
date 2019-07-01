@@ -29,7 +29,12 @@ add_rstudioconnect_file <- function(
   write_there("")
   write_there("pkgload::load_all()")
   write_there("options( \"golem.app.prod\" = TRUE)")
-  write_there("run_app() # add parameters here (if any)")
+  write_there(
+    sprintf(
+      "%s::run_app() # add parameters here (if any)", 
+      getOption("golem.app.name", pkgload::pkg_name())
+    )
+  )
   usethis::use_build_ignore(where)
   usethis::use_package("pkgload")
   cat_green_tick(glue("File created at {where}"))
