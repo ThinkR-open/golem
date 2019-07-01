@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.7050</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9999</span>
       </span>
     </div>
 
@@ -149,6 +149,48 @@
       <small>Source: <a href='https://github.com/ThinkR-open/golem/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="golem-0-0-1-9999---cran-release-candidate" class="section level1">
+<h1 class="page-header">
+<a href="#golem-0-0-1-9999---cran-release-candidate" class="anchor"></a>golem 0.0.1.9999 - CRAN release candidate</h1>
+<div id="changes-in-the-way-run_app-and-deploy-files-are-build" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-the-way-run_app-and-deploy-files-are-build" class="anchor"></a>Changes in the way run_app and deploy files are build</h2>
+<ul>
+<li>There is now a unique framework for run_app, that allows to deploy anywhere and can accept arguments. These arguments can then be retrieved with <code><a href="../reference/get_golem_options.html">get_golem_options()</a></code>. #</li>
+</ul>
+<blockquote>
+<p>See <a href="https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/" class="uri">https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/</a></p>
+</blockquote>
+</div>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h2>
+<ul>
+<li>There is no need for <code>ui.R</code> and <code>server.R</code> to exist by default. Removed. Can be recreated with <code><a href="../reference/add_files.html">add_ui_server_files()</a></code>
+</li>
+</ul>
+</div>
+<div id="new-function" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-function" class="anchor"></a>New function</h2>
+<ul>
+<li>There is now <code>add_shinyserver_file</code> &amp; <code>add_shinyappsio_file</code>, <a href='https://github.com/ThinkR-open/golem/issues/40'>#40</a></li>
+<li>
+<code><a href="../reference/add_files.html">add_ui_server_files()</a></code> creates an ui &amp; server.R files.</li>
+</ul>
+</div>
+<div id="small-functions-updates" class="section level2">
+<h2 class="hasAnchor">
+<a href="#small-functions-updates" class="anchor"></a>Small functions updates</h2>
+<ul>
+<li>Functions that create file(s) now automatically create folder if it’s not there. Can be prevented with <code>dir_create = FALSE</code>
+</li>
+<li>Functions that create file(s) can now be prevented from opening with <code>open = FALSE</code>, <a href='https://github.com/ThinkR-open/golem/issues/75'>#75</a></li>
+<li>We have explicited how to add external files (css &amp; js) to the app, <a href='https://github.com/ThinkR-open/golem/issues/78'>#78</a></li>
+<li>Launch test is now included in the default tests <a href='https://github.com/ThinkR-open/golem/issues/48'>#48</a></li>
+</ul>
+</div>
+</div>
     <div id="golem-0-0-1-6000" class="section level1">
 <h1 class="page-header">
 <a href="#golem-0-0-1-6000" class="anchor"></a>golem 0.0.1.6000+</h1>
@@ -157,18 +199,23 @@
 <a href="#changes" class="anchor"></a>Changes</h2>
 <ul>
 <li>
-<code><a href="../reference/create_golem.html">create_golem()</a></code> now switch to the new created project</li>
+<code><a href="../reference/create_golem.html">create_golem()</a></code> now switch to the newly created project</li>
+<li>
+<code>use_git()</code> is not listed in <code>dev/01_start.R</code>
+</li>
 </ul>
 </div>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Renamed <code><a href="../reference/rstudio_deploy.html">add_rconnect_file()</a></code> to <code><a href="../reference/rstudio_deploy.html">add_rstudioconnect_file()</a></code>
 </li>
 <li>Renamed <code>create_shiny_template()</code> to <code><a href="../reference/create_golem.html">create_golem()</a></code>
 </li>
 <li>Renamed <code>js()</code> to <code><a href="../reference/golem_js.html">activate_js()</a></code>
+</li>
+<li>Renamed <code>use_recommended_dep()</code> to <code><a href="../reference/use_recommended.html">use_recommended_deps()</a></code>
 </li>
 </ul>
 </div>
@@ -243,6 +290,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#golem-0-0-1-9999---cran-release-candidate">0.0.1.9999</a></li>
         <li><a href="#golem-0-0-1-6000">0.0.1.6000</a></li>
         <li><a href="#golem-0-0-1-5000">0.0.1.5000</a></li>
         <li><a href="#golem-0-0-1-0002">0.0.1.0002</a></li>
