@@ -10,6 +10,29 @@ darkgrey <- function(x) {
 dir_not_exist <- Negate(dir.exists)
 file_not_exist <- Negate(file.exists)
 
+create_dir_if_needed <- function(
+  path, 
+  auto_create
+){
+  # TRUE if path doesn't exist
+  dir_not_there <- dir_not_exist(path) 
+  go_create <- TRUE
+  # If not exists, maybe create it
+  if (dir_not_there){
+    # Auto create if needed
+    if (auto_create){
+      go_create <- TRUE
+    } else {
+      # Ask for creation
+      go_create <- yesno::yesno(sprintf("The %s does not exists, create?", path))
+    }
+    # Will create if autocreate or if yes to interactive
+    if (go_create) dir.create(path, recursive = TRUE)
+  }
+  
+  return(go_create)
+}
+
 check_file_exist <- function(file){
   res <- TRUE
   if (file.exists(file)){
