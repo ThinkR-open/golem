@@ -42,17 +42,21 @@ test_that("test print_dev",{
 test_that("test browser_button",{
  
     output <- capture_output_lines(browser_button())
-    # normal_text <- readLines("browser_button.txt")
-    # normal_text <- c("-- To be copied in your UI -----------------------------------------------------", 
-    #                  "actionButton(\"browser\", \"browser\"),", "tags$script(\"$('#browser').hide();\")", 
-    #                  "", "-- To be copied in your server -------------------------------------------------", 
-    #                  "observeEvent(input$browser,{", "  browser()", "})", "", "By default, this button will be hidden.", 
-    #                  "To show it, open your web browser JavaScript console", "And run $('#browser').show();"
-    # )
-    # normal_text <- readRDS("browser_button.RDS")
-    # expect_equal(output,normal_text)
-    
-    expect_equal_to_reference(output,"browser_button.test")
+    expect_true(
+      grepl('actionButton\\("browser", "browser"\\)', output[2])
+    )
+    expect_true(
+      grepl('tags\\$script\\(\"\\$\\(\'#browser\'\\).hide\\(\\);\"\\)', output[3])
+    )
+    expect_true(
+      grepl('observeEvent\\(input\\$browser', output[6])
+    )
+    expect_true(
+      grepl('  browser()', output[7])
+    )
+    expect_true(
+      grepl('run \\$\\(\'#browser\'\\)\\.show\\(\\);', output[12])
+    )
 })
 
 test_that("test set_option",{
