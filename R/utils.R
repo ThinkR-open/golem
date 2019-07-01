@@ -27,7 +27,15 @@ create_dir_if_needed <- function(
       go_create <- yesno::yesno(sprintf("The %s does not exists, create?", path))
     }
     # Will create if autocreate or if yes to interactive
-    if (go_create) dir.create(path, recursive = TRUE)
+    if (go_create) {
+      dir.create(path, recursive = TRUE)
+      cat_green_tick(
+        sprintf(
+          "Created folder %s to receive the file", 
+          path
+        )
+      )
+    } 
   }
   
   return(go_create)
