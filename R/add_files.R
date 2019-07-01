@@ -154,12 +154,10 @@ add_css_file <- function(
   }
 }
 
-#' @inheritParams  add_module
-#' @param dir Path to the dir of the file
+
 #' @export
 #' @rdname add_files
 #' @importFrom glue glue
-
 add_ui_server_files <- function(
   pkg = ".", 
   dir = "inst/app",

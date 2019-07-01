@@ -28,8 +28,6 @@ add_ui_server_files(pkg = ".", dir = "inst/app", dir_create = TRUE)
 \item{open}{Should the file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
-
-\item{dir}{Path to the dir of the file}
 }
 \description{
 These functions create files inside the \code{inst/app} folder.
