@@ -18,6 +18,8 @@ add_shinyserver_file(pkg = ".", open = TRUE)
 \item{pkg}{Where to put the app.R.}
 
 \item{open}{Open the file}
+
+\item{service}{Service used, one of "RStudio Connect", "Shiny Server" or "ShinyApps.io"}
 }
 \description{
 Add an app.R at the root of your package to deploy on RStudio Connect

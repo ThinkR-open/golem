@@ -5,6 +5,7 @@
 #'
 #' @param pkg Where to put the app.R.
 #' @param open Open the file
+#' @param service Service used, one of "RStudio Connect", "Shiny Server" or "ShinyApps.io"
 #' @inheritParams add_module
 #' @importFrom cli cat_bullet
 #' @aliases add_rconnect_file add_rstudioconnect_file
