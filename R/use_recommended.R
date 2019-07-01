@@ -1,7 +1,7 @@
 #' Add recommended elements
 #' 
 #' \describe{
-#'   \item{use_recommended_dep}{Adds `shiny`, `DT`, `attempt`, `glue`, `golem`, `htmltools` to dependencies}
+#'   \item{use_recommended_deps}{Adds `shiny`, `DT`, `attempt`, `glue`, `golem`, `htmltools` to dependencies}
 #'   \item{use_recommended_tests}{Adds a test folder and copy the golem tests}
 #' }
 #'
