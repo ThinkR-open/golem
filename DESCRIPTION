@@ -6,22 +6,22 @@ Authors@R:
              family = "Guyader",
              role = c("cre", "aut"),
              email = "vincent@thinkr.fr",
-             comment = structure("0000-0003-0671-9270", .Names = "ORCID")),
+             comment = c(ORCID = "0000-0003-0671-9270")),
       person(given = "Colin",
              family = "Fay",
              role = "aut",
              email = "contact@colinfay.me",
-             comment = structure("0000-0001-7343-1846", .Names = "ORCID")),
+             comment = c(ORCID = "0000-0001-7343-1846")),
       person(given = "Sébastien",
              family = "Rochette",
              role = "aut",
              email = "sebastien@thinkr.fr",
-             comment = structure("0000-0002-1565-9313", .Names = "ORCID")),
+             comment = c(ORCID = "0000-0002-1565-9313")),
       person(given = "Cervan",
              family = "Girard",
              role = "aut",
              email = "cervan@thinkr.fr",
-             comment = structure("0000-0002-4816-4624", .Names = "ORCID")),
+             comment = c(ORCID = "0000-0002-4816-4624")),
       person(given = "ThinkR",
              role = "cph"))
 Description: An opinionated framework for building a
@@ -39,6 +39,7 @@ Imports:
     crayon,
     desc,
     dockerfiler,
+    DT,
     glue,
     htmltools,
     pkgload,
@@ -58,7 +59,6 @@ Imports:
     yesno
 Suggests: 
     covr,
-    DT,
     knitr,
     pkgdown,
     purrr,
@@ -69,5 +69,5 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1

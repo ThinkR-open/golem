@@ -1,16 +1,8 @@
-#' Add an app.R at the root of your package to deploy on RStudio Connect
-#'
-#' @note 
-#' In previous versions, this function was called add_rconnect_file.
-#'
-#' @param pkg Where to put the app.R.
-#' @param open Open the file
-#' @inheritParams add_module
+#' @importFrom utils capture.output
 #' @importFrom cli cat_bullet
-#' @aliases add_rconnect_file add_rstudioconnect_file
-#' @export
-#' @rdname rstudio_deploy
-add_rstudioconnect_file <- function(
+#' @importFrom usethis use_build_ignore use_package
+#' @importFrom pkgload pkg_name
+add_rstudio_files <- function(
   pkg = ".",
   open = TRUE, 
   service = c("RStudio Connect", "Shiny Server", "ShinyApps.io")
@@ -24,7 +16,7 @@ add_rstudioconnect_file <- function(
     write(..., here, append = TRUE)
   }
   file.create( where )
-  usethis::use_build_ignore( basename(where) )
+  use_build_ignore( basename(where) )
   write_there("# Launch the ShinyApp (Do not remove this comment)")
   write_there("# To deploy, run: rsconnect::deployApp()")
   write_there("# Or use the blue button on top of this file")
@@ -34,18 +26,19 @@ add_rstudioconnect_file <- function(
   write_there(
     sprintf(
       "%s::run_app() # add parameters here (if any)", 
-      getOption("golem.app.name", pkgload::pkg_name())
+      getOption("golem.app.name", pkg_name())
     )
   )
-  usethis::use_build_ignore(where)
-  usethis::use_package("pkgload")
+  #use_build_ignore(where)
+  x <- capture.output(use_package("pkgload"))
   cat_green_tick(glue("File created at {where}"))
   cat_line("To deploy, run:")
   cat_bullet(darkgrey("rsconnect::deployApp()\n"))
   cat_red_bullet(
     sprintf(
       "Note that you'll need to upload the whole package to %s",
-      service)
+      service
+    )
   )
   
   
@@ -53,21 +46,39 @@ add_rstudioconnect_file <- function(
     rstudioapi::navigateToFile(where)
   } else {
     cat_red_bullet(
-      glue::glue("Go to {where}")
+      sprintf("Go to %s", where)
     )
   }
+}
+
+#' Add an app.R at the root of your package to deploy on RStudio Connect
+#'
+#' @note 
+#' In previous versions, this function was called add_rconnect_file.
+#'
+#' @param pkg Where to put the app.R.
+#' @param open Open the file
+#' @inheritParams add_module
+#' @aliases add_rconnect_file add_rstudioconnect_file
+#' @export
+#' @rdname rstudio_deploy
+add_rstudioconnect_file <- function(
+  pkg = ".", 
+  open = TRUE
+){
+  add_rstudio_files(pkg = pkg, open = open, service = "RStudio Connect")
 }
 
 #' @rdname rstudio_deploy
 #' @export
 add_shinyappsio_file <- function(pkg = ".", open = TRUE){
-  add_rstudioconnect_file(pkg = pkg, open = open, service = "ShinyApps.io")
+  add_rstudio_files(pkg = pkg, open = open, service = "ShinyApps.io")
 }
 
 #' @rdname rstudio_deploy
 #' @export
 add_shinyserver_file <- function(pkg = ".", open = TRUE){
-  add_rstudioconnect_file(pkg = pkg, open = open, service = "Shiny Server")
+  add_rstudio_files(pkg = pkg, open = open, service = "Shiny Server")
 }
 
 #' Create a Dockerfile for  Shiny App 

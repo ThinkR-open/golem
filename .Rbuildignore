@@ -14,3 +14,4 @@
 ^LICENSE\.md$
 ^CODE_OF_CONDUCT\.md$
 ^app\.R$
+^cran-comments\.md$

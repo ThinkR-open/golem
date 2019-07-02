@@ -24,7 +24,7 @@ Then they are called with `golem::invoke_js("fonction", "ui_element")`.
 
 This `ui_element` define the UI element to interact with. It can be a full jQuery selector, an id or a class.
 
-Note that `invoke_js` can be used with any function defined in a [JavaScript Custom Handler]()
+Note that `invoke_js` can be used with any function defined in a [JavaScript Custom Handler](https://shiny.rstudio.com/articles/communicating-with-js.html#from-r-to-javascript), that you can build with `golem::add_js_handler()`.
 
 ### `golem::invoke_js()`
 
