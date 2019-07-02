@@ -118,7 +118,7 @@
       <h1>Using {golem} js functions</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2019-07-01</h4>
+            <h4 class="date">2019-07-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/d_js.Rmd"><code>vignettes/d_js.Rmd</code></a></small>
       <div class="hidden name"><code>d_js.Rmd</code></div>
@@ -133,7 +133,7 @@
 <p><code>{golem}</code> comes with a series of JavaScript functions that you can call from the server. These functions are added by default with <code><a href="../reference/golem_js.html">golem::activate_js()</a></code> in <code>app_ui</code>.</p>
 <p>Then they are called with <code><a href="../reference/golem_js.html">golem::invoke_js("fonction", "ui_element")</a></code>.</p>
 <p>This <code>ui_element</code> define the UI element to interact with. It can be a full jQuery selector, an id or a class.</p>
-<p>Note that <code>invoke_js</code> can be used with any function defined in a <a href="">JavaScript Custom Handler</a></p>
+<p>Note that <code>invoke_js</code> can be used with any function defined in a <a href="https://shiny.rstudio.com/articles/communicating-with-js.html#from-r-to-javascript">JavaScript Custom Handler</a>, that you can build with <code><a href="../reference/add_files.html">golem::add_js_handler()</a></code>.</p>
 <div id="goleminvoke_js" class="section level3">
 <h3 class="hasAnchor">
 <a href="#goleminvoke_js" class="anchor"></a><code><a href="../reference/golem_js.html">golem::invoke_js()</a></code>

@@ -118,7 +118,7 @@
       <h1>Deploying Apps with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2019-07-01</h4>
+            <h4 class="date">2019-07-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/c_deploy.Rmd"><code>vignettes/c_deploy.Rmd</code></a></small>
       <div class="hidden name"><code>c_deploy.Rmd</code></div>
@@ -137,7 +137,7 @@
 <a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="dt">golem_opts =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(...)</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">  )</a>
 <a class="sourceLine" id="cb1-6" data-line-number="6">}</a></code></pre></div>
-<p>This function might looks a little bit weird, but there’s a long story behing it, and you can read more about it <a href="">there</a>.</p>
+<p>This function might looks a little bit weird, but there’s a long story behing it, and you can read more about it <a href="https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/">there</a>.</p>
 <p>But long story short, this combination of <code>with_golem_options</code> &amp; <code>golem_opts = list(...)</code> allows you to pass argument to the function to be used inside the application, from UI or from server side, which you can get with <code><a href="../reference/get_golem_options.html">get_golem_options()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">run_app</span>(<span class="dt">this =</span> <span class="st">"that"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># And in the app </span></a>
