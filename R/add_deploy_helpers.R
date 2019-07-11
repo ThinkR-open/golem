@@ -99,7 +99,7 @@ add_shinyserver_file <- function(pkg = ".", open = TRUE){
 #' @export
 #' @rdname dockerfiles
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' add_dockerfile()
 #' add_dockerfile_shinyproxy()
 #' add_dockerfile_heroku()

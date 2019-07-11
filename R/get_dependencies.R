@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' get_dependencies()
 #' }
 #' @importFrom stats setNames

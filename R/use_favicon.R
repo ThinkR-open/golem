@@ -8,7 +8,7 @@
 #' @importFrom attempt stop_if_not
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' use_favicon()
 #' use_favicon(path='path/to/your/favicon.ico')
 #' }
