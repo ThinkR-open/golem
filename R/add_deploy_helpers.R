@@ -259,7 +259,12 @@ dock_from_desc <- function(
   if (class(imp)[1] != "try-error"){ 
     # Remove base packages which are not on CRAN
     # And shouldn't be installed
-    reco <- rownames(installed.packages(priority="base"))
+    reco <- c("base", "compiler", "datasets", "graphics", "grDevices", "grid", 
+              "methods", "parallel", "splines", "stats", "stats4", "tcltk", 
+              "tools", "utils")#3.5
+
+    
+    
     
     # And Remotes package, which will be handled 
     # by install_local
