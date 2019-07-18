@@ -2,6 +2,7 @@ context("function add_dockerfile")
 
 test_that("add_dockerfile", {
   with_dir(pkg, {
+    remove_file("Dockerfile")
     output <- testthat::capture_output(add_dockerfile())
     expect_true(file.exists("Dockerfile"))
     test <-
@@ -14,6 +15,7 @@ test_that("add_dockerfile", {
 
 test_that("add_dockerfile_heroku", {
   with_dir(pkg, {
+    remove_file("Dockerfile")
     output <- testthat::capture_output(add_dockerfile_heroku())
     expect_true(file.exists("Dockerfile"))
     test <-
@@ -25,6 +27,7 @@ test_that("add_dockerfile_heroku", {
 
 test_that("add_dockerfile_shinyproxy", {
   with_dir(pkg, {
+    remove_file("Dockerfile")
     output <- testthat::capture_output(add_dockerfile_shinyproxy())
     expect_true(file.exists("Dockerfile"))
     test <-

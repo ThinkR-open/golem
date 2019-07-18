@@ -1,5 +1,6 @@
 ### lib
 library(withr)
+#unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
 
 remove_file <- function(path){
   if (file.exists(path)) file.remove(path)
