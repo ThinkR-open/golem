@@ -149,6 +149,33 @@
       <small>Source: <a href='https://github.com/ThinkR-open/golem/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="golem-0-1-0---cran-release-candidate-v2" class="section level1">
+<h1 class="page-header">
+<a href="#golem-0-1-0---cran-release-candidate-v2" class="anchor"></a>golem 0.1.0 - CRAN release candidate, v2</h1>
+<div id="new-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New Functions</h2>
+<ul>
+<li>
+<code>get_golem_wd</code> allows to print the current golem working directory, and <code>set_golem_wd</code> to change it.</li>
+</ul>
+</div>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li><p>In order to work, the functions creating files need a <code>golem.wd</code>. This working directory is set by <code>set_golem_options</code> or the first time you create a file. It default to <code>"."</code>, the current directory.</p></li>
+<li><p>Changes in the name of the args in <code>set_golem_options</code>: <code>pkg_path</code> is now <code>golem_wd</code>, <code>pkg_name</code> is now <code>golem_name</code>, <code>pkg_version</code> is now <code>golem_version</code></p></li>
+</ul>
+</div>
+<div id="internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<ul>
+<li>The <code><a href="https://www.rdocumentation.org/packages/utils/topics/installed.packages">installed.packages()</a></code> function is no longer used.</li>
+</ul>
+</div>
+</div>
     <div id="golem-0-0-1-9999---cran-release-candidate" class="section level1">
 <h1 class="page-header">
 <a href="#golem-0-0-1-9999---cran-release-candidate" class="anchor"></a>golem 0.0.1.9999 - CRAN release candidate</h1>
@@ -162,9 +189,9 @@
 <p>See <a href="https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/" class="uri">https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/</a></p>
 </blockquote>
 </div>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking Changes</h2>
 <ul>
 <li>There is no need for <code>ui.R</code> and <code>server.R</code> to exist by default. Removed. Can be recreated with <code><a href="../reference/add_files.html">add_ui_server_files()</a></code>
 </li>
@@ -205,9 +232,9 @@
 </li>
 </ul>
 </div>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Renamed <code><a href="../reference/rstudio_deploy.html">add_rconnect_file()</a></code> to <code><a href="../reference/rstudio_deploy.html">add_rstudioconnect_file()</a></code>
 </li>
@@ -219,9 +246,9 @@
 </li>
 </ul>
 </div>
-<div id="new-functions" class="section level2">
+<div id="new-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-functions" class="anchor"></a>New functions</h2>
+<a href="#new-functions-1" class="anchor"></a>New functions</h2>
 <ul>
 <li>
 <code><a href="../reference/golem_js.html">invoke_js()</a></code> allows to call JS functions from the server side. <a href='https://github.com/ThinkR-open/golem/issues/52'>#52</a></li>
@@ -290,6 +317,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#golem-0-1-0---cran-release-candidate-v2">0.1.0</a></li>
         <li><a href="#golem-0-0-1-9999---cran-release-candidate">0.0.1.9999</a></li>
         <li><a href="#golem-0-0-1-6000">0.0.1.6000</a></li>
         <li><a href="#golem-0-0-1-5000">0.0.1.5000</a></li>
