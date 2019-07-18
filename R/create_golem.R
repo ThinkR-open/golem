@@ -15,11 +15,13 @@
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi openProject
 #' @export
-create_golem <- function(path, 
-                         check_name = TRUE,
-                         open =TRUE,
-                         package_name = basename(path),
-                         ...) {
+create_golem <- function(
+  path, 
+  check_name = TRUE,
+  open =TRUE,
+  package_name = basename(path),
+  ...
+) {
   
   if (check_name){
     getFromNamespace("check_package_name", "usethis")(package_name)
