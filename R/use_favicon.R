@@ -9,8 +9,10 @@
 #'
 #' @examples
 #' \donttest{
-#' use_favicon()
-#' use_favicon(path='path/to/your/favicon.ico')
+#' if (interactive()){
+#'   use_favicon()
+#'   use_favicon(path='path/to/your/favicon.ico')
+#' }
 #' }
 use_favicon <- function(path, pkg = "."){
   
