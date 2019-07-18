@@ -32,7 +32,7 @@
 <meta property="og:title" content="Create a Dockerfile for  Shiny App — add_dockerfile" />
 
 <meta property="og:description" content="Build a container containing your Shiny App. add_dockerfile() creates
-a &quot;generalistic&quot; Dockerfile, while add_dockerfile_shinyproxy() and
+a &quot;classical&quot; Dockerfile, while add_dockerfile_shinyproxy() and
 add_dockerfile_heroku() creates plateform specific Dockerfile." />
 
 <meta property="og:image" content="/logo.png" />
@@ -157,22 +157,23 @@ add_dockerfile_heroku() creates plateform specific Dockerfile." />
     <div class="ref-description">
     
     <p>Build a container containing your Shiny App. <code>add_dockerfile()</code> creates
-a "generalistic" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
+a "classical" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
 <code>add_dockerfile_heroku()</code> creates plateform specific Dockerfile.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>add_dockerfile</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
-  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>,
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>80</span>, <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"0.0.0.0"</span>)
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>,
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>80</span>,
+  <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"0.0.0.0"</span>)
 
 <span class='fu'>add_dockerfile_shinyproxy</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
-  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>,
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>,
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>add_dockerfile_heroku</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
-  <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>,
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>,
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Version'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,6 +185,10 @@ a "generalistic" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
     <tr>
       <th>output</th>
       <td><p>name of the Dockerfile output.</p></td>
+    </tr>
+    <tr>
+      <th>pkg</th>
+      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
     </tr>
     <tr>
       <th>from</th>
@@ -208,11 +213,18 @@ Default is 0.0.0.0.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>add_dockerfile</span>()
-<span class='fu'>add_dockerfile_shinyproxy</span>()
-<span class='fu'>add_dockerfile_heroku</span>()
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='co'># Add a standard Dockerfile</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>()){
+   <span class='fu'>add_dockerfile</span>()
+}
+<span class='co'># Add a Dockerfile for ShinyProxy</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>()){
+    <span class='fu'>add_dockerfile_shinyproxy</span>()
+}
+<span class='co'># Add a Dockerfile for Heroku</span>
+<span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>()){
+    <span class='fu'>add_dockerfile_heroku</span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

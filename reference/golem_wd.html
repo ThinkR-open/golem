@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Files — add_js_file • golem</title>
+<title>Get and set <code>{golem}</code> working directory — get_golem_wd • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -29,9 +29,14 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Create Files — add_js_file" />
+<meta property="og:title" content="Get and set <code>{golem}</code> working directory — get_golem_wd" />
 
-<meta property="og:description" content="These functions create files inside the inst/app folder." />
+<meta property="og:description" content="Many {golem} functions rely on a specific working directory,
+most of the time the root of the package. This working directory
+is set by set_golem_options or the first time you create a file.
+It default to &quot;.&quot;, the current directory when starting a golem.
+You can use these two functions if you need to manipulate this
+directory." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -147,53 +152,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create Files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/add_files.R'><code>R/add_files.R</code></a></small>
-    <div class="hidden name"><code>add_files.Rd</code></div>
+    <h1>Get and set <code>{golem}</code> working directory</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/options.R'><code>R/options.R</code></a></small>
+    <div class="hidden name"><code>golem_wd.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These functions create files inside the <code>inst/app</code> folder.</p>
+    <p>Many <code>{golem}</code> functions rely on a specific working directory,
+most of the time the root of the package. This working directory
+is set by <code>set_golem_options</code> or the first time you create a file.
+It default to <code>"."</code>, the current directory when starting a golem.
+You can use these two functions if you need to manipulate this
+directory.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>add_js_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>get_golem_wd</span>()
 
-<span class='fu'>add_js_handler</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>add_css_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>add_ui_server_files</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app"</span>,
-  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>set_golem_wd</span>(<span class='no'>path</span>, <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>The name of the module</p></td>
+      <th>path</th>
+      <td><p>The path to set the golem woking directory.
+Note that it will be passed to <code>normalizePath</code>.</p></td>
     </tr>
     <tr>
-      <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
-    </tr>
-    <tr>
-      <th>dir</th>
-      <td><p>Path to the dir of the file</p></td>
-    </tr>
-    <tr>
-      <th>open</th>
-      <td><p>Should the file be opened?</p></td>
-    </tr>
-    <tr>
-      <th>dir_create</th>
-      <td><p>Creates the directory if it doesn't exist, default is <code>TRUE</code>.</p></td>
+      <th>talkative</th>
+      <td><p>Should the function print where the
+new path is defined?</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The path to the working directory.</p>
     
 
   </div>
@@ -201,7 +197,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

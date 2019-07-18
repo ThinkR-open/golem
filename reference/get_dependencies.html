@@ -158,8 +158,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_dependencies</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>dput</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>field</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Imports"</span>))</pre>
+    <pre class="usage"><span class='fu'>get_dependencies</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(),
+  <span class='kw'>dput</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>field</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Imports"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,6 +167,10 @@
     <tr>
       <th>path</th>
       <td><p>path to the DESCRIPTION file</p></td>
+    </tr>
+    <tr>
+      <th>pkg</th>
+      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
     </tr>
     <tr>
       <th>dput</th>
@@ -180,9 +184,9 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>get_dependencies</span>()
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/interactive'>interactive</a></span>()){
+  <span class='fu'>get_dependencies</span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
