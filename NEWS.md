@@ -1,3 +1,19 @@
+# golem 0.1.0 - CRAN release candidate,  v2
+
+## New Functions 
+
++ `get_golem_wd` allows  to print the current golem working directory, and `set_golem_wd` to change it.
+
+## Breaking changes 
+
++ In order to work, the functions creating files need a `golem.wd`. This working directory is set by `set_golem_options` or the first time you create a file. It default to `"."`, the current directory. 
+
++ Changes in the name of the args in `set_golem_options`: `pkg_path` is now `golem_wd`, `pkg_name` is now `golem_name`, `pkg_version` is now `golem_version`
+
+## Internal changes
+
++ The `installed.packages()` function is no longer used.
+
 # golem 0.0.1.9999 - CRAN release candidate
 
 ## Changes in the way run_app and deploy files are build
