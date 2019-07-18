@@ -39,7 +39,8 @@ In the rest of the Vignettes, we'll assume you're working in RStudio.
 
 Once the package is installed, you can got to File > New Project... in RStudio, and choose "Package for Shiny App Using golem" input. 
 
-![](golemtemplate.png)
+<img src = "golemtemplate.png" width = "80%" align = "center">
+
 
 If you want to do it through command line, you can use:
 
