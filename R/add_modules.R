@@ -12,10 +12,9 @@
 #' @importFrom glue glue
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
-
 add_module <- function(
   name, 
-  pkg = ".", 
+  pkg = get_golem_wd(), 
   open = TRUE, 
   dir_create = TRUE
 ){

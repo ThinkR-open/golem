@@ -3,7 +3,7 @@
 #' These functions create files inside the `inst/app` folder. 
 #' 
 #' @inheritParams  add_module
-#' @param dir Path to the dir of the file
+#' @param dir Path to the dir where the file while be created.
 #' @export
 #' @rdname add_files
 #' @importFrom glue glue
@@ -12,7 +12,7 @@
 
 add_js_file <- function(
   name, 
-  pkg = ".", 
+  pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
   dir_create = TRUE
@@ -59,10 +59,9 @@ add_js_file <- function(
 
 #' @export
 #' @rdname add_files
-
 add_js_handler <- function(
   name, 
-  pkg = ".", 
+  pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
   dir_create = TRUE
@@ -123,7 +122,7 @@ add_js_handler <- function(
 #' @rdname add_files
 add_css_file <- function(
   name, 
-  pkg = ".", 
+  pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
   dir_create = TRUE
@@ -174,12 +173,12 @@ add_css_file <- function(
 #' @rdname add_files
 #' @importFrom glue glue
 add_ui_server_files <- function(
-  pkg = ".", 
+  pkg = get_golem_wd(), 
   dir = "inst/app",
   dir_create = TRUE
 ){
   #browser()
-  old <- setwd(normalizePath(pkg))  
+  old <- setwd(normalizePath(pkg))   
   on.exit(setwd(old))
   
   dir_created <- create_dir_if_needed(
@@ -205,11 +204,14 @@ add_ui_server_files <- function(
   file.create(where)
   write_there <- function(...) write(..., file = where, append = TRUE)
   
+  if (is.null(getOption('golem.pkg.name'))){
+    pkg <- pkgload::pkg_name()
+  } else {
+    pkg <- getOption('golem.pkg.name')
+  }
+  
   write_there(
-    sprintf(
-      "%s:::app_ui()",
-      getOption('golem.pkg.name', pkgload::pkg_name())
-      )
+    sprintf( "%s:::app_ui()", pkg )
   )
   
   cat_green_tick(glue("ui file created at {where}"))
@@ -226,7 +228,7 @@ add_ui_server_files <- function(
   write_there(
     sprintf(
       "%s:::app_server",
-      getOption('golem.pkg.name', pkgload::pkg_name())
+      pkg
     )
   )
   

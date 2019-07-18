@@ -3,8 +3,8 @@
 #' @importFrom usethis use_build_ignore use_package
 #' @importFrom pkgload pkg_name
 add_rstudio_files <- function(
-  pkg = ".",
-  open = TRUE, 
+  pkg,
+  open, 
   service = c("RStudio Connect", "Shiny Server", "ShinyApps.io")
 ){
   service <- match.arg(service)
@@ -56,14 +56,29 @@ add_rstudio_files <- function(
 #' @note 
 #' In previous versions, this function was called add_rconnect_file.
 #'
+#' @inheritParams add_module
 #' @param pkg Where to put the app.R.
 #' @param open Open the file
-#' @inheritParams add_module
 #' @aliases add_rconnect_file add_rstudioconnect_file
 #' @export
 #' @rdname rstudio_deploy
+#' @examples
+#' \donttest{
+#' # Add a file for Connect
+#' if (interactive()){
+#'    add_rstudioconnect_file()
+#' }
+#' # Add a file for Shiny Server
+#' if (interactive()){
+#'     add_shinyserver_file()
+#' }
+#' # Add a file for Shinyapps.io
+#' if (interactive()){
+#'     add_shinyappsio_file()
+#' }
+#'}
 add_rstudioconnect_file <- function(
-  pkg = ".", 
+  pkg = get_golem_wd(), 
   open = TRUE
 ){
   add_rstudio_files(pkg = pkg, open = open, service = "RStudio Connect")
@@ -71,22 +86,29 @@ add_rstudioconnect_file <- function(
 
 #' @rdname rstudio_deploy
 #' @export
-add_shinyappsio_file <- function(pkg = ".", open = TRUE){
+add_shinyappsio_file <- function(
+  pkg = get_golem_wd(), 
+  open = TRUE
+  ){
   add_rstudio_files(pkg = pkg, open = open, service = "ShinyApps.io")
 }
 
 #' @rdname rstudio_deploy
 #' @export
-add_shinyserver_file <- function(pkg = ".", open = TRUE){
+add_shinyserver_file <- function(
+  pkg = get_golem_wd(), 
+  open = TRUE
+  ){
   add_rstudio_files(pkg = pkg, open = open, service = "Shiny Server")
 }
 
 #' Create a Dockerfile for  Shiny App 
 #' 
 #' Build a container containing your Shiny App. `add_dockerfile()` creates 
-#' a "generalistic" Dockerfile, while `add_dockerfile_shinyproxy()` and 
+#' a "classical" Dockerfile, while `add_dockerfile_shinyproxy()` and 
 #' `add_dockerfile_heroku()` creates plateform specific Dockerfile.
 #'
+#' @inheritParams  add_module
 #' @param input path to the DESCRIPTION file to use as an input.
 #' @param output name of the Dockerfile output.
 #' @param from The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
@@ -100,14 +122,24 @@ add_shinyserver_file <- function(pkg = ".", open = TRUE){
 #' @rdname dockerfiles
 #' @examples
 #' \donttest{
-#' add_dockerfile()
-#' add_dockerfile_shinyproxy()
-#' add_dockerfile_heroku()
+#' # Add a standard Dockerfile
+#' if (interactive()){
+#'    add_dockerfile()
+#' }
+#' # Add a Dockerfile for ShinyProxy
+#' if (interactive()){
+#'     add_dockerfile_shinyproxy()
+#' }
+#' # Add a Dockerfile for Heroku
+#' if (interactive()){
+#'     add_dockerfile_heroku()
+#' }
 #'}
 
 add_dockerfile <- function(
   input = "DESCRIPTION", 
   output = "Dockerfile", 
+  pkg = get_golem_wd(), 
   from = paste0(
     "rocker/tidyverse:", 
     R.Version()$major,".", 
@@ -118,7 +150,7 @@ add_dockerfile <- function(
   host = "0.0.0.0"
 ) {
   
-  where <- file.path(output) 
+  where <- file.path(pkg, output) 
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(where)
   dock <- dock_from_desc(input, FROM = from, AS = as)
@@ -138,6 +170,7 @@ add_dockerfile <- function(
 add_dockerfile_shinyproxy <- function( 
   input = "DESCRIPTION", 
   output = "Dockerfile", 
+  pkg = get_golem_wd(), 
   from = paste0(
     "rocker/tidyverse:", 
     R.Version()$major,".", 
@@ -146,7 +179,7 @@ add_dockerfile_shinyproxy <- function(
   as = NULL
 ){
   
-  where <- file.path(output)
+  where <- file.path(pkg, output)
   
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(where)
@@ -171,6 +204,7 @@ add_dockerfile_shinyproxy <- function(
 add_dockerfile_heroku <- function( 
   input = "DESCRIPTION", 
   output = "Dockerfile", 
+  pkg = get_golem_wd(), 
   from = paste0(
     "rocker/tidyverse:", 
     R.Version()$major,".", 
@@ -178,7 +212,7 @@ add_dockerfile_heroku <- function(
   ), 
   as = NULL
 ){
-  where <- file.path(output)
+  where <- file.path(pkg, output)
   
   if ( !check_file_exist(where) ) {
     return(invisible(FALSE))
@@ -261,8 +295,8 @@ dock_from_desc <- function(
     # And shouldn't be installed
     reco <- c("base", "compiler", "datasets", "graphics", "grDevices", "grid", 
               "methods", "parallel", "splines", "stats", "stats4", "tcltk", 
-              "tools", "utils")#3.5
-
+              "tools", "utils") #3.5
+    
     
     
     
