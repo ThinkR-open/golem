@@ -7,16 +7,17 @@
 \alias{add_ui_server_files}
 \title{Create Files}
 \usage{
-add_js_file(name, pkg = ".", dir = "inst/app/www", open = TRUE,
-  dir_create = TRUE)
+add_js_file(name, pkg = get_golem_wd(), dir = "inst/app/www",
+  open = TRUE, dir_create = TRUE)
 
-add_js_handler(name, pkg = ".", dir = "inst/app/www", open = TRUE,
-  dir_create = TRUE)
+add_js_handler(name, pkg = get_golem_wd(), dir = "inst/app/www",
+  open = TRUE, dir_create = TRUE)
 
-add_css_file(name, pkg = ".", dir = "inst/app/www", open = TRUE,
-  dir_create = TRUE)
+add_css_file(name, pkg = get_golem_wd(), dir = "inst/app/www",
+  open = TRUE, dir_create = TRUE)
 
-add_ui_server_files(pkg = ".", dir = "inst/app", dir_create = TRUE)
+add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app",
+  dir_create = TRUE)
 }
 \arguments{
 \item{name}{The name of the module}

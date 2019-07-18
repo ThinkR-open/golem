@@ -25,8 +25,10 @@ favicon(ico = "www/favicon.ico", rel = "shortcut icon")
 This function adds the favicon from \code{ico} to your shiny app.
 }
 \examples{
-\dontrun{
-use_favicon()
-use_favicon(path='path/to/your/favicon.ico')
+\donttest{
+if (interactive()){
+  use_favicon()
+  use_favicon(path='path/to/your/favicon.ico')
+}
 }
 }

@@ -7,21 +7,24 @@
 \title{Create a Dockerfile for  Shiny App}
 \usage{
 add_dockerfile(input = "DESCRIPTION", output = "Dockerfile",
-  from = paste0("rocker/tidyverse:", R.Version()$major, ".",
-  R.Version()$minor), as = NULL, port = 80, host = "0.0.0.0")
+  pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
+  R.Version()$major, ".", R.Version()$minor), as = NULL, port = 80,
+  host = "0.0.0.0")
 
 add_dockerfile_shinyproxy(input = "DESCRIPTION", output = "Dockerfile",
-  from = paste0("rocker/tidyverse:", R.Version()$major, ".",
-  R.Version()$minor), as = NULL)
+  pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
+  R.Version()$major, ".", R.Version()$minor), as = NULL)
 
 add_dockerfile_heroku(input = "DESCRIPTION", output = "Dockerfile",
-  from = paste0("rocker/tidyverse:", R.Version()$major, ".",
-  R.Version()$minor), as = NULL)
+  pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
+  R.Version()$major, ".", R.Version()$minor), as = NULL)
 }
 \arguments{
 \item{input}{path to the DESCRIPTION file to use as an input.}
 
 \item{output}{name of the Dockerfile output.}
+
+\item{pkg}{Path to the root of the package. Default is \code{"."}.}
 
 \item{from}{The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
 with \code{R.Version()$major} and \code{R.Version()$minor}.}
@@ -36,13 +39,22 @@ Default is 0.0.0.0.}
 }
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates
-a "generalistic" Dockerfile, while \code{add_dockerfile_shinyproxy()} and
+a "classical" Dockerfile, while \code{add_dockerfile_shinyproxy()} and
 \code{add_dockerfile_heroku()} creates plateform specific Dockerfile.
 }
 \examples{
-\dontrun{
-add_dockerfile()
-add_dockerfile_shinyproxy()
-add_dockerfile_heroku()
+\donttest{
+# Add a standard Dockerfile
+if (interactive()){
+   add_dockerfile()
+}
+# Add a Dockerfile for ShinyProxy
+if (interactive()){
+    add_dockerfile_shinyproxy()
+}
+# Add a Dockerfile for Heroku
+if (interactive()){
+    add_dockerfile_heroku()
+}
 }
 }

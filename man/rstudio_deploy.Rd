@@ -7,11 +7,11 @@
 \alias{add_shinyserver_file}
 \title{Add an app.R at the root of your package to deploy on RStudio Connect}
 \usage{
-add_rstudioconnect_file(pkg = ".", open = TRUE)
+add_rstudioconnect_file(pkg = get_golem_wd(), open = TRUE)
 
-add_shinyappsio_file(pkg = ".", open = TRUE)
+add_shinyappsio_file(pkg = get_golem_wd(), open = TRUE)
 
-add_shinyserver_file(pkg = ".", open = TRUE)
+add_shinyserver_file(pkg = get_golem_wd(), open = TRUE)
 }
 \arguments{
 \item{pkg}{Where to put the app.R.}
@@ -23,4 +23,20 @@ Add an app.R at the root of your package to deploy on RStudio Connect
 }
 \note{
 In previous versions, this function was called add_rconnect_file.
+}
+\examples{
+\donttest{
+# Add a file for Connect
+if (interactive()){
+   add_rstudioconnect_file()
+}
+# Add a file for Shiny Server
+if (interactive()){
+    add_shinyserver_file()
+}
+# Add a file for Shinyapps.io
+if (interactive()){
+    add_shinyappsio_file()
+}
+}
 }

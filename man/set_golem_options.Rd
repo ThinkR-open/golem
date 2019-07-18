@@ -4,19 +4,19 @@
 \alias{set_golem_options}
 \title{{golem} options}
 \usage{
-set_golem_options(pkg_name = pkgload::pkg_name(),
-  pkg_version = pkgload::pkg_version(), pkg_path = pkgload::pkg_path(),
-  app_prod = FALSE)
+set_golem_options(golem_name = pkgload::pkg_name(),
+  golem_version = pkgload::pkg_version(),
+  golem_wd = pkgload::pkg_path(), app_prod = FALSE)
 }
 \arguments{
-\item{pkg_name}{Name of the current golem.}
+\item{golem_name}{Name of the current golem.}
 
-\item{pkg_version}{Version of the current golem.}
+\item{golem_version}{Version of the current golem.}
 
-\item{pkg_path}{Name of the current golem.}
+\item{golem_wd}{Working directory of the current golem package.}
 
-\item{app_prod}{Is the {golem} in prod mode?}
+\item{app_prod}{Is the \code{{golem}} in prod mode?}
 }
 \description{
-Set a series of options to be used internally by {golem}.
+Set a series of options to be used internally by \code{{golem}}.
 }

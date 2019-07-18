@@ -4,11 +4,13 @@
 \alias{get_dependencies}
 \title{Return all package dependencies from current package}
 \usage{
-get_dependencies(path = "DESCRIPTION", dput = FALSE,
-  field = c("Imports"))
+get_dependencies(path = "DESCRIPTION", pkg = get_golem_wd(),
+  dput = FALSE, field = c("Imports"))
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file}
+
+\item{pkg}{Path to the root of the package. Default is \code{"."}.}
 
 \item{dput}{if TRUE return a dput output instead of character vector}
 
@@ -18,7 +20,9 @@ get_dependencies(path = "DESCRIPTION", dput = FALSE,
 Return all package dependencies from current package
 }
 \examples{
-\dontrun{
-get_dependencies()
+\donttest{
+if (interactive()){
+  get_dependencies()
+}
 }
 }

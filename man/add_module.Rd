@@ -4,7 +4,8 @@
 \alias{add_module}
 \title{Create a module}
 \usage{
-add_module(name, pkg = ".", open = TRUE, dir_create = TRUE)
+add_module(name, pkg = get_golem_wd(), open = TRUE,
+  dir_create = TRUE)
 }
 \arguments{
 \item{name}{The name of the module}
