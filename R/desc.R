@@ -21,7 +21,7 @@ fill_desc <- function(
   author_last_name, 
   author_email, 
   repo_url = NULL,
-  pkg = "."
+  pkg = get_golem_wd()
   ){
   path <- normalizePath(pkg)
   desc <- desc::description$new(
