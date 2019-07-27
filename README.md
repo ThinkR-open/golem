@@ -49,6 +49,8 @@ This package is part of a series of tools for Shiny, which includes:
 
   - [{golem} and Effective Shiny Development
     Methods](https://www.youtube.com/watch?v=OU1-CkSVdTI)
+  - [Hands-on demonstration of
+    {golem}](https://shinydevseries.com/post/golem-demo/)
 
 ## Installation
 
