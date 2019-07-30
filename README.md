@@ -4,6 +4,8 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.org/ThinkR-open/golem.svg?branch=master)](https://travis-ci.org/ThinkR-open/golem)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/ThinkR-open/golem?branch=master&svg=true)](https://ci.appveyor.com/project/ThinkR-open/golem)
 [![Coverage
 status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](https://codecov.io/github/ThinkR-open/golem?branch=master)
 
@@ -47,6 +49,8 @@ This package is part of a series of tools for Shiny, which includes:
 
   - [{golem} and Effective Shiny Development
     Methods](https://www.youtube.com/watch?v=OU1-CkSVdTI)
+  - [Hands-on demonstration of
+    {golem}](https://shinydevseries.com/post/golem-demo/)
 
 ## Installation
 

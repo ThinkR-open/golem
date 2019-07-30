@@ -16,3 +16,4 @@
 ^app\.R$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^appveyor\.yml$
