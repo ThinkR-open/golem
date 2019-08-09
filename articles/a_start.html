@@ -118,7 +118,7 @@
       <h1>Getting Started with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2019-08-05</h4>
+            <h4 class="date">2019-08-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/a_start.Rmd"><code>vignettes/a_start.Rmd</code></a></small>
       <div class="hidden name"><code>a_start.Rmd</code></div>
@@ -130,8 +130,12 @@
 <div id="installing-golem" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-golem" class="anchor"></a>Installing {golem}</h2>
-<p><code>{golem}</code> can be installed from GitHub using the <code>{remotes}</code> package:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"Thinkr-open/golem"</span>)</a></code></pre></div>
+<ul>
+<li>You can install the stable version of <code>{golem}</code> from CRAN:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"golem"</span>)</a></code></pre></div>
+<p>The development version of <code>{golem}</code> can be installed from GitHub using the <code>{remotes}</code> package:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"Thinkr-open/golem"</span>)</a></code></pre></div>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
@@ -148,7 +152,7 @@
 <p>Once the package is installed, you can got to File &gt; New Project… in RStudio, and choose “Package for Shiny App Using golem” input.</p>
 <p><img src="golemtemplate.png" width="80%" align="center"></p>
 <p>If you want to do it through command line, you can use:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/create_golem">create_golem</a></span>(<span class="dt">path =</span> <span class="st">"path/to/package"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/create_golem">create_golem</a></span>(<span class="dt">path =</span> <span class="st">"path/to/package"</span>)</a></code></pre></div>
 <p>This command allows you to create “illegally-named” package (for example, <code>1234</code>) by passing the <code>check_name</code> argument to <code>FALSE</code>. Note that this is not recommanded and <strong>should only be done if you know what you are doing</strong>.</p>
 <p>Once you’ve got that, a new RStudio project will be launched. Here is the structure of this project:</p>
 <pre><code>DESCRIPTION               
@@ -193,54 +197,54 @@ myapp.Rproj
 <h3 class="hasAnchor">
 <a href="#fill-the-desc" class="anchor"></a>Fill the DESC</h3>
 <p>First, fill the DESCRIPTION by adding information about the package that will contain your app. The first function, <code><a href="../reference/fill_desc.html">fill_desc()</a></code>, can be used to fil your <code>DESCRIPTION</code> file.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/fill_desc">fill_desc</a></span>(</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="dt">pkg_name =</span> <span class="st">"shinyexample"</span>, <span class="co"># The Name of the package containing the App </span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="dt">pkg_title =</span> <span class="st">"PKG_TITLE"</span>, <span class="co"># The Title of the package containing the App </span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="dt">pkg_description =</span> <span class="st">"PKG_DESC."</span>, <span class="co"># The Description of the package containing the App </span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="dt">author_first_name =</span> <span class="st">"AUTHOR_FIRST"</span>, <span class="co"># Your First Name</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="dt">author_last_name =</span> <span class="st">"AUTHOR_LAST"</span>,  <span class="co"># Your Last Name</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="dt">author_email =</span> <span class="st">"AUTHOR@MAIL.COM"</span>,      <span class="co"># Your Email</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">  <span class="dt">repo_url =</span> <span class="ot">NULL</span> <span class="co"># The (optional) URL of the GitHub Repo</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">)    </a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/fill_desc">fill_desc</a></span>(</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="dt">pkg_name =</span> <span class="st">"shinyexample"</span>, <span class="co"># The Name of the package containing the App </span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="dt">pkg_title =</span> <span class="st">"PKG_TITLE"</span>, <span class="co"># The Title of the package containing the App </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">pkg_description =</span> <span class="st">"PKG_DESC."</span>, <span class="co"># The Description of the package containing the App </span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="dt">author_first_name =</span> <span class="st">"AUTHOR_FIRST"</span>, <span class="co"># Your First Name</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="dt">author_last_name =</span> <span class="st">"AUTHOR_LAST"</span>,  <span class="co"># Your Last Name</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  <span class="dt">author_email =</span> <span class="st">"AUTHOR@MAIL.COM"</span>,      <span class="co"># Your Email</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">  <span class="dt">repo_url =</span> <span class="ot">NULL</span> <span class="co"># The (optional) URL of the GitHub Repo</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">)    </a></code></pre></div>
 </div>
 <div id="add-golem-options" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-golem-options" class="anchor"></a>Add <code>{golem}</code> options</h3>
 <p>Please DO run this line of code, as it sets a series of global options to be reused inside <code>{golem}</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/set_golem_options">set_golem_options</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/set_golem_options">set_golem_options</a></span>()</a></code></pre></div>
 </div>
 <div id="set-common-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#set-common-files" class="anchor"></a>Set common Files</h3>
 <p>If you want to use the MIT licence, README, code of conduct, lifecycle badge, and news</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/licenses.html">use_mit_license</a></span>( <span class="dt">name =</span> <span class="st">"Golem User"</span> )  <span class="co"># You can set another licence here</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_readme_rmd.html">use_readme_rmd</a></span>( <span class="dt">open =</span> <span class="ot">FALSE</span> )</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_code_of_conduct.html">use_code_of_conduct</a></span>()</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/badges.html">use_lifecycle_badge</a></span>( <span class="st">"Experimental"</span> )</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_news_md.html">use_news_md</a></span>( <span class="dt">open =</span> <span class="ot">FALSE</span> )</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_git.html">use_git</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/licenses.html">use_mit_license</a></span>( <span class="dt">name =</span> <span class="st">"Golem User"</span> )  <span class="co"># You can set another licence here</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_readme_rmd.html">use_readme_rmd</a></span>( <span class="dt">open =</span> <span class="ot">FALSE</span> )</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_code_of_conduct.html">use_code_of_conduct</a></span>()</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/badges.html">use_lifecycle_badge</a></span>( <span class="st">"Experimental"</span> )</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_news_md.html">use_news_md</a></span>( <span class="dt">open =</span> <span class="ot">FALSE</span> )</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_git.html">use_git</a></span>()</a></code></pre></div>
 <p>See <a href="https://usethis.r-lib.org/"><code>{usethis}</code></a> for more info about these functions.</p>
 </div>
 <div id="add-a-data-raw-folder" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-a-data-raw-folder" class="anchor"></a>Add a data-raw folder</h3>
 <p>If you have data in your package:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data_raw</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data_raw</a></span>()</a></code></pre></div>
 <p>About <a href="http://r-pkgs.had.co.nz/data.html">data in a package</a>.</p>
 </div>
 <div id="init-tests" class="section level3">
 <h3 class="hasAnchor">
 <a href="#init-tests" class="anchor"></a>Init Tests</h3>
 <p>Create a template for tests:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/use_recommended">use_recommended_tests</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/use_recommended">use_recommended_tests</a></span>()</a></code></pre></div>
 <p>About <a href="http://r-pkgs.had.co.nz/tests.html">tests in a package</a>.</p>
 </div>
 <div id="use-recommended-packages" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-recommended-packages" class="anchor"></a>Use Recommended Packages</h3>
 <p>This will add “shiny”, “DT”, “attempt”, “glue”, “htmltools”, and “golem” as a dependecy to your package.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/use_recommended">use_recommended_deps</a></span>(<span class="st">""</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/use_recommended">use_recommended_deps</a></span>(<span class="st">""</span>)</a></code></pre></div>
 </div>
 <div id="add-various-tools" class="section level3">
 <h3 class="hasAnchor">
@@ -248,18 +252,18 @@ myapp.Rproj
 <ul>
 <li>If you want to change the default favicon</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># Remove current favicon</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/favicon">remove_favicon</a></span>()</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co"># Add a new one</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/favicon">use_favicon</a></span>( <span class="dt">path =</span> <span class="st">"path/to/favicon"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Remove current favicon</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/favicon">remove_favicon</a></span>()</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co"># Add a new one</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/favicon">use_favicon</a></span>( <span class="dt">path =</span> <span class="st">"path/to/favicon"</span>)</a></code></pre></div>
 <p>Note that you can add an url, and the favicon will be downloaded to the <code>inst/app/www</code> folder.</p>
 <ul>
 <li>Utils</li>
 </ul>
 <p>These two functions add a file with various functions that can be used along the process of building your app.</p>
 <p>See each file in details for a description of the functions.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_ui</a></span>()</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_server</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_ui</a></span>()</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_server</a></span>()</a></code></pre></div>
 </div>
 </div>
 <div id="try-the-app" class="section level2">
@@ -267,7 +271,7 @@ myapp.Rproj
 <a href="#try-the-app" class="anchor"></a>Try the app</h2>
 <p>To run the app, go to the <code>dev/run_dev.R</code> file, and launch the all thing.</p>
 <p>You’re now set! You’ve successfully initiated the project and can go to dev/02_dev.R.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">rstudioapi<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstudioapi/topics/navigateToFile">navigateToFile</a></span>(<span class="st">"dev/02_dev.R"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">rstudioapi<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstudioapi/topics/navigateToFile">navigateToFile</a></span>(<span class="st">"dev/02_dev.R"</span>)</a></code></pre></div>
 </div>
   </div>
 
