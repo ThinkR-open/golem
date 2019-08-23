@@ -56,6 +56,10 @@ This package is part of a series of tools for Shiny, which includes:
   - [Hands-on demonstration of
     {golem}](https://shinydevseries.com/post/golem-demo/)
 
+### Cheatsheet
+
+  - [{golem} cheatsheet](https://thinkr.fr/golem_cheatsheet_v0.1.pdf)
+
 ## Installation
 
   - You can install the stable version from CRAN with:
