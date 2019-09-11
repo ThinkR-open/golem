@@ -24,7 +24,7 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app",
 
 \item{pkg}{Path to the root of the package. Default is \code{"."}.}
 
-\item{dir}{Path to the dir of the file}
+\item{dir}{Path to the dir where the file while be created.}
 
 \item{open}{Should the file be opened?}
 
