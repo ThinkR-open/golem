@@ -20,7 +20,7 @@ add_r_files <- function(
     return(invisible(FALSE))
   }
   if (!is.null(module)){
-    module <- paste0(module, "_")
+    module <- paste0("mod_", module, "_")
   }
   where <- file.path(
     "R", paste0(module, ext, "_", name, ".R")
@@ -49,7 +49,7 @@ add_r_files <- function(
 #' that starts either with fct_ or with utils_
 #'
 #' @param name The name of the file
-#' @param module If not NULL, the file will be module specific in the naming.
+#' @param module If not NULL, the file will be module specific in the naming (you don't need to add the leading `mod_`)
 #' @param pkg The working directory 
 #' @param open Should the file be opened once created? 
 #' @param dir_create Should the folder be created if it doesn't exist? 
@@ -67,9 +67,9 @@ add_fct <- function(
     name, 
     module,
     ext = "fct",
-    pkg = get_golem_wd(), 
-    open = TRUE, 
-    dir_create = TRUE
+    pkg = pkg, 
+    open = open, 
+    dir_create = dir_create
   )
 }
 
@@ -86,8 +86,8 @@ add_utils<- function(
     name, 
     module,
     ext = "utils",
-    pkg = get_golem_wd(), 
-    open = TRUE, 
-    dir_create = TRUE
+    pkg = pkg, 
+    open = open, 
+    dir_create = dir_create
   )
 }
