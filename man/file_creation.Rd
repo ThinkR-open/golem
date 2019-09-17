@@ -14,7 +14,7 @@ add_utils(name, module = NULL, pkg = get_golem_wd(), open = TRUE,
 \arguments{
 \item{name}{The name of the file}
 
-\item{module}{If not NULL, the file will be module specific in the naming.}
+\item{module}{If not NULL, the file will be module specific in the naming (you don't need to add the leading \code{mod_})}
 
 \item{pkg}{The working directory}
 

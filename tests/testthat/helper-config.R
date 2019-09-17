@@ -19,3 +19,6 @@ randir <- paste0(sample(letters, 10, TRUE), collapse = "")
 fp <- file.path("inst/app", randir)
 dir.create(file.path(pkg, fp), recursive = TRUE)
 
+rand_name <- function(){
+  paste0(sample(letters, 10, TRUE), collapse = "")
+}
