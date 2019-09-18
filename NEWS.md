@@ -4,6 +4,12 @@
 
 + `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
 
+## Breaking changes 
+
+## Bug fix
+
+## Internal changes
+
 # golem 0.1.0 - CRAN release candidate,  v2
 
 ## New Functions 
