@@ -152,7 +152,7 @@ add_dockerfile <- function(
   
   where <- file.path(pkg, output) 
   if ( !check_file_exist(where) ) return(invisible(FALSE))
-  usethis::use_build_ignore(where)
+  usethis::use_build_ignore(basename(where))
   dock <- dock_from_desc(input, FROM = from, AS = as)
   dock$EXPOSE(port)
   dock$CMD(
