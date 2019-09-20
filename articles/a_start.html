@@ -56,7 +56,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +99,7 @@
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -112,13 +112,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Getting Started with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2019-08-31</h4>
+            <h4 class="date">2019-09-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/a_start.Rmd"><code>vignettes/a_start.Rmd</code></a></small>
       <div class="hidden name"><code>a_start.Rmd</code></div>
@@ -133,9 +134,9 @@
 <ul>
 <li>You can install the stable version of <code>{golem}</code> from CRAN:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"golem"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"golem"</span>)</a></code></pre></div>
 <p>The development version of <code>{golem}</code> can be installed from GitHub using the <code>{remotes}</code> package:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"Thinkr-open/golem"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"Thinkr-open/golem"</span>)</a></code></pre></div>
 </div>
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
@@ -152,7 +153,7 @@
 <p>Once the package is installed, you can got to File &gt; New Project… in RStudio, and choose “Package for Shiny App Using golem” input.</p>
 <p><img src="golemtemplate.png" width="80%" align="center"></p>
 <p>If you want to do it through command line, you can use:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/create_golem">create_golem</a></span>(<span class="dt">path =</span> <span class="st">"path/to/package"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/create_golem.html">create_golem</a></span>(<span class="dt">path =</span> <span class="st">"path/to/package"</span>)</a></code></pre></div>
 <p>This command allows you to create “illegally-named” package (for example, <code>1234</code>) by passing the <code>check_name</code> argument to <code>FALSE</code>. Note that this is not recommanded and <strong>should only be done if you know what you are doing</strong>.</p>
 <p>Once you’ve got that, a new RStudio project will be launched. Here is the structure of this project:</p>
 <pre><code>DESCRIPTION               
@@ -197,7 +198,7 @@ myapp.Rproj
 <h3 class="hasAnchor">
 <a href="#fill-the-desc" class="anchor"></a>Fill the DESC</h3>
 <p>First, fill the DESCRIPTION by adding information about the package that will contain your app. The first function, <code><a href="../reference/fill_desc.html">fill_desc()</a></code>, can be used to fil your <code>DESCRIPTION</code> file.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/fill_desc">fill_desc</a></span>(</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/fill_desc.html">fill_desc</a></span>(</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="dt">pkg_name =</span> <span class="st">"shinyexample"</span>, <span class="co"># The Name of the package containing the App </span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="dt">pkg_title =</span> <span class="st">"PKG_TITLE"</span>, <span class="co"># The Title of the package containing the App </span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">pkg_description =</span> <span class="st">"PKG_DESC."</span>, <span class="co"># The Description of the package containing the App </span></a>
@@ -211,7 +212,7 @@ myapp.Rproj
 <h3 class="hasAnchor">
 <a href="#add-golem-options" class="anchor"></a>Add <code>{golem}</code> options</h3>
 <p>Please DO run this line of code, as it sets a series of global options to be reused inside <code>{golem}</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/set_golem_options">set_golem_options</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/set_golem_options.html">set_golem_options</a></span>()</a></code></pre></div>
 </div>
 <div id="set-common-files" class="section level3">
 <h3 class="hasAnchor">
@@ -237,14 +238,14 @@ myapp.Rproj
 <h3 class="hasAnchor">
 <a href="#init-tests" class="anchor"></a>Init Tests</h3>
 <p>Create a template for tests:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/use_recommended">use_recommended_tests</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/use_recommended.html">use_recommended_tests</a></span>()</a></code></pre></div>
 <p>About <a href="http://r-pkgs.had.co.nz/tests.html">tests in a package</a>.</p>
 </div>
 <div id="use-recommended-packages" class="section level3">
 <h3 class="hasAnchor">
 <a href="#use-recommended-packages" class="anchor"></a>Use Recommended Packages</h3>
 <p>This will add “shiny”, “DT”, “attempt”, “glue”, “htmltools”, and “golem” as a dependecy to your package.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/use_recommended">use_recommended_deps</a></span>(<span class="st">""</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/use_recommended.html">use_recommended_deps</a></span>(<span class="st">""</span>)</a></code></pre></div>
 </div>
 <div id="add-various-tools" class="section level3">
 <h3 class="hasAnchor">
@@ -253,17 +254,17 @@ myapp.Rproj
 <li>If you want to change the default favicon</li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Remove current favicon</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/favicon">remove_favicon</a></span>()</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/favicon.html">remove_favicon</a></span>()</a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co"># Add a new one</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/favicon">use_favicon</a></span>( <span class="dt">path =</span> <span class="st">"path/to/favicon"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb11-4" data-line-number="4">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/favicon.html">use_favicon</a></span>( <span class="dt">path =</span> <span class="st">"path/to/favicon"</span>)</a></code></pre></div>
 <p>Note that you can add an url, and the favicon will be downloaded to the <code>inst/app/www</code> folder.</p>
 <ul>
 <li>Utils</li>
 </ul>
 <p>These two functions add a file with various functions that can be used along the process of building your app.</p>
 <p>See each file in details for a description of the functions.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_ui</a></span>()</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/utils_files">use_utils_server</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/utils_files.html">use_utils_ui</a></span>()</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/utils_files.html">use_utils_server</a></span>()</a></code></pre></div>
 </div>
 </div>
 <div id="try-the-app" class="section level2">
@@ -271,7 +272,7 @@ myapp.Rproj
 <a href="#try-the-app" class="anchor"></a>Try the app</h2>
 <p>To run the app, go to the <code>dev/run_dev.R</code> file, and launch the all thing.</p>
 <p>You’re now set! You’ve successfully initiated the project and can go to dev/02_dev.R.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">rstudioapi<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/rstudioapi/topics/navigateToFile">navigateToFile</a></span>(<span class="st">"dev/02_dev.R"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">rstudioapi<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/rstudioapi/man/navigateToFile.html">navigateToFile</a></span>(<span class="st">"dev/02_dev.R"</span>)</a></code></pre></div>
 </div>
   </div>
 
@@ -292,6 +293,7 @@ myapp.Rproj
 </div>
 
 
+
       <footer><div class="thinkr">
   <p>golem is a  <strong>ThinkR</strong> package. Learn more at <a href="https://rtask.thinkr.fr">rtask.thinkr.fr</a>.</p>
 </div>
@@ -302,10 +304,12 @@ myapp.Rproj
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

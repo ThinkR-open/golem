@@ -12,8 +12,8 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A Framework for Robust Shiny Applications">
 <meta property="og:description" content="An opinionated framework for building a
-    production-ready 'Shiny' application. This package contains a series
-    of tools for building a robust 'Shiny' application from start to
+    production-ready Shiny application. This package contains a series
+    of tools for building a robust Shiny application from start to
     finish.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
@@ -39,7 +39,7 @@
 -->
 </head>
 <body>
-    <div class="container template-article">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -59,7 +59,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -102,7 +102,7 @@
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -115,13 +115,10 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+      </header><div class="row">
+  <div class="contents col-md-9">
+
 <p><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a> <a href="https://travis-ci.org/ThinkR-open/golem"><img src="https://travis-ci.org/ThinkR-open/golem.svg?branch=master" alt="Travis build status"></a> <a href="https://ci.appveyor.com/project/ThinkR-open/golem"><img src="https://ci.appveyor.com/api/projects/status/github/ThinkR-open/golem?branch=master&amp;svg=true" alt="AppVeyor build status"></a> <a href="https://codecov.io/github/ThinkR-open/golem?branch=master"><img src="https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg" alt="Coverage status"></a> <a href="https://cran.r-project.org/package=golem"><img src="https://www.r-pkg.org/badges/version/golem" alt="CRAN status"></a> <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" width="250px"></p>
 <div id="golem" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
@@ -201,12 +198,12 @@
 <ul>
 <li>You can install the stable version from CRAN with:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"golem"</span>)</a></code></pre></div>
+<!-- end list --><div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"golem"</span>)</a></code></pre></div>
 <ul>
 <li>You can install the development version from <a href="https://github.com/Thinkr-open/golem">GitHub</a> with:</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"Thinkr-open/golem"</span>)</a></code></pre></div>
+<!-- end list --><div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"Thinkr-open/golem"</span>)</a></code></pre></div>
 </div>
 <div id="launch-the-project" class="section level2">
 <h2 class="hasAnchor">
@@ -242,6 +239,7 @@
 <p>Please note that this project is released with a <a href="https://www.contributor-covenant.org/version/1/0/0/code-of-conduct.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
 </div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -263,20 +261,24 @@
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Vincent Guyader <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0003-0671-9270" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
-<li>Colin Fay <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7343-1846" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
-<li>Sébastien Rochette <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-1565-9313" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
-<li>Cervan Girard <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4816-4624" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Vincent Guyader <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0003-0671-9270" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Colin Fay <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7343-1846" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Sébastien Rochette <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-1565-9313" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Cervan Girard <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4816-4624" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
-
-      </div>
-
+  </div>
 </div>
 
 
@@ -290,10 +292,12 @@
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

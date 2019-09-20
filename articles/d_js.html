@@ -56,7 +56,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -99,7 +99,7 @@
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -112,13 +112,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Using {golem} js functions</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2019-08-31</h4>
+            <h4 class="date">2019-09-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/d_js.Rmd"><code>vignettes/d_js.Rmd</code></a></small>
       <div class="hidden name"><code>d_js.Rmd</code></div>
@@ -136,18 +137,18 @@
 <p>Note that <code>invoke_js</code> can be used with any function defined in a <a href="https://shiny.rstudio.com/articles/communicating-with-js.html#from-r-to-javascript">JavaScript Custom Handler</a>, that you can build with <code><a href="../reference/add_files.html">golem::add_js_handler()</a></code>.</p>
 <div id="goleminvoke_js" class="section level3">
 <h3 class="hasAnchor">
-<a href="#goleminvoke_js" class="anchor"></a><code><a href="../reference/golem_js.html">golem::invoke_js()</a></code>
+<a href="#goleminvoke_js" class="anchor"></a><code>golem::invoke_js()</code>
 </h3>
 <ul>
 <li>
 <code>showid</code> &amp; <code>hideid</code>, <code>showclass</code> &amp; <code>hideclass</code> show and hide elements through their id or class.</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/golem_js">invoke_js</a></span>(<span class="st">"showid"</span>, <span class="kw">ns</span>(<span class="st">"plot"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/golem_js.html">invoke_js</a></span>(<span class="st">"showid"</span>, <span class="kw">ns</span>(<span class="st">"plot"</span>))</a></code></pre></div>
 <ul>
 <li>
 <code>showhref</code> &amp; <code>hidehref</code> hide and show a link by trying to match the <code>href</code> content.</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/golem/topics/golem_js">invoke_js</a></span>(<span class="st">"showhref"</span>, <span class="st">"panel2"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/golem_js.html">invoke_js</a></span>(<span class="st">"showhref"</span>, <span class="st">"panel2"</span>)</a></code></pre></div>
 <ul>
 <li><p><code>clickon</code> click on the element. You have to use the full jQuery selector.</p></li>
 <li><p><code>show</code> &amp; <code>hide</code> show and hide elements, using the full jQuery selector.</p></li>
@@ -163,7 +164,7 @@
 <li><p><code>"button:contains('this')"</code>: buttons with a text containing <code>'this'</code></p></li>
 </ul>
 <p>Note that in html, tags contains attributes. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;a</span><span class="ot"> href</span> <span class="ot">=</span> <span class="st">"https://thinkr.fr"</span><span class="ot"> data-value</span> <span class="ot">=</span> <span class="st">"panel2"</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Comparison">&gt;</a></span>ThinkR<span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;a</span><span class="ot"> href</span> <span class="ot">=</span> <span class="st">"https://thinkr.fr"</span><span class="ot"> data-value</span> <span class="ot">=</span> <span class="st">"panel2"</span><span class="kw"><a href="https://rdrr.io/r/base/Comparison.html">&gt;</a></span>ThinkR<span class="kw">&lt;/a&gt;</span></a></code></pre></div>
 <p>contains <code>href</code> &amp; <code>data-value</code>. You can refer to these attributes with <code>[]</code> after the tag name.</p>
 <ul>
 <li><p><code>a[href = "https://thinkr.fr"]</code>: link with <code>href</code> being <code>https://thinkr.fr</code></p></li>
@@ -187,6 +188,7 @@
 </div>
 
 
+
       <footer><div class="thinkr">
   <p>golem is a  <strong>ThinkR</strong> package. Learn more at <a href="https://rtask.thinkr.fr">rtask.thinkr.fr</a>.</p>
 </div>
@@ -197,10 +199,12 @@
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
