@@ -34,7 +34,7 @@ BugReports: https://github.com/ThinkR-open/golem/issues
 Depends: 
     R (>= 3.0)
 Imports: 
-    attempt,
+    attempt (>= 0.3.0),
     cli,
     crayon,
     desc,
