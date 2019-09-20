@@ -11,6 +11,8 @@
 
 + The Dockerfile is now correctly added to .Rbuildignore (#81)
 
++ The dockerfile for shinyproxy no longer has a typo (#156)
+
 ## Internal changes
 
 # golem 0.1.0 - CRAN release candidate,  v2
