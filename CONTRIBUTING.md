@@ -53,6 +53,6 @@ You're welcome to fix the bug or implement the feature, but __please don't PR in
 
 6. PR the change __into golem dev branch__, not straight to master
 
-7. In your PR message, please add the reference of the issue, and the content to be used in NEWS.md 
+7. In your PR message, please add the reference of the issue, and the content to be used in NEWS.md. Changes can be : `## New Functions`, `## New features`, `## Breaking changes`, `## Bug fix`, `## Bug fix`, `## Internal changes`
 
   See https://github.com/ThinkR-open/golem/pull/149 for an example
