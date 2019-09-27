@@ -4,6 +4,7 @@
 
 + `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
 
+## New features
 
 ## Breaking changes 
 
