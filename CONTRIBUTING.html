@@ -156,11 +156,11 @@
 <div id="what-you-can-help-with" class="section level3">
 <h3 class="hasAnchor">
 <a href="#what-you-can-help-with" class="anchor"></a>What you can help with</h3>
-<p>There are three ways to contribute to the package:</p>
+<p>There are several ways to contribute to the package:</p>
 <ol>
-<li><p>Spot typos and / or mistakes in the documentations</p></li>
-<li><p>Feature requests / Bug Report</p></li>
-<li><p>Contribute the code-base with new features or by fixing a bug</p></li>
+<li><p>Spot typos and/or mistakes in the documentations</p></li>
+<li><p>Feature requests or Bug Report</p></li>
+<li><p>Contribute the code-base with new features or with bug fixes</p></li>
 </ol>
 </div>
 <div id="how-to-contribute" class="section level3">
@@ -171,9 +171,9 @@
 </ol>
 <p>For a simple typo, you can PR into the repo without opening an issue first. You can also only report the typo without doing a PR.</p>
 <ol>
-<li>For a new feature or bug report, start by open an issue on this repo.</li>
+<li>For a new feature or bug report, start by opening an issue on this repo.</li>
 </ol>
-<p><strong>You’re welcome to fix the bug or implement the feature, but please don’t PR in the repo with features or bugs correction without opening an issue first so that we can discuss the feature / confirm the bug.</strong></p>
+<p>You’re welcome to fix the bug or implement the feature, but <strong>please don’t PR in the repo with features or bugs correction without opening an issue first so that we can discuss the feature / confirm the bug.</strong></p>
 </div>
 <div id="making-change-into-golem" class="section level3">
 <h3 class="hasAnchor">
@@ -181,10 +181,25 @@
 </h3>
 <ol>
 <li><p>Fork the repo on your profile.</p></li>
-<li><p>Make the change on your repo.</p></li>
-<li><p>PR the change <strong>into the dev branche</strong>, not straight to master</p></li>
+<li><p><code>git clone</code> your repo on your machine.</p></li>
+</ol>
+<pre><code>git clone https://github.com/YOURNAME/golem.git</code></pre>
+<ol>
+<li>Work on the <code>dev</code> branch.</li>
+</ol>
+<pre><code>git branch dev</code></pre>
+<p>Or use the Git panel from RStudio</p>
+<ol>
+<li><p>Make the changes locally.</p></li>
+<li><p>Be sure to have a <code>devtools::check()</code> that return 0 errors, 0 warnings and 0 mistakes</p></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">devtools<span class="op">::</span><span class="kw">check</span>()</a></code></pre></div>
+<p>If ever you have some errors, please specify it in your commit message / PR comment</p>
+<ol>
+<li><p>PR the change <strong>into golem dev branch</strong>, not straight to master</p></li>
 <li><p>In your PR message, please add the reference of the issue, and the content to be used in NEWS.md</p></li>
 </ol>
+<p>See <a href="https://github.com/ThinkR-open/golem/pull/149" class="uri">https://github.com/ThinkR-open/golem/pull/149</a> for an example</p>
 </div>
 </div>
 
