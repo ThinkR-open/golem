@@ -187,7 +187,7 @@ add_dockerfile_shinyproxy <- function(
   
   dock$EXPOSE(3838)
   dock$CMD(glue::glue(
-    " [\"R\", \"-e options('shiny.port'=3838,shiny.host='0.0.0.0'); {read.dcf(input)[1]}::run_app()\"]"
+    " [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0'); {read.dcf(input)[1]}::run_app()\"]"
   ))
   dock$write(output)
   
