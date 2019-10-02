@@ -59,7 +59,7 @@ set_golem_wd <- function(
   path, 
   talkative = TRUE
 ){
-  path <- normalizePath(path)
+  path <- normalizePath(path, winslash = "/")
   if (talkative){
     cat_green_tick(
       sprintf("Definining golem working directory as `%s`", path)
