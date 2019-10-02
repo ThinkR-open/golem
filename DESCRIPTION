@@ -64,9 +64,9 @@ Suggests:
     purrr,
     rcmdcheck,
     rmarkdown,
-    withr
-VignetteBuilder: 
-    knitr
+    withr,
+    R.rsp
+VignetteBuilder: R.rsp
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
