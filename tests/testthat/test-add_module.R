@@ -9,7 +9,7 @@ test_that("add_module", {
     expect_true(file.exists("R/mod_test_fct_ftest.R"))
     expect_true(file.exists("R/mod_test_utils_utest.R"))
     script <- list.files("R", pattern = "mod_test")
-    expect_equal(tools::file_ext(script), "R")
+    lapply(tools::file_ext(script), function(x) testthat::expect_equal(x, "R"))
     ## Test message of function
     if (file.exists("R/mod_output.R")) {
       file.remove("R/mod_output.R")
