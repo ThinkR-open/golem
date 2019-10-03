@@ -38,7 +38,7 @@ add_module <- function(
   }
   
   if (!is.null(fct)){
-    add_utils(fct, module = name)
+    add_fct(fct, module = name)
   }
   
   if (!is.null(utils)){
