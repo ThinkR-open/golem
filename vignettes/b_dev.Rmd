@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 Now that you're all set with your project init, time to move to development :) 
 
-App development should happen through the `dev/02_dev.R` file, which contains common commands for developping. 
+App development should happen through the `dev/02_dev.R` file, which contains common commands for developing. 
 ## Launching the app
 
 To run the app, go to the `dev/run_dev.R` file, and run the all thing.
@@ -141,7 +141,7 @@ options( "golem.app.prod" = FALSE)
 golem::cat_dev("hey\n")
 ```
 
-You can then make any function being "dev-dependant" with the `make_dev()` function: 
+You can then make any function being "dev-dependent" with the `make_dev()` function: 
 
 ```{r eval = TRUE}
 log_dev <- golem::make_dev(log)

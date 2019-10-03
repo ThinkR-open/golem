@@ -3,7 +3,7 @@
 #' \code{activate_js} is used in your UI to insert directly the JavaScript 
 #' functions contained in golem. These functions can be called from 
 #' the server with \code{invoke_js}. \code{invoke_js} can also be used 
-#' to lauch any JS function created inside a Shiny JavaScript handler. 
+#' to launch any JS function created inside a Shiny JavaScript handler. 
 #' 
 #' @param fun JS function to be invoked.
 #' @param ui_ref The UI reference to call the JS function on.

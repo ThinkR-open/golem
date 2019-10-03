@@ -40,7 +40,7 @@ Default is 0.0.0.0.}
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates
 a "classical" Dockerfile, while \code{add_dockerfile_shinyproxy()} and
-\code{add_dockerfile_heroku()} creates plateform specific Dockerfile.
+\code{add_dockerfile_heroku()} creates platform specific Dockerfile.
 }
 \examples{
 \donttest{

@@ -35,7 +35,7 @@ set_golem_options <- function(
 #' You can use these two functions if you need to manipulate this 
 #' directory.
 #' 
-#' @param path The path to set the golem woking directory. 
+#' @param path The path to set the golem working directory. 
 #'     Note that it will be passed to `normalizePath`.
 #' @param talkative Should the function print where the 
 #'     new path is defined?

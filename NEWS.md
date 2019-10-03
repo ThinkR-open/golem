@@ -35,7 +35,7 @@
 
 + Functions that create file(s) now automatically create folder if it's not there. Can be prevented with `dir_create = FALSE`
 + Functions that create file(s) can now be prevented from opening with `open = FALSE`, #75
-+ We have explicited how to add external files (css & js) to the app, #78
++ We have made explicit how to add external files (css & js) to the app, #78
 + Launch test is now included in the default tests #48
 
 # golem 0.0.1.6000+
@@ -60,7 +60,7 @@
 
 ## Changes 
 
-* The dev files are now splitted in three - start / dev / deploy
+* The dev files are now split in three - start / dev / deploy
 
 * Every function that adds a file now check if the file already exists, and ask the user if they want to overwrite it (#15)
 
@@ -72,7 +72,7 @@
 
 + `add_*_files` now check if the folder exists, if not suggests to create it. #36
 
-## New funs
+## New functions
 
 * You now have a `browser_dev()` function that behaves like `warning_dev` and friends. #46
 
@@ -88,7 +88,7 @@
 
 ## Removed
 
-* `use_utils_prod` is now included in golem so you don't have to explicitely include the functions.
+* `use_utils_prod` is now included in golem so you don't have to explicitly include the functions.
 
 ## Docs 
 
