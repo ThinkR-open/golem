@@ -1,3 +1,29 @@
+# golem 0.1.9000+
+
+## New functions
+
++ `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
+
+## New features
+
++ `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157)
+
++ `add_module` now allows to create and `fct_` and an `utils_` file (#154, @novica)
+
+## Breaking changes 
+
+## Bug fix
+
++ The Dockerfile is now correctly added to .Rbuildignore (#81)
+
++ The dockerfile for shinyproxy no longer has a typo (#156, @fmmattioni)
+
++ `normalizePath()` now has a correct winlash (@kokbent)
+
++ spellcheck in files (@privefl)
+
+## Internal changes
+
 # golem 0.1.0 - CRAN release candidate,  v2
 
 ## New Functions 
@@ -35,7 +61,7 @@
 
 + Functions that create file(s) now automatically create folder if it's not there. Can be prevented with `dir_create = FALSE`
 + Functions that create file(s) can now be prevented from opening with `open = FALSE`, #75
-+ We have explicited how to add external files (css & js) to the app, #78
++ We have made explicit how to add external files (css & js) to the app, #78
 + Launch test is now included in the default tests #48
 
 # golem 0.0.1.6000+
@@ -60,7 +86,7 @@
 
 ## Changes 
 
-* The dev files are now splitted in three - start / dev / deploy
+* The dev files are now split in three - start / dev / deploy
 
 * Every function that adds a file now check if the file already exists, and ask the user if they want to overwrite it (#15)
 
@@ -72,7 +98,7 @@
 
 + `add_*_files` now check if the folder exists, if not suggests to create it. #36
 
-## New funs
+## New functions
 
 * You now have a `browser_dev()` function that behaves like `warning_dev` and friends. #46
 
@@ -88,7 +114,7 @@
 
 ## Removed
 
-* `use_utils_prod` is now included in golem so you don't have to explicitely include the functions.
+* `use_utils_prod` is now included in golem so you don't have to explicitly include the functions.
 
 ## Docs 
 

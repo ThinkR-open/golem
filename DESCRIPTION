@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.1
+Version: 0.1.0.9001
 Authors@R: 
     c(person(given = "Vincent",
              family = "Guyader",
@@ -34,7 +34,7 @@ BugReports: https://github.com/ThinkR-open/golem/issues
 Depends: 
     R (>= 3.0)
 Imports: 
-    attempt,
+    attempt (>= 0.3.0),
     cli,
     crayon,
     desc,
@@ -57,7 +57,8 @@ Imports:
     usethis,
     utils,
     yesno
-Suggests: 
+Suggests:
+    spelling, 
     covr,
     knitr,
     pkgdown,
@@ -71,3 +72,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+Language: en-US

@@ -14,7 +14,7 @@ status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/
 
 # {golem}
 
-`{golem}` is an opiniated framework for building production-grade shiny
+`{golem}` is an opinionated framework for building production-grade shiny
 applications.
 
 ## Tool series
@@ -46,7 +46,7 @@ This package is part of a series of tools for Shiny, which includes:
   - useR\! 2019 : [A Framework for Building Robust & Production Ready
     Shiny
     Apps](https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf)
-  - ThinkR x Rstudio Roadshow,Paris : [Production-grade Shiny Apps with
+  - ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with
     {golem}](https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem)
 
 ### Video

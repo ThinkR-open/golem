@@ -36,7 +36,7 @@ app_dev <- function(){
   !golem::app_prod()
 }
 
-#' Functions already made dev dependant
+#' Functions already made dev dependent
 #' 
 #' This functions will be run only if `golem::app_dev()`
 #'     returns TRUE.

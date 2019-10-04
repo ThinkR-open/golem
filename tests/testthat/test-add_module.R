@@ -4,10 +4,12 @@ context("function add_module")
 test_that("add_module", {
   with_dir(pkg, {
     remove_file("R/mod_test.R")
-    add_module("test", open = FALSE)
+    add_module("test", open = FALSE,   fct = "ftest", utils = "utest")
     expect_true(file.exists("R/mod_test.R"))
+    expect_true(file.exists("R/mod_test_fct_ftest.R"))
+    expect_true(file.exists("R/mod_test_utils_utest.R"))
     script <- list.files("R", pattern = "mod_test")
-    expect_equal(tools::file_ext(script), "R")
+    lapply(tools::file_ext(script), function(x) testthat::expect_equal(x, "R"))
     ## Test message of function
     if (file.exists("R/mod_output.R")) {
       file.remove("R/mod_output.R")

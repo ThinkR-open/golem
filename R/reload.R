@@ -37,6 +37,32 @@ document_and_reload <- function(
   if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
-  roxygenise(package.dir = pkg)
-  load_all(pkg)
+  roxed <- try({
+    roxygenise(package.dir = pkg)
+    })
+  if (attempt::is_try_error(roxed)){
+    cli::cat_rule(
+      "Error documenting your package"
+    )
+    dialog_if_has("Alert", "Error documenting your package")
+    return(invisible(FALSE))
+  }
+  loaded <- try({
+    load_all(pkg)
+  })
+  
+  if (attempt::is_try_error(loaded)){
+    cli::cat_rule(
+      "Error loading your package"
+    )
+    dialog_if_has("Alert", "Error loading your package")
+    return(invisible(FALSE))
+  }
+  
+}
+
+dialog_if_has <- function(title, message, url = ""){
+  if (rstudioapi::hasFun("showDialog")) {
+    rstudioapi::showDialog(title, message, url)
+  }
 }

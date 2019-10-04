@@ -5,7 +5,7 @@
 \title{Create a module}
 \usage{
 add_module(name, pkg = get_golem_wd(), open = TRUE,
-  dir_create = TRUE)
+  dir_create = TRUE, fct = NULL, utils = NULL)
 }
 \arguments{
 \item{name}{The name of the module}
@@ -15,6 +15,10 @@ add_module(name, pkg = get_golem_wd(), open = TRUE,
 \item{open}{Should the file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+
+\item{fct}{The name of the fct file.}
+
+\item{utils}{The name of the utils file.}
 }
 \description{
 This function creates a module inside the \code{R/} folder, based
