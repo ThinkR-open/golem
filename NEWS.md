@@ -1,3 +1,27 @@
+# golem 0.1.9000+
+
+## New functions
+
++ `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
+
+## New features
+
++ `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157)
+
++ `add_module` now allows to create and `fct_` and an `utils_` file (#154, @novica)
+
+## Breaking changes 
+
+## Bug fix
+
++ The Dockerfile is now correctly added to .Rbuildignore (#81)
+
++ The dockerfile for shinyproxy no longer has a typo (#156, @fmmattioni)
+
++ `normalizePath()` now has a correct winlash (@kokbent)
+
+## Internal changes
+
 # golem 0.1.0 - CRAN release candidate,  v2
 
 ## New Functions 
