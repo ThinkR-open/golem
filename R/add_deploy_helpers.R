@@ -164,7 +164,7 @@ add_dockerfile <- function(
   
   
   
-  dock <- dock_from_desc(path = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(input = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   dock$EXPOSE(port)
   dock$CMD(
     glue::glue(
@@ -196,7 +196,7 @@ add_dockerfile_shinyproxy <- function(
   
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(path = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(input = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   
   dock$EXPOSE(3838)
   dock$CMD(glue::glue(
@@ -233,7 +233,7 @@ add_dockerfile_heroku <- function(
     return(invisible(FALSE))
   } 
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(path = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(input = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   
   dock$CMD(
     glue::glue(
@@ -287,7 +287,7 @@ alert_build <- function(input, output){
 # From {dockerfiler}, in wait for the version to be on CRAN
 #' @importFrom utils installed.packages
 dock_from_desc <- function(
-  path = "DESCRIPTION",
+  input = "DESCRIPTION",
   FROM = "rocker/r-ver",
   AS = NULL,
   sysreqs = TRUE,
@@ -303,7 +303,7 @@ dock_from_desc <- function(
     }else{
     system_requirement <- NULL
   }
-  packages <- desc::desc_get_deps(input)$package
+  packages <- desc::desc_get_deps(path)$package
   packages <- packages[packages != "R"] # remove R
   packages <- packages[ !packages %in% c("base", "boot", "class", "cluster", 
                                          "codetools", "compiler", "datasets", 
@@ -344,7 +344,7 @@ dock_from_desc <- function(
 
   
   dock$COPY(
-    from = paste0(read.dcf(input)[1], "_*.tar.gz"),
+    from = paste0(read.dcf(path)[1], "_*.tar.gz"),
     to = "/app.tar.gz"
   )
   dock$RUN("R -e 'remotes::install_local(\"/app.tar.gz\")'")
