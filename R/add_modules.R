@@ -38,11 +38,11 @@ add_module <- function(
   }
   
   if (!is.null(fct)){
-    add_fct(fct, module = name)
+    add_fct(fct, module = name, open = open)
   }
   
   if (!is.null(utils)){
-    add_utils(utils, module = name)
+    add_utils(utils, module = name, open = open)
   }
   
   where <- file.path(
