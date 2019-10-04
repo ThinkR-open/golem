@@ -2,9 +2,3 @@ Binding: create_golem_gui
 Title: Package for Shiny App using golem
 OpenFiles: dev/01_start.R
 Icon: golem.png
-
-Parameter: without_comments
-Widget: CheckboxInput
-Label: Start my project without golem comments
-Default: Off
-Position: left
