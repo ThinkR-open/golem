@@ -109,7 +109,7 @@ add_shinyserver_file <- function(
 #' `add_dockerfile_heroku()` creates platform specific Dockerfile.
 #'
 #' @inheritParams  add_module
-#' @param input path to the DESCRIPTION file to use as an input.
+#' @param path path to the DESCRIPTION file to use as an input.
 #' @param output name of the Dockerfile output.
 #' @param from The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
 #'     with `R.Version()$major` and `R.Version()$minor`.
@@ -140,7 +140,7 @@ add_shinyserver_file <- function(
 #'}
 
 add_dockerfile <- function(
-  input = "DESCRIPTION", 
+  path = "DESCRIPTION", 
   output = "Dockerfile", 
   pkg = get_golem_wd(), 
   from = paste0(
@@ -164,22 +164,22 @@ add_dockerfile <- function(
   
   
   
-  dock <- dock_from_desc(input = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   dock$EXPOSE(port)
   dock$CMD(
     glue::glue(
-      "R -e \"options('shiny.port'={port},shiny.host='{host}');{read.dcf(input)[1]}::run_app()\""
+      "R -e \"options('shiny.port'={port},shiny.host='{host}');{read.dcf(path)[1]}::run_app()\""
     )
   )
   dock$write(output)
-  alert_build(input, output)
+  alert_build(path, output)
   
 }
 
 #' @export
 #' @rdname dockerfiles
 add_dockerfile_shinyproxy <- function( 
-  input = "DESCRIPTION", 
+  path = "DESCRIPTION", 
   output = "Dockerfile", 
   pkg = get_golem_wd(), 
   from = paste0(
@@ -196,15 +196,15 @@ add_dockerfile_shinyproxy <- function(
   
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(input = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   
   dock$EXPOSE(3838)
   dock$CMD(glue::glue(
-    " [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0'); {read.dcf(input)[1]}::run_app()\"]"
+    " [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0'); {read.dcf(path)[1]}::run_app()\"]"
   ))
   dock$write(output)
   
-  alert_build(input, output)
+  alert_build(path, output)
   
   usethis::use_build_ignore(files = output)
   
@@ -215,7 +215,7 @@ add_dockerfile_shinyproxy <- function(
 #' @export
 #' @rdname dockerfiles
 add_dockerfile_heroku <- function( 
-  input = "DESCRIPTION", 
+  path = "DESCRIPTION", 
   output = "Dockerfile", 
   pkg = get_golem_wd(), 
   from = paste0(
@@ -233,20 +233,20 @@ add_dockerfile_heroku <- function(
     return(invisible(FALSE))
   } 
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(input = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   
   dock$CMD(
     glue::glue(
-      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');{read.dcf(input)[1]}::run_app()\""
+      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');{read.dcf(path)[1]}::run_app()\""
     )
   )
   dock$write(output)
   
-  alert_build(input, output)
+  alert_build(path, output)
   
   apps_h <- gsub(
     "\\.", "-", 
-    glue("{read.dcf(input)[1]}-{read.dcf('DESCRIPTION')[1,][['Version']]}")
+    glue("{read.dcf(path)[1]}-{read.dcf(path)[1,][['Version']]}")
   )
   
   cat_rule( "From your command line, run:" )
@@ -273,13 +273,13 @@ add_dockerfile_heroku <- function(
   
 }
 
-alert_build <- function(input, output){
+alert_build <- function(path, output){
   cat_green_tick(
     glue("Dockerfile created at {output}")
   )
   cat_red_bullet(
     glue::glue(
-      "Be sure to put your {read.dcf(input)[1]}_{read.dcf(input)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
+      "Be sure to put your {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
     )
   )
 }
@@ -287,7 +287,7 @@ alert_build <- function(input, output){
 # From {dockerfiler}, in wait for the version to be on CRAN
 #' @importFrom utils installed.packages
 dock_from_desc <- function(
-  input = "DESCRIPTION",
+  path = "DESCRIPTION",
   FROM = "rocker/r-ver",
   AS = NULL,
   sysreqs = TRUE,
