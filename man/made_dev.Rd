@@ -6,11 +6,7 @@
 \alias{message_dev}
 \alias{warning_dev}
 \alias{browser_dev}
-<<<<<<< HEAD
 \title{Functions already made dev dependent}
-=======
-\title{Functions already made dev dependant}
->>>>>>> start with issue #171
 \usage{
 cat_dev(...)
 
