@@ -120,6 +120,9 @@ add_shinyserver_file <- function(
 #'    Default is 0.0.0.0.  
 #' @export
 #' @rdname dockerfiles
+#' @importFrom sysreqs sysreqs
+#' @importFrom desc desc_get_deps
+#' @importFrom dockerfiler Dockerfile
 #' @examples
 #' \donttest{
 #' # Add a standard Dockerfile
@@ -141,19 +144,27 @@ add_dockerfile <- function(
   output = "Dockerfile", 
   pkg = get_golem_wd(), 
   from = paste0(
-    "rocker/tidyverse:", 
+    "rocker/r-ver:", 
     R.Version()$major,".", 
     R.Version()$minor
   ), 
   as = NULL, 
   port = 80, 
-  host = "0.0.0.0"
+  host = "0.0.0.0",
+  sysreqs = TRUE,
+  repos = "https://cran.rstudio.com/"
+  # ,  function_to_launch = "run_app"
 ) {
+  
   
   where <- file.path(pkg, output) 
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(input, FROM = from, AS = as)
+  
+  
+  
+  
+  dock <- dock_from_desc(input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   dock$EXPOSE(port)
   dock$CMD(
     glue::glue(
@@ -176,14 +187,16 @@ add_dockerfile_shinyproxy <- function(
     R.Version()$major,".", 
     R.Version()$minor
   ), 
-  as = NULL
+  as = NULL,
+  sysreqs = TRUE,
+  repos = "https://cran.rstudio.com/"
 ){
   
   where <- file.path(pkg, output)
   
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(input, FROM = from, AS = as)
+  dock <- dock_from_desc(input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   
   dock$EXPOSE(3838)
   dock$CMD(glue::glue(
@@ -210,7 +223,9 @@ add_dockerfile_heroku <- function(
     R.Version()$major,".", 
     R.Version()$minor
   ), 
-  as = NULL
+  as = NULL,
+  sysreqs = TRUE,
+  repos = "https://cran.rstudio.com/"
 ){
   where <- file.path(pkg, output)
   
@@ -218,7 +233,7 @@ add_dockerfile_heroku <- function(
     return(invisible(FALSE))
   } 
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(input, FROM = from, AS = as)
+  dock <- dock_from_desc(input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   
   dock$CMD(
     glue::glue(
@@ -273,68 +288,62 @@ alert_build <- function(input, output){
 #' @importFrom utils installed.packages
 dock_from_desc <- function(
   path = "DESCRIPTION",
-  FROM = "rocker/r-base",
-  AS = NULL
+  FROM = "rocker/r-ver",
+  AS = NULL,
+  sysreqs = TRUE,
+  repos = "https://cran.rstudio.com/"
 ){
   
-  x <- dockerfiler::Dockerfile$new(FROM, AS)
-  x$RUN("R -e 'install.packages(\"remotes\")'")
+  if (sysreqs){
+    system_requirement <- unique(sysreqs::sysreqs(desc = path,platform = "linux-x86_64-debian-gcc"))
+  }else{
+    system_requirement <- NULL
+  }
+  packages <- desc::desc_get_deps(input)$package
+  packages <- packages[packages != "R"] # remove R
+  packages <- packages[ !packages %in% c("base", "boot", "class", "cluster", 
+                                         "codetools", "compiler", "datasets", 
+                                         "foreign", "graphics", "grDevices", 
+                                         "grid", "KernSmooth", "lattice", "MASS", 
+                                         "Matrix", "methods", "mgcv", "nlme", 
+                                         "nnet", "parallel", "rpart", "spatial", 
+                                         "splines", "stats", "stats4", "survival", 
+                                         "tcltk", "tools", "utils")] # remove base and recommended
+  pkg <- setNames(lapply(packages, packageVersion), packages)
+  dock <- dockerfiler::Dockerfile$new(FROM = from)
   
-  # We need to be sure install_cran is there
-  x$RUN("R -e 'remotes::install_github(\"r-lib/remotes\", ref = \"97bbf81\")'")
-  
-  desc <- read.dcf(path)
-  
-  # Handle cases where there is no deps
-  imp <- attempt::attempt({
-    desc[, "Imports"]
-  }, silent = TRUE)
-  
-  if (class(imp)[1] != "try-error"){ 
-    # Remove base packages which are not on CRAN
-    # And shouldn't be installed
-    reco <- c("base", "compiler", "datasets", "graphics", "grDevices", "grid", 
-              "methods", "parallel", "splines", "stats", "stats4", "tcltk", 
-              "tools", "utils") #3.5
-    
-    
-    
-    
-    # And Remotes package, which will be handled 
-    # by install_local
-    rem <- attempt::attempt({
-      desc[, "Remotes"]
-    }, silent = TRUE)
-    
-    if (class(rem)[1] != "try-error"){
-      rem <- strsplit(rem, "\n")[[1]]
-      rem <- vapply(rem, function(x){
-        strsplit(x, "/")[[1]][2]
-      }, character(1))
-      reco <- c(reco, unname(rem))
-    }
-    
-    if (length(imp) > 0) {
-      imp <- gsub(",", "", imp)
-      imp <- strsplit(imp, "\n")[[1]]
-      for (i in seq_along(imp)){
-        gg <- gsub(" \\(.*", "", imp[i])
-        if (!(gg %in% reco)){
-          # Specific versions can cause pblm in Docker (which have a specific date)
-          # And will be handled by install_local so we don't add them
-          if (!grepl("\\(", imp[i]) ){
-            x$RUN(paste0("R -e 'remotes::install_cran(\"", imp[i], "\")'"))
-          }
-        }
-      }
-    }
+  if (length(system_requirement)>0){
+    dock$RUN(paste("apt-get update && apt-get install -y ",paste(system_requirement,collapse = " ")))
   }
   
-  x$COPY(
-    from = paste0(desc[1], "_*.tar.gz"),
+  dock$RUN(
+    sprintf("echo \"options(repos = c(CRAN = '%s'), download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site",repos))
+  dock$RUN("R -e 'install.packages(\"remotes\")'")
+  
+  # We need to be sure install_cran is there
+  dock$RUN("R -e 'remotes::install_github(\"r-lib/remotes\", ref = \"97bbf81\")'")
+  
+  
+  
+  ping <- mapply(function(dock, ver, nm){
+    res <- dock$RUN(
+      sprintf(
+        "Rscript -e 'remotes::install_version(\"%s\", version = \"%s\")'", 
+        nm, ver
+      )
+    )
+  }, ver = pkg, nm = names(pkg), MoreArgs = list(dock = dock))
+  dock
+  
+  
+  
+
+  
+  dock$COPY(
+    from = paste0(read.dcf(input)[1], "_*.tar.gz"),
     to = "/app.tar.gz"
   )
-  x$RUN("R -e 'remotes::install_local(\"/app.tar.gz\")'")
+  dock$RUN("R -e 'remotes::install_local(\"/app.tar.gz\")'")
   
-  x
+  dock
 }
