@@ -106,7 +106,7 @@ add_shinyserver_file <- function(
 #' 
 #' Build a container containing your Shiny App. `add_dockerfile()` creates 
 #' a "classical" Dockerfile, while `add_dockerfile_shinyproxy()` and 
-#' `add_dockerfile_heroku()` creates plateform specific Dockerfile.
+#' `add_dockerfile_heroku()` creates platform specific Dockerfile.
 #'
 #' @inheritParams  add_module
 #' @param input path to the DESCRIPTION file to use as an input.
