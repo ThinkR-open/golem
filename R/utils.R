@@ -7,6 +7,10 @@ darkgrey <- function(x) {
   x <- crayon::make_style("darkgrey")(x)
 }
 
+msgRed <- function(x) {
+  x <- crayon::make_style("red")(x)
+}
+
 dir_not_exist <- Negate(dir.exists)
 file_not_exist <- Negate(file.exists)
 
