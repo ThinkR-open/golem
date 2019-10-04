@@ -14,7 +14,11 @@ used as the package name.}
 \item{check_name}{When using this function in the console, you can prevent
 the package name from being checked.}
 
+<<<<<<< HEAD
 \item{open}{boolean open the created project}
+=======
+\item{open}{booleen open the created project}
+>>>>>>> start with issue #171
 
 \item{package_name}{package name to use}
 

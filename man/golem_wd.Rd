@@ -10,7 +10,11 @@ get_golem_wd()
 set_golem_wd(path, talkative = TRUE)
 }
 \arguments{
+<<<<<<< HEAD
 \item{path}{The path to set the golem working directory.
+=======
+\item{path}{The path to set the golem woking directory.
+>>>>>>> start with issue #171
 Note that it will be passed to \code{normalizePath}.}
 
 \item{talkative}{Should the function print where the
