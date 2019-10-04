@@ -6,14 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MIT License • golem</title>
+<title>Add fct_ and utils_ files — add_fct • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
-<link href="cosmo.css" rel="stylesheet">
-<link href="thinkr.css" rel="stylesheet">
+<link href="../cosmo.css" rel="stylesheet">
+<link href="../thinkr.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -26,10 +26,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="MIT License" />
+<meta property="og:title" content="Add fct_ and utils_ files — add_fct" />
+<meta property="og:description" content="These function adds files in the R/ folder
+that starts either with fct_ or with utils_" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -47,8 +49,8 @@
 
 <!--  Code folding -->
 
-<script src="codefolding.js"></script>
-<link href="codefolding.css" rel="stylesheet">
+<script src="../codefolding.js"></script>
+<link href="../codefolding.css" rel="stylesheet">
 
 <!--
 <script>
@@ -70,7 +72,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -82,7 +84,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">golem</a>
+        <a class="navbar-link" href="../index.html">golem</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
       </span>
     </div>
@@ -90,13 +92,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -106,21 +108,21 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/a_start.html">Getting Started with {golem}</a>
+      <a href="../articles/a_start.html">Getting Started with {golem}</a>
     </li>
     <li>
-      <a href="articles/b_dev.html">Day to Day Dev with {golem}</a>
+      <a href="../articles/b_dev.html">Day to Day Dev with {golem}</a>
     </li>
     <li>
-      <a href="articles/c_deploy.html">Deploying Apps with {golem}</a>
+      <a href="../articles/c_deploy.html">Deploying Apps with {golem}</a>
     </li>
     <li>
-      <a href="articles/d_js.html">Using {golem} js functions</a>
+      <a href="../articles/d_js.html">Using {golem} js functions</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -144,23 +146,59 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>MIT License</h1>
+    <h1>Add fct_ and utils_ files</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/add_r_files.R'><code>R/add_r_files.R</code></a></small>
+    <div class="hidden name"><code>file_creation.Rd</code></div>
     </div>
 
-<div id="mit-license" class="section level1">
+    <div class="ref-description">
+    <p>These function adds files in the R/ folder
+that starts either with fct_ or with utils_</p>
+    </div>
 
-<p>Copyright (c) 2019 ThinkR</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-</div>
+    <pre class="usage"><span class='fu'>add_fct</span>(<span class='no'>name</span>, <span class='kw'>module</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>add_utils</span>(<span class='no'>name</span>, <span class='kw'>module</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>name</th>
+      <td><p>The name of the file</p></td>
+    </tr>
+    <tr>
+      <th>module</th>
+      <td><p>If not NULL, the file will be module specific in the naming (you don't need to add the leading <code>mod_</code>)</p></td>
+    </tr>
+    <tr>
+      <th>pkg</th>
+      <td><p>The working directory</p></td>
+    </tr>
+    <tr>
+      <th>open</th>
+      <td><p>Should the file be opened once created?</p></td>
+    </tr>
+    <tr>
+      <th>dir_create</th>
+      <td><p>Should the folder be created if it doesn't exist?</p></td>
+    </tr>
+    </table>
+
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+    </ul>
 
+  </div>
 </div>
-
 
 
       <footer>
