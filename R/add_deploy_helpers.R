@@ -164,7 +164,7 @@ add_dockerfile <- function(
   
   
   
-  dock <- dock_from_desc(input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(path = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   dock$EXPOSE(port)
   dock$CMD(
     glue::glue(
@@ -196,7 +196,7 @@ add_dockerfile_shinyproxy <- function(
   
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(path = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   
   dock$EXPOSE(3838)
   dock$CMD(glue::glue(
@@ -233,7 +233,7 @@ add_dockerfile_heroku <- function(
     return(invisible(FALSE))
   } 
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(path = input, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
   
   dock$CMD(
     glue::glue(
@@ -295,8 +295,12 @@ dock_from_desc <- function(
 ){
   
   if (sysreqs){
+    # please wait during system requirement calculation
+    cat_bullet("Please wait during system requirements calculation...",bullet = "info",bullet_col = "green") # TODO animated version ?
     system_requirement <- unique(sysreqs::sysreqs(desc = path,platform = "linux-x86_64-debian-gcc"))
-  }else{
+    cat_bullet("done",bullet = "tick",bullet_col = "green") # TODO animated version ?
+
+    }else{
     system_requirement <- NULL
   }
   packages <- desc::desc_get_deps(input)$package
