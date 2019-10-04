@@ -20,6 +20,8 @@
 
 + `normalizePath()` now has a correct winlash (@kokbent)
 
++ spellcheck in files (@privefl)
+
 ## Internal changes
 
 # golem 0.1.0 - CRAN release candidate,  v2
