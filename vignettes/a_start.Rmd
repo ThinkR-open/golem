@@ -55,7 +55,7 @@ If you want to do it through command line, you can use:
 golem::create_golem(path = "path/to/package")
 ```
 
-This command allows you to create "illegally-named" package (for example, `1234`) by passing the `check_name` argument to `FALSE`. Note that this is not recommanded and __should only be done if you know what you are doing__. 
+This command allows you to create "illegally-named" package (for example, `1234`) by passing the `check_name` argument to `FALSE`. Note that this is not recommended and __should only be done if you know what you are doing__. 
 
 Once you've got that, a new RStudio project will be launched. Here is the structure of this project:
 
@@ -87,7 +87,7 @@ If you're already familiar with R packages, most of these files will seem very f
 
 + `DESCRIPTION` & `NAMESPACE`: Package meta-data.
 
-+ `dev/`: Scripts that will be used along the process of developping your app. 
++ `dev/`: Scripts that will be used along the process of developing your app. 
 
 + `inst/app`: You'll add external dependencies in `www` (images, css, etc). `app_ui` and `app_server` in case you 
 
@@ -105,7 +105,7 @@ Once you've created your project, the first file that opens is `dev/01_start.R`.
 
 ### Fill the DESC
 
-First, fill the DESCRIPTION by adding information about the package that will contain your app. The first function, `fill_desc()`, can be used to fil your `DESCRIPTION` file.
+First, fill the DESCRIPTION by adding information about the package that will contain your app. The first function, `fill_desc()`, can be used to fill your `DESCRIPTION` file.
 
 ```{r }
 golem::fill_desc(
@@ -130,10 +130,10 @@ golem::set_golem_options()
 
 ### Set common Files 
 
-If you want to use the MIT licence, README, code of conduct, lifecycle badge, and news
+If you want to use the MIT license, README, code of conduct, lifecycle badge, and news
 
 ```{r eval = FALSE}
-usethis::use_mit_license( name = "Golem User" )  # You can set another licence here
+usethis::use_mit_license( name = "Golem User" )  # You can set another license here
 usethis::use_readme_rmd( open = FALSE )
 usethis::use_code_of_conduct()
 usethis::use_lifecycle_badge( "Experimental" )
@@ -166,7 +166,7 @@ About [tests in a package](http://r-pkgs.had.co.nz/tests.html).
 
 ### Use Recommended Packages
 
-This will add "shiny", "DT", "attempt", "glue", "htmltools", and "golem" as a dependecy to your package.
+This will add "shiny", "DT", "attempt", "glue", "htmltools", and "golem" as a dependency to your package.
 
 ```{r}
 golem::use_recommended_deps("")

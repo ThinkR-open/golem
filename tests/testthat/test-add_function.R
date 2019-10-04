@@ -88,7 +88,6 @@ test_that("add_ui_server_files", {
 
 test_that("add_fct and add_utils", {
   with_dir(pkg, {
-    browser()
     util_file <- "R/utils_ui.R"
     fct_file <- "R/fct_ui.R"
     mod <- "R/mod_plop.R"

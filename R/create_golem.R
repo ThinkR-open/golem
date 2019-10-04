@@ -4,7 +4,7 @@
 #'     used as the package name.
 #' @param check_name When using this function in the console, you can prevent 
 #'      the package name from being checked. 
-#' @param open booleen open the created project
+#' @param open boolean open the created project
 #' @param package_name package name to use
 #' @param without_comments boolean start project without golem comments
 #' @param ... not used
@@ -104,7 +104,7 @@ create_golem <- function(
   )
 }
 
-# to be used in Rstudio "new project" GUI
+# to be used in RStudio "new project" GUI
 create_golem_gui <- function(path,...){
   dots <- list(...)
   create_golem(
