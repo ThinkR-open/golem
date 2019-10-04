@@ -118,6 +118,8 @@ add_shinyserver_file <- function(
 #'     Default is 80.  
 #' @param host The `options('shiny.host')` on which to run the Shiny App.
 #'    Default is 0.0.0.0.  
+#' @param sysreqs boolean to check the System Requirements    
+#' @param repos character vector, the base URL of the repositories  
 #' @export
 #' @rdname dockerfiles
 #' @importFrom sysreqs sysreqs
@@ -285,7 +287,8 @@ alert_build <- function(path, output){
 }
 
 # From {dockerfiler}, in wait for the version to be on CRAN
-#' @importFrom utils installed.packages
+#' @importFrom utils installed.packages packageVersion
+#' 
 dock_from_desc <- function(
   path = "DESCRIPTION",
   FROM = "rocker/r-ver",
@@ -314,7 +317,7 @@ dock_from_desc <- function(
                                          "splines", "stats", "stats4", "survival", 
                                          "tcltk", "tools", "utils")] # remove base and recommended
   pkg <- setNames(lapply(packages, packageVersion), packages)
-  dock <- dockerfiler::Dockerfile$new(FROM = from)
+  dock <- dockerfiler::Dockerfile$new(FROM = FROM)
   
   if (length(system_requirement)>0){
     dock$RUN(paste("apt-get update && apt-get install -y ",paste(system_requirement,collapse = " ")))

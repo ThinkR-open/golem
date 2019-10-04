@@ -6,21 +6,24 @@
 \alias{add_dockerfile_heroku}
 \title{Create a Dockerfile for  Shiny App}
 \usage{
-add_dockerfile(input = "DESCRIPTION", output = "Dockerfile",
-  pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
+add_dockerfile(path = "DESCRIPTION", output = "Dockerfile",
+  pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL, port = 80,
-  host = "0.0.0.0")
+  host = "0.0.0.0", sysreqs = TRUE,
+  repos = "https://cran.rstudio.com/")
 
-add_dockerfile_shinyproxy(input = "DESCRIPTION", output = "Dockerfile",
+add_dockerfile_shinyproxy(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
-  R.Version()$major, ".", R.Version()$minor), as = NULL)
+  R.Version()$major, ".", R.Version()$minor), as = NULL,
+  sysreqs = TRUE, repos = "https://cran.rstudio.com/")
 
-add_dockerfile_heroku(input = "DESCRIPTION", output = "Dockerfile",
+add_dockerfile_heroku(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
-  R.Version()$major, ".", R.Version()$minor), as = NULL)
+  R.Version()$major, ".", R.Version()$minor), as = NULL,
+  sysreqs = TRUE, repos = "https://cran.rstudio.com/")
 }
 \arguments{
-\item{input}{path to the DESCRIPTION file to use as an input.}
+\item{path}{path to the DESCRIPTION file to use as an input.}
 
 \item{output}{name of the Dockerfile output.}
 
@@ -36,6 +39,10 @@ Default is 80.}
 
 \item{host}{The \code{options('shiny.host')} on which to run the Shiny App.
 Default is 0.0.0.0.}
+
+\item{sysreqs}{boolean to check the System Requirements}
+
+\item{repos}{character vector, the base URL of the repositories}
 }
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates

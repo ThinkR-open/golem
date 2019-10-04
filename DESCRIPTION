@@ -56,10 +56,10 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno
+    yesno,
+    sysreqs
 Suggests:
     spelling, 
-    yesno,
     covr,
     knitr,
     pkgdown,
