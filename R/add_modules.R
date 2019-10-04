@@ -7,6 +7,8 @@
 #' @param pkg Path to the root of the package. Default is `"."`.
 #' @param open Should the file be opened?
 #' @param dir_create Creates the directory if it doesn't exist, default is `TRUE`.
+#' @param fct The name of the fct file.
+#' @param utils The name of the utils file.
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export
 #' @importFrom glue glue
@@ -16,7 +18,9 @@ add_module <- function(
   name, 
   pkg = get_golem_wd(), 
   open = TRUE, 
-  dir_create = TRUE
+  dir_create = TRUE, 
+  fct = NULL, 
+  utils = NULL
 ){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
@@ -31,6 +35,14 @@ add_module <- function(
       "File not added (needs a valid directory)"
     )
     return(invisible(FALSE))
+  }
+  
+  if (!is.null(fct)){
+    add_fct(fct, module = name)
+  }
+  
+  if (!is.null(utils)){
+    add_utils(utils, module = name)
   }
   
   where <- file.path(
