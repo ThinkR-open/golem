@@ -56,7 +56,8 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno
+    yesno,
+    formatR
 Suggests: 
     covr,
     knitr,
