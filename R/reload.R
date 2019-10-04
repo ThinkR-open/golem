@@ -8,11 +8,12 @@ detach_all_attached <- function(){
   all_attached <-  paste("package:", names(sessionInfo()$otherPkgs), sep = "")
  attempt(
     suppressWarnings(
-      lapply(
+      invisible(lapply(
         all_attached,
         detach, 
         character.only = TRUE, 
         unload = TRUE
+        )
       )
     ), 
     silent = TRUE
