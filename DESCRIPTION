@@ -56,9 +56,6 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno,
-    formatR
-Suggests: 
     yesno
 Suggests:
     spelling, 

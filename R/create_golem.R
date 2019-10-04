@@ -6,7 +6,6 @@
 #'      the package name from being checked. 
 #' @param open boolean open the created project
 #' @param package_name package name to use
-#' @param without_comments boolean start project without golem comments
 #' @param ... not used
 #'
 #' @importFrom yesno yesno
@@ -15,14 +14,12 @@
 #' @importFrom stringr str_remove_all
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi openProject
-#' @importFrom formatR tidy_dir
 #' @export
 create_golem <- function(
   path, 
   check_name = TRUE,
   open =TRUE,
   package_name = basename(path),
-  without_comments = FALSE,
   ...
 ) {
   
@@ -75,20 +72,6 @@ create_golem <- function(
     },
     silent=TRUE)
   }
-  
-  
-  if ( without_comments == TRUE ) {
-    formatR::tidy_dir(
-      path = c(
-        file.path(path, "dev"),
-        file.path(path, "R")
-      ),
-      comment = FALSE,
-      blank = FALSE
-    )
-  }
-  
-  
   cat_rule("Created")
   
   
@@ -106,10 +89,5 @@ create_golem <- function(
 
 # to be used in RStudio "new project" GUI
 create_golem_gui <- function(path,...){
-  dots <- list(...)
-  create_golem(
-    path = path,
-    open = FALSE,
-    without_comments = dots$without_comments
-  )
+  create_golem(path=path,open=FALSE)
 }
