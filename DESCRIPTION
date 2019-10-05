@@ -70,6 +70,8 @@ Suggests:
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
+Remotes: 
+    r-hub/sysreqs
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
