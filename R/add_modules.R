@@ -8,7 +8,9 @@
 #' @param open Should the file be opened?
 #' @param dir_create Creates the directory if it doesn't exist, default is `TRUE`.
 #' @param fct The name of the fct file.
+#' @param export boolean is the module exported by the package
 #' @param utils The name of the utils file.
+#'
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export
 #' @importFrom glue glue
@@ -20,7 +22,8 @@ add_module <- function(
   open = TRUE, 
   dir_create = TRUE, 
   fct = NULL, 
-  utils = NULL
+  utils = NULL,
+  export = FALSE
 ){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
@@ -71,7 +74,9 @@ add_module <- function(
   write_there(glue("#' @rdname mod_%name%"))
   write_there("#'")
   write_there("#' @keywords internal")
+  if (export){
   write_there("#' @export ") 
+  }
   write_there("#' @importFrom shiny NS tagList ") 
   
   
@@ -85,7 +90,9 @@ add_module <- function(
   write_there("# Module Server")
   write_there("    ")
   write_there(glue("#' @rdname mod_%name%"))
-  write_there("#' @export")
+  if (export){
+    write_there("#' @export ") 
+  }
   write_there("#' @keywords internal")
   write_there("    ")
   write_there(glue("mod_%name%_server <- function(input, output, session){"))
