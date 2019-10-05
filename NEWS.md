@@ -6,6 +6,8 @@
 
 ## New features
 
++ `add_dockerfile()` now use installed pacakge version and explicit System Requirements
+
 + `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157)
 
 + `add_module` now allows to create and `fct_` and an `utils_` file (#154, @novica)

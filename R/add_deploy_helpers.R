@@ -122,7 +122,6 @@ add_shinyserver_file <- function(
 #' @param repos character vector, the base URL of the repositories  
 #' @export
 #' @rdname dockerfiles
-#' @importFrom sysreqs sysreqs
 #' @importFrom desc desc_get_deps
 #' @importFrom dockerfiler Dockerfile
 #' @examples
@@ -297,15 +296,7 @@ dock_from_desc <- function(
   repos = "https://cran.rstudio.com/"
 ){
   
-  if (sysreqs){
-    # please wait during system requirement calculation
-    cat_bullet("Please wait during system requirements calculation...",bullet = "info",bullet_col = "green") # TODO animated version ?
-    system_requirement <- unique(sysreqs::sysreqs(desc = path,platform = "linux-x86_64-debian-gcc"))
-    cat_bullet("done",bullet = "tick",bullet_col = "green") # TODO animated version ?
-
-    }else{
-    system_requirement <- NULL
-  }
+ 
   packages <- desc::desc_get_deps(path)$package
   packages <- packages[packages != "R"] # remove R
   packages <- packages[ !packages %in% c("base", "boot", "class", "cluster", 
@@ -316,6 +307,19 @@ dock_from_desc <- function(
                                          "nnet", "parallel", "rpart", "spatial", 
                                          "splines", "stats", "stats4", "survival", 
                                          "tcltk", "tools", "utils")] # remove base and recommended
+
+  
+  if (sysreqs){
+    # please wait during system requirement calculation
+    cat_bullet("Please wait during system requirements calculation...",bullet = "info",bullet_col = "green") # TODO animated version ?
+    system_requirement <- unique(get_sysreqs(packages = packages))
+    cat_bullet("done",bullet = "tick",bullet_col = "green") # TODO animated version ?
+    
+  }else{
+    system_requirement <- NULL
+  }
+  
+  
   pkg <- setNames(lapply(packages, packageVersion), packages)
   dock <- dockerfiler::Dockerfile$new(FROM = FROM)
   
