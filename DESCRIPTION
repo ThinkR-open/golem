@@ -57,7 +57,6 @@ Imports:
     usethis,
     utils,
     yesno,
-    miniCRAN,
     jsonlite
 Suggests:
     spelling, 
