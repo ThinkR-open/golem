@@ -1,6 +1,7 @@
 #' Create Files
 #' 
 #' These functions create files inside the `inst/app` folder. 
+#' These functions can be used outside of a {golem} package. 
 #' 
 #' @inheritParams  add_module
 #' @param dir Path to the dir where the file while be created.
