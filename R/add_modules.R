@@ -2,7 +2,7 @@
 #' 
 #' This function creates a module inside the `R/` folder, based 
 #' on a specific module structure. This function can be used outside
-#' of a {golem} package.
+#' of a {golem} project.
 #' 
 #' @param name The name of the module
 #' @param pkg Path to the root of the package. Default is `"."`.
