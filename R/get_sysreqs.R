@@ -15,5 +15,5 @@ path <- tempfile()
 utils::download.file(url, path,mode = "wb",quiet = quiet)
 out <- jsonlite::fromJSON(path)
 unlink(path)
-out
+sort(unique(out[!is.na(out)]))
 }
