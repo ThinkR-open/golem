@@ -1,5 +1,7 @@
 #' @importFrom rstudioapi getSourceEditorContext
 #' @importFrom rstudioapi modifyRange
+#' 
+#' @export
 insert_ns <- function () {
   curr_editor <- rstudioapi::getSourceEditorContext()
   
