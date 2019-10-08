@@ -29,8 +29,6 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app",
 \item{open}{Should the file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
-
-\item{url}{String representation of URL for the file to be downloaded}
 }
 \description{
 These functions create files inside the \code{inst/app} folder.
