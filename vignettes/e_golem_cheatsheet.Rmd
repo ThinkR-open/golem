@@ -1,0 +1,27 @@
+---
+title: "{golem} cheatsheet"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{e_golem_cheatsheet}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**[The high-resolution {golem} cheatsheet is available to download here](https://thinkr.fr/golem_cheatsheet_V0.1.pdf)**
+
+<a href="https://thinkr.fr/golem_cheatsheet_V0.1.pdf">
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("golem_cheatsheet_V0.1.jpg")
+```
+</a>
+
+
+
+
