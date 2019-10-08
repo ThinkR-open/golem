@@ -9,6 +9,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<script type="text/javascript">
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -46,7 +52,9 @@ In the rest of the Vignettes, we'll assume you're working in RStudio.
 
 Once the package is installed, you can got to File > New Project... in RStudio, and choose "Package for Shiny App Using golem" input. 
 
-<img src = "golemtemplate.png" width = "80%" align = "center">
+```{r, echo=FALSE, out.width="80%", fig.align="center", eval=TRUE}
+knitr::include_graphics("golemtemplate.png")
+```
 
 
 If you want to do it through command line, you can use:

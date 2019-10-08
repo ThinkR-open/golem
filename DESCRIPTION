@@ -59,7 +59,6 @@ Imports:
     yesno
 Suggests:
     spelling, 
-    yesno,
     covr,
     knitr,
     pkgdown,
