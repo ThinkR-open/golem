@@ -63,6 +63,19 @@ replace_word <- function(file,pattern, replace){
   writeLines(tx2, con=file)
 }
 
+remove_comments <- function(file) {
+  lines <- readLines(file)
+  lines_without_comment <- c()
+  for ( line in lines ) {
+    lines_without_comment <- append(
+      lines_without_comment, 
+      gsub("(\\s*#+[^'@].*$| #+[^#].*$)", "", line)
+    )
+  }
+  lines_without_comment <- lines_without_comment[lines_without_comment != ""]
+  writeLines(text = lines_without_comment, con = file)
+}
+
 cat_green_tick <- function(...){
   cat_bullet(
     ..., 

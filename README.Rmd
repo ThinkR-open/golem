@@ -20,7 +20,11 @@ knitr::opts_chunk$set(
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ThinkR-open/golem?branch=master&svg=true)](https://ci.appveyor.com/project/ThinkR-open/golem)
 [![Coverage status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](https://codecov.io/github/ThinkR-open/golem?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
-<img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" width=250px>
+
+```{r, echo=FALSE, out.width="250px", eval=TRUE, fig.align="left"}
+knitr::include_graphics("https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png")
+```
+
 
 # {golem}
 
