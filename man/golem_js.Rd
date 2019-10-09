@@ -12,6 +12,8 @@ invoke_js(fun, ..., session = shiny::getDefaultReactiveDomain())
 \arguments{
 \item{fun}{JS function to be invoked.}
 
+\item{...}{atomics or JSON-like vectors to be sent to the triggered JS function}
+
 \item{session}{The shiny session within which to call \code{sendCustomMessage}.
 
 \describe{
