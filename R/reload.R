@@ -8,11 +8,12 @@ detach_all_attached <- function(){
   all_attached <-  paste("package:", names(sessionInfo()$otherPkgs), sep = "")
  attempt(
     suppressWarnings(
-      lapply(
+      invisible(lapply(
         all_attached,
         detach, 
         character.only = TRUE, 
         unload = TRUE
+        )
       )
     ), 
     silent = TRUE
@@ -45,6 +46,7 @@ document_and_reload <- function(
       "Error documenting your package"
     )
     dialog_if_has("Alert", "Error documenting your package")
+    return(invisible(FALSE))
   }
   loaded <- try({
     load_all(pkg)
@@ -55,6 +57,7 @@ document_and_reload <- function(
       "Error loading your package"
     )
     dialog_if_has("Alert", "Error loading your package")
+    return(invisible(FALSE))
   }
   
 }

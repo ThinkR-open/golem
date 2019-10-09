@@ -10,12 +10,13 @@ status](https://ci.appveyor.com/api/projects/status/github/ThinkR-open/golem?bra
 status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](https://codecov.io/github/ThinkR-open/golem?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
-<img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" width=250px>
+
+<img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" width="250px" style="display: block; margin: auto auto auto 0;" />
 
 # {golem}
 
-`{golem}` is an opiniated framework for building production-grade shiny
-applications.
+`{golem}` is an opinionated framework for building production-grade
+shiny applications.
 
 ## Tool series
 
@@ -46,7 +47,7 @@ This package is part of a series of tools for Shiny, which includes:
   - useR\! 2019 : [A Framework for Building Robust & Production Ready
     Shiny
     Apps](https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf)
-  - ThinkR x Rstudio Roadshow,Paris : [Production-grade Shiny Apps with
+  - ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with
     {golem}](https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem)
 
 ### Video
@@ -84,7 +85,8 @@ remotes::install_github("Thinkr-open/golem")
 
 ## Launch the project
 
-Create a new package with the project template:
+Create a new package with the project
+template:
 
 <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png" width="80%" style="display: block; margin: auto;" />
 
