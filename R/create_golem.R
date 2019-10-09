@@ -59,7 +59,7 @@ create_golem <- function(
   for ( i in t ){
     file.rename(
       from = i,
-      to = gsub(i, "REMOVEME")
+      to = gsub("REMOVEME", "", i)
     )
     
     try({
