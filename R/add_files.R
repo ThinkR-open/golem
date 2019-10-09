@@ -3,7 +3,6 @@
 #' These functions create files inside the `inst/app` folder. 
 #' 
 #' @inheritParams  add_module
-#' @param url String representation of URL for the file to be downloaded
 #' @param dir Path to the dir where the file while be created.
 #' @export
 #' @rdname add_files
