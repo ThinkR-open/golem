@@ -40,6 +40,8 @@ invoke_js <- function(
   ...,
   session = shiny::getDefaultReactiveDomain()
 ){
+  if (fun == "")
+    stop("Error: invoke_js must be called with a valid JS handler name!")
   messages <- list(...)
   res <- lapply(
     messages,
