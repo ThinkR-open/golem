@@ -4,7 +4,7 @@
 #'     used as the package name.
 #' @param check_name When using this function in the console, you can prevent 
 #'      the package name from being checked. 
-#' @param open booleen open the created project
+#' @param open boolean open the created project
 #' @param package_name package name to use
 #' @param without_comments boolean start project without golem comments
 #' @param ... not used
@@ -15,7 +15,6 @@
 #' @importFrom stringr str_remove_all
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi openProject
-#' @importFrom formatR tidy_dir
 #' @export
 create_golem <- function(
   path, 
@@ -78,14 +77,16 @@ create_golem <- function(
   
   
   if ( without_comments == TRUE ) {
-    formatR::tidy_dir(
+    files <- list.files(
       path = c(
         file.path(path, "dev"),
         file.path(path, "R")
-      ),
-      comment = FALSE,
-      blank = FALSE
+      ), 
+      full.names = TRUE
     )
+    for ( file in files ) {
+      remove_comments(file)
+    }
   }
   
   
@@ -104,7 +105,7 @@ create_golem <- function(
   )
 }
 
-# to be used in Rstudio "new project" GUI
+# to be used in RStudio "new project" GUI
 create_golem_gui <- function(path,...){
   dots <- list(...)
   create_golem(
