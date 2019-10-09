@@ -2,19 +2,27 @@
 % Please edit documentation in R/add_files.R
 \name{add_js_file}
 \alias{add_js_file}
+\alias{add_external_js_file}
 \alias{add_js_handler}
 \alias{add_css_file}
+\alias{add_external_css_file}
 \alias{add_ui_server_files}
 \title{Create Files}
 \usage{
 add_js_file(name, pkg = get_golem_wd(), dir = "inst/app/www",
   open = TRUE, dir_create = TRUE)
 
+add_external_js_file(url, name, pkg = get_golem_wd(),
+  dir = "inst/app/www", open = TRUE, dir_create = TRUE)
+
 add_js_handler(name, pkg = get_golem_wd(), dir = "inst/app/www",
   open = TRUE, dir_create = TRUE)
 
 add_css_file(name, pkg = get_golem_wd(), dir = "inst/app/www",
   open = TRUE, dir_create = TRUE)
+
+add_external_css_file(url, name, pkg = get_golem_wd(),
+  dir = "inst/app/www", open = TRUE, dir_create = TRUE)
 
 add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app",
   dir_create = TRUE)
@@ -29,6 +37,8 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app",
 \item{open}{Should the file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+
+\item{url}{String representation of URL for the file to be downloaded}
 }
 \description{
 These functions create files inside the \code{inst/app} folder.
