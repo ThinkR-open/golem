@@ -45,7 +45,7 @@ add_js_file <- function(
   
   cat_green_tick(glue::glue("File created at {where}"))
   
-  if (check_file_exist(paste0(pkg, "/DESCRIPTION"))) {
+  if (file.exists(paste0(pkg, "/DESCRIPTION"))) {
   cat_red_bullet(
     glue::glue(
       'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
@@ -107,7 +107,8 @@ add_js_handler <- function(
   write_there("});")
   
   cat_green_tick(glue::glue("File created at {where}"))
-  if (check_file_exist(paste0(pkg, "/DESCRIPTION"))) {
+  
+  if (file.exists(paste0(pkg, "/DESCRIPTION"))) {
   cat_red_bullet(
     glue::glue(
       'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
@@ -158,7 +159,8 @@ add_css_file <- function(
   file.create(where)
   
   cat_green_tick(glue::glue("File created at {where}"))
-  if (check_file_exist(paste0(pkg, "/DESCRIPTION"))) {
+  
+  if (file.exists(paste0(pkg, "/DESCRIPTION"))) {
   cat_red_bullet(
     glue::glue(
       'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/{name}.css")`'
