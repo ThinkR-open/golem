@@ -7,12 +7,12 @@
 \usage{
 activate_js()
 
-invoke_js(fun, ui_ref, session = shiny::getDefaultReactiveDomain())
+invoke_js(fun, ..., session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
 \item{fun}{JS function to be invoked.}
 
-\item{ui_ref}{The UI reference to call the JS function on.}
+\item{...}{atomics or JSON-like vectors to be sent to the triggered JS function}
 
 \item{session}{The shiny session within which to call \code{sendCustomMessage}.
 
