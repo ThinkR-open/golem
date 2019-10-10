@@ -41,8 +41,10 @@ invoke_js <- function(
   ...,
   session = shiny::getDefaultReactiveDomain()
 ){
-  attempt::stop_if(fun == "",
-      "Error: Empty string is not a valid JS handler name")
+  attempt::stop_if(
+    fun == "",
+    msg = "Error: Empty string is not a valid JS handler name"
+  )
   messages <- list(...)
   res <- lapply(
     messages,
