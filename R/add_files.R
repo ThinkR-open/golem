@@ -186,6 +186,8 @@ add_ui_server_files <- function(
   dir = "inst/app",
   dir_create = TRUE
 ){
+  
+  #browser()
   old <- setwd(normalizePath(pkg))   
   on.exit(setwd(old))
   
