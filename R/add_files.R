@@ -1,6 +1,7 @@
 #' Create Files
 #' 
 #' These functions create files inside the `inst/app` folder. 
+#' These functions can be used outside of a {golem} project. 
 #' 
 #' @inheritParams  add_module
 #' @param dir Path to the dir where the file while be created.
@@ -17,6 +18,9 @@ add_js_file <- function(
   open = TRUE, 
   dir_create = TRUE
 ){
+  attempt::stop_if(rlang::is_missing(name),
+    msg = "Name is required")
+  
   old <- setwd(normalizePath(pkg))  
   on.exit(setwd(old))
   
@@ -66,6 +70,9 @@ add_js_handler <- function(
   open = TRUE, 
   dir_create = TRUE
 ){
+  attempt::stop_if(rlang::is_missing(name),
+    msg = "Name is required")
+  
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
@@ -127,6 +134,9 @@ add_css_file <- function(
   open = TRUE, 
   dir_create = TRUE
 ){
+  attempt::stop_if(rlang::is_missing(name),
+    msg = "Name is required")
+  
   old <- setwd(normalizePath(pkg)) 
   on.exit(setwd(old))
   
@@ -168,7 +178,6 @@ add_css_file <- function(
   }
 }
 
-
 #' @export
 #' @rdname add_files
 #' @importFrom glue glue
@@ -177,6 +186,9 @@ add_ui_server_files <- function(
   dir = "inst/app",
   dir_create = TRUE
 ){
+  attempt::stop_if(rlang::is_missing(name),
+    msg = "Name is required")
+  
   #browser()
   old <- setwd(normalizePath(pkg))   
   on.exit(setwd(old))

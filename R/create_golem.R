@@ -6,12 +6,12 @@
 #'      the package name from being checked. 
 #' @param open boolean open the created project
 #' @param package_name package name to use
+#' @param without_comments boolean start project without golem comments
 #' @param ... not used
 #'
 #' @importFrom yesno yesno
 #' @importFrom cli cat_rule
 #' @importFrom utils getFromNamespace
-#' @importFrom stringr str_remove_all
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi openProject
 #' @export
@@ -20,6 +20,7 @@ create_golem <- function(
   check_name = TRUE,
   open =TRUE,
   package_name = basename(path),
+  without_comments = FALSE,
   ...
 ) {
   
@@ -60,7 +61,7 @@ create_golem <- function(
   for ( i in t ){
     file.rename(
       from = i,
-      to =str_remove_all(i, "REMOVEME")
+      to = gsub("REMOVEME", "", i)
     )
     
     try({
@@ -72,6 +73,22 @@ create_golem <- function(
     },
     silent=TRUE)
   }
+  
+  
+  if ( without_comments == TRUE ) {
+    files <- list.files(
+      path = c(
+        file.path(path, "dev"),
+        file.path(path, "R")
+      ), 
+      full.names = TRUE
+    )
+    for ( file in files ) {
+      remove_comments(file)
+    }
+  }
+  
+  
   cat_rule("Created")
   
   
@@ -89,5 +106,10 @@ create_golem <- function(
 
 # to be used in RStudio "new project" GUI
 create_golem_gui <- function(path,...){
-  create_golem(path=path,open=FALSE)
+  dots <- list(...)
+  create_golem(
+    path = path,
+    open = FALSE,
+    without_comments = dots$without_comments
+  )
 }

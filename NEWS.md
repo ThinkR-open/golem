@@ -10,6 +10,8 @@
 
 + `add_module` now allows to create and `fct_` and an `utils_` file (#154, @novica)
 
++ `golem::detach_all_attached()` is now silent (#186, @annakau)
+
 ## Breaking changes 
 
 ## Bug fix
