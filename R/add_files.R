@@ -186,8 +186,6 @@ add_ui_server_files <- function(
   dir = "inst/app",
   dir_create = TRUE
 ){
-  attempt::stop_if(rlang::is_missing(name),
-    msg = "Name is required")
   
   #browser()
   old <- setwd(normalizePath(pkg))   
