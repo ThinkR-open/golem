@@ -12,7 +12,6 @@
 #' @importFrom yesno yesno
 #' @importFrom cli cat_rule
 #' @importFrom utils getFromNamespace
-#' @importFrom stringr str_remove_all
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi openProject
 #' @export
@@ -62,7 +61,7 @@ create_golem <- function(
   for ( i in t ){
     file.rename(
       from = i,
-      to =str_remove_all(i, "REMOVEME")
+      to = gsub("REMOVEME", "", i)
     )
     
     try({
