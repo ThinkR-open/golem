@@ -6,7 +6,7 @@
 #' to launch any JS function created inside a Shiny JavaScript handler. 
 #' 
 #' @param fun JS function to be invoked.
-#' @param ... atomics or JSON-like vectors to be sent to the triggered JS function
+#' @param ... JSON-like messages to be sent to the triggered JS function
 #' @param session The shiny session within which to call \code{sendCustomMessage}.
 #' 
 #' 
@@ -41,8 +41,8 @@ invoke_js <- function(
   ...,
   session = shiny::getDefaultReactiveDomain()
 ){
-  if (fun == "")
-    stop("Error: invoke_js must be called with a valid JS handler name!")
+  attempt::stop_if(fun == "",
+      "Error: Empty string is not a valid JS handler name")
   messages <- list(...)
   res <- lapply(
     messages,
