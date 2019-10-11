@@ -43,17 +43,19 @@ $( document ).ready(function() {
     $(what).removeAttr('disabled');
   });
   
-  Shiny.addCustomMessageHandler('alert', function(message) {
-    alert(message);
+  Shiny.addCustomMessageHandler('alert', function(args) {
+    alert(args.message);
   });
   
-  Shiny.addCustomMessageHandler('prompt', function(message) {
-    var input = prompt(message);
+  Shiny.addCustomMessageHandler('prompt', function(args) {
+    var input = prompt(args.message);
+    Shiny.setInputValues(args.id, input);
     return input;
   });
   
-  Shiny.addCustomMessageHandler('confirm', function(message) {
-    var input = confirm(message);
+  Shiny.addCustomMessageHandler('confirm', function(args) {
+    var input = confirm(args.message);
+    Shiny.setInputValues(args.id, input);
     return input;
   });
   
