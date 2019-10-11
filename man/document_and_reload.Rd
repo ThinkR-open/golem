@@ -4,7 +4,7 @@
 \alias{document_and_reload}
 \title{Document and reload your package}
 \usage{
-document_and_reload(pkg = ".")
+document_and_reload(pkg = get_golem_wd())
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is \code{"."}.}

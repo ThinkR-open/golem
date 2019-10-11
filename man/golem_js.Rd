@@ -12,7 +12,7 @@ invoke_js(fun, ..., session = shiny::getDefaultReactiveDomain())
 \arguments{
 \item{fun}{JS function to be invoked.}
 
-\item{...}{atomics or JSON-like vectors to be sent to the triggered JS function}
+\item{...}{JSON-like messages to be sent to the triggered JS function}
 
 \item{session}{The shiny session within which to call \code{sendCustomMessage}.
 
@@ -28,6 +28,9 @@ invoke_js(fun, ..., session = shiny::getDefaultReactiveDomain())
 \item{clickon}{Click on an element. The full jQuery selector has to be used.}
 \item{disable}{Add "disabled" to an element. The full jQuery selector has to be used.}
 \item{reable}{Remove "disabled" from an element. The full jQuery selector has to be used.}
+\item{alert}{Open an alert box with the message provided.}
+\item{prompt}{Open a prompt box with the message provided.}
+\item{confirm}{Open a confirm box with the message provided.}
 }}
 }
 \description{
