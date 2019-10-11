@@ -1,4 +1,4 @@
-#' Create run_dev by module
+#' Add run_dev by module
 #' 
 #' Allow you to create one run_dev by module
 #'
@@ -14,13 +14,13 @@
 #' @examples
 #' 
 #' \dontrun{
-#' create_run_dev("ok", 
+#' add_run_dev_module("ok", 
 #'                mod_ok_ui,
 #'                mod_ok_server, 
 #'                r= "reactiveValues(message = 'ok')", 
 #'                message = "'have to be string'")
 #' }
-create_run_dev <- function(name,
+add_run_dev_module <- function(name,
                            module_ui,
                            module_server, 
                            ...,
