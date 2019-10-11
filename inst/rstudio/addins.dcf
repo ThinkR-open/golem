@@ -1,0 +1,19 @@
+Name: Open start.R
+Description: Opens the 01_start.R file.
+Binding: go_to_start
+Interactive: false
+
+Name: Open dev.R
+Description: Opens the 02_dev.R file.
+Binding: go_to_dev
+Interactive: false
+
+Name: Open deploy.R
+Description: Opens the 03_deploy.R file.
+Binding: go_to_deploy
+Interactive: false
+
+Name: Open run_dev.R
+Description: Opens the run_dev.R file.
+Binding: go_to_run_dev
+Interactive: false
