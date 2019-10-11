@@ -38,32 +38,6 @@ test_that("add_js_file", {
   })
 })
 
-test_that("use_external_js_file", {
-  with_dir(pkg, {
-    remove_file("inst/app/www/script.js")
-    use_external_js_file("https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.min.js", "script", open = FALSE)
-    expect_true(file.exists("inst/app/www/script.js"))
-    
-    script <-
-      list.files("inst/app/www/", pattern = "script")
-    expect_equal(tools::file_ext(script),
-                 "js")
-    remove_file("inst/app/www/script.js")
-  })
-})
-
-test_that("use_external_css_file", {
-  with_dir(pkg, {
-    remove_file("inst/app/www/style.css")
-    use_external_css_file("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css", "style", open = FALSE)
-    expect_true(file.exists("inst/app/www/style.css"))
-    
-    style <-list.files("inst/app/www/", pattern = "style")
-    expect_equal(tools::file_ext(style), "css")
-    remove_file("inst/app/www/style.css")
-  })
-})
-
 test_that("add_js_handler", {
   with_dir(pkg, {
     remove_file("inst/app/www/handler.js")

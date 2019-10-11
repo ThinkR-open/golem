@@ -22,6 +22,9 @@
 #'   \item{clickon}{Click on an element. The full jQuery selector has to be used.}
 #'   \item{disable}{Add "disabled" to an element. The full jQuery selector has to be used.}
 #'   \item{reable}{Remove "disabled" from an element. The full jQuery selector has to be used.}
+#'   \item{alert}{Open an alert box with the message provided.}
+#'   \item{prompt}{Open a prompt box with the message provided.}
+#'   \item{confirm}{Open a confirm box with the message provided.}
 #' }
 #'
 #' @export
