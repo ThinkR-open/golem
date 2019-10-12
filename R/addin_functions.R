@@ -1,3 +1,5 @@
+#' Shorcut to insert NS
+#' 
 #' @importFrom rstudioapi getSourceEditorContext
 #' @importFrom rstudioapi modifyRange
 #' 
