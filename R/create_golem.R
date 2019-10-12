@@ -71,7 +71,8 @@ create_golem <- function(
     },
     silent=TRUE)
   }
-  cat_rule("Created")
+  cat_rule(paste0("A new golem package ", package_name, " was created."))
+  cat_rule("To continue work on your package start editing the 01_start.R file")
   
   
   if ( open & rstudioapi::isAvailable() ) { 
