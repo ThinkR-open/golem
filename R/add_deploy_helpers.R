@@ -118,8 +118,9 @@ add_shinyserver_file <- function(
 #'     Default is 80.  
 #' @param host The `options('shiny.host')` on which to run the Shiny App.
 #'    Default is 0.0.0.0.  
-#' @param sysreqs boolean to check the System Requirements    
+#' @param sysreqs boolean to check the system requirements    
 #' @param repos character vector, the base URL of the repositories  
+#' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
 #' @export
 #' @rdname dockerfiles
 #' @importFrom desc desc_get_deps
@@ -153,7 +154,8 @@ add_dockerfile <- function(
   port = 80, 
   host = "0.0.0.0",
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/"
+  repos = "https://cran.rstudio.com/",
+  expand = FALSE
   # ,  function_to_launch = "run_app"
 ) {
   
@@ -165,7 +167,7 @@ add_dockerfile <- function(
   
   
   
-  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos,expand = expand)
   dock$EXPOSE(port)
   dock$CMD(
     glue::glue(
@@ -190,14 +192,16 @@ add_dockerfile_shinyproxy <- function(
   ), 
   as = NULL,
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/"
+  repos = "https://cran.rstudio.com/",
+  expand = FALSE
 ){
   
   where <- file.path(pkg, output)
   
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as, 
+                         sysreqs = sysreqs, repos = repos, expand = expand)
   
   dock$EXPOSE(3838)
   dock$CMD(glue::glue(
@@ -226,7 +230,8 @@ add_dockerfile_heroku <- function(
   ), 
   as = NULL,
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/"
+  repos = "https://cran.rstudio.com/",
+  expand = FALSE
 ){
   where <- file.path(pkg, output)
   
@@ -234,7 +239,7 @@ add_dockerfile_heroku <- function(
     return(invisible(FALSE))
   } 
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos, expand = expand)
   
   dock$CMD(
     glue::glue(
@@ -286,6 +291,14 @@ alert_build <- function(path, output){
 }
 
 # From {dockerfiler}, in wait for the version to be on CRAN
+#' @param path 
+#'
+#' @param FROM 
+#' @param AS 
+#' @param sysreqs 
+#' @param repos 
+#' @param expand 
+#'
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps
@@ -296,7 +309,8 @@ dock_from_desc <- function(
   FROM = "rocker/r-ver",
   AS = NULL,
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/"
+  repos = "https://cran.rstudio.com/",
+  expand = FALSE
 ){
   
  
@@ -338,8 +352,17 @@ dock_from_desc <- function(
   dock <- dockerfiler::Dockerfile$new(FROM = FROM)
   
   if (length(system_requirement)>0){
+    
+    if ( !expand){
     dock$RUN(paste("apt-get update && apt-get install -y ",paste(system_requirement,collapse = " ")))
-  }
+    } else{
+    dock$RUN("apt-get update" )
+      for ( sr in system_requirement){
+    dock$RUN(paste("apt-get install -y ",sr))
+      }
+    }
+    
+    }
   
   dock$RUN(
     sprintf("echo \"options(repos = c(CRAN = '%s'), download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site",repos))

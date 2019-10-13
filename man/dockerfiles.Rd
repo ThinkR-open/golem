@@ -10,17 +10,19 @@ add_dockerfile(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL, port = 80,
   host = "0.0.0.0", sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/")
+  repos = "https://cran.rstudio.com/", expand = FALSE)
 
 add_dockerfile_shinyproxy(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
-  sysreqs = TRUE, repos = "https://cran.rstudio.com/")
+  sysreqs = TRUE, repos = "https://cran.rstudio.com/",
+  expand = FALSE)
 
 add_dockerfile_heroku(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
-  sysreqs = TRUE, repos = "https://cran.rstudio.com/")
+  sysreqs = TRUE, repos = "https://cran.rstudio.com/",
+  expand = FALSE)
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file to use as an input.}
@@ -40,9 +42,11 @@ Default is 80.}
 \item{host}{The \code{options('shiny.host')} on which to run the Shiny App.
 Default is 0.0.0.0.}
 
-\item{sysreqs}{boolean to check the System Requirements}
+\item{sysreqs}{boolean to check the system requirements}
 
 \item{repos}{character vector, the base URL of the repositories}
+
+\item{expand}{boolean, if \code{TRUE} each system requirement will be known his own RUN line}
 }
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates
