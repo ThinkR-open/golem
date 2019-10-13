@@ -287,6 +287,8 @@ alert_build <- function(path, output){
 
 # From {dockerfiler}, in wait for the version to be on CRAN
 #' @importFrom utils installed.packages packageVersion
+#' @importFrom remotes dev_package_deps
+#' @importFrom desc desc_get_deps
 #' 
 dock_from_desc <- function(
   path = "DESCRIPTION",
@@ -309,6 +311,8 @@ dock_from_desc <- function(
                                          "tcltk", "tools", "utils")] # remove base and recommended
 
   
+  
+ 
   if (sysreqs){
     # please wait during system requirement calculation
     cat_bullet("Please wait during system requirements calculation...",bullet = "info",bullet_col = "green") # TODO animated version ?
@@ -319,8 +323,17 @@ dock_from_desc <- function(
     system_requirement <- NULL
   }
   
+  remotes_deps <- remotes::package_deps(packages)
+  packages_on_cran <- remotes_deps$package[remotes_deps$is_cran]%>% 
+    intersect(packages)
   
-  pkg <- setNames(lapply(packages, packageVersion), packages)
+  packages_not_on_cran <- packages %>% 
+    setdiff(packages_on_cran)
+  
+  
+  packages_on_cran <- setNames(lapply(packages_on_cran, packageVersion), packages_on_cran)
+  
+  
   dock <- dockerfiler::Dockerfile$new(FROM = FROM)
   
   if (length(system_requirement)>0){
@@ -335,7 +348,7 @@ dock_from_desc <- function(
   dock$RUN("R -e 'remotes::install_github(\"r-lib/remotes\", ref = \"97bbf81\")'")
   
   
-  
+  if ( length(packages_on_cran>0)){
   ping <- mapply(function(dock, ver, nm){
     res <- dock$RUN(
       sprintf(
@@ -343,7 +356,35 @@ dock_from_desc <- function(
         nm, ver
       )
     )
-  }, ver = pkg, nm = names(pkg), MoreArgs = list(dock = dock))
+  }, ver = packages_on_cran, nm = names(packages_on_cran), MoreArgs = list(dock = dock))
+  }
+  
+  if ( length(packages_not_on_cran>0)){
+    
+    
+    # prepare the install_github
+    nn <- remotes_deps %>%
+      filter(!is_cran)  %>%
+      pull(remote)%>%
+      map_df(~.x[c('repo','username','sha')]) %>% 
+      mutate(remote = glue::glue("{username}/{repo}@{sha}")) %>% 
+      pull(remote)
+    
+    
+    pong <- mapply(function(dock, ver, nm){
+      res <- dock$RUN(
+        sprintf(
+          "Rscript -e 'remotes::install_github(\"%s\")'", 
+          ver
+        )
+      )
+    }, ver = nn, MoreArgs = list(dock = dock))
+    
+    
+  }
+  
+  
+  
   dock
   
   
