@@ -6,6 +6,7 @@
 #' @importFrom utils download.file
 #' @importFrom jsonlite fromJSON
 #' @importFrom remotes package_deps
+#' @export
 get_sysreqs <- function(packages, quiet = TRUE){
   
   # all_deps <- paste(miniCRAN::pkgDep(packages,suggests = FALSE,quiet=quiet), collapse = ",")

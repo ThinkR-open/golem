@@ -57,7 +57,8 @@ Imports:
     usethis,
     utils,
     yesno,
-    jsonlite
+    jsonlite,
+    magrittr
 Suggests:
     spelling, 
     covr,
