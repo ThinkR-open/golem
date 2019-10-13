@@ -17,3 +17,18 @@ Name: Open run_dev.R
 Description: Opens the run_dev.R file.
 Binding: go_to_run_dev
 Interactive: false
+
+Name: Open app_ui.R
+Description: Opens the app_ui.R file.
+Binding: go_to_app_ui
+Interactive: false
+
+Name: Open app_server.R
+Description: Opens the app_server.R file.
+Binding: go_to_app_server
+Interactive: false
+
+Name: Open run_app.R
+Description: Opens the run_app.R file.
+Binding: go_to_run_app
+Interactive: false

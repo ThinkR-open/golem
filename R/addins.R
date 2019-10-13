@@ -39,3 +39,15 @@ go_to_deploy <- function(){
 go_to_run_dev <- function(){
   go_to("dev/run_dev.R")
 }
+
+go_to_app_ui <- function(){
+  go_to("R/app_ui.R")
+}
+
+go_to_app_server <- function(){
+  go_to("R/app_server.R")
+}
+
+go_to_run_app <- function(){
+  go_to("R/run_app.R")
+}
