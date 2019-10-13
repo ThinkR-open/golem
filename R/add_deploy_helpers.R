@@ -289,6 +289,7 @@ alert_build <- function(path, output){
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps
+#' @importFrom magrittr %>% 
 #' 
 dock_from_desc <- function(
   path = "DESCRIPTION",
@@ -324,7 +325,7 @@ dock_from_desc <- function(
   }
   
   remotes_deps <- remotes::package_deps(packages)
-  packages_on_cran <- remotes_deps$package[remotes_deps$is_cran]%>% 
+  packages_on_cran <- remotes_deps$package[remotes_deps$is_cran] %>% 
     intersect(packages)
   
   packages_not_on_cran <- packages %>% 
@@ -361,15 +362,18 @@ dock_from_desc <- function(
   
   if ( length(packages_not_on_cran>0)){
     
-    
     # prepare the install_github
-    nn <- remotes_deps %>%
-      filter(!is_cran)  %>%
-      pull(remote)%>%
-      map_df(~.x[c('repo','username','sha')]) %>% 
-      mutate(remote = glue::glue("{username}/{repo}@{sha}")) %>% 
-      pull(remote)
+    # 
+  nn<-  lapply(
+    remotes_deps$remote[!remotes_deps$is_cran],
+    function(.){      .[c('repo','username','sha')]
+    }) %>% do.call(rbind,.) %>% as.data.frame()
     
+    # nn <- remotes_deps$remote[!remotes_deps$is_cran]%>%
+    #   map_df(~.x[c('repo','username','sha')]) %>% 
+    #   mutate(remote = glue::glue("{username}/{repo}@{sha}")) %>% 
+    #   pull(remote)
+  nn<- glue::glue("{nn$username}/{nn$repo}@{nn$sha}")
     
     pong <- mapply(function(dock, ver, nm){
       res <- dock$RUN(
