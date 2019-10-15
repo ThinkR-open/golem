@@ -6,6 +6,7 @@
 #'      the package name from being checked. 
 #' @param open boolean open the created project
 #' @param package_name package name to use
+#' @param without_comments boolean start project without golem comments
 #' @param ... not used
 #'
 #' @importFrom yesno yesno
@@ -20,6 +21,7 @@ create_golem <- function(
   check_name = TRUE,
   open =TRUE,
   package_name = basename(path),
+  without_comments = FALSE,
   ...
 ) {
   
@@ -72,9 +74,27 @@ create_golem <- function(
     },
     silent=TRUE)
   }
-  cat_line(paste0("A new golem package ", package_name, " was created in ", get_golem_wd(), "/", package_name,
+
+  
+  if ( without_comments == TRUE ) {
+    files <- list.files(
+      path = c(
+        file.path(path, "dev"),
+        file.path(path, "R")
+      ), 
+      full.names = TRUE
+    )
+    for ( file in files ) {
+      remove_comments(file)
+    }
+  }
+  
+  
+ cat_line(paste0("A new golem package ", package_name, " was created in ", get_golem_wd(), "/", package_name,
                   " directory.\n", 
                   "To continue work on your package start editing the 01_start.R file"))
+  
+
   
   if ( open & rstudioapi::isAvailable() ) { 
     rstudioapi::openProject(path = path)
@@ -90,5 +110,10 @@ create_golem <- function(
 
 # to be used in RStudio "new project" GUI
 create_golem_gui <- function(path,...){
-  create_golem(path=path,open=FALSE)
+  dots <- list(...)
+  create_golem(
+    path = path,
+    open = FALSE,
+    without_comments = dots$without_comments
+  )
 }

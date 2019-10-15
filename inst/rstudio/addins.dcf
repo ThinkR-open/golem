@@ -1,0 +1,4 @@
+Name: Put selected text into between ns()
+Description: add 'ns(' in front of selected text, and add ')' behind.
+Binding: insert_ns
+Interactive: false

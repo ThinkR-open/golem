@@ -6,7 +6,7 @@
 #' to launch any JS function created inside a Shiny JavaScript handler. 
 #' 
 #' @param fun JS function to be invoked.
-#' @param ui_ref The UI reference to call the JS function on.
+#' @param ... JSON-like messages to be sent to the triggered JS function
 #' @param session The shiny session within which to call \code{sendCustomMessage}.
 #' 
 #' 
@@ -22,6 +22,9 @@
 #'   \item{clickon}{Click on an element. The full jQuery selector has to be used.}
 #'   \item{disable}{Add "disabled" to an element. The full jQuery selector has to be used.}
 #'   \item{reable}{Remove "disabled" from an element. The full jQuery selector has to be used.}
+#'   \item{alert}{Open an alert box with the message provided.}
+#'   \item{prompt}{Open a prompt box with the message provided.}
+#'   \item{confirm}{Open a confirm box with the message provided.}
 #' }
 #'
 #' @export
@@ -38,13 +41,19 @@ activate_js <- function(){
 #' @rdname golem_js
 invoke_js <- function( 
   fun, 
-  ui_ref, 
-  session = shiny::getDefaultReactiveDomain() 
+  ...,
+  session = shiny::getDefaultReactiveDomain()
 ){
-  res <- mapply(function(x, y){
-    session$sendCustomMessage(x, y)
-  }, x = fun, y = ui_ref)
+  attempt::stop_if(
+    fun == "",
+    msg = "Error: Empty string is not a valid JS handler name"
+  )
+  messages <- list(...)
+  res <- lapply(
+    messages,
+    function(message, fun){
+      session$sendCustomMessage(fun, message)
+    },
+    fun=fun)
   invisible(res)
-  #session$sendCustomMessage(fun, ui_ref)
 }
-
