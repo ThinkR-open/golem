@@ -22,7 +22,8 @@ add_module(name, pkg = get_golem_wd(), open = TRUE,
 }
 \description{
 This function creates a module inside the \code{R/} folder, based
-on a specific module structure.
+on a specific module structure. This function can be used outside
+of a {golem} project.
 }
 \note{
 This function will prefix the \code{name} argument with \code{mod_}.
