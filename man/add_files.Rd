@@ -32,4 +32,5 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app",
 }
 \description{
 These functions create files inside the \code{inst/app} folder.
+These functions can be used outside of a {golem} project.
 }
