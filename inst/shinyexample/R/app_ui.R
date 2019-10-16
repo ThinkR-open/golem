@@ -12,6 +12,12 @@ app_ui <- function() {
 
 #' @import shiny
 golem_add_external_resources <- function(){
+  # checking www directory if it's empty then it will create a folder 
+  # 
+  if(system.file('app/www', package = 'shinyexample')==""){
+    path <- system.file(package = "shinyexample")
+    dir.create(paste0(path,"/app/www/"), recursive = TRUE)
+  }
   
   addResourcePath(
     'www', system.file('app/www', package = 'shinyexample')
