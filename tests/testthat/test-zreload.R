@@ -14,7 +14,7 @@ test_that("test document_and_reload",{
     cat(
     "#' @export
     sum_golem <- function(a,b){a + b}",file ="R/sum.R")
-    document_and_reload()
+    document_and_reload(pkg = ".")
     expect_equal(sum_golem(1,2),3)
   })
 })
