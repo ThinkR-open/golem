@@ -4,7 +4,11 @@ context("function add_module")
 test_that("add_module", {
   with_dir(pkg, {
     remove_file("R/mod_test.R")
-    add_module("test", open = FALSE,   fct = "ftest", utils = "utest")
+    withr::with_options(
+      c("golem.wd" = pkg), {
+        add_module("test", open = FALSE, pkg = pkg,  fct = "ftest", utils = "utest")
+      }
+    )
     expect_true(file.exists("R/mod_test.R"))
     expect_true(file.exists("R/mod_test_fct_ftest.R"))
     expect_true(file.exists("R/mod_test_utils_utest.R"))
