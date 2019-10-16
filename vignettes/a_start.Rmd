@@ -193,6 +193,8 @@ golem::use_favicon( path = "path/to/favicon")
 
 Note that you can add an url, and the favicon will be downloaded to the `inst/app/www` folder. 
 
+> **Note**: If you are deploying your app with [ShinyProxy](https://www.shinyproxy.io/), your favicon should have the `.png` extension, otherwise it is not going to work.
+
 + Utils
 
 These two functions add a file with various functions that can be used along the process of building your app.
