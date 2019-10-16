@@ -13,7 +13,7 @@ app_ui <- function(request) {
 #' @import shiny
 golem_add_external_resources <- function(){
   
-  addResourcePath(
+  golem::add_resource_path(
     'www', system.file('app/www', package = 'shinyexample')
   )
  
