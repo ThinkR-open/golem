@@ -25,3 +25,5 @@ rand_name <- function(){
 }
 
 set_golem_wd(pkg)
+orig_test <- usethis::proj_get()
+usethis::proj_set(pkg)
