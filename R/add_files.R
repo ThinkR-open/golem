@@ -10,6 +10,7 @@
 #' @importFrom glue glue
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
+#' @importFrom tools file_path_sans_ext
 
 add_js_file <- function(
   name, 
@@ -20,6 +21,8 @@ add_js_file <- function(
 ){
   attempt::stop_if(rlang::is_missing(name),
     msg = "Name is required")
+  
+  name <- file_path_sans_ext(name)
   
   old <- setwd(normalizePath(pkg))  
   on.exit(setwd(old))
@@ -74,6 +77,8 @@ add_js_handler <- function(
 ){
   attempt::stop_if(rlang::is_missing(name),
     msg = "Name is required")
+  
+  name <- file_path_sans_ext(name)
   
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
@@ -140,6 +145,8 @@ add_css_file <- function(
 ){
   attempt::stop_if(rlang::is_missing(name),
     msg = "Name is required")
+  
+  name <- file_path_sans_ext(name)
   
   old <- setwd(normalizePath(pkg)) 
   on.exit(setwd(old))

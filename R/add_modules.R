@@ -15,6 +15,7 @@
 #' @importFrom glue glue
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
+#' @importFrom tools file_path_sans_ext
 add_module <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -23,6 +24,9 @@ add_module <- function(
   fct = NULL, 
   utils = NULL
 ){
+  
+  name <- file_path_sans_ext(name)
+  
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
