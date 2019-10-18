@@ -27,3 +27,7 @@ It default to \code{"."}, the current directory when starting a golem.
 You can use these two functions if you need to manipulate this
 directory.
 }
+\details{
+NOTE that this will also affect the behavior of the \code{{usethis}}
+functions.
+}
