@@ -15,6 +15,12 @@ test_that("add_css_file", {
     )
     style <-list.files("inst/app/www/", pattern = "style")
     expect_equal(tools::file_ext(style), "css")
+    
+    # Test that extension is removed
+    remove_file("inst/app/www/style.css")
+    add_css_file("style.css", pkg = pkg, open = FALSE)
+    expect_true(file.exists("inst/app/www/style.css"))
+    
     remove_file("inst/app/www/style.css")
     remove_file("inst/app/www/stylebis.css")
   })
@@ -37,6 +43,11 @@ test_that("add_js_file", {
     expect_equal(tools::file_ext(script),
                  "js")
     remove_file("inst/app/www/script.js")
+    
+    # Test that extension is removed
+    add_js_file("script.js", pkg = pkg, open = FALSE)
+    expect_true(file.exists("inst/app/www/script.js"))
+    remove_file("inst/app/www/script.js")
   })
 })
 
@@ -56,6 +67,11 @@ test_that("add_js_handler", {
       list.files("inst/app/www/", pattern = "handler")
     expect_equal(tools::file_ext(script),
                  "js")
+    remove_file("inst/app/www/handler.js")
+    
+    # Test that extension is removed
+    add_js_handler("handler.js", pkg = pkg, open = FALSE)
+    expect_true(file.exists("inst/app/www/handler.js"))
     remove_file("inst/app/www/handler.js")
   })
 })
