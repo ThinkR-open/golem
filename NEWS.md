@@ -48,6 +48,8 @@
 
 + Better error on missing name in add_*, (#120, @novica)
 
++ When adding file, the extension is now ignored if provided by the user (#231)
+
 ## Internal changes
 
 + We no longer depend on `{stringr}` (#201, @TomerPacific)
