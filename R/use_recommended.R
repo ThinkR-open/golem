@@ -13,7 +13,7 @@
 #' 
 #' @export
 use_recommended_deps <- function(
-  pkg = ".",
+  pkg = get_golem_wd(),
   recommended = c("shiny","DT","attempt","glue","htmltools","golem")
 ){
   old <- setwd(normalizePath(pkg))
@@ -31,7 +31,7 @@ use_recommended_deps <- function(
 #' @importFrom utils capture.output
 #' @importFrom attempt without_warning
 use_recommended_tests <- function
-(pkg = "."
+(pkg = get_golem_wd()
  ){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old)) 
