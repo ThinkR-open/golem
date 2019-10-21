@@ -2,6 +2,8 @@ golem_sys <- function(..., lib.loc = NULL, mustWork = FALSE){
   system.file(..., package = "golem", lib.loc = lib.loc, mustWork = mustWork)
 }
 
+#' @export
+#' @rdname app_sys
 app_sys <- function() {
   system.file(..., package = get_golem_name())
 }
