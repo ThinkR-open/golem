@@ -17,6 +17,7 @@ add_rstudio_files <- function(
   }
   file.create( where )
   use_build_ignore( basename(where) )
+  use_build_ignore("rsconnect")
   write_there("# Launch the ShinyApp (Do not remove this comment)")
   write_there("# To deploy, run: rsconnect::deployApp()")
   write_there("# Or use the blue button on top of this file")
