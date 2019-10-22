@@ -13,4 +13,3 @@ document_and_reload(pkg = get_golem_wd())
 This function calls \code{rstudioapi::documentSaveAll()},
 \code{roxygen2::roxygenise()} and \code{pkgload::load_all()}.
 }
-

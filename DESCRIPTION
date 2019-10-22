@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.1.0.9001
+Version: 0.1.0.9500
 Authors@R: 
     c(person(given = "Vincent",
              family = "Guyader",
@@ -22,6 +22,10 @@ Authors@R:
              role = "aut",
              email = "cervan@thinkr.fr",
              comment = c(ORCID = "0000-0002-4816-4624")),
+      person(given = "Novica",
+             family = "Nakov",
+             role = "ctb",
+             email = "nnovica@gmail.com"),
       person(given = "ThinkR",
              role = "cph"))
 Description: An opinionated framework for building a
@@ -42,8 +46,6 @@ Imports:
     DT,
     glue,
     htmltools,
-    jsonlite,
-    magrittr
     pkgload,
     processx,
     remotes,
@@ -58,7 +60,7 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno,
+    yesno
 Suggests:
     spelling, 
     covr,

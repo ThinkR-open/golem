@@ -290,7 +290,8 @@ alert_build <- function(path, output){
   )
 }
 
-# From {dockerfiler}, in wait for the version to be on CRAN
+#' Create Dockerfile from DESCRIPTION
+#
 #' @param path 
 #'
 #' @param FROM 

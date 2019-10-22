@@ -3,7 +3,7 @@ context("function add_dockerfile")
 test_that("add_dockerfile", {
   with_dir(pkg, {
     remove_file("Dockerfile")
-    output <- testthat::capture_output(add_dockerfile(sysreqs = FALSE))
+    output <- testthat::capture_output(add_dockerfile(pkg = pkg, sysreqs = FALSE))
     expect_true(file.exists("Dockerfile"))
     test <-
       stringr::str_detect(output, "Dockerfile created at Dockerfile")
@@ -16,7 +16,7 @@ test_that("add_dockerfile", {
 test_that("add_dockerfile_heroku", {
   with_dir(pkg, {
     remove_file("Dockerfile")
-    output <- testthat::capture_output(add_dockerfile_heroku(sysreqs = FALSE))
+    output <- testthat::capture_output(add_dockerfile_heroku(pkg = pkg, sysreqs = FALSE))
     expect_true(file.exists("Dockerfile"))
     test <-
       stringr::str_detect(output, "Dockerfile created at Dockerfile")
@@ -28,7 +28,7 @@ test_that("add_dockerfile_heroku", {
 test_that("add_dockerfile_shinyproxy", {
   with_dir(pkg, {
     remove_file("Dockerfile")
-    output <- testthat::capture_output(add_dockerfile_shinyproxy(sysreqs = FALSE))
+    output <- testthat::capture_output(add_dockerfile_shinyproxy(pkg = pkg, sysreqs = FALSE))
     expect_true(file.exists("Dockerfile"))
     test <-
       stringr::str_detect(output, "Dockerfile created at Dockerfile")

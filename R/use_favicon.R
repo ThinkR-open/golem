@@ -14,7 +14,7 @@
 #'   use_favicon(path='path/to/your/favicon.ico')
 #' }
 #' }
-use_favicon <- function(path, pkg = "."){
+use_favicon <- function(path, pkg = get_golem_wd()){
   
   if (missing(path)){
     path <- golem_sys("shinyexample/inst/app/www", "favicon.ico")

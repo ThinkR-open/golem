@@ -11,6 +11,7 @@
 #'
 #' @importFrom yesno yesno
 #' @importFrom cli cat_rule
+#' @importFrom cli cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi openProject
@@ -73,7 +74,7 @@ create_golem <- function(
     },
     silent=TRUE)
   }
-  
+
   
   if ( without_comments == TRUE ) {
     files <- list.files(
@@ -89,8 +90,11 @@ create_golem <- function(
   }
   
   
-  cat_rule("Created")
+ cat_line(paste0("A new golem package ", package_name, " was created in ", get_golem_wd(), "/", package_name,
+                  " directory.\n", 
+                  "To continue work on your package start editing the 01_start.R file"))
   
+
   
   if ( open & rstudioapi::isAvailable() ) { 
     rstudioapi::openProject(path = path)

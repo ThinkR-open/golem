@@ -25,4 +25,3 @@ the package name from being checked.}
 \description{
 Create a package for Shiny App using golem
 }
-

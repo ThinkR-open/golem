@@ -1,20 +1,44 @@
+> Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
+
 # golem 0.1.9000+
 
 ## New functions
 
++ `add_dockerfile()` now use installed pacakge version and explicit System Requirements
+
 + `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
+
++ We switched from `shiny::addResourcePath()` to `golem::add_resource_path()`, which doesn't fail if the folder is empty (#223).
+
++ New JavaScript functions to use alert, prompt and confirm (#108, @zwycl)
+
++ `add_external_js_file` and `add_external_css_file` are designed to download .js and .css file off the web to the appropriate directory (#130, @zwycl)
 
 ## New features
 
-+ `add_dockerfile()` now use installed pacakge version and explicit System Requirements
+
 
 + `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157)
+
++ You can now create a golem without any comment (#171, @ArthurData)
+
++ The default `app_ui()` now has a `request` parameter, to natively handle bookmarking.
+
++ `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157). It also uses `get_golem_wd()` as a default path, to be consistent with the rest of `{golem}` (#219, @j450h1)
 
 + `add_module` now allows to create and `fct_` and an `utils_` file (#154, @novica)
 
 + `golem::detach_all_attached()` is now silent (#186, @annakau)
 
++ There is now a series of addins for going to a specific golem file (#212, @novica), and also to wrap a selected text into `ns()` (#143, @kokbent)
+
++ Creation of a golem project is now a little bit more talkative (#63, @novica)
+
++ golem apps now have a title tag in the header by default, (#172,  @novica)
+
 ## Breaking changes 
+
++ `invoke_js()` now takes a list of elements to send to JS (through `...`) instead of a vector (#155, @zwycl)
 
 ## Bug fix
 
@@ -26,7 +50,15 @@
 
 + spellcheck in files (@privefl)
 
++ Message to link to `golem_add_external_resources()` is now conditional to R being in a golem project (#167, @novica)
+
++ Better error on missing name in add_*, (#120, @novica)
+
++ When adding file, the extension is now ignored if provided by the user (#231)
+
 ## Internal changes
+
++ We no longer depend on `{stringr}` (#201, @TomerPacific)
 
 # golem 0.1.0 - CRAN release candidate,  v2
 

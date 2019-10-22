@@ -28,6 +28,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Novica Nakov \email{nnovica@gmail.com} [contributor]
   \item ThinkR [copyright holder]
 }
 

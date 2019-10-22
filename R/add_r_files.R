@@ -1,3 +1,4 @@
+#' @importFrom tools file_path_sans_ext
 add_r_files <- function(
   name, 
   ext = c("fct", "utils"),
@@ -6,6 +7,9 @@ add_r_files <- function(
   open = TRUE, 
   dir_create = TRUE
 ){
+  
+  name <- file_path_sans_ext(name)
+  
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   
