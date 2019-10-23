@@ -4,7 +4,7 @@
 
 ## New functions
 
-+ `add_dockerfile()` now use installed pacakge version and explicit System Requirements
++ `add_dockerfile()` was completely refactore. It now starts from r-ver, uses explicit package versions from you local machine, and tries to set as much System Requirements as possible by using `{sysreq}`, and parses and installs the Remotes tag from the DESCRIPTION (#189, #175)
 
 + `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
 
@@ -14,9 +14,9 @@
 
 + `add_external_js_file` and `add_external_css_file` are designed to download .js and .css file off the web to the appropriate directory (#130, @zwycl)
 
++ There is now an `app_sys()` function, which is a wrapper around `system.file(..., package = "myapp")` (#207,  @novica)
+
 ## New features
-
-
 
 + `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157)
 
@@ -35,6 +35,8 @@
 + Creation of a golem project is now a little bit more talkative (#63, @novica)
 
 + golem apps now have a title tag in the header by default, (#172,  @novica)
+
++ The `rsconnect` folder is now added to `.Rbuildignore` (#244)
 
 ## Breaking changes 
 
@@ -58,9 +60,15 @@
 
 + When adding file, the extension is now ignored if provided by the user (#231)
 
++ The dots R/run_app.R are now documented by default (#243)
+
++ Bug fix of the pkgdown website (#180, )
+
 ## Internal changes
 
 + We no longer depend on `{stringr}` (#201, @TomerPacific)
+
++ get_golem_wd() is now used everywhere in `{golem}` (#237, @felixgolcher)
 
 # golem 0.1.0 - CRAN release candidate,  v2
 
