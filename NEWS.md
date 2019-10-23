@@ -34,6 +34,8 @@
 
 + `invoke_js()` now takes a list of elements to send to JS (through `...`) instead of a vector (#155, @zwycl)
 
++ `get_dependencies` was removed from this package, please use `desc::desc_get_deps()` instead (#251)
+
 ## Bug fix
 
 + The Dockerfile is now correctly added to .Rbuildignore (#81)
