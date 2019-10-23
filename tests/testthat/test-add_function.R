@@ -3,9 +3,9 @@ context("test-add_file function")
 test_that("add_css_file", {
   
   with_dir(pkg, {
-    remove_file("inst/app/www/style.css")
+    remove_files("inst/app/www", "\\.css$")
     add_css_file("style", pkg = pkg, open = FALSE)
-    expect_true(file.exists("inst/app/www/style.css"))
+    expect_exists("inst/app/www/style.css")
     
     add_css_file("stylebis", pkg = pkg, open = FALSE, dir = normalizePath(fp))
     expect_true(
