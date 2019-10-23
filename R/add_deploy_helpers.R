@@ -304,6 +304,7 @@ alert_build <- function(path, output){
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps
 #' @importFrom magrittr %>% 
+#' @importFrom stats setNames
 #' 
 dock_from_desc <- function(
   path = "DESCRIPTION",
