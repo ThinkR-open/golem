@@ -21,13 +21,13 @@ test_that("add_module", {
     remove_file("R/mod_test.R")
     
     # Test ext 
-    add_module("test.R", open = FALSE, pkg = pkg,  fct = "ftest", utils = "utest")
-    expect_true(file.exists("R/mod_test.R"))
-    expect_true(file.exists("R/mod_test_fct_ftest.R"))
-    expect_true(file.exists("R/mod_test_utils_utest.R"))
-    remove_file("R/mod_test.R")
-    remove_file("R/mod_test_fct_ftest.R")
-    remove_file("R/mod_test_utils_utest.R")
+    add_module("test2.R", open = FALSE, pkg = pkg,  fct = "ftest", utils = "utest")
+    expect_true(file.exists("R/mod_test2.R"))
+    expect_true(file.exists("R/mod_test2_fct_ftest.R"))
+    expect_true(file.exists("R/mod_test2_utils_utest.R"))
+    remove_file("R/mod_test2.R")
+    remove_file("R/mod_test2_fct_ftest.R")
+    remove_file("R/mod_test2_utils_utest.R")
     
   })
 })
