@@ -6,23 +6,6 @@
 \alias{add_dockerfile_heroku}
 \title{Create a Dockerfile for  Shiny App}
 \usage{
-<<<<<<< HEAD
-add_dockerfile(input = "DESCRIPTION", output = "Dockerfile",
-  pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
-  R.Version()$major, ".", R.Version()$minor), as = NULL, port = 80,
-  host = "0.0.0.0")
-
-add_dockerfile_shinyproxy(input = "DESCRIPTION", output = "Dockerfile",
-  pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
-  R.Version()$major, ".", R.Version()$minor), as = NULL)
-
-add_dockerfile_heroku(input = "DESCRIPTION", output = "Dockerfile",
-  pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
-  R.Version()$major, ".", R.Version()$minor), as = NULL)
-}
-\arguments{
-\item{input}{path to the DESCRIPTION file to use as an input.}
-=======
 add_dockerfile(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL, port = 80,
@@ -43,17 +26,12 @@ add_dockerfile_heroku(path = "DESCRIPTION", output = "Dockerfile",
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file to use as an input.}
->>>>>>> c6b7641a205425d25ec27b011f3cde8a97e49190
 
 \item{output}{name of the Dockerfile output.}
 
 \item{pkg}{Path to the root of the package. Default is \code{"."}.}
 
-<<<<<<< HEAD
-\item{from}{The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
-=======
 \item{from}{The FROM of the Dockerfile. Default is FROM rocker/r-ver:
->>>>>>> c6b7641a205425d25ec27b011f3cde8a97e49190
 with \code{R.Version()$major} and \code{R.Version()$minor}.}
 
 \item{as}{The AS of the Dockerfile. Default it NULL.}
@@ -63,15 +41,12 @@ Default is 80.}
 
 \item{host}{The \code{options('shiny.host')} on which to run the Shiny App.
 Default is 0.0.0.0.}
-<<<<<<< HEAD
-=======
 
 \item{sysreqs}{boolean to check the system requirements}
 
 \item{repos}{character vector, the base URL of the repositories}
 
 \item{expand}{boolean, if \code{TRUE} each system requirement will be known his own RUN line}
->>>>>>> c6b7641a205425d25ec27b011f3cde8a97e49190
 }
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates
