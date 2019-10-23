@@ -1,6 +1,10 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
 Version: 0.1.0.9500
+Description: An opinionated framework for building a
+    production-ready 'Shiny' application. This package contains a series
+    of tools for building a robust 'Shiny' application from start to
+    finish.
 Authors@R: 
     c(person(given = "Vincent",
              family = "Guyader",
@@ -27,11 +31,7 @@ Authors@R:
              role = "ctb",
              email = "nnovica@gmail.com"),
       person(given = "ThinkR",
-             role = "cph"))
-Description: An opinionated framework for building a
-    production-ready 'Shiny' application. This package contains a series
-    of tools for building a robust 'Shiny' application from start to
-    finish.
+             role = "cph"))    
 License: MIT + file LICENSE
 URL: https://github.com/ThinkR-open/golem
 BugReports: https://github.com/ThinkR-open/golem/issues
@@ -43,11 +43,11 @@ Imports:
     crayon,
     desc,
     dockerfiler,
-    DT,
     glue,
     htmltools,
+    jsonlite,
+    magrittr,
     pkgload,
-    processx,
     remotes,
     rlang,
     roxygen2,
@@ -55,25 +55,27 @@ Imports:
     rstudioapi,
     shiny,
     stats,
-    stringr,
     testthat,
     tools,
     usethis,
     utils,
     yesno
 Suggests:
-    spelling, 
     covr,
+    devtools,
+    DT,
     knitr,
     pkgdown,
     purrr,
     rcmdcheck,
     rmarkdown,
+    spelling,
+    stringr,
     withr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-Language: en-US

@@ -1,0 +1,14 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Declare files that will always have CRLF line endings on checkout.
+*.Rd text eol=lf
+*.R text eol=lf
+*.Rmd text eol=lf
+*.md text eol=lf
+NAMESPACE text eol=lf
+DESCRIPTION text eol=lf
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
