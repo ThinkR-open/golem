@@ -91,11 +91,12 @@ get_golem_name <- function(){
 #' This function allows to use `app_sys()` instead of using the 
 #' `system.file(, package = "pkg")`.
 #' 
+#' @inheritParams base::system.file
 #' @return The path to the current golem. 
 #' @export
 #' @rdname golem_name
 
 #' @export
-app_sys <- function() {
+app_sys <- function(...) {
   system.file(..., package = get_golem_name())
 }
