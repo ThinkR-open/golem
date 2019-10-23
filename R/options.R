@@ -77,8 +77,25 @@ set_golem_wd <- function(
 #' @return The name of the golem. 
 #' @export
 #' @rdname golem_name
-
+#' @importFrom pkgload pkg_name
 
 get_golem_name <- function(){
-  getOption("golem_name")
+  if (is.null(getOption("golem_name"))){
+    options("golem.pkg.name" = pkg_name())
+  }
+  getOption("golem.pkg.name")
+}
+
+#' A wrapper around `system.file(..., package = get_golem_name())`
+#' 
+#' This function allows to use `app_sys()` instead of using the 
+#' `system.file(, package = "pkg")`.
+#' 
+#' @return The path to the current golem. 
+#' @export
+#' @rdname golem_name
+
+#' @export
+app_sys <- function() {
+  system.file(..., package = get_golem_name())
 }

@@ -11,19 +11,21 @@ app_ui <- function(request) {
 }
  
 #' @import shiny
+#' @importFrom golem app_sys
 golem_add_external_resources <- function(){
   
   golem::add_resource_path(
-    'www', system.file('app/www', package = 'shinyexample')
+    'www', app_sys('app/www')
   )
  
   tags$head(
     golem::activate_js(),
     golem::favicon(),
+    tags$title("shinyexample")
     # Add here all the external resources
     # If you have a custom.css in the inst/app/www
     # Or for example, you can add shinyalert::useShinyalert() here
     #tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
-    tags$title("shinyexample")
+    
   )
 }
