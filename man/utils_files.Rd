@@ -5,9 +5,9 @@
 \alias{use_utils_server}
 \title{Use the utils files}
 \usage{
-use_utils_ui(pkg = ".")
+use_utils_ui(pkg = get_golem_wd())
 
-use_utils_server(pkg = ".")
+use_utils_server(pkg = get_golem_wd())
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is \code{"."}.}

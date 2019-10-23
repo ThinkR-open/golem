@@ -6,7 +6,7 @@
 \alias{favicon}
 \title{Add a favicon to your shinyapp}
 \usage{
-use_favicon(path, pkg = ".")
+use_favicon(path, pkg = get_golem_wd())
 
 remove_favicon(path = "inst/app/www/favicon.ico")
 

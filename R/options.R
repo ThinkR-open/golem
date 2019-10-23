@@ -53,6 +53,7 @@ get_golem_wd <- function(){
   getOption("golem.wd")
 }
 
+
 #' @export
 #' @rdname golem_wd
 set_golem_wd <- function(
@@ -67,4 +68,17 @@ set_golem_wd <- function(
   }
   options("golem.wd" = path)
   invisible(path)
+}
+
+
+#' A function to return the golem name to be used elsewhere
+#' in the package.
+#' 
+#' @return The name of the golem. 
+#' @export
+#' @rdname golem_name
+
+
+get_golem_name <- function(){
+  getOption("golem_name")
 }

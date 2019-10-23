@@ -33,6 +33,7 @@ usethis::use_coverage()
 
 # Documentation
 usethis::use_vignette("build-app-package")
+usethis::use_vignette("e_golem_cheatsheet")
 
 # pkgdown
 usethis::use_pkgdown()
@@ -41,6 +42,7 @@ usethis::use_build_ignore("reference")
 pkgdown::build_site()
 
 # Dev
-attachment::att_to_description(extra.suggests = c("pkgdown", "rcmdcheck", "covr"), pkg_ignore = c("mypkg"))
+attachment::att_to_description(extra.suggests = c("pkgdown", "rcmdcheck", "covr", "DT"),
+                               pkg_ignore = c("mypkg", "s"))
 
 

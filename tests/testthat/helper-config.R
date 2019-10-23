@@ -1,17 +1,47 @@
 ### lib
 library(withr)
-#unlink(list.files(tempdir(), full.names = TRUE), recursive = TRUE)
+
+### Funs
 
 remove_file <- function(path){
-  if (file.exists(path)) file.remove(path)
+  if (file.exists(path)) unlink(path, force = TRUE)
 }
 
-## fake package
-fakename <- paste0(sample(letters, 10, TRUE), collapse = "")
-tpdir <- tempdir()
-if(!dir.exists(file.path(tpdir,fakename))){
-  create_golem(file.path(tpdir, fakename), open = FALSE)
+remove_files <- function(path, pattern = NULL){
+  fls <- list.files(
+    path, pattern, full.names = TRUE, recursive = TRUE
+  )
+  if (length(fls) >0){
+    res <- lapply(fls, function(x){
+      if (file.exists(x)) unlink(x, force = TRUE)
+    })
+  }
 }
+
+expect_exists <- function(fls) {
+  
+  act <- quasi_label(rlang::enquo(fls), arg = "fls")
+  
+  act$val <- file.exists(fls)
+  expect(
+    isTRUE(act$val),
+    sprintf("File %s doesn't exist.", fls)
+  )
+  
+  invisible(act$val)
+}
+
+
+## fake package
+fakename <- sprintf(
+  "%s%s",
+  paste0(sample(letters, 10, TRUE), collapse = ""),
+  gsub("[ :-]", "", Sys.time())
+  )
+
+tpdir <- tempdir()
+unlink(file.path(tpdir,fakename), recursive = TRUE)
+create_golem(file.path(tpdir, fakename), open = FALSE)
 pkg <- file.path(tpdir, fakename)
 
 ## random dir
@@ -22,3 +52,5 @@ dir.create(file.path(pkg, fp), recursive = TRUE)
 rand_name <- function(){
   paste0(sample(letters, 10, TRUE), collapse = "")
 }
+
+orig_test <- set_golem_wd(pkg)

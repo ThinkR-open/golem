@@ -1,7 +1,8 @@
 #' Create a module
 #' 
 #' This function creates a module inside the `R/` folder, based 
-#' on a specific module structure. 
+#' on a specific module structure. This function can be used outside
+#' of a {golem} project.
 #' 
 #' @param name The name of the module
 #' @param pkg Path to the root of the package. Default is `"."`.
@@ -16,6 +17,7 @@
 #' @importFrom glue glue
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
+#' @importFrom tools file_path_sans_ext
 add_module <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -25,6 +27,9 @@ add_module <- function(
   utils = NULL,
   export = FALSE
 ){
+  
+  name <- file_path_sans_ext(name)
+  
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   

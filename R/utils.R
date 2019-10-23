@@ -2,6 +2,13 @@ golem_sys <- function(..., lib.loc = NULL, mustWork = FALSE){
   system.file(..., package = "golem", lib.loc = lib.loc, mustWork = mustWork)
 }
 
+#' @export
+#' @rdname app_sys
+app_sys <- function() {
+  system.file(..., package = get_golem_name())
+}
+
+
 #  from usethis https://github.com/r-lib/usethis/
 darkgrey <- function(x) {
   x <- crayon::make_style("darkgrey")(x)
@@ -61,6 +68,19 @@ replace_word <- function(file,pattern, replace){
   suppressWarnings( tx  <- readLines(file) )
   tx2  <- gsub(pattern = pattern, replacement = replace, x = tx)
   writeLines(tx2, con=file)
+}
+
+remove_comments <- function(file) {
+  lines <- readLines(file)
+  lines_without_comment <- c()
+  for ( line in lines ) {
+    lines_without_comment <- append(
+      lines_without_comment, 
+      gsub("(\\s*#+[^'@].*$| #+[^#].*$)", "", line)
+    )
+  }
+  lines_without_comment <- lines_without_comment[lines_without_comment != ""]
+  writeLines(text = lines_without_comment, con = file)
 }
 
 cat_green_tick <- function(...){

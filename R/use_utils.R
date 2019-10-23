@@ -13,7 +13,7 @@
 #' @importFrom cli cat_bullet
 #' @importFrom glue glue
 #' @importFrom utils capture.output
-use_utils_ui <- function(pkg = "."){
+use_utils_ui <- function(pkg = get_golem_wd()){
   use_utils(file_name = "golem_utils_ui.R", pkg=pkg)
   capture.output(
     usethis::use_package("htmltools")
@@ -23,12 +23,12 @@ use_utils_ui <- function(pkg = "."){
 }
 #' @export
 #' @rdname utils_files
-use_utils_server <- function(pkg = "."){
+use_utils_server <- function(pkg = get_golem_wd()){
   use_utils(file_name = "golem_utils_server.R", pkg=pkg)
   cat_bullet("Utils server added", bullet = "tick", bullet_col = "green")
 } 
 
-use_utils <- function(file_name, pkg = "."){
+use_utils <- function(file_name, pkg = get_golem_wd()){
   old <- setwd(normalizePath(pkg))
   on.exit(setwd(old))
   where <- file.path(normalizePath(pkg), "R", file_name)

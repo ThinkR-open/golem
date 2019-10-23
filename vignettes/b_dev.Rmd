@@ -9,6 +9,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<script type="text/javascript">
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -94,6 +100,7 @@ golem::add_js_handler("script")
 golem::add_css_file("custom")
 ```
 
+Note: While the general philosophy of {golem} is being based on the idea that you're building a package, these functions can be used outside of a {golem} project. 
 
 ## Adding these external resources to your app
 
