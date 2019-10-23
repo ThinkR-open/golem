@@ -4,22 +4,24 @@
 \alias{dock_from_desc}
 \title{Create Dockerfile from DESCRIPTION}
 \usage{
-dock_from_desc(path = "DESCRIPTION", FROM = "rocker/r-ver",
-  AS = NULL, sysreqs = TRUE, repos = "https://cran.rstudio.com/",
+dock_from_desc(path = "DESCRIPTION", FROM = paste0("rocker/r-ver:",
+  R.Version()$major, ".", R.Version()$minor), AS = NULL,
+  sysreqs = TRUE, repos = "https://cran.rstudio.com/",
   expand = FALSE)
 }
 \arguments{
-\item{path}{}
+\item{path}{path to the DESCRIPTION file to use as an input.}
 
-\item{FROM}{}
+\item{FROM}{The FROM of the Dockerfile. Default is FROM rocker/r-ver:
+with \code{R.Version()$major} and \code{R.Version()$minor}.}
 
-\item{AS}{}
+\item{AS}{The AS of the Dockerfile. Default it NULL.}
 
-\item{sysreqs}{}
+\item{sysreqs}{boolean to check the system requirements}
 
-\item{repos}{}
+\item{repos}{character vector, the base URL of the repositories}
 
-\item{expand}{}
+\item{expand}{boolean, if \code{TRUE} each system requirement will be known his own RUN line}
 }
 \description{
 Create Dockerfile from DESCRIPTION

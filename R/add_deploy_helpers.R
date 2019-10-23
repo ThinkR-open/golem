@@ -111,7 +111,7 @@ add_shinyserver_file <- function(
 #' @inheritParams  add_module
 #' @param path path to the DESCRIPTION file to use as an input.
 #' @param output name of the Dockerfile output.
-#' @param from The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
+#' @param from The FROM of the Dockerfile. Default is FROM rocker/r-ver:
 #'     with `R.Version()$major` and `R.Version()$minor`.
 #' @param as The AS of the Dockerfile. Default it NULL. 
 #' @param port The `options('shiny.port')` on which to run the Shiny App.
@@ -186,7 +186,7 @@ add_dockerfile_shinyproxy <- function(
   output = "Dockerfile", 
   pkg = get_golem_wd(), 
   from = paste0(
-    "rocker/tidyverse:", 
+    "rocker/r-ver:", 
     R.Version()$major,".", 
     R.Version()$minor
   ), 
@@ -224,7 +224,7 @@ add_dockerfile_heroku <- function(
   output = "Dockerfile", 
   pkg = get_golem_wd(), 
   from = paste0(
-    "rocker/tidyverse:", 
+    "rocker/r-ver:", 
     R.Version()$major,".", 
     R.Version()$minor
   ), 
@@ -292,13 +292,14 @@ alert_build <- function(path, output){
 
 #' Create Dockerfile from DESCRIPTION
 #
-#' @param path 
+#' @param path path to the DESCRIPTION file to use as an input.
 #'
-#' @param FROM 
-#' @param AS 
-#' @param sysreqs 
-#' @param repos 
-#' @param expand 
+#' @param FROM The FROM of the Dockerfile. Default is FROM rocker/r-ver:
+#'     with `R.Version()$major` and `R.Version()$minor`.
+#' @param AS The AS of the Dockerfile. Default it NULL.
+#' @param sysreqs boolean to check the system requirements    
+#' @param repos character vector, the base URL of the repositories  
+#' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
 #'
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
@@ -308,7 +309,11 @@ alert_build <- function(path, output){
 #' 
 dock_from_desc <- function(
   path = "DESCRIPTION",
-  FROM = "rocker/r-ver",
+  FROM = paste0(
+    "rocker/r-ver:", 
+    R.Version()$major,".", 
+    R.Version()$minor
+  ),
   AS = NULL,
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",

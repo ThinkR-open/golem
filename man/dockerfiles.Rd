@@ -13,13 +13,13 @@ add_dockerfile(path = "DESCRIPTION", output = "Dockerfile",
   repos = "https://cran.rstudio.com/", expand = FALSE)
 
 add_dockerfile_shinyproxy(path = "DESCRIPTION", output = "Dockerfile",
-  pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
+  pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
   expand = FALSE)
 
 add_dockerfile_heroku(path = "DESCRIPTION", output = "Dockerfile",
-  pkg = get_golem_wd(), from = paste0("rocker/tidyverse:",
+  pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
   expand = FALSE)
@@ -31,7 +31,7 @@ add_dockerfile_heroku(path = "DESCRIPTION", output = "Dockerfile",
 
 \item{pkg}{Path to the root of the package. Default is \code{"."}.}
 
-\item{from}{The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
+\item{from}{The FROM of the Dockerfile. Default is FROM rocker/r-ver:
 with \code{R.Version()$major} and \code{R.Version()$minor}.}
 
 \item{as}{The AS of the Dockerfile. Default it NULL.}
