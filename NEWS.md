@@ -4,6 +4,8 @@
 
 ## New functions
 
++ `add_dockerfile()` now use installed pacakge version and explicit System Requirements
+
 + `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
 
 + We switched from `shiny::addResourcePath()` to `golem::add_resource_path()`, which doesn't fail if the folder is empty (#223).
@@ -13,6 +15,10 @@
 + `add_external_js_file` and `add_external_css_file` are designed to download .js and .css file off the web to the appropriate directory (#130, @zwycl)
 
 ## New features
+
+
+
++ `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157)
 
 + You can now create a golem without any comment (#171, @ArthurData)
 
@@ -33,6 +39,8 @@
 ## Breaking changes 
 
 + `invoke_js()` now takes a list of elements to send to JS (through `...`) instead of a vector (#155, @zwycl)
+
++ `get_dependencies` was removed from this package, please use `desc::desc_get_deps()` instead (#251)
 
 ## Bug fix
 
