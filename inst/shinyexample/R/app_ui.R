@@ -1,3 +1,7 @@
+#' ui
+#' 
+#' @param request needed for bookmarking
+#'
 #' @import shiny
 app_ui <- function(request) {
   tagList(
