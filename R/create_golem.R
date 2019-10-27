@@ -15,7 +15,6 @@
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable
 #' @importFrom rstudioapi openProject
-#' @importFrom rstudioapi getActiveProject
 #' @export
 create_golem <- function(
   path, 
@@ -27,9 +26,7 @@ create_golem <- function(
 ) {
   
   if (path == '.' & package_name == basename(path)){
-    if ( rstudioapi::isAvailable()){
-    package_name <- basename(rstudioapi::getActiveProject())
-    }
+    package_name <- basename(getwd())
   }
   
   
