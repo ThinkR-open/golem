@@ -14,11 +14,12 @@ used as the package name.}
 \item{check_name}{When using this function in the console, you can prevent
 the package name from being checked.}
 
-\item{open}{boolean open the created project}
+\item{open}{Boolean open the created project}
 
-\item{package_name}{package name to use}
+\item{package_name}{Package name to use.By default it's \code{basename(path)} but if path == '.' and \code{package_name}
+not explicitly given, then \code{basename(getwd())} will be used.}
 
-\item{without_comments}{boolean start project without golem comments}
+\item{without_comments}{Poolean start project without golem comments}
 
 \item{...}{not used}
 }

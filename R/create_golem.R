@@ -4,9 +4,10 @@
 #'     used as the package name.
 #' @param check_name When using this function in the console, you can prevent 
 #'      the package name from being checked. 
-#' @param open boolean open the created project
-#' @param package_name package name to use
-#' @param without_comments boolean start project without golem comments
+#' @param open Boolean open the created project
+#' @param package_name Package name to use.By default it's `basename(path)` but if path == '.' and `package_name` 
+#' not explicitly given, then `basename(getwd())` will be used.
+#' @param without_comments Poolean start project without golem comments
 #' @param ... not used
 #'
 #' @importFrom yesno yesno
