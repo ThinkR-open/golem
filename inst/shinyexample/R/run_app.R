@@ -1,9 +1,7 @@
 #' Run the Shiny Application
 #'
-#' @param onStart optional, described in ?shiny::shinyApp
-#' @param options optional, described in ?shiny::shinyApp
-#' @param enableBookmarking optional, described in ?shiny::shinyApp
 #' @param ... arguments to pass to golem_opts
+#' @inheritParams shiny::shinyApp
 #'
 #' @export
 #' @importFrom shiny shinyApp
