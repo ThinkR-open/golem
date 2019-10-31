@@ -4,12 +4,14 @@
 \alias{get_sysreqs}
 \title{get system requirements}
 \usage{
-get_sysreqs(packages, quiet = TRUE)
+get_sysreqs(packages, quiet = TRUE, batch_n = 30)
 }
 \arguments{
 \item{packages}{character vector of packages names}
 
 \item{quiet}{boolean if TRUE the function is quiet}
+
+\item{batch_n}{number of simultaneous packages to ask}
 }
 \description{
 get system requirements
