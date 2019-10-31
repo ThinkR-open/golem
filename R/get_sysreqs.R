@@ -21,7 +21,9 @@ get_sysreqs <- function(packages, quiet = TRUE,batch_n=30){
   split(all_deps, ceiling(seq_along(all_deps)/batch_n)) %>%
     map(~get_batch_sysreqs(.x,quiet=quiet)) %>% 
     unlist() %>% 
-    unname()
+    unname() %>% 
+    unique() %>% 
+    sort()
 
 }
 
