@@ -98,5 +98,5 @@ get_golem_name <- function(){
 
 #' @export
 app_sys <- function(...) {
-  system.file(..., package = get_golem_name())
+  getFromNamespace("shim_system.file", "pkgload")(..., package = get_golem_name())
 }
