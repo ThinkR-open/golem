@@ -122,6 +122,8 @@ add_shinyserver_file <- function(
 #' @param sysreqs boolean to check the system requirements    
 #' @param repos character vector, the base URL of the repositories  
 #' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
+#' @param http_proxy proxy address (http)
+#' @param https_proxy proxy address (https)
 #' @export
 #' @rdname dockerfiles
 #' @importFrom desc desc_get_deps
@@ -156,7 +158,9 @@ add_dockerfile <- function(
   host = "0.0.0.0",
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
-  expand = FALSE
+  expand = FALSE,
+  http_proxy = NULL,
+  https_proxy = http_proxy
   # ,  function_to_launch = "run_app"
 ) {
   
@@ -168,7 +172,7 @@ add_dockerfile <- function(
   
   
   
-  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos,expand = expand)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos,expand = expand,http_proxy = http_proxy,https_proxy = https_proxy)
   dock$EXPOSE(port)
   dock$CMD(
     glue::glue(
@@ -301,6 +305,8 @@ alert_build <- function(path, output){
 #' @param sysreqs boolean to check the system requirements    
 #' @param repos character vector, the base URL of the repositories  
 #' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
+#' @param http_proxy proxy address (http)
+#' @param https_proxy proxy address (https)
 #'
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
@@ -318,7 +324,9 @@ dock_from_desc <- function(
   AS = NULL,
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
-  expand = FALSE
+  expand = FALSE,
+  http_proxy = NULL,
+  https_proxy = http_proxy
 ){
   
  
@@ -358,6 +366,15 @@ dock_from_desc <- function(
   
   
   dock <- dockerfiler::Dockerfile$new(FROM = FROM)
+  
+  if ( !is.null(http_proxy) ){
+    dock$RUN(glue::glue("echo \"Sys.setenv(http_proxy= '{http_proxy}');Sys.setenv(HTTP_PROXY= '{http_proxy}')\">> /usr/local/lib/R/etc/Rprofile.site"))
+  }
+  if ( !is.null(https_proxy) ){
+    dock$RUN(glue::glue("echo \"Sys.setenv(https_proxy= '{https_proxy}');Sys.setenv(HTTPS_PROXY= '{https_proxy}')\">> /usr/local/lib/R/etc/Rprofile.site"))
+  }
+  
+  
   
   if (length(system_requirement)>0){
     

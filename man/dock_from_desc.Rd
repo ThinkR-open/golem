@@ -7,7 +7,7 @@
 dock_from_desc(path = "DESCRIPTION", FROM = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), AS = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
-  expand = FALSE)
+  expand = FALSE, http_proxy = NULL, https_proxy = http_proxy)
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file to use as an input.}
@@ -22,6 +22,10 @@ with \code{R.Version()$major} and \code{R.Version()$minor}.}
 \item{repos}{character vector, the base URL of the repositories}
 
 \item{expand}{boolean, if \code{TRUE} each system requirement will be known his own RUN line}
+
+\item{http_proxy}{proxy address (http)}
+
+\item{https_proxy}{proxy address (https)}
 }
 \description{
 Create Dockerfile from DESCRIPTION
