@@ -62,7 +62,9 @@
 
 + The dots R/run_app.R are now documented by default (#243)
 
-+ Bug fix of the pkgdown website (#180, )
++ Bug fix of the pkgdown website (#180)
+
++ `{golem}` now correctly handles command line creation of projet inside the current directory (#248)
 
 ## Internal changes
 
