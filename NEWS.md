@@ -12,7 +12,7 @@
 
 + New JavaScript functions to use alert, prompt and confirm (#108, @zwycl)
 
-+ `add_external_js_file` and `add_external_css_file` are designed to download .js and .css file off the web to the appropriate directory (#130, @zwycl)
++ `use_external_js_file` and `use_external_css_file` are designed to download .js and .css file off the web to the appropriate directory (#130, @zwycl)
 
 + There is now an `app_sys()` function, which is a wrapper around `system.file(..., package = "myapp")` (#207,  @novica)
 
