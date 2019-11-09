@@ -7,7 +7,7 @@
 dock_from_desc(path = "DESCRIPTION", FROM = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), AS = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
-  expand = FALSE)
+  expand = FALSE, build_golem_from_source = FALSE)
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file to use as an input.}

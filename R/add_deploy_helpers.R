@@ -156,7 +156,8 @@ add_dockerfile <- function(
   host = "0.0.0.0",
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
-  expand = FALSE
+  expand = FALSE,
+  build_golem_from_source = FALSE
   # ,  function_to_launch = "run_app"
 ) {
   
@@ -168,7 +169,8 @@ add_dockerfile <- function(
   
   
   
-  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos,expand = expand)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as,
+                         sysreqs = sysreqs, repos = repos,expand = expand,build_golem_from_source = build_golem_from_source)
   dock$EXPOSE(port)
   dock$CMD(
     glue::glue(
@@ -194,7 +196,8 @@ add_dockerfile_shinyproxy <- function(
   as = NULL,
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
-  expand = FALSE
+  expand = FALSE,
+  build_golem_from_source = FALSE
 ){
   
   where <- file.path(pkg, output)
@@ -202,7 +205,7 @@ add_dockerfile_shinyproxy <- function(
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(basename(where))
   dock <- dock_from_desc(path = path, FROM = from, AS = as, 
-                         sysreqs = sysreqs, repos = repos, expand = expand)
+                         sysreqs = sysreqs, repos = repos, expand = expand,build_golem_from_source=build_golem_from_source)
   
   dock$EXPOSE(3838)
   dock$CMD(glue::glue(
@@ -232,7 +235,8 @@ add_dockerfile_heroku <- function(
   as = NULL,
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
-  expand = FALSE
+  expand = FALSE,
+  build_golem_from_source = FALSE
 ){
   where <- file.path(pkg, output)
   
@@ -240,7 +244,7 @@ add_dockerfile_heroku <- function(
     return(invisible(FALSE))
   } 
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos, expand = expand)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos, expand = expand,build_golem_from_source = build_golem_from_source)
   
   dock$CMD(
     glue::glue(
@@ -318,7 +322,8 @@ dock_from_desc <- function(
   AS = NULL,
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
-  expand = FALSE
+  expand = FALSE,
+  build_golem_from_source = FALSE
 ){
   
  
@@ -423,14 +428,24 @@ dock_from_desc <- function(
   dock
   
   
-  
-
-  
-  dock$COPY(
+  if ( !build_golem_from_source){
+    # we use a already builded tar.gz file
+    dock$COPY(
     from = paste0(read.dcf(path)[1], "_*.tar.gz"),
     to = "/app.tar.gz"
   )
   dock$RUN("R -e 'remotes::install_local(\"/app.tar.gz\")'")
+  } else {
+    # 
+    dock$RUN("mkdir /build_zone")
+    dock$ADD(from = ".",to =  "/build_zone")
+    dock$WORKDIR("/build_zone")
+    #dock$RUN("R -e 'setwd(\"/build_zone\");devtools::build(path = \".\")'")
+    dock$RUN("R -e 'remotes::install_local()'")
+    
+    
+    
+  }
   
   dock
 }
