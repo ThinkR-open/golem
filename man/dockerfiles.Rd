@@ -17,13 +17,13 @@ add_dockerfile_shinyproxy(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
-  expand = FALSE)
+  expand = FALSE, build_golem_from_source = FALSE)
 
 add_dockerfile_heroku(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
-  expand = FALSE)
+  expand = FALSE, build_golem_from_source = FALSE)
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file to use as an input.}

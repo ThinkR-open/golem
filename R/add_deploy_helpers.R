@@ -166,9 +166,6 @@ add_dockerfile <- function(
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(basename(where))
   
-  
-  
-  
   dock <- dock_from_desc(path = path, FROM = from, AS = as,
                          sysreqs = sysreqs, repos = repos,expand = expand,build_golem_from_source = build_golem_from_source)
   dock$EXPOSE(port)
@@ -178,7 +175,7 @@ add_dockerfile <- function(
     )
   )
   dock$write(output)
-  alert_build(path, output)
+  alert_build(path, output,build_golem_from_source=build_golem_from_source)
   
 }
 
@@ -213,7 +210,7 @@ add_dockerfile_shinyproxy <- function(
   ))
   dock$write(output)
   
-  alert_build(path, output)
+  alert_build(path, output,build_golem_from_source=build_golem_from_source)
   
   usethis::use_build_ignore(files = output)
   
@@ -253,7 +250,7 @@ add_dockerfile_heroku <- function(
   )
   dock$write(output)
   
-  alert_build(path, output)
+  alert_build(path, output,build_golem_from_source=build_golem_from_source)
   
   apps_h <- gsub(
     "\\.", "-", 
@@ -284,15 +281,17 @@ add_dockerfile_heroku <- function(
   
 }
 
-alert_build <- function(path, output){
+alert_build <- function(path, output ,build_golem_from_source){
   cat_green_tick(
     glue("Dockerfile created at {output}")
   )
+  if ( ! build_golem_from_source){
   cat_red_bullet(
     glue::glue(
       "Be sure to put your {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
     )
   )
+  }
 }
 
 #' Create Dockerfile from DESCRIPTION
