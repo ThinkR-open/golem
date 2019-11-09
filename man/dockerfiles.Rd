@@ -50,6 +50,10 @@ Default is 0.0.0.0.}
 \item{repos}{character vector, the base URL of the repositories}
 
 \item{expand}{boolean, if \code{TRUE} each system requirement will be known his own RUN line}
+
+\item{build_golem_from_source}{boolean, if \code{TRUE} no tar.gz Package is created and the Dockerfile directly mount the source folder to build it}
+
+\item{update_tar_gz}{boolean, if \code{TRUE} and build_golem_from_source is also \code{TRUE} an updated tar.gz Package is created}
 }
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates
