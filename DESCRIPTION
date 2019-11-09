@@ -59,14 +59,14 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno
+    yesno,
+    purrr
 Suggests:
     covr,
     devtools,
     DT,
     knitr,
     pkgdown,
-    purrr,
     rcmdcheck,
     rmarkdown,
     spelling,
