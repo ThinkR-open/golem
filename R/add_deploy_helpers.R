@@ -306,7 +306,7 @@ alert_build <- function(path, output ,build_golem_from_source){
 #' @param sysreqs boolean to check the system requirements    
 #' @param repos character vector, the base URL of the repositories  
 #' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
-#'
+#' @param build_golem_from_source  boolean, if `TRUE` no tar.gz Package is created and the Dockerfile directly mount the source folder to build it
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps

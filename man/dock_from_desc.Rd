@@ -22,6 +22,8 @@ with \code{R.Version()$major} and \code{R.Version()$minor}.}
 \item{repos}{character vector, the base URL of the repositories}
 
 \item{expand}{boolean, if \code{TRUE} each system requirement will be known his own RUN line}
+
+\item{build_golem_from_source}{boolean, if \code{TRUE} no tar.gz Package is created and the Dockerfile directly mount the source folder to build it}
 }
 \description{
 Create Dockerfile from DESCRIPTION
