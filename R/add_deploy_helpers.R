@@ -157,7 +157,8 @@ add_dockerfile <- function(
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
   expand = FALSE,
-  build_golem_from_source = FALSE
+  build_golem_from_source = FALSE,
+  update_tar_gz = TRUE
   # ,  function_to_launch = "run_app"
 ) {
   
@@ -194,7 +195,8 @@ add_dockerfile_shinyproxy <- function(
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
   expand = FALSE,
-  build_golem_from_source = FALSE
+  build_golem_from_source = FALSE,
+  update_tar_gz = TRUE
 ){
   
   where <- file.path(pkg, output)
@@ -233,7 +235,8 @@ add_dockerfile_heroku <- function(
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
   expand = FALSE,
-  build_golem_from_source = FALSE
+  build_golem_from_source = FALSE,
+  update_tar_gz = TRUE
 ){
   where <- file.path(pkg, output)
   
@@ -288,7 +291,7 @@ alert_build <- function(path, output ,build_golem_from_source){
   if ( ! build_golem_from_source){
   cat_red_bullet(
     glue::glue(
-      "Be sure to put your {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
+      "Be sure to keep your {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
     )
   )
   }
@@ -322,7 +325,8 @@ dock_from_desc <- function(
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
   expand = FALSE,
-  build_golem_from_source = FALSE
+  build_golem_from_source = FALSE,
+  update_tar_gz = TRUE
 ){
   
  
@@ -427,8 +431,15 @@ dock_from_desc <- function(
   dock
   
   
-  if ( !build_golem_from_source){
+  if ( !build_golem_from_source & update_tar_gz){
     # we use a already builded tar.gz file
+    ancienne_version <- list.files(pattern = glue::glue("{read.dcf(path)[1]}_.+.tar.gz"),full.names = TRUE)
+    cat_red_bullet(glue::glue("We remove {paste(ancienne_version,collapse = ", ")} from folder"))
+    lapply(ancienne_version,file.remove)
+    lapply(ancienne_version,unlink,force=TRUE)
+    cat_green_tick(glue::glue(" {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz created."))
+    devtools::build(path = ".")
+    
     dock$COPY(
     from = paste0(read.dcf(path)[1], "_*.tar.gz"),
     to = "/app.tar.gz"
