@@ -122,10 +122,12 @@ add_shinyserver_file <- function(
 #' @param sysreqs boolean to check the system requirements    
 #' @param repos character vector, the base URL of the repositories  
 #' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
+#' @param open boolean, default is `TRUE` open the Dockerfile file
 #' @export
 #' @rdname dockerfiles
 #' @importFrom desc desc_get_deps
 #' @importFrom dockerfiler Dockerfile
+#' @importFrom rstudioapi navigateToFile isAvailable
 #' @examples
 #' \donttest{
 #' # Add a standard Dockerfile
@@ -156,7 +158,8 @@ add_dockerfile <- function(
   host = "0.0.0.0",
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
-  expand = FALSE
+  expand = FALSE,
+  open = TRUE
   # ,  function_to_launch = "run_app"
 ) {
   
@@ -176,6 +179,13 @@ add_dockerfile <- function(
     )
   )
   dock$write(output)
+  if (open) {
+    if (rstudioapi::isAvailable()) {
+      rstudioapi::navigateToFile(output)
+    } else {
+      try(file.edit(output))
+    }
+  }
   alert_build(path, output)
   
 }
@@ -194,7 +204,8 @@ add_dockerfile_shinyproxy <- function(
   as = NULL,
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
-  expand = FALSE
+  expand = FALSE,
+  open = TRUE
 ){
   
   where <- file.path(pkg, output)
@@ -211,7 +222,13 @@ add_dockerfile_shinyproxy <- function(
   dock$write(output)
   
   alert_build(path, output)
-  
+  if (open) {
+    if (rstudioapi::isAvailable()) {
+      rstudioapi::navigateToFile(output)
+    } else {
+      try(file.edit(output))
+    }
+  }
   usethis::use_build_ignore(files = output)
   
   invisible(output)
@@ -232,7 +249,8 @@ add_dockerfile_heroku <- function(
   as = NULL,
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
-  expand = FALSE
+  expand = FALSE,
+  open = TRUE
 ){
   where <- file.path(pkg, output)
   
@@ -274,7 +292,14 @@ add_dockerfile_heroku <- function(
   cat_red_bullet(
     glue("You can replace {apps_h} with another app name.")
   )
-  
+  browser()
+  if (open) {
+    if (rstudioapi::isAvailable()) {
+      rstudioapi::navigateToFile(output)
+    } else {
+      try(file.edit(output))
+    }
+  }
   usethis::use_build_ignore(files = output)
   invisible(output)
   
