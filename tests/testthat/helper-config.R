@@ -31,13 +31,18 @@ expect_exists <- function(fls) {
   invisible(act$val)
 }
 
+# We prevent the random name from having 
+# ui or server inside it 
+safe_let <- function(){
+  letters[-c(5,9,18,19,21,22)]
+}
 
 ## fake package
 fakename <- sprintf(
   "%s%s",
-  paste0(sample(letters, 10, TRUE), collapse = ""),
+  paste0(sample(safe_let(), 10, TRUE), collapse = ""),
   gsub("[ :-]", "", Sys.time())
-  )
+)
 
 tpdir <- tempdir()
 unlink(file.path(tpdir,fakename), recursive = TRUE)
@@ -45,12 +50,12 @@ create_golem(file.path(tpdir, fakename), open = FALSE)
 pkg <- file.path(tpdir, fakename)
 
 ## random dir
-randir <- paste0(sample(letters, 10, TRUE), collapse = "")
+randir <- paste0(sample(safe_let(), 10, TRUE), collapse = "")
 fp <- file.path("inst/app", randir)
 dir.create(file.path(pkg, fp), recursive = TRUE)
 
 rand_name <- function(){
-  paste0(sample(letters, 10, TRUE), collapse = "")
+  paste0(sample(safe_let(), 10, TRUE), collapse = "")
 }
 
 orig_test <- set_golem_wd(pkg)
