@@ -164,7 +164,6 @@ add_dockerfile <- function(
   open = TRUE,
   update_tar_gz = TRUE,
   build_golem_from_source = FALSE
-  # ,  function_to_launch = "run_app"
 ) {
   
   
@@ -320,7 +319,7 @@ alert_build <- function(path, output ,build_golem_from_source){
   if ( ! build_golem_from_source){
   cat_red_bullet(
     glue::glue(
-      "Be sure to put your {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
+      "Be sure to keep your {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
     )
   )
   }
@@ -337,6 +336,7 @@ alert_build <- function(path, output ,build_golem_from_source){
 #' @param repos character vector, the base URL of the repositories  
 #' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
 #' @param build_golem_from_source  boolean, if `TRUE` no tar.gz Package is created and the Dockerfile directly mount the source folder to build it
+#' @param update_tar_gz boolean, if `TRUE` and build_golem_from_source is also `TRUE` an updated tar.gz Package is created
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps
@@ -354,7 +354,8 @@ dock_from_desc <- function(
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
   expand = FALSE,
-  build_golem_from_source = FALSE
+  build_golem_from_source = FALSE,
+  update_tar_gz = TRUE
 ){
   
  
@@ -459,8 +460,15 @@ dock_from_desc <- function(
   dock
   
   
-  if ( !build_golem_from_source){
+  if ( !build_golem_from_source & update_tar_gz){
     # we use a already builded tar.gz file
+    ancienne_version <- list.files(pattern = glue::glue("{read.dcf(path)[1]}_.+.tar.gz"),full.names = TRUE)
+    cat_red_bullet(glue::glue("We remove {paste(ancienne_version,collapse = ", ")} from folder"))
+    lapply(ancienne_version,file.remove)
+    lapply(ancienne_version,unlink,force=TRUE)
+    cat_green_tick(glue::glue(" {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz created."))
+    devtools::build(path = ".")
+    
     dock$COPY(
     from = paste0(read.dcf(path)[1], "_*.tar.gz"),
     to = "/app.tar.gz"
