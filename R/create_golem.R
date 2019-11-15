@@ -91,7 +91,10 @@ create_golem <- function(
   yml_path <- file.path(path, "inst/golem-config.yml")
   
   conf <- yaml::read_yaml(yml_path, eval.expr = TRUE)
-  conf$dev$golem_wd <- "!expr here::here()"
+  
+  path <- "here::here()"
+  attr(path, "tag") <- "!expr"
+  conf$dev$golem_wd <- path
   conf$default$golem_name <- package_name
   conf$default$golem_version <- "0.0.0.9000"
   yaml::write_yaml(conf, yml_path)
