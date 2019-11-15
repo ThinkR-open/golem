@@ -19,6 +19,13 @@ darkgrey <- function(x) {
 dir_not_exist <- Negate(dir.exists)
 file_not_exist <- Negate(file.exists)
 
+is_package <- function(path){
+  x <- attempt::attempt({
+    pkgload::pkg_path()
+  })
+  !attempt::is_try_error(x)
+}
+
 create_if_needed <- function(
   path, 
   type = c("file", "directory"),

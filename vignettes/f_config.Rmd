@@ -47,6 +47,10 @@ glue::as_glue(
 )
 ```
 
++ default/golem_name, default/golem_version, default/app_prod are usable across the whole life of your golem app: while developping, and also when in production. 
++ production/app_prod might be used for adding elements that are to be used once the app is in production. 
++ dev/golem_wd is in a `dev` config because the only moment you might reliably use this config is while developping your app. Use the `app_sys()` function if you want to rely on the package path once the app is deployed.
+
 The good news is that if you don't want/need to use `{config}`, you can safely ignore this file, __just leave it where it is: it is used internally by the `{golem}` functions__.
 
 These options are globally set with: 

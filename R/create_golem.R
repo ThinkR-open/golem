@@ -45,9 +45,11 @@ create_golem <- function(
     }
   }
   
+  cat_rule("Creating dir")
   dir.create(path, recursive = TRUE, showWarnings = FALSE)
   cat_green_tick("Created package directory")
   
+  cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
   ll <- list.files(path = from, full.names = TRUE, all.files = TRUE,no.. = TRUE)
   # remove `..`
@@ -85,10 +87,11 @@ create_golem <- function(
   }
   cat_green_tick("Copied app skeleton")
   
+  cat_rule("Setting the default config")
   yml_path <- file.path(path, "inst/golem-config.yml")
   
-  conf <- yaml::read_yaml(yml_path)
-  conf$default$golem_wd <- normalizePath(path)
+  conf <- yaml::read_yaml(yml_path, eval.expr = TRUE)
+  conf$dev$golem_wd <- "!expr here::here()"
   conf$default$golem_name <- package_name
   conf$default$golem_version <- "0.0.0.9000"
   yaml::write_yaml(conf, yml_path)

@@ -3,9 +3,14 @@ context("function add_dockerfile")
 test_that("add_dockerfile", {
   with_dir(pkg, {
     unlink("Dockerfile", force = TRUE)
-    output <- testthat::capture_output(add_dockerfile(pkg = pkg, sysreqs = FALSE))
+    output <- testthat::capture_output(
+      add_dockerfile(pkg = pkg, sysreqs = FALSE)
+    )
     expect_exists("Dockerfile")
-    test <- stringr::str_detect(output, "Dockerfile created at Dockerfile")
+    test <- stringr::str_detect(
+      output, 
+      "Dockerfile created at Dockerfile"
+    )
     expect_true(test)
     remove_files("Dockerfile")
   })

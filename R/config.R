@@ -1,29 +1,29 @@
 #' @importFrom attempt attempt is_try_error
 #' @importFrom pkgload pkg_path
 guess_where_config <- function(
-  path
+  path = "."
 ){
   # Trying the path
-  path <- file.path(
+  ret_path <- file.path( 
     path, "inst/golem-config.yml"
   )
-  if (file.exists(path)) return(normalizePath(path))
+  if (file.exists(ret_path)) return(normalizePath(ret_path))
   # Trying maybe in the wd
-  path <-  "golem-config.yml"
-  if (file.exists(path)) return(normalizePath(path))
+  ret_path <-  "golem-config.yml"
+  if (file.exists(ret_path)) return(normalizePath(ret_path))
   # Trying with pkgpath
-  path <- attempt({
+  ret_path <- attempt({
     file.path(
       pkg_path(), 
       "inst/golem-config.yml"
     )
   })
   if (
-    !is_try_error(path) & 
-    file.exists(path)
+    !is_try_error(ret_path) & 
+    file.exists(ret_path)
   ) {
     return(
-      normalizePath(path)
+      normalizePath(ret_path)
     )
   }
   return(NULL)
@@ -38,7 +38,7 @@ get_current_config <- function(
 ){
   
   # We check wether we can guess where the config file is
-  path_conf <- guess_where_config(path)
+  path_conf <- guess_where_config(path) 
   # We default to inst/ if this doesn't exist
   if (is.null(path_conf)){
     path_conf <- file.path(
@@ -54,7 +54,7 @@ get_current_config <- function(
       )
     )
     # Return early if the user doesn't allow 
-    if (!ask) return(FALSE)
+    if (!ask) return(NULL)
     
     file_copy(
       path = golem_sys("shinyexample/inst/golem-config.yml"), 
@@ -69,7 +69,9 @@ get_current_config <- function(
       )
     )
     replace_word(
-      "R/app_config.R", 
+      file.path(
+        path, "R/app_config.R"
+      ), 
       "shinyexample", 
       pkg_name()
     )
@@ -78,7 +80,9 @@ get_current_config <- function(
     }
   }
   
-  return(path_conf)
+  return(
+    invisible(path_conf)
+  )
   
 }
 
@@ -99,7 +103,12 @@ amend_golem_config <- function(
   talkative = TRUE
 ){
   conf_path <- get_current_config(pkg)
-  conf <- read_yaml(conf_path)
+  stop_if(
+    conf_path, 
+    is.null, 
+    "Unable to retrieve golem config file."
+  )
+  conf <- read_yaml(conf_path, eval.expr = TRUE)
   conf[[config]][[key]] <- value
   write_yaml(
     conf, 
