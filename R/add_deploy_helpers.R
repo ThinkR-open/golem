@@ -163,7 +163,7 @@ add_dockerfile <- function(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = FALSE
+  build_golem_from_source = TRUE
 ) {
   
   
@@ -210,7 +210,7 @@ add_dockerfile_shinyproxy <- function(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = FALSE
+  build_golem_from_source = TRUE
 ){
   
   where <- file.path(pkg, output)
@@ -258,7 +258,7 @@ add_dockerfile_heroku <- function(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = FALSE
+  build_golem_from_source = TRUE
 ){
   where <- file.path(pkg, output)
   
@@ -354,7 +354,7 @@ dock_from_desc <- function(
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
   expand = FALSE,
-  build_golem_from_source = FALSE,
+  build_golem_from_source = TRUE,
   update_tar_gz = TRUE
 ){
   
