@@ -1,3 +1,5 @@
+#' @importFrom attempt attempt is_try_error
+#' @importFrom pkgload pkg_path
 guess_where_config <- function(
   path
 ){
@@ -10,14 +12,14 @@ guess_where_config <- function(
   path <-  "golem-config.yml"
   if (file.exists(path)) return(normalizePath(path))
   # Trying with pkgpath
-  path <- attempt::attempt({
+  path <- attempt({
     file.path(
-      pkgload::pkg_path(), 
+      pkg_path(), 
       "inst/golem-config.yml"
     )
   })
   if (
-    !attempt::is_try_error(path) & 
+    !is_try_error(path) & 
     file.exists(path)
   ) {
     return(
@@ -27,6 +29,9 @@ guess_where_config <- function(
   return(NULL)
 }
 
+#' @importFrom yesno yesno
+#' @importFrom fs file_copy
+#' @importFrom pkgload pkg_name
 get_current_config <- function(
   path = ".", 
   set_options = TRUE
@@ -42,7 +47,7 @@ get_current_config <- function(
   }
   
   if (!file.exists(path_conf)){
-    ask <- yesno::yesno(
+    ask <- yesno(
       sprintf(
         "The %s file doesn't exist, create?", 
         basename(path_conf)
@@ -51,13 +56,13 @@ get_current_config <- function(
     # Return early if the user doesn't allow 
     if (!ask) return(FALSE)
     
-    fs::file_copy(
+    file_copy(
       path = golem_sys("shinyexample/inst/golem-config.yml"), 
       new_path = file.path(
         path, "inst/golem-config.yml"
       )
     )
-    fs::file_copy(
+    file_copy(
       path = golem_sys("shinyexample/R/app_config.R"), 
       new_path = file.path(
         path, "R/app_config.R"
@@ -66,7 +71,7 @@ get_current_config <- function(
     replace_word(
       "R/app_config.R", 
       "shinyexample", 
-      pkgload::pkg_name()
+      pkg_name()
     )
     if (set_options){
       set_golem_options()
@@ -85,6 +90,7 @@ get_current_config <- function(
 #' @inheritParams set_golem_options
 #'
 #' @export
+#' @importFrom yaml read_yaml write_yaml
 amend_golem_config <- function(
   key,
   value, 
@@ -93,9 +99,9 @@ amend_golem_config <- function(
   talkative = TRUE
 ){
   conf_path <- get_current_config(pkg)
-  conf <- yaml::read_yaml(conf_path)
+  conf <- read_yaml(conf_path)
   conf[[config]][[key]] <- value
-  yaml::write_yaml(
+  write_yaml(
     conf, 
     conf_path
   )
