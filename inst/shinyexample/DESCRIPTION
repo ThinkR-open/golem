@@ -9,6 +9,7 @@ Authors@R:
 Description: What the package does (one paragraph).
 License: What license is it under?
 Imports: 
+    config,
     golem,
     shiny
 Encoding: UTF-8

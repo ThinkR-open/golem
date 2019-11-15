@@ -6,6 +6,8 @@
 
 + `add_dockerfile()` was completely refactore. It now starts from r-ver, uses explicit package versions from you local machine, and tries to set as much System Requirements as possible by using `{sysreq}`, and parses and installs the Remotes tag from the DESCRIPTION (#189, #175)
 
++ `add_dockerfile()` allow now to directly use the source of the package by mounting the source folder in the container and running `remotes::install_local()`
+
 + `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
 
 + We switched from `shiny::addResourcePath()` to `golem::add_resource_path()`, which doesn't fail if the folder is empty (#223).

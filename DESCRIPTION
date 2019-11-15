@@ -1,10 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.1.0.9500
-Description: An opinionated framework for building a
-    production-ready 'Shiny' application. This package contains a series
-    of tools for building a robust 'Shiny' application from start to
-    finish.
+Version: 0.1.0.9600
 Authors@R: 
     c(person(given = "Vincent",
              family = "Guyader",
@@ -31,7 +27,11 @@ Authors@R:
              role = "ctb",
              email = "nnovica@gmail.com"),
       person(given = "ThinkR",
-             role = "cph"))    
+             role = "cph"))
+Description: An opinionated framework for building a
+    production-ready 'Shiny' application. This package contains a series
+    of tools for building a robust 'Shiny' application from start to
+    finish.
 License: MIT + file LICENSE
 URL: https://github.com/ThinkR-open/golem
 BugReports: https://github.com/ThinkR-open/golem/issues
@@ -40,14 +40,17 @@ Depends:
 Imports: 
     attempt (>= 0.3.0),
     cli,
+    config,
     crayon,
     desc,
     dockerfiler,
+    fs,
     glue,
     htmltools,
     jsonlite,
     magrittr,
     pkgload,
+    purrr,
     remotes,
     rlang,
     roxygen2,
@@ -59,12 +62,11 @@ Imports:
     tools,
     usethis,
     utils,
-    yesno,
-    purrr
+    yaml,
+    yesno
 Suggests:
     covr,
     devtools,
-    DT,
     knitr,
     pkgdown,
     rcmdcheck,

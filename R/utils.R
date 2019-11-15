@@ -1,8 +1,15 @@
-golem_sys <- function(..., lib.loc = NULL, mustWork = FALSE){
-  system.file(..., package = "golem", lib.loc = lib.loc, mustWork = mustWork)
+golem_sys <- function(
+  ..., 
+  lib.loc = NULL, 
+  mustWork = FALSE
+){
+  system.file(
+    ..., 
+    package = "golem", 
+    lib.loc = lib.loc, 
+    mustWork = mustWork
+  )
 }
-
-
 
 #  from usethis https://github.com/r-lib/usethis/
 darkgrey <- function(x) {
@@ -11,6 +18,54 @@ darkgrey <- function(x) {
 
 dir_not_exist <- Negate(dir.exists)
 file_not_exist <- Negate(file.exists)
+
+is_package <- function(path){
+  x <- attempt::attempt({
+    pkgload::pkg_path()
+  })
+  !attempt::is_try_error(x)
+}
+
+create_if_needed <- function(
+  path, 
+  type = c("file", "directory"),
+  content = NULL
+){
+  type <- match.arg(type)
+  # Check if file or dir already exist
+  if (type == "file"){
+    dont_exist <- file_not_exist(path)
+  } else if (type == "directory"){
+    dont_exist <- dir_not_exist(path)
+  }
+  # If it doesn't exist, ask if we are allowed 
+  # to create it
+  if (dont_exist){
+    ask <- yesno::yesno(
+      sprintf(
+        "The %s %s doesn't exist, create?", 
+        basename(path), 
+        type
+      )
+    )
+    # Return early if the user doesn't allow 
+    if (!ask) return(FALSE)
+    
+  } else {
+    return(TRUE)
+  }
+  
+  # Create the file 
+  if (type == "file"){
+    fs::file_create(path)
+    write(content, path, append = TRUE)
+  } else if (type == "directory"){
+    fs::dir_create(path, recurse = TRUE)
+  }
+  # TRUE means that file exists (either 
+  # created or already there)
+  return(TRUE)
+}
 
 create_dir_if_needed <- function(
   path, 

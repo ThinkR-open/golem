@@ -1,6 +1,4 @@
-#' ui
-#' 
-#' @param request needed for bookmarking
+#' Application UI
 #'
 #' @import shiny
 app_ui <- function(request) {
@@ -13,9 +11,8 @@ app_ui <- function(request) {
     )
   )
 }
- 
+
 #' @import shiny
-#' @importFrom golem app_sys
 golem_add_external_resources <- function(){
   
   golem::add_resource_path(

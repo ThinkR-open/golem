@@ -41,6 +41,6 @@ get_batch_sysreqs <- function(all_deps,quiet=TRUE){
   
   
   
-  sort(unique(out[!is.na(out)]))
+  unique(out[!is.na(out)])
   
 }

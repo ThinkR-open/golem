@@ -1,6 +1,6 @@
 #' Use Files
 #' 
-#' These functions download files from external sources and install them inside the approriate directory. 
+#' These functions download files from external sources and install them inside the appropriate directory. 
 #' 
 #' @inheritParams  add_module
 #' @param url String representation of URL for the file to be downloaded

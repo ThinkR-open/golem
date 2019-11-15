@@ -10,19 +10,22 @@ add_dockerfile(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL, port = 80,
   host = "0.0.0.0", sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/", expand = FALSE, open = TRUE)
+  repos = "https://cran.rstudio.com/", expand = FALSE, open = TRUE,
+  update_tar_gz = TRUE, build_golem_from_source = FALSE)
 
 add_dockerfile_shinyproxy(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
-  expand = FALSE, open = TRUE)
+  expand = FALSE, open = TRUE, update_tar_gz = TRUE,
+  build_golem_from_source = FALSE)
 
 add_dockerfile_heroku(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
-  expand = FALSE, open = TRUE)
+  expand = FALSE, open = TRUE, update_tar_gz = TRUE,
+  build_golem_from_source = FALSE)
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file to use as an input.}
@@ -49,6 +52,10 @@ Default is 0.0.0.0.}
 \item{expand}{boolean, if \code{TRUE} each system requirement will be known his own RUN line}
 
 \item{open}{boolean, default is \code{TRUE} open the Dockerfile file}
+
+\item{update_tar_gz}{boolean, if \code{TRUE} and build_golem_from_source is also \code{TRUE} an updated tar.gz Package is created}
+
+\item{build_golem_from_source}{boolean, if \code{TRUE} no tar.gz Package is created and the Dockerfile directly mount the source folder to build it}
 }
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates

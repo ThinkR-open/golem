@@ -30,10 +30,10 @@ create_golem <- function(
     package_name <- basename(getwd())
   }
   
-  
-  
   if (check_name){
+    cat_rule("Checking package name")
     getFromNamespace("check_package_name", "usethis")(package_name)
+    cat_green_tick("Valid package name")
   }
   
   if (dir.exists(path)){
@@ -44,8 +44,12 @@ create_golem <- function(
       return(invisible(NULL))
     }
   }
-  dir.create(path, recursive = TRUE, showWarnings = FALSE)
   
+  cat_rule("Creating dir")
+  dir.create(path, recursive = TRUE, showWarnings = FALSE)
+  cat_green_tick("Created package directory")
+  
+  cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
   ll <- list.files(path = from, full.names = TRUE, all.files = TRUE,no.. = TRUE)
   # remove `..`
@@ -81,7 +85,21 @@ create_golem <- function(
     },
     silent=TRUE)
   }
-
+  cat_green_tick("Copied app skeleton")
+  
+  cat_rule("Setting the default config")
+  yml_path <- file.path(path, "inst/golem-config.yml")
+  
+  conf <- yaml::read_yaml(yml_path, eval.expr = TRUE)
+  
+  path <- "here::here()"
+  attr(path, "tag") <- "!expr"
+  conf$dev$golem_wd <- path
+  conf$default$golem_name <- package_name
+  conf$default$golem_version <- "0.0.0.9000"
+  yaml::write_yaml(conf, yml_path)
+  
+  cat_green_tick("Configured app")
   
   if ( without_comments == TRUE ) {
     files <- list.files(
@@ -96,17 +114,22 @@ create_golem <- function(
     }
   }
   
+  cat_rule("Done")
   
- cat_line(paste0("A new golem package ", package_name, " was created in ", get_golem_wd(), "/", package_name,
-                  " directory.\n", 
-                  "To continue work on your package start editing the 01_start.R file"))
-  
-
+  cat_line(
+    paste0(
+      "A new golem named ", 
+      package_name, 
+      " was created at ", 
+      normalizePath(path),
+      " .\n", 
+      "To continue working on your app, start editing the 01_start.R file."
+    )
+  )
   
   if ( open & rstudioapi::isAvailable() ) { 
     rstudioapi::openProject(path = path)
   }
-  
   
   return( 
     invisible(

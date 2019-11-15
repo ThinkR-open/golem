@@ -1,102 +1,293 @@
-#' {golem} options
+#' `{golem}` options
 #' 
-#' Set a series of options to be used internally by `{golem}`.
+#' Set and get a series of options to be used with `{golem}`. 
+#' These options are found inside the `golem-config.yml` file, found in most cases 
+#' inside the `inst` folder.
+#' 
+#' @section Set Functions:
+#' + `set_golem_options()` sets all the options, with the defaults from the functions below.
+#' + `set_golem_wd()` defaults to `here::here()`, which is the package root when starting a golem. 
+#' + `set_golem_name()` defaults `pkgload::pkg_name()`
+#' + `set_golem_version()` defaults `pkgload::pkg_version()`
+#' 
+#' @section Get Functions:
+#' Reads the information from `golem-config.yml`
+#' + `get_golem_wd()`
+#' + `get_golem_name()`
+#' + `get_golem_version()`
 #' 
 #' @param golem_name Name of the current golem.
 #' @param golem_version Version of the current golem.
 #' @param golem_wd Working directory of the current golem package.
 #' @param app_prod Is the `{golem}` in prod mode?
-#'
+#' @param path The path to set the golem working directory. 
+#'     Note that it will be passed to `normalizePath`.
+#' @param talkative Should the messages be printed to the console?
+#' @param name The name of the app
+#' @param version The version of the app
+#' @inheritParams config::get
+#' 
+#' @rdname golem_opts
+#' 
 #' @export
+#' @importFrom attempt stop_if_not
+#' @importFrom yaml read_yaml write_yaml
+#' @importFrom usethis proj_set
 set_golem_options <- function(
   golem_name = pkgload::pkg_name(), 
   golem_version = pkgload::pkg_version(), 
   golem_wd = pkgload::pkg_path(),
-  app_prod = FALSE
-){
-  cli::cat_rule("Setting {golem} options")
-  options("golem.pkg.name" = golem_name)
-  cat_green_tick(sprintf("Setting options('golem.pkg.name') to %s", golem_name))
-  options("golem.pkg.version" = golem_version)
-  cat_green_tick(sprintf("Setting options('golem.pkg.version') to %s", golem_version))
-  set_golem_wd(golem_wd, FALSE)
-  cat_green_tick(sprintf("Setting options('golem.wd') to %s", golem_wd))
-  cat_line("You can change golem working directory with set_golem_wd('path/to/wd')")
-  options("golem.app.prod" = app_prod)
-  cat_green_tick(sprintf("Setting options('golem.app.prod') to %s", app_prod))
-}
-
-#' Get and set `{golem}` working directory
-#' 
-#' Many `{golem}` functions rely on a specific working directory, 
-#' most of the time the root of the package. This working directory 
-#' is set by `set_golem_options` or the first time you create a file. 
-#' It default to `"."`, the current directory when starting a golem. 
-#' You can use these two functions if you need to manipulate this 
-#' directory.
-#' 
-#' @param path The path to set the golem working directory. 
-#'     Note that it will be passed to `normalizePath`.
-#' @param talkative Should the function print where the 
-#'     new path is defined?
-#'
-#' @return The path to the working directory. 
-#' @export
-#' @rdname golem_wd
-get_golem_wd <- function(){
-  if (is.null(getOption("golem.wd"))){
-    cat_red_bullet("Couldn't find golem working directory")
-    cat_green_tick("Definining golem working directory as `.`")
-    cat_line("You can change golem working directory with set_golem_wd('path/to/wd')")
-    set_golem_wd(".")
-  }
-  getOption("golem.wd")
-}
-
-
-#' @export
-#' @rdname golem_wd
-set_golem_wd <- function(
-  path, 
+  app_prod = FALSE, 
   talkative = TRUE
 ){
-  path <- normalizePath(path, winslash = "/")
-  if (talkative){
-    cat_green_tick(
-      sprintf("Definining golem working directory as `%s`", path)
-    )
+  
+  cat_if_talk <- function(..., fun = cat_green_tick){
+    if (talkative){
+      fun(...)
+    }
   }
-  options("golem.wd" = path)
+  
+  conf_path <- get_current_config(golem_wd, set_options = FALSE)
+   
+  stop_if(
+    conf_path, 
+    is.null, 
+    "Unable to retrieve golem config file."
+  )
+  
+  cat_if_talk(
+    "Setting {golem} options in `golem-config.yml`", 
+    fun= cli::cat_rule
+  )
+  
+  conf <- read_yaml(conf_path, eval.expr = TRUE)
+  
+  # Setting wd
+  if (golem_wd == here::here()){
+    path <- "here::here()"
+    attr(path, "tag") <- "!expr"
+  } else {
+    path <- golem_wd
+  }
+  
+  cat_if_talk(
+    sprintf(
+      "Setting `golem_wd` to %s", 
+      path
+    )
+  )
+  cat_if_talk(
+    "You can change golem working directory with set_golem_wd('path/to/wd')", 
+    fun = cat_line
+  )
+  conf$dev$golem_wd <- path
+  
+  # Setting name of the golem
+  cat_if_talk(
+    sprintf(
+      "Setting `golem_name` to %s", 
+      golem_name
+    )
+  )
+  conf$default$golem_name <- golem_name
+  
+  # Setting golem_version
+  cat_if_talk(
+    sprintf(
+      "Setting `golem_version` to %s", 
+      golem_version
+    )
+  )
+  conf$default$golem_version <- as.character(golem_version)
+  
+  # Setting app_prod
+  cat_if_talk(
+    sprintf(
+      "Setting `app_prod` to %s", 
+      app_prod
+    )
+  )
+  conf$default$app_prod <- app_prod
+  
+  # Export
+  write_yaml(
+    conf, 
+    conf_path
+  )
+  
+  cat_if_talk(
+    "Setting {usethis} project as `golem_wd`", 
+    fun = cli::cat_rule
+  )
+  proj_set(golem_wd)
+  
+}
+
+#' @importFrom yaml read_yaml write_yaml
+set_golem_things <- function(
+  key, 
+  value, 
+  path, 
+  talkative, 
+  config = "default"
+){
+  conf_path <- get_current_config(path, set_options = FALSE)
+  stop_if(
+    conf_path, 
+    is.null, 
+    "Unable to retrieve golem config file."
+  )
+  cat_if_talk <- function(..., fun = cat_green_tick){
+    if (talkative){
+      fun(...)
+    }
+  }
+  
+  cat_if_talk(
+    sprintf(
+      "Setting `%s` to %s", 
+      key, 
+      value
+    )
+  )
+  
+  conf <- read_yaml(conf_path, eval.expr = TRUE)
+  conf[[config]][[key]] <- value
+  write_yaml(
+    conf, 
+    conf_path
+  )
+  
   invisible(path)
 }
 
-
-#' A function to return the golem name to be used elsewhere
-#' in the package.
-#' 
-#' @return The name of the golem. 
 #' @export
-#' @rdname golem_name
-#' @importFrom pkgload pkg_name
-
-get_golem_name <- function(){
-  if (is.null(getOption("golem_name"))){
-    options("golem.pkg.name" = pkg_name())
+#' @rdname golem_opts
+set_golem_wd <- function(
+  path = pkgload::pkg_path(), 
+  talkative = TRUE
+){
+  path <- normalizePath(path, winslash = "/")
+  # Setting wd
+  
+  if (path == here::here()){
+    path <- "here::here()"
+    attr(path, "tag") <- "!expr"
   }
-  getOption("golem.pkg.name")
+  
+  set_golem_things(
+    "golem_wd", 
+    path, 
+    path, 
+    talkative = talkative, 
+    config = "dev"
+  )
+  
+  invisible(path)
+  
 }
 
-#' A wrapper around `system.file(..., package = get_golem_name())`
-#' 
-#' This function allows to use `app_sys()` instead of using the 
-#' `system.file(, package = "pkg")`.
-#' 
-#' @inheritParams base::system.file
-#' @return The path to the current golem. 
 #' @export
-#' @rdname golem_name
+#' @rdname golem_opts
+set_golem_name <- function(
+  name = pkgload::pkg_name(),
+  path = pkgload::pkg_path(), 
+  talkative = TRUE
+){
+  path <- normalizePath(path, winslash = "/")
+  set_golem_things(
+    "golem_name", 
+    name, 
+    path, 
+    talkative = talkative
+  )
+  
+  invisible(name)
+  
+}
 
 #' @export
-app_sys <- function(...) {
-  getFromNamespace("shim_system.file", "pkgload")(..., package = get_golem_name())
+#' @rdname golem_opts
+set_golem_version <- function(
+  version = pkgload::pkg_version(),
+  path = pkgload::pkg_path(), 
+  talkative = TRUE
+){
+  path <- normalizePath(path, winslash = "/")
+  set_golem_things(
+    "golem_version", 
+    as.character(version), 
+    path, 
+    talkative = talkative
+  )
+  
+  invisible(version)
 }
+
+#' @importFrom config get
+get_golem_things <- function(
+  value, 
+  config = Sys.getenv("R_CONFIG_ACTIVE", "default"), 
+  use_parent = TRUE, 
+  path 
+){
+  conf_path <- get_current_config(path, set_options = TRUE)
+  stop_if(
+    conf_path, 
+    is.null, 
+    "Unable to retrieve golem config file."
+  )
+  config::get(
+    value = value, 
+    config = config, 
+    file = conf_path,
+    use_parent = TRUE
+  )
+  
+}
+
+
+#' @export
+#' @rdname golem_opts
+get_golem_wd <- function(
+  use_parent = TRUE, 
+  path = pkgload::pkg_path()
+){
+  get_golem_things(
+    value = "golem_wd", 
+    config = "dev", 
+    use_parent = use_parent, 
+    path = path
+  )
+}
+
+#' @export
+#' @rdname golem_opts
+get_golem_name <- function(
+  config = Sys.getenv("R_CONFIG_ACTIVE", "default"), 
+  use_parent = TRUE, 
+  path = pkgload::pkg_path()
+){
+  get_golem_things(
+    value = "golem_name", 
+    config = config, 
+    use_parent = use_parent, 
+    path = path
+  )
+}
+
+#' @export
+#' @rdname golem_opts
+get_golem_version <- function(
+  config = Sys.getenv("R_CONFIG_ACTIVE", "default"), 
+  use_parent = TRUE, 
+  path = pkgload::pkg_path()
+){
+  get_golem_things(
+    value = "golem_version", 
+    config = config, 
+    use_parent = use_parent, 
+    path = path
+  )
+}
+
