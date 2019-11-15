@@ -172,7 +172,9 @@ add_dockerfile <- function(
   usethis::use_build_ignore(basename(where))
   
   dock <- dock_from_desc(path = path, FROM = from, AS = as,
-                         sysreqs = sysreqs, repos = repos,expand = expand,build_golem_from_source = build_golem_from_source)
+                         sysreqs = sysreqs, repos = repos,expand = expand,
+                         build_golem_from_source = build_golem_from_source,
+                         update_tar_gz = update_tar_gz)
   dock$EXPOSE(port)
   dock$CMD(
     glue::glue(
@@ -218,7 +220,9 @@ add_dockerfile_shinyproxy <- function(
   if ( !check_file_exist(where) ) return(invisible(FALSE))
   usethis::use_build_ignore(basename(where))
   dock <- dock_from_desc(path = path, FROM = from, AS = as, 
-                         sysreqs = sysreqs, repos = repos, expand = expand,build_golem_from_source=build_golem_from_source)
+                         sysreqs = sysreqs, repos = repos, expand = expand,
+                         build_golem_from_source=build_golem_from_source,
+                         update_tar_gz = update_tar_gz)
   
   dock$EXPOSE(3838)
   dock$CMD(glue::glue(
@@ -266,7 +270,9 @@ add_dockerfile_heroku <- function(
     return(invisible(FALSE))
   } 
   usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos, expand = expand,build_golem_from_source = build_golem_from_source)
+  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos,
+                         expand = expand,build_golem_from_source = build_golem_from_source,
+                         update_tar_gz = update_tar_gz)
   
   dock$CMD(
     glue::glue(
@@ -335,8 +341,8 @@ alert_build <- function(path, output ,build_golem_from_source){
 #' @param sysreqs boolean to check the system requirements    
 #' @param repos character vector, the base URL of the repositories  
 #' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
-#' @param build_golem_from_source  boolean, if `TRUE` no tar.gz Package is created and the Dockerfile directly mount the source folder to build it
 #' @param update_tar_gz boolean, if `TRUE` and build_golem_from_source is also `TRUE` an updated tar.gz Package is created
+#' @param build_golem_from_source  boolean, if `TRUE` no tar.gz Package is created and the Dockerfile directly mount the source folder to build it
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps
@@ -354,8 +360,8 @@ dock_from_desc <- function(
   sysreqs = TRUE,
   repos = "https://cran.rstudio.com/",
   expand = FALSE,
-  build_golem_from_source = TRUE,
-  update_tar_gz = TRUE
+  update_tar_gz = TRUE,
+  build_golem_from_source = TRUE
 ){
   
  
@@ -460,14 +466,18 @@ dock_from_desc <- function(
   dock
   
   
-  if ( !build_golem_from_source & update_tar_gz){
+  if ( !build_golem_from_source){
+    
+    if ( update_tar_gz ){
+      ancienne_version <- list.files(pattern = glue::glue("{read.dcf(path)[1]}_.+.tar.gz"),full.names = TRUE)
+      cat_red_bullet(glue::glue("We remove {paste(ancienne_version,collapse = ", ")} from folder"))
+      lapply(ancienne_version,file.remove)
+      lapply(ancienne_version,unlink,force=TRUE)
+      cat_green_tick(glue::glue(" {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz created."))
+      devtools::build(path = ".")
+    }
     # we use a already builded tar.gz file
-    ancienne_version <- list.files(pattern = glue::glue("{read.dcf(path)[1]}_.+.tar.gz"),full.names = TRUE)
-    cat_red_bullet(glue::glue("We remove {paste(ancienne_version,collapse = ", ")} from folder"))
-    lapply(ancienne_version,file.remove)
-    lapply(ancienne_version,unlink,force=TRUE)
-    cat_green_tick(glue::glue(" {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz created."))
-    devtools::build(path = ".")
+   
     
     dock$COPY(
     from = paste0(read.dcf(path)[1], "_*.tar.gz"),
