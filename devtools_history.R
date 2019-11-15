@@ -26,6 +26,7 @@ usethis::use_test("reload")
 usethis::use_test("js")
 usethis::use_test("aaadependencies")
 usethis::use_test("create_golem")
+usethis::use_test("config")
 
 # Travis
 usethis::use_travis()

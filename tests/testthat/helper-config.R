@@ -44,7 +44,7 @@ fakename <- sprintf(
   gsub("[ :-]", "", Sys.time())
 )
 
-tpdir <- tempdir()
+tpdir <- normalizePath(tempdir())
 unlink(file.path(tpdir,fakename), recursive = TRUE)
 create_golem(file.path(tpdir, fakename), open = FALSE)
 pkg <- file.path(tpdir, fakename)
@@ -58,4 +58,9 @@ rand_name <- function(){
   paste0(sample(safe_let(), 10, TRUE), collapse = "")
 }
 
+withr::with_dir(pkg, {
+  set_golem_options()
+})
+
 orig_test <- set_golem_wd(pkg)
+usethis::proj_set(pkg)
