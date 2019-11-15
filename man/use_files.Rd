@@ -25,5 +25,5 @@ use_external_css_file(url, name, pkg = get_golem_wd(),
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 }
 \description{
-These functions download files from external sources and install them inside the approriate directory.
+These functions download files from external sources and install them inside the appropriate directory.
 }
