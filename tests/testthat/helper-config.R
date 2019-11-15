@@ -1,8 +1,6 @@
 ### lib
 library(withr)
-
 ### Funs
-
 remove_file <- function(path){
   if (file.exists(path)) unlink(path, force = TRUE)
 }
@@ -60,7 +58,7 @@ rand_name <- function(){
 
 withr::with_dir(pkg, {
   set_golem_options()
+  usethis::proj_set(pkg)
+  orig_test <- set_golem_wd(pkg)
 })
 
-orig_test <- set_golem_wd(pkg)
-usethis::proj_set(pkg)

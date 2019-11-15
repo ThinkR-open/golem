@@ -6,7 +6,7 @@
 #' 
 #' @section Set Functions:
 #' + `set_golem_options()` sets all the options, with the defaults from the functions below.
-#' + `set_golem_wd()` defaults to `pkgload::pkg_path()`, the current directory when starting a golem. 
+#' + `set_golem_wd()` defaults to `here::here()`, which is the package root when starting a golem. 
 #' + `set_golem_name()` defaults `pkgload::pkg_name()`
 #' + `set_golem_version()` defaults `pkgload::pkg_version()`
 #' 
@@ -30,7 +30,7 @@
 #' @rdname golem_opts
 #' 
 #' @export
-#' @importFrom attempt stop_if
+#' @importFrom attempt stop_if_not
 #' @importFrom yaml read_yaml write_yaml
 #' @importFrom usethis proj_set
 set_golem_options <- function(
@@ -48,29 +48,39 @@ set_golem_options <- function(
   }
   
   conf_path <- get_current_config(golem_wd, set_options = FALSE)
-  
+   
   stop_if(
     conf_path, 
-    isFALSE, 
-    "You need to create golem-config.yml to set the options."
+    is.null, 
+    "Unable to retrieve golem config file."
   )
   
-  cat_if_talk("Setting {golem} options in `golem-config.yml`", fun= cli::cat_rule)
+  cat_if_talk(
+    "Setting {golem} options in `golem-config.yml`", 
+    fun= cli::cat_rule
+  )
   
-  conf <- read_yaml(conf_path)
+  conf <- read_yaml(conf_path, eval.expr = TRUE)
   
   # Setting wd
+  if (golem_wd == here::here()){
+    path <- "here::here()"
+    attr(path, "tag") <- "!expr"
+  } else {
+    path <- golem_wd
+  }
+  
   cat_if_talk(
     sprintf(
       "Setting `golem_wd` to %s", 
-      golem_wd
+      path
     )
   )
   cat_if_talk(
     "You can change golem working directory with set_golem_wd('path/to/wd')", 
     fun = cat_line
   )
-  conf$default$golem_wd <- golem_wd
+  conf$dev$golem_wd <- path
   
   # Setting name of the golem
   cat_if_talk(
@@ -105,7 +115,10 @@ set_golem_options <- function(
     conf_path
   )
   
-  cat_if_talk("Setting {usethis} project as `golem_wd`", fun= cli::cat_rule)
+  cat_if_talk(
+    "Setting {usethis} project as `golem_wd`", 
+    fun = cli::cat_rule
+  )
   proj_set(golem_wd)
   
 }
@@ -115,10 +128,15 @@ set_golem_things <- function(
   key, 
   value, 
   path, 
-  talkative
+  talkative, 
+  config = "default"
 ){
   conf_path <- get_current_config(path, set_options = FALSE)
-  
+  stop_if(
+    conf_path, 
+    is.null, 
+    "Unable to retrieve golem config file."
+  )
   cat_if_talk <- function(..., fun = cat_green_tick){
     if (talkative){
       fun(...)
@@ -133,9 +151,9 @@ set_golem_things <- function(
     )
   )
   
-  conf <- read_yaml(conf_path)
-  conf$default[[key]] <- value
- write_yaml(
+  conf <- read_yaml(conf_path, eval.expr = TRUE)
+  conf[[config]][[key]] <- value
+  write_yaml(
     conf, 
     conf_path
   )
@@ -150,13 +168,23 @@ set_golem_wd <- function(
   talkative = TRUE
 ){
   path <- normalizePath(path, winslash = "/")
+  # Setting wd
+  
+  if (path == here::here()){
+    path <- "here::here()"
+    attr(path, "tag") <- "!expr"
+  }
+  
   set_golem_things(
     "golem_wd", 
     path, 
     path, 
-    talkative = talkative
+    talkative = talkative, 
+    config = "dev"
   )
-
+  
+  invisible(path)
+  
 }
 
 #' @export
@@ -173,6 +201,8 @@ set_golem_name <- function(
     path, 
     talkative = talkative
   )
+  
+  invisible(name)
   
 }
 
@@ -191,6 +221,7 @@ set_golem_version <- function(
     talkative = talkative
   )
   
+  invisible(version)
 }
 
 #' @importFrom config get
@@ -201,7 +232,11 @@ get_golem_things <- function(
   path 
 ){
   conf_path <- get_current_config(path, set_options = TRUE)
-  
+  stop_if(
+    conf_path, 
+    is.null, 
+    "Unable to retrieve golem config file."
+  )
   config::get(
     value = value, 
     config = config, 
@@ -215,13 +250,12 @@ get_golem_things <- function(
 #' @export
 #' @rdname golem_opts
 get_golem_wd <- function(
-  config = Sys.getenv("R_CONFIG_ACTIVE", "default"), 
   use_parent = TRUE, 
   path = pkgload::pkg_path()
 ){
   get_golem_things(
     value = "golem_wd", 
-    config = config, 
+    config = "dev", 
     use_parent = use_parent, 
     path = path
   )

@@ -22,8 +22,7 @@ set_golem_name(name = pkgload::pkg_name(), path = pkgload::pkg_path(),
 set_golem_version(version = pkgload::pkg_version(),
   path = pkgload::pkg_path(), talkative = TRUE)
 
-get_golem_wd(config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
-  use_parent = TRUE, path = pkgload::pkg_path())
+get_golem_wd(use_parent = TRUE, path = pkgload::pkg_path())
 
 get_golem_name(config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
   use_parent = TRUE, path = pkgload::pkg_path())
@@ -49,12 +48,12 @@ Note that it will be passed to \code{normalizePath}.}
 
 \item{version}{The version of the app}
 
+\item{use_parent}{\code{TRUE} to scan parent directories for
+configuration files if the specified config file isn't found.}
+
 \item{config}{Name of configuration to read from. Defaults to
 the value of the \code{R_CONFIG_NAME} environment variable
 ("default" if the variable does not exist).}
-
-\item{use_parent}{\code{TRUE} to scan parent directories for
-configuration files if the specified config file isn't found.}
 }
 \description{
 Set and get a series of options to be used with \code{{golem}}.
@@ -65,7 +64,7 @@ inside the \code{inst} folder.
 
 \itemize{
 \item \code{set_golem_options()} sets all the options, with the defaults from the functions below.
-\item \code{set_golem_wd()} defaults to \code{pkgload::pkg_path()}, the current directory when starting a golem.
+\item \code{set_golem_wd()} defaults to \code{here::here()}, which is the package root when starting a golem.
 \item \code{set_golem_name()} defaults \code{pkgload::pkg_name()}
 \item \code{set_golem_version()} defaults \code{pkgload::pkg_version()}
 }
