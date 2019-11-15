@@ -292,7 +292,6 @@ add_dockerfile_heroku <- function(
   cat_red_bullet(
     glue("You can replace {apps_h} with another app name.")
   )
-  browser()
   if (open) {
     if (rstudioapi::isAvailable()) {
       rstudioapi::navigateToFile(output)
