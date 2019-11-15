@@ -11,21 +11,21 @@ add_dockerfile(path = "DESCRIPTION", output = "Dockerfile",
   R.Version()$major, ".", R.Version()$minor), as = NULL, port = 80,
   host = "0.0.0.0", sysreqs = TRUE,
   repos = "https://cran.rstudio.com/", expand = FALSE, open = TRUE,
-  update_tar_gz = TRUE, build_golem_from_source = FALSE)
+  update_tar_gz = TRUE, build_golem_from_source = TRUE)
 
 add_dockerfile_shinyproxy(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
   expand = FALSE, open = TRUE, update_tar_gz = TRUE,
-  build_golem_from_source = FALSE)
+  build_golem_from_source = TRUE)
 
 add_dockerfile_heroku(path = "DESCRIPTION", output = "Dockerfile",
   pkg = get_golem_wd(), from = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), as = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
   expand = FALSE, open = TRUE, update_tar_gz = TRUE,
-  build_golem_from_source = FALSE)
+  build_golem_from_source = TRUE)
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file to use as an input.}

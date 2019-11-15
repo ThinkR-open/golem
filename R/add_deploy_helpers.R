@@ -127,6 +127,7 @@ add_shinyserver_file <- function(
 #' @param update_tar_gz boolean, if `TRUE` and build_golem_from_source is also `TRUE` an updated tar.gz Package is created
 #' @export
 #' @rdname dockerfiles
+#' @importFrom usethis use_build_ignore
 #' @importFrom desc desc_get_deps
 #' @importFrom dockerfiler Dockerfile
 #' @importFrom rstudioapi navigateToFile isAvailable
@@ -318,6 +319,7 @@ add_dockerfile_heroku <- function(
   
 }
 
+#' @importFrom glue glue
 alert_build <- function(path, output ,build_golem_from_source){
   cat_green_tick(
     glue("Dockerfile created at {output}")
@@ -436,17 +438,11 @@ dock_from_desc <- function(
   
   if ( length(packages_not_on_cran>0)){
     
-    # prepare the install_github
-    # 
   nn<-  lapply(
     remotes_deps$remote[!remotes_deps$is_cran],
     function(.){      .[c('repo','username','sha')]
     }) %>% do.call(rbind,.) %>% as.data.frame()
     
-    # nn <- remotes_deps$remote[!remotes_deps$is_cran]%>%
-    #   map_df(~.x[c('repo','username','sha')]) %>% 
-    #   mutate(remote = glue::glue("{username}/{repo}@{sha}")) %>% 
-    #   pull(remote)
   nn<- glue::glue("{nn$username}/{nn$repo}@{nn$sha}")
     
     pong <- mapply(function(dock, ver, nm){
@@ -457,26 +453,24 @@ dock_from_desc <- function(
         )
       )
     }, ver = nn, MoreArgs = list(dock = dock))
-    
-    
   }
-  
-  
-  
-  dock
-  
   
   if ( !build_golem_from_source){
     
     if ( update_tar_gz ){
       ancienne_version <- list.files(pattern = glue::glue("{read.dcf(path)[1]}_.+.tar.gz"),full.names = TRUE)
+      
+      if (length(ancienne_version) > 0){
       cat_red_bullet(glue::glue("We remove {paste(ancienne_version,collapse = ", ")} from folder"))
       lapply(ancienne_version,file.remove)
       lapply(ancienne_version,unlink,force=TRUE)
+      }
+      
+      
       cat_green_tick(glue::glue(" {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz created."))
       devtools::build(path = ".")
     }
-    # we use a already builded tar.gz file
+    # we use an already builded tar.gz file
    
     
     dock$COPY(
@@ -485,15 +479,10 @@ dock_from_desc <- function(
   )
   dock$RUN("R -e 'remotes::install_local(\"/app.tar.gz\")'")
   } else {
-    # 
     dock$RUN("mkdir /build_zone")
     dock$ADD(from = ".",to =  "/build_zone")
     dock$WORKDIR("/build_zone")
-    #dock$RUN("R -e 'setwd(\"/build_zone\");devtools::build(path = \".\")'")
     dock$RUN("R -e 'remotes::install_local()'")
-    
-    
-    
   }
   
   dock
