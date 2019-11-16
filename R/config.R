@@ -92,9 +92,10 @@ get_current_config <- function(
 #' @inheritParams config::get
 #' @inheritParams add_module
 #' @inheritParams set_golem_options
-#'
+#' 
 #' @export
 #' @importFrom yaml read_yaml write_yaml
+#' @importFrom attempt stop_if
 amend_golem_config <- function(
   key,
   value, 

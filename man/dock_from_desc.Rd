@@ -7,7 +7,8 @@
 dock_from_desc(path = "DESCRIPTION", FROM = paste0("rocker/r-ver:",
   R.Version()$major, ".", R.Version()$minor), AS = NULL,
   sysreqs = TRUE, repos = "https://cran.rstudio.com/",
-  expand = FALSE, build_golem_from_source = FALSE)
+  expand = FALSE, update_tar_gz = TRUE,
+  build_golem_from_source = TRUE)
 }
 \arguments{
 \item{path}{path to the DESCRIPTION file to use as an input.}
@@ -22,6 +23,8 @@ with \code{R.Version()$major} and \code{R.Version()$minor}.}
 \item{repos}{character vector, the base URL of the repositories}
 
 \item{expand}{boolean, if \code{TRUE} each system requirement will be known his own RUN line}
+
+\item{update_tar_gz}{boolean, if \code{TRUE} and build_golem_from_source is also \code{TRUE} an updated tar.gz Package is created}
 
 \item{build_golem_from_source}{boolean, if \code{TRUE} no tar.gz Package is created and the Dockerfile directly mount the source folder to build it}
 }
