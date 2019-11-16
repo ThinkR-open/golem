@@ -1,5 +1,6 @@
 #' Application UI
-#'
+#' 
+#' @param request needed to use `enableBookmarking()`
 #' @import shiny
 app_ui <- function(request) {
   tagList(

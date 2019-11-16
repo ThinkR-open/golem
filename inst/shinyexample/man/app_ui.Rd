@@ -2,13 +2,13 @@
 % Please edit documentation in R/app_ui.R
 \name{app_ui}
 \alias{app_ui}
-\title{ui}
+\title{Application UI}
 \usage{
 app_ui(request)
 }
 \arguments{
-\item{request}{needed for bookmarking}
+\item{request}{needed to use `enableBookmarking()`}
 }
 \description{
-ui
+Application UI
 }
