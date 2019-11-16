@@ -46,6 +46,7 @@ Imports:
     dockerfiler,
     fs,
     glue,
+    here,
     htmltools,
     jsonlite,
     magrittr,
