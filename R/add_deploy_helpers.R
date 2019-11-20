@@ -477,12 +477,12 @@ dock_from_desc <- function(
     from = paste0(read.dcf(path)[1], "_*.tar.gz"),
     to = "/app.tar.gz"
   )
-  dock$RUN("R -e 'remotes::install_local(\"/app.tar.gz\")'")
+  dock$RUN("R -e 'remotes::install_local(\"/app.tar.gz\",upgrade=\"never\")'")
   } else {
     dock$RUN("mkdir /build_zone")
     dock$ADD(from = ".",to =  "/build_zone")
     dock$WORKDIR("/build_zone")
-    dock$RUN("R -e 'remotes::install_local()'")
+    dock$RUN("R -e 'remotes::install_local(upgrade=\"never\")'")
   }
   
   dock
