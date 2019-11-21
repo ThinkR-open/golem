@@ -15,9 +15,10 @@ add_resource_path <- function(prefix,
  
   list_f <- is_empty(list.files(path = directory_path))
   
-  if( list_f & warn_empty ){
+  if ( list_f & warn_empty ) {
     message("Unable to add your directory because it is empty")
   } else {
     addResourcePath(prefix, directory_path)
+message("Resource path added to ", prefix, "/", directory_path)
   }
 }
