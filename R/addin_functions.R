@@ -1,7 +1,3 @@
-#' insert_ns
-#' 
-#' Function to insert ns
-#' 
 #' @importFrom rstudioapi getSourceEditorContext
 #' @importFrom rstudioapi modifyRange
 #' 
