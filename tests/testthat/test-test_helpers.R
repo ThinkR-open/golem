@@ -1,5 +1,3 @@
-context("tests expect fonctions")
-
 test_that("test expect_shinytag",{
   with_dir(pkg,{
     expect_equal(capture_output(expect_shinytag(favicon("jean"))),"")
@@ -16,7 +14,6 @@ test_that("test expect_shinytaglist",{
 
 test_that("test expect_shinytaglist",{
   with_dir(pkg,{
-    
     ui <- shiny::h1("Jean")
     htmltools::save_html(ui,file = "jean.html")
     expect_equal(capture_output(expect_html_equal(ui = ui,html = "jean.html")),"")
