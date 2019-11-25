@@ -9,4 +9,4 @@ LazyData: true
 Imports: 
     shiny, 
     golem
-RoxygenNote: 6.1.1
+RoxygenNote: 6.1.0
