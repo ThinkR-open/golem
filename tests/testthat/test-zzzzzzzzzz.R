@@ -1,5 +1,5 @@
 # For setting back old usethis settings
-if (!identical(Sys.getenv("TRAVIS"), "true")) {
+if (dir.exists(orig_test)){
   usethis::proj_set(orig_test)
 }
 
