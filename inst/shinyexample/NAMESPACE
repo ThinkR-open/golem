@@ -3,5 +3,8 @@
 export(run_app)
 import(config)
 import(shiny)
+importFrom(golem,activate_js)
+importFrom(golem,add_resource_path)
+importFrom(golem,favicon)
 importFrom(golem,with_golem_options)
 importFrom(shiny,shinyApp)
