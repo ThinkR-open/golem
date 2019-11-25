@@ -11,9 +11,7 @@ test_that("add_module", {
     script <- list.files("R", pattern = "mod_test")
     lapply(tools::file_ext(script), function(x) testthat::expect_equal(x, "R"))
     ## Test message of function
-    if (file.exists("R/mod_output.R")) {
-      file.remove("R/mod_output.R")
-    }
+    remove_file("R/mod_output.R")
     output <- testthat::capture_output(add_module("output", open = FALSE))
     expect_true(
       stringr::str_detect(output, "File created at R/mod_output.R")

@@ -1,6 +1,3 @@
-context("test js function")
-
-
 test_that("active_js", {
   expect_is(activate_js(),'shiny.tag')
 })

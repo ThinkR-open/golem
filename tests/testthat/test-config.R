@@ -12,12 +12,12 @@ test_that("config works", {
       value = "inprod", 
       config = "production"
     )
-    pkgload::load_all(path = pkg)
-    expect_equal(get_golem_config("where"), "indev")
-    expect_equal(get_golem_config("where", config = "production"), "inprod")
+
+    expect_equal(config::get("where", file = "inst/golem-config.yml"), "indev")
+    expect_equal(config::get("where", config = "production", file = "inst/golem-config.yml"), "inprod")
     where_conf <- withr::with_envvar(
       c("R_CONFIG_ACTIVE" = "production"), {
-        get_golem_config("where")
+        config::get("where", file = "inst/golem-config.yml")
       }
     )
     expect_equal(where_conf, "inprod")

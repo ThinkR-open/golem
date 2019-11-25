@@ -25,7 +25,7 @@ create_golem <- function(
   without_comments = FALSE,
   ...
 ) {
-  
+   
   if (path == '.' & package_name == basename(path)){
     package_name <- basename(getwd())
   }
@@ -92,9 +92,9 @@ create_golem <- function(
   
   conf <- yaml::read_yaml(yml_path, eval.expr = TRUE)
   
-  path <- "here::here()"
-  attr(path, "tag") <- "!expr"
-  conf$dev$golem_wd <- path
+  yaml_golem_wd <- "here::here()"
+  attr(yaml_golem_wd, "tag") <- "!expr"
+  conf$dev$golem_wd <- yaml_golem_wd
   conf$default$golem_name <- package_name
   conf$default$golem_version <- "0.0.0.9000"
   yaml::write_yaml(conf, yml_path)

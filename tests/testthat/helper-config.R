@@ -29,6 +29,12 @@ expect_exists <- function(fls) {
   invisible(act$val)
 }
 
+burn_after_reading <- function(file, exp){
+  unlink(file, force = TRUE)
+  force(exp)
+  unlink(file, force = TRUE)
+}
+
 # We prevent the random name from having 
 # ui or server inside it 
 safe_let <- function(){
@@ -61,4 +67,3 @@ withr::with_dir(pkg, {
   usethis::proj_set(pkg)
   orig_test <- set_golem_wd(pkg)
 })
-

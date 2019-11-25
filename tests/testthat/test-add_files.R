@@ -1,79 +1,65 @@
 context("test-add_file function")
 
-test_that("add_css_file", {
+expect_add_file <- function(
+  fun,
+  ext, 
+  pkg, 
+  fp
+){
+  name <- rand_name()
+  # Be sure to remove all files in case there are
+  remove_files("inst/app/www", ext)
+  # Launch the function
+  fun(name, pkg = pkg, open = FALSE)
+  # Test that the file exists
+  expect_exists(file.path("inst/app/www", paste0(name,".", ext)))
+  # Check that the file exsts
+  ff <- list.files("inst/app/www/", pattern = name)
+  expect_equal(tools::file_ext(ff), ext)
+  
+  # Try another file in another dir
+  bis <- paste0(name, rand_name())
+  fun(bis, pkg = pkg, open = FALSE, dir = normalizePath(fp))
+  expect_exists( normalizePath(fp) )
+  ff <- list.files( normalizePath(fp), pattern = bis)
+  expect_equal(tools::file_ext(ff), ext)
+  
+  # Check that the extension is removed
+  name <- rand_name()
+  ter <- paste0(name, ".", ext)
+  fun(ter, pkg = pkg, open = FALSE,)
+  expect_exists(file.path("inst/app/www"))
+  ff <- list.files("inst/app/www/", pattern = ter)
+  expect_equal(tools::file_ext(ff), ext)
+  
+  remove_files("inst/app/www", ext)
+}
+
+test_that("add_files", {
   
   with_dir(pkg, {
-    remove_files("inst/app/www", "\\.css$")
-    add_css_file("style", pkg = pkg, open = FALSE)
-    expect_exists("inst/app/www/style.css")
-    
-    add_css_file("stylebis", pkg = pkg, open = FALSE, dir = normalizePath(fp))
-    expect_true(
-      file.exists(
-        file.path(fp, "stylebis.css")
-      )
+    expect_add_file(
+      add_css_file, 
+      ext = "css", 
+      pkg = pkg,
+      fp = fp
     )
-    style <-list.files("inst/app/www/", pattern = "style")
-    expect_equal(tools::file_ext(style), "css")
+    expect_add_file(
+      add_js_file, 
+      ext = "js", 
+      pkg = pkg,
+      fp = fp
+    )
+    expect_add_file(
+      add_js_handler, 
+      ext = "js", 
+      pkg = pkg,
+      fp = fp
+    )
     
-    # Test that extension is removed
-    remove_file("inst/app/www/style.css")
-    add_css_file("style.css", pkg = pkg, open = FALSE)
-    expect_true(file.exists("inst/app/www/style.css"))
-    
-    remove_file("inst/app/www/style.css")
-    remove_file("inst/app/www/stylebis.css")
   })
-})
+  
 
-test_that("add_js_file", {
-  with_dir(pkg, {
-    remove_file("inst/app/www/script.js")
-    add_js_file("script", pkg = pkg, open = FALSE)
-    expect_true(file.exists("inst/app/www/script.js"))
-    
-    add_js_file("script", pkg = pkg, open = FALSE, dir = normalizePath(fp))
-    expect_true(
-      file.exists(
-        file.path(fp, "script.js")
-      )
-    )
-    script <-
-      list.files("inst/app/www/", pattern = "script")
-    expect_equal(tools::file_ext(script),
-                 "js")
-    remove_file("inst/app/www/script.js")
-    
-    # Test that extension is removed
-    add_js_file("script.js", pkg = pkg, open = FALSE)
-    expect_true(file.exists("inst/app/www/script.js"))
-    remove_file("inst/app/www/script.js")
-  })
-})
-
-test_that("add_js_handler", {
-  with_dir(pkg, {
-    remove_file("inst/app/www/handler.js")
-    add_js_handler("handler", pkg = pkg, open = FALSE)
-    expect_true(file.exists("inst/app/www/handler.js"))
-    
-    add_js_handler("handler",pkg = pkg, open = FALSE, dir = normalizePath(fp))
-    expect_true(
-      file.exists(
-        file.path(fp, "handler.js")
-      )
-    )
-    script <-
-      list.files("inst/app/www/", pattern = "handler")
-    expect_equal(tools::file_ext(script),
-                 "js")
-    remove_file("inst/app/www/handler.js")
-    
-    # Test that extension is removed
-    add_js_handler("handler.js", pkg = pkg, open = FALSE)
-    expect_true(file.exists("inst/app/www/handler.js"))
-    remove_file("inst/app/www/handler.js")
-  })
 })
 
 test_that("add_ui_server_files", {
