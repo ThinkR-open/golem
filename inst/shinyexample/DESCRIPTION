@@ -8,6 +8,5 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     shiny, 
-    golem,
-    R6
+    golem
 RoxygenNote: 6.1.1
