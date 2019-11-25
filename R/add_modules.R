@@ -10,6 +10,7 @@
 #' @param dir_create Creates the directory if it doesn't exist, default is `TRUE`.
 #' @param fct The name of the fct file.
 #' @param utils The name of the utils file.
+#' @param export Logical. Should the module be exported? Default is `FALSE`.
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export
 #' @importFrom glue glue
@@ -22,7 +23,8 @@ add_module <- function(
   open = TRUE, 
   dir_create = TRUE, 
   fct = NULL, 
-  utils = NULL
+  utils = NULL, 
+  export = FALSE
 ){
   
   name <- file_path_sans_ext(name)
@@ -63,23 +65,21 @@ add_module <- function(
   glue <- function(...){
     glue::glue(..., .open = "%", .close = "%")
   }
-  write_there("# Module UI")
-  write_there("  ")
-  write_there(glue("#' @title   mod_%name%_ui and mod_%name%_server"))
-  write_there("#' @description  A shiny Module.")
+
+  write_there(glue("#' %name% UI Function"))
   write_there("#'")
-  write_there("#' @param id shiny id")
-  write_there("#' @param input internal")
-  write_there("#' @param output internal")
-  write_there("#' @param session internal")
+  write_there("#' @description A shiny Module.")
   write_there("#'")
-  write_there(glue("#' @rdname mod_%name%"))
+  write_there("#' @param id,input,output,session Internal parameters for {shiny}.")
   write_there("#'")
-  write_there("#' @keywords internal")
-  write_there("#' @export ") 
+  if (export){
+    write_there(glue("#' @rdname mod_%name%"))
+    write_there("#' @export ") 
+  } else {
+    write_there("#' @noRd ") 
+  }
+  write_there("#'")
   write_there("#' @importFrom shiny NS tagList ") 
-  
-  
   write_there(glue("mod_%name%_ui <- function(id){"))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
@@ -87,14 +87,18 @@ add_module <- function(
   write_there("  )")
   write_there("}")
   write_there("    ")
-  write_there("# Module Server")
-  write_there("    ")
-  write_there(glue("#' @rdname mod_%name%"))
-  write_there("#' @export")
-  write_there("#' @keywords internal")
-  write_there("    ")
+  
+  write_there(glue("#' %name% Server Function"))
+  write_there("#'")
+  if (export){
+    write_there(glue("#' @rdname mod_%name%"))
+    write_there("#' @export ") 
+  } else {
+    write_there("#' @noRd ") 
+  }
   write_there(glue("mod_%name%_server <- function(input, output, session){"))
   write_there("  ns <- session$ns")
+  write_there("    ")
   write_there("}")
   write_there("    ")
   

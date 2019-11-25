@@ -5,4 +5,7 @@ default:
 
 production: 
   app_prod: yes
+  
+dev: 
+  golem_wd: !exp here::here()
 

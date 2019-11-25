@@ -7,7 +7,7 @@
 run_app(...)
 }
 \arguments{
-\item{...}{A list of Options to be added to the app}
+\item{...}{A series of options to be used inside the app.}
 }
 \description{
 Run the Shiny Application
