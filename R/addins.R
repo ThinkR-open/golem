@@ -1,9 +1,33 @@
-#' {golem} addins
+#' `{golem}` addins
 #' 
-#' Addins to go to common files used in developing a `{golem}` package.
+#' `insert_ns()` takes a selected character vector and wrap it in `ns()`
+#'  The series of `go_to_*()` addins help you go to 
+#'  common files used in developing a `{golem}` application.
+#'
+#' @importFrom rstudioapi getSourceEditorContext modifyRange
+#' @importFrom attempt stop_if_not 
+#' @importFrom rstudioapi modifyRange
 #' 
-#' @param file Name of the file to be loaded from the `dev` directory.
-#' @param wd Working directory of the current golem package.
+#' @aliases addins
+#' @rdname addins
+#' @name addins
+NULL
+
+#' @rdname addins
+#' @aliases addins
+insert_ns <- function () {
+
+  curr_editor <- rstudioapi::getSourceEditorContext()
+  
+  id <- curr_editor$id
+  sel_rng <- curr_editor$selection[[1]]$range
+  sel_text <- curr_editor$selection[[1]]$text
+  
+  mod_text <- paste0("ns(", sel_text, ")")
+  
+  rstudioapi::modifyRange(sel_rng, mod_text, id = id)
+}
+
 
 go_to <- function(
   file,
@@ -15,39 +39,47 @@ go_to <- function(
   if (! file.exists(file)){
     message(file, "not found.")
   }
-  if (rstudioapi::hasFun("navigateToFile") ){
-    rstudioapi::navigateToFile(
-      file
-    )
-  } else {
-    message("Your version of RStudio does not support `navigateToFile`")
-  }
+  
+  stop_if_not(
+    rstudioapi::hasFun("navigateToFile"), 
+    msg = "Your version of RStudio does not support `navigateToFile`"
+  )
+  
+  rstudioapi::navigateToFile( file )
 }
 
+#' @rdname addins
+#' @aliases addins
 go_to_start <- function(){
   go_to("dev/01_start.R")
 }
-
+#' @rdname addins
+#' @aliases addins
 go_to_dev <- function(){
   go_to("dev/02_dev.R")
 }
-
+#' @rdname addins
+#' @aliases addins
 go_to_deploy <- function(){
   go_to("dev/03_deploy.R")
 }
-
+#' @rdname addins
+#' @aliases addins
 go_to_run_dev <- function(){
   go_to("dev/run_dev.R")
 }
-
+#' @rdname addins
+#' @aliases addins
 go_to_app_ui <- function(){
   go_to("R/app_ui.R")
 }
-
+#' @rdname addins
+#' @aliases addins
 go_to_app_server <- function(){
   go_to("R/app_server.R")
 }
-
+#' @rdname addins
+#' @aliases addins
 go_to_run_app <- function(){
   go_to("R/run_app.R")
 }
