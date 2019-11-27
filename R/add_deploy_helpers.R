@@ -395,12 +395,19 @@ dock_from_desc <- function(
   packages_on_cran <- remotes_deps$package[remotes_deps$is_cran] %>% 
     intersect(packages)
   
+  
   packages_not_on_cran <- packages %>% 
     setdiff(packages_on_cran)
   
   
-  packages_on_cran <- setNames(lapply(packages_on_cran, packageVersion), packages_on_cran)
+ packages_with_version <-  data.frame(
+   package=remotes_deps$package,
+   installed=remotes_deps$installed,stringsAsFactors = FALSE
+  )%>%
+   filter(package %in% packages_on_cran)
+
   
+  packages_on_cran <- packages_with_version$installed %>% setNames(packages_with_version$package)
   
   dock <- dockerfiler::Dockerfile$new(FROM = FROM)
   
