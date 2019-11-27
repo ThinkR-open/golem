@@ -8,7 +8,7 @@
 \title{Create Files}
 \usage{
 add_js_file(name, pkg = get_golem_wd(), dir = "inst/app/www",
-  open = TRUE, dir_create = TRUE)
+  open = TRUE, dir_create = TRUE, with_doc_ready = TRUE)
 
 add_js_handler(name, pkg = get_golem_wd(), dir = "inst/app/www",
   open = TRUE, dir_create = TRUE)
@@ -29,6 +29,8 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app",
 \item{open}{Should the file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+
+\item{with_doc_ready}{Should the default file include \code{$( document ).ready()}?}
 }
 \description{
 These functions create files inside the \code{inst/app} folder.
