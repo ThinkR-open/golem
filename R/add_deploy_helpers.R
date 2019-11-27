@@ -429,7 +429,7 @@ dock_from_desc <- function(
   ping <- mapply(function(dock, ver, nm){
     res <- dock$RUN(
       sprintf(
-        "Rscript -e 'remotes::install_version(\"%s\", version = \"%s\")'", 
+        "Rscript -e 'remotes::install_version(\"%s\",upgrade=\"never\", version = \"%s\")'", 
         nm, ver
       )
     )
