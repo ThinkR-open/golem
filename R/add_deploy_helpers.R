@@ -350,6 +350,7 @@ alert_build <- function(path, output ,build_golem_from_source){
 #' @importFrom desc desc_get_deps
 #' @importFrom magrittr %>% 
 #' @importFrom stats setNames
+#' @importFrom dplyr filter
 #' 
 dock_from_desc <- function(
   path = "DESCRIPTION",
@@ -401,10 +402,10 @@ dock_from_desc <- function(
   
   
  packages_with_version <-  data.frame(
-   package=remotes_deps$package,
+   pp=remotes_deps$package,
    installed=remotes_deps$installed,stringsAsFactors = FALSE
   )%>%
-   filter(package %in% packages_on_cran)
+   dplyr::filter(pp %in% packages_on_cran)
 
   
   packages_on_cran <- packages_with_version$installed %>% setNames(packages_with_version$package)
