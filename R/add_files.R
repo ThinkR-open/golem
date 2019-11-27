@@ -5,6 +5,7 @@
 #' 
 #' @inheritParams  add_module
 #' @param dir Path to the dir where the file while be created.
+#' @param with_doc_ready Should the default file include `$( document ).ready()`?
 #' @export
 #' @rdname add_files
 #' @importFrom glue glue
@@ -17,10 +18,13 @@ add_js_file <- function(
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
-  dir_create = TRUE
+  dir_create = TRUE, 
+  with_doc_ready = TRUE
 ){
-  attempt::stop_if(rlang::is_missing(name),
-    msg = "Name is required")
+  attempt::stop_if(
+    rlang::is_missing(name),
+    msg = "Name is required"
+  )
   
   name <- file_path_sans_ext(name)
   
@@ -50,14 +54,23 @@ add_js_file <- function(
   
   file.create(where)
   
+  if (with_doc_ready){
+    write_there <- function(...){
+      write(..., file = where, append = TRUE)
+    }
+    write_there("$( document ).ready(function() {")
+    write_there("  ")
+    write_there("});")
+  }
+  
   cat_green_tick(glue::glue("File created at {where}"))
   
   if (file.exists(paste0(pkg, "/DESCRIPTION"))) {
-  cat_red_bullet(
-    glue::glue(
-      'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
-    )
-  )}
+    cat_red_bullet(
+      glue::glue(
+        'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
+      )
+    )}
   
   if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
@@ -76,7 +89,7 @@ add_js_handler <- function(
   dir_create = TRUE
 ){
   attempt::stop_if(rlang::is_missing(name),
-    msg = "Name is required")
+                   msg = "Name is required")
   
   name <- file_path_sans_ext(name)
   
@@ -121,11 +134,11 @@ add_js_handler <- function(
   cat_green_tick(glue::glue("File created at {where}"))
   
   if (file.exists(paste0(pkg, "/DESCRIPTION"))) {
-  cat_red_bullet(
-    glue::glue(
-      'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
-    )
-  )}
+    cat_red_bullet(
+      glue::glue(
+        'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
+      )
+    )}
   
   if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
@@ -144,7 +157,7 @@ add_css_file <- function(
   dir_create = TRUE
 ){
   attempt::stop_if(rlang::is_missing(name),
-    msg = "Name is required")
+                   msg = "Name is required")
   
   name <- file_path_sans_ext(name)
   
@@ -178,11 +191,11 @@ add_css_file <- function(
   cat_green_tick(glue::glue("File created at {where}"))
   
   if (file.exists(paste0(pkg, "/DESCRIPTION"))) {
-  cat_red_bullet(
-    glue::glue(
-      'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/{name}.css")`'
-    )
-  )}
+    cat_red_bullet(
+      glue::glue(
+        'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/{name}.css")`'
+      )
+    )}
   
   if (rstudioapi::isAvailable() & open ){
     rstudioapi::navigateToFile(where)
