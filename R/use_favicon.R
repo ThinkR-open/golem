@@ -6,6 +6,7 @@
 #' @export
 #' 
 #' @importFrom attempt stop_if_not
+#' @importFrom fs path_abs path file_copy
 #'
 #' @examples
 #' \donttest{
@@ -14,28 +15,34 @@
 #'   use_favicon(path='path/to/your/favicon.ico')
 #' }
 #' }
-use_favicon <- function(path, pkg = get_golem_wd()){
+use_favicon <- function(
+  path, 
+  pkg = get_golem_wd()
+){
   
   if (missing(path)){
     path <- golem_sys("shinyexample/inst/app/www", "favicon.ico")
   } 
   
   ext <- tools::file_ext(path)
-  stop_if_not(ext, ~ .x %in% c("png",'ico'), 
-              "favicon must have .ico or .png extension")
+  stop_if_not(
+    ext, 
+    ~ .x %in% c("png",'ico'), 
+    "favicon must have .ico or .png extension"
+  )
   
-  path <- normalizePath(path)
+  path <- path_abs(path)
   
-  old <- setwd(normalizePath(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
-  to <- file.path(normalizePath(pkg), "inst/app/www", glue::glue("favicon.{ext}"))
+  to <- path(path_abs(pkg), "inst/app/www", glue::glue("favicon.{ext}"))
   
   if (! (path == to)) {
-    file.copy(
-      overwrite = TRUE,
+    file_copy(
       path, 
-      to
+      to, 
+      overwrite = TRUE
     )
     cat_green_tick(glue::glue("favicon.{ext} created at {to}"))
   }
@@ -47,18 +54,19 @@ use_favicon <- function(path, pkg = get_golem_wd()){
 }
 
 #' @rdname favicon
-#' @export
+#' @export 
+#' @importFrom fs file_delete file_exists
 remove_favicon <- function(
   path = "inst/app/www/favicon.ico"
 ){
-  if (file.exists(path)){
+  if (file_exists(path)){
     cat_green_tick(
       sprintf(
         "Removing favicon at %s", 
         path
       )
     )
-    unlink(path)
+    file_delete(path)
   } else {
     cat_red_bullet(
       sprintf(

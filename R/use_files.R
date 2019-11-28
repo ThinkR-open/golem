@@ -9,7 +9,7 @@
 #' @rdname use_files
 #' @importFrom glue glue
 #' @importFrom cli cat_bullet
-
+#' @importFrom fs path_abs path
 use_external_js_file <- function(
   url,
   name,
@@ -19,7 +19,7 @@ use_external_js_file <- function(
   dir_create = TRUE
 ){
   
-  old <- setwd(normalizePath(pkg))  
+  old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
   new_file <- glue::glue("{name}.js")
   
@@ -35,9 +35,9 @@ use_external_js_file <- function(
     return(invisible(FALSE))
   }
   
-  dir <- normalizePath(dir) 
+  dir <- path_abs(dir) 
   
-  where <- file.path(
+  where <- path(
     dir, new_file
   )
   if ( !check_file_exist(where) ) {
@@ -69,6 +69,7 @@ use_external_js_file <- function(
 
 #' @export
 #' @rdname use_files
+#' @importFrom fs path_abs
 use_external_css_file <- function(
   url,
   name,
@@ -78,7 +79,7 @@ use_external_css_file <- function(
   dir_create = TRUE
 ){
   
-  old <- setwd(normalizePath(pkg))  
+  old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
   new_file <- glue::glue("{name}.css")
   
@@ -94,9 +95,9 @@ use_external_css_file <- function(
     return(invisible(FALSE))
   }
   
-  dir <- normalizePath(dir) 
+  dir <- path_abs(dir) 
   
-  where <- file.path(
+  where <- path(
     dir, new_file
   )
   if ( !check_file_exist(where) ) {

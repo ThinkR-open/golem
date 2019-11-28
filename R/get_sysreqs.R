@@ -13,34 +13,46 @@
 #' @export
 get_sysreqs <- function(packages, quiet = TRUE,batch_n=30){
   
-  # all_deps <- paste(miniCRAN::pkgDep(packages,suggests = FALSE,quiet=quiet), collapse = ",")
-  # all_deps <- paste(unique(c(packages, unlist(miniCRAN::pkgDep(packages, suggests = FALSE)))), collapse = ",")
-  all_deps <- sort(unique(c(packages, unlist(remotes::package_deps(packages)$package))))
-  all_deps
+  all_deps <- sort(
+    unique(
+      c(packages, unlist( remotes::package_deps(packages)$package )
+      )
+    )
+  )
   
-  split(all_deps, ceiling(seq_along(all_deps)/batch_n)) %>%
-    map(~get_batch_sysreqs(.x,quiet=quiet)) %>% 
+  split(
+    all_deps, 
+    ceiling(
+      seq_along(all_deps) / batch_n
+    )
+  ) %>%
+    map( ~ get_batch_sysreqs(.x, quiet = quiet)) %>% 
     unlist() %>% 
     unname() %>% 
     unique() %>% 
     sort()
-
+  
 }
 
-
-get_batch_sysreqs <- function(all_deps,quiet=TRUE){
+#' @importFrom fs file_delete  file_temp
+get_batch_sysreqs <- function(
+  all_deps,
+  quiet=TRUE
+){
   
-  all_deps<-paste(all_deps  , collapse = ",")
-  
-  
-  url <- sprintf("https://sysreqs.r-hub.io/pkg/%s/linux-x86_64-debian-gcc",all_deps)
-  path <- tempfile()
-  utils::download.file(url, path,mode = "wb",quiet = quiet)
+  url <- sprintf(
+    "https://sysreqs.r-hub.io/pkg/%s/linux-x86_64-debian-gcc",
+    paste(all_deps, collapse = ",")
+  )
+  path <- file_temp()
+  utils::download.file(
+    url, 
+    path,
+    mode = "wb",
+    quiet = quiet
+  )
   out <- jsonlite::fromJSON(path)
-  unlink(path)
-  
-  
-  
+  file_delete(path)
   unique(out[!is.na(out)])
   
 }

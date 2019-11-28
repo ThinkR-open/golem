@@ -18,3 +18,5 @@
 ^CRAN-RELEASE$
 ^appveyor\.yml$
 ^CONTRIBUTING\.md$
+^doc$
+^Meta$

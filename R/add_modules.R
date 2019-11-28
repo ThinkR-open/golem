@@ -17,6 +17,7 @@
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #' @importFrom tools file_path_sans_ext
+#' @importFrom fs path_abs path file_create
 add_module <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -29,7 +30,7 @@ add_module <- function(
   
   name <- file_path_sans_ext(name)
   
-  old <- setwd(normalizePath(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
   dir_created <- create_dir_if_needed(
@@ -52,13 +53,12 @@ add_module <- function(
     add_utils(utils, module = name, open = open)
   }
   
-  where <- file.path(
+  where <- path(
     "R", paste0("mod_", name, ".R")
   )
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
-  file.create(where)
+
+  file_create(where)
+  
   write_there <- function(...){
     write(..., file = where, append = TRUE)
   }

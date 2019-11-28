@@ -12,7 +12,7 @@
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #' @importFrom tools file_path_sans_ext
-
+#' @importFrom fs path_abs path file_create file_exists
 add_js_file <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -28,7 +28,7 @@ add_js_file <- function(
   
   name <- file_path_sans_ext(name)
   
-  old <- setwd(normalizePath(pkg))  
+  old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
   
   dir_created <- create_dir_if_needed(
@@ -43,16 +43,13 @@ add_js_file <- function(
     return(invisible(FALSE))
   }
   
-  dir <- normalizePath(dir) 
+  dir <- path_abs(dir) 
   
-  where <- file.path(
+  where <- path(
     dir, glue::glue("{name}.js")
   )
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
   
-  file.create(where)
+  file_create(where)
   
   if (with_doc_ready){
     write_there <- function(...){
@@ -63,9 +60,11 @@ add_js_file <- function(
     write_there("});")
   }
   
-  cat_green_tick(glue::glue("File created at {where}"))
+  cat_green_tick(
+    glue::glue("File created at {where}")
+  )
   
-  if (file.exists(paste0(pkg, "/DESCRIPTION"))) {
+  if (file_exists(paste0(pkg, "/DESCRIPTION"))) {
     cat_red_bullet(
       glue::glue(
         'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
@@ -81,6 +80,7 @@ add_js_file <- function(
 
 #' @export
 #' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
 add_js_handler <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -88,12 +88,14 @@ add_js_handler <- function(
   open = TRUE, 
   dir_create = TRUE
 ){
-  attempt::stop_if(rlang::is_missing(name),
-                   msg = "Name is required")
+  attempt::stop_if(
+    rlang::is_missing(name),
+    msg = "Name is required"
+  )
   
   name <- file_path_sans_ext(name)
   
-  old <- setwd(normalizePath(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
   dir_created <- create_dir_if_needed(
@@ -108,16 +110,13 @@ add_js_handler <- function(
     return(invisible(FALSE))
   }
   
-  dir <- normalizePath(dir) 
+  dir <- path_abs(dir) 
   
   where <- file.path(
     dir, glue::glue("{name}.js")
   )
-  
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
-  file.create(where)
+
+  file_create(where)
   
   write_there <- function(...){
     write(..., file = where, append = TRUE)
@@ -133,7 +132,7 @@ add_js_handler <- function(
   
   cat_green_tick(glue::glue("File created at {where}"))
   
-  if (file.exists(paste0(pkg, "/DESCRIPTION"))) {
+  if (file_exists(paste0(pkg, "/DESCRIPTION"))) {
     cat_red_bullet(
       glue::glue(
         'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
@@ -149,6 +148,7 @@ add_js_handler <- function(
 
 #' @export
 #' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
 add_css_file <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -156,12 +156,14 @@ add_css_file <- function(
   open = TRUE, 
   dir_create = TRUE
 ){
-  attempt::stop_if(rlang::is_missing(name),
-                   msg = "Name is required")
+  attempt::stop_if(
+    rlang::is_missing(name),
+    msg = "Name is required"
+  )
   
   name <- file_path_sans_ext(name)
   
-  old <- setwd(normalizePath(pkg)) 
+  old <- setwd(path_abs(pkg)) 
   on.exit(setwd(old))
   
   dir_created <- create_dir_if_needed(
@@ -176,21 +178,17 @@ add_css_file <- function(
     return(invisible(FALSE))
   }
   
-  dir <- normalizePath(dir) 
+  dir <- path_abs(dir) 
   
-  where <- file.path(
+  where <- path(
     dir, glue::glue("{name}.css")
   )
   
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
-  
-  file.create(where)
+  file_create(where)
   
   cat_green_tick(glue::glue("File created at {where}"))
   
-  if (file.exists(paste0(pkg, "/DESCRIPTION"))) {
+  if (file_exists(paste0(pkg, "/DESCRIPTION"))) {
     cat_red_bullet(
       glue::glue(
         'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/{name}.css")`'
@@ -208,6 +206,7 @@ add_css_file <- function(
 #' @export
 #' @rdname add_files
 #' @importFrom glue glue
+#' @importFrom fs path_abs file_create
 add_ui_server_files <- function(
   pkg = get_golem_wd(), 
   dir = "inst/app",
@@ -215,7 +214,7 @@ add_ui_server_files <- function(
 ){
   
   #browser()
-  old <- setwd(normalizePath(pkg))   
+  old <- setwd(path_abs(pkg))   
   on.exit(setwd(old))
   
   dir_created <- create_dir_if_needed(
@@ -230,15 +229,13 @@ add_ui_server_files <- function(
     return(invisible(FALSE))
   }
   
-  dir <- normalizePath(dir) 
+  dir <- path_abs(dir) 
   
   # UI
-  where <- file.path(
-    dir, "ui.R"
-  )
-  if ( !check_file_exist(where) ) return(invisible(FALSE))
+  where <- path( dir, "ui.R")
   
-  file.create(where)
+  file_create(where)
+  
   write_there <- function(...) write(..., file = where, append = TRUE)
   
   if (is.null(getOption('golem.pkg.name'))){
@@ -257,9 +254,9 @@ add_ui_server_files <- function(
   where <- file.path(
     dir, "server.R"
   )
-  if ( !check_file_exist(where) ) return(invisible(FALSE))
   
-  file.create(where)
+  file_create(where)
+  
   write_there <- function(...) write(..., file = where, append = TRUE)
   
   write_there(
@@ -268,7 +265,6 @@ add_ui_server_files <- function(
       pkg
     )
   )
-  
   cat_green_tick(glue("server file created at {where}"))
   
 }

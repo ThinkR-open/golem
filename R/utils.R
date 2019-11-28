@@ -16,16 +16,18 @@ darkgrey <- function(x) {
   x <- crayon::make_style("darkgrey")(x)
 }
 
-dir_not_exist <- Negate(dir.exists)
-file_not_exist <- Negate(file.exists)
+#' @importFrom fs dir_exists file_exists
+dir_not_exist <- Negate(dir_exists)
+file_not_exist <- Negate(file_exists)
 
-is_package <- function(path){
-  x <- attempt::attempt({
-    pkgload::pkg_path()
-  })
-  !attempt::is_try_error(x)
-}
+# is_package <- function(path){
+#   x <- attempt::attempt({
+#     pkgload::pkg_path()
+#   })
+#   !attempt::is_try_error(x)
+# }
 
+#' @importFrom fs dir_create file_create
 create_if_needed <- function(
   path, 
   type = c("file", "directory"),
@@ -57,16 +59,17 @@ create_if_needed <- function(
   
   # Create the file 
   if (type == "file"){
-    fs::file_create(path)
+    file_create(path)
     write(content, path, append = TRUE)
   } else if (type == "directory"){
-    fs::dir_create(path, recurse = TRUE)
+    dir_create(path, recurse = TRUE)
   }
   # TRUE means that file exists (either 
   # created or already there)
   return(TRUE)
 }
 
+#' @importFrom fs dir_create
 create_dir_if_needed <- function(
   path, 
   auto_create
@@ -85,7 +88,7 @@ create_dir_if_needed <- function(
     }
     # Will create if autocreate or if yes to interactive
     if (go_create) {
-      dir.create(path, recursive = TRUE)
+      dir_create(path, recursive = TRUE)
       cat_green_tick(
         sprintf(
           "Created folder %s to receive the file", 
@@ -98,16 +101,19 @@ create_dir_if_needed <- function(
   return(go_create)
 }
 
+#' @importFrom fs file_exists
 check_file_exist <- function(file){
   res <- TRUE
-  if (file.exists(file)){
+  if (file_exists(file)){
     res <- yesno::yesno("This file already exists, override?")
   }
   return(res)
 }
+
+#' @importFrom fs dir_exists
 check_dir_exist <- function(dir){
   res <- TRUE
-  if (!dir.exists(dir)){ 
+  if (!dir_exists(dir)){ 
     res <- yesno::yesno(sprintf("The %s does not exists, create?", dir))
   }
   return(res)
@@ -133,6 +139,8 @@ remove_comments <- function(file) {
   writeLines(text = lines_without_comment, con = file)
 }
 
+#' @importFrom cli cat_bullet
+
 cat_green_tick <- function(...){
   cat_bullet(
     ..., 
@@ -141,10 +149,17 @@ cat_green_tick <- function(...){
   )
 }
 
+#' @importFrom cli cat_bullet
 cat_red_bullet <- function(...){
   cat_bullet(
     ..., 
     bullet = "bullet",
     bullet_col = "red"
   )
+}
+
+if_not_null <- function(x, ...){
+  if (! is.null(x)){
+    force(...)
+  }
 }

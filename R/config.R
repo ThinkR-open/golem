@@ -1,36 +1,37 @@
 #' @importFrom attempt attempt is_try_error
 #' @importFrom pkgload pkg_path
+#' @importFrom fs path path_abs
 guess_where_config <- function(
   path = "."
 ){
   # Trying the path
-  ret_path <- file.path( 
+  ret_path <- path( 
     path, "inst/golem-config.yml"
   )
-  if (file.exists(ret_path)) return(normalizePath(ret_path))
+  if (file_exists(ret_path)) return(path_abs(ret_path))
   # Trying maybe in the wd
   ret_path <-  "golem-config.yml"
-  if (file.exists(ret_path)) return(normalizePath(ret_path))
+  if (file_exists(ret_path)) return(path_abs(ret_path))
   # Trying with pkgpath
   ret_path <- attempt({
-    file.path(
+    path(
       pkg_path(), 
       "inst/golem-config.yml"
     )
   })
   if (
     !is_try_error(ret_path) & 
-    file.exists(ret_path)
+    file_exists(ret_path)
   ) {
     return(
-      normalizePath(ret_path)
+      path_abs(ret_path)
     )
   }
   return(NULL)
 }
 
 #' @importFrom yesno yesno
-#' @importFrom fs file_copy
+#' @importFrom fs file_copy path
 #' @importFrom pkgload pkg_name
 get_current_config <- function(
   path = ".", 
@@ -41,12 +42,12 @@ get_current_config <- function(
   path_conf <- guess_where_config(path) 
   # We default to inst/ if this doesn't exist
   if (is.null(path_conf)){
-    path_conf <- file.path(
+    path_conf <- path(
       path, "inst/golem-config.yml"
     )
   }
   
-  if (!file.exists(path_conf)){
+  if (!file_exists(path_conf)){
     ask <- yesno(
       sprintf(
         "The %s file doesn't exist, create?", 
@@ -58,7 +59,7 @@ get_current_config <- function(
     
     file_copy(
       path = golem_sys("shinyexample/inst/golem-config.yml"), 
-      new_path = file.path(
+      new_path = path(
         path, "inst/golem-config.yml"
       )
     )
@@ -69,7 +70,7 @@ get_current_config <- function(
       )
     )
     replace_word(
-      file.path(
+      path(
         path, "R/app_config.R"
       ), 
       "shinyexample", 
