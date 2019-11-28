@@ -71,6 +71,6 @@ golem::add_dockerfile()
 golem::add_shinyproxy_dockerfile()
 
 # If you want to deploy to Heroku
-golem::add_heroku_dockerfile()
+golem::add_dockerfile_heroku()
 ```
 
