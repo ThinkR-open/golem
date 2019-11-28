@@ -68,7 +68,7 @@ golem::add_shinyserver_file()
 golem::add_dockerfile()
 
 # If you want to deploy to ShinyProxy
-golem::add_shinyproxy_dockerfile()
+golem::add_dockerfile_shinyproxy()
 
 # If you want to deploy to Heroku
 golem::add_dockerfile_heroku()

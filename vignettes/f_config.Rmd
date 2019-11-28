@@ -69,7 +69,7 @@ get_golem_version()
 
 You can set these with: 
 
-```{r}
+```{r eval = FALSE}
 set_golem_name("this")
 set_golem_wd(".")
 set_golem_version("0.0.1")
