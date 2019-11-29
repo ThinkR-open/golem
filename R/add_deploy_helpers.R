@@ -525,15 +525,15 @@ dock_from_desc <- function(
   if ( !build_golem_from_source){
     
     if ( update_tar_gz ){
-      ancienne_version <- list.files(
+      old_version <- list.files(
         pattern = glue::glue("{read.dcf(path)[1]}_.+.tar.gz"),
         full.names = TRUE
       )
       
-      if (length(ancienne_version) > 0){
-        cat_red_bullet(glue::glue("We remove {paste(ancienne_version,collapse = ", ")} from folder"))
-        lapply(ancienne_version,file.remove)
-        lapply(ancienne_version,unlink,force=TRUE)
+      if ( length(old_version) > 0){
+        lapply(old_version, file.remove)
+        lapply(old_version, unlink, force = TRUE)
+        cat_red_bullet(glue::glue("{paste(old_version,collapse = ', ')} were removed from folder"))
       }
     
       cat_green_tick(glue::glue(" {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz created."))
