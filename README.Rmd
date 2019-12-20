@@ -62,6 +62,7 @@ _Building Big Shiny Apps_
 - [{golem} and Effective Shiny Development Methods](https://www.youtube.com/watch?v=OU1-CkSVdTI)
 - [Hands-on demonstration of {golem}](https://shinydevseries.com/post/golem-demo/)
 - useR! 2019 : [A Framework for Building Robust & Production Ready Shiny Apps](https://youtu.be/tCAan6smrjs)
+- `r  emo::flag("France")` [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
 
 ### Cheatsheet
 

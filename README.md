@@ -58,6 +58,7 @@ This package is part of a series of tools for Shiny, which includes:
     {golem}](https://shinydevseries.com/post/golem-demo/)
   - useR\! 2019 : [A Framework for Building Robust & Production Ready
     Shiny Apps](https://youtu.be/tCAan6smrjs)
+  - 🇫🇷 [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
 
 ### Cheatsheet
 
