@@ -25,7 +25,8 @@ add_module <- function(
   dir_create = TRUE, 
   fct = NULL, 
   utils = NULL, 
-  export = FALSE
+  export = FALSE, 
+  placeholder = " "
 ){
   
   name <- file_path_sans_ext(name)
@@ -82,7 +83,7 @@ add_module <- function(
   write_there(glue("mod_%name%_ui <- function(id){"))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
-  write_there("  ")
+  write_there(placeholder)
   write_there("  )")
   write_there("}")
   write_there("    ")
