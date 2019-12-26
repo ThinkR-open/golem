@@ -23,9 +23,8 @@ use_external_js_file <- function(
   on.exit(setwd(old))
   new_file <- glue::glue("{name}.js")
   
-  dir_created <- create_dir_if_needed(
-    dir, 
-    dir_create
+  dir_created <- create_if_needed(
+    dir, type = "directory"
   )
   
   if (!dir_created){
@@ -40,9 +39,9 @@ use_external_js_file <- function(
   where <- path(
     dir, new_file
   )
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
+  # if ( !check_file_exist(where) ) {
+  #   return(invisible(FALSE))
+  # } 
   
   if ( tools::file_ext(url) != "js") {
     cat_red_bullet(
@@ -53,7 +52,7 @@ use_external_js_file <- function(
   
   utils::download.file(url, where)
   
-  cat_green_tick(glue::glue("File created at {where}"))
+  cat_created(where)
   cat_red_bullet(
     glue::glue(
       'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
@@ -82,10 +81,9 @@ use_external_css_file <- function(
   old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
   new_file <- glue::glue("{name}.css")
-  
-  dir_created <- create_dir_if_needed(
-    dir, 
-    dir_create
+
+  dir_created <- create_if_needed(
+    dir, type = "directory"
   )
   
   if (!dir_created){
@@ -100,9 +98,9 @@ use_external_css_file <- function(
   where <- path(
     dir, new_file
   )
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
+  # if ( !check_file_exist(where) ) {
+  #   return(invisible(FALSE))
+  # } 
   
   if ( tools::file_ext(url) != "css") {
     cat_red_bullet(
@@ -113,7 +111,7 @@ use_external_css_file <- function(
   
   utils::download.file(url, where)
   
-  cat_green_tick(glue::glue("File created at {where}"))
+  cat_created(where)
   cat_red_bullet(
     glue::glue(
       'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.css")`'

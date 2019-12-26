@@ -31,9 +31,8 @@ add_js_file <- function(
   old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
   
-  dir_created <- create_dir_if_needed(
-    dir, 
-    dir_create
+  dir_created <- create_if_needed(
+    dir, type = "directory"
   )
   
   if (!dir_created){
@@ -60,9 +59,7 @@ add_js_file <- function(
     write_there("});")
   }
   
-  cat_green_tick(
-    glue::glue("File created at {where}")
-  )
+  cat_created(where)
   
   if (file_exists(paste0(pkg, "/DESCRIPTION"))) {
     cat_red_bullet(
@@ -98,9 +95,8 @@ add_js_handler <- function(
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
-  dir_created <- create_dir_if_needed(
-    dir, 
-    dir_create
+  dir_created <- create_if_needed(
+    dir, type = "directory"
   )
   
   if (!dir_created){
@@ -130,7 +126,7 @@ add_js_handler <- function(
   write_there("  })")
   write_there("});")
   
-  cat_green_tick(glue::glue("File created at {where}"))
+  cat_created(where)
   
   if (file_exists(paste0(pkg, "/DESCRIPTION"))) {
     cat_red_bullet(
@@ -166,9 +162,8 @@ add_css_file <- function(
   old <- setwd(path_abs(pkg)) 
   on.exit(setwd(old))
   
-  dir_created <- create_dir_if_needed(
-    dir, 
-    dir_create
+  dir_created <- create_if_needed(
+    dir, type = "directory"
   )
   
   if (!dir_created){
@@ -186,7 +181,7 @@ add_css_file <- function(
   
   file_create(where)
   
-  cat_green_tick(glue::glue("File created at {where}"))
+  cat_created(where)
   
   if (file_exists(paste0(pkg, "/DESCRIPTION"))) {
     cat_red_bullet(
@@ -217,9 +212,8 @@ add_ui_server_files <- function(
   old <- setwd(path_abs(pkg))   
   on.exit(setwd(old))
   
-  dir_created <- create_dir_if_needed(
-    dir, 
-    dir_create
+  dir_created <- create_if_needed(
+    dir, type = "directory"
   )
   
   if (!dir_created){
@@ -248,7 +242,7 @@ add_ui_server_files <- function(
     sprintf( "%s:::app_ui()", pkg )
   )
   
-  cat_green_tick(glue("ui file created at {where}"))
+  cat_created(where, "ui file")
   
   # server
   where <- file.path(
@@ -265,6 +259,6 @@ add_ui_server_files <- function(
       pkg
     )
   )
-  cat_green_tick(glue("server file created at {where}"))
+  cat_created(where, "server file")
   
 }

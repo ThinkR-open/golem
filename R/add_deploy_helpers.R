@@ -32,7 +32,7 @@ add_rstudio_files <- function(
   )
   #use_build_ignore(where)
   x <- capture.output(use_package("pkgload"))
-  cat_green_tick(glue("File created at {where}"))
+  cat_created(where)
   cat_line("To deploy, run:")
   cat_bullet(darkgrey("rsconnect::deployApp()\n"))
   cat_red_bullet(
@@ -146,7 +146,6 @@ add_shinyserver_file <- function(
 #'     add_dockerfile_heroku()
 #' }
 #'}
-
 add_dockerfile <- function(
   path = "DESCRIPTION", 
   output = "Dockerfile", 
@@ -169,7 +168,7 @@ add_dockerfile <- function(
   
   where <- path(pkg, output) 
   
-  if ( !check_file_exist(where) ) return(invisible(FALSE))
+  #if ( !check_file_exist(where) ) return(invisible(FALSE))
   
   usethis::use_build_ignore(path_file(where))
   
@@ -232,7 +231,7 @@ add_dockerfile_shinyproxy <- function(
   
   where <- path(pkg, output)
   
-  if ( !check_file_exist(where) ) return(invisible(FALSE))
+  #if ( !check_file_exist(where) ) return(invisible(FALSE))
   
   usethis::use_build_ignore(output)
   
@@ -292,7 +291,7 @@ add_dockerfile_heroku <- function(
 ){
   where <- path(pkg, output)
   
-  if ( !check_file_exist(where) )  return(invisible(FALSE)) 
+  #if ( !check_file_exist(where) )  return(invisible(FALSE)) 
   
   usethis::use_build_ignore(output)
   
@@ -356,10 +355,9 @@ add_dockerfile_heroku <- function(
 }
 
 #' @importFrom glue glue
-alert_build <- function(path, output ,build_golem_from_source){
-  cat_green_tick(
-    glue("Dockerfile created at {output}")
-  )
+alert_build <- function(path, output, build_golem_from_source){
+
+  cat_created(output, "Dockerfile")
   if ( ! build_golem_from_source ){
     cat_red_bullet(
       glue::glue(

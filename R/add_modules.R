@@ -33,9 +33,8 @@ add_module <- function(
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
-  dir_created <- create_dir_if_needed(
-    "R", 
-    dir_create
+  dir_created <- create_if_needed(
+    path(pkg, "R"), type = "directory"
   )
   
   if (!dir_created){
@@ -56,7 +55,7 @@ add_module <- function(
   where <- path(
     "R", paste0("mod_", name, ".R")
   )
-
+  
   file_create(where)
   
   write_there <- function(...){
@@ -65,7 +64,7 @@ add_module <- function(
   glue <- function(...){
     glue::glue(..., .open = "%", .close = "%")
   }
-
+  
   write_there(glue("#' %name% UI Function"))
   write_there("#'")
   write_there("#' @description A shiny Module.")
@@ -108,7 +107,7 @@ add_module <- function(
   write_there("## To be copied in the server")
   write_there(glue('# callModule(mod_%name%_server, "%name%_ui_1")'))
   write_there(" ")
-  cat_green_tick(glue("File created at %where%"))
+  cat_created(where)
   if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
   } else {

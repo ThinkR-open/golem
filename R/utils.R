@@ -51,54 +51,22 @@ create_if_needed <- function(
       )
     )
     # Return early if the user doesn't allow 
-    if (!ask) return(FALSE)
-    
-  } else {
-    return(TRUE)
-  }
+    if (!ask) {
+      return(FALSE)
+    } else {
+      # Create the file 
+      if (type == "file"){
+        file_create(path)
+        write(content, path, append = TRUE)
+      } else if (type == "directory"){
+        dir_create(path, recurse = TRUE)
+      }
+    }
+  } 
   
-  # Create the file 
-  if (type == "file"){
-    file_create(path)
-    write(content, path, append = TRUE)
-  } else if (type == "directory"){
-    dir_create(path, recurse = TRUE)
-  }
   # TRUE means that file exists (either 
   # created or already there)
   return(TRUE)
-}
-
-#' @importFrom fs dir_create
-create_dir_if_needed <- function(
-  path, 
-  auto_create
-){
-  # TRUE if path doesn't exist
-  dir_not_there <- dir_not_exist(path) 
-  go_create <- TRUE
-  # If not exists, maybe create it
-  if (dir_not_there){
-    # Auto create if needed
-    if (auto_create){
-      go_create <- TRUE
-    } else {
-      # Ask for creation
-      go_create <- yesno::yesno(sprintf("The %s does not exists, create?", path))
-    }
-    # Will create if autocreate or if yes to interactive
-    if (go_create) {
-      dir_create(path, recursive = TRUE)
-      cat_green_tick(
-        sprintf(
-          "Created folder %s to receive the file", 
-          path
-        )
-      )
-    } 
-  }
-  
-  return(go_create)
 }
 
 #' @importFrom fs file_exists
@@ -110,6 +78,7 @@ check_file_exist <- function(file){
   return(res)
 }
 
+# TODO Remove from codebase
 #' @importFrom fs dir_exists
 check_dir_exist <- function(dir){
   res <- TRUE
@@ -156,6 +125,34 @@ cat_red_bullet <- function(...){
     bullet = "bullet",
     bullet_col = "red"
   )
+}
+
+#' @importFrom cli cat_bullet
+cat_info <- function(...){
+  cat_bullet(
+    ..., 
+    bullet = "arrow_right",
+    bullet_col = "grey"
+  )
+}
+
+cat_exists <- function(where){
+  cat_red_bullet(
+    sprintf(
+      "%s already exists, skipping the copy.", 
+      path_file(where)
+    )
+  )
+  cat_info(
+    sprintf(
+      "If you want replace it, remove the %s file first.", 
+      path_file(where)
+    )
+  )
+}
+
+cat_created <- function(where, file = "File"){
+  cat_green_tick(glue::glue("{file} created at {where}"))
 }
 
 if_not_null <- function(x, ...){

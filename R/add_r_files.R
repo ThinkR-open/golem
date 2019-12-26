@@ -14,10 +14,10 @@ add_r_files <- function(
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
-  dir_created <- create_dir_if_needed(
-    "R", 
-    dir_create
+  dir_created <- create_if_needed(
+    "R", type = "directory"
   )
+  
   if (!dir_created){
     cat_red_bullet(
       "File not added (needs a valid directory)"

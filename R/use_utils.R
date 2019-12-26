@@ -16,28 +16,31 @@
 use_utils_ui <- function(
   pkg = get_golem_wd()
 ){
-  use_utils(
+  added <- use_utils(
     file_name = "golem_utils_ui.R", 
     pkg = pkg
   )
-  capture.output(
-    usethis::use_package("htmltools")
-  )
-  cat_green_tick("Utils UI added")
+  usethis::use_package("htmltools")
+  
+  if (added){
+    cat_green_tick("Utils UI added")
+  }
 }
 #' @export
 #' @rdname utils_files
 use_utils_server <- function(
   pkg = get_golem_wd()
 ){
-  use_utils(
+  added <- use_utils(
     file_name = "golem_utils_server.R", 
     pkg = pkg
   )
-  cat_green_tick("Utils server added")
+  if (added){
+    cat_green_tick("Utils server added")
+  }
 } 
 
-#' @importFrom fs file_copy path_abs
+#' @importFrom fs file_copy path_abs path_file
 use_utils <- function(
   file_name, 
   pkg = get_golem_wd()
@@ -47,12 +50,16 @@ use_utils <- function(
   )
   on.exit( setwd(old) )
   where <- path(path_abs(pkg), "R", file_name)
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
-  file_copy(
-    path = golem_sys("utils", file_name), 
-    new_path = where
-  )
-  cat_green_tick(glue::glue("File created at {where}"))
+  if (file_exists(where)){
+    cat_exists(where)
+    return(FALSE)
+  } else {
+    file_copy(
+      path = golem_sys("utils", file_name), 
+      new_path = where
+    )
+    cat_created(where)
+    return(TRUE)
+  }
+  
 } 
