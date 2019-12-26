@@ -16,16 +16,18 @@ darkgrey <- function(x) {
   x <- crayon::make_style("darkgrey")(x)
 }
 
-dir_not_exist <- Negate(dir.exists)
-file_not_exist <- Negate(file.exists)
+#' @importFrom fs dir_exists file_exists
+dir_not_exist <- Negate(dir_exists)
+file_not_exist <- Negate(file_exists)
 
-is_package <- function(path){
-  x <- attempt::attempt({
-    pkgload::pkg_path()
-  })
-  !attempt::is_try_error(x)
-}
+# is_package <- function(path){
+#   x <- attempt::attempt({
+#     pkgload::pkg_path()
+#   })
+#   !attempt::is_try_error(x)
+# }
 
+#' @importFrom fs dir_create file_create
 create_if_needed <- function(
   path, 
   type = c("file", "directory"),
@@ -49,65 +51,38 @@ create_if_needed <- function(
       )
     )
     # Return early if the user doesn't allow 
-    if (!ask) return(FALSE)
-    
-  } else {
-    return(TRUE)
-  }
+    if (!ask) {
+      return(FALSE)
+    } else {
+      # Create the file 
+      if (type == "file"){
+        file_create(path)
+        write(content, path, append = TRUE)
+      } else if (type == "directory"){
+        dir_create(path, recurse = TRUE)
+      }
+    }
+  } 
   
-  # Create the file 
-  if (type == "file"){
-    fs::file_create(path)
-    write(content, path, append = TRUE)
-  } else if (type == "directory"){
-    fs::dir_create(path, recurse = TRUE)
-  }
   # TRUE means that file exists (either 
   # created or already there)
   return(TRUE)
 }
 
-create_dir_if_needed <- function(
-  path, 
-  auto_create
-){
-  # TRUE if path doesn't exist
-  dir_not_there <- dir_not_exist(path) 
-  go_create <- TRUE
-  # If not exists, maybe create it
-  if (dir_not_there){
-    # Auto create if needed
-    if (auto_create){
-      go_create <- TRUE
-    } else {
-      # Ask for creation
-      go_create <- yesno::yesno(sprintf("The %s does not exists, create?", path))
-    }
-    # Will create if autocreate or if yes to interactive
-    if (go_create) {
-      dir.create(path, recursive = TRUE)
-      cat_green_tick(
-        sprintf(
-          "Created folder %s to receive the file", 
-          path
-        )
-      )
-    } 
-  }
-  
-  return(go_create)
-}
-
+#' @importFrom fs file_exists
 check_file_exist <- function(file){
   res <- TRUE
-  if (file.exists(file)){
+  if (file_exists(file)){
     res <- yesno::yesno("This file already exists, override?")
   }
   return(res)
 }
+
+# TODO Remove from codebase
+#' @importFrom fs dir_exists
 check_dir_exist <- function(dir){
   res <- TRUE
-  if (!dir.exists(dir)){ 
+  if (!dir_exists(dir)){ 
     res <- yesno::yesno(sprintf("The %s does not exists, create?", dir))
   }
   return(res)
@@ -133,6 +108,8 @@ remove_comments <- function(file) {
   writeLines(text = lines_without_comment, con = file)
 }
 
+#' @importFrom cli cat_bullet
+
 cat_green_tick <- function(...){
   cat_bullet(
     ..., 
@@ -141,10 +118,45 @@ cat_green_tick <- function(...){
   )
 }
 
+#' @importFrom cli cat_bullet
 cat_red_bullet <- function(...){
   cat_bullet(
     ..., 
     bullet = "bullet",
     bullet_col = "red"
   )
+}
+
+#' @importFrom cli cat_bullet
+cat_info <- function(...){
+  cat_bullet(
+    ..., 
+    bullet = "arrow_right",
+    bullet_col = "grey"
+  )
+}
+
+cat_exists <- function(where){
+  cat_red_bullet(
+    sprintf(
+      "%s already exists, skipping the copy.", 
+      path_file(where)
+    )
+  )
+  cat_info(
+    sprintf(
+      "If you want replace it, remove the %s file first.", 
+      path_file(where)
+    )
+  )
+}
+
+cat_created <- function(where, file = "File"){
+  cat_green_tick(glue::glue("{file} created at {where}"))
+}
+
+if_not_null <- function(x, ...){
+  if (! is.null(x)){
+    force(...)
+  }
 }

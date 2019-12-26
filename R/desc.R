@@ -12,6 +12,7 @@
 #' @importFrom desc description
 #' @importFrom glue glue
 #' @importFrom cli cat_bullet
+#' @importFrom fs path path_abs
 #' @export
 fill_desc <- function(
   pkg_name, 
@@ -24,10 +25,10 @@ fill_desc <- function(
   pkg = get_golem_wd()
 ){
   
-  path <- normalizePath(pkg)
+  path <- path_abs(pkg)
   
   desc <- desc::description$new(
-    file = file.path(path, "DESCRIPTION")
+    file = path(path, "DESCRIPTION")
   )
   desc$set(
     "Authors@R", 
@@ -73,12 +74,5 @@ fill_desc <- function(
     bullet = "tick", 
     bullet_col = "green"
   )
-}
-
-
-if_not_null <- function(x, ...){
-  if (! is.null(x)){
-    force(...)
-  }
 }
 

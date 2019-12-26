@@ -163,11 +163,12 @@ set_golem_things <- function(
 
 #' @export
 #' @rdname golem_opts
+#' @importFrom fs path_abs
 set_golem_wd <- function(
   path = pkgload::pkg_path(), 
   talkative = TRUE
 ){
-  path <- normalizePath(path, winslash = "/")
+  path <- path_abs(path)
   # Setting wd
   
   if (path == here::here()){
@@ -189,12 +190,13 @@ set_golem_wd <- function(
 
 #' @export
 #' @rdname golem_opts
+#' @importFrom fs path_abs
 set_golem_name <- function(
   name = pkgload::pkg_name(),
   path = pkgload::pkg_path(), 
   talkative = TRUE
 ){
-  path <- normalizePath(path, winslash = "/")
+  path <- path_abs(path)
   set_golem_things(
     "golem_name", 
     name, 
@@ -208,12 +210,13 @@ set_golem_name <- function(
 
 #' @export
 #' @rdname golem_opts
+#' @importFrom fs path_abs
 set_golem_version <- function(
   version = pkgload::pkg_version(),
   path = pkgload::pkg_path(), 
   talkative = TRUE
 ){
-  path <- normalizePath(path, winslash = "/")
+  path <- path_abs(path)
   set_golem_things(
     "golem_version", 
     as.character(version), 

@@ -2,21 +2,21 @@
 #' @importFrom cli cat_bullet
 #' @importFrom usethis use_build_ignore use_package
 #' @importFrom pkgload pkg_name
+#' @importFrom fs path file_create path_file
 add_rstudio_files <- function(
   pkg,
   open, 
   service = c("RStudio Connect", "Shiny Server", "ShinyApps.io")
 ){
   service <- match.arg(service)
-  where <- file.path(pkg, "app.R")
-  
-  if ( !check_file_exist(where) ) return(invisible(FALSE))
+  where <- path(pkg, "app.R")
+  file_create( where )
   
   write_there <- function(..., here = where){
     write(..., here, append = TRUE)
   }
-  file.create( where )
-  use_build_ignore( basename(where) )
+  
+  use_build_ignore( path_file(where) )
   use_build_ignore("rsconnect")
   write_there("# Launch the ShinyApp (Do not remove this comment)")
   write_there("# To deploy, run: rsconnect::deployApp()")
@@ -32,7 +32,7 @@ add_rstudio_files <- function(
   )
   #use_build_ignore(where)
   x <- capture.output(use_package("pkgload"))
-  cat_green_tick(glue("File created at {where}"))
+  cat_created(where)
   cat_line("To deploy, run:")
   cat_bullet(darkgrey("rsconnect::deployApp()\n"))
   cat_red_bullet(
@@ -41,7 +41,6 @@ add_rstudio_files <- function(
       service
     )
   )
-  
   
   if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
@@ -90,7 +89,7 @@ add_rstudioconnect_file <- function(
 add_shinyappsio_file <- function(
   pkg = get_golem_wd(), 
   open = TRUE
-  ){
+){
   add_rstudio_files(pkg = pkg, open = open, service = "ShinyApps.io")
 }
 
@@ -99,7 +98,7 @@ add_shinyappsio_file <- function(
 add_shinyserver_file <- function(
   pkg = get_golem_wd(), 
   open = TRUE
-  ){
+){
   add_rstudio_files(pkg = pkg, open = open, service = "Shiny Server")
 }
 
@@ -131,6 +130,7 @@ add_shinyserver_file <- function(
 #' @importFrom desc desc_get_deps
 #' @importFrom dockerfiler Dockerfile
 #' @importFrom rstudioapi navigateToFile isAvailable
+#' @importFrom fs path path_file
 #' @examples
 #' \donttest{
 #' # Add a standard Dockerfile
@@ -146,7 +146,6 @@ add_shinyserver_file <- function(
 #'     add_dockerfile_heroku()
 #' }
 #'}
-
 add_dockerfile <- function(
   path = "DESCRIPTION", 
   output = "Dockerfile", 
@@ -167,22 +166,33 @@ add_dockerfile <- function(
   build_golem_from_source = TRUE
 ) {
   
+  where <- path(pkg, output) 
   
-  where <- file.path(pkg, output) 
-  if ( !check_file_exist(where) ) return(invisible(FALSE))
-  usethis::use_build_ignore(basename(where))
+  #if ( !check_file_exist(where) ) return(invisible(FALSE))
   
-  dock <- dock_from_desc(path = path, FROM = from, AS = as,
-                         sysreqs = sysreqs, repos = repos,expand = expand,
-                         build_golem_from_source = build_golem_from_source,
-                         update_tar_gz = update_tar_gz)
+  usethis::use_build_ignore(path_file(where))
+  
+  dock <- dock_from_desc(
+    path = path, 
+    FROM = from, 
+    AS = as,
+    sysreqs = sysreqs, 
+    repos = repos,
+    expand = expand,
+    build_golem_from_source = build_golem_from_source,
+    update_tar_gz = update_tar_gz
+  )
+  
   dock$EXPOSE(port)
+  
   dock$CMD(
     glue::glue(
       "R -e \"options('shiny.port'={port},shiny.host='{host}');{read.dcf(path)[1]}::run_app()\""
     )
   )
+  
   dock$write(output)
+  
   if (open) {
     if (rstudioapi::isAvailable()) {
       rstudioapi::navigateToFile(output)
@@ -190,14 +200,17 @@ add_dockerfile <- function(
       try(file.edit(output))
     }
   }
-  alert_build(path = path,
-              output =  output,
-              build_golem_from_source=build_golem_from_source)
+  alert_build(
+    path = path,
+    output =  output,
+    build_golem_from_source = build_golem_from_source
+  )
   
 }
 
 #' @export
 #' @rdname dockerfiles
+#' @importFrom fs path path_file
 add_dockerfile_shinyproxy <- function( 
   path = "DESCRIPTION", 
   output = "Dockerfile", 
@@ -216,14 +229,22 @@ add_dockerfile_shinyproxy <- function(
   build_golem_from_source = TRUE
 ){
   
-  where <- file.path(pkg, output)
+  where <- path(pkg, output)
   
-  if ( !check_file_exist(where) ) return(invisible(FALSE))
-  usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(path = path, FROM = from, AS = as, 
-                         sysreqs = sysreqs, repos = repos, expand = expand,
-                         build_golem_from_source=build_golem_from_source,
-                         update_tar_gz = update_tar_gz)
+  #if ( !check_file_exist(where) ) return(invisible(FALSE))
+  
+  usethis::use_build_ignore(output)
+  
+  dock <- dock_from_desc(
+    path = path, 
+    FROM = from, 
+    AS = as, 
+    sysreqs = sysreqs, 
+    repos = repos, 
+    expand = expand,
+    build_golem_from_source = build_golem_from_source,
+    update_tar_gz = update_tar_gz
+  )
   
   dock$EXPOSE(3838)
   dock$CMD(glue::glue(
@@ -238,9 +259,11 @@ add_dockerfile_shinyproxy <- function(
       try(file.edit(output))
     }
   }
-  alert_build(path, output,build_golem_from_source=build_golem_from_source)
-  
-  usethis::use_build_ignore(files = output)
+  alert_build(
+    path, 
+    output,
+    build_golem_from_source = build_golem_from_source
+  )
   
   invisible(output)
   
@@ -248,6 +271,7 @@ add_dockerfile_shinyproxy <- function(
 
 #' @export
 #' @rdname dockerfiles
+#' @importFrom fs path path_file
 add_dockerfile_heroku <- function( 
   path = "DESCRIPTION", 
   output = "Dockerfile", 
@@ -265,15 +289,22 @@ add_dockerfile_heroku <- function(
   update_tar_gz = TRUE,
   build_golem_from_source = TRUE
 ){
-  where <- file.path(pkg, output)
+  where <- path(pkg, output)
   
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
-  usethis::use_build_ignore(basename(where))
-  dock <- dock_from_desc(path = path, FROM = from, AS = as, sysreqs = sysreqs, repos = repos,
-                         expand = expand,build_golem_from_source = build_golem_from_source,
-                         update_tar_gz = update_tar_gz)
+  #if ( !check_file_exist(where) )  return(invisible(FALSE)) 
+  
+  usethis::use_build_ignore(output)
+  
+  dock <- dock_from_desc(
+    path = path, 
+    FROM = from, 
+    AS = as, 
+    sysreqs = sysreqs, 
+    repos = repos,
+    expand = expand,
+    build_golem_from_source = build_golem_from_source,
+    update_tar_gz = update_tar_gz
+  )
   
   dock$CMD(
     glue::glue(
@@ -282,7 +313,11 @@ add_dockerfile_heroku <- function(
   )
   dock$write(output)
   
-  alert_build(path = path,output =  output,build_golem_from_source=build_golem_from_source)
+  alert_build(
+    path = path,
+    output =  output,
+    build_golem_from_source = build_golem_from_source
+  )
   
   apps_h <- gsub(
     "\\.", "-", 
@@ -320,16 +355,15 @@ add_dockerfile_heroku <- function(
 }
 
 #' @importFrom glue glue
-alert_build <- function(path, output ,build_golem_from_source){
-  cat_green_tick(
-    glue("Dockerfile created at {output}")
-  )
-  if ( ! build_golem_from_source){
-  cat_red_bullet(
-    glue::glue(
-      "Be sure to keep your {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
+alert_build <- function(path, output, build_golem_from_source){
+
+  cat_created(output, "Dockerfile")
+  if ( ! build_golem_from_source ){
+    cat_red_bullet(
+      glue::glue(
+        "Be sure to keep your {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
+      )
     )
-  )
   }
 }
 
@@ -350,7 +384,7 @@ alert_build <- function(path, output ,build_golem_from_source){
 #' @importFrom desc desc_get_deps
 #' @importFrom magrittr %>% 
 #' @importFrom stats setNames
-#' 
+#' @noRd
 dock_from_desc <- function(
   path = "DESCRIPTION",
   FROM = paste0(
@@ -366,28 +400,32 @@ dock_from_desc <- function(
   build_golem_from_source = TRUE
 ){
   
- 
   packages <- desc::desc_get_deps(path)$package
   packages <- packages[packages != "R"] # remove R
-  packages <- packages[ !packages %in% c("base", "boot", "class", "cluster", 
-                                         "codetools", "compiler", "datasets", 
-                                         "foreign", "graphics", "grDevices", 
-                                         "grid", "KernSmooth", "lattice", "MASS", 
-                                         "Matrix", "methods", "mgcv", "nlme", 
-                                         "nnet", "parallel", "rpart", "spatial", 
-                                         "splines", "stats", "stats4", "survival", 
-                                         "tcltk", "tools", "utils")] # remove base and recommended
-
+  packages <- packages[ !packages %in% c(
+    "base", "boot", "class", "cluster", 
+    "codetools", "compiler", "datasets", 
+    "foreign", "graphics", "grDevices", 
+    "grid", "KernSmooth", "lattice", "MASS", 
+    "Matrix", "methods", "mgcv", "nlme", 
+    "nnet", "parallel", "rpart", "spatial", 
+    "splines", "stats", "stats4", "survival", 
+    "tcltk", "tools", "utils"
+  )] # remove base and recommended
   
-  
- 
   if (sysreqs){
     # please wait during system requirement calculation
-    cat_bullet("Please wait during system requirements calculation...",bullet = "info",bullet_col = "green") # TODO animated version ?
-    system_requirement <- unique(get_sysreqs(packages = packages))
-    cat_bullet("done",bullet = "tick",bullet_col = "green") # TODO animated version ?
+    cat_bullet(
+      "Please wait while we compute system requirements...", 
+      bullet = "info",
+      bullet_col = "green"
+    ) # TODO animated version ?
+    system_requirement <- unique(
+      get_sysreqs(packages = packages)
+    )
+    cat_green_tick("Done") # TODO animated version ?
     
-  }else{
+  } else{
     system_requirement <- NULL
   }
   
@@ -395,61 +433,79 @@ dock_from_desc <- function(
   packages_on_cran <- remotes_deps$package[remotes_deps$is_cran] %>% 
     intersect(packages)
   
-  
   packages_not_on_cran <- packages %>% 
     setdiff(packages_on_cran)
   
-  
- packages_with_version <-  data.frame(
-   package=remotes_deps$package,
-   installed=remotes_deps$installed,stringsAsFactors = FALSE
+  packages_with_version <-  data.frame(
+    package=remotes_deps$package,
+    installed=remotes_deps$installed,
+    stringsAsFactors = FALSE
   )
-   packages_with_version <- packages_with_version[packages_with_version$package %in% packages_on_cran,]
+  packages_with_version <- packages_with_version[
+    packages_with_version$package %in% packages_on_cran,
+    ]
   
-  packages_on_cran <- packages_with_version$installed %>% setNames(packages_with_version$package)
+  packages_on_cran <- packages_with_version$installed %>% 
+    setNames(packages_with_version$package)
   
   dock <- dockerfiler::Dockerfile$new(FROM = FROM)
   
   if (length(system_requirement)>0){
-    
     if ( !expand){
-    dock$RUN(paste("apt-get update && apt-get install -y ",paste(system_requirement,collapse = " ")))
-    } else{
-    dock$RUN("apt-get update" )
-      for ( sr in system_requirement){
-    dock$RUN(paste("apt-get install -y ",sr))
+      dock$RUN(
+        paste(
+          "apt-get update && apt-get install -y ",
+          paste(system_requirement, collapse = " ") 
+        )
+      )
+    } else {
+      dock$RUN("apt-get update")
+      for ( sr in system_requirement ){
+        dock$RUN( paste("apt-get install -y ", sr) )
       }
     }
-    
-    }
+  }
   
   dock$RUN(
-    sprintf("echo \"options(repos = c(CRAN = '%s'), download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site",repos))
+    sprintf(
+      "echo \"options(repos = c(CRAN = '%s'), download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site",
+      repos
+    )
+  )
+  
   dock$RUN("R -e 'install.packages(\"remotes\")'")
   
   # We need to be sure install_cran is there
   dock$RUN("R -e 'remotes::install_github(\"r-lib/remotes\", ref = \"97bbf81\")'")
   
-  
   if ( length(packages_on_cran>0)){
-  ping <- mapply(function(dock, ver, nm){
-    res <- dock$RUN(
-      sprintf(
-        "Rscript -e 'remotes::install_version(\"%s\",upgrade=\"never\", version = \"%s\")'", 
-        nm, ver
+    ping <- mapply(function(dock, ver, nm){
+      res <- dock$RUN(
+        sprintf(
+          "Rscript -e 'remotes::install_version(\"%s\",upgrade=\"never\", version = \"%s\")'", 
+          nm, 
+          ver
+        )
       )
+    }, 
+    ver = packages_on_cran, 
+    nm = names(packages_on_cran), 
+    MoreArgs = list(dock = dock)
     )
-  }, ver = packages_on_cran, nm = names(packages_on_cran), MoreArgs = list(dock = dock))
   }
   
-  if ( length(packages_not_on_cran>0)){
+  if ( length(packages_not_on_cran > 0)){
     
-  nn<-  lapply(
-    remotes_deps$remote[!remotes_deps$is_cran],
-    function(.){      .[c('repo','username','sha')]
-    }) %>% do.call(rbind,.) %>% as.data.frame()
+    nn<-  lapply(
+      remotes_deps$remote[!remotes_deps$is_cran],
+      function(.){
+        .[c('repo','username','sha')]
+      }
+    ) %>% 
+      do.call(rbind,.) %>% 
+      as.data.frame()
     
-  nn<- glue::glue("{nn$username}/{nn$repo}@{nn$sha}")
+    nn <- glue::glue("{nn$username}/{nn$repo}@{nn$sha}")
     
     pong <- mapply(function(dock, ver, nm){
       res <- dock$RUN(
@@ -458,32 +514,36 @@ dock_from_desc <- function(
           ver
         )
       )
-    }, ver = nn, MoreArgs = list(dock = dock))
+    }, 
+    ver = nn, 
+    MoreArgs = list(dock = dock)
+    )
   }
   
   if ( !build_golem_from_source){
     
     if ( update_tar_gz ){
-      ancienne_version <- list.files(pattern = glue::glue("{read.dcf(path)[1]}_.+.tar.gz"),full.names = TRUE)
+      old_version <- list.files(
+        pattern = glue::glue("{read.dcf(path)[1]}_.+.tar.gz"),
+        full.names = TRUE
+      )
       
-      if (length(ancienne_version) > 0){
-      cat_red_bullet(glue::glue("We remove {paste(ancienne_version,collapse = ", ")} from folder"))
-      lapply(ancienne_version,file.remove)
-      lapply(ancienne_version,unlink,force=TRUE)
+      if ( length(old_version) > 0){
+        lapply(old_version, file.remove)
+        lapply(old_version, unlink, force = TRUE)
+        cat_red_bullet(glue::glue("{paste(old_version,collapse = ', ')} were removed from folder"))
       }
-      
-      
+    
       cat_green_tick(glue::glue(" {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz created."))
       devtools::build(path = ".")
     }
     # we use an already builded tar.gz file
-   
     
     dock$COPY(
-    from = paste0(read.dcf(path)[1], "_*.tar.gz"),
-    to = "/app.tar.gz"
-  )
-  dock$RUN("R -e 'remotes::install_local(\"/app.tar.gz\",upgrade=\"never\")'")
+      from = paste0(read.dcf(path)[1], "_*.tar.gz"),
+      to = "/app.tar.gz"
+    )
+    dock$RUN("R -e 'remotes::install_local(\"/app.tar.gz\",upgrade=\"never\")'")
   } else {
     dock$RUN("mkdir /build_zone")
     dock$ADD(from = ".",to =  "/build_zone")

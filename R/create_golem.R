@@ -11,11 +11,10 @@
 #' @param ... not used
 #'
 #' @importFrom yesno yesno
-#' @importFrom cli cat_rule
-#' @importFrom cli cat_line
+#' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
-#' @importFrom rstudioapi isAvailable
-#' @importFrom rstudioapi openProject
+#' @importFrom rstudioapi isAvailable openProject
+#' @importFrom fs path_abs path_file path file_move
 #' @export
 create_golem <- function(
   path, 
@@ -25,9 +24,9 @@ create_golem <- function(
   without_comments = FALSE,
   ...
 ) {
-   
-  if (path == '.' & package_name == basename(path)){
-    package_name <- basename(getwd())
+  
+  if (path == '.' & package_name == path_file(path)){
+    package_name <- path_file(getwd())
   }
   
   if (check_name){
@@ -36,7 +35,7 @@ create_golem <- function(
     cat_green_tick("Valid package name")
   }
   
-  if (dir.exists(path)){
+  if (dir_exists(path)){
     res <- yesno::yesno(
       paste("The path", path, "already exists, override?")
     )
@@ -46,14 +45,27 @@ create_golem <- function(
   }
   
   cat_rule("Creating dir")
-  dir.create(path, recursive = TRUE, showWarnings = FALSE)
+  dir_create(
+    path, 
+    recurse = TRUE
+  )
   cat_green_tick("Created package directory")
   
   cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
-  ll <- list.files(path = from, full.names = TRUE, all.files = TRUE,no.. = TRUE)
+  ll <- list.files(
+    path = from, 
+    full.names = TRUE, 
+    all.files = TRUE,
+    no.. = TRUE
+  )
   # remove `..`
-  file.copy(from = ll, to = path, overwrite = TRUE, recursive = TRUE)
+  file.copy(
+    ll, 
+    path, 
+    overwrite = TRUE, 
+    recursive = TRUE
+  )
   
   t1 <- list.files(
     path,
@@ -71,9 +83,9 @@ create_golem <- function(
   
   
   for ( i in t ){
-    file.rename(
-      from = i,
-      to = gsub("REMOVEME", "", i)
+    file_move(
+      path = i,
+      new_path = gsub("REMOVEME", "", i)
     )
     
     try({
@@ -83,12 +95,13 @@ create_golem <- function(
         replace = package_name
       )
     },
-    silent=TRUE)
+    silent = TRUE
+    )
   }
   cat_green_tick("Copied app skeleton")
   
   cat_rule("Setting the default config")
-  yml_path <- file.path(path, "inst/golem-config.yml")
+  yml_path <- path(path, "inst/golem-config.yml")
   
   conf <- yaml::read_yaml(yml_path, eval.expr = TRUE)
   
@@ -104,8 +117,8 @@ create_golem <- function(
   if ( without_comments == TRUE ) {
     files <- list.files(
       path = c(
-        file.path(path, "dev"),
-        file.path(path, "R")
+        path(path, "dev"),
+        path(path, "R")
       ), 
       full.names = TRUE
     )
@@ -121,7 +134,7 @@ create_golem <- function(
       "A new golem named ", 
       package_name, 
       " was created at ", 
-      normalizePath(path),
+      path_abs(path),
       " .\n", 
       "To continue working on your app, start editing the 01_start.R file."
     )
@@ -133,7 +146,7 @@ create_golem <- function(
   
   return( 
     invisible(
-      normalizePath(path)
+      path_abs(path)
     ) 
   )
 }

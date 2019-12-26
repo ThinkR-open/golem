@@ -1,4 +1,5 @@
 #' @importFrom tools file_path_sans_ext
+#' @importFrom fs path_abs path file_create
 add_r_files <- function(
   name, 
   ext = c("fct", "utils"),
@@ -10,13 +11,13 @@ add_r_files <- function(
   
   name <- file_path_sans_ext(name)
   
-  old <- setwd(normalizePath(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
-  dir_created <- create_dir_if_needed(
-    "R", 
-    dir_create
+  dir_created <- create_if_needed(
+    "R", type = "directory"
   )
+  
   if (!dir_created){
     cat_red_bullet(
       "File not added (needs a valid directory)"
@@ -26,15 +27,11 @@ add_r_files <- function(
   if (!is.null(module)){
     module <- paste0("mod_", module, "_")
   }
-  where <- file.path(
+  where <- path(
     "R", paste0(module, ext, "_", name, ".R")
   )
   
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
-  
-  file.create(where)
+  file_create(where)
   
   if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)

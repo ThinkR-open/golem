@@ -17,6 +17,7 @@
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #' @importFrom tools file_path_sans_ext
+#' @importFrom fs path_abs path file_create
 add_module <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -29,12 +30,11 @@ add_module <- function(
   
   name <- file_path_sans_ext(name)
   
-  old <- setwd(normalizePath(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
-  dir_created <- create_dir_if_needed(
-    "R", 
-    dir_create
+  dir_created <- create_if_needed(
+    path(pkg, "R"), type = "directory"
   )
   
   if (!dir_created){
@@ -52,20 +52,19 @@ add_module <- function(
     add_utils(utils, module = name, open = open)
   }
   
-  where <- file.path(
+  where <- path(
     "R", paste0("mod_", name, ".R")
   )
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
-  file.create(where)
+  
+  file_create(where)
+  
   write_there <- function(...){
     write(..., file = where, append = TRUE)
   }
   glue <- function(...){
     glue::glue(..., .open = "%", .close = "%")
   }
-
+  
   write_there(glue("#' %name% UI Function"))
   write_there("#'")
   write_there("#' @description A shiny Module.")
@@ -108,7 +107,7 @@ add_module <- function(
   write_there("## To be copied in the server")
   write_there(glue('# callModule(mod_%name%_server, "%name%_ui_1")'))
   write_there(" ")
-  cat_green_tick(glue("File created at %where%"))
+  cat_created(where)
   if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
   } else {

@@ -6,3 +6,5 @@ inst/rstudio/.DS_Store
 .Rproj.user
 .Rhistory
 .RData
+doc
+Meta
