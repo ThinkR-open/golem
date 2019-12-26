@@ -85,7 +85,7 @@ add_module <- function(
   write_there(glue("mod_%name%_ui <- function(id){"))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
-  write_there(placeholder)
+  write_there(ph_ui)
   write_there("  )")
   write_there("}")
   write_there("    ")
@@ -100,7 +100,7 @@ add_module <- function(
   }
   write_there(glue("mod_%name%_server <- function(input, output, session){"))
   write_there("  ns <- session$ns")
-  write_there(placeholderserver)
+  write_there(ph_server)
   write_there("}")
   write_there("    ")
   
