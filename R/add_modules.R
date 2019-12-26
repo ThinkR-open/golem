@@ -11,6 +11,7 @@
 #' @param fct The name of the fct file.
 #' @param utils The name of the utils file.
 #' @param export Logical. Should the module be exported? Default is `FALSE`.
+#' @param ph_ui,ph_server Texts to insert inside the modules UI and server. For advanced use.
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export
 #' @importFrom glue glue
@@ -26,7 +27,8 @@ add_module <- function(
   fct = NULL, 
   utils = NULL, 
   export = FALSE, 
-  placeholder = " "
+  ph_ui = " ",
+  ph_server = " "
 ){
   
   name <- file_path_sans_ext(name)
@@ -98,7 +100,7 @@ add_module <- function(
   }
   write_there(glue("mod_%name%_server <- function(input, output, session){"))
   write_there("  ns <- session$ns")
-  write_there("    ")
+  write_there(placeholderserver)
   write_there("}")
   write_there("    ")
   
