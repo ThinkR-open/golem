@@ -9,7 +9,7 @@ app_sys <- function(...){
 }
 
 
-#' Access files in the current app
+#' Read App Config
 #' 
 #' @param value Value to retrieve from the config file. 
 #' @param config R_CONFIG_ACTIVE value. 
