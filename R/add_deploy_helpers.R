@@ -448,7 +448,7 @@ dock_from_desc <- function(
   packages_on_cran <- packages_with_version$installed %>% 
     setNames(packages_with_version$package)
   
-  dock <- dockerfiler::Dockerfile$new(FROM = FROM)
+  dock <- dockerfiler::Dockerfile$new(FROM = FROM, AS = AS)
   
   if (length(system_requirement)>0){
     if ( !expand){
