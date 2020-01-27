@@ -5,11 +5,21 @@
 \alias{add_utils}
 \title{Add fct_ and utils_ files}
 \usage{
-add_fct(name, module = NULL, pkg = get_golem_wd(), open = TRUE,
-  dir_create = TRUE)
+add_fct(
+  name,
+  module = NULL,
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE
+)
 
-add_utils(name, module = NULL, pkg = get_golem_wd(), open = TRUE,
-  dir_create = TRUE)
+add_utils(
+  name,
+  module = NULL,
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE
+)
 }
 \arguments{
 \item{name}{The name of the file}

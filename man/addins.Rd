@@ -30,6 +30,6 @@ go_to_run_app()
 }
 \description{
 \code{insert_ns()} takes a selected character vector and wrap it in \code{ns()}
-The series of \code{go_to_*()} addins help you go to
+The series of \verb{go_to_*()} addins help you go to
 common files used in developing a \code{{golem}} application.
 }

@@ -5,11 +5,23 @@
 \alias{use_external_css_file}
 \title{Use Files}
 \usage{
-use_external_js_file(url, name, pkg = get_golem_wd(),
-  dir = "inst/app/www", open = TRUE, dir_create = TRUE)
+use_external_js_file(
+  url,
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE
+)
 
-use_external_css_file(url, name, pkg = get_golem_wd(),
-  dir = "inst/app/www", open = TRUE, dir_create = TRUE)
+use_external_css_file(
+  url,
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE
+)
 }
 \arguments{
 \item{url}{String representation of URL for the file to be downloaded}
