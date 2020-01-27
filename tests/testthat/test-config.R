@@ -2,7 +2,7 @@ test_that("config works", {
   with_dir(pkg, {
     expect_equal(get_golem_name(), fakename)
     expect_equal(get_golem_version(), "0.0.0.9000")
-    expect_equal(get_golem_wd(), pkg)
+    expect_equal(normalizePath(get_golem_wd(), mustWork = FALSE), normalizePath(pkg, mustWork = FALSE))
     amend_golem_config(
       key = "where", 
       value = "indev"
