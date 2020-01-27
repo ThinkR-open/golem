@@ -29,7 +29,7 @@ test_that("config works", {
     set_golem_version("0.0.0.9000")
     
     set_golem_wd(normalizePath("inst"))
-    expect_equal(get_golem_wd(), normalizePath("inst"))
+    expect_equal(normalizePath(get_golem_wd()), normalizePath("inst"))
     set_golem_wd(pkg)
   })
 })
