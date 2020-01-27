@@ -4,8 +4,14 @@
 \alias{create_golem}
 \title{Create a package for Shiny App using golem}
 \usage{
-create_golem(path, check_name = TRUE, open = TRUE,
-  package_name = basename(path), without_comments = FALSE, ...)
+create_golem(
+  path,
+  check_name = TRUE,
+  open = TRUE,
+  package_name = basename(path),
+  without_comments = FALSE,
+  ...
+)
 }
 \arguments{
 \item{path}{Name of the folder to create the package in. This will also be

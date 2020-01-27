@@ -4,9 +4,16 @@
 \alias{fill_desc}
 \title{Fill your description}
 \usage{
-fill_desc(pkg_name, pkg_title, pkg_description, author_first_name,
-  author_last_name, author_email, repo_url = NULL,
-  pkg = get_golem_wd())
+fill_desc(
+  pkg_name,
+  pkg_title,
+  pkg_description,
+  author_first_name,
+  author_last_name,
+  author_email,
+  repo_url = NULL,
+  pkg = get_golem_wd()
+)
 }
 \arguments{
 \item{pkg_name}{The name of the package}
