@@ -30,3 +30,4 @@ drop_nulls <- function(x){
 # typing reactiveValues is too long
 rv <- shiny::reactiveValues
 rvtl <- shiny::reactiveValuesToList
+

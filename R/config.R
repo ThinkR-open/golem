@@ -117,3 +117,4 @@ amend_golem_config <- function(
   )
   invisible(TRUE)
 }
+

@@ -57,3 +57,4 @@ invoke_js <- function(
     fun=fun)
   invisible(res)
 }
+
