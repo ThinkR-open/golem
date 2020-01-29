@@ -68,3 +68,4 @@ withr::with_dir(pkg, {
   orig_test <- set_golem_wd(pkg)
   usethis::use_mit_license("Golem")
 })
+

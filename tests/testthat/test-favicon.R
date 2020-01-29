@@ -28,3 +28,4 @@ test_that("test favicon",{
     )
   })
 })
+
