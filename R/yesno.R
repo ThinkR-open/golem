@@ -1,3 +1,4 @@
+#' @importFrom utils menu
 yesno <- function (...) 
 {
   cat(paste0(..., collapse = ""))

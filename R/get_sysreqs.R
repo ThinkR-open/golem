@@ -8,7 +8,6 @@
 #' @importFrom utils download.file
 #' @importFrom jsonlite fromJSON
 #' @importFrom remotes package_deps
-#' @importFrom purrr map
 #' @export
 get_sysreqs <- function(packages, quiet = TRUE,batch_n=30){
   
