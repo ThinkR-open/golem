@@ -24,9 +24,7 @@ test_that("test detach_all_attached",{
   with_dir(pkg_reload,{
     test <- detach_all_attached()
     testthat::expect_true(
-      # all(purrr::map_lgl(test, is.null))
       all(as.logical(lapply(test, is.null))
-        
         )
     )
   })

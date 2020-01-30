@@ -60,8 +60,7 @@ Imports:
     tools,
     usethis,
     utils,
-    yaml,
-    yesno
+    yaml
 Suggests:
     covr,
     devtools,

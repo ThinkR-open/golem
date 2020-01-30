@@ -26,9 +26,6 @@ test_that("desc works", {
     
     expect_true(
       all(
-        # purrr::map_lgl(add_desc,function(x){
-        #   any(grepl(x,desc))}
-        # )
         as.logical(lapply(add_desc,function(x){
           any(grepl(x,desc))}
         )
