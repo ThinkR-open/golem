@@ -9,7 +9,6 @@
 #' @importFrom jsonlite fromJSON
 #' @importFrom remotes package_deps
 #' @importFrom purrr map
-#' @importFrom magrittr %>% 
 #' @export
 get_sysreqs <- function(packages, quiet = TRUE,batch_n=30){
   
@@ -20,18 +19,18 @@ get_sysreqs <- function(packages, quiet = TRUE,batch_n=30){
     )
   )
   
-  split(
+sp <-   split(
     all_deps, 
     ceiling(
       seq_along(all_deps) / batch_n
     )
-  ) %>%
-    map( ~ get_batch_sysreqs(.x, quiet = quiet)) %>% 
-    unlist() %>% 
-    unname() %>% 
-    unique() %>% 
-    sort()
-  
+  ) 
+
+
+sort(unique(unname(unlist(
+  map(sp, ~ get_batch_sysreqs(.x, quiet = quiet))
+))))
+
 }
 
 #' @importFrom fs file_delete  file_temp

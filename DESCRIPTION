@@ -49,7 +49,6 @@ Imports:
     here,
     htmltools,
     jsonlite,
-    magrittr,
     pkgload,
     purrr,
     remotes,
