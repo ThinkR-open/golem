@@ -28,7 +28,11 @@ sp <-   split(
 
 
 sort(unique(unname(unlist(
-  map(sp, ~ get_batch_sysreqs(.x, quiet = quiet))
+  
+  # map(sp, ~ get_batch_sysreqs(.x, quiet = quiet))
+  lapply(sp, function(.x){ get_batch_sysreqs(.x, quiet = quiet) })
+  
+  
 ))))
 
 }

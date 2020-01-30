@@ -4,16 +4,16 @@ test_that("test use_favicon",{
   with_dir(pkg,{
     use_favicon()
     expect_true(file.exists("inst/app/www/favicon.ico"))
-    purrr::map(
+    lapply(
       c(
         "test.jpeg",
         "test.bmp",
         "test.gif",
         "test.tiff"
       ),
-      ~ expect_error(
+      function(.x) {expect_error(
         use_favicon(path = .x)
-      )
+      )}
     )
     golem::remove_favicon()
     expect_false(file.exists("inst/app/www/favicon.ico"))
