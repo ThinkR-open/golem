@@ -382,7 +382,6 @@ alert_build <- function(path, output, build_golem_from_source){
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps
-#' @importFrom magrittr %>% 
 #' @importFrom stats setNames
 #' @noRd
 dock_from_desc <- function(
@@ -430,11 +429,11 @@ dock_from_desc <- function(
   }
   
   remotes_deps <- remotes::package_deps(packages)
-  packages_on_cran <- remotes_deps$package[remotes_deps$is_cran] %>% 
-    intersect(packages)
+  packages_on_cran <-  
+    intersect(remotes_deps$package[remotes_deps$is_cran],packages)
   
-  packages_not_on_cran <- packages %>% 
-    setdiff(packages_on_cran)
+  packages_not_on_cran <- 
+    setdiff(packages,packages_on_cran)
   
   packages_with_version <-  data.frame(
     package=remotes_deps$package,
@@ -445,8 +444,8 @@ dock_from_desc <- function(
     packages_with_version$package %in% packages_on_cran,
     ]
   
-  packages_on_cran <- packages_with_version$installed %>% 
-    setNames(packages_with_version$package)
+  packages_on_cran <-  
+    setNames(packages_with_version$installed, packages_with_version$package)
   
   dock <- dockerfiler::Dockerfile$new(FROM = FROM, AS = AS)
   
@@ -496,14 +495,12 @@ dock_from_desc <- function(
   
   if ( length(packages_not_on_cran > 0)){
     
-    nn<-  lapply(
-      remotes_deps$remote[!remotes_deps$is_cran],
-      function(.){
-        .[c('repo','username','sha')]
-      }
-    ) %>% 
-      do.call(rbind,.) %>% 
-      as.data.frame()
+    nn <-
+      as.data.frame(do.call(rbind,
+                            lapply(remotes_deps$remote[!remotes_deps$is_cran],
+                                   function(.) {
+                                     .[c('repo', 'username', 'sha')]
+                                   })))
     
     nn <- glue::glue("{nn$username}/{nn$repo}@{nn$sha}")
     
