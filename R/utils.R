@@ -43,7 +43,7 @@ create_if_needed <- function(
   # If it doesn't exist, ask if we are allowed 
   # to create it
   if (dont_exist){
-    ask <- yesno::yesno(
+    ask <- yesno(
       sprintf(
         "The %s %s doesn't exist, create?", 
         basename(path), 
@@ -73,7 +73,7 @@ create_if_needed <- function(
 check_file_exist <- function(file){
   res <- TRUE
   if (file_exists(file)){
-    res <- yesno::yesno("This file already exists, override?")
+    res <- yesno("This file already exists, override?")
   }
   return(res)
 }
@@ -83,7 +83,7 @@ check_file_exist <- function(file){
 check_dir_exist <- function(dir){
   res <- TRUE
   if (!dir_exists(dir)){ 
-    res <- yesno::yesno(sprintf("The %s does not exists, create?", dir))
+    res <- yesno(sprintf("The %s does not exists, create?", dir))
   }
   return(res)
 }

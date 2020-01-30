@@ -30,7 +30,6 @@ guess_where_config <- function(
   return(NULL)
 }
 
-#' @importFrom yesno yesno
 #' @importFrom fs file_copy path
 #' @importFrom pkgload pkg_name
 get_current_config <- function(

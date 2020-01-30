@@ -10,7 +10,6 @@
 #' @param without_comments Poolean start project without golem comments
 #' @param ... not used
 #'
-#' @importFrom yesno yesno
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject
@@ -36,7 +35,7 @@ create_golem <- function(
   }
   
   if (dir_exists(path)){
-    res <- yesno::yesno(
+    res <- yesno(
       paste("The path", path, "already exists, override?")
     )
     if (!res){
