@@ -50,7 +50,6 @@ Imports:
     htmltools,
     jsonlite,
     pkgload,
-    purrr,
     remotes,
     rlang,
     roxygen2,
