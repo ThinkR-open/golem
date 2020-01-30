@@ -22,7 +22,7 @@ add_rstudio_files <- function(
   write_there("# To deploy, run: rsconnect::deployApp()")
   write_there("# Or use the blue button on top of this file")
   write_there("")
-  write_there("pkgload::load_all()")
+  write_there("pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)")
   write_there("options( \"golem.app.prod\" = TRUE)")
   write_there(
     sprintf(
