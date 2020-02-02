@@ -4,7 +4,7 @@
 # 
 # 1 - On init
 # 
-## 1.1 - Fill the descripion & set options
+## 1.1 - Fill the description & set options
 ## 
 ## Add information about the package that will contain your app
 
