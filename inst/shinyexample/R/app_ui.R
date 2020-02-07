@@ -1,6 +1,6 @@
-#' The application User-Interfac
+#' The application User-Interface
 #' 
-#' @param request Internal parameter for {shiny}. 
+#' @param request Internal parameter for `{shiny}`. 
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @noRd
@@ -21,7 +21,7 @@ app_ui <- function(request) {
 #' resources inside the Shiny application. 
 #' 
 #' @import shiny
-#' @importFrom golem add_resource_path activate_js favicon
+#' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
 golem_add_external_resources <- function(){
   
@@ -30,14 +30,13 @@ golem_add_external_resources <- function(){
   )
  
   tags$head(
-    activate_js(),
     favicon(),
-    tags$title("shinyexample")
-    # Add here all the external resources
-    # If you have a custom.css in the inst/app/www
-    # Or for example, you can add shinyalert::useShinyalert() here
-    #tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
-    
+    bundle_resources(
+      path = app_sys('app/www'),
+      app_title = 'shinyexample'
+    )
+    # Add here other external resources
+    # for example, you can add shinyalert::useShinyalert() 
   )
 }
 
