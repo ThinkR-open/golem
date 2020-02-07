@@ -61,12 +61,23 @@ add_js_file <- function(
   
   cat_created(where)
   
-  if (file_exists(paste0(pkg, "/DESCRIPTION"))) {
-    cat_red_bullet(
-      glue::glue(
-        'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
+  if (
+    file_exists(
+      paste0(pkg, "/DESCRIPTION")
+    )
+  ) {
+    if (dir != "inst/app/www"){
+      cat_red_bullet(
+        glue::glue(
+          'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
+        )
       )
-    )}
+    } else {
+      cat_green_tick(
+        'File automatically linked in `golem_add_external_resources()`.'
+      )
+    }
+  }
   
   if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
@@ -128,12 +139,23 @@ add_js_handler <- function(
   
   cat_created(where)
   
-  if (file_exists(paste0(pkg, "/DESCRIPTION"))) {
-    cat_red_bullet(
-      glue::glue(
-        'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
+  if (
+    file_exists(
+      paste0(pkg, "/DESCRIPTION")
+    )
+  ) {
+    if (dir != "inst/app/www"){
+      cat_red_bullet(
+        glue::glue(
+          'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
+        )
       )
-    )}
+    } else {
+      cat_green_tick(
+        'File automatically linked in `golem_add_external_resources()`.'
+      )
+    }
+  }
   
   if (rstudioapi::isAvailable() & open){
     rstudioapi::navigateToFile(where)
@@ -183,12 +205,23 @@ add_css_file <- function(
   
   cat_created(where)
   
-  if (file_exists(paste0(pkg, "/DESCRIPTION"))) {
-    cat_red_bullet(
-      glue::glue(
-        'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/{name}.css")`'
+  if (
+    file_exists(
+      paste0(pkg, "/DESCRIPTION")
+    )
+  ) {
+    if (dir != "inst/app/www"){
+      cat_red_bullet(
+        glue::glue(
+          'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/{name}.css")`'
+        )
       )
-    )}
+    } else {
+      cat_green_tick(
+        'File automatically linked in `golem_add_external_resources()`.'
+      )
+    }
+  }
   
   if (rstudioapi::isAvailable() & open ){
     rstudioapi::navigateToFile(where)
