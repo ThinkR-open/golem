@@ -42,13 +42,7 @@ add_rstudio_files <- function(
     )
   )
   
-  if (rstudioapi::isAvailable() & open){
-    rstudioapi::navigateToFile(where)
-  } else {
-    cat_red_bullet(
-      sprintf("Go to %s", where)
-    )
-  }
+  open_or_go_to(where, open)
 }
 
 #' Add an app.R at the root of your package to deploy on RStudio Connect
@@ -186,8 +180,11 @@ add_dockerfile <- function(
   dock$EXPOSE(port)
   
   dock$CMD(
-    glue::glue(
-      "R -e \"options('shiny.port'={port},shiny.host='{host}');{read.dcf(path)[1]}::run_app()\""
+    sprintf(
+      "R -e \"options('shiny.port'=%s,shiny.host='%s');%s::run_app()\"", 
+      port, 
+      host, 
+      read.dcf(path)[1]
     )
   )
   
@@ -247,8 +244,9 @@ add_dockerfile_shinyproxy <- function(
   )
   
   dock$EXPOSE(3838)
-  dock$CMD(glue::glue(
-    " [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0');{read.dcf(path)[1]}::run_app()\"]"
+  dock$CMD(sprintf(
+    " [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0');%s::run_app()\"]", 
+    read.dcf(path)[1]
   ))
   dock$write(output)
   
@@ -307,8 +305,9 @@ add_dockerfile_heroku <- function(
   )
   
   dock$CMD(
-    glue::glue(
-      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');{read.dcf(path)[1]}::run_app()\""
+    sprintf(
+      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');%s::run_app()\"", 
+      read.dcf(path)[1]
     )
   )
   dock$write(output)
@@ -321,26 +320,30 @@ add_dockerfile_heroku <- function(
   
   apps_h <- gsub(
     "\\.", "-", 
-    glue("{read.dcf(path)[1]}-{read.dcf(path)[1,][['Version']]}")
+    sprintf(
+      "%s-%s",
+      read.dcf(path)[1], 
+      read.dcf(path)[1,][['Version']]
+    )
   )
   
   cat_rule( "From your command line, run:" )
   cat_line("heroku container:login")
   cat_line(
-    glue("heroku create {apps_h}")
+    sprintf("heroku create %s", apps_h)
   ) 
   cat_line(
-    glue("heroku container:push web --app {apps_h}")
+    sprintf("heroku container:push web --app %s", apps_h)
   )
   cat_line(
-    glue("heroku container:release web --app {apps_h}")
+    sprintf("heroku container:release web --app %s", apps_h)
   )
   cat_line(
-    glue("heroku open --app {apps_h}")
+    sprintf("heroku open --app %s", apps_h)
   )
   cat_red_bullet("Be sure to have the heroku CLI installed.")
   cat_red_bullet(
-    glue("You can replace {apps_h} with another app name.")
+    sprintf("You can replace %s with another app name.", apps_h)
   )
   if (open) {
     if (rstudioapi::isAvailable()) {
@@ -354,14 +357,19 @@ add_dockerfile_heroku <- function(
   
 }
 
-#' @importFrom glue glue
-alert_build <- function(path, output, build_golem_from_source){
-
+alert_build <- function(
+  path, 
+  output, 
+  build_golem_from_source
+){
   cat_created(output, "Dockerfile")
   if ( ! build_golem_from_source ){
     cat_red_bullet(
-      glue::glue(
-        "Be sure to keep your {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz file (generated using `devtools::build()` ) in the same folder as the {basename(output)} file generated"
+      sprintf(
+        "Be sure to keep your %s_%s.tar.gz file (generated using `devtools::build()` ) in the same folder as the %s file generated", 
+        read.dcf(path)[1], 
+        read.dcf(path)[1,][['Version']], 
+        basename(output)
       )
     )
   }
@@ -382,7 +390,6 @@ alert_build <- function(path, output, build_golem_from_source){
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps
-#' @importFrom stats setNames
 #' @noRd
 dock_from_desc <- function(
   path = "DESCRIPTION",
@@ -442,10 +449,12 @@ dock_from_desc <- function(
   )
   packages_with_version <- packages_with_version[
     packages_with_version$package %in% packages_on_cran,
-    ]
+  ]
   
-  packages_on_cran <-  
-    setNames(packages_with_version$installed, packages_with_version$package)
+  packages_on_cran <-  set_name(
+    packages_with_version$installed, 
+    packages_with_version$package
+  )
   
   dock <- dockerfiler::Dockerfile$new(FROM = FROM, AS = AS)
   
@@ -502,7 +511,13 @@ dock_from_desc <- function(
                                      .[c('repo', 'username', 'sha')]
                                    })))
     
-    nn <- glue::glue("{nn$username}/{nn$repo}@{nn$sha}")
+    nn <- sprintf(
+      "%s/%s@%s", 
+      nn$username, 
+      nn$repo, 
+      nn$sha
+    )
+    
     
     pong <- mapply(function(dock, ver, nm){
       res <- dock$RUN(
@@ -521,17 +536,28 @@ dock_from_desc <- function(
     
     if ( update_tar_gz ){
       old_version <- list.files(
-        pattern = glue::glue("{read.dcf(path)[1]}_.+.tar.gz"),
+        pattern = sprintf("%s_.+.tar.gz", read.dcf(path)[1]),
         full.names = TRUE
       )
       
       if ( length(old_version) > 0){
         lapply(old_version, file.remove)
         lapply(old_version, unlink, force = TRUE)
-        cat_red_bullet(glue::glue("{paste(old_version,collapse = ', ')} were removed from folder"))
+        cat_red_bullet(
+          sprintf(
+            "%s were removed from folder", 
+            paste(old_version, collapse = ', ')
+          )
+        )
       }
-    
-      cat_green_tick(glue::glue(" {read.dcf(path)[1]}_{read.dcf(path)[1,][['Version']]}.tar.gz created."))
+      
+      cat_green_tick(
+        sprintf(
+          " %s_%s.tar.gz created.", 
+          read.dcf(path)[1], 
+          read.dcf(path)[1,][['Version']]
+        )
+      )
       devtools::build(path = ".")
     }
     # we use an already builded tar.gz file

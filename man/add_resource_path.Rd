@@ -4,14 +4,18 @@
 \alias{add_resource_path}
 \title{Add resource path}
 \usage{
-add_resource_path(prefix, directory_path, warn_empty = FALSE)
+add_resource_path(prefix, directoryPath, warn_empty = FALSE)
 }
 \arguments{
-\item{prefix}{The URL prefix (without slashes). Valid characters are a-z, A-Z, 0-9, hyphen, period, and underscore. For example, a value of 'foo' means that any request paths that begin with '/foo' will be mapped to the given directory.}
+\item{prefix}{The URL prefix (without slashes). Valid characters are a-z,
+A-Z, 0-9, hyphen, period, and underscore. For example, a value of 'foo'
+means that any request paths that begin with '/foo' will be mapped to the
+given directory.}
 
-\item{directory_path}{The directory that contains the static resources to be served.}
+\item{directoryPath}{The directory that contains the static resources to be
+served.}
 
-\item{warn_empty}{Boolean. By default FALSE, if TRUE diplay message if directory empty}
+\item{warn_empty}{Boolean. By default FALSE, if TRUE display message if directory is empty.}
 }
 \description{
 Add resource path

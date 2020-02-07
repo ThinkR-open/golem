@@ -20,13 +20,6 @@ darkgrey <- function(x) {
 dir_not_exist <- Negate(dir_exists)
 file_not_exist <- Negate(file_exists)
 
-# is_package <- function(path){
-#   x <- attempt::attempt({
-#     pkgload::pkg_path()
-#   })
-#   !attempt::is_try_error(x)
-# }
-
 #' @importFrom fs dir_create file_create
 create_if_needed <- function(
   path, 
@@ -109,7 +102,6 @@ remove_comments <- function(file) {
 }
 
 #' @importFrom cli cat_bullet
-
 cat_green_tick <- function(...){
   cat_bullet(
     ..., 
@@ -151,12 +143,128 @@ cat_exists <- function(where){
   )
 }
 
-cat_created <- function(where, file = "File"){
-  cat_green_tick(glue::glue("{file} created at {where}"))
+cat_created <- function(
+  where, 
+  file = "File"
+){
+  cat_green_tick(
+    sprintf(
+      "%s created at %s",
+      file, 
+      where
+    )
+  )
 }
+
+# File made dance
+
+cat_automatically_linked <- function(){
+  cat_green_tick(
+    'File automatically linked in `golem_add_external_resources()`.'
+  )
+}
+
+open_or_go_to <- function(
+  where,
+  open
+){
+  if (
+    rstudioapi::isAvailable() && 
+    open && 
+    rstudioapi::hasFun("navigateToFile")
+  ){
+    rstudioapi::navigateToFile(where)
+  } else {
+    cat_red_bullet(
+      sprintf(
+        "Go to %s", 
+        where
+      )
+    )
+  }
+}
+
+desc_exist <- function(pkg){
+  file_exists(
+    paste0(pkg, "/DESCRIPTION")
+  )
+}
+
+after_creation_message_js <- function(
+  pkg, 
+  dir, 
+  name
+){
+  if (
+    desc_exist(pkg)
+  ) {
+    if (dir != "inst/app/www"){
+      cat_red_bullet(
+        sprintf(
+          'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/%s.js")`', 
+          name
+        )
+      )
+    } else {
+      cat_automatically_linked()
+    }
+  }
+}
+after_creation_message_css <- function(
+  pkg, 
+  dir, 
+  name
+){
+  if (
+    desc_exist(pkg)
+  ) {
+    if (dir != "inst/app/www"){
+      cat_red_bullet(
+        sprintf(
+          'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`', 
+          name
+        )
+      )
+    } else {
+      cat_automatically_linked()
+    }
+  }
+}
+
+file_created_dance <- function(
+  where, 
+  fun, 
+  pkg, 
+  dir, 
+  name, 
+  open
+){
+  cat_created(where)
+
+  fun(pkg, dir, name)
+  
+  open_or_go_to(where, open)
+}
+
+# Minor toolings
 
 if_not_null <- function(x, ...){
   if (! is.null(x)){
     force(...)
   }
+}
+
+set_name <- function(x, y){
+  names(x) <- y
+  x
+}
+
+# FROM tools::file_path_sans_ext() & tools::file_ext
+file_path_sans_ext <- function(x){
+  sub("([^.]+)\\.[[:alnum:]]+$", "\\1", x)
+}
+
+file_ext <- function (x) {
+  pos <- regexpr("\\.([[:alnum:]]+)$", x)
+  ifelse(pos > -1L, substring(x, pos + 1L), "")
 }

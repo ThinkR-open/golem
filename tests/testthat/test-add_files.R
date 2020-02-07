@@ -3,14 +3,14 @@ context("test-add_file function")
 expect_add_file <- function(
   fun,
   ext, 
-  pkg, 
+  pak, 
   fp
 ){
   name <- rand_name()
   # Be sure to remove all files in case there are
   remove_files("inst/app/www", ext)
   # Launch the function
-  fun(name, pkg = pkg, open = FALSE)
+  fun(name, pkg = pak, open = FALSE)
   # Test that the file exists
   expect_exists(file.path("inst/app/www", paste0(name,".", ext)))
   # Check that the file exsts
@@ -19,7 +19,7 @@ expect_add_file <- function(
   
   # Try another file in another dir
   bis <- paste0(name, rand_name())
-  fun(bis, pkg = pkg, open = FALSE, dir = normalizePath(fp))
+  fun(bis, pkg = pak, open = FALSE, dir = normalizePath(fp))
   expect_exists( normalizePath(fp) )
   ff <- list.files( normalizePath(fp), pattern = bis)
   expect_equal(tools::file_ext(ff), ext)
@@ -41,19 +41,19 @@ test_that("add_files", {
     expect_add_file(
       add_css_file, 
       ext = "css", 
-      pkg = pkg,
+      pak = pkg,
       fp = fp
     )
     expect_add_file(
       add_js_file, 
       ext = "js", 
-      pkg = pkg,
+      pak = pkg,
       fp = fp
     )
     expect_add_file(
       add_js_handler, 
       ext = "js", 
-      pkg = pkg,
+      pak = pkg,
       fp = fp
     )
     

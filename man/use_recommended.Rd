@@ -5,10 +5,8 @@
 \alias{use_recommended_tests}
 \title{Add recommended elements}
 \usage{
-use_recommended_deps(
-  pkg = get_golem_wd(),
-  recommended = c("shiny", "DT", "attempt", "glue", "htmltools", "golem")
-)
+use_recommended_deps(pkg = get_golem_wd(), recommended = c("shiny",
+  "DT", "attempt", "glue", "htmltools", "golem"))
 
 use_recommended_tests(pkg = get_golem_wd())
 }

@@ -33,8 +33,7 @@
 #'
 #' @export
 #' @rdname golem_js
-#' @importFrom htmltools includeScript
-
+#' @importFrom shiny includeScript
 activate_js <- function(){
   includeScript(
     system.file("utils/golem-js.js", package = "golem")

@@ -7,7 +7,6 @@
 #' @param dir Path to the dir where the file while be created.
 #' @export
 #' @rdname use_files
-#' @importFrom glue glue
 #' @importFrom cli cat_bullet
 #' @importFrom fs path_abs path
 use_external_js_file <- function(
@@ -21,7 +20,7 @@ use_external_js_file <- function(
   
   old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
-  new_file <- glue::glue("{name}.js")
+  new_file <- sprintf("%s.js", name)
   
   dir_created <- create_if_needed(
     dir, type = "directory"
@@ -39,11 +38,8 @@ use_external_js_file <- function(
   where <- path(
     dir, new_file
   )
-  # if ( !check_file_exist(where) ) {
-  #   return(invisible(FALSE))
-  # } 
   
-  if ( tools::file_ext(url) != "js") {
+  if ( file_ext(url) != "js") {
     cat_red_bullet(
       "File not added (URL must end with .js extension)"
     )
@@ -52,18 +48,15 @@ use_external_js_file <- function(
   
   utils::download.file(url, where)
   
-  cat_created(where)
-  cat_red_bullet(
-    glue::glue(
-      'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
-    )
+  file_created_dance(
+    where, 
+    after_creation_message_js, 
+    pkg, 
+    dir, 
+    name,
+    open
   )
   
-  if (rstudioapi::isAvailable() & open){
-    rstudioapi::navigateToFile(where)
-  } else {
-    cat_red_bullet(glue::glue("Go to {where}"))
-  }
 }
 
 #' @export
@@ -80,7 +73,7 @@ use_external_css_file <- function(
   
   old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
-  new_file <- glue::glue("{name}.css")
+  new_file <- sprintf("%s.css", name)
 
   dir_created <- create_if_needed(
     dir, type = "directory"
@@ -98,11 +91,8 @@ use_external_css_file <- function(
   where <- path(
     dir, new_file
   )
-  # if ( !check_file_exist(where) ) {
-  #   return(invisible(FALSE))
-  # } 
-  
-  if ( tools::file_ext(url) != "css") {
+
+  if ( file_ext(url) != "css") {
     cat_red_bullet(
       "File not added (URL must end with .css extension)"
     )
@@ -111,17 +101,14 @@ use_external_css_file <- function(
   
   utils::download.file(url, where)
   
-  cat_created(where)
-  cat_red_bullet(
-    glue::glue(
-      'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.css")`'
-    )
+  file_created_dance(
+    where, 
+    after_creation_message_css, 
+    pkg, 
+    dir, 
+    name,
+    open
   )
-  
-  if (rstudioapi::isAvailable() & open){
-    rstudioapi::navigateToFile(where)
-  } else {
-    cat_red_bullet(glue::glue("Go to {where}"))
-  }
+
 }
 

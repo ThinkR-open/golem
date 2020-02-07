@@ -24,7 +24,7 @@ use_favicon <- function(
     path <- golem_sys("shinyexample/inst/app/www", "favicon.ico")
   } 
   
-  ext <- tools::file_ext(path)
+  ext <- file_ext(path)
   stop_if_not(
     ext, 
     ~ .x %in% c("png",'ico'), 
@@ -36,7 +36,14 @@ use_favicon <- function(
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
-  to <- path(path_abs(pkg), "inst/app/www", glue::glue("favicon.{ext}"))
+  to <- path(
+    path_abs(pkg), 
+    "inst/app/www",
+    sprintf(
+      "favicon.%s", 
+      ext
+    )
+  )
   
   if (! (path == to)) {
     file_copy(
@@ -44,11 +51,24 @@ use_favicon <- function(
       to, 
       overwrite = TRUE
     )
-    cat_green_tick(glue::glue("favicon.{ext} created at {to}"))
+    cat_green_tick(
+      sprintf(
+        "favicon.%s created at %s", 
+        ext, 
+        to
+      )
+    )
   }
   
   cat_rule("Change / Add in the app_ui function")
-  cat_line(darkgrey(glue('golem::favicon("www/favicon.{ext}")')))
+  cat_line(
+    darkgrey(
+      sprintf(
+        'golem::favicon("www/favicon.%s")', 
+        ext
+      )
+    )
+  )
   cat_line()
   
 }

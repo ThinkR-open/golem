@@ -7,7 +7,7 @@
 #' @param open Boolean open the created project
 #' @param package_name Package name to use.By default it's `basename(path)` but if path == '.' and `package_name` 
 #' not explicitly given, then `basename(getwd())` will be used.
-#' @param without_comments Poolean start project without golem comments
+#' @param without_comments Boolean start project without golem comments
 #' @param ... not used
 #'
 #' @importFrom cli cat_rule cat_line

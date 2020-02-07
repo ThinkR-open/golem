@@ -8,10 +8,8 @@
 #' @param with_doc_ready Should the default file include `$( document ).ready()`?
 #' @export
 #' @rdname add_files
-#' @importFrom glue glue
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
-#' @importFrom tools file_path_sans_ext
 #' @importFrom fs path_abs path file_create file_exists
 add_js_file <- function(
   name, 
@@ -45,7 +43,7 @@ add_js_file <- function(
   dir <- path_abs(dir) 
   
   where <- path(
-    dir, glue::glue("{name}.js")
+    dir, sprintf("%s.js", name)
   )
   
   file_create(where)
@@ -59,31 +57,15 @@ add_js_file <- function(
     write_there("});")
   }
   
-  cat_created(where)
+  file_created_dance(
+    where, 
+    after_creation_message_js, 
+    pkg, 
+    dir, 
+    name,
+    open
+  )
   
-  if (
-    file_exists(
-      paste0(pkg, "/DESCRIPTION")
-    )
-  ) {
-    if (dir != "inst/app/www"){
-      cat_red_bullet(
-        glue::glue(
-          'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
-        )
-      )
-    } else {
-      cat_green_tick(
-        'File automatically linked in `golem_add_external_resources()`.'
-      )
-    }
-  }
-  
-  if (rstudioapi::isAvailable() & open){
-    rstudioapi::navigateToFile(where)
-  } else {
-    cat_red_bullet(glue::glue("Go to {where}"))
-  }
 }
 
 #' @export
@@ -120,48 +102,30 @@ add_js_handler <- function(
   dir <- path_abs(dir) 
   
   where <- file.path(
-    dir, glue::glue("{name}.js")
+    dir, sprintf("%s.js", name)
   )
-
+  
   file_create(where)
   
   write_there <- function(...){
     write(..., file = where, append = TRUE)
   }
-  glue <- function(...){
-    glue::glue(..., .open = "%", .close = "%")
-  }
+  
   write_there("$( document ).ready(function() {")
   write_there("  Shiny.addCustomMessageHandler('fun', function(arg) {")
   write_there("  ")
   write_there("  })")
   write_there("});")
   
-  cat_created(where)
+  file_created_dance(
+    where, 
+    after_creation_message_js, 
+    pkg, 
+    dir, 
+    name,
+    open
+  )
   
-  if (
-    file_exists(
-      paste0(pkg, "/DESCRIPTION")
-    )
-  ) {
-    if (dir != "inst/app/www"){
-      cat_red_bullet(
-        glue::glue(
-          'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/{name}.js")`'
-        )
-      )
-    } else {
-      cat_green_tick(
-        'File automatically linked in `golem_add_external_resources()`.'
-      )
-    }
-  }
-  
-  if (rstudioapi::isAvailable() & open){
-    rstudioapi::navigateToFile(where)
-  } else {
-    cat_red_bullet(glue::glue("Go to {where}"))
-  }
 }
 
 #' @export
@@ -198,42 +162,26 @@ add_css_file <- function(
   dir <- path_abs(dir) 
   
   where <- path(
-    dir, glue::glue("{name}.css")
+    dir, sprintf(
+      "%s.css", 
+      name
+    )
   )
   
   file_create(where)
-  
-  cat_created(where)
-  
-  if (
-    file_exists(
-      paste0(pkg, "/DESCRIPTION")
-    )
-  ) {
-    if (dir != "inst/app/www"){
-      cat_red_bullet(
-        glue::glue(
-          'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/{name}.css")`'
-        )
-      )
-    } else {
-      cat_green_tick(
-        'File automatically linked in `golem_add_external_resources()`.'
-      )
-    }
-  }
-  
-  if (rstudioapi::isAvailable() & open ){
-    rstudioapi::navigateToFile(where)
-  } else {
-    cat_red_bullet(glue::glue("Go to {where}"))
-  }
+  file_created_dance(
+    where, 
+    after_creation_message_css, 
+    pkg, 
+    dir, 
+    name,
+    open
+  )
 }
 
 
 #' @export
 #' @rdname add_files
-#' @importFrom glue glue
 #' @importFrom fs path_abs file_create
 add_ui_server_files <- function(
   pkg = get_golem_wd(), 

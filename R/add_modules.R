@@ -14,10 +14,8 @@
 #' @param ph_ui,ph_server Texts to insert inside the modules UI and server. For advanced use.
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export
-#' @importFrom glue glue
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
-#' @importFrom tools file_path_sans_ext
 #' @importFrom fs path_abs path file_create
 add_module <- function(
   name, 
@@ -64,25 +62,22 @@ add_module <- function(
   write_there <- function(...){
     write(..., file = where, append = TRUE)
   }
-  glue <- function(...){
-    glue::glue(..., .open = "%", .close = "%")
-  }
   
-  write_there(glue("#' %name% UI Function"))
+  write_there(sprintf("#' %s UI Function", name))
   write_there("#'")
   write_there("#' @description A shiny Module.")
   write_there("#'")
   write_there("#' @param id,input,output,session Internal parameters for {shiny}.")
   write_there("#'")
   if (export){
-    write_there(glue("#' @rdname mod_%name%"))
+    write_there(sprintf("#' @rdname mod_%s", name))
     write_there("#' @export ") 
   } else {
     write_there("#' @noRd ") 
   }
   write_there("#'")
   write_there("#' @importFrom shiny NS tagList ") 
-  write_there(glue("mod_%name%_ui <- function(id){"))
+  write_there(sprintf("mod_%s_ui <- function(id){", name))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
   write_there(ph_ui)
@@ -90,34 +85,26 @@ add_module <- function(
   write_there("}")
   write_there("    ")
   
-  write_there(glue("#' %name% Server Function"))
+  write_there(sprintf("#' %s Server Function", name))
   write_there("#'")
   if (export){
-    write_there(glue("#' @rdname mod_%name%"))
+    write_there(sprintf("#' @rdname mod_%s", name))
     write_there("#' @export ") 
   } else {
     write_there("#' @noRd ") 
   }
-  write_there(glue("mod_%name%_server <- function(input, output, session){"))
+  write_there(sprintf("mod_%s_server <- function(input, output, session){", name))
   write_there("  ns <- session$ns")
   write_there(ph_server)
   write_there("}")
   write_there("    ")
   
   write_there("## To be copied in the UI")
-  write_there(glue('# mod_%name%_ui("%name%_ui_1")'))
+  write_there(sprintf('# mod_%s_ui("%s_ui_1")', name, name))
   write_there("    ")
   write_there("## To be copied in the server")
-  write_there(glue('# callModule(mod_%name%_server, "%name%_ui_1")'))
+  write_there(sprintf('# callModule(mod_%s_server, "%s_ui_1")', name, name))
   write_there(" ")
   cat_created(where)
-  if (rstudioapi::isAvailable() & open){
-    rstudioapi::navigateToFile(where)
-  } else {
-    cat_bullet(
-      glue("Go to %where%"), 
-      bullet = "square_small_filled", 
-      bullet_col = "red"
-    )
-  }
+  open_or_go_to(where, open)
 }

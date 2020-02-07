@@ -11,7 +11,6 @@
 #' @rdname utils_files
 #' 
 #' @importFrom cli cat_bullet
-#' @importFrom glue glue
 #' @importFrom utils capture.output
 use_utils_ui <- function(
   pkg = get_golem_wd()
