@@ -15,7 +15,7 @@ app_sys <- function(...){
 #' @param config R_CONFIG_ACTIVE value. 
 #' @param use_parent Logical, scan the parent directory for config file.
 #'     
-#' @import config
+#' @importFrom config get
 #' 
 #' @noRd
 get_golem_config <- function(

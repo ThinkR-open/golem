@@ -22,9 +22,13 @@
 #'   \item{clickon}{Click on an element. The full jQuery selector has to be used.}
 #'   \item{disable}{Add "disabled" to an element. The full jQuery selector has to be used.}
 #'   \item{reable}{Remove "disabled" from an element. The full jQuery selector has to be used.}
-#'   \item{alert}{Open an alert box with the message provided.}
-#'   \item{prompt}{Open a prompt box with the message provided.}
-#'   \item{confirm}{Open a confirm box with the message provided.}
+#'   \item{alert}{Open an alert box with the message(s) provided.}
+#'   \item{prompt}{Open a prompt box with the message(s) provided. This function takes 
+#'   a list with message and id `list(message = "", id = "")`. The output of the prompt 
+#'   will be sent to `input$id`.}
+#'   \item{confirm}{Open a confirm box with the message provided. This function takes 
+#'   a list with message and id `list(message = "", id = "")`. The output of the prompt 
+#'   will be sent to `input$id`.}
 #' }
 #'
 #' @export
@@ -54,7 +58,8 @@ invoke_js <- function(
     function(message, fun){
       session$sendCustomMessage(fun, message)
     },
-    fun=fun)
+    fun = fun
+  )
   invisible(res)
 }
 
