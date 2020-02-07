@@ -15,13 +15,16 @@ library(testthat)
 golem::create_golem( "gogolele", open = FALSE)
 setwd("/tmp/gogolele/")
 
+usethis::use_mit_license("Golem")
+devtools::check()
+
 golem::set_golem_options()
 
 
 golem::use_recommended_tests()
+golem::use_recommended_deps()
 golem::use_utils_ui()
 golem::use_utils_server()
-devtools::test()
 
 golem::add_module( 
   name = "my_first_module", 
@@ -49,7 +52,7 @@ mod1 <- append(
     "  golem::invoke_js('alert', 'hey')",
     "})",
     "output$plot <- renderPlot({",
-    "   plot(iris)",
+    "   graphics::plot(datasets::iris)",
     "})"
   ), 
   grep(
@@ -86,4 +89,5 @@ server <- append(
 write(server, "R/app_server.R")
 
 devtools::document()
+devtools::check()
 remotes::install_local()
