@@ -15,7 +15,7 @@ favicon(ico = "www/favicon.ico", rel = "shortcut icon")
 \arguments{
 \item{path}{Path to your favicon file (.ico or .png)}
 
-\item{pkg}{Path to the root of the package. Default is \code{"."}}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}}
 
 \item{ico}{path to favicon file}
 

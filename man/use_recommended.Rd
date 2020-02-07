@@ -11,7 +11,7 @@ use_recommended_deps(pkg = get_golem_wd(), recommended = c("shiny",
 use_recommended_tests(pkg = get_golem_wd())
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{"."}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{recommended}{A vector of recommended packages.}
 }

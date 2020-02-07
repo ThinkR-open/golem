@@ -11,7 +11,7 @@ add_module(name, pkg = get_golem_wd(), open = TRUE,
 \arguments{
 \item{name}{The name of the module}
 
-\item{pkg}{Path to the root of the package. Default is \code{"."}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{open}{Should the file be opened?}
 

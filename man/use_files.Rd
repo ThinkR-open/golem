@@ -16,7 +16,7 @@ use_external_css_file(url, name, pkg = get_golem_wd(),
 
 \item{name}{The name of the module}
 
-\item{pkg}{Path to the root of the package. Default is \code{"."}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{dir}{Path to the dir where the file while be created.}
 
