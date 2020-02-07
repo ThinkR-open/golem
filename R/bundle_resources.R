@@ -8,7 +8,7 @@
 #' @param path The path to the folder where the external files are located.
 #' @param app_title The title of the app, to be used as an application title.
 #' @inheritParams htmltools::htmlDependency
-#'
+#' @importFrom htmltools htmlDependency
 #' @export
 bundle_resources <- function(
   path, 

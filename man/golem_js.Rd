@@ -23,14 +23,18 @@ invoke_js(fun, ..., session = shiny::getDefaultReactiveDomain())
 \item{hideid}{Hide an element with the id provided.}
 \item{showclass}{Same as showid, but with class.}
 \item{hideclass}{Same as hideid, but with class.}
-\item{showhref}{Same as showid, but with \verb{a[href*=}}
-\item{hidehref}{Same as hideid, but with \verb{a[href*=}}
+\item{showhref}{Same as showid, but with \code{a[href*=}}
+\item{hidehref}{Same as hideid, but with \code{a[href*=}}
 \item{clickon}{Click on an element. The full jQuery selector has to be used.}
 \item{disable}{Add "disabled" to an element. The full jQuery selector has to be used.}
 \item{reable}{Remove "disabled" from an element. The full jQuery selector has to be used.}
-\item{alert}{Open an alert box with the message provided.}
-\item{prompt}{Open a prompt box with the message provided.}
-\item{confirm}{Open a confirm box with the message provided.}
+\item{alert}{Open an alert box with the message(s) provided.}
+\item{prompt}{Open a prompt box with the message(s) provided. This function takes
+a list with message and id \code{list(message = "", id = "")}. The output of the prompt
+will be sent to \code{input$id}.}
+\item{confirm}{Open a confirm box with the message provided. This function takes
+a list with message and id \code{list(message = "", id = "")}. The output of the prompt
+will be sent to \code{input$id}.}
 }}
 }
 \description{

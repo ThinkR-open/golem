@@ -10,7 +10,6 @@
 #' @param pkg Path to look for the DESCRIPTION
 #' 
 #' @importFrom desc description
-#' @importFrom glue glue
 #' @importFrom cli cat_bullet
 #' @importFrom fs path path_abs
 #' @export
@@ -32,7 +31,12 @@ fill_desc <- function(
   )
   desc$set(
     "Authors@R", 
-    glue("person('{author_first_name}', '{author_last_name}', email = '{author_email}', role = c('cre', 'aut'))")
+    sprintf(
+      "person('%s', '%s', email = '%s', role = c('cre', 'aut'))", 
+      author_first_name, 
+      author_last_name,
+      author_email
+    )
   )
   desc$del(
     keys = "Maintainer"
@@ -60,7 +64,9 @@ fill_desc <- function(
     repo_url, 
     desc$set(
       "BugReports", 
-      glue("{repo_url}/issues"
+      sprintf(
+        "%s/issues", 
+        repo_url
       )
     )
   )

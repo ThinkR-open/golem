@@ -1,4 +1,3 @@
-#' @importFrom tools file_path_sans_ext
 #' @importFrom fs path_abs path file_create
 add_r_files <- function(
   name, 
@@ -32,16 +31,8 @@ add_r_files <- function(
   )
   
   file_create(where)
+  open_or_go_to(where, open)
   
-  if (rstudioapi::isAvailable() & open){
-    rstudioapi::navigateToFile(where)
-  } else {
-    cat_bullet(
-      glue("Go to {where}"), 
-      bullet = "square_small_filled", 
-      bullet_col = "red"
-    )
-  }
 }
 
 #' Add fct_ and utils_ files
