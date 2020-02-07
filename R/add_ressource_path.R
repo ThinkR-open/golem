@@ -14,7 +14,7 @@ add_resource_path <- function(
 ){
   
   list_f <- length(
-    list.files(path = directory_path)
+    list.files(path = directoryPath)
   ) == 0
   
   if ( list_f & warn_empty ) {
