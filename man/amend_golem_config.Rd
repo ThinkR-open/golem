@@ -16,7 +16,7 @@ amend_golem_config(key, value, config = "default",
 the value of the \code{R_CONFIG_NAME} environment variable
 ("default" if the variable does not exist).}
 
-\item{pkg}{Path to the root of the package. Default is \code{"."}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{talkative}{Should the messages be printed to the console?}
 }

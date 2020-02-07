@@ -23,7 +23,7 @@ fill_desc(pkg_name, pkg_title, pkg_description, author_first_name,
 
 \item{repo_url}{URL (if needed)}
 
-\item{pkg}{Path to look for the DESCRIPTION}
+\item{pkg}{Path to look for the DESCRIPTION. Default is \code{get_golem_wd()}.}
 }
 \description{
 Fill your description

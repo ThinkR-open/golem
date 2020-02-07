@@ -1,7 +1,7 @@
 #' Add a favicon to your shinyapp
 #'
 #' @param path Path to your favicon file (.ico or .png) 
-#' @param pkg Path to the root of the package. Default is `"."`
+#' @param pkg Path to the root of the package. Default is `get_golem_wd()`
 #' @rdname favicon
 #' @export
 #' 

@@ -16,7 +16,7 @@ add_utils(name, module = NULL, pkg = get_golem_wd(), open = TRUE,
 
 \item{module}{If not NULL, the file will be module specific in the naming (you don't need to add the leading \code{mod_})}
 
-\item{pkg}{The working directory}
+\item{pkg}{The working directory. Default is \code{get_golem_wd()}.}
 
 \item{open}{Should the file be opened once created?}
 

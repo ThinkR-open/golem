@@ -7,7 +7,7 @@
 #' @param author_last_name Last Name of the author
 #' @param author_email Email of the author
 #' @param repo_url URL (if needed)
-#' @param pkg Path to look for the DESCRIPTION
+#' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
 #' 
 #' @importFrom desc description
 #' @importFrom cli cat_bullet

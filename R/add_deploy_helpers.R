@@ -51,7 +51,7 @@ add_rstudio_files <- function(
 #' In previous versions, this function was called add_rconnect_file.
 #'
 #' @inheritParams add_module
-#' @param pkg Where to put the app.R.
+#' @param pkg Where to put the app.R. Default is `get_golem_wd()`.
 #' @param open Open the file
 #' @aliases add_rconnect_file add_rstudioconnect_file
 #' @export

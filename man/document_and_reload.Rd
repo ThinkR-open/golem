@@ -7,7 +7,7 @@
 document_and_reload(pkg = get_golem_wd())
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{"."}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 }
 \description{
 This function calls \code{rstudioapi::documentSaveAll()},

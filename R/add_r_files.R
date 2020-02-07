@@ -42,7 +42,7 @@ add_r_files <- function(
 #'
 #' @param name The name of the file
 #' @param module If not NULL, the file will be module specific in the naming (you don't need to add the leading `mod_`)
-#' @param pkg The working directory 
+#' @param pkg The working directory. Default is `get_golem_wd()`.
 #' @param open Should the file be opened once created? 
 #' @param dir_create Should the folder be created if it doesn't exist? 
 #' 

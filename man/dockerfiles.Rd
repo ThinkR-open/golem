@@ -32,7 +32,7 @@ add_dockerfile_heroku(path = "DESCRIPTION", output = "Dockerfile",
 
 \item{output}{name of the Dockerfile output.}
 
-\item{pkg}{Path to the root of the package. Default is \code{"."}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{from}{The FROM of the Dockerfile. Default is FROM rocker/r-ver:
 with \code{R.Version()$major} and \code{R.Version()$minor}.}

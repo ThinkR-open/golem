@@ -14,7 +14,7 @@ add_shinyappsio_file(pkg = get_golem_wd(), open = TRUE)
 add_shinyserver_file(pkg = get_golem_wd(), open = TRUE)
 }
 \arguments{
-\item{pkg}{Where to put the app.R.}
+\item{pkg}{Where to put the app.R. Default is \code{get_golem_wd()}.}
 
 \item{open}{Open the file}
 }

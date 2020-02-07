@@ -5,7 +5,7 @@
 #' of a {golem} project.
 #' 
 #' @param name The name of the module
-#' @param pkg Path to the root of the package. Default is `"."`.
+#' @param pkg Path to the root of the package. Default is `get_golem_wd()`.
 #' @param open Should the file be opened?
 #' @param dir_create Creates the directory if it doesn't exist, default is `TRUE`.
 #' @param fct The name of the fct file.
