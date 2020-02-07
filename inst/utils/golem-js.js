@@ -43,8 +43,8 @@ $( document ).ready(function() {
     $(what).removeAttr('disabled');
   });
   
-  Shiny.addCustomMessageHandler('alert', function(args) {
-    alert(args.message);
+  Shiny.addCustomMessageHandler('alert', function(message) {
+    alert(message);
   });
   
   Shiny.addCustomMessageHandler('prompt', function(args) {
