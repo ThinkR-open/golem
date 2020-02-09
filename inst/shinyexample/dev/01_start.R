@@ -22,6 +22,9 @@ golem::fill_desc(
 
 golem::set_golem_options()
 
+
+## enable "Generate documentation using roxygen2"
+golem::enable_roxygenize()
 ## 1.2 - Set common Files 
 ## 
 ## If you want to use the MIT license, README, code of conduct, lifecycle badge, and news
