@@ -463,7 +463,8 @@ dock_from_desc <- function(
       dock$RUN(
         paste(
           "apt-get update && apt-get install -y ",
-          paste(system_requirement, collapse = " ") 
+          paste(system_requirement, collapse = " "),
+          "&& rm -rf /var/lib/apt/lists/*"
         )
       )
     } else {
@@ -471,6 +472,7 @@ dock_from_desc <- function(
       for ( sr in system_requirement ){
         dock$RUN( paste("apt-get install -y ", sr) )
       }
+      dock$RUN("rm -rf /var/lib/apt/lists/*")
     }
   }
   
