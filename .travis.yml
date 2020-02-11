@@ -10,11 +10,11 @@ r_github_packages:
 matrix:
   include:
   - r: devel
-      env: VDIFFR_RUN_TESTS=true
-      before_cache:
-      - Rscript -e 'remotes::install_cran("pkgdown")'
-      - Rscript -e 'remotes::install_github("ThinkR-open/thinkrtemplate")'
-      deploy:
+    env: VDIFFR_RUN_TESTS=true
+    before_cache:
+    - Rscript -e 'remotes::install_cran("pkgdown")'
+    - Rscript -e 'remotes::install_github("ThinkR-open/thinkrtemplate")'
+    deploy:
       provider: pages
       skip-cleanup: true
       github-token: $GITHUB_PAT
