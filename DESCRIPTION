@@ -43,6 +43,7 @@ Imports:
     config,
     crayon,
     desc,
+    devtools,
     dockerfiler,
     fs,
     here,
@@ -52,6 +53,7 @@ Imports:
     remotes,
     rlang,
     roxygen2,
+    rsconnect,
     rstudioapi,
     shiny,
     testthat,
@@ -60,16 +62,15 @@ Imports:
     yaml
 Suggests:
     covr,
-    devtools,
     glue,
     knitr,
     pkgdown,
     purrr,
     rcmdcheck,
     rmarkdown,
-    rsconnect,
     spelling,
     stringr,
+    tools,
     withr
 VignetteBuilder: 
     knitr

@@ -11,9 +11,7 @@ status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](
 [![CRAN
 status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
 
-<img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" width="250px" style="display: block; margin: auto auto auto 0;" />
-
-# {golem}
+# {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" alt="" width="120" />
 
 `{golem}` is an opinionated framework for building production-grade
 shiny applications.
