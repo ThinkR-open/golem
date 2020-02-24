@@ -57,6 +57,7 @@ _Building Big Shiny Apps_
 - useR! 2019 : [A Framework for Building Robust & Production Ready Shiny Apps](https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf)
 - ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with {golem}](https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem)
 - rstudio::conf(2020) : [Production-grade Shiny Apps with golem](https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem)
+
 ### Video 
 
 - [{golem} and Effective Shiny Development Methods](https://www.youtube.com/watch?v=OU1-CkSVdTI)

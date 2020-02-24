@@ -47,25 +47,20 @@ This package is part of a series of tools for Shiny, which includes:
   - useR\! 2019 : [A Framework for Building Robust & Production Ready
     Shiny
     Apps](https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf)
-
   - ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with
     {golem}](https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem)
-
   - rstudio::conf(2020) : [Production-grade Shiny Apps with
     golem](https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem)
-    \#\#\# Video
+
+### Video
 
   - [{golem} and Effective Shiny Development
     Methods](https://www.youtube.com/watch?v=OU1-CkSVdTI)
-
   - [Hands-on demonstration of
     {golem}](https://shinydevseries.com/post/golem-demo/)
-
   - useR\! 2019 : [A Framework for Building Robust & Production Ready
     Shiny Apps](https://youtu.be/tCAan6smrjs)
-
   - 🇫🇷 [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
-
   - rstudio::conf(2020) : [Production-grade Shiny Apps with
     golem](https://resources.rstudio.com/rstudio-conf-2020/production-grade-shiny-apps-with-golem-colin-fay)
 
