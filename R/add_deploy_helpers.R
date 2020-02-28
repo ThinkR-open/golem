@@ -560,7 +560,7 @@ dock_from_desc <- function(
       )
       devtools::build(path = ".")
     }
-    # we use an already builded tar.gz file
+    # we use an already built tar.gz file
     
     dock$COPY(
       from = paste0(read.dcf(path)[1], "_*.tar.gz"),
