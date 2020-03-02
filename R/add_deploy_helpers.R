@@ -561,7 +561,7 @@ dock_from_desc <- function(
         )
       )
       if (rlang::is_installed("pkgbuild")) {
-        pkgbuild::build(path = ".")
+        getFromNamespace("build","pkgbuild")(path = ".")
       } else {
         stop("please install {pkgbuild}")
       }
