@@ -2,6 +2,7 @@
 #'
 #' @param path Path to your favicon file (.ico or .png) 
 #' @param pkg Path to the root of the package. Default is `get_golem_wd()`
+#' @param method Method to be used for downloading files, 'curl' is default see [utils::download.file]
 #' @rdname favicon
 #' @export
 #' 
