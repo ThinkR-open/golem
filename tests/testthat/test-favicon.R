@@ -32,7 +32,7 @@ test_that("test use_favicon online fail",{
   with_dir(pkg,{
     golem::remove_favicon()
     expect_false(file.exists("inst/app/www/favicon.ico"))
-    use_favicon(path = "https://fr.wikipedia.org//static/favicon/dontexist.ico")
+    expect_error(use_favicon(path = "https://fr.wikipedia.org//static/favicon/dontexist.ico"))
     expect_false(file.exists("inst/app/www/favicon.ico"))
   })
 })
