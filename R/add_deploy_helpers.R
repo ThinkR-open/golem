@@ -560,7 +560,13 @@ dock_from_desc <- function(
           read.dcf(path)[1,][['Version']]
         )
       )
-      devtools::build(path = ".")
+      if (rlang::is_installed("pkgbuild")) {
+        pkgbuild::build(path = ".")
+      } else {
+        stop("please install {pkgbuild}")
+      }
+      
+      
     }
     # we use an already built tar.gz file
     
