@@ -2,11 +2,13 @@
 #'
 #' @param path Path to your favicon file (.ico or .png) 
 #' @param pkg Path to the root of the package. Default is `get_golem_wd()`
+#' @param method Method to be used for downloading files, 'curl' is default see [utils::download.file]
 #' @rdname favicon
 #' @export
 #' 
 #' @importFrom attempt stop_if_not
 #' @importFrom fs path_abs path file_copy
+#' @importFrom tools file_ext
 #'
 #' @examples
 #' \donttest{
@@ -17,9 +19,9 @@
 #' }
 use_favicon <- function(
   path, 
-  pkg = get_golem_wd()
+  pkg = get_golem_wd(),
+  method = "curl"
 ){
-  
   if (missing(path)){
     path <- golem_sys("shinyexample/inst/app/www", "favicon.ico")
   } 
@@ -31,7 +33,31 @@ use_favicon <- function(
     "favicon must have .ico or .png extension"
   )
   
-  path <- path_abs(path)
+  
+  local <- file.exists(path)
+  
+  if ( !local ){
+  x <- attempt::attempt(curlGetHeaders(path), silent = TRUE)
+  # > attempt::is_try_error(x)
+   if ( attr(x, 'status') == 200 ){
+  
+  destfile <- tempfile(fileext = paste0(".",ext),pattern = "favicon")
+  download.file(path, destfile , method = method)
+  path <- path_abs(destfile)
+   } else {
+     return(stop("can't reach the favicon, check your internet connection"))
+   }
+  }
+  
+  
+  if ( !file_exists(path) ){
+    return(stop("can't reach the favicon, check your internet connection"))
+    
+    
+  }
+  
+  
+  # path <- path_abs(path)
   
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
