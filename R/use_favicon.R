@@ -137,6 +137,8 @@ remove_favicon <- function(
 #' 
 #' @param ico path to favicon file
 #' @param rel rel
+#' @param resources_path prefix of the resource path of the app
+#' @inheritParams add_modules
 #'
 #' @export
 #' @importFrom htmltools tags
@@ -144,7 +146,7 @@ favicon <- function(
   ico, 
   rel="shortcut icon", 
   resources_path = "www", 
-  golem_wd = get_golem_wd()
+  pkg = get_golem_wd()
 ){
   if (missing(ico)){
     ici <- list.files( 
