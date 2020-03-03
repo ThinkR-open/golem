@@ -8,7 +8,6 @@
 #' 
 #' @importFrom attempt stop_if_not
 #' @importFrom fs path_abs path file_copy
-#' @importFrom tools file_ext
 #'
 #' @examples
 #' \donttest{
@@ -22,11 +21,12 @@ use_favicon <- function(
   pkg = get_golem_wd(),
   method = "curl"
 ){
-  if (missing(path)){
+  if ( missing(path) ){
     path <- golem_sys("shinyexample/inst/app/www", "favicon.ico")
   } 
   
   ext <- file_ext(path)
+  
   stop_if_not(
     ext, 
     ~ .x %in% c("png",'ico'), 
@@ -34,33 +34,42 @@ use_favicon <- function(
   )
   
   
-  local <- file.exists(path)
+  local <- fs::file_exists(path)
   
   if ( !local ){
-  x <- attempt::attempt(curlGetHeaders(path), silent = TRUE)
-  # > attempt::is_try_error(x)
-   if ( attr(x, 'status') == 200 ){
-  
-  destfile <- tempfile(fileext = paste0(".",ext),pattern = "favicon")
-  download.file(path, destfile , method = method)
-  path <- path_abs(destfile)
-   } else {
-     return(stop("can't reach the favicon, check your internet connection"))
-   }
+    
+    try_online <- attempt::attempt(
+      curlGetHeaders(path), 
+      silent = TRUE
+    )
+    attempt::stop_if(
+      try_online,
+      attempt::is_try_error, 
+      "Provided path is neither a local path nor a reachable url."
+    )
+    
+    attempt::stop_if_not(
+      attr(try_online, 'status'),
+      ~ .x == 200, 
+      "Unable to reach provided url (response code is not 200)."
+    )
+    
+    destfile <- tempfile(
+      fileext = paste0(".",ext),
+      pattern = "favicon"
+    )
+    
+    download.file(
+      path, 
+      destfile, 
+      method = method
+    )
+    path <- path_abs(destfile)
   }
   
+  old <- setwd( path_abs(pkg) )
   
-  if ( !file_exists(path) ){
-    return(stop("can't reach the favicon, check your internet connection"))
-    
-    
-  }
-  
-  
-  # path <- path_abs(path)
-  
-  old <- setwd(path_abs(pkg))
-  on.exit(setwd(old))
+  on.exit( setwd(old) )
   
   to <- path(
     path_abs(pkg), 
@@ -71,7 +80,7 @@ use_favicon <- function(
     )
   )
   
-  if (! (path == to)) {
+  if (! (path == to) ) {
     file_copy(
       path, 
       to, 
@@ -86,16 +95,15 @@ use_favicon <- function(
     )
   }
   
-  cat_rule("Change / Add in the app_ui function")
   cat_line(
-    darkgrey(
-      sprintf(
-        'golem::favicon("www/favicon.%s")', 
-        ext
-      )
+    "Favicon is automatically linked in app_ui via `golem_add_external_resources()`"
+  )
+  cat_red_bullet(
+    sprintf(
+      "No file found at %s", 
+      path
     )
   )
-  cat_line()
   
 }
 
@@ -132,6 +140,34 @@ remove_favicon <- function(
 #'
 #' @export
 #' @importFrom htmltools tags
-favicon <- function( ico = "www/favicon.ico", rel="shortcut icon" ){
-  tags$head(tags$link(rel= rel, href= ico))
+favicon <- function( 
+  ico, 
+  rel="shortcut icon", 
+  resources_path = "www", 
+  golem_wd = get_golem_wd()
+){
+  if (missing(ico)){
+    ici <- list.files( 
+      pattern = "favicon", 
+      fs::path(
+        golem_wd, 
+        "inst/app/www"
+      )
+    )
+    attempt::stop_if(
+      length(ici), 
+      ~ .x > 2, 
+      "You have 2 favicons inside your app/www folder."
+    )
+    ico <- fs::path(
+      resources_path, 
+      ici 
+    )
+  }
+  tags$head(
+    tags$link(
+      rel = rel, 
+      href = ico
+    )
+  )
 }
