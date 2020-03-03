@@ -152,14 +152,14 @@ favicon <- function(
     ici <- list.files( 
       pattern = "favicon", 
       fs::path(
-        golem_wd, 
+        pkg, 
         "inst/app/www"
       )
     )
     attempt::stop_if(
       length(ici), 
       ~ .x > 2, 
-      "You have 2 favicons inside your app/www folder."
+      "You have 2 favicons inside your app/www folder, please remove one."
     )
     ico <- fs::path(
       resources_path, 
