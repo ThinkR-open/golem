@@ -22,30 +22,56 @@ bundle_resources <- function(
   all_files = TRUE
 ){
   
-  htmltools::htmlDependency(
-    name, 
-    version,
-    src = path,
-    script = list.files(
-      path, 
-      pattern = "\\.js$"
-    ),
-    stylesheet = list.files(
-      path, 
-      pattern = "\\.css$"
-    ),
-    meta = meta, 
-    head = c(
-      as.character(
-        tags$title(app_title)
-      ), 
-      as.character(
-        golem::activate_js()
-      ),
-      head
-    ),
-    attachment = attachment,
-    package = package,
-    all_files = all_files
-  )
+  if (
+    length(
+      list.files(path) 
+    ) > 0
+  ){
+    res <- list()
+    res[[
+      length(res) + 1
+      ]] <- htmltools::htmlDependency(
+        name, 
+        version,
+        src = path,
+        script = list.files(
+          path, 
+          pattern = "\\.js$"
+        ),
+        meta = meta, 
+        head = c(
+          as.character(
+            tags$title(app_title)
+          ), 
+          as.character(
+            golem::activate_js()
+          ),
+          head
+        ),
+        attachment = attachment,
+        package = package,
+        all_files = all_files
+      )
+    # For some reason `htmlDependency` doesn't bundle css, 
+    # So add them by hand
+    css_nms <- paste0(
+      basename(path), 
+      "/", 
+      list.files(
+        path,
+        pattern = "\\.css$"
+      ) 
+    )
+    
+    for (i in css_nms ){
+      res[[
+        length(res) + 1
+        ]] <- tags$link(
+          href = i, 
+          rel = "stylesheet"
+        )
+    }
+    
+    res
+  }
 }
