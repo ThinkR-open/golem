@@ -63,6 +63,7 @@ Suggests:
     devtools,
     glue,
     knitr,
+    pkgbuild,
     pkgdown,
     purrr,
     rcmdcheck,
