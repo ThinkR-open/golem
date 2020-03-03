@@ -198,7 +198,10 @@ after_creation_message_js <- function(
   if (
     desc_exist(pkg)
   ) {
-    if (dir != "inst/app/www"){
+    if ( 
+      fs::path_abs(dir) != fs::path_abs("inst/app/www") & 
+      packageVersion("golem") < "0.2.0"
+    ){
       cat_red_bullet(
         sprintf(
           'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/%s.js")`', 
@@ -218,7 +221,9 @@ after_creation_message_css <- function(
   if (
     desc_exist(pkg)
   ) {
-    if (dir != "inst/app/www"){
+    if (fs::path_abs(dir) != fs::path_abs("inst/app/www") & 
+        packageVersion("golem") < "0.2.0"
+    ){
       cat_red_bullet(
         sprintf(
           'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`', 
@@ -240,7 +245,7 @@ file_created_dance <- function(
   open
 ){
   cat_created(where)
-
+  
   fun(pkg, dir, name)
   
   open_or_go_to(where, open)
