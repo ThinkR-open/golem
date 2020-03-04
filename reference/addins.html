@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Use the utils files — use_utils_ui • golem</title>
+<title><code>{golem}</code> addins — addins • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,14 +30,10 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Use the utils files — use_utils_ui" />
-<meta property="og:description" content="
-
-use_utils_uiCopies the golem_utils_ui.R to the R folder.
-use_utils_serverCopies the golem_utils_server.R to the R folder.
-
-
-" />
+<meta property="og:title" content="<code>{golem}</code> addins — addins" />
+<meta property="og:description" content="insert_ns() takes a selected character vector and wrap it in ns()
+The series of go_to_*() addins help you go to
+common files used in developing a {golem} application." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -160,40 +156,39 @@ use_utils_serverCopies the golem_utils_server.R to the R folder.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Use the utils files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/use_utils.R'><code>R/use_utils.R</code></a></small>
-    <div class="hidden name"><code>utils_files.Rd</code></div>
+    <h1><code>{golem}</code> addins</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/addins.R'><code>R/addins.R</code></a></small>
+    <div class="hidden name"><code>addins.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-<dl class='dl-horizontal'>
-<dt>use_utils_ui</dt><dd><p>Copies the golem_utils_ui.R to the R folder.</p></dd>
-<dt>use_utils_server</dt><dd><p>Copies the golem_utils_server.R to the R folder.</p></dd>
-
-</dl>
-
+    <p><code>insert_ns()</code> takes a selected character vector and wrap it in <code>ns()</code>
+The series of <code>go_to_*()</code> addins help you go to
+common files used in developing a <code>{golem}</code> application.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use_utils_ui</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())
+    <pre class="usage"><span class='fu'>insert_ns</span>()
 
-<span class='fu'>use_utils_server</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())</pre>
+<span class='fu'>go_to_start</span>()
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
-    </tr>
-    </table>
+<span class='fu'>go_to_dev</span>()
+
+<span class='fu'>go_to_deploy</span>()
+
+<span class='fu'>go_to_run_dev</span>()
+
+<span class='fu'>go_to_app_ui</span>()
+
+<span class='fu'>go_to_app_server</span>()
+
+<span class='fu'>go_to_run_app</span>()</pre>
+
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

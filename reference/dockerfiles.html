@@ -87,7 +87,7 @@ add_dockerfile_heroku() creates platform specific Dockerfile." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -120,6 +120,12 @@ add_dockerfile_heroku() creates platform specific Dockerfile." />
     </li>
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
+    </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -161,24 +167,32 @@ a "classical" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
 <code>add_dockerfile_heroku()</code> creates platform specific Dockerfile.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_dockerfile</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>,
+    <pre class="usage"><span class='fu'>add_dockerfile</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"rocker/r-ver:"</span>,
   <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>80</span>,
-  <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"0.0.0.0"</span>)
+  <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"0.0.0.0"</span>, <span class='kw'>sysreqs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com/"</span>, <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>update_tar_gz</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>build_golem_from_source</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>add_dockerfile_shinyproxy</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>add_dockerfile_shinyproxy</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"rocker/r-ver:"</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sysreqs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com/"</span>,
+  <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>update_tar_gz</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_golem_from_source</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>add_dockerfile_heroku</span>(<span class='kw'>input</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"rocker/tidyverse:"</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>add_dockerfile_heroku</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>output</span> <span class='kw'>=</span> <span class='st'>"Dockerfile"</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"rocker/r-ver:"</span>,
+  <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>minor</span>), <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sysreqs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com/"</span>,
+  <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>update_tar_gz</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_golem_from_source</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>input</th>
+      <th>path</th>
       <td><p>path to the DESCRIPTION file to use as an input.</p></td>
     </tr>
     <tr>
@@ -187,11 +201,11 @@ a "classical" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
     </tr>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
+      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
     </tr>
     <tr>
       <th>from</th>
-      <td><p>The FROM of the Dockerfile. Default is FROM rocker/tidyverse:
+      <td><p>The FROM of the Dockerfile. Default is FROM rocker/r-ver:
 with <code>R.Version()$major</code> and <code>R.Version()$minor</code>.</p></td>
     </tr>
     <tr>
@@ -207,6 +221,30 @@ Default is 80.</p></td>
       <th>host</th>
       <td><p>The <code><a href='https://rdrr.io/r/base/options.html'>options('shiny.host')</a></code> on which to run the Shiny App.
 Default is 0.0.0.0.</p></td>
+    </tr>
+    <tr>
+      <th>sysreqs</th>
+      <td><p>boolean to check the system requirements</p></td>
+    </tr>
+    <tr>
+      <th>repos</th>
+      <td><p>character vector, the base URL of the repositories</p></td>
+    </tr>
+    <tr>
+      <th>expand</th>
+      <td><p>boolean, if <code>TRUE</code> each system requirement will be known his own RUN line</p></td>
+    </tr>
+    <tr>
+      <th>open</th>
+      <td><p>boolean, default is <code>TRUE</code> open the Dockerfile file</p></td>
+    </tr>
+    <tr>
+      <th>update_tar_gz</th>
+      <td><p>boolean, if <code>TRUE</code> and build_golem_from_source is also <code>TRUE</code> an updated tar.gz Package is created</p></td>
+    </tr>
+    <tr>
+      <th>build_golem_from_source</th>
+      <td><p>boolean, if <code>TRUE</code> no tar.gz Package is created and the Dockerfile directly mount the source folder to build it</p></td>
     </tr>
     </table>
 

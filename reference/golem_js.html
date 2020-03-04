@@ -88,7 +88,7 @@ to launch any JS function created inside a Shiny JavaScript handler." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -121,6 +121,12 @@ to launch any JS function created inside a Shiny JavaScript handler." />
     </li>
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
+    </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -165,7 +171,7 @@ to launch any JS function created inside a Shiny JavaScript handler.</p>
 
     <pre class="usage"><span class='fu'>activate_js</span>()
 
-<span class='fu'>invoke_js</span>(<span class='no'>fun</span>, <span class='no'>ui_ref</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='kw pkg'>shiny</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/domains.html'>getDefaultReactiveDomain</a></span>())</pre>
+<span class='fu'>invoke_js</span>(<span class='no'>fun</span>, <span class='no'>...</span>, <span class='kw'>session</span> <span class='kw'>=</span> <span class='kw pkg'>shiny</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/domains.html'>getDefaultReactiveDomain</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,8 +181,8 @@ to launch any JS function created inside a Shiny JavaScript handler.</p>
       <td><p>JS function to be invoked.</p></td>
     </tr>
     <tr>
-      <th>ui_ref</th>
-      <td><p>The UI reference to call the JS function on.</p></td>
+      <th>...</th>
+      <td><p>JSON-like messages to be sent to the triggered JS function</p></td>
     </tr>
     <tr>
       <th>session</th>
@@ -193,6 +199,13 @@ to launch any JS function created inside a Shiny JavaScript handler.</p>
 <dt>clickon</dt><dd><p>Click on an element. The full jQuery selector has to be used.</p></dd>
 <dt>disable</dt><dd><p>Add "disabled" to an element. The full jQuery selector has to be used.</p></dd>
 <dt>reable</dt><dd><p>Remove "disabled" from an element. The full jQuery selector has to be used.</p></dd>
+<dt>alert</dt><dd><p>Open an alert box with the message(s) provided.</p></dd>
+<dt>prompt</dt><dd><p>Open a prompt box with the message(s) provided. This function takes
+a list with message and id <code><a href='https://rdrr.io/r/base/list.html'>list(message = "", id = "")</a></code>. The output of the prompt
+will be sent to <code>input$id</code>.</p></dd>
+<dt>confirm</dt><dd><p>Open a confirm box with the message provided. This function takes
+a list with message and id <code><a href='https://rdrr.io/r/base/list.html'>list(message = "", id = "")</a></code>. The output of the prompt
+will be sent to <code>input$id</code>.</p></dd>
 
 </dl></td>
     </tr>

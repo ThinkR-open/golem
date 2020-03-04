@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return all package dependencies from current package — get_dependencies • golem</title>
+<title>get system requirements — get_sysreqs • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,8 +30,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Return all package dependencies from current package — get_dependencies" />
-<meta property="og:description" content="Return all package dependencies from current package" />
+<meta property="og:title" content="get system requirements — get_sysreqs" />
+<meta property="og:description" content="get system requirements" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -119,6 +119,12 @@
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
     </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -148,52 +154,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return all package dependencies from current package</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/get_dependencies.R'><code>R/get_dependencies.R</code></a></small>
-    <div class="hidden name"><code>get_dependencies.Rd</code></div>
+    <h1>get system requirements</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/get_sysreqs.R'><code>R/get_sysreqs.R</code></a></small>
+    <div class="hidden name"><code>get_sysreqs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Return all package dependencies from current package</p>
+    <p>get system requirements</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_dependencies</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"DESCRIPTION"</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(),
-  <span class='kw'>dput</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>field</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Imports"</span>))</pre>
+    <pre class="usage"><span class='fu'>get_sysreqs</span>(<span class='no'>packages</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>batch_n</span> <span class='kw'>=</span> <span class='fl'>30</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>path</th>
-      <td><p>path to the DESCRIPTION file</p></td>
+      <th>packages</th>
+      <td><p>character vector of packages names</p></td>
     </tr>
     <tr>
-      <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
+      <th>quiet</th>
+      <td><p>boolean if TRUE the function is quiet</p></td>
     </tr>
     <tr>
-      <th>dput</th>
-      <td><p>if TRUE return a dput output instead of character vector</p></td>
-    </tr>
-    <tr>
-      <th>field</th>
-      <td><p>DESCRIPTION fields to parse. Default is Import</p></td>
+      <th>batch_n</th>
+      <td><p>number of simultaneous packages to ask</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()){
-  <span class='fu'>get_dependencies</span>()
-}
-<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="Create a module — add_module" />
 <meta property="og:description" content="This function creates a module inside the R/ folder, based
-on a specific module structure." />
+on a specific module structure. This function can be used outside
+of a golem project." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -86,7 +87,7 @@ on a specific module structure." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -119,6 +120,12 @@ on a specific module structure." />
     </li>
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
+    </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -156,11 +163,13 @@ on a specific module structure." />
 
     <div class="ref-description">
     <p>This function creates a module inside the <code>R/</code> folder, based
-on a specific module structure.</p>
+on a specific module structure. This function can be used outside
+of a golem project.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_module</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fct</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>utils</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>add_module</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fct</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>utils</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>export</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ph_ui</span> <span class='kw'>=</span> <span class='st'>" "</span>, <span class='kw'>ph_server</span> <span class='kw'>=</span> <span class='st'>" "</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -171,7 +180,7 @@ on a specific module structure.</p>
     </tr>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
+      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
     </tr>
     <tr>
       <th>open</th>
@@ -188,6 +197,14 @@ on a specific module structure.</p>
     <tr>
       <th>utils</th>
       <td><p>The name of the utils file.</p></td>
+    </tr>
+    <tr>
+      <th>export</th>
+      <td><p>Logical. Should the module be exported? Default is <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>ph_ui, ph_server</th>
+      <td><p>Texts to insert inside the modules UI and server. For advanced use.</p></td>
     </tr>
     </table>
 

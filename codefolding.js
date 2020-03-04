@@ -41,7 +41,7 @@ window.initializeCodeFolding = function(show) {
         .attr('aria-expanded', show)
         .attr('aria-controls', id);
 
-    var buttonRow = $('<div class="row"></div>');
+    var buttonRow = $('<div class="row code-folding"></div>');
     var buttonCol = $('<div class="col-md-12"></div>');
 
     buttonCol.append(showCodeButton);

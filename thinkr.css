@@ -30,6 +30,12 @@ h2 {
     color: #15b7d6;
 }
 
+/* body */
+body > .container .row {
+    margin-top: 51px;
+}
+
+/* navbar position fixed */
 .navbar-default {
     background-color: #3b4450;
     border-color: #3b4450;
@@ -57,4 +63,8 @@ h2 {
 
 .btn-xs, .btn-group-xs > .btn {
     border-radius: 3px;
+}
+
+code {
+    font-size: 80%;
 }

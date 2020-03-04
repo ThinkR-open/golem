@@ -31,7 +31,8 @@
 <script src="../pkgdown.js"></script>
 
 <meta property="og:title" content="Create Files — add_js_file" />
-<meta property="og:description" content="These functions create files inside the inst/app folder." />
+<meta property="og:description" content="These functions create files inside the inst/app folder.
+These functions can be used outside of a golem project." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -85,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -118,6 +119,12 @@
     </li>
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
+    </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -154,19 +161,20 @@
     </div>
 
     <div class="ref-description">
-    <p>These functions create files inside the <code>inst/app</code> folder.</p>
+    <p>These functions create files inside the <code>inst/app</code> folder.
+These functions can be used outside of a golem project.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_js_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+    <pre class="usage"><span class='fu'>add_js_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>with_doc_ready</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>add_js_handler</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
   <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>add_js_handler</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+<span class='fu'>add_css_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
   <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>add_css_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-
-<span class='fu'>add_ui_server_files</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app"</span>,
+<span class='fu'>add_ui_server_files</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app"</span>,
   <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -178,7 +186,7 @@
     </tr>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
+      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
     </tr>
     <tr>
       <th>dir</th>
@@ -191,6 +199,10 @@
     <tr>
       <th>dir_create</th>
       <td><p>Creates the directory if it doesn't exist, default is <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>with_doc_ready</th>
+      <td><p>Should the default file include <code>$( document ).ready()</code>?</p></td>
     </tr>
     </table>
 

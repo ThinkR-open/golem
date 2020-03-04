@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -118,6 +118,12 @@
     </li>
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
+    </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -157,11 +163,12 @@
     <p>This function adds the favicon from <code>ico</code> to your shiny app.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use_favicon</span>(<span class='no'>path</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)
+    <pre class="usage"><span class='fu'>use_favicon</span>(<span class='no'>path</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"curl"</span>)
 
 <span class='fu'>remove_favicon</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"inst/app/www/favicon.ico"</span>)
 
-<span class='fu'>favicon</span>(<span class='kw'>ico</span> <span class='kw'>=</span> <span class='st'>"www/favicon.ico"</span>, <span class='kw'>rel</span> <span class='kw'>=</span> <span class='st'>"shortcut icon"</span>)</pre>
+<span class='fu'>favicon</span>(<span class='no'>ico</span>, <span class='kw'>rel</span> <span class='kw'>=</span> <span class='st'>"shortcut icon"</span>, <span class='kw'>resources_path</span> <span class='kw'>=</span> <span class='st'>"www"</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,7 +179,11 @@
     </tr>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code>"."</code></p></td>
+      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>Method to be used for downloading files, 'curl' is default see <a href='https://rdrr.io/r/utils/download.file.html'>utils::download.file</a></p></td>
     </tr>
     <tr>
       <th>ico</th>
@@ -181,6 +192,10 @@
     <tr>
       <th>rel</th>
       <td><p>rel</p></td>
+    </tr>
+    <tr>
+      <th>resources_path</th>
+      <td><p>prefix of the resource path of the app</p></td>
     </tr>
     </table>
 

@@ -1,7 +1,7 @@
 /* Code folding */
 /* Each code block button */
 .code-folding-btn { margin-bottom: 4px; }
-.row {
+.row.code-folding {
     display: flex;
     border-bottom: solid 1px #d7d7d7;
 }

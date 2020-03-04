@@ -49,7 +49,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -82,6 +82,12 @@
     </li>
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
+    </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -120,7 +126,7 @@
       <h1>Day to Day Dev with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2019-12-10</h4>
+            <h4 class="date">2020-03-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/b_dev.Rmd"><code>vignettes/b_dev.Rmd</code></a></small>
       <div class="hidden name"><code>b_dev.Rmd</code></div>
@@ -137,77 +143,91 @@ $(document).ready(function () {
 <h2 class="hasAnchor">
 <a href="#day-to-day-development-with-golem" class="anchor"></a>Day to day development with <code>{golem}</code>
 </h2>
-<p>Now that you’re all set with your project init, time to move to development :)</p>
-<p>App development should happen through the <code>dev/02_dev.R</code> file, which contains common commands for developing. ## Launching the app</p>
+<p>Now that you’re all set with your project init, time to move to development!</p>
+<p>App development should happen through the <code>dev/02_dev.R</code> file, which contains common commands for developing.</p>
+</div>
+<div id="launching-the-app" class="section level2">
+<h2 class="hasAnchor">
+<a href="#launching-the-app" class="anchor"></a>Launching the app</h2>
 <p>To run the app, go to the <code>dev/run_dev.R</code> file, and run the all thing.</p>
 </div>
 <div id="dev02_dev-r" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dev02_dev-r" class="anchor"></a><code>dev/02_dev.R</code>
 </h2>
-<div id="add-modules" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-modules" class="anchor"></a>Add modules</h3>
-<p>The <code><a href="../reference/add_module.html">golem::add_module()</a></code> functions creates a module in the <code>R</code> folder. The file and the modules will be named after the <code>name</code> parameter, by adding <code>mod_</code> to the R file, and <code>mod_*_ui</code> and <code>mod_*_server</code> to the UI and server functions.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_module.html">add_module</a></span>( <span class="dt">name =</span> <span class="st">"my_first_module"</span> ) <span class="co"># Name of the module</span></a></code></pre></div>
-<p>The new file will contain:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># mod_UI</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">mod_my_first_module_ui &lt;-<span class="st"> </span><span class="cf">function</span>(id){</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  ns &lt;-<span class="st"> </span><span class="kw">NS</span>(id)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="kw">tagList</span>(</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">mod_my_first_module_server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session){</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">  ns &lt;-<span class="st"> </span>session<span class="op">$</span>ns</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">}</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">## To be copied in the UI</a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co"># mod_my_first_module_ui("my_first_module_1")</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">    </a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">## To be copied in the server</a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co"># callModule(mod_my_first_module_server, "my_first_module_1")</span></a></code></pre></div>
-<p>In order not to make errors when putting these into your app, the end of the file will contain code that has to be copied and pasted inside your UI and server functions.</p>
-</div>
 <div id="add-dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-dependencies" class="anchor"></a>Add dependencies</h3>
 <p>To be called each time you need a new package as a dependency:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_package.html">use_package</a></span>(<span class="st">"pkg"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_package.html">use_package</a></span>(<span class="st">"pkg"</span>)</a></code></pre></div>
+<p>About <a href="https://r-pkgs.org/namespace.html">package dependencies</a>.</p>
+</div>
+<div id="add-modules" class="section level3">
+<h3 class="hasAnchor">
+<a href="#add-modules" class="anchor"></a>Add modules</h3>
+<p>The <code><a href="../reference/add_module.html">golem::add_module()</a></code> functions creates a module in the <code>R</code> folder. The file and the modules will be named after the <code>name</code> parameter, by adding <code>mod_</code> to the R file, and <code>mod_*_ui</code> and <code>mod_*_server</code> to the UI and server functions.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_module.html">add_module</a></span>( <span class="dt">name =</span> <span class="st">"my_first_module"</span> ) <span class="co"># Name of the module</span></a></code></pre></div>
+<p>The new file will contain:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># mod_UI</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">mod_my_first_module_ui &lt;-<span class="st"> </span><span class="cf">function</span>(id){</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  ns &lt;-<span class="st"> </span><span class="kw">NS</span>(id)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw">tagList</span>(</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  )</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">mod_my_first_module_server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session){</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">  ns &lt;-<span class="st"> </span>session<span class="op">$</span>ns</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">}</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">    </a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">## To be copied in the UI</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co"># mod_my_first_module_ui("my_first_module_1")</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">    </a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">## To be copied in the server</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co"># callModule(mod_my_first_module_server, "my_first_module_1")</span></a></code></pre></div>
+<p>At the end of the file, you will find a piece of code that has to be copied and pasted inside your UI and server functions.</p>
+</div>
+</div>
+<div id="add-function-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#add-function-files" class="anchor"></a>Add function files</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/file_creation.html">add_fct</a></span>( <span class="st">"helpers"</span> ) </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/file_creation.html">add_utils</a></span>( <span class="st">"helpers"</span> )</a></code></pre></div>
+<p>These two function create <code>R/fct_helpers.R</code> and <code>R/utils_helpers.R</code>, two file you can use to add business logic functions.</p>
+<div id="add-external-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#add-external-files" class="anchor"></a>Add external files</h3>
+<p>These functions create external dependencies (JavaScript and CSS). <code><a href="../reference/add_files.html">add_js_file()</a></code> creates a simple JavaScript file, while <code><a href="../reference/add_files.html">add_js_handler()</a></code> adds a file with a skeleton for shiny custom handlers.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_files.html">add_js_file</a></span>(<span class="st">"script"</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_files.html">add_js_handler</a></span>(<span class="st">"script"</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_files.html">add_css_file</a></span>(<span class="st">"custom"</span>)</a></code></pre></div>
+<p>Note: While the general philosophy of <code>{golem}</code> is being based on the idea that you’re building a package, these functions can be used outside of a <code>{golem}</code> project.</p>
+<p>Note that you can also download external CSS and JavaScript files with:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/use_files.html">use_external_css_file</a></span>(<span class="st">"url"</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/use_files.html">use_external_js_file</a></span>(<span class="st">"url"</span>)</a></code></pre></div>
+</div>
+<div id="adding-these-external-resources-to-your-app" class="section level3">
+<h3 class="hasAnchor">
+<a href="#adding-these-external-resources-to-your-app" class="anchor"></a>Adding these external resources to your app</h3>
+<p>You can add any external resource into <code>inst/app/www</code>.</p>
+<p>JavaScript and CSS are automatically linked in the <code>golem_add_external_resources()</code> function. If you add other resources (example images), you can link them in the app with the <code>www</code> prefix:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tags<span class="op">$</span><span class="kw">img</span>(<span class="dt">src =</span> <span class="st">"www/my.png"</span>)</a></code></pre></div>
+<p>You can also list here the use of other packages, for example <code>useShinyalert()</code> from the <code>{shinyalert}</code> package.</p>
+</div>
+<div id="add-a-data-raw-folder" class="section level3">
+<h3 class="hasAnchor">
+<a href="#add-a-data-raw-folder" class="anchor"></a>Add a data-raw folder</h3>
+<p>If you have data in your package:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data_raw</a></span>()</a></code></pre></div>
+<p>About <a href="https://r-pkgs.org/data.html">data in a package</a>.</p>
 </div>
 <div id="add-tests" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-tests" class="anchor"></a>Add tests</h3>
 <p>Add more tests to your application:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_testthat.html">use_test</a></span>( <span class="st">"app"</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_testthat.html">use_test</a></span>( <span class="st">"app"</span> )</a></code></pre></div>
+<p>About <a href="https://r-pkgs.org/tests.html">testing a package</a>.</p>
 </div>
-<div id="add-a-browser-button" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-a-browser-button" class="anchor"></a>Add a browser button</h3>
-<p>Learn more about this: <a href="https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/" class="uri">https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/</a></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/browser_button.html">browser_button</a></span>()</a></code></pre></div>
-</div>
-<div id="add-external-files" class="section level3">
-<h3 class="hasAnchor">
-<a href="#add-external-files" class="anchor"></a>Add external files</h3>
-<p>These functions create external dependencies (JavaScript and CSS). <code><a href="../reference/add_files.html">add_js_file()</a></code> creates a simple JavaScript file, while <code><a href="../reference/add_files.html">add_js_handler()</a></code> adds a file with a skeleton for shiny custom handlers.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_files.html">add_js_file</a></span>(<span class="st">"script"</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_files.html">add_js_handler</a></span>(<span class="st">"script"</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_files.html">add_css_file</a></span>(<span class="st">"custom"</span>)</a></code></pre></div>
-</div>
-</div>
-<div id="adding-these-external-resources-to-your-app" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adding-these-external-resources-to-your-app" class="anchor"></a>Adding these external resources to your app</h2>
-<p>You can add any external resource (JS, css) into <code>inst/app/www</code>.</p>
-<p>Then, You’ll need to point to these external resources in <code>golem_add_external_resources()</code>. For example, if you’ve created a CSS file with <code><a href="../reference/add_files.html">golem::add_css_file("custom")</a></code>, you can add the file with:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tags<span class="op">$</span><span class="kw">link</span>(<span class="dt">rel=</span><span class="st">"stylesheet"</span>, <span class="dt">type=</span><span class="st">"text/css"</span>, <span class="dt">href=</span><span class="st">"www/custom.css"</span>)</a></code></pre></div>
-<p>Put these links into <code>R/app_ui.R</code>, in the <code>golem_add_external_resources()</code> function.</p>
-<p>You can also list here the use of other packages, for example <code>useShinyalert()</code> from the <code>{shinyalert}</code> package.</p>
-<blockquote>
-<p>Note: we’ve chosen to leave it “raw”, in the sense that there is a <code>addResourcePath</code> and a <code>tags$head</code>. If you’re comfortable with <code>{htmltools}</code>, you can build a <code><a href="https://rdrr.io/pkg/htmltools/man/htmlDependency.html">htmltools::htmlDependency</a></code>.</p>
-</blockquote>
 </div>
 <div id="documentation" class="section level2">
 <h2 class="hasAnchor">
@@ -215,15 +235,16 @@ $(document).ready(function () {
 <div id="vignette" class="section level3">
 <h3 class="hasAnchor">
 <a href="#vignette" class="anchor"></a>Vignette</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_vignette.html">use_vignette</a></span>(<span class="st">"shinyexample"</span>)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/build_vignettes.html">build_vignettes</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_vignette.html">use_vignette</a></span>(<span class="st">"shinyexample"</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/build_vignettes.html">build_vignettes</a></span>()</a></code></pre></div>
+<p>About <a href="https://r-pkgs.org/vignettes.html">package Vignette</a>.</p>
 </div>
 <div id="code-coverage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#code-coverage" class="anchor"></a>Code coverage</h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/ci.html">use_travis</a></span>()</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/ci.html">use_appveyor</a></span>()</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_coverage.html">use_coverage</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/ci.html">use_travis</a></span>()</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/ci.html">use_appveyor</a></span>()</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_coverage.html">use_coverage</a></span>()</a></code></pre></div>
 </div>
 </div>
 <div id="using-golem-dev-functions" class="section level2">
@@ -231,17 +252,17 @@ $(document).ready(function () {
 <a href="#using-golem-dev-functions" class="anchor"></a>Using <code>{golem}</code> dev functions</h2>
 <p>There’s a series of tools to make your app behave differently whether it’s in dev or prod mode. Notably, the <code><a href="../reference/prod.html">app_prod()</a></code> and <code><a href="../reference/prod.html">app_dev()</a></code> function tests for <code><a href="https://rdrr.io/r/base/options.html">options( "golem.app.prod")</a></code> (or return TRUE if this option doesn’t exist).</p>
 <p>Setting this options at the beginning of your dev process allows to make your app behave in a specific way when you are in dev mode. For example, printing message to the console with <code><a href="../reference/made_dev.html">cat_dev()</a></code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/made_dev.html">cat_dev</a></span>(<span class="st">"hey</span><span class="ch">\n</span><span class="st">"</span>)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/made_dev.html">cat_dev</a></span>(<span class="st">"hey</span><span class="ch">\n</span><span class="st">"</span>)</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; hey</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/made_dev.html">cat_dev</a></span>(<span class="st">"hey</span><span class="ch">\n</span><span class="st">"</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/made_dev.html">cat_dev</a></span>(<span class="st">"hey</span><span class="ch">\n</span><span class="st">"</span>)</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; hey</span></a></code></pre></div>
 <p>You can then make any function being “dev-dependent” with the <code><a href="../reference/make_dev.html">make_dev()</a></code> function:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">log_dev &lt;-<span class="st"> </span>golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/make_dev.html">make_dev</a></span>(log)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">log_dev</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; [1] 2.302585</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">log_dev</span>(<span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">log_dev &lt;-<span class="st"> </span>golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/make_dev.html">make_dev</a></span>(log)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">log_dev</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; [1] 2.302585</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">log_dev</span>(<span class="dv">10</span>)</a></code></pre></div>
 </div>
   </div>
 
@@ -252,8 +273,9 @@ $(document).ready(function () {
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#day-to-day-development-with-golem">Day to day development with <code>{golem}</code></a></li>
+      <li><a href="#launching-the-app">Launching the app</a></li>
       <li><a href="#dev02_dev-r"><code>dev/02_dev.R</code></a></li>
-      <li><a href="#adding-these-external-resources-to-your-app">Adding these external resources to your app</a></li>
+      <li><a href="#add-function-files">Add function files</a></li>
       <li><a href="#documentation">Documentation</a></li>
       <li><a href="#using-golem-dev-functions">Using <code>{golem}</code> dev functions</a></li>
       </ul>

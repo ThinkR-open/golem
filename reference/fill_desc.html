@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -118,6 +118,12 @@
     </li>
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
+    </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -159,7 +165,7 @@
 
     <pre class="usage"><span class='fu'>fill_desc</span>(<span class='no'>pkg_name</span>, <span class='no'>pkg_title</span>, <span class='no'>pkg_description</span>, <span class='no'>author_first_name</span>,
   <span class='no'>author_last_name</span>, <span class='no'>author_email</span>, <span class='kw'>repo_url</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_wd.html'>get_golem_wd</a></span>())</pre>
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,7 +200,7 @@
     </tr>
     <tr>
       <th>pkg</th>
-      <td><p>Path to look for the DESCRIPTION</p></td>
+      <td><p>Path to look for the DESCRIPTION. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
     </tr>
     </table>
 

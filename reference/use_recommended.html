@@ -91,7 +91,7 @@ use_recommended_testsAdds a test folder and copy the golem tests
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -124,6 +124,12 @@ use_recommended_testsAdds a test folder and copy the golem tests
     </li>
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
+    </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -169,17 +175,17 @@ use_recommended_testsAdds a test folder and copy the golem tests
 
     </div>
 
-    <pre class="usage"><span class='fu'>use_recommended_deps</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>recommended</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"shiny"</span>, <span class='st'>"DT"</span>,
-  <span class='st'>"attempt"</span>, <span class='st'>"glue"</span>, <span class='st'>"htmltools"</span>, <span class='st'>"golem"</span>))
+    <pre class="usage"><span class='fu'>use_recommended_deps</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>recommended</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"shiny"</span>,
+  <span class='st'>"DT"</span>, <span class='st'>"attempt"</span>, <span class='st'>"glue"</span>, <span class='st'>"htmltools"</span>, <span class='st'>"golem"</span>))
 
-<span class='fu'>use_recommended_tests</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+<span class='fu'>use_recommended_tests</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code>"."</code>.</p></td>
+      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
     </tr>
     <tr>
       <th>recommended</th>

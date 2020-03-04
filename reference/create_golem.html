@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -118,6 +118,12 @@
     </li>
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
+    </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -158,7 +164,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>create_golem</span>(<span class='no'>path</span>, <span class='kw'>check_name</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>package_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='no'>path</span>), <span class='no'>...</span>)</pre>
+  <span class='kw'>package_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='no'>path</span>), <span class='kw'>without_comments</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,11 +181,16 @@ the package name from being checked.</p></td>
     </tr>
     <tr>
       <th>open</th>
-      <td><p>boolean open the created project</p></td>
+      <td><p>Boolean open the created project</p></td>
     </tr>
     <tr>
       <th>package_name</th>
-      <td><p>package name to use</p></td>
+      <td><p>Package name to use.By default it's <code><a href='https://rdrr.io/r/base/basename.html'>basename(path)</a></code> but if path == '.' and <code>package_name</code>
+not explicitly given, then <code><a href='https://rdrr.io/r/base/basename.html'>basename(getwd())</a></code> will be used.</p></td>
+    </tr>
+    <tr>
+      <th>without_comments</th>
+      <td><p>Boolean start project without golem comments</p></td>
     </tr>
     <tr>
       <th>...</th>

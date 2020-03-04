@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>golem options — set_golem_options • golem</title>
+<title>Automatically serve golem external resources — bundle_resources • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,8 +30,11 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="golem options — set_golem_options" />
-<meta property="og:description" content="Set a series of options to be used internally by {golem}." />
+<meta property="og:title" content="Automatically serve golem external resources — bundle_resources" />
+<meta property="og:description" content="This function is a wrapper around htmltools::htmlDependency that
+automatically bundles the CSS and JavaScript files in inst/app/www
+and which are created by golem::add_css_file() , golem::add_js_file()
+and golem::add_js_handler()." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -85,7 +88,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -119,6 +122,12 @@
     <li>
       <a href="../articles/d_js.html">Using {golem} js functions</a>
     </li>
+    <li>
+      <a href="../articles/e_config.html">Using golem config</a>
+    </li>
+    <li>
+      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -148,37 +157,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>golem options</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/options.R'><code>R/options.R</code></a></small>
-    <div class="hidden name"><code>set_golem_options.Rd</code></div>
+    <h1>Automatically serve golem external resources</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/bundle_resources.R'><code>R/bundle_resources.R</code></a></small>
+    <div class="hidden name"><code>bundle_resources.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Set a series of options to be used internally by <code>{golem}</code>.</p>
+    <p>This function is a wrapper around <code><a href='https://rdrr.io/pkg/htmltools/man/htmlDependency.html'>htmltools::htmlDependency</a></code> that
+automatically bundles the CSS and JavaScript files in <code>inst/app/www</code>
+and which are created by <code><a href='add_files.html'>golem::add_css_file()</a></code> , <code><a href='add_files.html'>golem::add_js_file()</a></code>
+and <code><a href='add_files.html'>golem::add_js_handler()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_golem_options</span>(<span class='kw'>golem_name</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_name</a></span>(),
-  <span class='kw'>golem_version</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_version</a></span>(),
-  <span class='kw'>golem_wd</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(), <span class='kw'>app_prod</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>bundle_resources</span>(<span class='no'>path</span>, <span class='no'>app_title</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"golem_resources"</span>,
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"0.0.1"</span>, <span class='kw'>meta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>head</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>attachment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>package</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>all_files</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>golem_name</th>
-      <td><p>Name of the current golem.</p></td>
+      <th>path</th>
+      <td><p>The path to the folder where the external files are located.</p></td>
     </tr>
     <tr>
-      <th>golem_version</th>
-      <td><p>Version of the current golem.</p></td>
+      <th>app_title</th>
+      <td><p>The title of the app, to be used as an application title.</p></td>
     </tr>
     <tr>
-      <th>golem_wd</th>
-      <td><p>Working directory of the current golem package.</p></td>
+      <th>name</th>
+      <td><p>Library name</p></td>
     </tr>
     <tr>
-      <th>app_prod</th>
-      <td><p>Is the <code>{golem}</code> in prod mode?</p></td>
+      <th>version</th>
+      <td><p>Library version</p></td>
+    </tr>
+    <tr>
+      <th>meta</th>
+      <td><p>Named list of meta tags to insert into document head</p></td>
+    </tr>
+    <tr>
+      <th>head</th>
+      <td><p>Arbitrary lines of HTML to insert into the document head</p></td>
+    </tr>
+    <tr>
+      <th>attachment</th>
+      <td><p>Attachment(s) to include within the document head. See
+Details.</p></td>
+    </tr>
+    <tr>
+      <th>package</th>
+      <td><p>An R package name to indicate where to find the <code>src</code>
+directory when <code>src</code> is a relative path (see
+<code>resolveDependencies</code>).</p></td>
+    </tr>
+    <tr>
+      <th>all_files</th>
+      <td><p>Whether all files under the <code>src</code> directory are
+dependency files. If <code>FALSE</code>, only the files specified in
+<code>script</code>, <code>stylesheet</code>, and <code>attachment</code> are treated as
+dependency files.</p></td>
     </tr>
     </table>
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Use the utils files — use_utils_ui • golem</title>
+<title>Amend golem config file — amend_golem_config • golem</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,14 +30,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Use the utils files — use_utils_ui" />
-<meta property="og:description" content="
-
-use_utils_uiCopies the golem_utils_ui.R to the R folder.
-use_utils_serverCopies the golem_utils_server.R to the R folder.
-
-
-" />
+<meta property="og:title" content="Amend golem config file — amend_golem_config" />
+<meta property="og:description" content="Amend golem config file" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -160,31 +154,42 @@ use_utils_serverCopies the golem_utils_server.R to the R folder.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Use the utils files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/use_utils.R'><code>R/use_utils.R</code></a></small>
-    <div class="hidden name"><code>utils_files.Rd</code></div>
+    <h1>Amend golem config file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/config.R'><code>R/config.R</code></a></small>
+    <div class="hidden name"><code>amend_golem_config.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-<dl class='dl-horizontal'>
-<dt>use_utils_ui</dt><dd><p>Copies the golem_utils_ui.R to the R folder.</p></dd>
-<dt>use_utils_server</dt><dd><p>Copies the golem_utils_server.R to the R folder.</p></dd>
-
-</dl>
-
+    <p>Amend golem config file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use_utils_ui</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())
-
-<span class='fu'>use_utils_server</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())</pre>
+    <pre class="usage"><span class='fu'>amend_golem_config</span>(<span class='no'>key</span>, <span class='no'>value</span>, <span class='kw'>config</span> <span class='kw'>=</span> <span class='st'>"default"</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>key</th>
+      <td><p>key of the value to add in <code>config</code></p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>Name of value (<code>NULL</code> to read all values)</p></td>
+    </tr>
+    <tr>
+      <th>config</th>
+      <td><p>Name of configuration to read from. Defaults to
+the value of the <code>R_CONFIG_NAME</code> environment variable
+("default" if the variable does not exist).</p></td>
+    </tr>
+    <tr>
       <th>pkg</th>
       <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>talkative</th>
+      <td><p>Should the messages be printed to the console?</p></td>
     </tr>
     </table>
 
