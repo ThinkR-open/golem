@@ -4,9 +4,11 @@
 
 ## New functions
 
-+ `add_dockerfile()` was completely refactore. It now starts from r-ver, uses explicit package versions from you local machine, and tries to set as much System Requirements as possible by using `{sysreq}`, and parses and installs the Remotes tag from the DESCRIPTION (#189, #175)
++ `add_dockerfile()` was completely refactored. It now starts from r-ver, uses explicit package versions from you local machine, and tries to set as much System Requirements as possible by using `{sysreq}`, and parses and installs the Remotes tag from the DESCRIPTION (#189, #175)
 
 + `add_dockerfile()` allow now to directly use the source of the package by mounting the source folder in the container and running `remotes::install_local()`
+
++ `add_dockerfile()` now builds the tar.gz (#273)
 
 + `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
 
@@ -16,9 +18,14 @@
 
 + `use_external_js_file` and `use_external_css_file` are designed to download .js and .css file off the web to the appropriate directory (#130, @zwycl)
 
-+ There is now an `app_sys()` function, which is a wrapper around `system.file(..., package = "myapp")` (#207,  @novica)
 
 ## New features
+
++ `{golem}` now comes with an internal config file. Please refer to the `config` Vignette for more information.
+
++ `bundle_resources()` comes with every new app and bundles all the css and js files you put inside the `inst/app/www` folder, by matchine the file extension.
+
++ There is now an `app_sys()` function, which is a wrapper around `system.file(..., package = "myapp")` (#207,  @novica)
 
 + `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157)
 
@@ -40,11 +47,27 @@
 
 + The `rsconnect` folder is now added to `.Rbuildignore` (#244)
 
++ `devtools::test()` in 03_deploy.R is now `devtools::check()`
+
++ modules bow have a placeholder for content 
+
++ Dev scripts have been rewritten and rerordered a litte bit
+
 ## Breaking changes 
 
 + `invoke_js()` now takes a list of elements to send to JS (through `...`) instead of a vector (#155, @zwycl)
 
 + `get_dependencies` was removed from this package, please use `desc::desc_get_deps()` instead (#251)
+
++ `{golem}` now uses `here::here()` to determine the default working directory (#287)
+
++ Modules used to be exported by default. You now have to specify it when creating the modules (#144)
+
++ `run_app()` is no longer explicitely namespaced in the run_dev script (#267)
+
++ JavaScript files now default to having `$(document).ready()` (#227)
+
++ Every filesystem manipulation is now done with `{fs}`. That should be pretty transparent for most users but please open an issue if it causes problem (#285)
 
 ## Bug fix
 
@@ -68,6 +91,8 @@
 
 + `{golem}` now correctly handles command line creation of projet inside the current directory (#248)
 
++ The test are now more robust when it comes to random name generation (#281)
+
 ## Internal changes
 
 + We no longer depend on `{stringr}` (#201, @TomerPacific)
@@ -90,11 +115,13 @@
 
 + The `installed.packages()` function is no longer used.
 
++ Every filesystem manipulation is now done with `{fs}` (#285)
+
 # golem 0.0.1.9999 - CRAN release candidate
 
 ## Changes in the way run_app and deploy files are build
 
-+ There is now a unique framework for run_app, that allows to deploy anywhere and can accept arguments. These arguments can then be retrieved with `get_golem_options()`. #
++ There is now a unique framework for run_app, that allows to deploy anywhere and can accept arguments. These arguments can then be retrieved with `get_golem_options()`. 
 
 > See https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/
 
