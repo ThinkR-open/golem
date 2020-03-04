@@ -31,3 +31,4 @@ get_golem_options <- function(which = NULL){
     getShinyOption("golem_options")[[which]]
   }
 }
+

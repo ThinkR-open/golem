@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.1.0.9001
+Version: 0.2.0
 Authors@R: 
     c(person(given = "Vincent",
              family = "Guyader",
@@ -22,6 +22,10 @@ Authors@R:
              role = "aut",
              email = "cervan@thinkr.fr",
              comment = c(ORCID = "0000-0002-4816-4624")),
+      person(given = "Novica",
+             family = "Nakov",
+             role = "ctb",
+             email = "nnovica@gmail.com"),
       person(given = "ThinkR",
              role = "cph"))
 Description: An opinionated framework for building a
@@ -36,40 +40,42 @@ Depends:
 Imports: 
     attempt (>= 0.3.0),
     cli,
+    config,
     crayon,
     desc,
     dockerfiler,
-    DT,
-    glue,
+    fs,
+    here,
     htmltools,
+    jsonlite,
     pkgload,
-    processx,
     remotes,
     rlang,
     roxygen2,
-    rsconnect,
     rstudioapi,
     shiny,
-    stats,
-    stringr,
     testthat,
-    tools,
     usethis,
     utils,
-    yesno
+    yaml
 Suggests:
-    spelling, 
     covr,
+    devtools,
+    glue,
     knitr,
+    pkgbuild,
     pkgdown,
     purrr,
     rcmdcheck,
     rmarkdown,
+    rsconnect,
+    spelling,
+    stringr,
     withr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
-Language: en-US
+RoxygenNote: 7.0.2

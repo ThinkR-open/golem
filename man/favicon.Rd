@@ -6,20 +6,25 @@
 \alias{favicon}
 \title{Add a favicon to your shinyapp}
 \usage{
-use_favicon(path, pkg = ".")
+use_favicon(path, pkg = get_golem_wd(), method = "curl")
 
 remove_favicon(path = "inst/app/www/favicon.ico")
 
-favicon(ico = "www/favicon.ico", rel = "shortcut icon")
+favicon(ico, rel = "shortcut icon", resources_path = "www",
+  pkg = get_golem_wd())
 }
 \arguments{
 \item{path}{Path to your favicon file (.ico or .png)}
 
-\item{pkg}{Path to the root of the package. Default is \code{"."}}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}}
+
+\item{method}{Method to be used for downloading files, 'curl' is default see \link[utils:download.file]{utils::download.file}}
 
 \item{ico}{path to favicon file}
 
 \item{rel}{rel}
+
+\item{resources_path}{prefix of the resource path of the app}
 }
 \description{
 This function adds the favicon from \code{ico} to your shiny app.

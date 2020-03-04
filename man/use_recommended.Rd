@@ -5,13 +5,13 @@
 \alias{use_recommended_tests}
 \title{Add recommended elements}
 \usage{
-use_recommended_deps(pkg = ".", recommended = c("shiny", "DT",
-  "attempt", "glue", "htmltools", "golem"))
+use_recommended_deps(pkg = get_golem_wd(), recommended = c("shiny",
+  "DT", "attempt", "glue", "htmltools", "golem"))
 
-use_recommended_tests(pkg = ".")
+use_recommended_tests(pkg = get_golem_wd())
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{"."}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{recommended}{A vector of recommended packages.}
 }

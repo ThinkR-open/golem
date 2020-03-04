@@ -1,18 +1,73 @@
+> Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
+
 # golem 0.1.9000+
 
 ## New functions
 
++ `add_dockerfile()` was completely refactored. It now starts from r-ver, uses explicit package versions from you local machine, and tries to set as much System Requirements as possible by using `{sysreq}`, and parses and installs the Remotes tag from the DESCRIPTION (#189, #175)
+
++ `add_dockerfile()` allow now to directly use the source of the package by mounting the source folder in the container and running `remotes::install_local()`
+
++ `add_dockerfile()` now builds the tar.gz (#273)
+
 + `add_fct` and `add_utils` add new files in your R folder that can hold utils and functions (#123).
+
++ We switched from `shiny::addResourcePath()` to `golem::add_resource_path()`, which doesn't fail if the folder is empty (#223).
+
++ New JavaScript functions to use alert, prompt and confirm (#108, @zwycl)
+
++ `use_external_js_file` and `use_external_css_file` are designed to download .js and .css file off the web to the appropriate directory (#130, @zwycl)
+
 
 ## New features
 
++ `{golem}` now comes with an internal config file. Please refer to the `config` Vignette for more information.
+
++ `bundle_resources()` comes with every new app and bundles all the css and js files you put inside the `inst/app/www` folder, by matchine the file extension.
+
++ There is now an `app_sys()` function, which is a wrapper around `system.file(..., package = "myapp")` (#207,  @novica)
+
 + `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157)
+
++ You can now create a golem without any comment (#171, @ArthurData)
+
++ The default `app_ui()` now has a `request` parameter, to natively handle bookmarking.
+
++ `document_and_reload()` now stops when it fails, and returns an explicit failure message (#157). It also uses `get_golem_wd()` as a default path, to be consistent with the rest of `{golem}` (#219, @j450h1)
 
 + `add_module` now allows to create and `fct_` and an `utils_` file (#154, @novica)
 
 + `golem::detach_all_attached()` is now silent (#186, @annakau)
 
++ There is now a series of addins for going to a specific golem file (#212, @novica), and also to wrap a selected text into `ns()` (#143, @kokbent)
+
++ Creation of a golem project is now a little bit more talkative (#63, @novica)
+
++ golem apps now have a title tag in the header by default, (#172,  @novica)
+
++ The `rsconnect` folder is now added to `.Rbuildignore` (#244)
+
++ `devtools::test()` in 03_deploy.R is now `devtools::check()`
+
++ modules bow have a placeholder for content 
+
++ Dev scripts have been rewritten and rerordered a litte bit
+
 ## Breaking changes 
+
++ `invoke_js()` now takes a list of elements to send to JS (through `...`) instead of a vector (#155, @zwycl)
+
++ `get_dependencies` was removed from this package, please use `desc::desc_get_deps()` instead (#251)
+
++ `{golem}` now uses `here::here()` to determine the default working directory (#287)
+
++ Modules used to be exported by default. You now have to specify it when creating the modules (#144)
+
++ `run_app()` is no longer explicitely namespaced in the run_dev script (#267)
+
++ JavaScript files now default to having `$(document).ready()` (#227)
+
++ Every filesystem manipulation is now done with `{fs}`. That should be pretty transparent for most users but please open an issue if it causes problem (#285)
 
 ## Bug fix
 
@@ -24,7 +79,25 @@
 
 + spellcheck in files (@privefl)
 
++ Message to link to `golem_add_external_resources()` is now conditional to R being in a golem project (#167, @novica)
+
++ Better error on missing name in add_*, (#120, @novica)
+
++ When adding file, the extension is now ignored if provided by the user (#231)
+
++ The dots R/run_app.R are now documented by default (#243)
+
++ Bug fix of the pkgdown website (#180)
+
++ `{golem}` now correctly handles command line creation of projet inside the current directory (#248)
+
++ The test are now more robust when it comes to random name generation (#281)
+
 ## Internal changes
+
++ We no longer depend on `{stringr}` (#201, @TomerPacific)
+
++ get_golem_wd() is now used everywhere in `{golem}` (#237, @felixgolcher)
 
 # golem 0.1.0 - CRAN release candidate,  v2
 
@@ -42,11 +115,13 @@
 
 + The `installed.packages()` function is no longer used.
 
++ Every filesystem manipulation is now done with `{fs}` (#285)
+
 # golem 0.0.1.9999 - CRAN release candidate
 
 ## Changes in the way run_app and deploy files are build
 
-+ There is now a unique framework for run_app, that allows to deploy anywhere and can accept arguments. These arguments can then be retrieved with `get_golem_options()`. #
++ There is now a unique framework for run_app, that allows to deploy anywhere and can accept arguments. These arguments can then be retrieved with `get_golem_options()`. 
 
 > See https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/
 

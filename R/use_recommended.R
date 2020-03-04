@@ -9,14 +9,15 @@
 #' @param recommended A vector of recommended packages.
 #' 
 #' @importFrom usethis use_testthat use_package
+#' @importFrom fs path_abs
 #' @rdname use_recommended 
 #' 
 #' @export
 use_recommended_deps <- function(
-  pkg = ".",
+  pkg = get_golem_wd(),
   recommended = c("shiny","DT","attempt","glue","htmltools","golem")
 ){
-  old <- setwd(normalizePath(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   for ( i in sort(recommended)){
     try(use_package(i))
@@ -30,20 +31,24 @@ use_recommended_deps <- function(
 #' @importFrom usethis use_testthat use_package
 #' @importFrom utils capture.output
 #' @importFrom attempt without_warning
-use_recommended_tests <- function
-(pkg = "."
- ){
-  old <- setwd(normalizePath(pkg))
+#' @importFrom fs path_abs path
+use_recommended_tests <- function (
+  pkg = get_golem_wd()
+){
+  old <- setwd(path_abs(pkg))
+  
   on.exit(setwd(old)) 
+  
   if (!dir.exists(
-    file.path(normalizePath(pkg), "tests")
+    path(path_abs(pkg), "tests")
   )){
     without_warning(use_testthat)()
   }
-  x <- capture.output(use_package("processx"))
-  file.copy(
+  capture.output(use_package("processx"))
+  
+  file_copy(
     golem_sys("utils", "test-golem-recommended.R"), 
-    file.path(normalizePath(pkg), "tests", "testthat")
+    path(old, "tests", "testthat")
   )
   cat_green_tick("Tests added")
 } 

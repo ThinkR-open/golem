@@ -25,14 +25,25 @@ knitr::opts_chunk$set(
 
 ## Day to day development with `{golem}`
 
-Now that you're all set with your project init, time to move to development :) 
+Now that you're all set with your project init, time to move to development!
 
 App development should happen through the `dev/02_dev.R` file, which contains common commands for developing. 
+
 ## Launching the app
 
 To run the app, go to the `dev/run_dev.R` file, and run the all thing.
 
 ## `dev/02_dev.R`
+
+### Add dependencies
+
+To be called each time you need a new package as a dependency:
+
+```{r}
+usethis::use_package("pkg")
+```
+
+About [package dependencies](https://r-pkgs.org/namespace.html).
 
 ### Add modules
 
@@ -64,31 +75,16 @@ mod_my_first_module_server <- function(input, output, session){
 # callModule(mod_my_first_module_server, "my_first_module_1")
 ```
 
-In order not to make errors when putting these into your app, the end of the file will contain code that has to be copied and pasted inside your UI and server functions. 
+At the end of the file, you will find a piece of code that has to be copied and pasted inside your UI and server functions.
 
-### Add dependencies
-
-To be called each time you need a new package as a dependency:
+## Add function files 
 
 ```{r}
-usethis::use_package("pkg")
+golem::add_fct( "helpers" ) 
+golem::add_utils( "helpers" )
 ```
 
-### Add tests
-
-Add more tests to your application:
-
-```{r}
-usethis::use_test( "app" )
-```
-
-### Add a browser button
-
-Learn more about this: https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/
-
-```{r}
-golem::browser_button()
-```
+These two function create `R/fct_helpers.R` and `R/utils_helpers.R`, two file you can use to add business logic functions.
 
 ### Add external files
 
@@ -100,22 +96,46 @@ golem::add_js_handler("script")
 golem::add_css_file("custom")
 ```
 
+Note: While the general philosophy of `{golem}` is being based on the idea that you're building a package, these functions can be used outside of a `{golem}` project. 
 
-## Adding these external resources to your app
+Note that you can also download external CSS and JavaScript files with:
 
-You can add any external resource (JS, css) into `inst/app/www`. 
-
-Then, You'll need to point to these external resources in `golem_add_external_resources()`. For example, if you've created a CSS file with `golem::add_css_file("custom")`, you can add the file with:
-
-``` r
-tags$link(rel="stylesheet", type="text/css", href="www/custom.css")
+```{r}
+golem::use_external_css_file("url")
+golem::use_external_js_file("url")
 ```
 
-Put these links into `R/app_ui.R`, in the `golem_add_external_resources()` function.
+### Adding these external resources to your app
+
+You can add any external resource into `inst/app/www`. 
+
+JavaScript and CSS are automatically linked in the `golem_add_external_resources()` function. If you add other resources (example images), you can link them in the app with the `www` prefix: 
+
+```{r}
+tags$img(src = "www/my.png")
+```
 
 You can also list here the use of other packages, for example `useShinyalert()` from the `{shinyalert}` package.
 
-> Note: we've chosen to leave it "raw", in the sense that there is a `addResourcePath` and a `tags$head`. If you're comfortable with `{htmltools}`, you can build a `htmltools::htmlDependency`. 
+### Add a data-raw folder
+
+If you have data in your package: 
+
+```{r}
+usethis::use_data_raw()
+```
+
+About [data in a package](https://r-pkgs.org/data.html).
+
+### Add tests
+
+Add more tests to your application:
+
+```{r}
+usethis::use_test( "app" )
+```
+
+About [testing a package](https://r-pkgs.org/tests.html).
 
 ## Documentation
 
@@ -125,6 +145,8 @@ You can also list here the use of other packages, for example `useShinyalert()` 
 usethis::use_vignette("shinyexample")
 devtools::build_vignettes()
 ```
+
+About [package Vignette](https://r-pkgs.org/vignettes.html).
 
 ### Code coverage
 

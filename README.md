@@ -49,6 +49,8 @@ This package is part of a series of tools for Shiny, which includes:
     Apps](https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf)
   - ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with
     {golem}](https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem)
+  - rstudio::conf(2020) : [Production-grade Shiny Apps with
+    golem](https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem)
 
 ### Video
 
@@ -58,6 +60,9 @@ This package is part of a series of tools for Shiny, which includes:
     {golem}](https://shinydevseries.com/post/golem-demo/)
   - useR\! 2019 : [A Framework for Building Robust & Production Ready
     Shiny Apps](https://youtu.be/tCAan6smrjs)
+  - 🇫🇷 [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
+  - rstudio::conf(2020) : [Production-grade Shiny Apps with
+    golem](https://resources.rstudio.com/rstudio-conf-2020/production-grade-shiny-apps-with-golem-colin-fay)
 
 ### Cheatsheet
 
@@ -85,8 +90,7 @@ remotes::install_github("Thinkr-open/golem")
 
 ## Launch the project
 
-Create a new package with the project
-template:
+Create a new package with the project template:
 
 <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png" width="80%" style="display: block; margin: auto;" />
 

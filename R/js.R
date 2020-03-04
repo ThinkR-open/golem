@@ -6,7 +6,7 @@
 #' to launch any JS function created inside a Shiny JavaScript handler. 
 #' 
 #' @param fun JS function to be invoked.
-#' @param ui_ref The UI reference to call the JS function on.
+#' @param ... JSON-like messages to be sent to the triggered JS function
 #' @param session The shiny session within which to call \code{sendCustomMessage}.
 #' 
 #' 
@@ -22,12 +22,18 @@
 #'   \item{clickon}{Click on an element. The full jQuery selector has to be used.}
 #'   \item{disable}{Add "disabled" to an element. The full jQuery selector has to be used.}
 #'   \item{reable}{Remove "disabled" from an element. The full jQuery selector has to be used.}
+#'   \item{alert}{Open an alert box with the message(s) provided.}
+#'   \item{prompt}{Open a prompt box with the message(s) provided. This function takes 
+#'   a list with message and id `list(message = "", id = "")`. The output of the prompt 
+#'   will be sent to `input$id`.}
+#'   \item{confirm}{Open a confirm box with the message provided. This function takes 
+#'   a list with message and id `list(message = "", id = "")`. The output of the prompt 
+#'   will be sent to `input$id`.}
 #' }
 #'
 #' @export
 #' @rdname golem_js
-#' @importFrom htmltools includeScript
-
+#' @importFrom shiny includeScript
 activate_js <- function(){
   includeScript(
     system.file("utils/golem-js.js", package = "golem")
@@ -38,13 +44,21 @@ activate_js <- function(){
 #' @rdname golem_js
 invoke_js <- function( 
   fun, 
-  ui_ref, 
-  session = shiny::getDefaultReactiveDomain() 
+  ...,
+  session = shiny::getDefaultReactiveDomain()
 ){
-  res <- mapply(function(x, y){
-    session$sendCustomMessage(x, y)
-  }, x = fun, y = ui_ref)
+  attempt::stop_if(
+    fun == "",
+    msg = "Error: Empty string is not a valid JS handler name"
+  )
+  messages <- list(...)
+  res <- lapply(
+    messages,
+    function(message, fun){
+      session$sendCustomMessage(fun, message)
+    },
+    fun = fun
+  )
   invisible(res)
-  #session$sendCustomMessage(fun, ui_ref)
 }
 

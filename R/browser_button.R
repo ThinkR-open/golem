@@ -20,3 +20,4 @@ browser_button <- function(){
   cat_line("To show it, open your web browser JavaScript console")
   cat_line("And run $('#browser').show();")
 }
+
