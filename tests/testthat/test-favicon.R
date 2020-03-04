@@ -22,6 +22,7 @@ test_that("test use_favicon",{
 
 test_that("test use_favicon online",{
   with_dir(pkg,{
+    skip_on_cran()
     golem::remove_favicon()
     expect_false(file.exists("inst/app/www/favicon.ico"))
     use_favicon(path = "https://fr.wikipedia.org//static/favicon/wikipedia.ico")
