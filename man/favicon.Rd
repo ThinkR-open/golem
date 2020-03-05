@@ -10,8 +10,8 @@ use_favicon(path, pkg = get_golem_wd(), method = "curl")
 
 remove_favicon(path = "inst/app/www/favicon.ico")
 
-favicon(ico, rel = "shortcut icon", resources_path = "www",
-  pkg = get_golem_wd())
+favicon(ico = "favicon", rel = "shortcut icon",
+  resources_path = "www", ext = "ico")
 }
 \arguments{
 \item{path}{Path to your favicon file (.ico or .png)}
@@ -25,6 +25,8 @@ favicon(ico, rel = "shortcut icon", resources_path = "www",
 \item{rel}{rel}
 
 \item{resources_path}{prefix of the resource path of the app}
+
+\item{ext}{the extension of the favicon}
 }
 \description{
 This function adds the favicon from \code{ico} to your shiny app.
