@@ -98,12 +98,6 @@ use_favicon <- function(
   cat_line(
     "Favicon is automatically linked in app_ui via `golem_add_external_resources()`"
   )
-  cat_red_bullet(
-    sprintf(
-      "No file found at %s", 
-      path
-    )
-  )
   
 }
 
