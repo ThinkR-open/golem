@@ -1,5 +1,11 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
+# golem 0.2.9000+
+
+## bug fix
+ 
++ fixed issue with favicon when package is built (#387)
+
 # golem 0.1.9000+
 
 ## New functions
