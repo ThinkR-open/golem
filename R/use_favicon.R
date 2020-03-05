@@ -95,10 +95,16 @@ use_favicon <- function(
     )
   }
   
-  cat_line(
-    "Favicon is automatically linked in app_ui via `golem_add_external_resources()`"
-  )
-  
+  if (ext == "png"){
+    cat_red_bullet(
+      "You choose a png favicon, please add `ext = 'png'` to the `favicon()` function in golem_add_external_resources()."
+    )
+  } else {
+    cat_line(
+      "Favicon is automatically linked in app_ui via `golem_add_external_resources()`"
+    )
+  }
+
 }
 
 #' @rdname favicon
@@ -132,34 +138,23 @@ remove_favicon <- function(
 #' @param ico path to favicon file
 #' @param rel rel
 #' @param resources_path prefix of the resource path of the app
-#' @inheritParams add_modules
+#' @param ext the extension of the favicon
 #'
 #' @export
 #' @importFrom htmltools tags
 favicon <- function( 
-  ico, 
+  ico = "favicon", 
   rel="shortcut icon", 
   resources_path = "www", 
-  pkg = get_golem_wd()
+  ext = "ico"
 ){
-  if (missing(ico)){
-    ici <- list.files( 
-      pattern = "favicon", 
-      fs::path(
-        pkg, 
-        "inst/app/www"
-      )
-    )
-    attempt::stop_if(
-      length(ici), 
-      ~ .x > 2, 
-      "You have 2 favicons inside your app/www folder, please remove one."
-    )
-    ico <- fs::path(
-      resources_path, 
-      ici 
-    )
-  }
+  
+  ico <- fs::path(
+    resources_path, 
+    ico, 
+    ext = ext
+  )
+  
   tags$head(
     tags$link(
       rel = rel, 
