@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -167,8 +167,8 @@
 
 <span class='fu'>remove_favicon</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"inst/app/www/favicon.ico"</span>)
 
-<span class='fu'>favicon</span>(<span class='no'>ico</span>, <span class='kw'>rel</span> <span class='kw'>=</span> <span class='st'>"shortcut icon"</span>, <span class='kw'>resources_path</span> <span class='kw'>=</span> <span class='st'>"www"</span>,
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())</pre>
+<span class='fu'>favicon</span>(<span class='kw'>ico</span> <span class='kw'>=</span> <span class='st'>"favicon"</span>, <span class='kw'>rel</span> <span class='kw'>=</span> <span class='st'>"shortcut icon"</span>,
+  <span class='kw'>resources_path</span> <span class='kw'>=</span> <span class='st'>"www"</span>, <span class='kw'>ext</span> <span class='kw'>=</span> <span class='st'>"ico"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,6 +196,10 @@
     <tr>
       <th>resources_path</th>
       <td><p>prefix of the resource path of the app</p></td>
+    </tr>
+    <tr>
+      <th>ext</th>
+      <td><p>the extension of the favicon</p></td>
     </tr>
     </table>
 
