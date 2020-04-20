@@ -14,7 +14,7 @@ use_external_js_file <- function(
   name,
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
-  open = TRUE, 
+  open = FALSE, 
   dir_create = TRUE
 ){
   
@@ -68,7 +68,7 @@ use_external_css_file <- function(
   name,
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
-  open = TRUE, 
+  open = FALSE, 
   dir_create = TRUE
 ){
   
