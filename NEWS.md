@@ -4,9 +4,19 @@
 
 # golem 0.2.9000+
 
-## bug fix
+## New functions
+
+## New features
+
++ `use_external_*()` function don't open files by default (#404)
+
+## Breaking changes
+
+## Bug fix
  
 + fixed issue with favicon when package is built (#387)
+
++ `use_external_*()` function don't add ext if already there (#405)
 
 ## Internal changes
 
