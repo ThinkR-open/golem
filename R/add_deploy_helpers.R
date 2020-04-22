@@ -366,7 +366,7 @@ alert_build <- function(
   if ( ! build_golem_from_source ){
     cat_red_bullet(
       sprintf(
-        "Be sure to keep your %s_%s.tar.gz file (generated using `devtools::build()` ) in the same folder as the %s file generated", 
+        "Be sure to keep your %s_%s.tar.gz file (generated using `pkgbuild::build(vignettes = FALSE)` ) in the same folder as the %s file generated", 
         read.dcf(path)[1], 
         read.dcf(path)[1,][['Version']], 
         basename(output)
@@ -553,15 +553,25 @@ dock_from_desc <- function(
         )
       }
       
-      cat_green_tick(
-        sprintf(
-          " %s_%s.tar.gz created.", 
-          read.dcf(path)[1], 
-          read.dcf(path)[1,][['Version']]
-        )
-      )
+
       if (rlang::is_installed("pkgbuild")) {
-        pkgbuild::build(".")
+        out <- pkgbuild::build(path = ".", dest_path = ".", vignettes = FALSE)
+        
+        if (missing(out)){
+          cat_red_bullet("Error during tar.gz building"          )
+          
+        } else {
+        
+        cat_green_tick(
+          sprintf(
+            " %s_%s.tar.gz created.", 
+            read.dcf(path)[1], 
+            read.dcf(path)[1,][['Version']]
+          )
+        )
+        }
+        
+        
       } else {
         stop("please install {pkgbuild}")
       }
