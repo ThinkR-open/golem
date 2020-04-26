@@ -390,6 +390,7 @@ alert_build <- function(
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps
+#' @importFrom usethis use_build_ignore
 #' @noRd
 dock_from_desc <- function(
   path = "DESCRIPTION",
@@ -561,7 +562,7 @@ dock_from_desc <- function(
           cat_red_bullet("Error during tar.gz building"          )
           
         } else {
-        
+          usethis::use_build_ignore(files = out)
         cat_green_tick(
           sprintf(
             " %s_%s.tar.gz created.", 
