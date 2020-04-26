@@ -486,9 +486,6 @@ dock_from_desc <- function(
   
   dock$RUN("R -e 'install.packages(\"remotes\")'")
   
-  # We need to be sure install_cran is there
-  dock$RUN("R -e 'remotes::install_github(\"r-lib/remotes\", ref = \"97bbf81\")'")
-  
   if ( length(packages_on_cran>0)){
     ping <- mapply(function(dock, ver, nm){
       res <- dock$RUN(
