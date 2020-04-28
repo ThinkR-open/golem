@@ -4,8 +4,15 @@
 \alias{create_golem}
 \title{Create a package for Shiny App using golem}
 \usage{
-create_golem(path, check_name = TRUE, open = TRUE,
-  package_name = basename(path), without_comments = FALSE, ...)
+create_golem(
+  path,
+  check_name = TRUE,
+  open = TRUE,
+  package_name = basename(path),
+  without_comments = FALSE,
+  overwrite = NULL,
+  ...
+)
 }
 \arguments{
 \item{path}{Name of the folder to create the package in. This will also be
@@ -20,6 +27,8 @@ the package name from being checked.}
 not explicitly given, then \code{basename(getwd())} will be used.}
 
 \item{without_comments}{Boolean start project without golem comments}
+
+\item{overwrite}{Boolean overwrite directory if path already exists. \code{NULL} (default) to prompt user.}
 
 \item{...}{not used}
 }

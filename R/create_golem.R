@@ -8,6 +8,7 @@
 #' @param package_name Package name to use.By default it's `basename(path)` but if path == '.' and `package_name` 
 #' not explicitly given, then `basename(getwd())` will be used.
 #' @param without_comments Boolean start project without golem comments
+#' @param overwrite Boolean overwrite directory if path already exists. `NULL` (default) to prompt user.
 #' @param ... not used
 #'
 #' @importFrom cli cat_rule cat_line
@@ -21,6 +22,7 @@ create_golem <- function(
   open =TRUE,
   package_name = basename(path),
   without_comments = FALSE,
+  overwrite = NULL,
   ...
 ) {
   
@@ -34,21 +36,30 @@ create_golem <- function(
     cat_green_tick("Valid package name")
   }
   
-  if (dir_exists(path)){
-    res <- yesno(
-      paste("The path", path, "already exists, override?")
-    )
-    if (!res){
+  cat_rule("Creating dir")
+  if (!dir_exists(path)) {
+    dir_create(path, recurse = TRUE)
+    cat_green_tick("Created package directory")
+  } else {
+    # directory already exists
+    overwrite <-
+      if (is.null(overwrite) && interactive()) {
+        # overwrite is not set and session is interactive: prompting user
+        yesno("The path ", path, " already exists. Overwrite?")
+      } else if (is.null(overwrite)) {
+        # overwrite is not set and session is not interactive: making safe choice
+        FALSE
+      } else {
+        # overwrite is set, so we use the user-supplied value
+        overwrite
+      }
+    if (!overwrite) {
+      cat_red_bullet("The path ",  path, " already exists and `overwrite` is not TRUE. Aborting.")
       return(invisible(NULL))
     }
+    cat_green_tick("Overwrote existing package directory")
   }
   
-  cat_rule("Creating dir")
-  dir_create(
-    path, 
-    recurse = TRUE
-  )
-  cat_green_tick("Created package directory")
   
   cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
