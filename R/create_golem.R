@@ -13,7 +13,7 @@
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject
-#' @importFrom fs path_abs path_file path file_move
+#' @importFrom fs path_abs path_file path dir_copy
 #' @export
 create_golem <- function(
   path, 
@@ -52,24 +52,20 @@ create_golem <- function(
   
   cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
-  files_to_copy <- list.files(
-    path = from, 
-    full.names = FALSE, 
-    all.files = TRUE,
-    no.. = TRUE
-  )
+
+  # Copy over whole directory
+  dir_copy(path = from, new_path = path, overwrite = TRUE)
   
-  # Copying files one by one
-  # Making changes to them as needed
-  for (f in files_to_copy) {
-    file.copy(
-      from = file.path(from, f),
-      to = path,
-      overwrite = TRUE, 
-      recursive = TRUE
-    )
+  # Listing copied files ***from source directory***
+  copied_files <- list.files(path = from,
+                             full.names = FALSE,
+                             all.files = TRUE,
+                             recursive = TRUE)
+
+  # Going through copied files to replace package name
+  for (f in copied_files) {
     copied_file <- file.path(path, f)
-    
+
     if (grepl("^REMOVEME", f)) {
       file.rename(from = copied_file,
                   to = file.path(path, gsub("REMOVEME", "", f)))
@@ -85,6 +81,7 @@ create_golem <- function(
       }, silent = TRUE)
     }
   }
+
   cat_green_tick("Copied app skeleton")
   
   cat_rule("Setting the default config")
