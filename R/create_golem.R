@@ -52,50 +52,38 @@ create_golem <- function(
   
   cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
-  ll <- list.files(
+  files_to_copy <- list.files(
     path = from, 
-    full.names = TRUE, 
+    full.names = FALSE, 
     all.files = TRUE,
     no.. = TRUE
   )
-  # remove `..`
-  file.copy(
-    ll, 
-    path, 
-    overwrite = TRUE, 
-    recursive = TRUE
-  )
   
-  t1 <- list.files(
-    path,
-    all.files = TRUE,
-    recursive = TRUE,
-    include.dirs = FALSE,
-    full.names = TRUE
-  )
-  t <- grep(
-    x = t1, 
-    pattern = "ico$",
-    invert = TRUE,
-    value = TRUE
-  ) 
-  
-  
-  for ( i in t ){
-    file_move(
-      path = i,
-      new_path = gsub("REMOVEME", "", i)
+  # Copying files one by one
+  # Making changes to them as needed
+  for (f in files_to_copy) {
+    file.copy(
+      from = file.path(from, f),
+      to = path,
+      overwrite = TRUE, 
+      recursive = TRUE
     )
+    copied_file <- file.path(path, f)
     
-    try({
-      replace_word(
-        file =   i,
-        pattern = "shinyexample",
-        replace = package_name
-      )
-    },
-    silent = TRUE
-    )
+    if (grepl("^REMOVEME", f)) {
+      file.rename(from = copied_file,
+                  to = file.path(path, gsub("REMOVEME", "", f)))
+      copied_file <- file.path(path, gsub("REMOVEME", "", f))
+    }
+    
+    if (!grepl("ico$", copied_file)) {
+      try({
+        replace_word(
+          file = copied_file,
+          pattern = "shinyexample",
+          replace = package_name)
+      }, silent = TRUE)
+    }
   }
   cat_green_tick("Copied app skeleton")
   

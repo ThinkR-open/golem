@@ -18,6 +18,8 @@
 
 + `use_external_*()` function don't add ext if already there (#405)
 
++ `create_golem` function does not modify any existing file (#423, @antoine-sachet)
+
 ## Internal changes
 
 + `document_and_reload()` now has `export_all = FALSE,helpers = FALSE,attach_testthat = FALSE`, allowing the function to behave more closely to what library() does (#399)
