@@ -10,6 +10,8 @@
 
 + `use_external_*()` function don't open files by default (#404)
 
++ `use_recommended_tests*()` now calls ` use_spell_check()` (#430)
+
 ## Breaking changes
 
 ## Bug fix
