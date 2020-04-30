@@ -12,6 +12,8 @@
 
 + `use_recommended_tests*()` now calls ` use_spell_check()` (#430)
 
++ The `02_dev.R` now includes more CI links
+
 ## Breaking changes
 
 ## Bug fix
