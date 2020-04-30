@@ -15,6 +15,8 @@
 ## Breaking changes
 
 ## Bug fix
+
++ `config::get()` is no longer exported to prevent clashing with `base::get()`
  
 + fixed issue with favicon when package is built (#387)
 
