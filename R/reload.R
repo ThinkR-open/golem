@@ -49,7 +49,7 @@ document_and_reload <- function(
     return(invisible(FALSE))
   }
   loaded <- try({
-    load_all(pkg)
+    load_all(pkg,export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)
   })
   
   if (attempt::is_try_error(loaded)){

@@ -14,13 +14,14 @@ use_external_js_file <- function(
   name,
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
-  open = TRUE, 
+  open = FALSE, 
   dir_create = TRUE
 ){
   
   old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
-  new_file <- sprintf("%s.js", name)
+  name <-  file_path_sans_ext(name)
+  new_file <- sprintf( "%s.js", name )
   
   dir_created <- create_if_needed(
     dir, type = "directory"
@@ -67,12 +68,13 @@ use_external_css_file <- function(
   name,
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
-  open = TRUE, 
+  open = FALSE, 
   dir_create = TRUE
 ){
   
   old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
+  name <-  file_path_sans_ext(name)
   new_file <- sprintf("%s.css", name)
 
   dir_created <- create_if_needed(

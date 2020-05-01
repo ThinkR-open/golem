@@ -1,10 +1,34 @@
+# golem (development version)
+
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
 # golem 0.2.9000+
 
-## bug fix
+## New functions
+
+## New features
+
++ `use_external_*()` function don't open files by default (#404)
+
++ `use_recommended_tests*()` now calls ` use_spell_check()` (#430)
+
++ The `02_dev.R` now includes more CI links
+
+## Breaking changes
+
+## Bug fix
+
++ `config::get()` is no longer exported to prevent clashing with `base::get()`
  
 + fixed issue with favicon when package is built (#387)
+
++ `use_external_*()` function don't add ext if already there (#405)
+
++ test for app launching is now skipped if not interactive
+
+## Internal changes
+
++ `document_and_reload()` now has `export_all = FALSE,helpers = FALSE,attach_testthat = FALSE`, allowing the function to behave more closely to what library() does (#399)
 
 # golem 0.1.9000+
 
