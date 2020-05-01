@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.2.1.9000
+Version: 0.2.1.9010
 Authors@R: 
     c(person(given = "Vincent",
              family = "Guyader",
@@ -66,6 +66,7 @@ Suggests:
     pkgbuild,
     pkgdown,
     purrr,
+    processx,
     rcmdcheck,
     rmarkdown,
     rsconnect,
