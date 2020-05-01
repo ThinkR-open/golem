@@ -6,6 +6,7 @@
 #' }
 #'
 #' @inheritParams add_module
+#' @inheritParams usethis::use_spell_check
 #' @param recommended A vector of recommended packages.
 #' 
 #' @importFrom usethis use_testthat use_package
@@ -28,12 +29,15 @@ use_recommended_deps <- function(
 
 #' @rdname use_recommended 
 #' @export
-#' @importFrom usethis use_testthat use_package
+#' @importFrom usethis use_testthat use_package use_spell_check
 #' @importFrom utils capture.output
 #' @importFrom attempt without_warning
 #' @importFrom fs path_abs path
 use_recommended_tests <- function (
-  pkg = get_golem_wd()
+  pkg = get_golem_wd(), 
+  vignettes = TRUE, 
+  lang = "en-US", 
+  error = FALSE
 ){
   old <- setwd(path_abs(pkg))
   
@@ -49,6 +53,11 @@ use_recommended_tests <- function (
   file_copy(
     golem_sys("utils", "test-golem-recommended.R"), 
     path(old, "tests", "testthat")
+  )
+  use_spell_check(
+    vignettes = vignettes, 
+    lang = lang, 
+    error = error
   )
   cat_green_tick("Tests added")
 } 

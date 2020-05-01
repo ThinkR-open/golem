@@ -10,15 +10,23 @@
 
 + `use_external_*()` function don't open files by default (#404)
 
++ `use_recommended_tests*()` now calls ` use_spell_check()` (#430)
+
++ The `02_dev.R` now includes more CI links
+
 ## Breaking changes
 
 ## Bug fix
+
++ `config::get()` is no longer exported to prevent clashing with `base::get()`
  
 + fixed issue with favicon when package is built (#387)
 
 + `use_external_*()` function don't add ext if already there (#405)
 
 + `create_golem` function does not modify any existing file (#423, @antoine-sachet)
+
++ test for app launching is now skipped if not interactive
 
 ## Internal changes
 
