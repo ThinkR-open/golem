@@ -31,7 +31,7 @@ This package is part of a series of tools for Shiny, which includes:
 
 ### The Book :
 
-  - <https://thinkr-open.github.io/building-shiny-apps-workflow/>
+  - <https://engineering-shiny.org/>
 
 ### Blog posts :
 
