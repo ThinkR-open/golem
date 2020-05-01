@@ -24,6 +24,8 @@
 
 + `use_external_*()` function don't add ext if already there (#405)
 
++ `create_golem` function does not modify any existing file (#423, @antoine-sachet)
+
 + test for app launching is now skipped if not interactive
 
 ## Internal changes
