@@ -13,7 +13,7 @@
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject
-#' @importFrom fs path_abs path_file path dir_copy
+#' @importFrom fs path_abs path_file path dir_copy path_expand
 #' @export
 create_golem <- function(
   path, 
@@ -23,6 +23,8 @@ create_golem <- function(
   without_comments = FALSE,
   ...
 ) {
+  
+  path <- path_expand(path)
   
   if (path == '.' & package_name == path_file(path)){
     package_name <- path_file(getwd())
