@@ -10,39 +10,49 @@ add_rstudio_files <- function(
 ){
   service <- match.arg(service)
   where <- path(pkg, "app.R")
-  file_create( where )
   
-  write_there <- function(..., here = where){
-    write(..., here, append = TRUE)
+  
+  if (!file_exists(where)){
+    file_create( where )
+    
+    write_there <- function(..., here = where){
+      write(..., here, append = TRUE)
+    }
+    
+    use_build_ignore( path_file(where) )
+    use_build_ignore("rsconnect")
+    write_there("# Launch the ShinyApp (Do not remove this comment)")
+    write_there("# To deploy, run: rsconnect::deployApp()")
+    write_there("# Or use the blue button on top of this file")
+    write_there("")
+    write_there("pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)")
+    write_there("options( \"golem.app.prod\" = TRUE)")
+    write_there(
+      sprintf(
+        "%s::run_app() # add parameters here (if any)", 
+        get_golem_name()
+      )
+    )
+    
+    x <- capture.output(use_package("pkgload"))
+    cat_created(where)
+    cat_line("To deploy, run:")
+    cat_bullet(darkgrey("rsconnect::deployApp()\n"))
+    cat_red_bullet(
+      sprintf(
+        "Note that you'll need to upload the whole package to %s",
+        service
+      )
+    )
+    
+    open_or_go_to(where, open)
+  } else {
+    file_already_there_dance(
+      where = where, 
+      open_file = open
+    )
   }
   
-  use_build_ignore( path_file(where) )
-  use_build_ignore("rsconnect")
-  write_there("# Launch the ShinyApp (Do not remove this comment)")
-  write_there("# To deploy, run: rsconnect::deployApp()")
-  write_there("# Or use the blue button on top of this file")
-  write_there("")
-  write_there("pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)")
-  write_there("options( \"golem.app.prod\" = TRUE)")
-  write_there(
-    sprintf(
-      "%s::run_app() # add parameters here (if any)", 
-      getOption("golem.app.name", pkg_name())
-    )
-  )
-  #use_build_ignore(where)
-  x <- capture.output(use_package("pkgload"))
-  cat_created(where)
-  cat_line("To deploy, run:")
-  cat_bullet(darkgrey("rsconnect::deployApp()\n"))
-  cat_red_bullet(
-    sprintf(
-      "Note that you'll need to upload the whole package to %s",
-      service
-    )
-  )
-  
-  open_or_go_to(where, open)
 }
 
 #' Add an app.R at the root of your package to deploy on RStudio Connect

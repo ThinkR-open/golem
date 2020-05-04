@@ -16,6 +16,15 @@ test_that("add_module", {
     expect_true(
       stringr::str_detect(output, "File created at R/mod_output.R")
     )
+    
+    # Check content is not over-added
+    lmod <- length(readLines("R/mod_output.R"))
+    add_module("output", open = FALSE)
+    expect_equal(
+      lmod, 
+      length(readLines("R/mod_output.R"))
+    )
+
     remove_file("R/mod_test.R")
     
     # Test ext 

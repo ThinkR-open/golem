@@ -21,7 +21,7 @@ test_that("test use_recommended_deps",{
 
 test_that("test use_recommended_tests",{
   with_dir(pkg,{
-    use_recommended_tests()
+    use_recommended_tests(spellcheck = FALSE)
     expect_true(dir.exists("tests"))
     expect_exists("tests/testthat/test-golem-recommended.R")
   })

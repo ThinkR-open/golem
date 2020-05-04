@@ -63,7 +63,7 @@ expect_html_equal <- function(ui, html){
 #' @export
 #' @rdname testhelpers
 #' @param sleep number of seconds
-#' @importFrom testthat skip_on_cran skip_on_travis skip_on_appveyor
+#' @importFrom testthat skip_on_cran skip_on_travis skip_on_appveyor expect_true
 expect_running <- function(sleep){
   skip_on_cran()
   skip_on_travis()
