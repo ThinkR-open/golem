@@ -4,7 +4,7 @@ test_that("app ui", {
   # Check that formals have not been removed
   fmls <- formals(app_ui)
   for (i in c("request")){
-    expect_true("request" %in% names(fmls))
+    expect_true(i %in% names(fmls))
   }
 })
 
@@ -14,7 +14,7 @@ test_that("app server", {
   # Check that formals have not been removed
   fmls <- formals(app_server)
   for (i in c("input", "output", "session")){
-    expect_true("request" %in% names(fmls))
+    expect_true(i %in% names(fmls))
   }
 })
 
