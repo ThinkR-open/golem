@@ -14,6 +14,10 @@
 
 + The `02_dev.R` now includes more CI links
 
++ `golem::expect_running()` is now bundled in default tests
+
++ Default tests now test for functions formals (#437)
+
 ## Breaking changes
 
 ## Bug fix
