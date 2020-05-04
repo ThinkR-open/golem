@@ -26,6 +26,8 @@
 
 + `create_golem` function does not modify any existing file (#423, @antoine-sachet)
 
++ `add_resources_path()` now correctly handles empty folder (#395)
+
 + test for app launching is now skipped if not interactive
 
 ## Internal changes
