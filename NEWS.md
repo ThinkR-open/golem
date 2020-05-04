@@ -10,6 +10,8 @@
 
 + `use_external_*()` function don't open files by default (#404)
 
++ `create_golem()` function now has an `overwrite` argument (#424, @antoine-sachet)
+
 ## Breaking changes
 
 ## Bug fix
