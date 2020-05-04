@@ -17,8 +17,10 @@ add_resource_path <- function(
     list.files(path = directoryPath)
   ) == 0
   
-  if ( list_f & warn_empty ) {
-    warning("No resources to add from resource path (directory empty).")
+  if ( list_f ) {
+    if (warn_empty){
+      warning("No resources to add from resource path (directory empty).")
+    }
   } else {
     addResourcePath(prefix, directoryPath)
   }
