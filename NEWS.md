@@ -18,6 +18,8 @@
 
 ## Bug fix
 
++ `add_` functions no longer append to file if it already exists (#393)
+
 + `config::get()` is no longer exported to prevent clashing with `base::get()`
  
 + fixed issue with favicon when package is built (#387)

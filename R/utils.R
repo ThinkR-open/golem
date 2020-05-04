@@ -166,11 +166,11 @@ cat_automatically_linked <- function(){
 
 open_or_go_to <- function(
   where,
-  open
+  open_file
 ){
   if (
     rstudioapi::isAvailable() && 
-    open && 
+    open_file && 
     rstudioapi::hasFun("navigateToFile")
   ){
     rstudioapi::navigateToFile(where)
@@ -242,15 +242,28 @@ file_created_dance <- function(
   pkg, 
   dir, 
   name, 
-  open
+  open_file
 ){
   cat_created(where)
   
   fun(pkg, dir, name)
   
-  open_or_go_to(where, open)
+  open_or_go_to(
+    where = where,
+    open_file = open_file
+  )
 }
 
+file_already_there_dance <- function(
+  where, 
+  open_file
+){
+  cat_green_tick("File already exists.")
+  open_or_go_to(
+    where = where,
+    open_file = open_file
+  )
+}
 # Minor toolings
 
 if_not_null <- function(x, ...){

@@ -46,25 +46,31 @@ add_js_file <- function(
     dir, sprintf("%s.js", name)
   )
   
-  file_create(where)
-  
-  if (with_doc_ready){
-    write_there <- function(...){
-      write(..., file = where, append = TRUE)
-    }
-    write_there("$( document ).ready(function() {")
-    write_there("  ")
-    write_there("});")
+  if (!file.exists(where)){
+    file_create(where)
+    
+    if (with_doc_ready){
+      write_there <- function(...){
+        write(..., file = where, append = TRUE)
+      }
+      write_there("$( document ).ready(function() {")
+      write_there("  ")
+      write_there("});")
+    } 
+    file_created_dance(
+      where, 
+      after_creation_message_js, 
+      pkg, 
+      dir, 
+      name,
+      open
+    )
+  } else {
+    file_already_there_dance(
+     where = where, 
+      open_file = open
+    )
   }
-  
-  file_created_dance(
-    where, 
-    after_creation_message_js, 
-    pkg, 
-    dir, 
-    name,
-    open
-  )
   
 }
 
@@ -105,26 +111,35 @@ add_js_handler <- function(
     dir, sprintf("%s.js", name)
   )
   
-  file_create(where)
-  
-  write_there <- function(...){
-    write(..., file = where, append = TRUE)
+  if (!file.exists(where)){
+    
+    file_create(where)
+    
+    write_there <- function(...){
+      write(..., file = where, append = TRUE)
+    }
+    
+    write_there("$( document ).ready(function() {")
+    write_there("  Shiny.addCustomMessageHandler('fun', function(arg) {")
+    write_there("  ")
+    write_there("  })")
+    write_there("});")
+    file_created_dance(
+      where, 
+      after_creation_message_js, 
+      pkg, 
+      dir, 
+      name,
+      open_file = open
+    )
+  } else {
+    file_already_there_dance(
+      where, 
+      open_file = open
+    )
   }
   
-  write_there("$( document ).ready(function() {")
-  write_there("  Shiny.addCustomMessageHandler('fun', function(arg) {")
-  write_there("  ")
-  write_there("  })")
-  write_there("});")
   
-  file_created_dance(
-    where, 
-    after_creation_message_js, 
-    pkg, 
-    dir, 
-    name,
-    open
-  )
   
 }
 
@@ -168,15 +183,23 @@ add_css_file <- function(
     )
   )
   
-  file_create(where)
-  file_created_dance(
-    where, 
-    after_creation_message_css, 
-    pkg, 
-    dir, 
-    name,
-    open
-  )
+  if (!file_exists(where)){
+    file_create(where)
+    file_created_dance(
+      where, 
+      after_creation_message_css, 
+      pkg, 
+      dir, 
+      name,
+      open
+    )
+  } else {
+    file_already_there_dance(
+      where = where, 
+      open_file = open
+    )
+  }
+  
 }
 
 
@@ -209,37 +232,42 @@ add_ui_server_files <- function(
   # UI
   where <- path( dir, "ui.R")
   
-  file_create(where)
-  
-  write_there <- function(...) write(..., file = where, append = TRUE)
-  
-  if (is.null(getOption('golem.pkg.name'))){
-    pkg <- pkgload::pkg_name()
+  if (!file_exists(where)){
+    file_create(where)
+    
+    write_there <- function(...) write(..., file = where, append = TRUE)
+    
+    pkg <- get_golem_name()
+    
+    write_there(
+      sprintf( "%s:::app_ui()", pkg )
+    )
+    
+    cat_created(where, "ui file")
   } else {
-    pkg <- getOption('golem.pkg.name')
+    cat_green_tick("UI file already exists.")
   }
-  
-  write_there(
-    sprintf( "%s:::app_ui()", pkg )
-  )
-  
-  cat_created(where, "ui file")
   
   # server
   where <- file.path(
     dir, "server.R"
   )
   
-  file_create(where)
   
-  write_there <- function(...) write(..., file = where, append = TRUE)
-  
-  write_there(
-    sprintf(
-      "%s:::app_server",
-      pkg
+  if (!file_exists(where)){
+    file_create(where)
+    
+    write_there <- function(...) write(..., file = where, append = TRUE)
+    
+    write_there(
+      sprintf(
+        "%s:::app_server",
+        pkg
+      )
     )
-  )
-  cat_created(where, "server file")
+    cat_created(where, "server file")
+  } else {
+    cat_green_tick("server file already exists.")
+  }
   
 }
