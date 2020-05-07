@@ -34,7 +34,9 @@
 
 + `add_resources_path()` now correctly handles empty folder (#395)
 
-+ test for app launching is now skipped if not interactive
++ test for app launching is now skipped if not interactive()
+
++ `add_utils` and `add_fct` now print to the console (#427, @novica)
 
 ## Internal changes
 
