@@ -48,13 +48,10 @@ Imports:
     here,
     htmltools,
     jsonlite,
-    pkgbuild,
     pkgload,
-    processx,
     remotes,
     rlang,
     roxygen2,
-    rsconnect,
     rstudioapi,
     shiny,
     testthat,
@@ -73,7 +70,10 @@ Suggests:
     spelling,
     stringr,
     tools,
-    withr
+    withr,
+    pkgbuild,
+    processx,
+    rsconnect
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
