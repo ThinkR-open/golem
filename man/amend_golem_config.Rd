@@ -4,8 +4,13 @@
 \alias{amend_golem_config}
 \title{Amend golem config file}
 \usage{
-amend_golem_config(key, value, config = "default",
-  pkg = get_golem_wd(), talkative = TRUE)
+amend_golem_config(
+  key,
+  value,
+  config = "default",
+  pkg = get_golem_wd(),
+  talkative = TRUE
+)
 }
 \arguments{
 \item{key}{key of the value to add in \code{config}}

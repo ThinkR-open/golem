@@ -4,9 +4,17 @@
 \alias{add_module}
 \title{Create a module}
 \usage{
-add_module(name, pkg = get_golem_wd(), open = TRUE,
-  dir_create = TRUE, fct = NULL, utils = NULL, export = FALSE,
-  ph_ui = " ", ph_server = " ")
+add_module(
+  name,
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE,
+  fct = NULL,
+  utils = NULL,
+  export = FALSE,
+  ph_ui = " ",
+  ph_server = " "
+)
 }
 \arguments{
 \item{name}{The name of the module}
@@ -26,7 +34,7 @@ add_module(name, pkg = get_golem_wd(), open = TRUE,
 \item{ph_ui, ph_server}{Texts to insert inside the modules UI and server. For advanced use.}
 }
 \description{
-This function creates a module inside the \code{R/} folder, based
+This function creates a module inside the \verb{R/} folder, based
 on a specific module structure. This function can be used outside
 of a {golem} project.
 }
