@@ -10,8 +10,12 @@ use_favicon(path, pkg = get_golem_wd(), method = "curl")
 
 remove_favicon(path = "inst/app/www/favicon.ico")
 
-favicon(ico = "favicon", rel = "shortcut icon",
-  resources_path = "www", ext = "ico")
+favicon(
+  ico = "favicon",
+  rel = "shortcut icon",
+  resources_path = "www",
+  ext = "ico"
+)
 }
 \arguments{
 \item{path}{Path to your favicon file (.ico or .png)}
