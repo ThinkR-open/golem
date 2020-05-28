@@ -8,8 +8,20 @@
 
 <title>Changelog • golem</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Bootstrap -->
 <link href="../cosmo.css" rel="stylesheet">
@@ -35,7 +47,7 @@
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -84,7 +96,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9020</span>
       </span>
     </div>
 
@@ -135,7 +147,7 @@
           <div id="code-folding-buttons" class="btn-group"><button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-_extension-text-contrast=""><span>Show/Hide all code</span><span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;"><li><a id="rmd-show-all-code" href="#">Show All Code</a></li><li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li></ul></div>
         </li>
         <li>
-  <a href="https://github.com/ThinkR-open/golem">
+  <a href="https://github.com/ThinkR-open/golem/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -153,29 +165,71 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/ThinkR-open/golem/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="golem-0-2-9000" class="section level1">
-<h1 class="page-header">
-<a href="#golem-0-2-9000" class="anchor"></a>golem 0.2.9000+<small> Unreleased </small>
+    <div id="golem-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#golem-development-version" class="anchor"></a>golem (development version)<small> Unreleased </small>
 </h1>
-<div id="bug-fix" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fix" class="anchor"></a>bug fix</h2>
-<ul>
-<li>fixed issue with favicon when package is built (<a href='https://github.com/ThinkR-open/golem/issues/387'>#387</a>)</li>
-</ul>
+<blockquote>
+<p>Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue.</p>
+</blockquote>
 </div>
-</div>
-    <div id="golem-0-1-9000" class="section level1">
-<h1 class="page-header">
-<a href="#golem-0-1-9000" class="anchor"></a>golem 0.1.9000+<small> Unreleased </small>
+    <div id="golem-0-2-9000" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.9000">
+<a href="#golem-0-2-9000" class="anchor"></a>golem 0.2.9000+<small> Unreleased </small>
 </h1>
 <div id="new-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-functions" class="anchor"></a>New functions</h2>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li><p><code>use_external_*()</code> function don’t open files by default (<a href='https://github.com/ThinkR-open/golem/issues/404'>#404</a>)</p></li>
+<li><p><code>use_recommended_tests*()</code> now calls <code>use_spell_check()</code> (<a href='https://github.com/ThinkR-open/golem/issues/430'>#430</a>)</p></li>
+<li><p>The <code>02_dev.R</code> now includes more CI links</p></li>
+<li><p><code><a href="../reference/testhelpers.html">golem::expect_running()</a></code> is now bundled in default tests</p></li>
+<li><p>Default tests now test for functions formals (<a href='https://github.com/ThinkR-open/golem/issues/437'>#437</a>)</p></li>
+</ul>
+</div>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+</div>
+<div id="bug-fix" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fix" class="anchor"></a>Bug fix</h2>
+<ul>
+<li><p><code>add_</code> functions no longer append to file if it already exists (<a href='https://github.com/ThinkR-open/golem/issues/393'>#393</a>)</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/config/man/get.html">config::get()</a></code> is no longer exported to prevent clashing with <code><a href="https://rdrr.io/r/base/get.html">base::get()</a></code></p></li>
+<li><p>fixed issue with favicon when package is built (<a href='https://github.com/ThinkR-open/golem/issues/387'>#387</a>)</p></li>
+<li><p><code>use_external_*()</code> function don’t add ext if already there (<a href='https://github.com/ThinkR-open/golem/issues/405'>#405</a>)</p></li>
+<li><p><code>create_golem</code> function does not modify any existing file (<a href='https://github.com/ThinkR-open/golem/issues/423'>#423</a>, <a href='https://github.com/antoine-sachet'>@antoine-sachet</a>)</p></li>
+<li><p><code>add_resources_path()</code> now correctly handles empty folder (<a href='https://github.com/ThinkR-open/golem/issues/395'>#395</a>)</p></li>
+<li><p>test for app launching is now skipped if not interactive()</p></li>
+<li><p><code>add_utils</code> and <code>add_fct</code> now print to the console (<a href='https://github.com/ThinkR-open/golem/issues/427'>#427</a>, <a href='https://github.com/novica'>@novica</a>)</p></li>
+</ul>
+</div>
+<div id="internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<ul>
+<li>
+<code><a href="../reference/document_and_reload.html">document_and_reload()</a></code> now has <code>export_all = FALSE,helpers = FALSE,attach_testthat = FALSE</code>, allowing the function to behave more closely to what library() does (<a href='https://github.com/ThinkR-open/golem/issues/399'>#399</a>)</li>
+</ul>
+</div>
+</div>
+    <div id="golem-0-1-9000" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.9000">
+<a href="#golem-0-1-9000" class="anchor"></a>golem 0.1.9000+<small> Unreleased </small>
+</h1>
+<div id="new-functions-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-functions-1" class="anchor"></a>New functions</h2>
 <ul>
 <li><p><code><a href="../reference/dockerfiles.html">add_dockerfile()</a></code> was completely refactored. It now starts from r-ver, uses explicit package versions from you local machine, and tries to set as much System Requirements as possible by using <code>{sysreq}</code>, and parses and installs the Remotes tag from the DESCRIPTION (<a href='https://github.com/ThinkR-open/golem/issues/189'>#189</a>, <a href='https://github.com/ThinkR-open/golem/issues/175'>#175</a>)</p></li>
 <li><p><code><a href="../reference/dockerfiles.html">add_dockerfile()</a></code> allow now to directly use the source of the package by mounting the source folder in the container and running <code><a href="https://remotes.r-lib.org/reference/install_local.html">remotes::install_local()</a></code></p></li>
@@ -186,9 +240,9 @@
 <li><p><code>use_external_js_file</code> and <code>use_external_css_file</code> are designed to download .js and .css file off the web to the appropriate directory (<a href='https://github.com/ThinkR-open/golem/issues/130'>#130</a>, <a href='https://github.com/zwycl'>@zwycl</a>)</p></li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li><p><code>{golem}</code> now comes with an internal config file. Please refer to the <code>config</code> Vignette for more information.</p></li>
 <li><p><code><a href="../reference/bundle_resources.html">bundle_resources()</a></code> comes with every new app and bundles all the css and js files you put inside the <code>inst/app/www</code> folder, by matchine the file extension.</p></li>
@@ -208,9 +262,9 @@
 <li><p>Dev scripts have been rewritten and rerordered a litte bit</p></li>
 </ul>
 </div>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li><p><code><a href="../reference/golem_js.html">invoke_js()</a></code> now takes a list of elements to send to JS (through <code>...</code>) instead of a vector (<a href='https://github.com/ThinkR-open/golem/issues/155'>#155</a>, <a href='https://github.com/zwycl'>@zwycl</a>)</p></li>
 <li><p><code>get_dependencies</code> was removed from this package, please use <code><a href="https://rdrr.io/pkg/desc/man/desc_get_deps.html">desc::desc_get_deps()</a></code> instead (<a href='https://github.com/ThinkR-open/golem/issues/251'>#251</a>)</p></li>
@@ -238,9 +292,9 @@
 <li><p>The test are now more robust when it comes to random name generation (<a href='https://github.com/ThinkR-open/golem/issues/281'>#281</a>)</p></li>
 </ul>
 </div>
-<div id="internal-changes" class="section level2">
+<div id="internal-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<a href="#internal-changes-1" class="anchor"></a>Internal changes</h2>
 <ul>
 <li><p>We no longer depend on <code>{stringr}</code> (<a href='https://github.com/ThinkR-open/golem/issues/201'>#201</a>, <a href='https://github.com/TomerPacific'>@TomerPacific</a>)</p></li>
 <li><p>get_golem_wd() is now used everywhere in <code>{golem}</code> (<a href='https://github.com/ThinkR-open/golem/issues/237'>#237</a>, <a href='https://github.com/felixgolcher'>@felixgolcher</a>)</p></li>
@@ -248,28 +302,28 @@
 </div>
 </div>
     <div id="golem-0-1-0---cran-release-candidate-v2" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.0">
 <a href="#golem-0-1-0---cran-release-candidate-v2" class="anchor"></a>golem 0.1.0 - CRAN release candidate, v2<small> Unreleased </small>
 </h1>
-<div id="new-functions-1" class="section level2">
+<div id="new-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-functions-1" class="anchor"></a>New Functions</h2>
+<a href="#new-functions-2" class="anchor"></a>New Functions</h2>
 <ul>
 <li>
 <code>get_golem_wd</code> allows to print the current golem working directory, and <code>set_golem_wd</code> to change it.</li>
 </ul>
 </div>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li><p>In order to work, the functions creating files need a <code>golem.wd</code>. This working directory is set by <code>set_golem_options</code> or the first time you create a file. It default to <code>"."</code>, the current directory.</p></li>
 <li><p>Changes in the name of the args in <code>set_golem_options</code>: <code>pkg_path</code> is now <code>golem_wd</code>, <code>pkg_name</code> is now <code>golem_name</code>, <code>pkg_version</code> is now <code>golem_version</code></p></li>
 </ul>
 </div>
-<div id="internal-changes-1" class="section level2">
+<div id="internal-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-changes-1" class="anchor"></a>Internal changes</h2>
+<a href="#internal-changes-2" class="anchor"></a>Internal changes</h2>
 <ul>
 <li><p>The <code><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages()</a></code> function is no longer used.</p></li>
 <li><p>Every filesystem manipulation is now done with <code>{fs}</code> (<a href='https://github.com/ThinkR-open/golem/issues/285'>#285</a>)</p></li>
@@ -277,7 +331,7 @@
 </div>
 </div>
     <div id="golem-0-0-1-9999---cran-release-candidate" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.0.1.9999">
 <a href="#golem-0-0-1-9999---cran-release-candidate" class="anchor"></a>golem 0.0.1.9999 - CRAN release candidate<small> Unreleased </small>
 </h1>
 <div id="changes-in-the-way-run_app-and-deploy-files-are-build" class="section level2">
@@ -290,9 +344,9 @@
 <p>See <a href="https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/" class="uri">https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/</a></p>
 </blockquote>
 </div>
-<div id="breaking-changes-2" class="section level2">
+<div id="breaking-changes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-2" class="anchor"></a>Breaking Changes</h2>
+<a href="#breaking-changes-3" class="anchor"></a>Breaking Changes</h2>
 <ul>
 <li>There is no need for <code>ui.R</code> and <code>server.R</code> to exist by default. Removed. Can be recreated with <code><a href="../reference/add_files.html">add_ui_server_files()</a></code>
 </li>
@@ -320,7 +374,7 @@
 </div>
 </div>
     <div id="golem-0-0-1-6000" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.0.1.6000">
 <a href="#golem-0-0-1-6000" class="anchor"></a>golem 0.0.1.6000+<small> Unreleased </small>
 </h1>
 <div id="changes" class="section level2">
@@ -334,9 +388,9 @@
 </li>
 </ul>
 </div>
-<div id="breaking-changes-3" class="section level2">
+<div id="breaking-changes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-3" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-4" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Renamed <code><a href="../reference/rstudio_deploy.html">add_rconnect_file()</a></code> to <code><a href="../reference/rstudio_deploy.html">add_rstudioconnect_file()</a></code>
 </li>
@@ -348,9 +402,9 @@
 </li>
 </ul>
 </div>
-<div id="new-functions-2" class="section level2">
+<div id="new-functions-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-functions-2" class="anchor"></a>New functions</h2>
+<a href="#new-functions-3" class="anchor"></a>New functions</h2>
 <ul>
 <li>
 <code><a href="../reference/golem_js.html">invoke_js()</a></code> allows to call JS functions from the server side. <a href='https://github.com/ThinkR-open/golem/issues/52'>#52</a></li>
@@ -358,7 +412,7 @@
 </div>
 </div>
     <div id="golem-0-0-1-5000" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.0.1.5000">
 <a href="#golem-0-0-1-5000" class="anchor"></a>golem 0.0.1.5000<small> Unreleased </small>
 </h1>
 <div id="changes-1" class="section level2">
@@ -373,9 +427,9 @@
 <li><p><code>add_*_files</code> now check if the folder exists, if not suggests to create it. <a href='https://github.com/ThinkR-open/golem/issues/36'>#36</a></p></li>
 </ul>
 </div>
-<div id="new-functions-3" class="section level2">
+<div id="new-functions-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-functions-3" class="anchor"></a>New functions</h2>
+<a href="#new-functions-4" class="anchor"></a>New functions</h2>
 <ul>
 <li><p>You now have a <code><a href="../reference/made_dev.html">browser_dev()</a></code> function that behaves like <code>warning_dev</code> and friends. <a href='https://github.com/ThinkR-open/golem/issues/46'>#46</a></p></li>
 <li><p>Added <code><a href="../reference/golem_opts.html">set_golem_options()</a></code> to add local options used internally by {golem} &amp;&amp; added it to the <code>01_start.R</code>. <a href='https://github.com/ThinkR-open/golem/issues/49'>#49</a></p></li>
@@ -402,13 +456,13 @@
 </div>
 </div>
     <div id="golem-0-0-1-0002" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.0.1.0002">
 <a href="#golem-0-0-1-0002" class="anchor"></a>golem 0.0.1.0002<small> Unreleased </small>
 </h1>
 <p>Last round of functions, and some documentation cleanup.</p>
 </div>
     <div id="golem-0-0-0-9000" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.0.0.9000">
 <a href="#golem-0-0-0-9000" class="anchor"></a>golem 0.0.0.9000<small> Unreleased </small>
 </h1>
 <ul>
@@ -418,20 +472,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#golem-0-2-9000">0.2.9000</a></li>
-        <li><a href="#golem-0-1-9000">0.1.9000</a></li>
-        <li><a href="#golem-0-1-0---cran-release-candidate-v2">0.1.0</a></li>
-        <li><a href="#golem-0-0-1-9999---cran-release-candidate">0.0.1.9999</a></li>
-        <li><a href="#golem-0-0-1-6000">0.0.1.6000</a></li>
-        <li><a href="#golem-0-0-1-5000">0.0.1.5000</a></li>
-        <li><a href="#golem-0-0-1-0002">0.0.1.0002</a></li>
-        <li><a href="#golem-0-0-0-9000">0.0.0.9000</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>

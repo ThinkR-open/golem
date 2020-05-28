@@ -6,15 +6,23 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Day to Day Dev with {golem} • golem</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../cosmo.css" rel="stylesheet">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Bootstrap --><link href="../cosmo.css" rel="stylesheet">
 <link href="../thinkr.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Day to Day Dev with {golem}">
-<meta property="og:description" content="">
+<meta property="og:description" content="golem">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
+<meta name="robots" content="noindex">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 --><!--[if lt IE 9]>
@@ -49,7 +57,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9020</span>
       </span>
     </div>
 
@@ -105,7 +113,7 @@
 </div>
         </li>
         <li>
-  <a href="https://github.com/ThinkR-open/golem">
+  <a href="https://github.com/ThinkR-open/golem/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -126,7 +134,7 @@
       <h1>Day to Day Dev with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2020-03-05</h4>
+            <h4 class="date">2020-05-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/b_dev.Rmd"><code>vignettes/b_dev.Rmd</code></a></small>
       <div class="hidden name"><code>b_dev.Rmd</code></div>
@@ -159,73 +167,74 @@ $(document).ready(function () {
 <h3 class="hasAnchor">
 <a href="#add-dependencies" class="anchor"></a>Add dependencies</h3>
 <p>To be called each time you need a new package as a dependency:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_package.html">use_package</a></span>(<span class="st">"pkg"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_package.html">use_package</a></span>(<span class="st">"pkg"</span>)</pre></body></html></div>
 <p>About <a href="https://r-pkgs.org/namespace.html">package dependencies</a>.</p>
 </div>
 <div id="add-modules" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-modules" class="anchor"></a>Add modules</h3>
 <p>The <code><a href="../reference/add_module.html">golem::add_module()</a></code> functions creates a module in the <code>R</code> folder. The file and the modules will be named after the <code>name</code> parameter, by adding <code>mod_</code> to the R file, and <code>mod_*_ui</code> and <code>mod_*_server</code> to the UI and server functions.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_module.html">add_module</a></span>( <span class="dt">name =</span> <span class="st">"my_first_module"</span> ) <span class="co"># Name of the module</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/add_module.html">add_module</a></span>( <span class="kw">name</span> <span class="kw">=</span> <span class="st">"my_first_module"</span> ) <span class="co"># Name of the module</span></pre></body></html></div>
 <p>The new file will contain:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># mod_UI</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">mod_my_first_module_ui &lt;-<span class="st"> </span><span class="cf">function</span>(id){</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  ns &lt;-<span class="st"> </span><span class="kw">NS</span>(id)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw">tagList</span>(</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">  </a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">  )</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">mod_my_first_module_server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session){</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">  ns &lt;-<span class="st"> </span>session<span class="op">$</span>ns</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">}</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb3-13" data-line-number="13">## To be copied in the UI</a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co"># mod_my_first_module_ui("my_first_module_1")</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15">    </a>
-<a class="sourceLine" id="cb3-16" data-line-number="16">## To be copied in the server</a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co"># callModule(mod_my_first_module_server, "my_first_module_1")</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># mod_UI</span>
+<span class="no">mod_my_first_module_ui</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">id</span>){
+  <span class="no">ns</span> <span class="kw">&lt;-</span> <span class="fu">NS</span>(<span class="no">id</span>)
+  <span class="fu">tagList</span>(
+
+  )
+}
+
+<span class="no">mod_my_first_module_server</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">input</span>, <span class="no">output</span>, <span class="no">session</span>){
+  <span class="no">ns</span> <span class="kw">&lt;-</span> <span class="no">session</span>$<span class="no">ns</span>
+}
+
+<span class="co">## To be copied in the UI</span>
+<span class="co"># mod_my_first_module_ui("my_first_module_1")</span>
+
+<span class="co">## To be copied in the server</span>
+<span class="co"># callModule(mod_my_first_module_server, "my_first_module_1")</span></pre></body></html></div>
 <p>At the end of the file, you will find a piece of code that has to be copied and pasted inside your UI and server functions.</p>
 </div>
 </div>
 <div id="add-function-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#add-function-files" class="anchor"></a>Add function files</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/file_creation.html">add_fct</a></span>( <span class="st">"helpers"</span> ) </a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/file_creation.html">add_utils</a></span>( <span class="st">"helpers"</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/file_creation.html">add_fct</a></span>( <span class="st">"helpers"</span> )
+<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/file_creation.html">add_utils</a></span>( <span class="st">"helpers"</span> )</pre></body></html></div>
 <p>These two function create <code>R/fct_helpers.R</code> and <code>R/utils_helpers.R</code>, two file you can use to add business logic functions.</p>
 <div id="add-external-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-external-files" class="anchor"></a>Add external files</h3>
 <p>These functions create external dependencies (JavaScript and CSS). <code><a href="../reference/add_files.html">add_js_file()</a></code> creates a simple JavaScript file, while <code><a href="../reference/add_files.html">add_js_handler()</a></code> adds a file with a skeleton for shiny custom handlers.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_files.html">add_js_file</a></span>(<span class="st">"script"</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_files.html">add_js_handler</a></span>(<span class="st">"script"</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/add_files.html">add_css_file</a></span>(<span class="st">"custom"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/add_files.html">add_js_file</a></span>(<span class="st">"script"</span>)
+<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/add_files.html">add_js_handler</a></span>(<span class="st">"script"</span>)
+<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/add_files.html">add_css_file</a></span>(<span class="st">"custom"</span>)</pre></body></html></div>
 <p>Note: While the general philosophy of <code>{golem}</code> is being based on the idea that you’re building a package, these functions can be used outside of a <code>{golem}</code> project.</p>
 <p>Note that you can also download external CSS and JavaScript files with:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/use_files.html">use_external_css_file</a></span>(<span class="st">"url"</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/use_files.html">use_external_js_file</a></span>(<span class="st">"url"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/use_files.html">use_external_css_file</a></span>(<span class="kw">url</span> <span class="kw">=</span> <span class="st">"url"</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"your_provided_name"</span>)
+<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/use_files.html">use_external_js_file</a></span>(<span class="kw">url</span> <span class="kw">=</span> <span class="st">"url"</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"your_provided_name"</span>)</pre></body></html></div>
+<p>The above has the effect of downloading the file at the specified url and giving it a provided name. If the intent is to use a CDN hosted CSS/JS file then manually add the tag - <code>tags$script(src = "source_of_ur_css/js")</code> in the function <code>golem_add_external_resources</code> in file <code>app-ui.R</code>. The tag can be added inside the <code>tags$head(...)</code> if the intent is to load the js/css file in the <code>&lt;head&gt;</code> of the document or outside it if it is intended in the <code>&lt;body&gt;</code>.</p>
 </div>
 <div id="adding-these-external-resources-to-your-app" class="section level3">
 <h3 class="hasAnchor">
 <a href="#adding-these-external-resources-to-your-app" class="anchor"></a>Adding these external resources to your app</h3>
 <p>You can add any external resource into <code>inst/app/www</code>.</p>
 <p>JavaScript and CSS are automatically linked in the <code>golem_add_external_resources()</code> function. If you add other resources (example images), you can link them in the app with the <code>www</code> prefix:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tags<span class="op">$</span><span class="kw">img</span>(<span class="dt">src =</span> <span class="st">"www/my.png"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">tags</span>$<span class="fu">img</span>(<span class="kw">src</span> <span class="kw">=</span> <span class="st">"www/my.png"</span>)</pre></body></html></div>
 <p>You can also list here the use of other packages, for example <code>useShinyalert()</code> from the <code>{shinyalert}</code> package.</p>
 </div>
 <div id="add-a-data-raw-folder" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-a-data-raw-folder" class="anchor"></a>Add a data-raw folder</h3>
 <p>If you have data in your package:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data_raw</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_data.html">use_data_raw</a></span>()</pre></body></html></div>
 <p>About <a href="https://r-pkgs.org/data.html">data in a package</a>.</p>
 </div>
 <div id="add-tests" class="section level3">
 <h3 class="hasAnchor">
 <a href="#add-tests" class="anchor"></a>Add tests</h3>
 <p>Add more tests to your application:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_testthat.html">use_test</a></span>( <span class="st">"app"</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_r.html">use_test</a></span>( <span class="st">"app"</span> )</pre></body></html></div>
 <p>About <a href="https://r-pkgs.org/tests.html">testing a package</a>.</p>
 </div>
 </div>
@@ -235,16 +244,16 @@ $(document).ready(function () {
 <div id="vignette" class="section level3">
 <h3 class="hasAnchor">
 <a href="#vignette" class="anchor"></a>Vignette</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_vignette.html">use_vignette</a></span>(<span class="st">"shinyexample"</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/build_vignettes.html">build_vignettes</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_vignette.html">use_vignette</a></span>(<span class="st">"shinyexample"</span>)
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/build_vignettes.html">build_vignettes</a></span>()</pre></body></html></div>
 <p>About <a href="https://r-pkgs.org/vignettes.html">package Vignette</a>.</p>
 </div>
 <div id="code-coverage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#code-coverage" class="anchor"></a>Code coverage</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/ci.html">use_travis</a></span>()</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/ci.html">use_appveyor</a></span>()</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">usethis<span class="op">::</span><span class="kw"><a href="https://usethis.r-lib.org/reference/use_coverage.html">use_coverage</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/ci.html">use_travis</a></span>()
+<span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/ci.html">use_appveyor</a></span>()
+<span class="kw pkg">usethis</span><span class="kw ns">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_coverage.html">use_coverage</a></span>()</pre></body></html></div>
 </div>
 </div>
 <div id="using-golem-dev-functions" class="section level2">
@@ -252,17 +261,20 @@ $(document).ready(function () {
 <a href="#using-golem-dev-functions" class="anchor"></a>Using <code>{golem}</code> dev functions</h2>
 <p>There’s a series of tools to make your app behave differently whether it’s in dev or prod mode. Notably, the <code><a href="../reference/prod.html">app_prod()</a></code> and <code><a href="../reference/prod.html">app_dev()</a></code> function tests for <code><a href="https://rdrr.io/r/base/options.html">options( "golem.app.prod")</a></code> (or return TRUE if this option doesn’t exist).</p>
 <p>Setting this options at the beginning of your dev process allows to make your app behave in a specific way when you are in dev mode. For example, printing message to the console with <code><a href="../reference/made_dev.html">cat_dev()</a></code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/made_dev.html">cat_dev</a></span>(<span class="st">"hey</span><span class="ch">\n</span><span class="st">"</span>)</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/made_dev.html">cat_dev</a></span>(<span class="st">"hey</span><span class="ch">\n</span><span class="st">"</span>)</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; hey</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/made_dev.html">cat_dev</a></span>(<span class="st">"hey\n"</span>)
+<span class="co">#&gt; Warning in extract_lang(f = comp_lang, y = quote(if (.isMethodsDispatchOn()</span>
+<span class="co">#&gt; &amp;&amp; : devtools is incompatible with the current version of R. `load_all()` may</span>
+<span class="co">#&gt; function incorrectly.</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/made_dev.html">cat_dev</a></span>(<span class="st">"hey\n"</span>)
+<span class="co">#&gt; hey</span></pre></body></html></div>
 <p>You can then make any function being “dev-dependent” with the <code><a href="../reference/make_dev.html">make_dev()</a></code> function:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">log_dev &lt;-<span class="st"> </span>golem<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/golem/man/make_dev.html">make_dev</a></span>(log)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">log_dev</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; [1] 2.302585</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> =<span class="st"> </span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">log_dev</span>(<span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">log_dev</span> <span class="kw">&lt;-</span> <span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/make_dev.html">make_dev</a></span>(<span class="no">log</span>)
+<span class="fu">log_dev</span>(<span class="fl">10</span>)
+<span class="co">#&gt; [1] 2.302585</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="fu">log_dev</span>(<span class="fl">10</span>)</pre></body></html></div>
 </div>
   </div>
 

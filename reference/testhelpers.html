@@ -8,8 +8,20 @@
 
 <title>Test helpers — expect_shinytag • golem</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Bootstrap -->
 <link href="../cosmo.css" rel="stylesheet">
@@ -37,7 +49,7 @@ in your Shiny app package." />
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -86,7 +98,7 @@ in your Shiny app package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9020</span>
       </span>
     </div>
 
@@ -137,7 +149,7 @@ in your Shiny app package." />
           <div id="code-folding-buttons" class="btn-group"><button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-_extension-text-contrast=""><span>Show/Hide all code</span><span class="caret"></span></button><ul class="dropdown-menu" style="min-width: 50px;"><li><a id="rmd-show-all-code" href="#">Show All Code</a></li><li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li></ul></div>
         </li>
         <li>
-  <a href="https://github.com/ThinkR-open/golem">
+  <a href="https://github.com/ThinkR-open/golem/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -169,7 +181,9 @@ in your Shiny app package.</p>
 
 <span class='fu'>expect_shinytaglist</span>(<span class='no'>object</span>)
 
-<span class='fu'>expect_html_equal</span>(<span class='no'>ui</span>, <span class='no'>html</span>)</pre>
+<span class='fu'>expect_html_equal</span>(<span class='no'>ui</span>, <span class='no'>html</span>)
+
+<span class='fu'>expect_running</span>(<span class='no'>sleep</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,6 +200,10 @@ in your Shiny app package.</p>
       <th>html</th>
       <td><p>html file to compare to ui</p></td>
     </tr>
+    <tr>
+      <th>sleep</th>
+      <td><p>number of seconds</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -196,14 +214,10 @@ in your Shiny app package.</p>
     <pre class="examples"><div class='input'><span class='fu'>expect_shinytag</span>(<span class='kw pkg'>shiny</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/shiny/man/builder.html'>tags</a></span>$<span class='fu'>span</span>(<span class='st'>"1"</span>))
 <span class='fu'>expect_shinytaglist</span>(<span class='kw pkg'>shiny</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/shiny/man/tag.html'>tagList</a></span>(<span class='fl'>1</span>))</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
