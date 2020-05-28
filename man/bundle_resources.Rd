@@ -4,9 +4,17 @@
 \alias{bundle_resources}
 \title{Automatically serve golem external resources}
 \usage{
-bundle_resources(path, app_title, name = "golem_resources",
-  version = "0.0.1", meta = NULL, head = NULL, attachment = NULL,
-  package = NULL, all_files = TRUE)
+bundle_resources(
+  path,
+  app_title,
+  name = "golem_resources",
+  version = "0.0.1",
+  meta = NULL,
+  head = NULL,
+  attachment = NULL,
+  package = NULL,
+  all_files = TRUE
+)
 }
 \arguments{
 \item{path}{The path to the folder where the external files are located.}
@@ -26,7 +34,7 @@ Details.}
 
 \item{package}{An R package name to indicate where to find the \code{src}
 directory when \code{src} is a relative path (see
-\code{\link{resolveDependencies}}).}
+\code{\link[htmltools]{resolveDependencies}}).}
 
 \item{all_files}{Whether all files under the \code{src} directory are
 dependency files. If \code{FALSE}, only the files specified in

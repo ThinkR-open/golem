@@ -63,16 +63,17 @@ Suggests:
     devtools,
     glue,
     knitr,
-    pkgbuild,
     pkgdown,
     purrr,
-    processx,
     rcmdcheck,
     rmarkdown,
-    rsconnect,
     spelling,
     stringr,
-    withr
+    tools,
+    withr,
+    pkgbuild,
+    processx,
+    rsconnect
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
