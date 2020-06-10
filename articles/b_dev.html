@@ -57,7 +57,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9020</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9021</span>
       </span>
     </div>
 
@@ -134,7 +134,7 @@
       <h1>Day to Day Dev with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2020-05-28</h4>
+            <h4 class="date">2020-06-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/b_dev.Rmd"><code>vignettes/b_dev.Rmd</code></a></small>
       <div class="hidden name"><code>b_dev.Rmd</code></div>
@@ -263,9 +263,6 @@ $(document).ready(function () {
 <p>Setting this options at the beginning of your dev process allows to make your app behave in a specific way when you are in dev mode. For example, printing message to the console with <code><a href="../reference/made_dev.html">cat_dev()</a></code>.</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/made_dev.html">cat_dev</a></span>(<span class="st">"hey\n"</span>)
-<span class="co">#&gt; Warning in extract_lang(f = comp_lang, y = quote(if (.isMethodsDispatchOn()</span>
-<span class="co">#&gt; &amp;&amp; : devtools is incompatible with the current version of R. `load_all()` may</span>
-<span class="co">#&gt; function incorrectly.</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>( <span class="st">"golem.app.prod"</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/made_dev.html">cat_dev</a></span>(<span class="st">"hey\n"</span>)
 <span class="co">#&gt; hey</span></pre></body></html></div>
