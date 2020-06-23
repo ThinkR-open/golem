@@ -326,10 +326,44 @@ col_1 <- function(...){
 #'  shinyApp(ui, server)
 #'  
 #' }
-make_action_button <- function(tag, inputId) {
-  # listen to the shiny action button input binding
-  tag$attribs$class <- paste(tag$attribs$class, "action-button")
-  tag$attribs$id <- inputId
+make_action_button <- function(tag, inputId = NULL) {
+  # some obvious checks
+  if (!inherits(tag, "shiny.tag")) stop("Must provide a shiny tag.")
+  if (!is.null(tag$attribs$class)) {
+    if (grep("action-button", tag$attribs$class)) {
+      stop("tag is already an action button")
+    }
+  }
+  if (is.null(inputId) && is.null(tag$attribs$id)) {
+    stop("tag does not have any id. Please use inputId to be able to
+           access it on the server side.")
+  }
+  
+  # handle id
+  if (!is.null(inputId)) {
+    if (!is.null(tag$attribs$id)) {
+      cat_red_bullet(
+        paste(
+          "tag already has an id. Please use input$", tag$attribs$id, "to access it from the server side. inputId will be ignored.")
+      )
+    } else {
+      tag$attribs$id <- inputId
+      cat_green_tick("Adding id attribute ...")
+    }
+  } else {
+    cat_green_tick("Using the internal tag id. Nothing to do on your side.")
+  }
+  
+  # handle class
+  if (is.null(tag$attribs$class)) {
+    tag$attribs$class <- "action-button"
+    cat_green_tick("Adding action-button class ...")
+  } else {
+    tag$attribs$class <- paste(tag$attribs$class, "action-button") 
+  }
+  
+  cat_green_tick("Ready to go ...")
+  # return tag
   tag
 }
 
