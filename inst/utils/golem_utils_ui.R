@@ -294,6 +294,46 @@ col_1 <- function(...){
   column(1, ...)
 }
 
+
+
+#' Make the current tag behave like an action button
+#' 
+#' Only works with compatible tags like button or links
+#'
+#' @param tag Any compatible tag.
+#' @param inputId Unique id. This will host the input value to be used
+#' on the server side.
+#'
+#' @return The modified tag with an extra id and the action button class.
+#' @noRd
+#'
+#' @examples
+#' if (interactive()) {
+#'  library(shiny)
+#'  
+#'  link <- a(href = "#", "My super link", style = "color: lightblue;") 
+#'  
+#'  ui <- fluidPage(
+#'   make_action_button(link, inputId = "mylink")
+#'  )
+#'  
+#'  server <- function(input, output, session) {
+#'    observeEvent(input$mylink, {
+#'     showNotification("Pouic!")
+#'    })
+#'  }
+#'  
+#'  shinyApp(ui, server)
+#'  
+#' }
+make_action_button <- function(tag, inputId) {
+  # listen to the shiny action button input binding
+  tag$attribs$class <- paste(tag$attribs$class, "action-button")
+  tag$attribs$id <- inputId
+  tag
+}
+
+
 # UNCOMMENT AND USE 
 # 
 # usethis::use_package("markdown")
