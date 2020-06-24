@@ -3,6 +3,7 @@
 \name{add_js_file}
 \alias{add_js_file}
 \alias{add_js_handler}
+\alias{add_js_binding}
 \alias{add_css_file}
 \alias{add_ui_server_files}
 \title{Create Files}
@@ -22,6 +23,16 @@ add_js_handler(
   dir = "inst/app/www",
   open = TRUE,
   dir_create = TRUE
+)
+
+add_js_binding(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE,
+  initialize = FALSE,
+  rate_policy = FALSE
 )
 
 add_css_file(
@@ -46,6 +57,11 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app", dir_create = TRUE)
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
 \item{with_doc_ready}{Should the default file include \verb{$( document ).ready()}?}
+
+\item{initialize}{Whether to add the initialize method. Default to FALSE.}
+
+\item{rate_policy}{Whether to apply rate policy to callback method. Default
+to FALSE.}
 }
 \description{
 These functions create files inside the \code{inst/app} folder.
