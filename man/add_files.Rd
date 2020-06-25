@@ -61,7 +61,8 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app", dir_create = TRUE)
 \item{initialize}{Whether to add the initialize method. Default to FALSE.}
 
 \item{rate_policy}{Whether to apply rate policy to callback method. Default
-to FALSE.}
+to FALSE. If TRUE, the debounce method with a delay of 250 ms is applied. YOu may
+edit manually according to \url{https://shiny.rstudio.com/articles/building-inputs.html}.}
 }
 \description{
 These functions create files inside the \code{inst/app} folder.

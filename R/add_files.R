@@ -151,7 +151,8 @@ add_js_handler <- function(
 #' @rdname add_files
 #' @param initialize Whether to add the initialize method. Default to FALSE.
 #' @param rate_policy Whether to apply rate policy to callback method. Default
-#' to FALSE.
+#' to FALSE. If TRUE, the debounce method with a delay of 250 ms is applied. YOu may
+#' edit manually according to \url{https://shiny.rstudio.com/articles/building-inputs.html}.
 #' @importFrom fs path_abs path file_create file_exists
 add_js_binding <- function(
   name, 
