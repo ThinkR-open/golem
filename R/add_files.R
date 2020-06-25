@@ -149,10 +149,15 @@ add_js_handler <- function(
 
 #' @export
 #' @rdname add_files
-#' @param initialize Whether to add the initialize method. Default to FALSE.
-#' @param rate_policy Whether to apply rate policy to callback method. Default
-#' to FALSE. If TRUE, the debounce method with a delay of 250 ms is applied. YOu may
-#' edit manually according to \url{https://shiny.rstudio.com/articles/building-inputs.html}.
+#' @param initialize Whether to add the initialize method. Default to FALSE. Some JavaScript API 
+#' require to initialize components before using them.
+#' @param dev Whether to insert console.log calls in the most important methods of the binding.
+#' This is only to help building the input binding. Default to FALSE
+#' @param events List of events to generate event listeners in the subscribe method. For instance,
+#' \code{list(name = c("click", "keyup"), rate_policy = c(FALSE, TRUE))}.
+#' The list contain names and rate policies to apply to each event. If a rate policy is found, 
+#' the debounce method with a default delay of 250 ms is applied. You may edit manually according to 
+#' \url{https://shiny.rstudio.com/articles/building-inputs.html}. 
 #' @importFrom fs path_abs path file_create file_exists
 add_js_binding <- function(
   name, 
@@ -160,12 +165,26 @@ add_js_binding <- function(
   dir = "inst/app/www",
   open = TRUE, 
   dir_create = TRUE,
-  initialize = FALSE, 
-  rate_policy = FALSE
+  initialize = FALSE,
+  dev = FALSE,
+  events = list(
+    name = "click",
+    rate_policy = FALSE
+  )
 ){
   attempt::stop_if(
     rlang::is_missing(name),
     msg = "Name is required"
+  )
+  
+  attempt::stop_if(
+    length(events$name) == 0,
+    msg = "At least one event is required"
+  )
+  
+  attempt::stop_if(
+    length(events$name) != length(events$rate_policy),
+    msg = "Incomplete events list"
   )
   
   name <- file_path_sans_ext(name)
@@ -198,6 +217,10 @@ add_js_binding <- function(
       write(..., file = where, append = TRUE)
     }
     
+    # If we find at least 1 event with a rate policy, we allow
+    # the getRatePolicy method
+    global_rate_policy <- sum(sapply(events$rate_policy, `[[`, 1)) > 0
+    
     write_there(sprintf("var %s = new Shiny.InputBinding();", name))
     write_there(sprintf("$.extend(%s, {", name))
     # find
@@ -207,34 +230,42 @@ add_js_binding <- function(
     # initialize
     if (initialize) {
       write_there("  initialize: function(el) {")
-      write_there("    // optional part. Only if the input relies on the JS API with specific initialisation")
+      write_there("    // optional part. Only if the input relies on a JS API with specific initialization.")
       write_there("  },") 
     }
     # get value
     write_there("  getValue: function(el) {")
+    if (dev) write_there("    console.log($(el));")
     write_there("    // JS code to get value")
     write_there("  },")
     # set value
     write_there("  setValue: function(el, value) {")
+    if (dev) write_there("    console.log('New value is: ' + value);")
     write_there("    // JS code to set value")
     write_there("  },")
     # receive
     write_there("  receiveMessage: function(el, data) {")
     write_there("    // this.setValue(el, data);")
+    if (dev) write_there("    console.log('Updated ...');")
     write_there("  },")
     # subscribe
     write_there("  subscribe: function(el, callback) {")
-    write_there(sprintf("    $(el).on('event.%s', function(event) {", name))
-    if (rate_policy) {
-      write_there("      callback(true);")
-    } else {
-      write_there("      callback();")
-    }
-    write_there("    });")
+    # list of event listeners
+    lapply(seq_along(events$name), function(i) {
+      write_there(sprintf("    $(el).on('%s.%s', function(e) {", events$name[i], name))
+      if (events$rate_policy[i]) {
+        write_there("      callback(true);")
+      } else {
+        write_there("      callback();")
+      }
+      if (dev) write_there("      console.log('Subscribe ...');")
+      write_there("    });")
+      write_there("")
+    })
     write_there("  },")
     
     # rate policy if any
-    if (rate_policy) {
+    if (global_rate_policy) {
       write_there("  getRatePolicy: function() {")
       write_there("    return {")
       write_there("      policy: 'debounce',")
