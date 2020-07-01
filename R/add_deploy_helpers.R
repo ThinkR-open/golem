@@ -163,7 +163,7 @@ add_dockerfile <- function(
   port = 80, 
   host = "0.0.0.0",
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/",
+  repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
@@ -229,7 +229,7 @@ add_dockerfile_shinyproxy <- function(
   ), 
   as = NULL,
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/",
+  repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
@@ -291,7 +291,7 @@ add_dockerfile_heroku <- function(
   ), 
   as = NULL,
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/",
+  repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
@@ -411,7 +411,7 @@ dock_from_desc <- function(
   ),
   AS = NULL,
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/",
+  repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   update_tar_gz = TRUE,
   build_golem_from_source = TRUE
@@ -487,10 +487,15 @@ dock_from_desc <- function(
     }
   }
   
+  
+  repos_as_character <- paste(capture.output(dput(repos)),collapse = "")
+  repos_as_character <-  gsub(pattern = '\"',replacement = '\'',x=repos_as_character)
+  
+  
   dock$RUN(
     sprintf(
-      "echo \"options(repos = c(CRAN = '%s'), download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site",
-      repos
+      "echo \"options(repos = %s, download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site",
+      repos_as_character
     )
   )
   
