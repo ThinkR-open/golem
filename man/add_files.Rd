@@ -3,6 +3,7 @@
 \name{add_js_file}
 \alias{add_js_file}
 \alias{add_js_handler}
+\alias{add_js_binding}
 \alias{add_css_file}
 \alias{add_ui_server_files}
 \title{Create Files}
@@ -22,6 +23,17 @@ add_js_handler(
   dir = "inst/app/www",
   open = TRUE,
   dir_create = TRUE
+)
+
+add_js_binding(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE,
+  initialize = FALSE,
+  dev = FALSE,
+  events = list(name = "click", rate_policy = FALSE)
 )
 
 add_css_file(
@@ -46,6 +58,18 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app", dir_create = TRUE)
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
 \item{with_doc_ready}{Should the default file include \verb{$( document ).ready()}?}
+
+\item{initialize}{Whether to add the initialize method. Default to FALSE. Some JavaScript API
+require to initialize components before using them.}
+
+\item{dev}{Whether to insert console.log calls in the most important methods of the binding.
+This is only to help building the input binding. Default to FALSE}
+
+\item{events}{List of events to generate event listeners in the subscribe method. For instance,
+\code{list(name = c("click", "keyup"), rate_policy = c(FALSE, TRUE))}.
+The list contain names and rate policies to apply to each event. If a rate policy is found,
+the debounce method with a default delay of 250 ms is applied. You may edit manually according to
+\url{https://shiny.rstudio.com/articles/building-inputs.html}.}
 }
 \description{
 These functions create files inside the \code{inst/app} folder.
