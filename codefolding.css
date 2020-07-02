@@ -5,6 +5,9 @@
     display: flex;
     border-bottom: solid 1px #d7d7d7;
 }
+body > .container .row.code-folding {
+    margin-top: 0;
+}
 .collapse { display: none; }
 .in {
     display: block ;

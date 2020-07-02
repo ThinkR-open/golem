@@ -44,7 +44,7 @@
 </script>
 -->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -131,10 +131,10 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Day to Day Dev with {golem}</h1>
+      <h1 data-toc-skip>Day to Day Dev with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2020-06-10</h4>
+            <h4 class="date">2020-07-02</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/b_dev.Rmd"><code>vignettes/b_dev.Rmd</code></a></small>
       <div class="hidden name"><code>b_dev.Rmd</code></div>
@@ -275,21 +275,11 @@ $(document).ready(function () {
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#day-to-day-development-with-golem">Day to day development with <code>{golem}</code></a></li>
-      <li><a href="#launching-the-app">Launching the app</a></li>
-      <li><a href="#dev02_dev-r"><code>dev/02_dev.R</code></a></li>
-      <li><a href="#add-function-files">Add function files</a></li>
-      <li><a href="#documentation">Documentation</a></li>
-      <li><a href="#using-golem-dev-functions">Using <code>{golem}</code> dev functions</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 

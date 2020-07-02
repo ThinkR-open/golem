@@ -44,7 +44,7 @@
 </script>
 -->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -131,7 +131,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Using golem config</h1>
+      <h1 data-toc-skip>Using golem config</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/e_config.Rmd"><code>vignettes/e_config.Rmd</code></a></small>
@@ -178,12 +178,12 @@ dev:
 <span class="co">#&gt; ✔ Setting `golem_version` to 0.0.0.9000</span>
 <span class="co">#&gt; ✔ Setting `app_prod` to FALSE</span>
 <span class="co">#&gt; ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────</span>
-<span class="co">#&gt; ✔ Setting active project to '/tmp/Rtmp00CJrl/golex'</span></pre></body></html></div>
+<span class="co">#&gt; ✔ Setting active project to '/tmp/RtmpzVjXVo/golex'</span></pre></body></html></div>
 <p>The functions reading the options in this config file are:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/golem_opts.html">get_golem_name</a></span>()
 <span class="co">#&gt; [1] "golex"</span>
 <span class="fu"><a href="../reference/golem_opts.html">get_golem_wd</a></span>()
-<span class="co">#&gt; [1] "/tmp/Rtmp00CJrl/golex"</span>
+<span class="co">#&gt; [1] "/tmp/RtmpzVjXVo/golex"</span>
 <span class="fu"><a href="../reference/golem_opts.html">get_golem_version</a></span>()
 <span class="co">#&gt; [1] "0.0.0.9000"</span></pre></body></html></div>
 <p>You can set these with:</p>
@@ -216,7 +216,7 @@ production:
   app_prod: yes
   where: inprod
 dev:
-  golem_wd: /tmp/Rtmp00CJrl/golex</code></pre>
+  golem_wd: /tmp/RtmpzVjXVo/golex</code></pre>
 </div>
 <div id="app_config-r" class="section level2">
 <h2 class="hasAnchor">
@@ -259,21 +259,11 @@ dev:
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#about-instgolem-config-yml">About <code>inst/golem-config.yml</code></a></li>
-      <li><a href="#setting-golem-config">Setting <code>golem-config</code></a></li>
-      <li><a href="#using-golem-config">Using <code>golem-config</code></a></li>
-      <li><a href="#app_config-r"><code>app_config.R</code></a></li>
-      <li><a href="#golem_config-vs-golem_options"><code>golem_config</code> vs <code>golem_options</code></a></li>
-      <li><a href="#note-for-golem-0-2-0-users">Note for <code>{golem}</code> &lt; 0.2.0 users</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 

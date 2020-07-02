@@ -85,7 +85,7 @@ add_dockerfile_heroku() creates platform specific Dockerfile." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -188,7 +188,7 @@ a "classical" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
   <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>80</span>,
   <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"0.0.0.0"</span>,
   <span class='kw'>sysreqs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com/"</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>CRAN</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com/"</span>),
   <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>update_tar_gz</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -202,7 +202,7 @@ a "classical" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
   <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"rocker/r-ver:"</span>, <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>minor</span>),
   <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>sysreqs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com/"</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>CRAN</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com/"</span>),
   <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>update_tar_gz</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -216,7 +216,7 @@ a "classical" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
   <span class='kw'>from</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"rocker/r-ver:"</span>, <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>major</span>, <span class='st'>"."</span>, <span class='fu'><a href='https://rdrr.io/r/base/Version.html'>R.Version</a></span>()$<span class='no'>minor</span>),
   <span class='kw'>as</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>sysreqs</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com/"</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>CRAN</span> <span class='kw'>=</span> <span class='st'>"https://cran.rstudio.com/"</span>),
   <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>update_tar_gz</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
