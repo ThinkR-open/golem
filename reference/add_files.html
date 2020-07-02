@@ -194,6 +194,17 @@ These functions can be used outside of a golem project.</p>
   <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )
 
+<span class='fu'>add_js_binding</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>initialize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>dev</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>events</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"click"</span>, <span class='kw'>rate_policy</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+)
+
 <span class='fu'>add_css_file</span>(
   <span class='no'>name</span>,
   <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
@@ -230,6 +241,24 @@ These functions can be used outside of a golem project.</p>
     <tr>
       <th>with_doc_ready</th>
       <td><p>Should the default file include <code>$( document ).ready()</code>?</p></td>
+    </tr>
+    <tr>
+      <th>initialize</th>
+      <td><p>Whether to add the initialize method. Default to FALSE. Some JavaScript API
+require to initialize components before using them.</p></td>
+    </tr>
+    <tr>
+      <th>dev</th>
+      <td><p>Whether to insert console.log calls in the most important methods of the binding.
+This is only to help building the input binding. Default to FALSE</p></td>
+    </tr>
+    <tr>
+      <th>events</th>
+      <td><p>List of events to generate event listeners in the subscribe method. For instance,
+<code><a href='https://rdrr.io/r/base/list.html'>list(name = c("click", "keyup"), rate_policy = c(FALSE, TRUE))</a></code>.
+The list contain names and rate policies to apply to each event. If a rate policy is found,
+the debounce method with a default delay of 250 ms is applied. You may edit manually according to
+<a href='https://shiny.rstudio.com/articles/building-inputs.html'>https://shiny.rstudio.com/articles/building-inputs.html</a>.</p></td>
     </tr>
     </table>
 
