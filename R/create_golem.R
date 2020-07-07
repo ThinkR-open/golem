@@ -13,7 +13,7 @@
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject
-#' @importFrom fs path_abs path_file path file_move
+#' @importFrom fs path_abs path_file path dir_copy path_expand
 #' @export
 create_golem <- function(
   path, 
@@ -23,6 +23,8 @@ create_golem <- function(
   without_comments = FALSE,
   ...
 ) {
+  
+  path <- path_expand(path)
   
   if (path == '.' & package_name == path_file(path)){
     package_name <- path_file(getwd())
@@ -52,51 +54,36 @@ create_golem <- function(
   
   cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
-  ll <- list.files(
-    path = from, 
-    full.names = TRUE, 
-    all.files = TRUE,
-    no.. = TRUE
-  )
-  # remove `..`
-  file.copy(
-    ll, 
-    path, 
-    overwrite = TRUE, 
-    recursive = TRUE
-  )
+
+  # Copy over whole directory
+  dir_copy(path = from, new_path = path, overwrite = TRUE)
   
-  t1 <- list.files(
-    path,
-    all.files = TRUE,
-    recursive = TRUE,
-    include.dirs = FALSE,
-    full.names = TRUE
-  )
-  t <- grep(
-    x = t1, 
-    pattern = "ico$",
-    invert = TRUE,
-    value = TRUE
-  ) 
-  
-  
-  for ( i in t ){
-    file_move(
-      path = i,
-      new_path = gsub("REMOVEME", "", i)
-    )
+  # Listing copied files ***from source directory***
+  copied_files <- list.files(path = from,
+                             full.names = FALSE,
+                             all.files = TRUE,
+                             recursive = TRUE)
+
+  # Going through copied files to replace package name
+  for (f in copied_files) {
+    copied_file <- file.path(path, f)
+
+    if (grepl("^REMOVEME", f)) {
+      file.rename(from = copied_file,
+                  to = file.path(path, gsub("REMOVEME", "", f)))
+      copied_file <- file.path(path, gsub("REMOVEME", "", f))
+    }
     
-    try({
-      replace_word(
-        file =   i,
-        pattern = "shinyexample",
-        replace = package_name
-      )
-    },
-    silent = TRUE
-    )
+    if (!grepl("ico$", copied_file)) {
+      try({
+        replace_word(
+          file = copied_file,
+          pattern = "shinyexample",
+          replace = package_name)
+      }, silent = TRUE)
+    }
   }
+
   cat_green_tick("Copied app skeleton")
   
   cat_rule("Setting the default config")

@@ -14,9 +14,15 @@
 
 + The `02_dev.R` now includes more CI links
 
++ `golem::expect_running()` is now bundled in default tests
+
++ Default tests now test for functions formals (#437)
+
 ## Breaking changes
 
 ## Bug fix
+
++ `add_` functions no longer append to file if it already exists (#393)
 
 + `config::get()` is no longer exported to prevent clashing with `base::get()`
  
@@ -24,7 +30,13 @@
 
 + `use_external_*()` function don't add ext if already there (#405)
 
-+ test for app launching is now skipped if not interactive
++ `create_golem` function does not modify any existing file (#423, @antoine-sachet)
+
++ `add_resources_path()` now correctly handles empty folder (#395)
+
++ test for app launching is now skipped if not interactive()
+
++ `add_utils` and `add_fct` now print to the console (#427, @novica)
 
 ## Internal changes
 

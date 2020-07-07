@@ -12,6 +12,7 @@ use_recommended_deps(
 
 use_recommended_tests(
   pkg = get_golem_wd(),
+  spellcheck = TRUE,
   vignettes = TRUE,
   lang = "en-US",
   error = FALSE
@@ -21,6 +22,8 @@ use_recommended_tests(
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{recommended}{A vector of recommended packages.}
+
+\item{spellcheck}{Whether or not to use a spellcheck test.}
 
 \item{vignettes}{Logical, \code{TRUE} to spell check all \code{rmd} and \code{rnw} files in
 the \verb{vignettes/} folder.}

@@ -271,12 +271,16 @@ get_golem_name <- function(
   use_parent = TRUE, 
   path = pkgload::pkg_path()
 ){
-  get_golem_things(
+  nm <- get_golem_things(
     value = "golem_name", 
     config = config, 
     use_parent = use_parent, 
     path = path
   )
+  if (is.null(nm)){
+    nm <- pkgload::pkg_name()
+  }
+  nm
 }
 
 #' @export

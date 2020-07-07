@@ -31,6 +31,7 @@ add_r_files <- function(
   )
   
   file_create(where)
+  cat_created(where)
   open_or_go_to(where, open)
   
 }
@@ -67,7 +68,7 @@ add_fct <- function(
 
 #' @rdname file_creation
 #' @export
-add_utils<- function(
+add_utils <- function(
   name, 
   module = NULL,
   pkg = get_golem_wd(), 

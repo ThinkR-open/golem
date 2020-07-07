@@ -10,39 +10,49 @@ add_rstudio_files <- function(
 ){
   service <- match.arg(service)
   where <- path(pkg, "app.R")
-  file_create( where )
   
-  write_there <- function(..., here = where){
-    write(..., here, append = TRUE)
+  
+  if (!file_exists(where)){
+    file_create( where )
+    
+    write_there <- function(..., here = where){
+      write(..., here, append = TRUE)
+    }
+    
+    use_build_ignore( path_file(where) )
+    use_build_ignore("rsconnect")
+    write_there("# Launch the ShinyApp (Do not remove this comment)")
+    write_there("# To deploy, run: rsconnect::deployApp()")
+    write_there("# Or use the blue button on top of this file")
+    write_there("")
+    write_there("pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)")
+    write_there("options( \"golem.app.prod\" = TRUE)")
+    write_there(
+      sprintf(
+        "%s::run_app() # add parameters here (if any)", 
+        get_golem_name()
+      )
+    )
+    
+    x <- capture.output(use_package("pkgload"))
+    cat_created(where)
+    cat_line("To deploy, run:")
+    cat_bullet(darkgrey("rsconnect::deployApp()\n"))
+    cat_red_bullet(
+      sprintf(
+        "Note that you'll need to upload the whole package to %s",
+        service
+      )
+    )
+    
+    open_or_go_to(where, open)
+  } else {
+    file_already_there_dance(
+      where = where, 
+      open_file = open
+    )
   }
   
-  use_build_ignore( path_file(where) )
-  use_build_ignore("rsconnect")
-  write_there("# Launch the ShinyApp (Do not remove this comment)")
-  write_there("# To deploy, run: rsconnect::deployApp()")
-  write_there("# Or use the blue button on top of this file")
-  write_there("")
-  write_there("pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)")
-  write_there("options( \"golem.app.prod\" = TRUE)")
-  write_there(
-    sprintf(
-      "%s::run_app() # add parameters here (if any)", 
-      getOption("golem.app.name", pkg_name())
-    )
-  )
-  #use_build_ignore(where)
-  x <- capture.output(use_package("pkgload"))
-  cat_created(where)
-  cat_line("To deploy, run:")
-  cat_bullet(darkgrey("rsconnect::deployApp()\n"))
-  cat_red_bullet(
-    sprintf(
-      "Note that you'll need to upload the whole package to %s",
-      service
-    )
-  )
-  
-  open_or_go_to(where, open)
 }
 
 #' Add an app.R at the root of your package to deploy on RStudio Connect
@@ -153,7 +163,7 @@ add_dockerfile <- function(
   port = 80, 
   host = "0.0.0.0",
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/",
+  repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
@@ -219,7 +229,7 @@ add_dockerfile_shinyproxy <- function(
   ), 
   as = NULL,
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/",
+  repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
@@ -281,7 +291,7 @@ add_dockerfile_heroku <- function(
   ), 
   as = NULL,
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/",
+  repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
@@ -366,7 +376,7 @@ alert_build <- function(
   if ( ! build_golem_from_source ){
     cat_red_bullet(
       sprintf(
-        "Be sure to keep your %s_%s.tar.gz file (generated using `devtools::build()` ) in the same folder as the %s file generated", 
+        "Be sure to keep your %s_%s.tar.gz file (generated using `pkgbuild::build(vignettes = FALSE)` ) in the same folder as the %s file generated", 
         read.dcf(path)[1], 
         read.dcf(path)[1,][['Version']], 
         basename(output)
@@ -390,6 +400,7 @@ alert_build <- function(
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
 #' @importFrom desc desc_get_deps
+#' @importFrom usethis use_build_ignore
 #' @noRd
 dock_from_desc <- function(
   path = "DESCRIPTION",
@@ -400,7 +411,7 @@ dock_from_desc <- function(
   ),
   AS = NULL,
   sysreqs = TRUE,
-  repos = "https://cran.rstudio.com/",
+  repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   update_tar_gz = TRUE,
   build_golem_from_source = TRUE
@@ -476,17 +487,19 @@ dock_from_desc <- function(
     }
   }
   
+  
+  repos_as_character <- paste(capture.output(dput(repos)),collapse = "")
+  repos_as_character <-  gsub(pattern = '\"',replacement = '\'',x=repos_as_character)
+  
+  
   dock$RUN(
     sprintf(
-      "echo \"options(repos = c(CRAN = '%s'), download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site",
-      repos
+      "echo \"options(repos = %s, download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site",
+      repos_as_character
     )
   )
   
   dock$RUN("R -e 'install.packages(\"remotes\")'")
-  
-  # We need to be sure install_cran is there
-  dock$RUN("R -e 'remotes::install_github(\"r-lib/remotes\", ref = \"97bbf81\")'")
   
   if ( length(packages_on_cran>0)){
     ping <- mapply(function(dock, ver, nm){
@@ -553,15 +566,25 @@ dock_from_desc <- function(
         )
       }
       
-      cat_green_tick(
-        sprintf(
-          " %s_%s.tar.gz created.", 
-          read.dcf(path)[1], 
-          read.dcf(path)[1,][['Version']]
-        )
-      )
+
       if (rlang::is_installed("pkgbuild")) {
-        pkgbuild::build(".")
+        out <- pkgbuild::build(path = ".", dest_path = ".", vignettes = FALSE)
+        
+        if (missing(out)){
+          cat_red_bullet("Error during tar.gz building"          )
+          
+        } else {
+          usethis::use_build_ignore(files = out)
+        cat_green_tick(
+          sprintf(
+            " %s_%s.tar.gz created.", 
+            read.dcf(path)[1], 
+            read.dcf(path)[1,][['Version']]
+          )
+        )
+        }
+        
+        
       } else {
         stop("please install {pkgbuild}")
       }

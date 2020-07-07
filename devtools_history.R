@@ -37,13 +37,18 @@ usethis::use_vignette("build-app-package")
 usethis::use_vignette("e_golem_cheatsheet")
 
 # pkgdown
+# remotes::install_github("ThinkR-open/thinkrtemplate")
+# remotes::install_github("hadley/emo")
 usethis::use_pkgdown()
 usethis::use_git_ignore("docs")
 usethis::use_build_ignore("reference")
 pkgdown::build_site()
 
 # Dev
-attachment::att_to_description(extra.suggests = c("pkgdown", "rcmdcheck", "covr", "DT"),
-                               pkg_ignore = c("mypkg", "s"))
-
+attachment::att_to_description(
+  extra.suggests = c("pkgdown", "rcmdcheck", "covr"), #, "DT"),
+  pkg_ignore = c("mypkg", "s", "pkgbuild", "processx", "rsconnect"))
+usethis::use_package("pkgbuild", type = "Suggests")
+usethis::use_package("processx", type = "Suggests")
+usethis::use_package("rsconnect", type = "Suggests")
 

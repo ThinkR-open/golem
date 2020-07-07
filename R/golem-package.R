@@ -1,6 +1,6 @@
 #' A package for building Shiny App
 #' 
-#' Read more about building big shiny apps at [https://thinkr-open.github.io/building-shiny-apps-workflow/](https://thinkr-open.github.io/building-shiny-apps-workflow/).
+#' Read more about building big shiny apps at [https://engineering-shiny.org/](https://engineering-shiny.org/).
 #'
 #' @docType package
 #' @name golem
