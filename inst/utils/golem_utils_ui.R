@@ -348,21 +348,15 @@ make_action_button <- function(tag, inputId = NULL) {
       )
     } else {
       tag$attribs$id <- inputId
-      cat_green_tick("Adding id attribute ...")
     }
-  } else {
-    cat_green_tick("Using the internal tag id. Nothing to do on your side.")
-  }
+  } 
   
   # handle class
   if (is.null(tag$attribs$class)) {
     tag$attribs$class <- "action-button"
-    cat_green_tick("Adding action-button class ...")
   } else {
     tag$attribs$class <- paste(tag$attribs$class, "action-button") 
   }
-  
-  cat_green_tick("Ready to go ...")
   # return tag
   tag
 }
