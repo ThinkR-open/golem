@@ -6,6 +6,8 @@
 
 ## New functions
 
++ You can now create a skeleton for a Shiny input binding using the `golem::add_js_binding("name")` function (#452, @DivadNojnarg)
+
 ## New features
 
 + `use_external_*()` function don't open files by default (#404)
@@ -17,6 +19,12 @@
 + `golem::expect_running()` is now bundled in default tests
 
 + Default tests now test for functions formals (#437)
+
++ You can now pass arguments to interal roxygenise() & load_all() (#467)
+
+## Soft deprecated
+
++ `add_ui_server_files()` is now signaled as deprecated. Please comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to be kept inside the package
 
 ## Breaking changes
 
@@ -37,6 +45,8 @@
 + test for app launching is now skipped if not interactive()
 
 + `add_utils` and `add_fct` now print to the console (#427, @novica)
+
++ Multiple CRAN repo are now correctly passed to the Dockerfile (#462)
 
 ## Internal changes
 
