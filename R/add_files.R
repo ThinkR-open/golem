@@ -376,7 +376,7 @@ add_ui_server_files <- function(
   dir_create = TRUE
 ){
   
-  #browser()
+  warning("This function will be deprecated in a future version of {golem}.\nPlease comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to stay.")
   old <- setwd(path_abs(pkg))   
   on.exit(setwd(old))
   
