@@ -184,6 +184,9 @@
 <div id="new-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-functions" class="anchor"></a>New functions</h2>
+<ul>
+<li>You can now create a skeleton for a Shiny input binding using the <code><a href="../reference/add_files.html">golem::add_js_binding("name")</a></code> function (<a href='https://github.com/ThinkR-open/golem/issues/452'>#452</a>, <a href='https://github.com/DivadNojnarg'>@DivadNojnarg</a>)</li>
+</ul>
 </div>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
@@ -194,6 +197,15 @@
 <li><p>The <code>02_dev.R</code> now includes more CI links</p></li>
 <li><p><code><a href="../reference/testhelpers.html">golem::expect_running()</a></code> is now bundled in default tests</p></li>
 <li><p>Default tests now test for functions formals (<a href='https://github.com/ThinkR-open/golem/issues/437'>#437</a>)</p></li>
+<li><p>You can now pass arguments to interal roxygenise() &amp; load_all() (<a href='https://github.com/ThinkR-open/golem/issues/467'>#467</a>)</p></li>
+</ul>
+</div>
+<div id="soft-deprecated" class="section level2">
+<h2 class="hasAnchor">
+<a href="#soft-deprecated" class="anchor"></a>Soft deprecated</h2>
+<ul>
+<li>
+<code><a href="../reference/add_files.html">add_ui_server_files()</a></code> is now signaled as deprecated. Please comment on <a href="https://github.com/ThinkR-open/golem/issues/445" class="uri">https://github.com/ThinkR-open/golem/issues/445</a> if you want it to be kept inside the package</li>
 </ul>
 </div>
 <div id="breaking-changes" class="section level2">
@@ -212,6 +224,7 @@
 <li><p><code>add_resources_path()</code> now correctly handles empty folder (<a href='https://github.com/ThinkR-open/golem/issues/395'>#395</a>)</p></li>
 <li><p>test for app launching is now skipped if not interactive()</p></li>
 <li><p><code>add_utils</code> and <code>add_fct</code> now print to the console (<a href='https://github.com/ThinkR-open/golem/issues/427'>#427</a>, <a href='https://github.com/novica'>@novica</a>)</p></li>
+<li><p>Multiple CRAN repo are now correctly passed to the Dockerfile (<a href='https://github.com/ThinkR-open/golem/issues/462'>#462</a>)</p></li>
 </ul>
 </div>
 <div id="internal-changes" class="section level2">
