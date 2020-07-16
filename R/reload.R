@@ -6,14 +6,14 @@
 #' @export
 detach_all_attached <- function(){
   all_attached <-  paste("package:", names(sessionInfo()$otherPkgs), sep = "")
- attempt(
+  attempt(
     suppressWarnings(
       invisible(lapply(
         all_attached,
         detach, 
         character.only = TRUE, 
         unload = TRUE
-        )
+      )
       )
     ), 
     silent = TRUE
@@ -29,18 +29,33 @@ detach_all_attached <- function(){
 #' \code{roxygen2::roxygenise()} and \code{pkgload::load_all()}.
 #'
 #' @inheritParams add_module
+#' @inheritParams roxygen2::roxygenise
+#' @inheritParams pkgload::load_all
+#' @param ... Other arguments passed to `pkgload::load_all()`
 #' @importFrom roxygen2 roxygenise
 #' @importFrom pkgload load_all
 #' @export
 document_and_reload <- function(
-  pkg = get_golem_wd()
+  pkg = get_golem_wd(), 
+  roclets = NULL, 
+  load_code = NULL, 
+  clean = FALSE, 
+  export_all = FALSE,
+  helpers = FALSE,
+  attach_testthat = FALSE, 
+  ...
 ){
   if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
   roxed <- try({
-    roxygenise(package.dir = pkg)
-    })
+    roxygenise(
+      package.dir = pkg, 
+      roclets = roclets, 
+      load_code =load_code,
+      clean = clean
+    )
+  })
   if (attempt::is_try_error(roxed)){
     cli::cat_rule(
       "Error documenting your package"
@@ -49,7 +64,13 @@ document_and_reload <- function(
     return(invisible(FALSE))
   }
   loaded <- try({
-    load_all(pkg,export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)
+    load_all(
+      pkg,
+      export_all = export_all,
+      helpers = helpers,
+      attach_testthat = attach_testthat, 
+      ...
+    )
   })
   
   if (attempt::is_try_error(loaded)){
