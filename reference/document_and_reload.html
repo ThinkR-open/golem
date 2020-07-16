@@ -49,7 +49,7 @@ roxygen2::roxygenise() and pkgload::load_all()." />
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -98,7 +98,7 @@ roxygen2::roxygenise() and pkgload::load_all()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -177,7 +177,16 @@ roxygen2::roxygenise() and pkgload::load_all()." />
 <code><a href='https://roxygen2.r-lib.org/reference/roxygenize.html'>roxygen2::roxygenise()</a></code> and <code><a href='https://rdrr.io/pkg/pkgload/man/load_all.html'>pkgload::load_all()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>document_and_reload</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())</pre>
+    <pre class="usage"><span class='fu'>document_and_reload</span>(
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>roclets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>load_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>helpers</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>attach_testthat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,6 +194,43 @@ roxygen2::roxygenise() and pkgload::load_all()." />
     <tr>
       <th>pkg</th>
       <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>roclets</th>
+      <td><p>Character vector of roclet names to use with package.
+The default, <code>NULL</code>, uses the roxygen <code>roclets</code> option,
+which defaults to <code><a href='https://rdrr.io/r/base/c.html'>c("collate", "namespace", "rd")</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>load_code</th>
+      <td><p>A function used to load all the R code in the package
+directory. The default, <code>NULL</code>, uses the strategy defined by
+the <code>load</code> roxygen option, which defaults to <code><a href='https://roxygen2.r-lib.org/reference/load.html'>load_pkgload()</a></code>.
+See <a href='https://roxygen2.r-lib.org/reference/load.html'>load</a> for more details.</p></td>
+    </tr>
+    <tr>
+      <th>clean</th>
+      <td><p>If <code>TRUE</code>, roxygen will delete all files previously
+created by roxygen before running each roclet.</p></td>
+    </tr>
+    <tr>
+      <th>export_all</th>
+      <td><p>If <code>TRUE</code> (the default), export all objects.
+If <code>FALSE</code>, export only the objects that are listed as exports
+in the NAMESPACE file.</p></td>
+    </tr>
+    <tr>
+      <th>helpers</th>
+      <td><p>if <code>TRUE</code> loads <span class="pkg">testthat</span> test helpers.</p></td>
+    </tr>
+    <tr>
+      <th>attach_testthat</th>
+      <td><p>If <code>TRUE</code>, attach <span class="pkg">testthat</span> to the search path,
+which more closely mimics the environment within test files.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed to <code><a href='https://rdrr.io/pkg/pkgload/man/load_all.html'>pkgload::load_all()</a></code></p></td>
     </tr>
     </table>
 
@@ -205,7 +251,7 @@ roxygen2::roxygenise() and pkgload::load_all()." />
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

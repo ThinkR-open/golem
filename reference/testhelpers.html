@@ -49,7 +49,7 @@ in your Shiny app package." />
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -98,7 +98,7 @@ in your Shiny app package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -181,7 +181,9 @@ in your Shiny app package.</p>
 
 <span class='fu'>expect_shinytaglist</span>(<span class='no'>object</span>)
 
-<span class='fu'>expect_html_equal</span>(<span class='no'>ui</span>, <span class='no'>html</span>)</pre>
+<span class='fu'>expect_html_equal</span>(<span class='no'>ui</span>, <span class='no'>html</span>)
+
+<span class='fu'>expect_running</span>(<span class='no'>sleep</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,6 +199,10 @@ in your Shiny app package.</p>
     <tr>
       <th>html</th>
       <td><p>html file to compare to ui</p></td>
+    </tr>
+    <tr>
+      <th>sleep</th>
+      <td><p>number of seconds</p></td>
     </tr>
     </table>
 
@@ -223,7 +229,7 @@ in your Shiny app package.</p>
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

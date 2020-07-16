@@ -49,7 +49,7 @@ These functions can be used outside of a golem project." />
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -98,7 +98,7 @@ These functions can be used outside of a golem project." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -177,17 +177,43 @@ These functions can be used outside of a golem project." />
 These functions can be used outside of a golem project.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_js_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>with_doc_ready</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>add_js_file</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>with_doc_ready</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>add_js_handler</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>add_js_handler</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>add_css_file</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>add_js_binding</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>initialize</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>dev</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>events</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"click"</span>, <span class='kw'>rate_policy</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+)
 
-<span class='fu'>add_ui_server_files</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app"</span>,
-  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>add_css_file</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
+
+<span class='fu'>add_ui_server_files</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app"</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,6 +242,24 @@ These functions can be used outside of a golem project.</p>
       <th>with_doc_ready</th>
       <td><p>Should the default file include <code>$( document ).ready()</code>?</p></td>
     </tr>
+    <tr>
+      <th>initialize</th>
+      <td><p>Whether to add the initialize method. Default to FALSE. Some JavaScript API
+require to initialize components before using them.</p></td>
+    </tr>
+    <tr>
+      <th>dev</th>
+      <td><p>Whether to insert console.log calls in the most important methods of the binding.
+This is only to help building the input binding. Default to FALSE</p></td>
+    </tr>
+    <tr>
+      <th>events</th>
+      <td><p>List of events to generate event listeners in the subscribe method. For instance,
+<code><a href='https://rdrr.io/r/base/list.html'>list(name = c("click", "keyup"), rate_policy = c(FALSE, TRUE))</a></code>.
+The list contain names and rate policies to apply to each event. If a rate policy is found,
+the debounce method with a default delay of 250 ms is applied. You may edit manually according to
+<a href='https://shiny.rstudio.com/articles/building-inputs.html'>https://shiny.rstudio.com/articles/building-inputs.html</a>.</p></td>
+    </tr>
     </table>
 
 
@@ -235,7 +279,7 @@ These functions can be used outside of a golem project.</p>
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

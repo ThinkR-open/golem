@@ -50,7 +50,7 @@ inside the inst folder." />
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -99,7 +99,7 @@ inside the inst folder." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -179,25 +179,41 @@ These options are found inside the <code>golem-config.yml</code> file, found in 
 inside the <code>inst</code> folder.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_golem_options</span>(<span class='kw'>golem_name</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_name</a></span>(),
+    <pre class="usage"><span class='fu'>set_golem_options</span>(
+  <span class='kw'>golem_name</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_name</a></span>(),
   <span class='kw'>golem_version</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_version</a></span>(),
-  <span class='kw'>golem_wd</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(), <span class='kw'>app_prod</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='kw'>golem_wd</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(),
+  <span class='kw'>app_prod</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
 <span class='fu'>set_golem_wd</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(), <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>set_golem_name</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_name</a></span>(), <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(),
-  <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>set_golem_name</span>(
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_name</a></span>(),
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(),
+  <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>set_golem_version</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_version</a></span>(),
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(), <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>set_golem_version</span>(
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_version</a></span>(),
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(),
+  <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
 <span class='fu'>get_golem_wd</span>(<span class='kw'>use_parent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>())
 
-<span class='fu'>get_golem_name</span>(<span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"R_CONFIG_ACTIVE"</span>, <span class='st'>"default"</span>),
-  <span class='kw'>use_parent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>())
+<span class='fu'>get_golem_name</span>(
+  <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"R_CONFIG_ACTIVE"</span>, <span class='st'>"default"</span>),
+  <span class='kw'>use_parent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>()
+)
 
-<span class='fu'>get_golem_version</span>(<span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"R_CONFIG_ACTIVE"</span>, <span class='st'>"default"</span>),
-  <span class='kw'>use_parent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>())</pre>
+<span class='fu'>get_golem_version</span>(
+  <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"R_CONFIG_ACTIVE"</span>, <span class='st'>"default"</span>),
+  <span class='kw'>use_parent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -286,7 +302,7 @@ the value of the <code>R_CONFIG_NAME</code> environment variable
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

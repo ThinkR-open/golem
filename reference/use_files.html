@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -97,7 +97,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -175,11 +175,23 @@
     <p>These functions download files from external sources and install them inside the appropriate directory.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use_external_js_file</span>(<span class='no'>url</span>, <span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
-  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>use_external_js_file</span>(
+  <span class='no'>url</span>,
+  <span class='no'>name</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>use_external_css_file</span>(<span class='no'>url</span>, <span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
-  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>use_external_css_file</span>(
+  <span class='no'>url</span>,
+  <span class='no'>name</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -227,7 +239,7 @@
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

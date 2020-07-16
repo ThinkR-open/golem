@@ -48,7 +48,7 @@
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -97,7 +97,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -175,8 +175,14 @@
     <p>Create a package for Shiny App using golem</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_golem</span>(<span class='no'>path</span>, <span class='kw'>check_name</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>package_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='no'>path</span>), <span class='kw'>without_comments</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>create_golem</span>(
+  <span class='no'>path</span>,
+  <span class='kw'>check_name</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>package_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='no'>path</span>),
+  <span class='kw'>without_comments</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -227,7 +233,7 @@ not explicitly given, then <code><a href='https://rdrr.io/r/base/basename.html'>
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

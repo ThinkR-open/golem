@@ -22,6 +22,7 @@
 <meta property="og:description" content="golem">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
+<meta name="robots" content="noindex">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 --><!--[if lt IE 9]>
@@ -56,7 +57,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -133,7 +134,7 @@
       <h1 data-toc-skip>Day to Day Dev with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2020-07-10</h4>
+            <h4 class="date">2020-07-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/b_dev.Rmd"><code>vignettes/b_dev.Rmd</code></a></small>
       <div class="hidden name"><code>b_dev.Rmd</code></div>
@@ -210,8 +211,9 @@ $(document).ready(function () {
 <span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/add_files.html">add_css_file</a></span>(<span class="st">"custom"</span>)</pre></body></html></div>
 <p>Note: While the general philosophy of <code>{golem}</code> is being based on the idea that you’re building a package, these functions can be used outside of a <code>{golem}</code> project.</p>
 <p>Note that you can also download external CSS and JavaScript files with:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/use_files.html">use_external_css_file</a></span>(<span class="st">"url"</span>)
-<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/use_files.html">use_external_js_file</a></span>(<span class="st">"url"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/use_files.html">use_external_css_file</a></span>(<span class="kw">url</span> <span class="kw">=</span> <span class="st">"url"</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"your_provided_name"</span>)
+<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/use_files.html">use_external_js_file</a></span>(<span class="kw">url</span> <span class="kw">=</span> <span class="st">"url"</span>, <span class="kw">name</span> <span class="kw">=</span> <span class="st">"your_provided_name"</span>)</pre></body></html></div>
+<p>The above has the effect of downloading the file at the specified url and giving it a provided name. If the intent is to use a CDN hosted CSS/JS file then manually add the tag - <code>tags$script(src = "source_of_ur_css/js")</code> in the function <code>golem_add_external_resources</code> in file <code>app-ui.R</code>. The tag can be added inside the <code>tags$head(...)</code> if the intent is to load the js/css file in the <code>&lt;head&gt;</code> of the document or outside it if it is intended in the <code>&lt;body&gt;</code>.</p>
 </div>
 <div id="adding-these-external-resources-to-your-app" class="section level3">
 <h3 class="hasAnchor">
@@ -289,7 +291,7 @@ $(document).ready(function () {
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

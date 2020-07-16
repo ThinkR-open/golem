@@ -50,7 +50,7 @@ of a golem project." />
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -99,7 +99,7 @@ of a golem project." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -179,9 +179,17 @@ on a specific module structure. This function can be used outside
 of a golem project.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_module</span>(<span class='no'>name</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>fct</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>utils</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>export</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ph_ui</span> <span class='kw'>=</span> <span class='st'>" "</span>, <span class='kw'>ph_server</span> <span class='kw'>=</span> <span class='st'>" "</span>)</pre>
+    <pre class="usage"><span class='fu'>add_module</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>fct</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>utils</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>export</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ph_ui</span> <span class='kw'>=</span> <span class='st'>" "</span>,
+  <span class='kw'>ph_server</span> <span class='kw'>=</span> <span class='st'>" "</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -240,7 +248,7 @@ of a golem project.</p>
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

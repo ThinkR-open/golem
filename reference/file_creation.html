@@ -49,7 +49,7 @@ that starts either with fct_ or with utils_" />
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -98,7 +98,7 @@ that starts either with fct_ or with utils_" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -177,11 +177,21 @@ that starts either with fct_ or with utils_" />
 that starts either with fct_ or with utils_</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_fct</span>(<span class='no'>name</span>, <span class='kw'>module</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>add_fct</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>module</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)
 
-<span class='fu'>add_utils</span>(<span class='no'>name</span>, <span class='kw'>module</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(), <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>add_utils</span>(
+  <span class='no'>name</span>,
+  <span class='kw'>module</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,7 +235,7 @@ that starts either with fct_ or with utils_</p>
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

@@ -51,7 +51,7 @@ and golem::add_js_handler()." />
 <meta name="twitter:card" content="summary" />
 
 
-
+<meta name="robots" content="noindex">
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -100,7 +100,7 @@ and golem::add_js_handler()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -181,9 +181,17 @@ and which are created by <code><a href='add_files.html'>golem::add_css_file()</a
 and <code><a href='add_files.html'>golem::add_js_handler()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bundle_resources</span>(<span class='no'>path</span>, <span class='no'>app_title</span>, <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"golem_resources"</span>,
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"0.0.1"</span>, <span class='kw'>meta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>head</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>attachment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>all_files</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>bundle_resources</span>(
+  <span class='no'>path</span>,
+  <span class='no'>app_title</span>,
+  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"golem_resources"</span>,
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"0.0.1"</span>,
+  <span class='kw'>meta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>head</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>attachment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>package</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>all_files</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -221,7 +229,7 @@ Details.</p></td>
       <th>package</th>
       <td><p>An R package name to indicate where to find the <code>src</code>
 directory when <code>src</code> is a relative path (see
-<code>resolveDependencies</code>).</p></td>
+<code><a href='https://rdrr.io/pkg/htmltools/man/resolveDependencies.html'>resolveDependencies</a></code>).</p></td>
     </tr>
     <tr>
       <th>all_files</th>
@@ -249,7 +257,7 @@ dependency files.</p></td>
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>

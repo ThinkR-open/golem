@@ -22,6 +22,7 @@
 <meta property="og:description" content="golem">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
+<meta name="robots" content="noindex">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 --><!--[if lt IE 9]>
@@ -56,7 +57,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9022</span>
       </span>
     </div>
 
@@ -177,12 +178,12 @@ dev:
 <span class="co">#&gt; ✔ Setting `golem_version` to 0.0.0.9000</span>
 <span class="co">#&gt; ✔ Setting `app_prod` to FALSE</span>
 <span class="co">#&gt; ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────</span>
-<span class="co">#&gt; ✔ Setting active project to '/tmp/RtmpkwyzUZ/golex'</span></pre></body></html></div>
+<span class="co">#&gt; ✔ Setting active project to '/tmp/RtmppUIOcT/golex'</span></pre></body></html></div>
 <p>The functions reading the options in this config file are:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/golem_opts.html">get_golem_name</a></span>()
 <span class="co">#&gt; [1] "golex"</span>
 <span class="fu"><a href="../reference/golem_opts.html">get_golem_wd</a></span>()
-<span class="co">#&gt; [1] "/tmp/RtmpkwyzUZ/golex"</span>
+<span class="co">#&gt; [1] "/tmp/RtmppUIOcT/golex"</span>
 <span class="fu"><a href="../reference/golem_opts.html">get_golem_version</a></span>()
 <span class="co">#&gt; [1] "0.0.0.9000"</span></pre></body></html></div>
 <p>You can set these with:</p>
@@ -215,7 +216,7 @@ production:
   app_prod: yes
   where: inprod
 dev:
-  golem_wd: /tmp/RtmpkwyzUZ/golex</code></pre>
+  golem_wd: /tmp/RtmppUIOcT/golex</code></pre>
 </div>
 <div id="app_config-r" class="section level2">
 <h2 class="hasAnchor">
@@ -274,7 +275,7 @@ dev:
 
 <div class="author">
   <p>
-    Developed by Vincent Guyader, Colin Fay, Sébastien Rochette, Cervan Girard.
+    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
     Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
   </p>
 </div>
