@@ -29,6 +29,7 @@ fill_desc <- function(
   desc <- desc::description$new(
     file = path(path, "DESCRIPTION")
   )
+  
   desc$set(
     "Authors@R", 
     sprintf(
@@ -44,9 +45,19 @@ fill_desc <- function(
   desc$set_version(
     version = "0.0.0.9000"
   )
+  set_golem_version(
+    version = "0.0.0.9000", 
+    path = path
+  )
   desc$set(
     Package = pkg_name
   )
+  change_app_config_name(
+    name = pkg_name,
+    path = pkg
+  )
+  set_golem_name(pkg_name)
+  
   desc$set(
     Title = pkg_title
   )
