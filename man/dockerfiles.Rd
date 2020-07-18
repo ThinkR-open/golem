@@ -19,7 +19,8 @@ add_dockerfile(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 )
 
 add_dockerfile_shinyproxy(
@@ -33,7 +34,8 @@ add_dockerfile_shinyproxy(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 )
 
 add_dockerfile_heroku(
@@ -47,7 +49,8 @@ add_dockerfile_heroku(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 )
 }
 \arguments{
@@ -79,6 +82,8 @@ Default is 0.0.0.0.}
 \item{update_tar_gz}{boolean, if \code{TRUE} and build_golem_from_source is also \code{TRUE} an updated tar.gz Package is created}
 
 \item{build_golem_from_source}{boolean, if \code{TRUE} no tar.gz Package is created and the Dockerfile directly mount the source folder to build it}
+
+\item{extra_sysreqs}{extra debian system requirements as character vector. Will be installed with apt-get install}
 }
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates
