@@ -192,7 +192,8 @@ a "classical" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
   <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>update_tar_gz</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>build_golem_from_source</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>build_golem_from_source</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>extra_sysreqs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
 
 <span class='fu'>add_dockerfile_shinyproxy</span>(
@@ -206,7 +207,8 @@ a "classical" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
   <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>update_tar_gz</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>build_golem_from_source</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>build_golem_from_source</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>extra_sysreqs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
 
 <span class='fu'>add_dockerfile_heroku</span>(
@@ -220,7 +222,8 @@ a "classical" Dockerfile, while <code>add_dockerfile_shinyproxy()</code> and
   <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>update_tar_gz</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>build_golem_from_source</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>build_golem_from_source</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>extra_sysreqs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -280,6 +283,10 @@ Default is 0.0.0.0.</p></td>
     <tr>
       <th>build_golem_from_source</th>
       <td><p>boolean, if <code>TRUE</code> no tar.gz Package is created and the Dockerfile directly mount the source folder to build it</p></td>
+    </tr>
+    <tr>
+      <th>extra_sysreqs</th>
+      <td><p>extra debian system requirements as character vector. Will be installed with apt-get install</p></td>
     </tr>
     </table>
 
