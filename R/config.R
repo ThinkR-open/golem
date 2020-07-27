@@ -86,6 +86,24 @@ get_current_config <- function(
   
 }
 
+change_app_config_name <- function(
+  name, 
+  path = get_golem_wd()
+){
+  pth <- fs::path(path, "R", "app_config.R")
+  app_config <- readLines(pth) 
+  
+  where_system.file <- grep("system.file", app_config)
+  
+  app_config[
+    where_system.file
+  ] <- sprintf(
+    '  system.file(..., package = "%s")', 
+    name
+  )
+  write(app_config, pth )
+}
+
 #' Amend golem config file
 #'
 #' @param key key of the value to add in `config`
