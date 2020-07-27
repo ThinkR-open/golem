@@ -52,6 +52,8 @@
 
 + `document_and_reload()` now has `export_all = FALSE,helpers = FALSE,attach_testthat = FALSE`, allowing the function to behave more closely to what library() does (#399)
 
++ Dockerfile generation now removes the copied file and tar.gz
+
 # golem 0.1.9000+
 
 ## New functions
