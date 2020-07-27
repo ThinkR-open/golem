@@ -48,7 +48,7 @@
 
 + Multiple CRAN repo are now correctly passed to the Dockerfile (#462)
 
-+ app_config, DESC and golem-config.yml are now updated whenever you change the name of the package using a golem function 
++ app_config, DESC and golem-config.yml are now updated whenever you change the name of the package using a golem function (#469 )
 
 ## Internal changes
 
