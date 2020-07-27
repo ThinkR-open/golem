@@ -22,6 +22,8 @@
 
 + You can now pass arguments to interal roxygenise() & load_all() (#467)
 
++ Bundle_resources() now handle subfolders (#446)
+
 ## Soft deprecated
 
 + `add_ui_server_files()` is now signaled as deprecated. Please comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to be kept inside the package
