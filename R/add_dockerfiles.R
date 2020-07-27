@@ -20,6 +20,7 @@
 #' @param open boolean, default is `TRUE` open the Dockerfile file
 #' @param build_golem_from_source  boolean, if `TRUE` no tar.gz Package is created and the Dockerfile directly mount the source folder to build it
 #' @param update_tar_gz boolean, if `TRUE` and build_golem_from_source is also `TRUE` an updated tar.gz Package is created
+#' @param extra_sysreqs extra debian system requirements as character vector. Will be installed with apt-get install
 #' @export
 #' @rdname dockerfiles
 #' @importFrom usethis use_build_ignore
@@ -59,7 +60,8 @@ add_dockerfile <- function(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 ) {
   
   where <- path(pkg, output) 
@@ -76,7 +78,8 @@ add_dockerfile <- function(
     repos = repos,
     expand = expand,
     build_golem_from_source = build_golem_from_source,
-    update_tar_gz = update_tar_gz
+    update_tar_gz = update_tar_gz,
+    extra_sysreqs = extra_sysreqs
   )
   
   dock$EXPOSE(port)
@@ -125,7 +128,8 @@ add_dockerfile_shinyproxy <- function(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 ){
   
   where <- path(pkg, output)
@@ -142,7 +146,8 @@ add_dockerfile_shinyproxy <- function(
     repos = repos, 
     expand = expand,
     build_golem_from_source = build_golem_from_source,
-    update_tar_gz = update_tar_gz
+    update_tar_gz = update_tar_gz,
+    extra_sysreqs = extra_sysreqs
   )
   
   dock$EXPOSE(3838)
@@ -187,7 +192,8 @@ add_dockerfile_heroku <- function(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 ){
   where <- path(pkg, output)
   
@@ -203,7 +209,8 @@ add_dockerfile_heroku <- function(
     repos = repos,
     expand = expand,
     build_golem_from_source = build_golem_from_source,
-    update_tar_gz = update_tar_gz
+    update_tar_gz = update_tar_gz,
+    extra_sysreqs = extra_sysreqs
   )
   
   dock$CMD(
@@ -289,9 +296,11 @@ alert_build <- function(
 #' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
 #' @param update_tar_gz boolean, if `TRUE` and build_golem_from_source is also `TRUE` an updated tar.gz Package is created
 #' @param build_golem_from_source  boolean, if `TRUE` no tar.gz Package is created and the Dockerfile directly mount the source folder to build it
+#' @param extra_sysreqs extra debian system requirements as character vector. Will be installed with apt-get install
+#'
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
-#' @importFrom desc desc_get_deps
+#' @importFrom desc desc_get_deps desc_get
 #' @importFrom usethis use_build_ignore
 #' @noRd
 dock_from_desc <- function(
@@ -306,7 +315,8 @@ dock_from_desc <- function(
   repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 ){
   
   packages <- desc::desc_get_deps(path)$package
@@ -337,6 +347,19 @@ dock_from_desc <- function(
   } else{
     system_requirement <- NULL
   }
+  
+  sr <- desc::desc_get(file = path,keys = "SystemRequirements" )
+  
+  if ( length(extra_sysreqs)>0 ){
+    system_requirement <- unique(c(system_requirement,extra_sysreqs))
+  } else if (!is.na(sr))   {
+    message(paste("the DESCRIPTION file contains the SystemRequirements bellow : ",sr))
+    message(paste("please check the Dockerfile created and if needed pass extra sysreqs using the extra_sysreqs param"))
+    
+  }
+  
+  
+  
   
   remotes_deps <- remotes::package_deps(packages)
   packages_on_cran <-  

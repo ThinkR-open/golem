@@ -48,6 +48,8 @@
 
 + Multiple CRAN repo are now correctly passed to the Dockerfile (#462)
 
++ app_config, DESC and golem-config.yml are now updated whenever you change the name of the package using a golem function (#469 )
+
 ## Internal changes
 
 + `document_and_reload()` now has `export_all = FALSE,helpers = FALSE,attach_testthat = FALSE`, allowing the function to behave more closely to what library() does (#399)
