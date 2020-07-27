@@ -36,7 +36,8 @@ bundle_resources <- function(
         src = path,
         script = list.files(
           path, 
-          pattern = "\\.js$"
+          pattern = "\\.js$", 
+          recursive = TRUE
         ),
         meta = meta, 
         head = c(
@@ -59,7 +60,8 @@ bundle_resources <- function(
       "/", 
       list.files(
         path,
-        pattern = "\\.css$"
+        pattern = "\\.css$", 
+        recursive = TRUE
       ) 
     )
     
