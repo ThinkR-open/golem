@@ -8,6 +8,10 @@
 
 + You can now create a skeleton for a Shiny input binding using the `golem::add_js_binding("name")` function (#452, @DivadNojnarg)
 
++ `utils_ui.R` now contains a "make_action_button()" function (#457, @DivadNojnarg)
+
++ `run_dev()` launches the `run_dev.R` script (#478, @KoderKow)
+
 ## New features
 
 + `use_external_*()` function don't open files by default (#404)
@@ -23,6 +27,8 @@
 + You can now pass arguments to interal roxygenise() & load_all() (#467)
 
 + Bundle_resources() now handle subfolders (#446)
+
++ `run_app()` now includes the default arguments of `shinyApp()` (#254, @chasemc)
 
 ## Soft deprecated
 
