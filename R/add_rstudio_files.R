@@ -62,7 +62,6 @@ add_rstudio_files <- function(
 #'
 #' @inheritParams add_module
 #' @param pkg Where to put the app.R. Default is `get_golem_wd()`.
-#' @param open Open the file
 #' @aliases add_rconnect_file add_rstudioconnect_file
 #' @export
 #' @rdname rstudio_deploy

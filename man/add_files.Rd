@@ -75,3 +75,6 @@ the debounce method with a default delay of 250 ms is applied. You may edit manu
 These functions create files inside the \code{inst/app} folder.
 These functions can be used outside of a {golem} project.
 }
+\note{
+\code{add_ui_server_files} will be deprecated in future version of \code{{golem}}
+}
