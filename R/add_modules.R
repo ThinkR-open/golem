@@ -86,25 +86,60 @@ add_module <- function(
     write_there("}")
     write_there("    ")
     
-    write_there(sprintf("#' %s Server Function", name))
-    write_there("#'")
-    if (export){
-      write_there(sprintf("#' @rdname mod_%s", name))
-      write_there("#' @export ") 
-    } else {
-      write_there("#' @noRd ") 
-    }
-    write_there(sprintf("mod_%s_server <- function(input, output, session){", name))
-    write_there("  ns <- session$ns")
-    write_there(ph_server)
-    write_there("}")
-    write_there("    ")
+    if (packageVersion("shiny") < "1.5"){
     
-    write_there("## To be copied in the UI")
-    write_there(sprintf('# mod_%s_ui("%s_ui_1")', name, name))
-    write_there("    ")
-    write_there("## To be copied in the server")
-    write_there(sprintf('# callModule(mod_%s_server, "%s_ui_1")', name, name))
+      write_there(sprintf("#' %s Server Function", name))
+      write_there("#'")
+      if (export){
+        write_there(sprintf("#' @rdname mod_%s", name))
+        write_there("#' @export ") 
+      } else {
+        write_there("#' @noRd ") 
+      }
+      write_there(sprintf("mod_%s_server <- function(input, output, session){", name))
+      write_there("  ns <- session$ns")
+      write_there(ph_server)
+      write_there("}")
+      write_there("    ")
+      
+      write_there("## To be copied in the UI")
+      write_there(sprintf('# mod_%s_ui("%s_ui_1")', name, name))
+      write_there("    ")
+      write_there("## To be copied in the server")
+      write_there(sprintf('# callModule(mod_%s_server, "%s_ui_1")', name, name))
+      
+        
+    } else {
+      
+      write_there(sprintf("#' %s Server Functions", name))
+      write_there("#'")
+      if (export){
+        write_there(sprintf("#' @rdname mod_%s", name))
+        write_there("#' @export ") 
+      } else {
+        write_there("#' @noRd ") 
+      }
+      write_there(sprintf("mod_%s_server_core <- function(input, output, session){", name))
+      write_there("  ns <- session$ns")
+      write_there(ph_server)
+      write_there("}")
+      write_there("    ")
+      
+      write_there(sprintf("mod_%s_server <- function(id){", name))
+      write_there("  moduleServer(")
+      write_there("    id,")
+      write_there(sprintf("    mod_%s_server_core", name))
+      write_there("  )")
+      write_there("}")
+      
+      write_there("## To be copied in the UI")
+      write_there(sprintf('# mod_%s_ui("%s_ui_1")', name, name))
+      write_there("    ")
+      write_there("## To be copied in the server")
+      write_there(sprintf('# mod_%s_server("%s_ui_1")', name, name))
+      
+    }
+    
     write_there(" ")
     cat_created(where)
     open_or_go_to(where, open)
