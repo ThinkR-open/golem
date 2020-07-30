@@ -33,7 +33,7 @@ detach_all_attached <- function(){
 #' @importFrom pkgload load_all
 #' @export
 document_and_reload <- function(
-  pkg = "."
+  pkg = get_golem_wd()
 ){
   if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
@@ -49,7 +49,7 @@ document_and_reload <- function(
     return(invisible(FALSE))
   }
   loaded <- try({
-    load_all(pkg)
+    load_all(pkg,export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)
   })
   
   if (attempt::is_try_error(loaded)){

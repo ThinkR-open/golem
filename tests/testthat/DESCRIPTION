@@ -9,8 +9,6 @@ LazyData: true
 Imports: 
     shiny, 
     golem
-Remotes: 
-    Thinkr-open/golem
 RoxygenNote: 6.1.0
 URL: http://repo_url.com
 BugReports: http://repo_url.com/issues

@@ -4,13 +4,22 @@
 \alias{add_module}
 \title{Create a module}
 \usage{
-add_module(name, pkg = get_golem_wd(), open = TRUE,
-  dir_create = TRUE, fct = NULL, utils = NULL)
+add_module(
+  name,
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE,
+  fct = NULL,
+  utils = NULL,
+  export = FALSE,
+  ph_ui = " ",
+  ph_server = " "
+)
 }
 \arguments{
 \item{name}{The name of the module}
 
-\item{pkg}{Path to the root of the package. Default is \code{"."}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{open}{Should the file be opened?}
 
@@ -19,10 +28,15 @@ add_module(name, pkg = get_golem_wd(), open = TRUE,
 \item{fct}{The name of the fct file.}
 
 \item{utils}{The name of the utils file.}
+
+\item{export}{Logical. Should the module be exported? Default is \code{FALSE}.}
+
+\item{ph_ui, ph_server}{Texts to insert inside the modules UI and server. For advanced use.}
 }
 \description{
-This function creates a module inside the \code{R/} folder, based
-on a specific module structure.
+This function creates a module inside the \verb{R/} folder, based
+on a specific module structure. This function can be used outside
+of a {golem} project.
 }
 \note{
 This function will prefix the \code{name} argument with \code{mod_}.

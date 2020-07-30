@@ -1,0 +1,11 @@
+default:  
+  golem_name: shinyexample
+  golem_version: 0.0.0.9000
+  app_prod: no
+
+production: 
+  app_prod: yes
+  
+dev: 
+  golem_wd: !exp here::here()
+

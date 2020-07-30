@@ -5,15 +5,35 @@
 \alias{use_recommended_tests}
 \title{Add recommended elements}
 \usage{
-use_recommended_deps(pkg = ".", recommended = c("shiny", "DT",
-  "attempt", "glue", "htmltools", "golem"))
+use_recommended_deps(
+  pkg = get_golem_wd(),
+  recommended = c("shiny", "DT", "attempt", "glue", "htmltools", "golem")
+)
 
-use_recommended_tests(pkg = ".")
+use_recommended_tests(
+  pkg = get_golem_wd(),
+  spellcheck = TRUE,
+  vignettes = TRUE,
+  lang = "en-US",
+  error = FALSE
+)
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{"."}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{recommended}{A vector of recommended packages.}
+
+\item{spellcheck}{Whether or not to use a spellcheck test.}
+
+\item{vignettes}{Logical, \code{TRUE} to spell check all \code{rmd} and \code{rnw} files in
+the \verb{vignettes/} folder.}
+
+\item{lang}{Preferred spelling language. Usually either \code{"en-US"} or
+\code{"en-GB"}.}
+
+\item{error}{Logical, indicating whether the unit test should fail if
+spelling errors are found. Defaults to \code{FALSE}, which does not error, but
+prints potential spelling errors}
 }
 \description{
 \describe{

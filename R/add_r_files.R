@@ -1,3 +1,4 @@
+#' @importFrom fs path_abs path file_create
 add_r_files <- function(
   name, 
   ext = c("fct", "utils"),
@@ -6,13 +7,16 @@ add_r_files <- function(
   open = TRUE, 
   dir_create = TRUE
 ){
-  old <- setwd(normalizePath(pkg))
+  
+  name <- file_path_sans_ext(name)
+  
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   
-  dir_created <- create_dir_if_needed(
-    "R", 
-    dir_create
+  dir_created <- create_if_needed(
+    "R", type = "directory"
   )
+  
   if (!dir_created){
     cat_red_bullet(
       "File not added (needs a valid directory)"
@@ -22,25 +26,14 @@ add_r_files <- function(
   if (!is.null(module)){
     module <- paste0("mod_", module, "_")
   }
-  where <- file.path(
+  where <- path(
     "R", paste0(module, ext, "_", name, ".R")
   )
   
-  if ( !check_file_exist(where) ) {
-    return(invisible(FALSE))
-  } 
+  file_create(where)
+  cat_created(where)
+  open_or_go_to(where, open)
   
-  file.create(where)
-  
-  if (rstudioapi::isAvailable() & open){
-    rstudioapi::navigateToFile(where)
-  } else {
-    cat_bullet(
-      glue("Go to {where}"), 
-      bullet = "square_small_filled", 
-      bullet_col = "red"
-    )
-  }
 }
 
 #' Add fct_ and utils_ files
@@ -50,7 +43,7 @@ add_r_files <- function(
 #'
 #' @param name The name of the file
 #' @param module If not NULL, the file will be module specific in the naming (you don't need to add the leading `mod_`)
-#' @param pkg The working directory 
+#' @param pkg The working directory. Default is `get_golem_wd()`.
 #' @param open Should the file be opened once created? 
 #' @param dir_create Should the folder be created if it doesn't exist? 
 #' 
@@ -75,7 +68,7 @@ add_fct <- function(
 
 #' @rdname file_creation
 #' @export
-add_utils<- function(
+add_utils <- function(
   name, 
   module = NULL,
   pkg = get_golem_wd(), 
@@ -91,3 +84,4 @@ add_utils<- function(
     dir_create = dir_create
   )
 }
+

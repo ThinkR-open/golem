@@ -1,5 +1,3 @@
-context("tests dev function")
-
 test_that("test app_dev",{
   with_options(
     c(
