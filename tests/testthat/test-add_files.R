@@ -81,7 +81,7 @@ test_that("add_ui_server_files", {
   with_dir(pkg, {
     remove_file("inst/app/ui.R")
     remove_file("inst/app/server.R")
-    add_ui_server_files(pkg = pkg)
+    expect_warning(add_ui_server_files(pkg = pkg))
     expect_true(file.exists("inst/app/ui.R"))    
     expect_true(file.exists("inst/app/server.R"))    
     script <- list.files("inst/app/", pattern = "ui")
@@ -92,7 +92,7 @@ test_that("add_ui_server_files", {
     # Check content is not over-added
     l_ui <- length(readLines(list.files("inst/app/", pattern = "ui", full.names = TRUE)))
     l_server <- length(readLines(list.files("inst/app/", pattern = "server", full.names = TRUE)))
-    add_ui_server_files(pkg = pkg)
+    expect_warning(add_ui_server_files(pkg = pkg))
     expect_equal(
       l_ui, 
       length(readLines(list.files("inst/app/", pattern = "ui", full.names = TRUE)))
@@ -102,7 +102,7 @@ test_that("add_ui_server_files", {
       length(readLines(list.files("inst/app/", pattern = "server", full.names = TRUE)))
     )
     
-    add_ui_server_files(pkg = pkg)
+    expect_warning(add_ui_server_files(pkg = pkg))
     remove_file("inst/app/ui.R")
     remove_file("inst/app/server.R")
   })
