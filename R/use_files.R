@@ -21,6 +21,11 @@ use_external_js_file <- function(
   
   old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
+  
+  if (missing(name)){
+    name <- basename(url)
+  }
+  
   name <-  file_path_sans_ext(name)
   new_file <- sprintf( "%s.js", name )
   
@@ -40,6 +45,18 @@ use_external_js_file <- function(
   where <- path(
     dir, new_file
   )
+  
+  if (
+    fs::file_exists(where)
+  ){
+    cat_red_bullet(
+      sprintf(
+        "A file named `%s` already exists in %s. You need to delete or rename this file first.",
+        new_file, dir
+      )
+    )
+    return(invisible(FALSE))
+  }
   
   if ( file_ext(url) != "js") {
     cat_red_bullet(
@@ -78,6 +95,11 @@ use_external_css_file <- function(
   
   old <- setwd(path_abs(pkg))  
   on.exit(setwd(old))
+  
+  if (missing(name)){
+    name <- basename(url)
+  }
+  
   name <-  file_path_sans_ext(name)
   new_file <- sprintf("%s.css", name)
   
@@ -97,6 +119,18 @@ use_external_css_file <- function(
   where <- path(
     dir, new_file
   )
+  
+  if (
+    fs::file_exists(where)
+  ){
+    cat_red_bullet(
+      sprintf(
+        "A file named `%s` already exists in %s. You need to delete or rename this file first.",
+        new_file, dir
+      )
+    )
+    return(invisible(FALSE))
+  }
   
   if ( file_ext(url) != "css") {
     cat_red_bullet(
@@ -158,6 +192,18 @@ use_html_template <- function(
     dir, new_file
   )
   
+  if (
+    fs::file_exists(where)
+  ){
+    cat_red_bullet(
+      sprintf(
+        "A file named `%s` already exists in %s. You need to delete or rename this file first.",
+        new_file, dir
+      )
+    )
+    return(invisible(FALSE))
+  }
+  
   cat_line("")
   cat_rule("Initiating file download")
   
@@ -185,7 +231,6 @@ use_external_file <- function(
   dir_create = TRUE
 ){
   
-  
   if (missing(name)){
     name <- basename(url)
   }
@@ -209,6 +254,18 @@ use_external_file <- function(
   where <- path(
     dir, name
   )
+  
+  if (
+    fs::file_exists(where)
+  ){
+    cat_red_bullet(
+      sprintf(
+        "A file named `%s` already exists in %s. You need to delete or rename this file first.",
+        new_file, dir
+      )
+    )
+    return(invisible(FALSE))
+  }
   
   cat_line("")
   cat_rule("Initiating file download")
