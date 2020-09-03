@@ -12,6 +12,8 @@
 
 + `run_dev()` launches the `run_dev.R` script (#478, @KoderKow)
 
++ `use_html_template()` downloads an external HTML page and allow to use it as an `htmlTemplate()`, (#491)
+
 ## New features
 
 + `use_external_*()` function don't open files by default (#404)
