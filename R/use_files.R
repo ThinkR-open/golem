@@ -1,6 +1,6 @@
 #' Use Files
 #' 
-#' These functions download files from external sources and install them inside the appropriate directory. 
+#' These functions download files from external sources and put them inside the www directory. 
 #' 
 #' @inheritParams  add_module
 #' @param url String representation of URL for the file to be downloaded
@@ -58,7 +58,8 @@ use_external_js_file <- function(
     pkg, 
     dir, 
     name,
-    open
+    open, 
+    catfun = cat_downloaded
   )
   
 }
@@ -114,7 +115,8 @@ use_external_css_file <- function(
     pkg, 
     dir, 
     name,
-    open
+    open, 
+    catfun = cat_downloaded
   )
   
 }
@@ -161,14 +163,7 @@ use_html_template <- function(
   
   utils::download.file(url, where)
   
-  file_created_dance(
-    where, 
-    after_creation_message_css, 
-    pkg, 
-    dir, 
-    name,
-    open
-  )
+  cat_downloaded(where)
   
   cat_line("")
   cat_rule("To use this html as a template, add the following code in app_ui.R:")
@@ -176,4 +171,50 @@ use_html_template <- function(
   cat_line(darkgrey('    app_sys("app/www/template.html"),'))
   cat_line(darkgrey('    # add here the template arguments'))
   cat_line(darkgrey(')'))
+}
+
+#' @export
+#' @rdname use_files
+#' @importFrom fs path_abs
+use_external_file <- function(
+  url,
+  name,
+  pkg = get_golem_wd(), 
+  dir = "inst/app/www",
+  open = FALSE, 
+  dir_create = TRUE
+){
+  
+  
+  if (missing(name)){
+    name <- basename(url)
+  }
+  
+  old <- setwd(path_abs(pkg))  
+  on.exit(setwd(old))
+  
+  dir_created <- create_if_needed(
+    dir, type = "directory"
+  )
+  
+  if (!dir_created){
+    cat_red_bullet(
+      "File not added (needs a valid directory)"
+    )
+    return(invisible(FALSE))
+  }
+  
+  dir <- path_abs(dir) 
+  
+  where <- path(
+    dir, name
+  )
+  
+  cat_line("")
+  cat_rule("Initiating file download")
+  
+  utils::download.file(url, where)
+  
+  cat_downloaded(where)
+  
 }
