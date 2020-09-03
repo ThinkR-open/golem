@@ -13,7 +13,9 @@
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject
+#' @importFrom usethis use_latest_dependencies
 #' @importFrom fs path_abs path_file path dir_copy path_expand
+#' @importFrom yaml write_yaml
 #' @export
 create_golem <- function(
   path, 
@@ -96,7 +98,7 @@ create_golem <- function(
   conf$dev$golem_wd <- yaml_golem_wd
   conf$default$golem_name <- package_name
   conf$default$golem_version <- "0.0.0.9000"
-  yaml::write_yaml(conf, yml_path)
+  write_yaml(conf, yml_path)
   
   cat_green_tick("Configured app")
   
@@ -112,6 +114,10 @@ create_golem <- function(
       remove_comments(file)
     }
   }
+  
+  old <- setwd(path)
+  use_latest_dependencies()
+  setwd(old)
   
   cat_rule("Done")
   
