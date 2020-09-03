@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.2.1.9026
+Version: 0.2.1.9027
 Authors@R: 
     c(person(given = "Colin",
              family = "Fay",
