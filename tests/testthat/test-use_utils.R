@@ -1,5 +1,3 @@
-context("tests use_utils")
-
 test_that("test use_utils_ui",{
   with_dir(pkg,{
     remove_file("R/golem_utils_ui.R")

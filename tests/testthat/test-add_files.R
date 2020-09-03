@@ -1,5 +1,3 @@
-context("test-add_file function")
-
 expect_add_file <- function(
   fun,
   ext, 
