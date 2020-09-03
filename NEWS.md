@@ -14,6 +14,8 @@
 
 + `use_html_template()` downloads an external HTML page and allow to use it as an `htmlTemplate()`, (#491)
 
++ `is_running()` checks if the current running application is a `{golem}` based application (#366)
+
 ## New features
 
 + `use_external_*()` function don't open files by default (#404)
@@ -33,6 +35,10 @@
 + `run_app()` now includes the default arguments of `shinyApp()` (#254, @chasemc)
 
 + `create_golem()` now adds strict dependencie versions (#466)
+
++ `{golem}` app now comes with a meta tags "app-builder", which default to "golem", and that can be changed or turn off in `bundle_resources()`
+
++ `with_golem_options` now explicit calls `print` on the `app` object, solving some issues with benchmarking the application. This explicit print can be turned off by setting `print` to FALSE in `with_golem_options` (#148)
 
 ## Soft deprecated
 
@@ -67,6 +73,7 @@
 + `document_and_reload()` now has `export_all = FALSE,helpers = FALSE,attach_testthat = FALSE`, allowing the function to behave more closely to what library() does (#399)
 
 + Dockerfile generation now removes the copied file and tar.gz
+
 
 # golem 0.1.9000+
 
