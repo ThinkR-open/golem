@@ -43,6 +43,7 @@
 #'     add_dockerfile_heroku()
 #' }
 #'}
+#'@return The `{dockerfiler}` object, invisibly.
 add_dockerfile <- function(
   path = "DESCRIPTION", 
   output = "Dockerfile", 
@@ -108,6 +109,8 @@ add_dockerfile <- function(
     build_golem_from_source = build_golem_from_source
   )
   
+  return(invisible(dock))
+  
 }
 
 #' @export
@@ -170,7 +173,7 @@ add_dockerfile_shinyproxy <- function(
     build_golem_from_source = build_golem_from_source
   )
   
-  invisible(output)
+  return(invisible(dock))
   
 }
 
@@ -262,7 +265,7 @@ add_dockerfile_heroku <- function(
     }
   }
   usethis::use_build_ignore(files = output)
-  invisible(output)
+  return(invisible(dock))
   
 }
 
@@ -353,13 +356,10 @@ dock_from_desc <- function(
   if ( length(extra_sysreqs)>0 ){
     system_requirement <- unique(c(system_requirement,extra_sysreqs))
   } else if (!is.na(sr))   {
-    message(paste("the DESCRIPTION file contains the SystemRequirements bellow : ",sr))
+    message(paste("the DESCRIPTION file contains the SystemRequirements bellow: ",sr))
     message(paste("please check the Dockerfile created and if needed pass extra sysreqs using the extra_sysreqs param"))
     
   }
-  
-  
-  
   
   remotes_deps <- remotes::package_deps(packages)
   packages_on_cran <-  
@@ -385,7 +385,7 @@ dock_from_desc <- function(
   dock <- dockerfiler::Dockerfile$new(FROM = FROM, AS = AS)
   
   if (length(system_requirement)>0){
-    if ( !expand){
+    if ( !expand ){
       dock$RUN(
         paste(
           "apt-get update && apt-get install -y ",
@@ -482,9 +482,8 @@ dock_from_desc <- function(
       }
       
 
-      if (rlang::is_installed("pkgbuild")) {
+      if (isTRUE(requireNamespace("pkgbuild", quietly = TRUE))) {
         out <- pkgbuild::build(path = ".", dest_path = ".", vignettes = FALSE)
-        
         if (missing(out)){
           cat_red_bullet("Error during tar.gz building"          )
           
@@ -498,7 +497,6 @@ dock_from_desc <- function(
           )
         )
         }
-        
         
       } else {
         stop("please install {pkgbuild}")

@@ -85,6 +85,9 @@ Default is 0.0.0.0.}
 
 \item{extra_sysreqs}{extra debian system requirements as character vector. Will be installed with apt-get install}
 }
+\value{
+The \code{{dockerfiler}} object, invisibly.
+}
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates
 a "classical" Dockerfile, while \code{add_dockerfile_shinyproxy()} and
