@@ -48,6 +48,8 @@
 
 ## Breaking changes
 
++ `add_dockerfile*` function now return the `{dockerfiler}` object instead of the path to it. It allows to modify the Dockerfile object programmatically. (#493) 
+
 ## Bug fix
 
 + `add_` functions no longer append to file if it already exists (#393)
