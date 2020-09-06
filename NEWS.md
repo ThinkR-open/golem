@@ -18,6 +18,8 @@
 
 + `use_external_file()` allows to add any file to the `www` folder (#295)
 
++ `module_template()` is the default function for `{golem}` module creation. Users will now be able to define a custom `module_template()` function for `add_module()`, allowing to extend `{golem}` with your own module creation function. See ?golem::module_template for more info (#365)
+
 ## New features
 
 + `use_external_*()` function don't open files by default (#404)
