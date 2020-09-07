@@ -306,6 +306,91 @@ add_js_binding <- function(
 
 
 
+#' @export
+#' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
+add_js_output_binding <- function(
+  name, 
+  pkg = get_golem_wd(), 
+  dir = "inst/app/www",
+  open = TRUE, 
+  dir_create = TRUE
+){
+  attempt::stop_if(
+    rlang::is_missing(name),
+    msg = "Name is required"
+  )
+  
+  name <- file_path_sans_ext(name)
+  
+  old <- setwd(path_abs(pkg))
+  on.exit(setwd(old))
+  
+  dir_created <- create_if_needed(
+    dir, type = "directory"
+  )
+  
+  if (!dir_created){
+    cat_red_bullet(
+      "File not added (needs a valid directory)"
+    )
+    return(invisible(FALSE))
+  }
+  
+  dir <- path_abs(dir) 
+  
+  where <- file.path(
+    dir, sprintf("%s.js", name)
+  )
+  
+  if (!file.exists(where)){
+    
+    file_create(where)
+    
+    write_there <- function(...){
+      write(..., file = where, append = TRUE)
+    }
+    
+    # write in the file!
+    
+    write_there(sprintf("var %s = new Shiny.OutputBinding();", name))
+    write_there(sprintf("$.extend(%s, {", name))
+    # find
+    write_there("  find: function(scope) {")
+    write_there("    // JS logic $(scope).find('whatever')")
+    write_there("  },")
+    # renderValue
+    write_there("  renderValue: function(el, data) {")
+    write_there("    // JS logic")
+    write_there("  }")
+    # end
+    write_there("});")
+    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", name))
+    
+    
+    file_created_dance(
+      where, 
+      after_creation_message_js, 
+      pkg, 
+      dir, 
+      name,
+      open_file = open
+    )
+  } else {
+    file_already_there_dance(
+      where, 
+      open_file = open
+    )
+  }
+  
+  
+  
+}
+
+
+
+
+
 
 #' @export
 #' @rdname add_files

@@ -4,6 +4,7 @@
 \alias{add_js_file}
 \alias{add_js_handler}
 \alias{add_js_binding}
+\alias{add_js_output_binding}
 \alias{add_css_file}
 \alias{add_ui_server_files}
 \title{Create Files}
@@ -34,6 +35,14 @@ add_js_binding(
   initialize = FALSE,
   dev = FALSE,
   events = list(name = "click", rate_policy = FALSE)
+)
+
+add_js_output_binding(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE
 )
 
 add_css_file(
