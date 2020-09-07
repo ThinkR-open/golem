@@ -3,9 +3,8 @@
 \name{add_js_file}
 \alias{add_js_file}
 \alias{add_js_handler}
-\alias{add_js_binding}
-\alias{add_js_output_binding}
 \alias{add_js_input_binding}
+\alias{add_js_output_binding}
 \alias{add_css_file}
 \alias{add_ui_server_files}
 \title{Create Files}
