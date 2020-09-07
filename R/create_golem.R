@@ -8,7 +8,9 @@
 #' @param package_name Package name to use.By default it's `basename(path)` but if path == '.' and `package_name` 
 #' not explicitly given, then `basename(getwd())` will be used.
 #' @param without_comments Boolean start project without golem comments
-#' @param ... not used
+#' @param project_hook A function executed as a hook after project creation. Can be used to change the default `{golem}` structure.
+#' to override the files and content. This function is executed 
+#' @param ... Arguments passed to the `project_hook()` function.  
 #'
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
@@ -20,12 +22,13 @@
 create_golem <- function(
   path, 
   check_name = TRUE,
-  open =TRUE,
+  open = TRUE,
   package_name = basename(path),
   without_comments = FALSE,
+  project_hook = golem::project_hook,
   ...
 ) {
-  
+ 
   path <- path_expand(path)
   
   if (path == '.' & package_name == path_file(path)){
@@ -101,6 +104,12 @@ create_golem <- function(
   write_yaml(conf, yml_path)
   
   cat_green_tick("Configured app")
+  cat_rule("Running post creation function")
+  old <- setwd(path)
+  project_hook(path = path, package_name = package_name, ...)
+  setwd(old)
+  
+  cat_green_tick("All set")
   
   if ( without_comments == TRUE ) {
     files <- list.files(
@@ -143,13 +152,47 @@ create_golem <- function(
   )
 }
 
+#' Project Hook
+#' 
+#' Project hooks allow to define a function run just after {golem}
+#' project creation.
+#'
+#' @inheritParams create_golem
+#' @param ... Arguments passed from `create_golem()`, unused in the default 
+#' function.
+#'
+#' @return Used for side effects
+#' @export
+#'
+#' @examples
+#' if (interactive()){
+#'     my_proj <- function(...){
+#'         unlink("dev/", TRUE, TRUE)
+#'     }
+#'     create_golem("ici", project_template = my_proj)
+#' }
+project_hook <- function(path, package_name, ...){
+  return(TRUE)
+}
+
 # to be used in RStudio "new project" GUI
 create_golem_gui <- function(path,...){
   dots <- list(...)
+  attempt::stop_if_not(
+    dots$project_hook, 
+    ~ grepl("::", .x), 
+    "{golem} project templates must be explicitely namespaced (pkg::fun)"
+  )
+  splt <- strsplit(dots$project_hook, "::")
+  project_hook <- getFromNamespace(
+    splt[[1]][2], 
+    splt[[1]][1]
+  )
   create_golem(
     path = path,
     open = FALSE,
-    without_comments = dots$without_comments
+    without_comments = dots$without_comments,
+    project_hook = project_hook
   )
 }
 

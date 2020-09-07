@@ -10,6 +10,7 @@ create_golem(
   open = TRUE,
   package_name = basename(path),
   without_comments = FALSE,
+  project_hook = golem::project_hook,
   ...
 )
 }
@@ -27,7 +28,10 @@ not explicitly given, then \code{basename(getwd())} will be used.}
 
 \item{without_comments}{Boolean start project without golem comments}
 
-\item{...}{not used}
+\item{project_hook}{A function executed as a hook after project creation. Can be used to change the default \code{{golem}} structure.
+to override the files and content. This function is executed}
+
+\item{...}{Arguments passed to the \code{project_hook()} function.}
 }
 \description{
 Create a package for Shiny App using golem

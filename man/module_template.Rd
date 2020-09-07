@@ -62,3 +62,6 @@ if (interactive()){
 }
 
 }
+\seealso{
+\code{\link[=add_module]{add_module()}}
+}
