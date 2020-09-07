@@ -68,7 +68,7 @@ test_that("add_files", {
       fp = fp
     )
     expect_add_file(
-      add_js_binding, 
+      add_js_input_binding, 
       ext = "js", 
       pak = pkg,
       fp = fp
