@@ -159,7 +159,7 @@ add_js_handler <- function(
 #' the debounce method with a default delay of 250 ms is applied. You may edit manually according to 
 #' \url{https://shiny.rstudio.com/articles/building-inputs.html}. 
 #' @importFrom fs path_abs path file_create file_exists
-add_js_binding <- function(
+add_js_input_binding <- function(
   name, 
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
