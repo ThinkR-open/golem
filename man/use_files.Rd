@@ -3,6 +3,8 @@
 \name{use_external_js_file}
 \alias{use_external_js_file}
 \alias{use_external_css_file}
+\alias{use_html_template}
+\alias{use_external_file}
 \title{Use Files}
 \usage{
 use_external_js_file(
@@ -15,6 +17,24 @@ use_external_js_file(
 )
 
 use_external_css_file(
+  url,
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  dir_create = TRUE
+)
+
+use_html_template(
+  url,
+  name = "template.html",
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  dir_create = TRUE
+)
+
+use_external_file(
   url,
   name,
   pkg = get_golem_wd(),
@@ -37,5 +57,8 @@ use_external_css_file(
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 }
 \description{
-These functions download files from external sources and install them inside the appropriate directory.
+These functions download files from external sources and put them inside the www directory.
+}
+\note{
+See \code{?htmltools::htmlTemplate} and \verb{https://shiny.rstudio.com/articles/templates.html} for more information about \code{htmlTemplate}.
 }

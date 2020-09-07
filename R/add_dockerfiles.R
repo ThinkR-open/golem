@@ -1,111 +1,3 @@
-#' @importFrom utils capture.output
-#' @importFrom cli cat_bullet
-#' @importFrom usethis use_build_ignore use_package
-#' @importFrom pkgload pkg_name
-#' @importFrom fs path file_create path_file
-add_rstudio_files <- function(
-  pkg,
-  open, 
-  service = c("RStudio Connect", "Shiny Server", "ShinyApps.io")
-){
-  service <- match.arg(service)
-  where <- path(pkg, "app.R")
-  
-  
-  if (!file_exists(where)){
-    file_create( where )
-    
-    write_there <- function(..., here = where){
-      write(..., here, append = TRUE)
-    }
-    
-    use_build_ignore( path_file(where) )
-    use_build_ignore("rsconnect")
-    write_there("# Launch the ShinyApp (Do not remove this comment)")
-    write_there("# To deploy, run: rsconnect::deployApp()")
-    write_there("# Or use the blue button on top of this file")
-    write_there("")
-    write_there("pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)")
-    write_there("options( \"golem.app.prod\" = TRUE)")
-    write_there(
-      sprintf(
-        "%s::run_app() # add parameters here (if any)", 
-        get_golem_name()
-      )
-    )
-    
-    x <- capture.output(use_package("pkgload"))
-    cat_created(where)
-    cat_line("To deploy, run:")
-    cat_bullet(darkgrey("rsconnect::deployApp()\n"))
-    cat_red_bullet(
-      sprintf(
-        "Note that you'll need to upload the whole package to %s",
-        service
-      )
-    )
-    
-    open_or_go_to(where, open)
-  } else {
-    file_already_there_dance(
-      where = where, 
-      open_file = open
-    )
-  }
-  
-}
-
-#' Add an app.R at the root of your package to deploy on RStudio Connect
-#'
-#' @note 
-#' In previous versions, this function was called add_rconnect_file.
-#'
-#' @inheritParams add_module
-#' @param pkg Where to put the app.R. Default is `get_golem_wd()`.
-#' @param open Open the file
-#' @aliases add_rconnect_file add_rstudioconnect_file
-#' @export
-#' @rdname rstudio_deploy
-#' @examples
-#' \donttest{
-#' # Add a file for Connect
-#' if (interactive()){
-#'    add_rstudioconnect_file()
-#' }
-#' # Add a file for Shiny Server
-#' if (interactive()){
-#'     add_shinyserver_file()
-#' }
-#' # Add a file for Shinyapps.io
-#' if (interactive()){
-#'     add_shinyappsio_file()
-#' }
-#'}
-add_rstudioconnect_file <- function(
-  pkg = get_golem_wd(), 
-  open = TRUE
-){
-  add_rstudio_files(pkg = pkg, open = open, service = "RStudio Connect")
-}
-
-#' @rdname rstudio_deploy
-#' @export
-add_shinyappsio_file <- function(
-  pkg = get_golem_wd(), 
-  open = TRUE
-){
-  add_rstudio_files(pkg = pkg, open = open, service = "ShinyApps.io")
-}
-
-#' @rdname rstudio_deploy
-#' @export
-add_shinyserver_file <- function(
-  pkg = get_golem_wd(), 
-  open = TRUE
-){
-  add_rstudio_files(pkg = pkg, open = open, service = "Shiny Server")
-}
-
 #' Create a Dockerfile for  Shiny App 
 #' 
 #' Build a container containing your Shiny App. `add_dockerfile()` creates 
@@ -128,6 +20,7 @@ add_shinyserver_file <- function(
 #' @param open boolean, default is `TRUE` open the Dockerfile file
 #' @param build_golem_from_source  boolean, if `TRUE` no tar.gz Package is created and the Dockerfile directly mount the source folder to build it
 #' @param update_tar_gz boolean, if `TRUE` and build_golem_from_source is also `TRUE` an updated tar.gz Package is created
+#' @param extra_sysreqs extra debian system requirements as character vector. Will be installed with apt-get install
 #' @export
 #' @rdname dockerfiles
 #' @importFrom usethis use_build_ignore
@@ -150,6 +43,7 @@ add_shinyserver_file <- function(
 #'     add_dockerfile_heroku()
 #' }
 #'}
+#'@return The `{dockerfiler}` object, invisibly.
 add_dockerfile <- function(
   path = "DESCRIPTION", 
   output = "Dockerfile", 
@@ -167,7 +61,8 @@ add_dockerfile <- function(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 ) {
   
   where <- path(pkg, output) 
@@ -184,7 +79,8 @@ add_dockerfile <- function(
     repos = repos,
     expand = expand,
     build_golem_from_source = build_golem_from_source,
-    update_tar_gz = update_tar_gz
+    update_tar_gz = update_tar_gz,
+    extra_sysreqs = extra_sysreqs
   )
   
   dock$EXPOSE(port)
@@ -213,6 +109,8 @@ add_dockerfile <- function(
     build_golem_from_source = build_golem_from_source
   )
   
+  return(invisible(dock))
+  
 }
 
 #' @export
@@ -233,7 +131,8 @@ add_dockerfile_shinyproxy <- function(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 ){
   
   where <- path(pkg, output)
@@ -250,7 +149,8 @@ add_dockerfile_shinyproxy <- function(
     repos = repos, 
     expand = expand,
     build_golem_from_source = build_golem_from_source,
-    update_tar_gz = update_tar_gz
+    update_tar_gz = update_tar_gz,
+    extra_sysreqs = extra_sysreqs
   )
   
   dock$EXPOSE(3838)
@@ -273,7 +173,7 @@ add_dockerfile_shinyproxy <- function(
     build_golem_from_source = build_golem_from_source
   )
   
-  invisible(output)
+  return(invisible(dock))
   
 }
 
@@ -295,7 +195,8 @@ add_dockerfile_heroku <- function(
   expand = FALSE,
   open = TRUE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 ){
   where <- path(pkg, output)
   
@@ -311,7 +212,8 @@ add_dockerfile_heroku <- function(
     repos = repos,
     expand = expand,
     build_golem_from_source = build_golem_from_source,
-    update_tar_gz = update_tar_gz
+    update_tar_gz = update_tar_gz,
+    extra_sysreqs = extra_sysreqs
   )
   
   dock$CMD(
@@ -363,7 +265,7 @@ add_dockerfile_heroku <- function(
     }
   }
   usethis::use_build_ignore(files = output)
-  invisible(output)
+  return(invisible(dock))
   
 }
 
@@ -397,9 +299,11 @@ alert_build <- function(
 #' @param expand boolean, if `TRUE` each system requirement will be known his own RUN line
 #' @param update_tar_gz boolean, if `TRUE` and build_golem_from_source is also `TRUE` an updated tar.gz Package is created
 #' @param build_golem_from_source  boolean, if `TRUE` no tar.gz Package is created and the Dockerfile directly mount the source folder to build it
+#' @param extra_sysreqs extra debian system requirements as character vector. Will be installed with apt-get install
+#'
 #' @importFrom utils installed.packages packageVersion
 #' @importFrom remotes dev_package_deps
-#' @importFrom desc desc_get_deps
+#' @importFrom desc desc_get_deps desc_get
 #' @importFrom usethis use_build_ignore
 #' @noRd
 dock_from_desc <- function(
@@ -414,7 +318,8 @@ dock_from_desc <- function(
   repos = c(CRAN="https://cran.rstudio.com/"),
   expand = FALSE,
   update_tar_gz = TRUE,
-  build_golem_from_source = TRUE
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
 ){
   
   packages <- desc::desc_get_deps(path)$package
@@ -446,6 +351,16 @@ dock_from_desc <- function(
     system_requirement <- NULL
   }
   
+  sr <- desc::desc_get(file = path,keys = "SystemRequirements" )
+  
+  if ( length(extra_sysreqs)>0 ){
+    system_requirement <- unique(c(system_requirement,extra_sysreqs))
+  } else if (!is.na(sr))   {
+    message(paste("the DESCRIPTION file contains the SystemRequirements bellow: ",sr))
+    message(paste("please check the Dockerfile created and if needed pass extra sysreqs using the extra_sysreqs param"))
+    
+  }
+  
   remotes_deps <- remotes::package_deps(packages)
   packages_on_cran <-  
     intersect(remotes_deps$package[remotes_deps$is_cran],packages)
@@ -470,7 +385,7 @@ dock_from_desc <- function(
   dock <- dockerfiler::Dockerfile$new(FROM = FROM, AS = AS)
   
   if (length(system_requirement)>0){
-    if ( !expand){
+    if ( !expand ){
       dock$RUN(
         paste(
           "apt-get update && apt-get install -y ",
@@ -567,9 +482,8 @@ dock_from_desc <- function(
       }
       
 
-      if (rlang::is_installed("pkgbuild")) {
+      if (isTRUE(requireNamespace("pkgbuild", quietly = TRUE))) {
         out <- pkgbuild::build(path = ".", dest_path = ".", vignettes = FALSE)
-        
         if (missing(out)){
           cat_red_bullet("Error during tar.gz building"          )
           
@@ -584,7 +498,6 @@ dock_from_desc <- function(
         )
         }
         
-        
       } else {
         stop("please install {pkgbuild}")
       }
@@ -598,12 +511,46 @@ dock_from_desc <- function(
       to = "/app.tar.gz"
     )
     dock$RUN("R -e 'remotes::install_local(\"/app.tar.gz\",upgrade=\"never\")'")
+    dock$RUN("rm /app.tar.gz")
   } else {
     dock$RUN("mkdir /build_zone")
     dock$ADD(from = ".",to =  "/build_zone")
     dock$WORKDIR("/build_zone")
     dock$RUN("R -e 'remotes::install_local(upgrade=\"never\")'")
+    dock$RUN("rm -rf /build_zone")
   }
+  # Add a dockerignore
+  docker_ignore_add()
   
   dock
+}
+
+docker_ignore_add <- function(
+  pkg = get_golem_wd()
+){
+  path <- fs::path(
+    pkg,
+    ".dockerignore"
+  )
+  
+  if (!fs::file_exists(
+    path
+  )){
+    fs::file_create(path)
+  }
+  write_ignore <- function(content){
+    write(content, path, append = TRUE)
+  }
+  for (i in c(
+    ".RData", 
+    ".Rhistory", 
+    ".git", 
+    ".gitignore", 
+    "manifest.json", 
+    "rsconnect/",
+    "Rproj.user"
+  )) {
+    write_ignore(i)
+  }
+  
 }

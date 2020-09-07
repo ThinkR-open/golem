@@ -6,6 +6,20 @@
 
 ## New functions
 
++ You can now create a skeleton for a Shiny input binding using the `golem::add_js_binding("name")` function (#452, @DivadNojnarg)
+
++ `utils_ui.R` now contains a "make_action_button()" function (#457, @DivadNojnarg)
+
++ `run_dev()` launches the `run_dev.R` script (#478, @KoderKow)
+
++ `use_html_template()` downloads an external HTML page and allow to use it as an `htmlTemplate()`, (#491)
+
++ `is_running()` checks if the current running application is a `{golem}` based application (#366)
+
++ `use_external_file()` allows to add any file to the `www` folder (#295)
+
++ `module_template()` is the default function for `{golem}` module creation. Users will now be able to define a custom `module_template()` function for `add_module()`, allowing to extend `{golem}` with your own module creation function. See ?golem::module_template for more info (#365)
+
 ## New features
 
 + `use_external_*()` function don't open files by default (#404)
@@ -18,7 +32,25 @@
 
 + Default tests now test for functions formals (#437)
 
++ You can now pass arguments to interal roxygenise() & load_all() (#467)
+
++ Bundle_resources() now handle subfolders (#446)
+
++ `run_app()` now includes the default arguments of `shinyApp()` (#254, @chasemc)
+
++ `create_golem()` now adds strict dependencie versions (#466)
+
++ `{golem}` app now comes with a meta tags "app-builder", which default to "golem", and that can be changed or turn off in `bundle_resources()`
+
++ `with_golem_options` now explicit calls `print` on the `app` object, solving some issues with benchmarking the application. This explicit print can be turned off by setting `print` to FALSE in `with_golem_options` (#148)
+
+## Soft deprecated
+
++ `add_ui_server_files()` is now signaled as deprecated. Please comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to be kept inside the package
+
 ## Breaking changes
+
++ `add_dockerfile*` function now return the `{dockerfiler}` object instead of the path to it. It allows to modify the Dockerfile object programmatically. (#493) 
 
 ## Bug fix
 
@@ -38,9 +70,16 @@
 
 + `add_utils` and `add_fct` now print to the console (#427, @novica)
 
++ Multiple CRAN repo are now correctly passed to the Dockerfile (#462)
+
++ app_config, DESC and golem-config.yml are now updated whenever you change the name of the package using a golem function (#469 )
+
 ## Internal changes
 
 + `document_and_reload()` now has `export_all = FALSE,helpers = FALSE,attach_testthat = FALSE`, allowing the function to behave more closely to what library() does (#399)
+
++ Dockerfile generation now removes the copied file and tar.gz
+
 
 # golem 0.1.9000+
 

@@ -4,10 +4,28 @@
 \alias{run_app}
 \title{Run the Shiny Application}
 \usage{
-run_app(...)
+run_app(onStart = NULL, options = list(), enableBookmarking = NULL,
+  ...)
 }
 \arguments{
-\item{...}{A series of options to be used inside the app.}
+\item{onStart}{A function that will be called before the app is actually run.
+This is only needed for \code{shinyAppObj}, since in the \code{shinyAppDir}
+case, a \code{global.R} file can be used for this purpose.}
+
+\item{options}{Named options that should be passed to the \code{runApp} call
+(these can be any of the following: "port", "launch.browser", "host", "quiet",
+"display.mode" and "test.mode"). You can also specify \code{width} and
+\code{height} parameters which provide a hint to the embedding environment
+about the ideal height/width for the app.}
+
+\item{enableBookmarking}{Can be one of \code{"url"}, \code{"server"}, or
+\code{"disable"}. This is equivalent to calling the
+\code{\link[=enableBookmarking]{enableBookmarking()}} function just before calling
+\code{shinyApp()}. With the default value (\code{NULL}), the app will
+respect the setting from any previous calls to \code{enableBookmarking()}.
+See \code{\link[=enableBookmarking]{enableBookmarking()}} for more information.}
+
+\item{...}{arguments to pass to golem_opts}
 }
 \description{
 Run the Shiny Application

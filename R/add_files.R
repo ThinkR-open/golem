@@ -11,6 +11,8 @@
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #' @importFrom fs path_abs path file_create file_exists
+#' 
+#' @note `add_ui_server_files` will be deprecated in future version of `{golem}`
 add_js_file <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -159,7 +161,7 @@ add_js_handler <- function(
 #' the debounce method with a default delay of 250 ms is applied. You may edit manually according to 
 #' \url{https://shiny.rstudio.com/articles/building-inputs.html}. 
 #' @importFrom fs path_abs path file_create file_exists
-add_js_binding <- function(
+add_js_input_binding <- function(
   name, 
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
@@ -461,7 +463,7 @@ add_ui_server_files <- function(
   dir_create = TRUE
 ){
   
-  #browser()
+  .Deprecated(msg = "This function will be deprecated in a future version of {golem}.\nPlease comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to stay.")
   old <- setwd(path_abs(pkg))   
   on.exit(setwd(old))
   

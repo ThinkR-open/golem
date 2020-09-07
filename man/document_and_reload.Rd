@@ -4,10 +4,42 @@
 \alias{document_and_reload}
 \title{Document and reload your package}
 \usage{
-document_and_reload(pkg = get_golem_wd())
+document_and_reload(
+  pkg = get_golem_wd(),
+  roclets = NULL,
+  load_code = NULL,
+  clean = FALSE,
+  export_all = FALSE,
+  helpers = FALSE,
+  attach_testthat = FALSE,
+  ...
+)
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+
+\item{roclets}{Character vector of roclet names to use with package.
+The default, \code{NULL}, uses the roxygen \code{roclets} option,
+which defaults to \code{c("collate", "namespace", "rd")}.}
+
+\item{load_code}{A function used to load all the R code in the package
+directory. The default, \code{NULL}, uses the strategy defined by
+the \code{load} roxygen option, which defaults to \code{\link[roxygen2:load_pkgload]{load_pkgload()}}.
+See \link[roxygen2]{load} for more details.}
+
+\item{clean}{If \code{TRUE}, roxygen will delete all files previously
+created by roxygen before running each roclet.}
+
+\item{export_all}{If \code{TRUE} (the default), export all objects.
+If \code{FALSE}, export only the objects that are listed as exports
+in the NAMESPACE file.}
+
+\item{helpers}{if \code{TRUE} loads \pkg{testthat} test helpers.}
+
+\item{attach_testthat}{If \code{TRUE}, attach \pkg{testthat} to the search path,
+which more closely mimics the environment within test files.}
+
+\item{...}{Other arguments passed to \code{pkgload::load_all()}}
 }
 \description{
 This function calls \code{rstudioapi::documentSaveAll()},

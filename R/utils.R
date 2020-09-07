@@ -143,6 +143,19 @@ cat_exists <- function(where){
   )
 }
 
+cat_downloaded <- function(
+  where, 
+  file = "File"
+){
+  cat_green_tick(
+    sprintf(
+      "%s downloaded at %s",
+      file, 
+      where
+    )
+  )
+}
+
 cat_created <- function(
   where, 
   file = "File"
@@ -242,9 +255,10 @@ file_created_dance <- function(
   pkg, 
   dir, 
   name, 
-  open_file
+  open_file, 
+  catfun = cat_created
 ){
-  cat_created(where)
+  catfun(where)
   
   fun(pkg, dir, name)
   
