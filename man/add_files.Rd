@@ -6,6 +6,7 @@
 \alias{add_js_input_binding}
 \alias{add_js_output_binding}
 \alias{add_css_file}
+\alias{add_html_template}
 \alias{add_ui_server_files}
 \title{Create Files}
 \usage{
@@ -47,6 +48,14 @@ add_js_output_binding(
 
 add_css_file(
   name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE
+)
+
+add_html_template(
+  name = "template.html",
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,

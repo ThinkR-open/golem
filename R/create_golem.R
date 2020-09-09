@@ -104,8 +104,15 @@ create_golem <- function(
   write_yaml(conf, yml_path)
   
   cat_green_tick("Configured app")
-  cat_rule("Running post creation function")
+  cat_rule("Running project hook function")
   old <- setwd(path)
+  #browser()
+  # TODO fix
+  # for some weird reason test() fails here when using golem::
+  # and I don't have time to search why rn
+  if (substitute(project_hook) == "golem::project_hook"){
+    project_hook <- getFromNamespace("project_hook", "golem")
+  }
   project_hook(path = path, package_name = package_name, ...)
   setwd(old)
   
@@ -150,29 +157,6 @@ create_golem <- function(
       path_abs(path)
     ) 
   )
-}
-
-#' Project Hook
-#' 
-#' Project hooks allow to define a function run just after {golem}
-#' project creation.
-#'
-#' @inheritParams create_golem
-#' @param ... Arguments passed from `create_golem()`, unused in the default 
-#' function.
-#'
-#' @return Used for side effects
-#' @export
-#'
-#' @examples
-#' if (interactive()){
-#'     my_proj <- function(...){
-#'         unlink("dev/", TRUE, TRUE)
-#'     }
-#'     create_golem("ici", project_template = my_proj)
-#' }
-project_hook <- function(path, package_name, ...){
-  return(TRUE)
 }
 
 # to be used in RStudio "new project" GUI

@@ -41,9 +41,7 @@ add_module <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   

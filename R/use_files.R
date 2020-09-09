@@ -34,9 +34,7 @@ use_external_js_file <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   
@@ -46,15 +44,8 @@ use_external_js_file <- function(
     dir, new_file
   )
   
-  if (
-    fs::file_exists(where)
-  ){
-    cat_red_bullet(
-      sprintf(
-        "A file named `%s` already exists in %s. You need to delete or rename this file first.",
-        new_file, dir
-      )
-    )
+  if (fs::file_exists(where)){
+    cat_exists(where)
     return(invisible(FALSE))
   }
   
@@ -65,8 +56,8 @@ use_external_js_file <- function(
     return(invisible(FALSE))
   }
   
-  cat_line("")
-  cat_rule("Initiating file download")
+  cat_start_download()
+  
   utils::download.file(url, where)
   
   file_created_dance(
@@ -108,9 +99,7 @@ use_external_css_file <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   
@@ -120,15 +109,8 @@ use_external_css_file <- function(
     dir, new_file
   )
   
-  if (
-    fs::file_exists(where)
-  ){
-    cat_red_bullet(
-      sprintf(
-        "A file named `%s` already exists in %s. You need to delete or rename this file first.",
-        new_file, dir
-      )
-    )
+  if (fs::file_exists(where)){
+    cat_exists(where)
     return(invisible(FALSE))
   }
   
@@ -139,8 +121,8 @@ use_external_css_file <- function(
     return(invisible(FALSE))
   }
   
-  cat_line("")
-  cat_rule("Initiating file download")
+  cat_start_download()
+  
   utils::download.file(url, where)
   
   file_created_dance(
@@ -158,7 +140,7 @@ use_external_css_file <- function(
 #' @export
 #' @rdname use_files
 #' @importFrom fs path_abs
-use_html_template <- function(
+use_external_html_template <- function(
   url,
   name = "template.html",
   pkg = get_golem_wd(), 
@@ -180,9 +162,7 @@ use_html_template <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   
@@ -192,31 +172,26 @@ use_html_template <- function(
     dir, new_file
   )
   
-  if (
-    fs::file_exists(where)
-  ){
-    cat_red_bullet(
-      sprintf(
-        "A file named `%s` already exists in %s. You need to delete or rename this file first.",
-        new_file, dir
-      )
-    )
+  if (fs::file_exists(where)){
+    cat_exists(where)
     return(invisible(FALSE))
   }
   
-  cat_line("")
-  cat_rule("Initiating file download")
+  cat_start_download()
   
   utils::download.file(url, where)
   
   cat_downloaded(where)
   
-  cat_line("")
-  cat_rule("To use this html as a template, add the following code in app_ui.R:")
-  cat_line(darkgrey('htmlTemplate('))
-  cat_line(darkgrey('    app_sys("app/www/template.html"),'))
-  cat_line(darkgrey('    # add here the template arguments'))
-  cat_line(darkgrey(')'))
+  file_created_dance(
+    where, 
+    after_creation_message_html_template, 
+    pkg, 
+    dir, 
+    name,
+    open
+  )
+  
 }
 
 #' @export
@@ -243,9 +218,7 @@ use_external_file <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   
@@ -255,20 +228,12 @@ use_external_file <- function(
     dir, name
   )
   
-  if (
-    fs::file_exists(where)
-  ){
-    cat_red_bullet(
-      sprintf(
-        "A file named `%s` already exists in %s. You need to delete or rename this file first.",
-        new_file, dir
-      )
-    )
+  if (fs::file_exists(where)){
+    cat_exists(where)
     return(invisible(FALSE))
   }
   
-  cat_line("")
-  cat_rule("Initiating file download")
+  cat_start_download()
   
   utils::download.file(url, where)
   
