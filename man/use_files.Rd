@@ -3,7 +3,7 @@
 \name{use_external_js_file}
 \alias{use_external_js_file}
 \alias{use_external_css_file}
-\alias{use_html_template}
+\alias{use_external_html_template}
 \alias{use_external_file}
 \title{Use Files}
 \usage{
@@ -25,7 +25,7 @@ use_external_css_file(
   dir_create = TRUE
 )
 
-use_html_template(
+use_external_html_template(
   url,
   name = "template.html",
   pkg = get_golem_wd(),
