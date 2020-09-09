@@ -176,7 +176,8 @@ create_golem_gui <- function(path,...){
     path = path,
     open = FALSE,
     without_comments = dots$without_comments,
-    project_hook = project_hook
+    project_hook = project_hook, 
+    check_name = dots$check_name
   )
 }
 
