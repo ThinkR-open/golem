@@ -119,19 +119,13 @@ add_module <- function(
       } else {
         write_there("#' @noRd ") 
       }
-      write_there(sprintf("mod_%s_server_core <- function(input, output, session){", name))
-      write_there("  ns <- session$ns")
+      write_there(sprintf("mod_%s_server <- function(id){", name))
+      write_there("  moduleServer( id, function(input, output, session){")
+      write_there("    ns <- session$ns")
       write_there(ph_server)
+      write_there("  })")
       write_there("}")
       write_there("    ")
-      
-      write_there("#' @importFrom golem moduleServer")
-      write_there(sprintf("mod_%s_server <- function(id){", name))
-      write_there("  moduleServer(")
-      write_there("    id,")
-      write_there(sprintf("    mod_%s_server_core", name))
-      write_there("  )")
-      write_there("}")
       
       write_there("## To be copied in the UI")
       write_there(sprintf('# mod_%s_ui("%s_ui_1")', name, name))
@@ -152,53 +146,57 @@ add_module <- function(
   }
 }
 
-#' shim for moduleServer
-#' 
-#' This function is a shim for `shiny::moduleServer` that allows passing 
-#' arguments via `...`
-#'
-#' @inheritParams shiny::moduleServer
-#' @param ... Arguments to pass to the module server function when it's defined outside of `moduleServer()`
-#'
-#' @return The return value, if any, from executing the module server function
-#' 
-#' @export
-#'
-#' @examples
-#' name_ui <- function(id){
-#' ns <- NS(id)
-#' tagList(
-#'   actionButton(ns("go"), "go")
-#' )
-#' }
-#' 
-#' name_server_core <- function(input, output, session, arg) {
-#'   observeEvent( input$go , {
-#'     print(arg)
-#'   })
-#' }
-#' 
-#' name_server <- function(id, arg) {
-#'   moduleServer(
-#'    id,
-#'    name_server_core, 
-#'    arg = arg
-#'   )
-#' }
-moduleServer <- function(
-  id, 
-  module, 
-  ...,
-  session = getDefaultReactiveDomain()
-) {
-  if (inherits(session, "MockShinySession")) {
-    body(module) <- rlang::expr({
-      session$setEnv(base::environment())
-      !!body(module)
-    })
-    session$setReturned(callModule(module, id, session = session, ...))
-  }
-  else {
-    callModule(module, id, session = session, ...)
-  }
-}
+# This is an idea for shiming moduleServer from {shiny} so that 
+# the server infrastructure is not 
+# 
+# #' shim for moduleServer
+# #' 
+# #' This function is a shim for `shiny::moduleServer` that allows passing 
+# #' arguments via `...`
+# #'
+# #' @inheritParams shiny::moduleServer
+# #' @param ... Arguments to pass to the module server function when it's defined outside of `moduleServer()`
+# #'
+# #' @return The return value, if any, from executing the module server function
+# #' 
+# #' @export
+# #'
+# #' @examples
+# #' name_ui <- function(id){
+# #' ns <- NS(id)
+# #' tagList(
+# #'   actionButton(ns("go"), "go")
+# #' )
+# #' }
+# #' 
+# #' name_server_core <- function(input, output, session, arg) {
+# #'   observeEvent( input$go , {
+# #'     print(arg)
+# #'   })
+# #' }
+# #' 
+# #' name_server <- function(id, arg) {
+# #'   moduleServer(
+# #'    id,
+# #'    name_server_core, 
+# #'    arg = arg
+# #'   )
+# #' }
+# moduleServer <- function(
+#   id, 
+#   module, 
+#   ...,
+#   session = getDefaultReactiveDomain()
+# ) {
+#   if (inherits(session, "MockShinySession")) {
+#     body(module) <- rlang::expr({
+#       session$setEnv(base::environment())
+#       !!body(module)
+#     })
+#     session$setReturned(callModule(module, id, session = session, ...))
+#   }
+#   else {
+#     callModule(module, id, session = session, ...)
+#   }
+# }
+# 
