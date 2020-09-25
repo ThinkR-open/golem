@@ -8,3 +8,15 @@ Widget: CheckboxInput
 Label: Start my project without golem comments
 Default: Off
 Position: left
+
+Parameter: project_hook
+Widget: TextInput
+Label: Hook function to run during project creation
+Default: golem::project_hook
+Position: left
+
+Parameter: check_name
+Widget: CheckboxInput
+Label: Perform a Check on the name
+Default: On
+Position: left

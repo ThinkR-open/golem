@@ -8,22 +8,27 @@
 #' @param package_name Package name to use.By default it's `basename(path)` but if path == '.' and `package_name` 
 #' not explicitly given, then `basename(getwd())` will be used.
 #' @param without_comments Boolean start project without golem comments
-#' @param ... not used
+#' @param project_hook A function executed as a hook after project creation. Can be used to change the default `{golem}` structure.
+#' to override the files and content. This function is executed 
+#' @param ... Arguments passed to the `project_hook()` function.  
 #'
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject
+#' @importFrom usethis use_latest_dependencies
 #' @importFrom fs path_abs path_file path dir_copy path_expand
+#' @importFrom yaml write_yaml
 #' @export
 create_golem <- function(
   path, 
   check_name = TRUE,
-  open =TRUE,
+  open = TRUE,
   package_name = basename(path),
   without_comments = FALSE,
+  project_hook = golem::project_hook,
   ...
 ) {
-  
+ 
   path <- path_expand(path)
   
   if (path == '.' & package_name == path_file(path)){
@@ -96,9 +101,22 @@ create_golem <- function(
   conf$dev$golem_wd <- yaml_golem_wd
   conf$default$golem_name <- package_name
   conf$default$golem_version <- "0.0.0.9000"
-  yaml::write_yaml(conf, yml_path)
+  write_yaml(conf, yml_path)
   
   cat_green_tick("Configured app")
+  cat_rule("Running project hook function")
+  old <- setwd(path)
+  #browser()
+  # TODO fix
+  # for some weird reason test() fails here when using golem::
+  # and I don't have time to search why rn
+  if (substitute(project_hook) == "golem::project_hook"){
+    project_hook <- getFromNamespace("project_hook", "golem")
+  }
+  project_hook(path = path, package_name = package_name, ...)
+  setwd(old)
+  
+  cat_green_tick("All set")
   
   if ( without_comments == TRUE ) {
     files <- list.files(
@@ -112,6 +130,10 @@ create_golem <- function(
       remove_comments(file)
     }
   }
+  
+  old <- setwd(path)
+  use_latest_dependencies()
+  setwd(old)
   
   cat_rule("Done")
   
@@ -140,10 +162,22 @@ create_golem <- function(
 # to be used in RStudio "new project" GUI
 create_golem_gui <- function(path,...){
   dots <- list(...)
+  attempt::stop_if_not(
+    dots$project_hook, 
+    ~ grepl("::", .x), 
+    "{golem} project templates must be explicitely namespaced (pkg::fun)"
+  )
+  splt <- strsplit(dots$project_hook, "::")
+  project_hook <- getFromNamespace(
+    splt[[1]][2], 
+    splt[[1]][1]
+  )
   create_golem(
     path = path,
     open = FALSE,
-    without_comments = dots$without_comments
+    without_comments = dots$without_comments,
+    project_hook = project_hook, 
+    check_name = dots$check_name
   )
 }
 

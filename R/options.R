@@ -41,6 +41,11 @@ set_golem_options <- function(
   talkative = TRUE
 ){
   
+  change_app_config_name(
+    name = golem_name,
+    path = golem_wd
+  )
+  
   cat_if_talk <- function(..., fun = cat_green_tick){
     if (talkative){
       fun(...)
@@ -80,6 +85,7 @@ set_golem_options <- function(
     "You can change golem working directory with set_golem_wd('path/to/wd')", 
     fun = cat_line
   )
+  
   conf$dev$golem_wd <- path
   
   # Setting name of the golem
@@ -197,11 +203,26 @@ set_golem_name <- function(
   talkative = TRUE
 ){
   path <- path_abs(path)
+  # Changing in YAML
   set_golem_things(
     "golem_name", 
     name, 
     path, 
     talkative = talkative
+  )
+  # Changing in app-config.R
+  change_app_config_name(
+    name = name,
+    path = path
+  )
+  
+  # Changing in DESCRIPTION
+  desc <- desc::description$new(file = fs::path(path, "DESCRIPTION"))
+  desc$set(
+    Package = name
+  )
+  desc$write(
+    file = "DESCRIPTION"
   )
   
   invisible(name)
@@ -222,6 +243,13 @@ set_golem_version <- function(
     as.character(version), 
     path, 
     talkative = talkative
+  )
+  desc <- desc::description$new(file = fs::path(path, "DESCRIPTION"))
+  desc$set_version(
+    version = version
+  )
+  desc$write(
+    file = "DESCRIPTION"
   )
   
   invisible(version)

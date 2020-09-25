@@ -1,5 +1,3 @@
-context("test-add_r_files function")
-
 test_that("add_fct and add_utils", {
   with_dir(pkg, {
     util_file <- "R/utils_ui.R"

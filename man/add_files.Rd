@@ -3,8 +3,10 @@
 \name{add_js_file}
 \alias{add_js_file}
 \alias{add_js_handler}
-\alias{add_js_binding}
+\alias{add_js_input_binding}
+\alias{add_js_output_binding}
 \alias{add_css_file}
+\alias{add_html_template}
 \alias{add_ui_server_files}
 \title{Create Files}
 \usage{
@@ -25,7 +27,7 @@ add_js_handler(
   dir_create = TRUE
 )
 
-add_js_binding(
+add_js_input_binding(
   name,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
@@ -36,8 +38,24 @@ add_js_binding(
   events = list(name = "click", rate_policy = FALSE)
 )
 
+add_js_output_binding(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE
+)
+
 add_css_file(
   name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE
+)
+
+add_html_template(
+  name = "template.html",
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
@@ -74,4 +92,7 @@ the debounce method with a default delay of 250 ms is applied. You may edit manu
 \description{
 These functions create files inside the \code{inst/app} folder.
 These functions can be used outside of a {golem} project.
+}
+\note{
+\code{add_ui_server_files} will be deprecated in future version of \code{{golem}}
 }

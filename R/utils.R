@@ -131,7 +131,7 @@ cat_info <- function(...){
 cat_exists <- function(where){
   cat_red_bullet(
     sprintf(
-      "%s already exists, skipping the copy.", 
+      "[Skipped] %s already exists.", 
       path_file(where)
     )
   )
@@ -139,6 +139,30 @@ cat_exists <- function(where){
     sprintf(
       "If you want replace it, remove the %s file first.", 
       path_file(where)
+    )
+  )
+}
+
+cat_dir_necessary <- function(){
+  cat_red_bullet(
+    "File not added (needs a valid directory)"
+  )
+}
+
+cat_start_download <- function(){
+  cat_line("")
+  cat_rule("Initiating file download")
+}
+
+cat_downloaded <- function(
+  where, 
+  file = "File"
+){
+  cat_green_tick(
+    sprintf(
+      "%s downloaded at %s",
+      file, 
+      where
     )
   )
 }
@@ -236,15 +260,29 @@ after_creation_message_css <- function(
   }
 }
 
+after_creation_message_html_template <- function(
+  pkg, 
+  dir, 
+  name
+){
+  cat_line("")
+  cat_rule("To use this html file as a template, add the following code in app_ui.R:")
+  cat_line(darkgrey('htmlTemplate('))
+  cat_line(darkgrey(sprintf('    app_sys("app/www/%s.html"),', name)))
+  cat_line(darkgrey('    # add here the template arguments'))
+  cat_line(darkgrey(')'))
+}
+
 file_created_dance <- function(
   where, 
   fun, 
   pkg, 
   dir, 
   name, 
-  open_file
+  open_file, 
+  catfun = cat_created
 ){
-  cat_created(where)
+  catfun(where)
   
   fun(pkg, dir, name)
   

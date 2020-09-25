@@ -36,3 +36,8 @@ Name: Put selected text into between ns()
 Description: add 'ns(' in front of selected text, and add ')' behind.
 Binding: insert_ns
 Interactive: false
+
+Name: Run run_dev.R
+Description: Runs the run_dev.R file.
+Binding: run_dev
+Interactive: true

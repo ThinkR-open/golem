@@ -12,8 +12,8 @@ add_module(
   fct = NULL,
   utils = NULL,
   export = FALSE,
-  ph_ui = " ",
-  ph_server = " "
+  module_template = golem::module_template,
+  ...
 )
 }
 \arguments{
@@ -31,7 +31,7 @@ add_module(
 
 \item{export}{Logical. Should the module be exported? Default is \code{FALSE}.}
 
-\item{ph_ui, ph_server}{Texts to insert inside the modules UI and server. For advanced use.}
+\item{...}{Arguments to be passed to the \code{module_template} function.}
 }
 \description{
 This function creates a module inside the \verb{R/} folder, based
@@ -40,4 +40,7 @@ of a {golem} project.
 }
 \note{
 This function will prefix the \code{name} argument with \code{mod_}.
+}
+\seealso{
+\code{\link[=module_template]{module_template()}}
 }

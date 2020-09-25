@@ -11,6 +11,8 @@
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #' @importFrom fs path_abs path file_create file_exists
+#' 
+#' @note `add_ui_server_files` will be deprecated in future version of `{golem}`
 add_js_file <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -34,9 +36,7 @@ add_js_file <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   
@@ -99,9 +99,7 @@ add_js_handler <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   
@@ -159,7 +157,7 @@ add_js_handler <- function(
 #' the debounce method with a default delay of 250 ms is applied. You may edit manually according to 
 #' \url{https://shiny.rstudio.com/articles/building-inputs.html}. 
 #' @importFrom fs path_abs path file_create file_exists
-add_js_binding <- function(
+add_js_input_binding <- function(
   name, 
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
@@ -187,7 +185,11 @@ add_js_binding <- function(
     msg = "Incomplete events list"
   )
   
-  name <- file_path_sans_ext(name)
+  raw_name <- name
+  
+  name <- file_path_sans_ext(
+    sprintf("input-%s", name)
+  )
   
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
@@ -197,9 +199,7 @@ add_js_binding <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   
@@ -221,8 +221,8 @@ add_js_binding <- function(
     # the getRatePolicy method
     global_rate_policy <- sum(sapply(events$rate_policy, `[[`, 1)) > 0
     
-    write_there(sprintf("var %s = new Shiny.InputBinding();", name))
-    write_there(sprintf("$.extend(%s, {", name))
+    write_there(sprintf("var %s = new Shiny.InputBinding();", raw_name))
+    write_there(sprintf("$.extend(%s, {", raw_name))
     # find
     write_there("  find: function(scope) {")
     write_there("    // JS logic $(scope).find('whatever')")
@@ -252,7 +252,7 @@ add_js_binding <- function(
     write_there("  subscribe: function(el, callback) {")
     # list of event listeners
     lapply(seq_along(events$name), function(i) {
-      write_there(sprintf("    $(el).on('%s.%s', function(e) {", events$name[i], name))
+      write_there(sprintf("    $(el).on('%s.%s', function(e) {", events$name[i], raw_name))
       if (events$rate_policy[i]) {
         write_there("      callback(true);")
       } else {
@@ -276,12 +276,12 @@ add_js_binding <- function(
     
     # unsubscribe
     write_there("  unsubscribe: function(el) {")
-    write_there(sprintf("    $(el).off('.%s');", name))
+    write_there(sprintf("    $(el).off('.%s');", raw_name))
     write_there("  }")
     
     # end
     write_there("});")
-    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", name))
+    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", raw_name))
     
     
     file_created_dance(
@@ -299,13 +299,88 @@ add_js_binding <- function(
     )
   }
   
-  
-  
 }
 
-
-
-
+#' @export
+#' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
+add_js_output_binding <- function(
+  name, 
+  pkg = get_golem_wd(), 
+  dir = "inst/app/www",
+  open = TRUE, 
+  dir_create = TRUE
+){
+  attempt::stop_if(
+    rlang::is_missing(name),
+    msg = "Name is required"
+  )
+  
+  raw_name <- name
+  
+  name <- file_path_sans_ext(
+    sprintf("output-%s", name)
+  )
+  
+  old <- setwd(path_abs(pkg))
+  on.exit(setwd(old))
+  
+  dir_created <- create_if_needed(
+    dir, type = "directory"
+  )
+  
+  if (!dir_created){
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+  
+  dir <- path_abs(dir) 
+  
+  where <- file.path(
+    dir, sprintf("%s.js", name)
+  )
+  
+  if (!file.exists(where)){
+    
+    file_create(where)
+    
+    write_there <- function(...){
+      write(..., file = where, append = TRUE)
+    }
+    
+    # write in the file!
+    
+    write_there(sprintf("var %s = new Shiny.OutputBinding();", raw_name))
+    write_there(sprintf("$.extend(%s, {", raw_name))
+    # find
+    write_there("  find: function(scope) {")
+    write_there("    // JS logic $(scope).find('whatever')")
+    write_there("  },")
+    # renderValue
+    write_there("  renderValue: function(el, data) {")
+    write_there("    // JS logic")
+    write_there("  }")
+    # end
+    write_there("});")
+    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", raw_name))
+    
+    
+    file_created_dance(
+      where, 
+      after_creation_message_js, 
+      pkg, 
+      dir, 
+      name,
+      open_file = open
+    )
+  } else {
+    file_already_there_dance(
+      where, 
+      open_file = open
+    )
+  }
+  
+}
 
 #' @export
 #' @rdname add_files
@@ -332,9 +407,7 @@ add_css_file <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   
@@ -366,6 +439,75 @@ add_css_file <- function(
   
 }
 
+#' @export
+#' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
+add_html_template <- function(
+  name = "template.html", 
+  pkg = get_golem_wd(), 
+  dir = "inst/app/www",
+  open = TRUE, 
+  dir_create = TRUE
+){
+
+  name <- file_path_sans_ext(name)
+  
+  old <- setwd(path_abs(pkg)) 
+  on.exit(setwd(old))
+  
+  dir_created <- create_if_needed(
+    dir, type = "directory"
+  )
+  
+  if (!dir_created){
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+  
+  dir <- path_abs(dir) 
+  
+  where <- path(
+    dir, sprintf(
+      "%s.html", 
+      name
+    )
+  )
+  
+  if (!file_exists(where)){
+    file_create(where)
+    write_there <- function(...) write(..., file = where, append = TRUE)
+    write_there("<!DOCTYPE html>")
+    write_there("<html>")
+    write_there("  <head>")
+    write_there(
+      sprintf(
+        "    <title>%s</title>", 
+        get_golem_name()
+      )
+    )
+    write_there("  </head>")
+    write_there("  <body>")
+    write_there("    ")
+    write_there("  </body>")
+    write_there("</html>")
+    write_there("")
+    file_created_dance(
+      where, 
+      after_creation_message_html_template, 
+      pkg, 
+      dir, 
+      name,
+      open
+    )
+  } else {
+    file_already_there_dance(
+      where = where, 
+      open_file = open
+    )
+  }
+  
+}
+
 
 #' @export
 #' @rdname add_files
@@ -376,7 +518,8 @@ add_ui_server_files <- function(
   dir_create = TRUE
 ){
   
-  #browser()
+  .Deprecated(msg = "This function will be deprecated in a future version of {golem}.\nPlease comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to stay.")
+  
   old <- setwd(path_abs(pkg))   
   on.exit(setwd(old))
   
@@ -385,9 +528,7 @@ add_ui_server_files <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   

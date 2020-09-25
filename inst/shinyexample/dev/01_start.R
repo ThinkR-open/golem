@@ -13,6 +13,11 @@
 
 ## Fill the DESCRIPTION ----
 ## Add meta data about your application
+## 
+## /!\ Note: if you want to change the name of your app during development, 
+## either re-run this function, call golem::set_golem_name(), or don't forget
+## to change the name in the app_sys() function in app_config.R /!\
+## 
 golem::fill_desc(
   pkg_name = "shinyexample", # The Name of the package containing the App 
   pkg_title = "PKG_TITLE", # The Title of the package containing the App 
@@ -46,8 +51,8 @@ golem::use_recommended_deps()
 
 ## Favicon ----
 # If you want to change the favicon (default is golem's one)
-golem::remove_favicon()
 golem::use_favicon() # path = "path/to/ico". Can be an online file. 
+golem::remove_favicon()
 
 ## Add helper functions ----
 golem::use_utils_ui()

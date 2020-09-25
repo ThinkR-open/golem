@@ -1,6 +1,3 @@
-context("function add_module")
-
-
 test_that("add_module", {
   with_dir(pkg, {
     remove_file("R/mod_test.R")
