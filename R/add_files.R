@@ -185,7 +185,11 @@ add_js_input_binding <- function(
     msg = "Incomplete events list"
   )
   
-  name <- file_path_sans_ext(name)
+  raw_name <- name
+  
+  name <- file_path_sans_ext(
+    sprintf("input-%s", name)
+  )
   
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
@@ -217,8 +221,8 @@ add_js_input_binding <- function(
     # the getRatePolicy method
     global_rate_policy <- sum(sapply(events$rate_policy, `[[`, 1)) > 0
     
-    write_there(sprintf("var %s = new Shiny.InputBinding();", name))
-    write_there(sprintf("$.extend(%s, {", name))
+    write_there(sprintf("var %s = new Shiny.InputBinding();", raw_name))
+    write_there(sprintf("$.extend(%s, {", raw_name))
     # find
     write_there("  find: function(scope) {")
     write_there("    // JS logic $(scope).find('whatever')")
@@ -248,7 +252,7 @@ add_js_input_binding <- function(
     write_there("  subscribe: function(el, callback) {")
     # list of event listeners
     lapply(seq_along(events$name), function(i) {
-      write_there(sprintf("    $(el).on('%s.%s', function(e) {", events$name[i], name))
+      write_there(sprintf("    $(el).on('%s.%s', function(e) {", events$name[i], raw_name))
       if (events$rate_policy[i]) {
         write_there("      callback(true);")
       } else {
@@ -272,12 +276,12 @@ add_js_input_binding <- function(
     
     # unsubscribe
     write_there("  unsubscribe: function(el) {")
-    write_there(sprintf("    $(el).off('.%s');", name))
+    write_there(sprintf("    $(el).off('.%s');", raw_name))
     write_there("  }")
     
     # end
     write_there("});")
-    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", name))
+    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", raw_name))
     
     
     file_created_dance(
@@ -295,12 +299,7 @@ add_js_input_binding <- function(
     )
   }
   
-  
-  
 }
-
-
-
 
 #' @export
 #' @rdname add_files
@@ -317,7 +316,11 @@ add_js_output_binding <- function(
     msg = "Name is required"
   )
   
-  name <- file_path_sans_ext(name)
+  raw_name <- name
+  
+  name <- file_path_sans_ext(
+    sprintf("output-%s", name)
+  )
   
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
@@ -347,8 +350,8 @@ add_js_output_binding <- function(
     
     # write in the file!
     
-    write_there(sprintf("var %s = new Shiny.OutputBinding();", name))
-    write_there(sprintf("$.extend(%s, {", name))
+    write_there(sprintf("var %s = new Shiny.OutputBinding();", raw_name))
+    write_there(sprintf("$.extend(%s, {", raw_name))
     # find
     write_there("  find: function(scope) {")
     write_there("    // JS logic $(scope).find('whatever')")
@@ -359,7 +362,7 @@ add_js_output_binding <- function(
     write_there("  }")
     # end
     write_there("});")
-    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", name))
+    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", raw_name))
     
     
     file_created_dance(
@@ -377,14 +380,7 @@ add_js_output_binding <- function(
     )
   }
   
-  
-  
 }
-
-
-
-
-
 
 #' @export
 #' @rdname add_files
