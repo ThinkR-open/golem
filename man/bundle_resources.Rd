@@ -13,7 +13,8 @@ bundle_resources(
   head = NULL,
   attachment = NULL,
   package = NULL,
-  all_files = TRUE
+  all_files = TRUE,
+  app_builder = "golem"
 )
 }
 \arguments{
@@ -40,6 +41,9 @@ directory when \code{src} is a relative path (see
 dependency files. If \code{FALSE}, only the files specified in
 \code{script}, \code{stylesheet}, and \code{attachment} are treated as
 dependency files.}
+
+\item{app_builder}{The name of the app builder to add as a meta tag.
+Turn to NULL if you don't want this meta tag to be included.}
 }
 \description{
 This function is a wrapper around \code{htmltools::htmlDependency} that

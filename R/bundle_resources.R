@@ -7,6 +7,8 @@
 #'
 #' @param path The path to the folder where the external files are located.
 #' @param app_title The title of the app, to be used as an application title.
+#' @param app_builder The name of the app builder to add as a meta tag. 
+#' Turn to NULL if you don't want this meta tag to be included. 
 #' @inheritParams htmltools::htmlDependency
 #' @importFrom htmltools htmlDependency
 #' @export
@@ -19,7 +21,8 @@ bundle_resources <- function(
   head = NULL,
   attachment = NULL,
   package = NULL,
-  all_files = TRUE
+  all_files = TRUE, 
+  app_builder = "golem"
 ){
   
   if (
@@ -39,7 +42,7 @@ bundle_resources <- function(
           pattern = "\\.js$", 
           recursive = TRUE
         ),
-        meta = meta, 
+        meta =c("app-builder" = app_builder, meta), 
         head = c(
           as.character(
             tags$title(app_title)

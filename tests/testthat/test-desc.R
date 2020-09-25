@@ -1,4 +1,3 @@
-context("test-desc")
 
 test_that("desc works", {
   with_dir(pkg,{

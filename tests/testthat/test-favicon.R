@@ -1,5 +1,3 @@
-context("tests use_favicon")
-
 test_that("test use_favicon",{
   with_dir(pkg,{
     use_favicon()

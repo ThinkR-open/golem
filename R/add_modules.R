@@ -11,12 +11,14 @@
 #' @param fct The name of the fct file.
 #' @param utils The name of the utils file.
 #' @param export Logical. Should the module be exported? Default is `FALSE`.
-#' @param ph_ui,ph_server Texts to insert inside the modules UI and server. For advanced use.
+#' @param ... Arguments to be passed to the `module_template` function.
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #' @importFrom fs path_abs path file_create
+#' 
+#' @seealso [module_template()]
 add_module <- function(
   name, 
   pkg = get_golem_wd(), 
@@ -25,8 +27,8 @@ add_module <- function(
   fct = NULL, 
   utils = NULL, 
   export = FALSE, 
-  ph_ui = " ",
-  ph_server = " "
+  module_template = golem::module_template, 
+  ...
 ){
   
   name <- file_path_sans_ext(name)
@@ -39,9 +41,7 @@ add_module <- function(
   )
   
   if (!dir_created){
-    cat_red_bullet(
-      "File not added (needs a valid directory)"
-    )
+    cat_dir_necessary()
     return(invisible(FALSE))
   }
   
@@ -60,9 +60,7 @@ add_module <- function(
   if (!file_exists(where)){
     file_create(where)
     
-    write_there <- function(...){
-      write(..., file = where, append = TRUE)
-    }
+    module_template(name = name, path = where, export = export, ...)
     
     write_there(sprintf("#' %s UI Function", name))
     write_there("#'")
