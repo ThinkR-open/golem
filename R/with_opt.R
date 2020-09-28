@@ -53,6 +53,43 @@ with_golem_options <- function(
 #' @param which NULL (default), or the name of an option
 #' @importFrom shiny getShinyOption
 #' @export
+#' @examples 
+#' 
+#' \dontrun{
+#' # 1. Pass parameters to `run_app`
+#' 
+#' run_app(p1 = "param1", p2 = "param2")
+#' 
+#' # 2. Use get_golem_options()
+#' 
+#' ## in UI...
+#' 
+#' h1(get_golem_options("p1"))
+#' 
+#' ## ...or in server
+#' 
+#' output$param <- renderPrint({
+#'   paste("param p2 = ",get_golem_options("p2"))
+#' })
+#' 
+#' # Et voila.
+#' 
+#' # to set default value, edit run_app like this :
+#' run_app <- function(
+#' ..., p3 = "default p3"
+#' ) {
+#'   with_golem_options(
+#'     app = shinyApp(
+#'       ui = app_ui, 
+#'       server = app_server
+#'     ), 
+#'     golem_opts = list(..., p3 = p3)
+#'   )
+#' }
+#'  
+#' 
+#' }
+#' 
 get_golem_options <- function(which = NULL){
   
   if (is.null(which)){
