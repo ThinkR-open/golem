@@ -34,6 +34,13 @@ with_golem_options <- function(
   # Bundling the options inside the shinyApp object
   app$appOptions$golem_options <- golem_opts
   
+  # On shiny server, Connect & shinyapp.io, print should be turned off, 
+  # as it would throw an error
+  
+  if (Sys.getenv('SHINY_PORT') != ""){
+    print <- FALSE
+  }
+  
   # Almost all cases will be ok with explicitely printing the 
   # application object, but for corner cases like direct shinyApp
   # object manipulation, this feature can be turned off
