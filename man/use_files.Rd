@@ -55,6 +55,8 @@ use_external_file(
 \item{open}{Should the file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+
+\item{path}{String representation of the local path for the file to be implemented (use_file only)}
 }
 \description{
 These functions download files from external sources and put them inside the www directory.

@@ -4,6 +4,7 @@
 #' 
 #' @inheritParams  add_module
 #' @param url String representation of URL for the file to be downloaded
+#' @param path String representation of the local path for the file to be implemented (use_file only)
 #' @param dir Path to the dir where the file while be created.
 #' @note See `?htmltools::htmlTemplate` and `https://shiny.rstudio.com/articles/templates.html` for more information about `htmlTemplate`.
 #' @export
@@ -238,5 +239,51 @@ use_external_file <- function(
   utils::download.file(url, where)
   
   cat_downloaded(where)
+  
+}
+
+#' @export
+#' @rdname use_file
+#' @importFrom fs path_abs file_exists
+use_file <- function(
+  path,
+  name,
+  pkg = get_golem_wd(), 
+  dir = "inst/app/www",
+  open = FALSE, 
+  dir_create = TRUE
+){
+  if (missing(name)){
+    name <- basename(path)
+  }
+  
+  old <- setwd(path_abs(pkg))  
+  on.exit(setwd(old))
+  
+  dir_created <- create_if_needed(
+    dir, type = "directory"
+  )
+  
+  if (!dir_created){
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+  
+  dir <- path_abs(dir) 
+  
+  where <- path(
+    dir, name
+  )
+  
+  if (file_exists(where)){
+    cat_exists(where)
+    return(invisible(FALSE))
+  }
+  
+  cat_start_copy()
+  
+  file.copy(path, where)
+  
+  cat_copied(where)
   
 }
