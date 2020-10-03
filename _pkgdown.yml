@@ -122,7 +122,6 @@ reference:
     - use_recommended_deps
     - use_recommended_tests
 
-
 - title: 	Misc
   contents:
     - add_module
