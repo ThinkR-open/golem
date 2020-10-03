@@ -76,13 +76,19 @@ add_js_file <- function(
 
 #' @export
 #' @rdname add_files
+#' @param handler_template JS code to be written. Default to \link{handler_template}.
+#' You may overwrite this with your own template function.
+#' @param ... Arguments to be passed to the `module_template` function.
 #' @importFrom fs path_abs path file_create file_exists
+#' @seealso [handler_template()]
 add_js_handler <- function(
   name, 
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
-  dir_create = TRUE
+  dir_create = TRUE,
+  handler_template = golem::handler_template,
+  ...
 ){
   attempt::stop_if(
     rlang::is_missing(name),
@@ -113,15 +119,8 @@ add_js_handler <- function(
     
     file_create(where)
     
-    write_there <- function(...){
-      write(..., file = where, append = TRUE)
-    }
+    handler_template(path = where, ...)
     
-    write_there("$( document ).ready(function() {")
-    write_there("  Shiny.addCustomMessageHandler('fun', function(arg) {")
-    write_there("  ")
-    write_there("  })")
-    write_there("});")
     file_created_dance(
       where, 
       after_creation_message_js, 
@@ -139,6 +138,34 @@ add_js_handler <- function(
   
   
   
+}
+
+
+
+#' Golem's default custom handler template
+#' 
+#' This function does not aim at being called as is by 
+#' users, but to be passed as an argument to the `add_js_handler()` 
+#' function.
+#' 
+#' @inheritParams add_module
+#' @param path The path to the JS script where this template will be written. 
+#' @param type Shiny's custom handler type.
+#' @param js_code JavaScript code to be written in the function.
+#' @return Used for side effect
+#' @rdname add_files
+#' @export
+#' @seealso [add_js_handler()]
+handler_template <- function(path, type = "fun", js_code = " ") {
+  write_there <- function(...){
+    write(..., file = path, append = TRUE)
+  }
+  
+  write_there("$( document ).ready(function() {")
+  write_there(sprintf("  Shiny.addCustomMessageHandler('%s', function(arg) {", type))
+  write_there(js_code)
+  write_there("  })")
+  write_there("});")
 }
 
 
