@@ -89,6 +89,17 @@ add_utils <- function(
   )
 }
 
+#' Append roxygen comments to fct_ and utils_ files
+#' 
+#' This function as boilerplate roxygen comments 
+#' for fct_ and utils_ files
+#'
+#' @param name The name of the file
+#' @param path The path to the R script where the module will be written. 
+#' @param ext A string denoting the type of file to be created. 
+#' 
+#' @rdname file_creation
+#' @export
 append_roxygen_comment <- function(name, path, ext) {
   write_there <- function(...){
     write(..., file = path, append = TRUE)
