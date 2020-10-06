@@ -29,6 +29,12 @@ add_r_files <- function(
   )
   
   file_create(where)
+
+  if(file_exists(where) & is.null(module)) {
+    # Must be a function or utility file being created
+    append_roxygen_comment(name = name, path = where, ext = ext)
+  }
+
   cat_created(where)
   open_or_go_to(where, open)
   
@@ -83,3 +89,34 @@ add_utils <- function(
   )
 }
 
+append_roxygen_comment <- function(name, path, ext) {
+  write_there <- function(...){
+    write(..., file = path, append = TRUE)
+  }
+
+  file_type = " "
+
+  if(ext == "utils") {
+    file_type = "utility"
+  } else {
+    file_type = "function"
+  }
+  
+  write_there(sprintf("#' %s %s", name, file_type))
+  write_there("#'")
+  write_there(sprintf("#' @description A shiny %s", file_type))
+  write_there("#'")
+  write_there(sprintf("#' @param Internal parameters for the %s.", file_type))
+  write_there("#'")
+  write_there(sprintf("#' @return The return value, if any, from executing the %s.", file_type))
+  write_there("#'")
+  write_there("#' @export")
+}
+
+
+
+# #' @param ... Arguments to pass to the module server function when it's defined outside of `moduleServer()`
+# #'
+# #' @return The return value, if any, from executing the module server function
+# #' 
+# #' @export
