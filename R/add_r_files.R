@@ -112,11 +112,3 @@ append_roxygen_comment <- function(name, path, ext) {
   write_there("#'")
   write_there("#' @export")
 }
-
-
-
-# #' @param ... Arguments to pass to the module server function when it's defined outside of `moduleServer()`
-# #'
-# #' @return The return value, if any, from executing the module server function
-# #' 
-# #' @export
