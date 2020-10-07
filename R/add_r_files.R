@@ -31,7 +31,7 @@ add_r_files <- function(
   if (!file_exists(where)){
     file_create(where)
     
-    module_template(name = name, path = where, export = export, ...)
+    file_template(name = name, path = where, export = export, ...)
     
     #write_there(" ")
     cat_created(where)
@@ -106,7 +106,7 @@ add_utils <- function(
 #' @return Used for side effect
 #' @export
 #' @seealso [add_module()]
-module_template <- function(name, path, export, ph_ui = " ", ph_server = " "){
+file_template <- function(name, path, export, ph_ui = " ", ph_server = " "){
   
   write_there(sprintf("#' %s R file", name))
   write_there("#'")
