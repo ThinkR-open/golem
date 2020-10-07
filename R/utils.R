@@ -324,3 +324,10 @@ file_ext <- function (x) {
   pos <- regexpr("\\.([[:alnum:]]+)$", x)
   ifelse(pos > -1L, substring(x, pos + 1L), "")
 }
+
+
+# write roxygen
+
+write_there <- function(...){
+  write(..., file = path, append = TRUE)
+}

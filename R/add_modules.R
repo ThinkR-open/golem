@@ -176,10 +176,7 @@ add_module <- function(
 #' @export
 #' @seealso [add_module()]
 module_template <- function(name, path, export, ph_ui = " ", ph_server = " "){
-  write_there <- function(...){
-    write(..., file = path, append = TRUE)
-  }
-  
+
   write_there(sprintf("#' %s UI Function", name))
   write_there("#'")
   write_there("#' @description A shiny Module.")
