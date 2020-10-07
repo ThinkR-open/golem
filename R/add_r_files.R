@@ -99,7 +99,7 @@ add_utils <- function(
 #' @param ext A string denoting the type of file to be created. 
 #' 
 #' @rdname file_creation
-#' @export
+#' @noRd
 append_roxygen_comment <- function(name, path, ext) {
   write_there <- function(...){
     write(..., file = path, append = TRUE)
