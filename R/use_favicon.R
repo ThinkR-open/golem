@@ -97,7 +97,7 @@ use_favicon <- function(
   
   if (ext == "png"){
     cat_red_bullet(
-      "You choose a png favicon, please add `ext = 'png'` to the `favicon()` function in golem_add_external_resources()."
+      "You choose a png favicon, please add `ext = 'png'` to `favicon()` within the `golem_add_external_resources()` function in 'app_ui.R'."
     )
   } else {
     cat_line(
