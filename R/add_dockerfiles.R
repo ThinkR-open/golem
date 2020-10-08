@@ -409,7 +409,7 @@ dock_from_desc <- function(
   
   dock$RUN(
     sprintf(
-      "echo \"options(repos = %s, download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site",
+      "echo \"options(repos = %s, download.file.method = 'libcurl', Ncpus = 4)\" >> /usr/local/lib/R/etc/Rprofile.site",
       repos_as_character
     )
   )
