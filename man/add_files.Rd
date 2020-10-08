@@ -3,6 +3,7 @@
 \name{add_js_file}
 \alias{add_js_file}
 \alias{add_js_handler}
+\alias{handler_template}
 \alias{add_js_input_binding}
 \alias{add_js_output_binding}
 \alias{add_css_file}
@@ -24,8 +25,12 @@ add_js_handler(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE
+  dir_create = TRUE,
+  handler_template = golem::handler_template,
+  ...
 )
+
+handler_template(path, type = "fun", js_code = " ")
 
 add_js_input_binding(
   name,
@@ -77,6 +82,17 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app", dir_create = TRUE)
 
 \item{with_doc_ready}{Should the default file include \verb{$( document ).ready()}?}
 
+\item{handler_template}{JS code to be written. Default to \link{handler_template}.
+You may overwrite this with your own template function.}
+
+\item{...}{Arguments to be passed to the \code{module_template} function.}
+
+\item{path}{The path to the JS script where this template will be written.}
+
+\item{type}{Shiny's custom handler type.}
+
+\item{js_code}{JavaScript code to be written in the function.}
+
 \item{initialize}{Whether to add the initialize method. Default to FALSE. Some JavaScript API
 require to initialize components before using them.}
 
@@ -89,10 +105,22 @@ The list contain names and rate policies to apply to each event. If a rate polic
 the debounce method with a default delay of 250 ms is applied. You may edit manually according to
 \url{https://shiny.rstudio.com/articles/building-inputs.html}.}
 }
+\value{
+Used for side effect
+}
 \description{
 These functions create files inside the \code{inst/app} folder.
 These functions can be used outside of a {golem} project.
+
+This function does not aim at being called as is by
+users, but to be passed as an argument to the \code{add_js_handler()}
+function.
 }
 \note{
 \code{add_ui_server_files} will be deprecated in future version of \code{{golem}}
+}
+\seealso{
+\code{\link[=handler_template]{handler_template()}}
+
+\code{\link[=add_js_handler]{add_js_handler()}}
 }

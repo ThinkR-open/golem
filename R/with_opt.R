@@ -1,23 +1,27 @@
 #' Add Golem options to a Shiny App 
 #' 
-#' @note 
 #' You'll probably never have to write this function 
 #' as it is included in the golem template created on 
 #' launch.
+#' 
+#' @note 
+#' For compatibility issue, this function turns `options(shiny.autoload.r)`
+#' to `FALSE`. See https://github.com/ThinkR-open/golem/issues/468 for more background.
 #'
 #' @param app the app object.
 #' @param golem_opts A list of Options to be added to the app
-#' @param print Whether or not to print the app. Default is to TRUE, which 
+#' @param print Whether or not to print the app. Default is to FALSE, which 
 #' should be what you need in  99.99% of the cases. In case you need to 
-#' actually get the app object, you can set it to `FALSE`.
+#' actively print the app object, you can set it to `TRUE`.
 #'
 #' @return a shiny.appObj object
 #' @export
 with_golem_options <- function(
   app, 
   golem_opts, 
-  print = TRUE
+  print = FALSE
 ){
+
   # Setting the running option
   set_golem_global(
     "running", 
