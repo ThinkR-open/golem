@@ -25,7 +25,9 @@ add_module <- function(
   open = TRUE, 
   dir_create = TRUE, 
   fct = NULL, 
-  utils = NULL, 
+  utils = NULL,
+  js = NULL,
+  js_handler = NULL,
   export = FALSE, 
   module_template = golem::module_template, 
   ...
@@ -51,6 +53,14 @@ add_module <- function(
   
   if (!is.null(utils)){
     add_utils(utils, module = name, open = open)
+  }
+  
+  if (!is.null(js)){
+    add_js_file(js, module = name, open = open)
+  }
+  
+  if (!is.null(js_handler)){
+    add_js_handler(js_handler, module = name, open = open)
   }
   
   where <- path(
