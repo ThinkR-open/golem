@@ -10,7 +10,7 @@
 #' @export
 #' @rdname use_files
 #' @importFrom cli cat_bullet
-#' @importFrom fs path_abs path
+#' @importFrom fs path_abs path file_exists
 use_external_js_file <- function(
   url,
   name,
@@ -45,7 +45,7 @@ use_external_js_file <- function(
     dir, new_file
   )
   
-  if (fs::file_exists(where)){
+  if (file_exists(where)){
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -75,7 +75,7 @@ use_external_js_file <- function(
 
 #' @export
 #' @rdname use_files
-#' @importFrom fs path_abs
+#' @importFrom fs path_abs file_exists
 use_external_css_file <- function(
   url,
   name,
@@ -110,7 +110,7 @@ use_external_css_file <- function(
     dir, new_file
   )
   
-  if (fs::file_exists(where)){
+  if (file_exists(where)){
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -140,7 +140,7 @@ use_external_css_file <- function(
 
 #' @export
 #' @rdname use_files
-#' @importFrom fs path_abs
+#' @importFrom fs path_abs file_exists
 use_external_html_template <- function(
   url,
   name = "template.html",
@@ -173,7 +173,7 @@ use_external_html_template <- function(
     dir, new_file
   )
   
-  if (fs::file_exists(where)){
+  if (file_exists(where)){
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -197,7 +197,7 @@ use_external_html_template <- function(
 
 #' @export
 #' @rdname use_files
-#' @importFrom fs path_abs
+#' @importFrom fs path_abs file_exists
 use_external_file <- function(
   url,
   name,
@@ -229,7 +229,7 @@ use_external_file <- function(
     dir, name
   )
   
-  if (fs::file_exists(where)){
+  if (file_exists(where)){
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -243,9 +243,196 @@ use_external_file <- function(
 }
 
 #' @export
+#' @rdname use_files
+#' @importFrom fs path_abs file_exists
+use_internal_js_file <- function(
+  path,
+  name,
+  pkg = get_golem_wd(), 
+  dir = "inst/app/www",
+  open = FALSE, 
+  dir_create = TRUE
+){
+  
+  old <- setwd(path_abs(pkg))  
+  on.exit(setwd(old))
+  
+  if (missing(name)){
+    name <- basename(path)
+  }
+  
+  name <-  file_path_sans_ext(name)
+  new_file <- sprintf( "%s.js", name )
+  
+  dir_created <- create_if_needed(
+    dir, type = "directory"
+  )
+  
+  if (!dir_created){
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+  
+  dir <- path_abs(dir) 
+  
+  where <- path(
+    dir, new_file
+  )
+  
+  if (file_exists(where)){
+    cat_exists(where)
+    return(invisible(FALSE))
+  }
+  
+  if ( file_ext(path) != "js") {
+    cat_red_bullet(
+      "File not added (URL must end with .js extension)"
+    )
+    return(invisible(FALSE))
+  }
+  
+  cat_start_copy()
+  
+  file.copy(path, where)
+  
+  file_created_dance(
+    where, 
+    after_creation_message_css, 
+    pkg, 
+    dir, 
+    name,
+    open, 
+    catfun = cat_copied
+  )
+  
+}
+
+#' @export
+#' @rdname use_files
+#' @importFrom fs path_abs file_exists
+use_internal_css_file <- function(
+  path,
+  name,
+  pkg = get_golem_wd(), 
+  dir = "inst/app/www",
+  open = FALSE, 
+  dir_create = TRUE
+){
+  
+  old <- setwd(path_abs(pkg))  
+  on.exit(setwd(old))
+  
+  if (missing(name)){
+    name <- basename(path)
+  }
+  
+  name <-  file_path_sans_ext(name)
+  new_file <- sprintf("%s.css", name)
+  
+  dir_created <- create_if_needed(
+    dir, type = "directory"
+  )
+  
+  if (!dir_created){
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+  
+  dir <- path_abs(dir) 
+  
+  where <- path(
+    dir, new_file
+  )
+  
+  if (file_exists(where)){
+    cat_exists(where)
+    return(invisible(FALSE))
+  }
+  
+  if ( file_ext(path) != "css") {
+    cat_red_bullet(
+      "File not added (URL must end with .css extension)"
+    )
+    return(invisible(FALSE))
+  }
+  
+  cat_start_copy()
+  
+  file.copy(path, where)
+  
+  file_created_dance(
+    where, 
+    after_creation_message_css, 
+    pkg, 
+    dir, 
+    name,
+    open, 
+    catfun = cat_copied
+  )
+  
+}
+
+#' @export
+#' @rdname use_files
+#' @importFrom fs path_abs file_exists
+use_internal_html_template <- function(
+  path,
+  name = "template.html",
+  pkg = get_golem_wd(), 
+  dir = "inst/app/www",
+  open = FALSE, 
+  dir_create = TRUE
+){
+  
+  old <- setwd(path_abs(pkg))  
+  on.exit(setwd(old))
+  
+  new_file <- sprintf(
+    "%s.html", 
+    file_path_sans_ext(name)
+  )
+  
+  dir_created <- create_if_needed(
+    dir, type = "directory"
+  )
+  
+  if (!dir_created){
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+  
+  dir <- path_abs(dir) 
+  
+  where <- path(
+    dir, new_file
+  )
+  
+  if (file_exists(where)){
+    cat_exists(where)
+    return(invisible(FALSE))
+  }
+  
+  cat_start_copy()
+  
+  file.copy(path, where)
+  
+  cat_copied(where)
+  
+  file_created_dance(
+    where, 
+    after_creation_message_html_template, 
+    pkg, 
+    dir, 
+    name,
+    open
+  )
+  
+}
+
+#' @export
 #' @rdname use_file
 #' @importFrom fs path_abs file_exists
-use_file <- function(
+use_internal_file <- function(
   path,
   name,
   pkg = get_golem_wd(), 

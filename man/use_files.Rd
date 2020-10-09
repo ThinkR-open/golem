@@ -5,6 +5,9 @@
 \alias{use_external_css_file}
 \alias{use_external_html_template}
 \alias{use_external_file}
+\alias{use_internal_js_file}
+\alias{use_internal_css_file}
+\alias{use_internal_html_template}
 \title{Use Files}
 \usage{
 use_external_js_file(
@@ -37,6 +40,33 @@ use_external_html_template(
 use_external_file(
   url,
   name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  dir_create = TRUE
+)
+
+use_internal_js_file(
+  path,
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  dir_create = TRUE
+)
+
+use_internal_css_file(
+  path,
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  dir_create = TRUE
+)
+
+use_internal_html_template(
+  path,
+  name = "template.html",
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
