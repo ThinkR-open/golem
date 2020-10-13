@@ -36,8 +36,14 @@ list_to_li <- function(list, class = NULL){
   }
   
 }
-
+#' Turn an R list into corresponding HTML paragraph tags
+#'
+#' @param list an R list
+#' @param class a class for the paragraph tags
+#' @examples 
+#' list_to_p(c("This is the first paragraph", "this is the second paragraph"))
 #' @importFrom htmltools tags tagAppendAttributes tagList
+#' 
 list_to_p <- function(list, class = NULL){
   if (is.null(class)){
     tagList(
