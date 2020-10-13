@@ -167,6 +167,24 @@ cat_downloaded <- function(
   )
 }
 
+cat_start_copy <- function(){
+  cat_line("")
+  cat_rule("Copying file")
+}
+
+cat_copied <- function(
+  where,
+  file = "File"
+){
+  cat_green_tick(
+    sprintf(
+      "%s copied to %s",
+      file,
+      where
+    )
+  )
+}
+
 cat_created <- function(
   where, 
   file = "File"

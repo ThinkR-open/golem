@@ -5,6 +5,9 @@
 \alias{use_external_css_file}
 \alias{use_external_html_template}
 \alias{use_external_file}
+\alias{use_internal_js_file}
+\alias{use_internal_css_file}
+\alias{use_internal_html_template}
 \title{Use Files}
 \usage{
 use_external_js_file(
@@ -42,6 +45,33 @@ use_external_file(
   open = FALSE,
   dir_create = TRUE
 )
+
+use_internal_js_file(
+  path,
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  dir_create = TRUE
+)
+
+use_internal_css_file(
+  path,
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  dir_create = TRUE
+)
+
+use_internal_html_template(
+  path,
+  name = "template.html",
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  dir_create = TRUE
+)
 }
 \arguments{
 \item{url}{String representation of URL for the file to be downloaded}
@@ -55,6 +85,8 @@ use_external_file(
 \item{open}{Should the file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+
+\item{path}{String representation of the local path for the file to be implemented (use_file only)}
 }
 \description{
 These functions download files from external sources and put them inside the www directory.
