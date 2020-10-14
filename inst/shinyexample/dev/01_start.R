@@ -25,6 +25,7 @@ golem::fill_desc(
   author_first_name = "AUTHOR_FIRST", # Your First Name
   author_last_name = "AUTHOR_LAST", # Your Last Name
   author_email = "AUTHOR@MAIL.COM", # Your Email
+  author_orcid = NULL, # Your ORCID ID
   repo_url = NULL # The URL of the GitHub Repo (optional) 
 )     
 
