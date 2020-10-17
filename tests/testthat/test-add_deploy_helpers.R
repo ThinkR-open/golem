@@ -99,7 +99,7 @@ test_that("add_dockerfiles multi repos", {
           expect_true(test)
           
           
-    to_find <-   "RUN echo \"options(repos = c(bioc1 = 'https://bioconductor.org/packages/3.10/data/annotation', bioc2 = 'https://bioconductor.org/packages/3.10/data/experiment', CRAN = 'https://cran.rstudio.com'), download.file.method = 'libcurl')\" >> /usr/local/lib/R/etc/Rprofile.site"
+    to_find <-   "RUN echo \"options(repos = c(bioc1 = 'https://bioconductor.org/packages/3.10/data/annotation', bioc2 = 'https://bioconductor.org/packages/3.10/data/experiment', CRAN = 'https://cran.rstudio.com'), download.file.method = 'libcurl', Ncpus = 4)\" >> /usr/local/lib/R/etc/Rprofile.site"
           
           
           
