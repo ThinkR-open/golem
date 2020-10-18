@@ -11,11 +11,12 @@ sanity_check<- function(){
   all_R_files <-list.files(path = active_project_dir, pattern = "\\.R$", recursive = TRUE)
   to_find <- c('browser()', '#TODO', '#TOFIX', '#BUG', '# TODO', '# TOFIX', '# BUG')
   source_markers <- data.frame()
-  for(file_name in all_R_files)
-  {
+
+
+  for(file_name in all_R_files){
     file <- readLines(file_name)
-    for ( word in to_find)
-    {
+
+    for ( word in to_find){
       line_number <- grep(word, file, fixed = TRUE)
       if(length(line_number) > 0){
         df <- data.frame(
@@ -29,13 +30,11 @@ sanity_check<- function(){
       }
     }
   }
-  if(length(source_markers) > 0)
-  {
+
+  if(length(source_markers) > 0){
     rstudioapi::sourceMarkers("sanity_check", markers = source_markers)
   }
-  else
-  {
+  else{
     message("No errors found. Sanity check passed successfully.")
   }
-
 }
