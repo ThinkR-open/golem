@@ -29,6 +29,13 @@ sanity_check<- function(){
       }
     }
   }
-  
-  rstudioapi::sourceMarkers("sanity_check", markers = source_markers)
+  if(length(source_markers) > 0)
+  {
+    rstudioapi::sourceMarkers("sanity_check", markers = source_markers)
+  }
+  else
+  {
+    message("No errors found. Sanity check passed successfully.")
+  }
+
 }
