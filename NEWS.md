@@ -20,6 +20,8 @@
 
 + `module_template()` is the default function for `{golem}` module creation. Users will now be able to define a custom `module_template()` function for `add_module()`, allowing to extend `{golem}` with your own module creation function. See ?golem::module_template for more info (#365)
 
++ `sanity_check()` function has been added to check for any 'browser()' or commented  #TODO / #TOFIX / #BUG in the code(#1354 @Swechhya) 
+
 ## New features
 
 + `use_external_*()` function don't open files by default (#404)
