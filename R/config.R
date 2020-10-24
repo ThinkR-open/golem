@@ -47,12 +47,9 @@ get_current_config <- function(
   }
   
   if (!file_exists(path_conf)){
-    ask <- yesno(
-      sprintf(
-        "The %s file doesn't exist, create?", 
-        basename(path_conf)
-      )
-    )
+    ask <- yesno(sprintf(
+      "The %s file doesn't exist, create?", basename(path_conf)
+    ))
     # Return early if the user doesn't allow 
     if (!ask) return(NULL)
     

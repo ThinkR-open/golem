@@ -36,13 +36,11 @@ create_if_needed <- function(
   # If it doesn't exist, ask if we are allowed 
   # to create it
   if (dont_exist){
-    ask <- yesno(
-      sprintf(
-        "The %s %s doesn't exist, create?", 
-        basename(path), 
-        type
-      )
-    )
+    ask <- yesno(sprintf(
+      "The %s %s doesn't exist, create?", 
+      basename(path), 
+      type
+    ))
     # Return early if the user doesn't allow 
     if (!ask) {
       return(FALSE)
