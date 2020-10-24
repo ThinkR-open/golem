@@ -27,11 +27,22 @@ add_r_files <- function(
   where <- path(
     "R", paste0(module, ext, "_", name, ".R")
   )
-  
-  file_create(where)
-  cat_created(where)
-  open_or_go_to(where, open)
-  
+
+  if (!file_exists(where)){
+    file_create(where)
+    
+    file_template(name = name, path = where, export = export, ...)
+    
+    #write_there(" ")
+    cat_created(where)
+    open_or_go_to(where, open)
+  } else {
+    file_already_there_dance(
+      where = where, 
+      open_file = open
+    )
+  }
+    
 }
 
 #' Add fct_ and utils_ files
@@ -83,3 +94,23 @@ add_utils <- function(
   )
 }
 
+#' #' Golem File Template Function
+#
+#' @inheritParams add_r_files
+#' @param path The path to the R script where the module will be written. 
+#' Note that this path will not be set by the user but internally by 
+#' `add_r_files()`. 
+#' @param ph_ui,ph_server Texts to insert inside the modules UI and server. For advanced use.
+#' @param ... Arguments to be passed to the template, via `add_r_files()`
+#'
+#' @return Used for side effect
+#' @export
+#' @seealso [add_module()]
+file_template <- function(name, path, export, ph_ui = " ", ph_server = " "){
+  
+  write_there(sprintf("#' %s R file", name))
+  write_there("#'")
+  write_there("#' @description An R script.")
+  write_there("#'")
+  
+}
