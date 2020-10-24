@@ -111,7 +111,7 @@ file_template <- function(name, path, export, ph_ui = " ", ph_server = " "){
   write_there <- function(...){
     write(..., file = path, append = TRUE)
   }
-  
+
   write_there(sprintf("#' %s R file", name))
   write_there("#'")
   write_there("#' @description An R script.")
