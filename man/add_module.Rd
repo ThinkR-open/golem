@@ -11,6 +11,8 @@ add_module(
   dir_create = TRUE,
   fct = NULL,
   utils = NULL,
+  js = NULL,
+  js_handler = NULL,
   export = FALSE,
   module_template = golem::module_template,
   ...
