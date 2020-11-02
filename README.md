@@ -11,7 +11,7 @@ status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](
 [![CRAN
 status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
 
-# {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" alt="" width="120" />
+# {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
 `{golem}` is an opinionated framework for building production-grade
 shiny applications.
@@ -65,6 +65,25 @@ This package is part of a series of tools for Shiny, which includes:
 ### Cheatsheet
 
   - [{golem} cheatsheet](https://thinkr.fr/golem_cheatsheet_v0.1.pdf)
+
+### Examples apps
+
+These are examples from the community. Please note that they may not
+necessarily be written in a canonical fashion and may have been written
+with different versions of {golem} or {shiny}.
+
+  - <https://github.com/seanhardison1/vcrshiny>
+      - [Link to hosted
+        version](http://seanhardison.shinyapps.io/vcrshiny/)
+  - <https://github.com/CDU-data-science-team/healthcareSPC>
+      - [Link to hosted
+        version](https://involve.nottshc.nhs.uk:8443/open_healthcare_spc/)
+  - <https://github.com/marton-balazs-kovacs/tenzing>
+      - [Link to hosted
+        version](https://martonbalazskovacs.shinyapps.io/tenzing/)
+  - <https://github.com/shahreyar-abeer/cranstars>
+      - [Link to hosted
+        version](https://shahreyar-abeer.shinyapps.io/cranstars/)
 
 ## Installation
 
