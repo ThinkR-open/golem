@@ -24,10 +24,10 @@ Project hooks allow to define a function run just after {golem}
 project creation.
 }
 \examples{
-if (interactive()){
-    my_proj <- function(...){
-        unlink("dev/", TRUE, TRUE)
-    }
-    create_golem("ici", project_template = my_proj)
+if (interactive()) {
+  my_proj <- function(...) {
+    unlink("dev/", TRUE, TRUE)
+  }
+  create_golem("ici", project_template = my_proj)
 }
 }
