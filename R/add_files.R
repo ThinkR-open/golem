@@ -6,6 +6,10 @@
 #' @inheritParams  add_module
 #' @param dir Path to the dir where the file while be created.
 #' @param with_doc_ready Should the default file include `$( document ).ready()`?
+#' @param template Function writing in the created file.
+#' You may overwrite this with your own template function.
+#' @param ... Arguments to be passed to the `template` function.
+#' 
 #' @export
 #' @rdname add_files
 #' @importFrom cli cat_bullet
@@ -13,13 +17,17 @@
 #' @importFrom fs path_abs path file_create file_exists
 #' 
 #' @note `add_ui_server_files` will be deprecated in future version of `{golem}`
+#' 
+#' @seealso [js_handler_template(), js_template(), css_template()]
 add_js_file <- function(
   name, 
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
   dir_create = TRUE, 
-  with_doc_ready = TRUE
+  with_doc_ready = TRUE, 
+  template = golem::js_template,
+  ...
 ){
   attempt::stop_if(
     rlang::is_missing(name),
@@ -54,9 +62,11 @@ add_js_file <- function(
         write(..., file = where, append = TRUE)
       }
       write_there("$( document ).ready(function() {")
-      write_there("  ")
+      template(path = where, ...)
       write_there("});")
-    } 
+    } else {
+      template(path = where, ...)
+    }
     file_created_dance(
       where, 
       after_creation_message_js, 
@@ -76,18 +86,17 @@ add_js_file <- function(
 
 #' @export
 #' @rdname add_files
-#' @param handler_template JS code to be written. Default to \link{handler_template}.
-#' You may overwrite this with your own template function.
-#' @param ... Arguments to be passed to the `module_template` function.
+#' 
 #' @importFrom fs path_abs path file_create file_exists
-#' @seealso [handler_template()]
+#' 
+#' @seealso [js_handler_template()]
 add_js_handler <- function(
   name, 
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
   dir_create = TRUE,
-  handler_template = golem::handler_template,
+  template = golem::js_handler_template,
   ...
 ){
   attempt::stop_if(
@@ -119,7 +128,7 @@ add_js_handler <- function(
     
     file_create(where)
     
-    handler_template(path = where, ...)
+    template(path = where, ...)
     
     file_created_dance(
       where, 
@@ -136,41 +145,7 @@ add_js_handler <- function(
     )
   }
   
-  
-  
 }
-
-
-
-#' Golem's default custom handler template
-#' 
-#' This function does not aim at being called as is by 
-#' users, but to be passed as an argument to the `add_js_handler()` 
-#' function.
-#' 
-#' @inheritParams add_module
-#' @param path The path to the JS script where this template will be written. 
-#' @param type Shiny's custom handler type.
-#' @param js_code JavaScript code to be written in the function.
-#' @return Used for side effect
-#' @rdname add_files
-#' @export
-#' @seealso [add_js_handler()]
-handler_template <- function(path, type = "fun", js_code = " ") {
-  write_there <- function(...){
-    write(..., file = path, append = TRUE)
-  }
-  
-  write_there("$( document ).ready(function() {")
-  write_there(sprintf("  Shiny.addCustomMessageHandler('%s', function(arg) {", type))
-  write_there(js_code)
-  write_there("  })")
-  write_there("});")
-}
-
-
-
-
 
 #' @export
 #' @rdname add_files
@@ -417,7 +392,9 @@ add_css_file <- function(
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
-  dir_create = TRUE
+  dir_create = TRUE, 
+  template = golem::css_template,
+  ...
 ){
   attempt::stop_if(
     rlang::is_missing(name),
@@ -449,6 +426,7 @@ add_css_file <- function(
   
   if (!file_exists(where)){
     file_create(where)
+    template(path = where, ...)
     file_created_dance(
       where, 
       after_creation_message_css, 
