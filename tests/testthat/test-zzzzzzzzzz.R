@@ -1,7 +1,7 @@
-# For setting back old usethis settings
-if (dir.exists(orig_test)){
+# # For setting back old usethis settings
+try({
   usethis::proj_set(orig_test)
-}
+  unlink(pkg, TRUE, TRUE)
+})
 
-unlink(pkg, TRUE, TRUE)
 
