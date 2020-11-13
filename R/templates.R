@@ -62,7 +62,7 @@ js_template <- function(
     write(..., file = path, append = TRUE)
   }
   
-  write_there(js_code)
+  write_there(code)
 }
 
 #' @export
