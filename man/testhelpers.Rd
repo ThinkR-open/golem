@@ -13,7 +13,7 @@ expect_shinytaglist(object)
 
 expect_html_equal(ui, html)
 
-expect_running(sleep)
+expect_running(sleep, testdir = "apptest")
 }
 \arguments{
 \item{object}{the object to test}

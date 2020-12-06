@@ -63,17 +63,17 @@ expect_html_equal <- function(ui, html){
 #' @export
 #' @rdname testhelpers
 #' @param sleep number of seconds
-#' @importFrom testthat skip_on_cran skip_on_travis skip_on_appveyor expect_true
-expect_running <- function(sleep){
+#' @importFrom testthat skip_on_cran expect_true
+expect_running <- function(sleep, testdir = 'apptest'){
   skip_on_cran()
-  skip_on_travis()
-  skip_on_appveyor()
   x <- processx::process$new(
-    "R", 
+    command = file.path(Sys.getenv('R_HOME'),'bin/R'), 
     c(
       "-e", 
       "pkgload::load_all(here::here());run_app()"
-    )
+    ),
+    stderr  = file.path(testdir,'err.txt'),
+    stdout  = file.path(testdir,'out.txt')
   )
   Sys.sleep(sleep)
   expect_true(x$is_alive())
