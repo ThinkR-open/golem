@@ -348,7 +348,7 @@ make_action_button <- function(tag, inputId = NULL) {
   # handle id
   if (!is.null(inputId)) {
     if (!is.null(tag$attribs$id)) {
-      cli::cat_bullet(bullet = "circle", bullet_col = "red",
+      cli::cat_bullet(bullet = "bullet", bullet_col = "red",
         paste(
           "tag already has an id. Please use input$", tag$attribs$id, "to access it from the server side. inputId will be ignored.")
       )
