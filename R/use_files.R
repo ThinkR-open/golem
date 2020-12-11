@@ -430,7 +430,7 @@ use_internal_html_template <- function(
 }
 
 #' @export
-#' @rdname use_file
+#' @rdname use_files
 #' @importFrom fs path_abs file_exists
 use_internal_file <- function(
   path,

@@ -8,6 +8,7 @@
 \alias{use_internal_js_file}
 \alias{use_internal_css_file}
 \alias{use_internal_html_template}
+\alias{use_internal_file}
 \title{Use Files}
 \usage{
 use_external_js_file(
@@ -67,6 +68,15 @@ use_internal_css_file(
 use_internal_html_template(
   path,
   name = "template.html",
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  dir_create = TRUE
+)
+
+use_internal_file(
+  path,
+  name,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
