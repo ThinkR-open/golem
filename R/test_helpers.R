@@ -66,12 +66,12 @@ expect_html_equal <- function(ui, html){
 #' @importFrom testthat skip_on_cran expect_true
 expect_running <- function(sleep, testdir = 'apptest'){
   skip_on_cran()
-  
+  skip_if_not(interactive())
   test_pkg_stem <- gsub('/tests/testthat$','',here::here())
   test_pkg_name <- tools::file_path_sans_ext(basename(test_pkg_stem))
   
   x <- processx::process$new(
-    command = normalizePath(file.path(Sys.getenv("R_HOME"),'R')), 
+    command = "R", 
     c(
       "-e", 
       sprintf("library(%s);run_app()",test_pkg_name)
