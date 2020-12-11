@@ -529,6 +529,7 @@ docker_ignore_add <- function(
   pkg = get_golem_wd()
 ){
   
+  
   path <- fs::path(
     pkg,
     ".dockerignore"
@@ -537,6 +538,7 @@ docker_ignore_add <- function(
   if (!fs::file_exists(
     path
   )){
+    usethis::use_build_ignore(".dockerignore")
     fs::file_create(path)
     write_ignore <- function(content){
       write(content, path, append = TRUE)
