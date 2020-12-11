@@ -492,7 +492,7 @@ add_html_template <- function(
     )
     write_there("  </head>")
     write_there("  <body>")
-    write_there("    ")
+    write_there("    {{ body }}")
     write_there("  </body>")
     write_there("</html>")
     write_there("")
