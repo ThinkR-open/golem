@@ -65,19 +65,21 @@ expect_html_equal <- function(ui, html){
 #' @param sleep number of seconds
 #' @importFrom testthat skip_on_cran expect_true
 expect_running <- function(sleep, testdir = 'apptest'){
+  
   skip_on_cran()
-  skip_if_not(interactive())
-  test_pkg_stem <- gsub('/tests/testthat$','',here::here())
-  test_pkg_name <- tools::file_path_sans_ext(basename(test_pkg_stem))
+  
+  if (Sys.getenv("TESTTHAT_PKG" ) == ""){
+    pkg_name <- pkgload::pkg_name()
+  } else {
+    pkg_name <- Sys.getenv("TESTTHAT_PKG" )
+  }
   
   x <- processx::process$new(
-    command = "R", 
+    command = normalizePath(file.path(Sys.getenv("R_HOME"),'R')),
     c(
-      "-e", 
-      sprintf("library(%s);run_app()",test_pkg_name)
-    ),
-    stderr  = file.path(testdir,'err.txt'),
-    stdout  = file.path(testdir,'out.txt')
+      "-e",
+      sprintf("library(%s, lib = '%s');run_app()", pkg_name, .libPaths())
+    )
   )
   Sys.sleep(sleep)
   expect_true(x$is_alive())
