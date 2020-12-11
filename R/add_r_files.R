@@ -28,14 +28,22 @@ add_r_files <- function(
     "R", paste0(module, ext, "_", name, ".R")
   )
   
-  file_create(where)
-
-  if(file_exists(where) & is.null(module)) {
-    # Must be a function or utility file being created
-    append_roxygen_comment(name = name, path = where, ext = ext)
+  if (!file_exists(where)){
+    file_create(where)
+    
+    if(file_exists(where) & is.null(module)) {
+      # Must be a function or utility file being created
+      append_roxygen_comment(name = name, path = where, ext = ext)
+    }
+    
+    cat_created(where)
+  } else {
+    file_already_there_dance(
+      where = where, 
+      open_file = open
+    )
   }
-
-  cat_created(where)
+  
   open_or_go_to(where, open)
   
 }
@@ -100,7 +108,7 @@ add_utils <- function(
 #' 
 #' @rdname file_creation
 #' @noRd
-append_roxygen_comment <- function(name, path, ext) {
+append_roxygen_comment <- function(name, path, ext, export = FALSE) {
   write_there <- function(...){
     write(..., file = path, append = TRUE)
   }
@@ -113,13 +121,16 @@ append_roxygen_comment <- function(name, path, ext) {
     file_type = "function"
   }
   
-  write_there(sprintf("#' %s %s", name, file_type))
+  write_there(sprintf("#' %s ", name))
   write_there("#'")
-  write_there(sprintf("#' @description A shiny %s", file_type))
-  write_there("#'")
-  write_there(sprintf("#' @param Internal parameters for the %s.", file_type))
+  write_there(sprintf("#' @description A %s function", ext))
   write_there("#'")
   write_there(sprintf("#' @return The return value, if any, from executing the %s.", file_type))
   write_there("#'")
-  write_there("#' @export")
+  if (export){
+    write_there("#' @export")
+  } else {
+    write_there("#' @noRd")
+  }
+  
 }
