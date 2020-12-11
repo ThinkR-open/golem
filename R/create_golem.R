@@ -133,6 +133,11 @@ create_golem <- function(
   
   old <- setwd(path)
   use_latest_dependencies()
+  
+  cat_rule("Appending .Rprofile")
+  write("options(shiny.autoload.r=FALSE)", ".Rprofile", append = TRUE)
+  cat_green_tick("Appended")
+  
   setwd(old)
   
   cat_rule("Done")
