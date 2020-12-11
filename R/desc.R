@@ -32,7 +32,7 @@ fill_desc <- function(
     file = path(path, "DESCRIPTION")
   )
   
-   if(!is.character(author_orcid)){
+   if(!is.null(author_orcid) & !is.character(author_orcid)){
     
     stop("ORCID ID must be provided as a character object")
     
