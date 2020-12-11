@@ -528,6 +528,7 @@ dock_from_desc <- function(
 docker_ignore_add <- function(
   pkg = get_golem_wd()
 ){
+  
   path <- fs::path(
     pkg,
     ".dockerignore"
@@ -537,20 +538,20 @@ docker_ignore_add <- function(
     path
   )){
     fs::file_create(path)
-  }
-  write_ignore <- function(content){
-    write(content, path, append = TRUE)
-  }
-  for (i in c(
-    ".RData", 
-    ".Rhistory", 
-    ".git", 
-    ".gitignore", 
-    "manifest.json", 
-    "rsconnect/",
-    "Rproj.user"
-  )) {
-    write_ignore(i)
-  }
+    write_ignore <- function(content){
+      write(content, path, append = TRUE)
+    }
+    for (i in c(
+      ".RData", 
+      ".Rhistory", 
+      ".git", 
+      ".gitignore", 
+      "manifest.json", 
+      "rsconnect/",
+      "Rproj.user"
+    )) {
+      write_ignore(i)
+    }
+  } 
   
 }
