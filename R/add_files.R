@@ -362,7 +362,7 @@ add_js_output_binding <- function(
     write_there("  }")
     # end
     write_there("});")
-    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", raw_name))
+    write_there(sprintf("Shiny.outputBindings.register(%s, 'shiny.whatever');", raw_name))
     
     
     file_created_dance(
