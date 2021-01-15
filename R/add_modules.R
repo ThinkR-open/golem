@@ -56,11 +56,11 @@ add_module <- function(
   }
   
   if (!is.null(js)){
-    add_js_file(js, module = name, open = open)
+    add_js_file(js, pkg = pkg, open = open)
   }
   
   if (!is.null(js_handler)){
-    add_js_handler(js_handler, module = name, open = open)
+    add_js_handler(js_handler, pkg = pkg, open = open)
   }
   
   where <- path(
