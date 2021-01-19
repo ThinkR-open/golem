@@ -36,6 +36,7 @@ library(desc, lib.loc = temp_lib)
 library(testthat, lib.loc = temp_lib)
 
 cli::cat_rule("Install crystalmountains")
+
 remotes::install_github("thinkr-open/crystalmountains")
 
 cli::cat_rule("Copy golem to temp_golem and install it")
