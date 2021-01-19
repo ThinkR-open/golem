@@ -31,12 +31,20 @@ add_module(
 
 \item{utils}{If specified, creates a mod_utils file.}
 
+<<<<<<< HEAD
 \item{js, js_handler}{Name of a javascript or javascript handler file to create
 along the module.}
 
 \item{export}{Logical. Should the module be exported? Default is \code{FALSE}.}
 
 \item{module_template}{The module template function.}
+=======
+\item{js, js_handler}{If specified, creates a module related JavaScript file.}
+
+\item{export}{Logical. Should the module be exported? Default is \code{FALSE}.}
+
+\item{module_template}{Function that serves as a module template.}
+>>>>>>> devtools check pass
 
 \item{...}{Arguments to be passed to the \code{module_template} function.}
 }
