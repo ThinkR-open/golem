@@ -58,12 +58,7 @@ cli::cat_rule("Install crystalmountains")
 install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
 
 
-cli::cat_rule("Copy golem to temp_golem and install it")
-dir.create(temp_golem, recursive = TRUE)
-fs::dir_copy(".", temp_golem, overwrite = TRUE)
-old_wd <- setwd(temp_golem)
-install_local(lib = temp_lib, upgrade = "never", force = TRUE)
-cat_ok()
+cli::cat_rule("Load pack")
 
 library(desc, lib.loc = temp_lib)
 library(testthat, lib.loc = temp_lib)
@@ -83,6 +78,7 @@ create_golem(
 expect_true(
   dir.exists(temp_app)
 )
+
 
 usethis::use_dev_package("golem")
 

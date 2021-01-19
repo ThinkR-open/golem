@@ -94,9 +94,12 @@ jobs:
           _R_CHECK_CRAN_INCOMING_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+<<<<<<< HEAD
         
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v3.x
+=======
+>>>>>>> test Github Actions
 
       - name: Manual Test
         run: source("inst/mantests/build.R")
@@ -113,8 +116,11 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+<<<<<<< HEAD
           
       - uses: actions/upload-artifact@v1
         with:
           name: golem
           path: golem/
+=======
+>>>>>>> test Github Actions
