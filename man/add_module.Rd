@@ -27,9 +27,9 @@ add_module(
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
-\item{fct}{The name of the fct file.}
+\item{fct}{If specified, creates a mod_fct file.}
 
-\item{utils}{The name of the utils file.}
+\item{utils}{If specified, creates a mod_utils file.}
 
 \item{js, js_handler}{Name of a javascript or javascript handler file to create
 along the module.}
