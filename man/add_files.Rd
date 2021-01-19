@@ -108,7 +108,5 @@ These functions can be used outside of a {golem} project.
 \code{add_ui_server_files} will be deprecated in future version of \code{{golem}}
 }
 \seealso{
-\code{\link[=js_handler_template(), js_template(), css_template]{js_handler_template(), js_template(), css_template()}}
-
 \code{\link[=js_handler_template]{js_handler_template()}}
 }
