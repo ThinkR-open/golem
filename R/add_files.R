@@ -17,8 +17,6 @@
 #' @importFrom fs path_abs path file_create file_exists
 #' 
 #' @note `add_ui_server_files` will be deprecated in future version of `{golem}`
-#' 
-#' @seealso [js_handler_template(), js_template(), css_template()]
 add_js_file <- function(
   name, 
   pkg = get_golem_wd(), 

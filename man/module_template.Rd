@@ -4,7 +4,7 @@
 \alias{module_template}
 \title{Golem Module Template Function}
 \usage{
-module_template(name, path, export, ph_ui = " ", ph_server = " ")
+module_template(name, path, export, ph_ui = " ", ph_server = " ", ...)
 }
 \arguments{
 \item{name}{The name of the module}
