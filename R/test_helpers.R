@@ -64,7 +64,7 @@ expect_html_equal <- function(ui, html){
 #' @rdname testhelpers
 #' @param sleep number of seconds
 #' @importFrom testthat skip_on_cran expect_true
-expect_running <- function(sleep, testdir = 'apptest'){
+expect_running <- function(sleep){
   
   skip_on_cran()
   
