@@ -2,7 +2,7 @@
 
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
-# golem 0.2.9000+
+# golem 0.3.0
 
 ## New functions
 
@@ -18,11 +18,21 @@
 
 + `use_external_file()` allows to add any file to the `www` folder (#295)
 
++ `use_internal_()` functions allow to any file from the current computer to the `www` folder (@KasperThystrup, #529)
+
++ Every `{golem}` project now have a `project_hook` that is launched after the project creation.
+
 + `module_template()` is the default function for `{golem}` module creation. Users will now be able to define a custom `module_template()` function for `add_module()`, allowing to extend `{golem}` with your own module creation function. See ?golem::module_template for more info (#365)
+
++ `add_js_` and `add_css_` functions now have a template function, allowing to pass a file constructor.
+
++ The new `add_html_template()` creates an htmlTemplate.
 
 + `sanity_check()` function has been added to check for any 'browser()' or commented  #TODO / #TOFIX / #BUG in the code(#1354 @Swechhya) 
 
 ## New features
+
++ The modules are now created with the new skeleton when the installed version of `{shiny}` is >= 1.5.0.
 
 + `use_external_*()` function don't open files by default (#404)
 
@@ -34,9 +44,9 @@
 
 + Default tests now test for functions formals (#437)
 
-+ You can now pass arguments to interal roxygenise() & load_all() (#467)
++ You can now pass arguments to internal roxygenise() & load_all() (#467)
 
-+ Bundle_resources() now handle subfolders (#446)
++ `Bundle_resources()` now handle subfolders (#446)
 
 + `run_app()` now includes the default arguments of `shinyApp()` (#254, @chasemc)
 
@@ -44,7 +54,11 @@
 
 + `{golem}` app now comes with a meta tags "app-builder", which default to "golem", and that can be changed or turn off in `bundle_resources()`
 
-+ `with_golem_options` now explicit calls `print` on the `app` object, solving some issues with benchmarking the application. This explicit print can be turned off by setting `print` to FALSE in `with_golem_options` (#148)
++ `with_golem_options` can now explicit calls `print` on the `app` object, solving some issues with benchmarking the application. This explicit print can be turned off by setting `print` to FALSE in `with_golem_options` (#148)
+
++ `dockerignore` is now available
+
++ The `add_helpers` and `add_utils` now have roxygen comments (Richard Pilbery, #330)
 
 ## Soft deprecated
 
@@ -53,6 +67,8 @@
 ## Breaking changes
 
 + `add_dockerfile*` function now return the `{dockerfiler}` object instead of the path to it. It allows to modify the Dockerfile object programmatically. (#493) 
+
++ The `get_golem_config` now first look for a `GOLEM_CONFIG_ACTIVE` before looking for `R_CONFIG_ACTIVE` (#563)
 
 ## Bug fix
 
@@ -76,6 +92,12 @@
 
 + app_config, DESC and golem-config.yml are now updated whenever you change the name of the package using a golem function (#469 )
 
++ `test_recommended` now work in every case (hopefully)
+
+- `usethis::use_mit_license` does not have the `name` argument anymore so if fits new version of `{usethis}` (#594)
+
+- Typo fix preventing `invoke_js("prompt")` and `invoke_js("confirm")` to work (#606)
+
 ## Internal changes
 
 + `document_and_reload()` now has `export_all = FALSE,helpers = FALSE,attach_testthat = FALSE`, allowing the function to behave more closely to what library() does (#399)
@@ -83,7 +105,7 @@
 + Dockerfile generation now removes the copied file and tar.gz
 
 
-# golem 0.1.9000+
+# golem 0.2.1
 
 ## New functions
 
