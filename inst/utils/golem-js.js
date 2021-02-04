@@ -49,13 +49,13 @@ $( document ).ready(function() {
   
   Shiny.addCustomMessageHandler('prompt', function(args) {
     var input = prompt(args.message);
-    Shiny.setInputValues(args.id, input);
+    Shiny.setInputValue(args.id, input);
     return input;
   });
   
   Shiny.addCustomMessageHandler('confirm', function(args) {
     var input = confirm(args.message);
-    Shiny.setInputValues(args.id, input);
+    Shiny.setInputValue(args.id, input);
     return input;
   });
   
