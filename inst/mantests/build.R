@@ -69,6 +69,7 @@ expect_true(
 )
 
 usethis::use_dev_package("golem")
+
 setwd(temp_app)
 here::set_here(getwd())
 usethis::use_build_ignore(".here")
