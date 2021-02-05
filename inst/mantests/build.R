@@ -20,17 +20,11 @@ fakename <- sprintf(
 cli::cat_rule("Set up for lib")
 
 if (Sys.getenv("CI", "local") == "local"){
-  
   temp_lib <- .libPaths()
-  
 } else {
-  
   temp_lib <- file.path(tempdir(), "temp_lib")
   .libPaths(c(temp_lib,.libPaths()))
-  
 }
-
-
 
 # This will be our golem app
 temp_app <- file.path(tempdir(),fakename, "golemmetrics")
@@ -42,7 +36,7 @@ if (dir.exists(temp_app)) {
 dir.create(temp_lib, recursive = TRUE)
 
 install.packages(
-  c("remotes", "desc", "testthat", "cli", "fs"), 
+  c("remotes", "desc", "testthat", "cli", "fs", "whereami"), 
   lib = temp_lib, 
   repo = "https://cran.rstudio.com/"
 )
@@ -72,6 +66,7 @@ library(golem, lib.loc = )
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
 
+whereami::cat_where(whereami::whereami())
 create_golem(
   temp_app, 
   open = FALSE, 
@@ -82,11 +77,16 @@ expect_true(
   dir.exists(temp_app)
 )
 
+whereami::cat_where(whereami::whereami())
 usethis::use_dev_package("golem")
 
 setwd(temp_app)
-here::set_here(getwd())
+
+whereami::cat_where(whereami::whereami())
+here::set_here(temp_app)
+whereami::cat_where(whereami::whereami())
 usethis::use_build_ignore(".here")
+whereami::cat_where(whereami::whereami())
 devtools::check()
 cat_ok()
 
