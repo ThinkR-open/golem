@@ -21,6 +21,7 @@ cli::cat_rule("Set up for lib")
 
 if (Sys.getenv("CI", "local") == "local"){
 <<<<<<< HEAD
+<<<<<<< HEAD
   temp_lib <- .libPaths()
 } else {
   temp_lib <- file.path(tempdir(), "temp_lib")
@@ -28,18 +29,20 @@ if (Sys.getenv("CI", "local") == "local"){
 }
 =======
   
+=======
+>>>>>>> more logs
   temp_lib <- .libPaths()
-  
 } else {
-  
   temp_lib <- file.path(tempdir(), "temp_lib")
   .libPaths(c(temp_lib,.libPaths()))
-  
 }
 
+<<<<<<< HEAD
 
 >>>>>>> upload
 
+=======
+>>>>>>> more logs
 # This will be our golem app
 temp_app <- file.path(tempdir(),fakename, "golemmetrics")
 
@@ -99,6 +102,7 @@ cli::cat_rule("Creating a golem based app")
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 # We'll need to install golem from the current branch because 
 # otherwise the dependency tree breaks
@@ -109,6 +113,9 @@ library(golem, lib.loc = temp_lib)
 
 =======
 >>>>>>> upload
+=======
+whereami::cat_where(whereami::whereami())
+>>>>>>> more logs
 create_golem(
   temp_app, 
   open = FALSE, 
@@ -119,11 +126,16 @@ expect_true(
   dir.exists(temp_app)
 )
 
+<<<<<<< HEAD
 
+=======
+whereami::cat_where(whereami::whereami())
+>>>>>>> more logs
 usethis::use_dev_package("golem")
 
 setwd(temp_app)
 
+<<<<<<< HEAD
 
 here::set_here(temp_app)
 
@@ -137,6 +149,14 @@ cat(
 )
 
 #devtools::check()
+=======
+whereami::cat_where(whereami::whereami())
+here::set_here(temp_app)
+whereami::cat_where(whereami::whereami())
+usethis::use_build_ignore(".here")
+whereami::cat_where(whereami::whereami())
+devtools::check()
+>>>>>>> more logs
 cat_ok()
 
 
