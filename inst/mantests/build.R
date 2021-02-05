@@ -73,7 +73,7 @@ cli::cat_rule("Creating a golem based app")
 # We'll need to install golem from the current branch because 
 # otherwise the dependency tree breaks
 remove.packages("golem")
-install_github("ThinkR-open/golem", ref = Sys.getenv("GITHUB_REF_SLUG", "dev"), force = TRUE)
+install_github("ThinkR-open/golem", ref = Sys.getenv("GITHUB_BASE_REF", "dev"), force = TRUE)
 library(golem, lib.loc = temp_lib)
 >>>>>>> testing with renaming of repo
 
