@@ -94,12 +94,18 @@ cli::cat_rule("Load pack")
 
 library(desc, lib.loc = temp_lib)
 library(testthat, lib.loc = temp_lib)
+<<<<<<< HEAD
 library(golem, lib.loc = )
 >>>>>>> upload
+=======
+library(golem, lib.loc = temp_lib)
+library(whereami, lib.loc = temp_lib)
+>>>>>>> library(whereami, lib.loc = temp_lib)
 
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -116,6 +122,9 @@ library(golem, lib.loc = temp_lib)
 =======
 whereami::cat_where(whereami::whereami())
 >>>>>>> more logs
+=======
+cat_where(whereami())
+>>>>>>> library(whereami, lib.loc = temp_lib)
 create_golem(
   temp_app, 
   open = FALSE, 
@@ -127,14 +136,19 @@ expect_true(
 )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 whereami::cat_where(whereami::whereami())
 >>>>>>> more logs
+=======
+cat_where(whereami())
+>>>>>>> library(whereami, lib.loc = temp_lib)
 usethis::use_dev_package("golem")
 
 setwd(temp_app)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 here::set_here(temp_app)
@@ -151,10 +165,13 @@ cat(
 #devtools::check()
 =======
 whereami::cat_where(whereami::whereami())
+=======
+cat_where(whereami())
+>>>>>>> library(whereami, lib.loc = temp_lib)
 here::set_here(temp_app)
-whereami::cat_where(whereami::whereami())
+cat_where(whereami())
 usethis::use_build_ignore(".here")
-whereami::cat_where(whereami::whereami())
+cat_where(whereami())
 devtools::check()
 >>>>>>> more logs
 cat_ok()
