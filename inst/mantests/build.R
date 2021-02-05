@@ -109,6 +109,7 @@ cli::cat_rule("Creating a golem based app")
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 # We'll need to install golem from the current branch because 
 # otherwise the dependency tree breaks
@@ -125,6 +126,9 @@ whereami::cat_where(whereami::whereami())
 =======
 cat_where(whereami())
 >>>>>>> library(whereami, lib.loc = temp_lib)
+=======
+
+>>>>>>> remove wherami
 create_golem(
   temp_app, 
   open = FALSE, 
@@ -137,6 +141,7 @@ expect_true(
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 whereami::cat_where(whereami::whereami())
@@ -144,10 +149,13 @@ whereami::cat_where(whereami::whereami())
 =======
 cat_where(whereami())
 >>>>>>> library(whereami, lib.loc = temp_lib)
+=======
+>>>>>>> remove wherami
 usethis::use_dev_package("golem")
 
 setwd(temp_app)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -168,10 +176,20 @@ whereami::cat_where(whereami::whereami())
 =======
 cat_where(whereami())
 >>>>>>> library(whereami, lib.loc = temp_lib)
+=======
+
+>>>>>>> remove wherami
 here::set_here(temp_app)
-cat_where(whereami())
+
 usethis::use_build_ignore(".here")
-cat_where(whereami())
+
+usethis::use_dev_package("golem")
+
+cat(
+  readLines("DESCRIPTION"),
+  sep = "\n"
+)
+
 devtools::check()
 >>>>>>> more logs
 cat_ok()
