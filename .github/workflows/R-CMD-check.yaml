@@ -117,10 +117,17 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> upload
           
       - uses: actions/upload-artifact@v1
         with:
           name: golem
+<<<<<<< HEAD
           path: golem/
 =======
 >>>>>>> test Github Actions
+=======
+          path: golem/
+>>>>>>> upload

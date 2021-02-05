@@ -20,11 +20,25 @@ fakename <- sprintf(
 cli::cat_rule("Set up for lib")
 
 if (Sys.getenv("CI", "local") == "local"){
+<<<<<<< HEAD
   temp_lib <- .libPaths()
 } else {
   temp_lib <- file.path(tempdir(), "temp_lib")
   .libPaths(c(temp_lib,.libPaths()))
 }
+=======
+  
+  temp_lib <- .libPaths()
+  
+} else {
+  
+  temp_lib <- file.path(tempdir(), "temp_lib")
+  .libPaths(c(temp_lib,.libPaths()))
+  
+}
+
+
+>>>>>>> upload
 
 # This will be our golem app
 temp_app <- file.path(tempdir(),fakename, "golemmetrics")
@@ -50,13 +64,18 @@ try({remove.packages("golem")})
 # otherwise the dependency tree breaks
 install_github(
   "ThinkR-open/golem", 
+<<<<<<< HEAD
   ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
+=======
+  ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
+>>>>>>> upload
   force = TRUE, lib = temp_lib
 )
 
 cli::cat_rule("Install crystalmountains")
 install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
 
+<<<<<<< HEAD
 
 cli::cat_rule("Load pack")
 
@@ -64,10 +83,21 @@ library(desc, lib.loc = temp_lib)
 library(testthat, lib.loc = temp_lib)
 library(golem, lib.loc = temp_lib)
 library(whereami, lib.loc = temp_lib)
+=======
+install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
+
+
+cli::cat_rule("Load pack")
+
+library(desc, lib.loc = temp_lib)
+library(testthat, lib.loc = temp_lib)
+library(golem, lib.loc = )
+>>>>>>> upload
 
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 # We'll need to install golem from the current branch because 
@@ -77,6 +107,8 @@ install_github("ThinkR-open/golem", ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
 library(golem, lib.loc = temp_lib)
 >>>>>>> testing with renaming of repo
 
+=======
+>>>>>>> upload
 create_golem(
   temp_app, 
   open = FALSE, 
