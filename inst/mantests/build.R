@@ -73,7 +73,7 @@ library(whereami, lib.loc = temp_lib)
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
 
-cat_where(whereami())
+
 create_golem(
   temp_app, 
   open = FALSE, 
@@ -84,15 +84,22 @@ expect_true(
   dir.exists(temp_app)
 )
 
-cat_where(whereami())
 usethis::use_dev_package("golem")
+
 setwd(temp_app)
 
-cat_where(whereami())
+
 here::set_here(temp_app)
-cat_where(whereami())
+
 usethis::use_build_ignore(".here")
-cat_where(whereami())
+
+usethis::use_dev_package("golem")
+
+cat(
+  readLines("DESCRIPTION"),
+  sep = "\n"
+)
+
 devtools::check()
 cat_ok()
 
