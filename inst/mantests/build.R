@@ -68,10 +68,14 @@ try({remove.packages("golem")})
 install_github(
   "ThinkR-open/golem", 
 <<<<<<< HEAD
+<<<<<<< HEAD
   ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
 =======
   ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
 >>>>>>> upload
+=======
+  ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
+>>>>>>> No check
   force = TRUE, lib = temp_lib
 )
 
@@ -190,8 +194,12 @@ cat(
   sep = "\n"
 )
 
+<<<<<<< HEAD
 devtools::check()
 >>>>>>> more logs
+=======
+#devtools::check()
+>>>>>>> No check
 cat_ok()
 
 
