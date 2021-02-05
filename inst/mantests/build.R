@@ -50,7 +50,7 @@ try({remove.packages("golem")})
 # otherwise the dependency tree breaks
 install_github(
   "ThinkR-open/golem", 
-  ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
+  ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
   force = TRUE, lib = temp_lib
 )
 
@@ -100,7 +100,7 @@ cat(
   sep = "\n"
 )
 
-devtools::check()
+#devtools::check()
 cat_ok()
 
 
