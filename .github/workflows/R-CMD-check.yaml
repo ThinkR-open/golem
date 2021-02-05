@@ -113,3 +113,8 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+          
+      - uses: actions/upload-artifact@v1
+        with:
+          name: golem
+          path: golem/

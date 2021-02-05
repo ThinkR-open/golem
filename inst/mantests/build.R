@@ -1,22 +1,39 @@
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
 
+# We prevent the random name from having 
+# ui or server inside it 
+safe_let <- function(){
+  letters[-c(5,9,18,19,21,22)]
+}
+
+## fake package
+fakename <- sprintf(
+  "%s%s",
+  paste0(sample(safe_let(), 10, TRUE), collapse = ""),
+  gsub("[ :-]", "", Sys.time())
+)
+
 # Just so that I can use this script locally too,
 # I set a temporary lib
 # 
 cli::cat_rule("Set up for lib")
 
-temp_lib <- file.path(tempdir(), "temp_lib")
-
-# This will be our mock golem
-temp_golem <- file.path(tempdir(), "temp_golem")
-
-if (dir.exists(temp_golem)) {
-  unlink(temp_golem, TRUE, TRUE)
+if (Sys.getenv("CI", "local") == "local"){
+  
+  temp_lib <- .libPaths()
+  
+} else {
+  
+  temp_lib <- file.path(tempdir(), "temp_lib")
+  .libPaths(c(temp_lib,.libPaths()))
+  
 }
 
+
+
 # This will be our golem app
-temp_app <- file.path(tempdir(), "golemmetrics")
+temp_app <- file.path(tempdir(),fakename, "golemmetrics")
 
 if (dir.exists(temp_app)) {
   unlink(temp_app, TRUE, TRUE)
@@ -30,13 +47,21 @@ install.packages(
   repo = "https://cran.rstudio.com/"
 )
 
-cli::cat_rule("Load pack")
+cli::cat_rule("Install golem")
+
 library(remotes, lib.loc = temp_lib)
-library(desc, lib.loc = temp_lib)
-library(testthat, lib.loc = temp_lib)
+
+try({remove.packages("golem")})
+# We'll need to install golem from the current branch because 
+# otherwise the dependency tree breaks
+install_github(
+  "ThinkR-open/golem", 
+  ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
+  force = TRUE, lib = temp_lib
+)
 
 cli::cat_rule("Install crystalmountains")
-remotes::install_github("thinkr-open/crystalmountains")
+install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
 
 
 cli::cat_rule("Copy golem to temp_golem and install it")
@@ -46,24 +71,18 @@ old_wd <- setwd(temp_golem)
 install_local(lib = temp_lib, upgrade = "never", force = TRUE)
 cat_ok()
 
-# Making sure we have the current version
-cli::cat_rule("Checking golem version")
-expect_equal(
-  packageVersion("golem", lib = temp_lib),
-  desc_get_version()
-)
-cat_ok()
+library(desc, lib.loc = temp_lib)
+library(testthat, lib.loc = temp_lib)
+library(golem, lib.loc = )
 
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
 
-# We'll need to install golem from the current branch because 
-# otherwise the dependency tree breaks
-remove.packages("golem")
-install_github("ThinkR-open/golem", ref = Sys.getenv("GITHUB_BASE_REF", "dev"), force = TRUE)
-library(golem, lib.loc = temp_lib)
-
-create_golem(temp_app, open = FALSE, project_hook = crystalmountains::golem_hook)
+create_golem(
+  temp_app, 
+  open = FALSE, 
+  project_hook = crystalmountains::golem_hook
+)
 
 expect_true(
   dir.exists(temp_app)
@@ -178,7 +197,7 @@ cat_ok()
 
 cli::cat_rule("Create Common Files")
 
-usethis::use_mit_license( name = "Golem User" )  # You can set another license here
+usethis::use_mit_license( "Golem User" ) 
 
 expect_equal(
   desc::desc_get_field("License"), 
@@ -306,6 +325,10 @@ remotes::install_local(targz)
 golem::add_dockerfile()
 system("docker build -t golemmetrics .")
 cat_ok()
+
+# Create a new folder
+dir.create("golem")
+fs::dir_copy(getwd(), "golem")
 
 # Restore old wd
 setwd(old_wd)
