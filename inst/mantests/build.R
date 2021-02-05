@@ -57,12 +57,19 @@ cat_ok()
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
 
+# We'll need to install golem from the current branch because 
+# otherwise the dependency tree breaks
+remove.packages("golem")
+install_github("thinkr-open/golem", ref = Sys.getenv("GITHUB_REF_SLUG", "dev"))
 library(golem, lib.loc = temp_lib)
 
 create_golem(temp_app, open = FALSE, project_hook = crystalmountains::golem_hook)
+
 expect_true(
   dir.exists(temp_app)
 )
+
+usethis::use_dev_package("golem")
 setwd(temp_app)
 here::set_here(getwd())
 usethis::use_build_ignore(".here")
