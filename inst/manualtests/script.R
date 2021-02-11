@@ -15,7 +15,7 @@ library(testthat)
 golem::create_golem( "gogolele", open = FALSE)
 setwd("/tmp/gogolele/")
 
-usethis::use_mit_license("Golem")
+usethis::use_mit_license(copyright_holder = "Golem")
 devtools::check()
 
 golem::set_golem_options()

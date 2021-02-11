@@ -61,7 +61,7 @@ Imports:
     rstudioapi,
     shiny,
     testthat,
-    usethis(>= 1.6.0),
+    usethis(>= 2.0.0),
     utils,
     yaml
 Suggests:
