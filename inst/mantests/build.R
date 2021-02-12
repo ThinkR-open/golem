@@ -55,15 +55,9 @@ install_github(
 )
 
 cli::cat_rule("Install crystalmountains")
-<<<<<<< HEAD
-
 install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
 
 
-=======
-install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
-
->>>>>>> b2b702a46baba178b6f28f847438ae342bf5ab2b
 cli::cat_rule("Load pack")
 
 library(desc, lib.loc = temp_lib)
@@ -85,11 +79,9 @@ expect_true(
   dir.exists(temp_app)
 )
 
-<<<<<<< HEAD
+
 usethis::use_dev_package("golem")
 
-=======
->>>>>>> b2b702a46baba178b6f28f847438ae342bf5ab2b
 setwd(temp_app)
 
 
