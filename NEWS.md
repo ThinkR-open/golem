@@ -62,6 +62,8 @@
 
 + `dev/03_dev.R` now has `devtools::build()` (#603)
 
++ `detach_all_attached()` is now silent (#605)
+
 ## Soft deprecated
 
 + `add_ui_server_files()` is now signaled as deprecated. Please comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to be kept inside the package

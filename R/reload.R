@@ -18,6 +18,7 @@ detach_all_attached <- function(){
     ), 
     silent = TRUE
   )
+  return(invisible(TRUE))
 }
 
 
