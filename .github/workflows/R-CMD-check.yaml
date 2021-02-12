@@ -98,6 +98,10 @@ jobs:
       - name: Inject slug/short variables
         uses: rlespinasse/github-slug-action@v3.x
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b2b702a46baba178b6f28f847438ae342bf5ab2b
       - name: Manual Test
         run: source("inst/mantests/build.R")
         shell: Rscript {0}
