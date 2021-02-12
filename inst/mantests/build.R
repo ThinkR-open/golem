@@ -84,6 +84,7 @@ install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
 
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 cli::cat_rule("Load pack")
 
 library(desc, lib.loc = temp_lib)
@@ -94,6 +95,8 @@ library(whereami, lib.loc = temp_lib)
 install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
 
 
+=======
+>>>>>>> git  conflict solved
 cli::cat_rule("Load pack")
 
 library(desc, lib.loc = temp_lib)
@@ -146,6 +149,7 @@ expect_true(
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 whereami::cat_where(whereami::whereami())
@@ -157,6 +161,11 @@ cat_where(whereami())
 >>>>>>> remove wherami
 usethis::use_dev_package("golem")
 
+=======
+
+usethis::use_dev_package("golem")
+
+>>>>>>> git  conflict solved
 setwd(temp_app)
 
 <<<<<<< HEAD
