@@ -38,8 +38,106 @@ will be sent to \code{input$id}.}
 }}
 }
 \description{
-\code{activate_js} is used in your UI to insert directly the JavaScript
-functions contained in golem. These functions can be called from
+\code{activate_js} is used to insert directly some JavaScript functions in your golem.
+By default \code{\link[=bundle_ressources]{bundle_ressources()}} load these function  automatically for you.
+
+These JavaScript functions can be called from
 the server with \code{invoke_js}. \code{invoke_js} can also be used
 to launch any JS function created inside a Shiny JavaScript handler.
+}
+\examples{
+if ( interactive()){
+library(shiny)
+ui <- fluidPage(
+  golem::activate_js(), #already loaded in your golem by bundle_resources()
+  fluidRow(
+  actionButton(inputId = "hidebutton1",label = "hide button1"),
+  actionButton(inputId = "showbutton1",label = "show button1"),
+  actionButton(inputId = "button1",label = "button1")
+),
+  fluidRow(
+  actionButton(inputId = "hideclassA",label = "hide class A"),
+  actionButton(inputId = "showclassA",label = "show class A"),
+  actionButton(inputId = "buttonA1",label = "button A1",class="A"),
+  actionButton(inputId = "buttonA2",label = "button A2",class="A"),
+  actionButton(inputId = "buttonA3",label = "button A3",class="A")
+),
+
+fluidRow(
+  actionButton(inputId = "clickhide",label = "click on 'hide button1' and 'hide class A'"),
+  actionButton(inputId = "clickshow",label = "click on 'show button1' and 'show class A'")
+  ),
+
+fluidRow(
+  
+  actionButton(inputId = "disableA",label = "disable class A"),
+  actionButton(inputId = "reableA",label = "reable class A")
+  
+  
+)
+,
+
+fluidRow(
+  
+  actionButton(inputId = "alertbutton",label = "alert button"),
+  actionButton(inputId = "promptbutton",label = "prompt button"),
+  actionButton(inputId = "confirmbutton",label = "confirm button")
+  
+  
+)
+  )
+
+server <- function(input, output, session){
+  
+  observeEvent( input$hidebutton1 , {
+  golem::invoke_js("hideid","button1")
+  })
+  observeEvent( input$showbutton1 , {
+  golem::invoke_js("showid","button1")
+  })
+  
+  observeEvent( input$hideclassA , {
+  golem::invoke_js("hideclass","A")
+  })
+  observeEvent( input$showclassA , {
+  golem::invoke_js("showclass","A")
+  })
+  
+  observeEvent( input$clickhide , {
+  golem::invoke_js("clickon","#hidebutton1")
+  golem::invoke_js("clickon","#hideclassA")
+  })
+  
+  observeEvent( input$clickshow , {
+  golem::invoke_js("clickon","#showbutton1")
+  golem::invoke_js("clickon","#showclassA")
+  })
+  
+  observeEvent( input$disableA , {
+  golem::invoke_js("disable",".A")
+  })
+  observeEvent( input$reableA , {
+  golem::invoke_js("reable",".A")
+  })
+  
+  observeEvent( input$alertbutton , {
+  golem::invoke_js("alert","ALERT!!")
+  })
+  
+  observeEvent( input$promptbutton , {
+    golem::invoke_js("prompt", list(message ="what's your name", id  = "name") )
+  })
+    observeEvent( input$name , {
+  message(paste("input$name",input$name))
+  })
+  
+  observeEvent( input$confirmbutton , {
+    golem::invoke_js("confirm", list(message ="Are you sure", id  = "sure") )
+  })
+    observeEvent( input$sure , {
+    message(paste("input$sure",input$sure))
+  })
+}
+shiny::shinyApp(ui,server)
+}
 }

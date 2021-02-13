@@ -4,6 +4,8 @@
 #' automatically bundles the CSS and JavaScript files in `inst/app/www`
 #' and which are created by `golem::add_css_file()` , `golem::add_js_file()`
 #' and `golem::add_js_handler()`.
+#' 
+#' This function also preload [activate_js()] which allow you ut use preconfigured JavaScript functions using [invoke_js()]
 #'
 #' @param path The path to the folder where the external files are located.
 #' @param app_title The title of the app, to be used as an application title.
