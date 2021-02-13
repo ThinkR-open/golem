@@ -45,7 +45,7 @@ activate_js <- function(){
 #' @export
 #' @rdname golem_js
 #' @examples 
-#' if ( interactive()){
+#' if ( interactive() ){
 #' library(shiny)
 #' ui <- fluidPage(
 #'   golem::activate_js(), #already loaded in your golem by bundle_resources()
