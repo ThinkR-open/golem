@@ -11,6 +11,9 @@
 #' @param fct The name of the fct file.
 #' @param utils The name of the utils file.
 #' @param export Logical. Should the module be exported? Default is `FALSE`.
+#' @param js,js_handler Name of a javascript or javascript handler file to create 
+#' along the module.
+#' @param module_template The module template function.
 #' @param ... Arguments to be passed to the `module_template` function.
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export
@@ -180,7 +183,6 @@ add_module <- function(
 #' Note that this path will not be set by the user but internally by 
 #' `add_module()`. 
 #' @param ph_ui,ph_server Texts to insert inside the modules UI and server. For advanced use.
-#' @param ... Arguments to be passed to the template, via `add_module()`
 #'
 #' @return Used for side effect
 #' @export

@@ -1,7 +1,13 @@
 # # For setting back old usethis settings
 try({
-  usethis::proj_set(orig_test)
-  unlink(pkg, TRUE, TRUE)
+  if (exists("orig_test")){
+    usethis::proj_set(orig_test)
+  }
+  if (exists("pkg")){
+    unlink(pkg, TRUE, TRUE)
+  }
+  
+ 
 })
 
 

@@ -31,7 +31,12 @@ add_module(
 
 \item{utils}{The name of the utils file.}
 
+\item{js, js_handler}{Name of a javascript or javascript handler file to create
+along the module.}
+
 \item{export}{Logical. Should the module be exported? Default is \code{FALSE}.}
+
+\item{module_template}{The module template function.}
 
 \item{...}{Arguments to be passed to the \code{module_template} function.}
 }

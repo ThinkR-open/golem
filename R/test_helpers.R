@@ -64,9 +64,13 @@ expect_html_equal <- function(ui, html){
 #' @rdname testhelpers
 #' @param sleep number of seconds
 #' @importFrom testthat skip_on_cran expect_true
-expect_running <- function(sleep, testdir = 'apptest'){
+#' @importFrom testthat skip_if_not
+expect_running <- function(sleep){
   
   skip_on_cran()
+  
+  # Ok for now we'll get back to this
+  skip_if_not(interactive())
   
   # Oh boy using testthat and processx is a mess
   # 

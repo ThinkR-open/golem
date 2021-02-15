@@ -16,8 +16,6 @@ Note that this path will not be set by the user but internally by
 \item{export}{Logical. Should the module be exported? Default is \code{FALSE}.}
 
 \item{ph_ui, ph_server}{Texts to insert inside the modules UI and server. For advanced use.}
-
-\item{...}{Arguments to be passed to the template, via \code{add_module()}}
 }
 \value{
 Used for side effect
