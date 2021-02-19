@@ -1,7 +1,7 @@
 #' Interact with JavaScript built-in Functions
 #' 
 #' \code{activate_js} is used to insert directly some JavaScript functions in your golem.
-#'  By default [bundle_ressources()] load these function  automatically for you. 
+#'  By default \code{bundle_ressources()} load these function  automatically for you. 
 #'  
 #' These JavaScript functions can be called from 
 #' the server with \code{invoke_js}. \code{invoke_js} can also be used 
