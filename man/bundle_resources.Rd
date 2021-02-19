@@ -51,3 +51,6 @@ automatically bundles the CSS and JavaScript files in \code{inst/app/www}
 and which are created by \code{golem::add_css_file()} , \code{golem::add_js_file()}
 and \code{golem::add_js_handler()}.
 }
+\details{
+This function also preload \code{\link[=activate_js]{activate_js()}} which allow you ut use preconfigured JavaScript functions using \code{\link[=invoke_js]{invoke_js()}}
+}
