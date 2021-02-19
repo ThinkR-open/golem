@@ -20,35 +20,12 @@ fakename <- sprintf(
 cli::cat_rule("Set up for lib")
 
 if (Sys.getenv("CI", "local") == "local"){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  temp_lib <- .libPaths()
-} else {
-  temp_lib <- file.path(tempdir(), "temp_lib")
-  .libPaths(c(temp_lib,.libPaths()))
-}
-=======
-  
-=======
->>>>>>> more logs
-=======
->>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
   temp_lib <- .libPaths()
 } else {
   temp_lib <- file.path(tempdir(), "temp_lib")
   .libPaths(c(temp_lib,.libPaths()))
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
->>>>>>> upload
-
-=======
->>>>>>> more logs
-=======
->>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 # This will be our golem app
 temp_app <- file.path(tempdir(),fakename, "golemmetrics")
 
@@ -59,7 +36,7 @@ if (dir.exists(temp_app)) {
 dir.create(temp_lib, recursive = TRUE)
 
 install.packages(
-  c("remotes", "desc", "testthat", "cli", "fs", "whereami"), 
+  c("remotes", "desc", "testthat", "cli", "fs"), 
   lib = temp_lib, 
   repo = "https://cran.rstudio.com/"
 )
@@ -67,96 +44,39 @@ install.packages(
 cli::cat_rule("Install golem")
 
 library(remotes, lib.loc = temp_lib)
+library(desc, lib.loc = temp_lib)
+library(testthat, lib.loc = temp_lib)
+library(cli, lib.loc = temp_lib)
+library(fs, lib.loc = temp_lib)
 
 try({remove.packages("golem")})
 # We'll need to install golem from the current branch because 
 # otherwise the dependency tree breaks
 install_github(
   "ThinkR-open/golem", 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
-=======
-  ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
->>>>>>> upload
-=======
-  ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
->>>>>>> No check
-=======
-  ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
->>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
   force = TRUE, lib = temp_lib
 )
 
 cli::cat_rule("Install crystalmountains")
 install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 cli::cat_rule("Load pack")
-
-library(desc, lib.loc = temp_lib)
-library(testthat, lib.loc = temp_lib)
-library(golem, lib.loc = temp_lib)
-library(whereami, lib.loc = temp_lib)
-<<<<<<< HEAD
-=======
-install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
-
-
-=======
->>>>>>> git  conflict solved
-cli::cat_rule("Load pack")
-
-library(desc, lib.loc = temp_lib)
-library(testthat, lib.loc = temp_lib)
-<<<<<<< HEAD
-library(golem, lib.loc = )
->>>>>>> upload
-=======
-library(golem, lib.loc = temp_lib)
-library(whereami, lib.loc = temp_lib)
->>>>>>> library(whereami, lib.loc = temp_lib)
-=======
->>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 # We'll need to install golem from the current branch because 
 # otherwise the dependency tree breaks
 remove.packages("golem")
-install_github("ThinkR-open/golem", ref = Sys.getenv("GITHUB_BASE_REF", "dev"), force = TRUE)
+install_github(
+  "ThinkR-open/golem",
+  ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
+  force = TRUE
+  )
+
 library(golem, lib.loc = temp_lib)
->>>>>>> testing with renaming of repo
 
-=======
->>>>>>> upload
-=======
-whereami::cat_where(whereami::whereami())
->>>>>>> more logs
-=======
-cat_where(whereami())
->>>>>>> library(whereami, lib.loc = temp_lib)
-=======
-
->>>>>>> remove wherami
-=======
-
->>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 create_golem(
   temp_app, 
   open = FALSE, 
@@ -167,32 +87,7 @@ expect_true(
   dir.exists(temp_app)
 )
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-whereami::cat_where(whereami::whereami())
->>>>>>> more logs
-=======
-cat_where(whereami())
->>>>>>> library(whereami, lib.loc = temp_lib)
-=======
->>>>>>> remove wherami
-usethis::use_dev_package("golem")
-
-=======
-
-usethis::use_dev_package("golem")
-
->>>>>>> git  conflict solved
 setwd(temp_app)
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 here::set_here(temp_app)
 
@@ -205,23 +100,7 @@ cat(
   sep = "\n"
 )
 
-#devtools::check()
-=======
-whereami::cat_where(whereami::whereami())
-=======
-cat_where(whereami())
->>>>>>> library(whereami, lib.loc = temp_lib)
-=======
 
->>>>>>> remove wherami
-=======
-
-usethis::use_dev_package("golem")
-
-setwd(temp_app)
-
-
->>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 here::set_here(temp_app)
 
 usethis::use_build_ignore(".here")
@@ -232,17 +111,7 @@ cat(
   readLines("DESCRIPTION"),
   sep = "\n"
 )
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 devtools::check()
->>>>>>> more logs
-=======
-#devtools::check()
->>>>>>> No check
-=======
-#devtools::check()
->>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 cat_ok()
 
 
@@ -486,8 +355,4 @@ unlink(temp_app, TRUE, TRUE)
 unlink(temp_golem, TRUE, TRUE)
 unlink(temp_lib, TRUE, TRUE)
 
-<<<<<<< HEAD
 cli::cat_rule("Completed")
-=======
-cli::cat_rule("Completed")
->>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
