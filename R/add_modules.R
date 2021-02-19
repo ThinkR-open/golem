@@ -14,7 +14,7 @@
 #' @param export Logical. Should the module be exported? Default is `FALSE`.
 #' @param js,js_handler Name of a javascript or javascript handler file to create 
 #' along the module.
-#' @param module_template The module template function.
+#' @param module_template Function that serves as a module template.
 #' @param ... Arguments to be passed to the `module_template` function.
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export

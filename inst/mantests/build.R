@@ -22,6 +22,7 @@ cli::cat_rule("Set up for lib")
 if (Sys.getenv("CI", "local") == "local"){
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   temp_lib <- .libPaths()
 } else {
   temp_lib <- file.path(tempdir(), "temp_lib")
@@ -31,6 +32,8 @@ if (Sys.getenv("CI", "local") == "local"){
   
 =======
 >>>>>>> more logs
+=======
+>>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
   temp_lib <- .libPaths()
 } else {
   temp_lib <- file.path(tempdir(), "temp_lib")
@@ -38,11 +41,14 @@ if (Sys.getenv("CI", "local") == "local"){
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 >>>>>>> upload
 
 =======
 >>>>>>> more logs
+=======
+>>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 # This will be our golem app
 temp_app <- file.path(tempdir(),fakename, "golemmetrics")
 
@@ -69,6 +75,7 @@ install_github(
   "ThinkR-open/golem", 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
 =======
   ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
@@ -76,6 +83,9 @@ install_github(
 =======
   ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
 >>>>>>> No check
+=======
+  ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
+>>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
   force = TRUE, lib = temp_lib
 )
 
@@ -83,14 +93,19 @@ cli::cat_rule("Install crystalmountains")
 install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+
+>>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 cli::cat_rule("Load pack")
 
 library(desc, lib.loc = temp_lib)
 library(testthat, lib.loc = temp_lib)
 library(golem, lib.loc = temp_lib)
 library(whereami, lib.loc = temp_lib)
+<<<<<<< HEAD
 =======
 install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
 
@@ -108,10 +123,13 @@ library(golem, lib.loc = )
 library(golem, lib.loc = temp_lib)
 library(whereami, lib.loc = temp_lib)
 >>>>>>> library(whereami, lib.loc = temp_lib)
+=======
+>>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -136,6 +154,9 @@ cat_where(whereami())
 =======
 
 >>>>>>> remove wherami
+=======
+
+>>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 create_golem(
   temp_app, 
   open = FALSE, 
@@ -146,6 +167,7 @@ expect_true(
   dir.exists(temp_app)
 )
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -192,6 +214,14 @@ cat_where(whereami())
 =======
 
 >>>>>>> remove wherami
+=======
+
+usethis::use_dev_package("golem")
+
+setwd(temp_app)
+
+
+>>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 here::set_here(temp_app)
 
 usethis::use_build_ignore(".here")
@@ -204,11 +234,15 @@ cat(
 )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 devtools::check()
 >>>>>>> more logs
 =======
 #devtools::check()
 >>>>>>> No check
+=======
+#devtools::check()
+>>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
 cat_ok()
 
 
@@ -452,4 +486,8 @@ unlink(temp_app, TRUE, TRUE)
 unlink(temp_golem, TRUE, TRUE)
 unlink(temp_lib, TRUE, TRUE)
 
+<<<<<<< HEAD
 cli::cat_rule("Completed")
+=======
+cli::cat_rule("Completed")
+>>>>>>> 248a225f68db2da0fee867ee1f1a2ebb98aa6059
