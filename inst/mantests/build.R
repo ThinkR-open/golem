@@ -260,7 +260,9 @@ cat_ok()
 cli::cat_rule("Going through 01_start.R")
 
 cli::cat_rule("Testing usepackage")
-
+if (!requireNamespace("cranlogs")){
+  install.packages("cranlogs")
+}
 usethis::use_package( "cranlogs" )
 expect_true(
   "cranlogs" %in% desc::desc_get_deps()$package
