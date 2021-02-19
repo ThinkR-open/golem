@@ -36,7 +36,7 @@ if (dir.exists(temp_app)) {
 dir.create(temp_lib, recursive = TRUE)
 
 install.packages(
-  c("remotes", "desc", "testthat", "cli", "fs"), 
+  c("remotes", "desc", "testthat", "cli", "fs", "cranlogs"), 
   lib = temp_lib, 
   repo = "https://cran.rstudio.com/"
 )
@@ -260,6 +260,7 @@ cat_ok()
 cli::cat_rule("Going through 01_start.R")
 
 cli::cat_rule("Testing usepackage")
+
 usethis::use_package( "cranlogs" )
 expect_true(
   "cranlogs" %in% desc::desc_get_deps()$package
