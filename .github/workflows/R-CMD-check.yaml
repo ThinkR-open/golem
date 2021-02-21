@@ -9,10 +9,12 @@ on:
     branches:
       - main
       - master
+      - GA
   pull_request:
     branches:
       - main
       - master
+      - GA
 
 name: R-CMD-check
 
