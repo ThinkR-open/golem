@@ -66,7 +66,7 @@ with_golem_options <- function(
 #' @export
 #' @examples 
 #' 
-#' if (interactive()){
+#' \dontrun{
 #'   
 #'   # Define and use golem_options
 #'   
