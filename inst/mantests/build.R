@@ -347,7 +347,7 @@ remotes::install_local(targz)
 cli::cat_rule("Testing 03_dev")
 
 golem::add_dockerfile()
-system("docker build -t golemmetrics .")
+#system("docker build -t golemmetrics .")
 cat_ok()
 
 # Create a new folder
