@@ -49,7 +49,7 @@ library(testthat, lib.loc = temp_lib)
 library(cli, lib.loc = temp_lib)
 library(fs, lib.loc = temp_lib)
 
-try({remove.packages("golem")})
+# try({remove.packages("golem")})
 # We'll need to install golem from the current branch because 
 # otherwise the dependency tree breaks
 install_github(
@@ -68,7 +68,7 @@ cli::cat_rule("Creating a golem based app")
 
 # We'll need to install golem from the current branch because 
 # otherwise the dependency tree breaks
-remove.packages("golem")
+# remove.packages("golem")
 install_github(
   "ThinkR-open/golem",
   ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
@@ -87,7 +87,7 @@ expect_true(
   dir.exists(temp_app)
 )
 
-setwd(temp_app)
+old <- setwd(temp_app)
 
 here::set_here(temp_app)
 
@@ -216,7 +216,7 @@ cat_ok()
 
 cli::cat_rule("Create Common Files")
 
-usethis::use_mit_license( "Golem User" ) 
+#usethis::use_mit_license( "Golem User" ) 
 
 expect_equal(
   desc::desc_get_field("License"), 
@@ -344,6 +344,8 @@ remotes::install_local(force = TRUE)
 targz <- devtools::build()
 remotes::install_local(targz)
 
+cli::cat_rule("Testing 03_dev")
+
 golem::add_dockerfile()
 system("docker build -t golemmetrics .")
 cat_ok()
@@ -353,7 +355,7 @@ dir.create("golem")
 fs::dir_copy(getwd(), "golem")
 
 # Restore old wd
-setwd(old_wd)
+
 unlink(temp_app, TRUE, TRUE)
 unlink(temp_golem, TRUE, TRUE)
 unlink(temp_lib, TRUE, TRUE)
