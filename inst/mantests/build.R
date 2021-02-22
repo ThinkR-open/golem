@@ -356,8 +356,8 @@ fs::dir_copy(getwd(), "golem")
 
 # Restore old wd
 
-unlink(temp_app, TRUE, TRUE)
-unlink(temp_golem, TRUE, TRUE)
-unlink(temp_lib, TRUE, TRUE)
+# unlink(temp_app, TRUE, TRUE)
+# unlink(temp_golem, TRUE, TRUE)
+# unlink(temp_lib, TRUE, TRUE)
 
 cli::cat_rule("Completed")
