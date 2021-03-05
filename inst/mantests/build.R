@@ -56,8 +56,9 @@ library(fs, lib.loc = temp_lib)
 # otherwise the dependency tree breaks
 install_github(
   "ThinkR-open/golem", 
-  ref = Sys.getenv("GITHUB_HEAD_REF_SLUG", "dev"), 
-  force = TRUE, lib = temp_lib
+  ref = Sys.getenv("GITHUB_HEAD_REF", "dev"), 
+  force = TRUE, 
+  lib = temp_lib
 )
 
 cli::cat_rule("Install crystalmountains")
