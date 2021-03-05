@@ -1,4 +1,4 @@
-Sys.getenv()
+print(Sys.getenv())
 
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
