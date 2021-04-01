@@ -58,10 +58,21 @@ create_golem <- function(
   cat_green_tick("Created package directory")
   
   
-  if ( open & rstudioapi::isAvailable() ) { 
-    cat_rule("Init Rstudio Project")
-    rstudioapi::initializeProject(path = path)
-    enable_roxygenize()
+  if ( rstudioapi::isAvailable() ) { 
+    cat_rule("Rstudio project initialisation")
+    rproj_path <- rstudioapi::initializeProject(path = path)
+    
+    if (file.exists(rproj_path)){
+      
+    enable_roxygenize(path = rproj_path)
+      
+    }else{
+      stop("can't create .Rproj file ")
+      
+    }
+    
+    
+    
   }
   
 
