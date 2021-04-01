@@ -70,9 +70,7 @@ create_golem <- function(
       stop("can't create .Rproj file ")
       
     }
-    
-    
-    
+
   }
   
 
