@@ -57,6 +57,24 @@ create_golem <- function(
   )
   cat_green_tick("Created package directory")
   
+  
+  if ( rstudioapi::isAvailable() ) { 
+    cat_rule("Rstudio project initialisation")
+    rproj_path <- rstudioapi::initializeProject(path = path)
+    
+    if (file.exists(rproj_path)){
+      
+    enable_roxygenize(path = rproj_path)
+      
+    }else{
+      stop("can't create .Rproj file ")
+      
+    }
+
+  }
+  
+
+  
   cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
 
@@ -106,7 +124,6 @@ create_golem <- function(
   cat_green_tick("Configured app")
   cat_rule("Running project hook function")
   old <- setwd(path)
-  #browser()
   # TODO fix
   # for some weird reason test() fails here when using golem::
   # and I don't have time to search why rn
@@ -161,6 +178,8 @@ create_golem <- function(
       "To continue working on your app, start editing the 01_start.R file."
     )
   )
+  
+  
   
   if ( open & rstudioapi::isAvailable() ) { 
     rstudioapi::openProject(path = path)
