@@ -82,7 +82,7 @@ jobs:
         
       - name: Manual Test
         run: |
-          Rscript -e 'source(\"inst/mantests/build.R\")'
+          Rscript -e 'source("inst/mantests/build.R")'
           docker build -t golemmetrics .
  
       - name: Upload check results
