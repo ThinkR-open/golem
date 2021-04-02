@@ -388,11 +388,14 @@ cat_ok()
 
 if (Sys.info()['sysname'] == "Darwin"){
   install_cran("git2r")
+  
+  git2r::init()
+  
   git2r::config(
     user.name = "Colin Fay", 
     user.email = "contact@colinfay.me"
   )
-  git2r::init()
+  
   git2r::add(path = list.files(getwd()))
   git2r::commit(message = sprintf(
     "Deploy %s", 
