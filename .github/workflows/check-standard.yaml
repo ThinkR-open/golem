@@ -89,6 +89,7 @@ jobs:
       # Deploy to local repo
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
+        if: runner.os != 'macOS'
         env:
           REPO: self
           BRANCH: golemmetrics
