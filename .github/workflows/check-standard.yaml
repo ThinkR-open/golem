@@ -84,7 +84,6 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           Rscript -e 'source("inst/mantests/build.R")'
-          docker build -t golemmetrics .
           
       # Deploy to local repo
       - name: Deploy
