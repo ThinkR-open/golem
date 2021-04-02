@@ -76,7 +76,7 @@ install_github(
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
 
-library(golem, lib.loc = temp_lib)
+library(golem)
 
 create_golem(
   temp_app, 
