@@ -1,4 +1,4 @@
-print(Sys.getenv())
+ci_original_wd <- getwd()
 
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
@@ -372,6 +372,16 @@ golem::add_dockerfile()
 cat_ok()
 
 # Restore old wd
+
+
+fs::dir_copy(
+  temp_app, 
+  fs::path(
+    ci_original_wd, 
+    "inst", 
+    "golemmetrics"
+  )
+)
 
 # unlink(temp_app, TRUE, TRUE)
 # unlink(temp_golem, TRUE, TRUE)
