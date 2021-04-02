@@ -82,6 +82,9 @@ jobs:
         
       - name: Manual Test
         if: runner.os != 'Windows'
+        env:
+          SHINYAPPIOTOKEN: ${{ secrets.SHINYAPPIOTOKEN }}
+          SHINYAPPIOSECRET: ${{ secrets.SHINYAPPIOSECRET }}
         run: |
           Rscript -e 'source("inst/mantests/build.R")'
           
