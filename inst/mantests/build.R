@@ -375,14 +375,14 @@ cli::cat_rule("Testing 03_dev")
 
 #golem::add_dockerfile()
 
-golem::add_shinyappsio_file()
-
-rsconnect::setAccountInfo(
-  name = 'colinfay',
-  token = Sys.getenv("SHINYAPPIOTOKEN"),
-  secret = Sys.getenv("SHINYAPPIOSECRET")
-)
-deployApp()
+# golem::add_shinyappsio_file()
+# 
+# rsconnect::setAccountInfo(
+#   name = 'colinfay',
+#   token = Sys.getenv("SHINYAPPIOTOKEN"),
+#   secret = Sys.getenv("SHINYAPPIOSECRET")
+# )
+# deployApp()
 
 cat_ok()
 
