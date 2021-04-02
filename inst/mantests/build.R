@@ -401,6 +401,9 @@ if (Sys.info()['sysname'] == "Darwin"){
     "Deploy %s", 
     Sys.time()
   ))
+  
+  system('git branch -M main')
+  
   git2r::remote_add(
     name = "origin", 
     url = "https://github.com/ThinkR-open/golemmetrics.git"
