@@ -81,22 +81,10 @@ jobs:
         shell: Rscript {0}
         
       - name: Manual Test
-        if: runner.os != 'Windows'
         env:
-          SHINYAPPIOTOKEN: ${{ secrets.SHINYAPPIOTOKEN }}
-          SHINYAPPIOSECRET: ${{ secrets.SHINYAPPIOSECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           Rscript -e 'source("inst/mantests/build.R")'
-          
-      # Deploy to local repo
-      - name: Deploy
-        if: runner.os != 'macOS'
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: golemmetrics
-          FOLDER: inst/golemmetrics
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
       - name: Upload check results
         if: failure()

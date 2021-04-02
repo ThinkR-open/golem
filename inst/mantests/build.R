@@ -386,6 +386,26 @@ cli::cat_rule("Testing 03_dev")
 
 cat_ok()
 
+if (Sys.info()['sysname'] == "Darwin"){
+  install_cran("git2r")
+  git2r::init()
+  git2r::add(path = list.files(getwd()))
+  git2r::commit(message = sprintf(
+    "Deploy %s", 
+    Sys.time()
+  ))
+  git2r::remote_add(
+    name = "origin", 
+    url = "https://github.com/ThinkR-open/golemmetrics.git"
+  )
+  git2r::push(
+    force = TRUE,
+    credentials = git2r::cred_token(
+      Sys.getenv("GITHUB_TOKEN")
+    )
+  )
+}
+
 # Restore old wd
 
 # unlink(temp_app, TRUE, TRUE)
