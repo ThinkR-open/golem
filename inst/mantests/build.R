@@ -54,10 +54,15 @@ library(fs, lib.loc = temp_lib)
 
 # We'll need to install golem from the current branch because 
 # otherwise the dependency tree breaks
-install_github(
-  "ThinkR-open/golem",
-  ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
-  force = TRUE,
+# install_github(
+#   "ThinkR-open/golem",
+#   ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
+#   force = TRUE,
+#   lib.loc = temp_lib
+# )
+
+# Installing the current version of golem
+install_local(
   lib.loc = temp_lib
 )
 
