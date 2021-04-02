@@ -389,26 +389,38 @@ cat_ok()
 if (Sys.info()['sysname'] == "Darwin"){
   install_cran("git2r")
   
-  git2r::init()
+  repo_bare <- git2r::init()
   
   git2r::config(
+    repo_bare,
     user.name = "Colin Fay", 
     user.email = "contact@colinfay.me"
   )
   
-  git2r::add(path = list.files(getwd()))
-  git2r::commit(message = sprintf(
-    "Deploy %s", 
-    Sys.time()
-  ))
   
-  system('git branch -M main')
+  git2r::add(
+    repo_bare, 
+    path = list.files(getwd())
+  )
+  
+  git2r::commit(
+    repo_bare,
+    message = sprintf(
+      "Deploy %s", 
+      Sys.time()
+    )
+  )
   
   git2r::remote_add(
+    repo_bare,
     name = "origin", 
     url = "https://github.com/ThinkR-open/golemmetrics.git"
   )
+  
   git2r::push(
+    repo_bare,
+    name = "origin", 
+    refspec = "refs/heads/master",
     set_upstream = TRUE,
     force = TRUE,
     credentials = git2r::cred_token(
