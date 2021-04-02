@@ -409,6 +409,7 @@ if (Sys.info()['sysname'] == "Darwin"){
     url = "https://github.com/ThinkR-open/golemmetrics.git"
   )
   git2r::push(
+    set_upstream = TRUE,
     force = TRUE,
     credentials = git2r::cred_token(
       Sys.getenv("GITHUB_TOKEN")
