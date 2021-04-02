@@ -81,6 +81,7 @@ jobs:
         shell: Rscript {0}
         
       - name: Manual Test
+        if: runner.os != 'Windows'
         run: |
           Rscript -e 'source("inst/mantests/build.R")'
           docker build -t golemmetrics .
