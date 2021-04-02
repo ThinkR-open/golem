@@ -81,9 +81,11 @@ jobs:
         shell: Rscript {0}
         
       - name: Manual Test
-        run: source("inst/mantests/build.R")
-        shell: Rscript {0}
-
+        run: |
+          pwd && ls
+          Rscript -e 'source("inst/mantests/build.R")'
+          docker build -t golemmetrics .
+ 
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main

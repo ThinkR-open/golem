@@ -22,6 +22,7 @@ fakename <- sprintf(
 cli::cat_rule("Set up for lib")
 
 if (Sys.getenv("CI", "local") == "local"){
+  # If I'm on the CI, we don't change the lib
   temp_lib <- .libPaths()
 } else {
   temp_lib <- file.path(tempdir(), "temp_lib")
@@ -29,7 +30,7 @@ if (Sys.getenv("CI", "local") == "local"){
 }
 
 # This will be our golem app
-temp_app <- file.path(tempdir(),fakename, "golemmetrics")
+temp_app <- file.path(tempdir(), fakename, "golemmetrics")
 
 if (dir.exists(temp_app)) {
   unlink(temp_app, TRUE, TRUE)
@@ -51,32 +52,23 @@ library(testthat, lib.loc = temp_lib)
 library(cli, lib.loc = temp_lib)
 library(fs, lib.loc = temp_lib)
 
-# try({remove.packages("golem")})
 # We'll need to install golem from the current branch because 
 # otherwise the dependency tree breaks
-install_github(
-  "ThinkR-open/golem", 
-  ref = Sys.getenv("GITHUB_HEAD_REF", "dev"), 
-  force = TRUE, 
-  lib = temp_lib
-)
-
-cli::cat_rule("Install crystalmountains")
-install_github("thinkr-open/crystalmountains", lib.loc = temp_lib)
-
-cli::cat_rule("Load pack")
-
-# Going to the temp dir and create a new golem
-cli::cat_rule("Creating a golem based app")
-
-# We'll need to install golem from the current branch because 
-# otherwise the dependency tree breaks
-# remove.packages("golem")
 install_github(
   "ThinkR-open/golem",
   ref = Sys.getenv("GITHUB_BASE_REF", "dev"), 
   force = TRUE
-  )
+)
+
+cli::cat_rule("Install crystalmountains")
+
+install_github(
+  "thinkr-open/crystalmountains", 
+  lib.loc = temp_lib
+)
+
+# Going to the temp dir and create a new golem
+cli::cat_rule("Creating a golem based app")
 
 library(golem, lib.loc = temp_lib)
 
@@ -96,7 +88,13 @@ here::set_here(temp_app)
 
 usethis::use_build_ignore(".here")
 
-usethis::use_dev_package("golem")
+usethis::use_dev_package(
+  "golem", 
+  remotes = sprintf(
+    "ThinkR-open/golem@%s",
+    Sys.getenv("GITHUB_BASE_REF", "dev")
+  )
+)
 
 cat(
   readLines("DESCRIPTION"),
@@ -141,7 +139,27 @@ cat_ok()
 
 cli::cat_rule("Checking all files are here")
 
-expected_files <- c("DESCRIPTION", "NAMESPACE", "R", "R/app_config.R", "R/app_server.R", "R/app_ui.R", "R/run_app.R", "dev", "dev/01_start.R", "dev/02_dev.R", "dev/03_deploy.R", "dev/run_dev.R", "inst", "inst/app", "inst/app/www", "inst/app/www/favicon.ico", "inst/golem-config.yml", "man", "man/run_app.Rd")
+expected_files <- c(
+  "DESCRIPTION", 
+  "NAMESPACE",
+  "R", 
+  "R/app_config.R", 
+  "R/app_server.R", 
+  "R/app_ui.R", 
+  "R/run_app.R", 
+  "dev", 
+  "dev/01_start.R", 
+  "dev/02_dev.R", 
+  "dev/03_deploy.R", 
+  "dev/run_dev.R", 
+  "inst", 
+  "inst/app", 
+  "inst/app/www", 
+  "inst/app/www/favicon.ico", 
+  "inst/golem-config.yml",
+  "man", 
+  "man/run_app.Rd"
+)
 actual_files <- fs::dir_ls(recurse = TRUE)
 
 for (i in expected_files) {
@@ -350,12 +368,8 @@ remotes::install_local(targz)
 cli::cat_rule("Testing 03_dev")
 
 golem::add_dockerfile()
-#system("docker build -t golemmetrics .")
-cat_ok()
 
-# Create a new folder
-dir.create("golem")
-fs::dir_copy(getwd(), "golem")
+cat_ok()
 
 # Restore old wd
 
