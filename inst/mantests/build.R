@@ -1,5 +1,3 @@
-ci_original_wd <- getwd()
-
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
 
@@ -23,14 +21,16 @@ cli::cat_rule("Set up for lib")
 
 if (Sys.getenv("CI", "local") == "local"){
   # If I'm on the CI, we don't change the lib
+  temp_app <- file.path("inst", "golemmetrics")
   temp_lib <- .libPaths()
 } else {
+  temp_app <- file.path(tempdir(), fakename, "golemmetrics")
   temp_lib <- file.path(tempdir(), "temp_lib")
   .libPaths(c(temp_lib,.libPaths()))
 }
 
 # This will be our golem app
-temp_app <- file.path(tempdir(), fakename, "golemmetrics")
+
 
 if (dir.exists(temp_app)) {
   unlink(temp_app, TRUE, TRUE)
@@ -378,16 +378,6 @@ golem::add_dockerfile()
 cat_ok()
 
 # Restore old wd
-
-
-fs::dir_copy(
-  temp_app, 
-  fs::path(
-    ci_original_wd, 
-    "inst", 
-    "golemmetrics"
-  )
-)
 
 # unlink(temp_app, TRUE, TRUE)
 # unlink(temp_golem, TRUE, TRUE)
