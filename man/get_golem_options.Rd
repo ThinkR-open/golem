@@ -16,7 +16,7 @@ parameters passed to \code{run_app()}.
 }
 \examples{
 
-if (interactive()){
+\dontrun{
   
   # Define and use golem_options
   
