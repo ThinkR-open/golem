@@ -96,7 +96,7 @@ usethis::use_build_ignore(".here")
 
 usethis::use_dev_package(
   "golem", 
-  remotes = sprintf(
+  remote = sprintf(
     "ThinkR-open/golem@%s",
     Sys.getenv("GITHUB_BASE_REF", "dev")
   )
