@@ -28,11 +28,12 @@ if (Sys.getenv("CI", "local") == "local"){
   temp_app <- file.path(getwd(), "inst", "golemmetrics")
   temp_lib <- .libPaths()
 } else {
-  temp_app <- file.path(tempdir(), fakename, "golemmetrics")
+  temp_app <- file.path(getwd(), "inst", "golemmetrics")
   temp_lib <- file.path(tempdir(), "temp_lib")
   .libPaths(c(temp_lib,.libPaths()))
 }
 
+cli::cat_bullet(temp_app)
 # This will be our golem app
 
 
