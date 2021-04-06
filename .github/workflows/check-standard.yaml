@@ -86,6 +86,10 @@ jobs:
           source("inst/mantests/build.R")
         shell: Rscript {0}
         
+      - name: ls
+        run: |
+          ls
+        
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@master
         if: runner.os == 'Linux' 

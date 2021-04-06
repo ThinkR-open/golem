@@ -1,4 +1,6 @@
 print(Sys.getenv())
+print(getwd())
+print(list.files())
 
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
@@ -21,20 +23,17 @@ fakename <- sprintf(
 # 
 cli::cat_rule("Set up for lib")
 
-# if (Sys.getenv("CI", "local") == "local"){
-#   # If I'm on the CI, we don't change the lib
-#   
-# } else {
-#   temp_app <- file.path(tempdir(), fakename, "golemmetrics")
-#   temp_lib <- file.path(tempdir(), "temp_lib")
-#   .libPaths(c(temp_lib,.libPaths()))
-# }
-
+if (Sys.getenv("CI", "local") == "local"){
+  # If I'm on the CI, we don't change the lib
+  temp_app <- file.path(getwd(), "inst", "golemmetrics")
+  temp_lib <- .libPaths()
+} else {
+  temp_app <- file.path(tempdir(), fakename, "golemmetrics")
+  temp_lib <- file.path(tempdir(), "temp_lib")
+  .libPaths(c(temp_lib,.libPaths()))
+}
 
 # This will be our golem app
-
-temp_app <- file.path("inst", "golemmetrics")
-temp_lib <- .libPaths()
 
 
 if (dir.exists(temp_app)) {
@@ -48,8 +47,6 @@ install.packages(
   lib = temp_lib, 
   repo = "https://cran.rstudio.com/"
 )
-
-cli::cat_boxx(getwd())
 
 cli::cat_rule("Install golem")
 
