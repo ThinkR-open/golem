@@ -38,6 +38,8 @@ use_favicon <- function(
   
   if ( !local ){
     
+    
+    if (getRversion() >= "3.5"){
     try_online <- attempt::attempt(
       curlGetHeaders(path), 
       silent = TRUE
@@ -53,6 +55,9 @@ use_favicon <- function(
       ~ .x == 200, 
       "Unable to reach provided url (response code is not 200)."
     )
+    
+    }
+    
     
     destfile <- tempfile(
       fileext = paste0(".",ext),
