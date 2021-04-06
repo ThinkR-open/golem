@@ -89,7 +89,7 @@ jobs:
         
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@master
-        if: runner.os == 'macOS'
+        if: runner.os == 'Linux' & runner.r == 'release'
         env:
           API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
         with:
