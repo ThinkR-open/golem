@@ -21,19 +21,20 @@ fakename <- sprintf(
 # 
 cli::cat_rule("Set up for lib")
 
-if (Sys.getenv("CI", "local") == "local"){
-  # If I'm on the CI, we don't change the lib
-  temp_app <- file.path("inst", "golemmetrics")
-  temp_lib <- .libPaths()
-} else {
-  temp_app <- file.path(tempdir(), fakename, "golemmetrics")
-  temp_lib <- file.path(tempdir(), "temp_lib")
-  .libPaths(c(temp_lib,.libPaths()))
-}
+# if (Sys.getenv("CI", "local") == "local"){
+#   # If I'm on the CI, we don't change the lib
+#   
+# } else {
+#   temp_app <- file.path(tempdir(), fakename, "golemmetrics")
+#   temp_lib <- file.path(tempdir(), "temp_lib")
+#   .libPaths(c(temp_lib,.libPaths()))
+# }
+
 
 # This will be our golem app
 
-
+temp_app <- file.path("inst", "golemmetrics")
+temp_lib <- .libPaths()
 
 
 if (dir.exists(temp_app)) {
