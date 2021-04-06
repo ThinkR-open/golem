@@ -137,7 +137,7 @@ These parameters might not be used inside your own function, but __they need to 
 ### Example
 
 ```{r}
-my_tmpl <- function(name, path, ...){
+my_tmpl <- function(name, path, export, ...){
    # Define a template that only write the name of the 
    # module in the file
    write(name, path)
@@ -178,7 +178,7 @@ You can then define your own function inside your `{golem}` based application, b
 
 File template functions will receive, by default, the following parameters from the `add_*()` function. 
 
-+ `path`: the path to the file in R/
++ `path`: the path to the file 
 + `...` further arguments
 
 These parameters might not be used inside your own function, but __they need to be set in the function skeleton__, for compatibility reasons.

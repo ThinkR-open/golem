@@ -8,12 +8,13 @@
 #' @param pkg Path to the root of the package. Default is `get_golem_wd()`.
 #' @param open Should the file be opened?
 #' @param dir_create Creates the directory if it doesn't exist, default is `TRUE`.
-#' @param fct The name of the fct file.
-#' @param utils The name of the utils file.
+#' @param fct If specified, creates a mod_fct file.
+#' @param utils If specified, creates a mod_utils file.
+#' @param js,js_handler If specified, creates a module related JavaScript file.
 #' @param export Logical. Should the module be exported? Default is `FALSE`.
 #' @param js,js_handler Name of a javascript or javascript handler file to create 
 #' along the module.
-#' @param module_template The module template function.
+#' @param module_template Function that serves as a module template.
 #' @param ... Arguments to be passed to the `module_template` function.
 #' @note This function will prefix the `name` argument with `mod_`.
 #' @export
@@ -187,7 +188,7 @@ add_module <- function(
 #' @return Used for side effect
 #' @export
 #' @seealso [add_module()]
-module_template <- function(name, path, export, ph_ui = " ", ph_server = " "){
+module_template <- function(name, path, export, ph_ui = " ", ph_server = " ", ...){
   write_there <- function(...){
     write(..., file = path, append = TRUE)
   }
