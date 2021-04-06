@@ -94,7 +94,7 @@ jobs:
         uses: cpina/github-action-push-to-another-repository@master
         if: runner.os == 'Linux' 
         env:
-          API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: 'inst/golemmetrics'
           destination-github-username: 'Colin Fay'
