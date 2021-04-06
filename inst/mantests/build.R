@@ -375,15 +375,6 @@ cli::cat_rule("Testing 03_dev")
 
 #golem::add_dockerfile()
 
-# golem::add_shinyappsio_file()
-# 
-# rsconnect::setAccountInfo(
-#   name = 'colinfay',
-#   token = Sys.getenv("SHINYAPPIOTOKEN"),
-#   secret = Sys.getenv("SHINYAPPIOSECRET")
-# )
-# deployApp()
-
 cat_ok()
 
 if (Sys.info()['sysname'] == "Darwin"){
@@ -393,10 +384,12 @@ if (Sys.info()['sysname'] == "Darwin"){
   
   git2r::config(
     repo_bare,
+    global = TRUE,
     user.name = "Colin Fay", 
     user.email = "contact@colinfay.me"
   )
   
+  system("git branch -M main")
   
   git2r::add(
     repo_bare, 
@@ -411,22 +404,16 @@ if (Sys.info()['sysname'] == "Darwin"){
     )
   )
   
-  git2r::remote_add(
-    repo_bare,
-    name = "origin", 
-    url = "https://github.com/ThinkR-open/golemmetrics.git"
-  )
   
-  git2r::push(
-    repo_bare,
-    name = "origin", 
-    refspec = "refs/heads/master",
-    set_upstream = TRUE,
-    force = TRUE,
-    credentials = git2r::cred_token(
+  system(
+    sprintf(
+      "git remote add origin https://colinfay:%s@github.com/ThinkR-open/golemmetrics", 
       Sys.getenv("GITHUB_TOKEN")
     )
   )
+  
+  system("git push --force --set-upstream origin main")
+  
 }
 
 # Restore old wd

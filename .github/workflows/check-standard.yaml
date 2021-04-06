@@ -81,9 +81,8 @@ jobs:
         shell: Rscript {0}
         
       - name: Manual Test
-        if: runner.os != 'Windows'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_PAT }}
         run: |
           Rscript -e 'source("inst/mantests/build.R")'
  
