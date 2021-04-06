@@ -97,10 +97,10 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
         with:
           source-directory: 'inst/golemmetrics'
-          destination-github-username: 'colinfay'
+          destination-github-username: 'Colin Fay'
           destination-repository-username: 'thinkr-open'
           destination-repository-name: 'golemmetrics'
-          user-email: 'contact@colinfay.me'
+          user-email: contact@colinfay.me
           target-branch: main
           
       - name: Upload check results
