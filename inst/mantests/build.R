@@ -386,6 +386,10 @@ if (Sys.info()['sysname'] == "Linux"){
   usethis::use_git()
   dir.create(".git/hooks", recursive = TRUE)
   file.create(".git/hooks/pre-commit")
+  install.packages("rsconnect")
+  rsconnect::writeManifest()
+  install.packages("knitr")
+  knitr::knit("readme.Rmd")
 }
 
 # Restore old wd
