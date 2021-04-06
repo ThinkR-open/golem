@@ -45,6 +45,8 @@ install.packages(
   repo = "https://cran.rstudio.com/"
 )
 
+remotes::install_version("shiny", "1.5.0", lib.loc = temp_lib)
+
 cli::cat_rule("Install golem")
 
 library(remotes, lib.loc = temp_lib)
