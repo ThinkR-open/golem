@@ -95,7 +95,8 @@ jobs:
           source-directory: 'inst/golemmetrics'
           destination-github-username: 'thinkr-open'
           destination-repository-name: 'golemmetrics'
-          user-email: carles3@pina.cat  
+          user-email: contact@colinfay.me
+          target-branch: main
           
       - name: Upload check results
         if: failure()
