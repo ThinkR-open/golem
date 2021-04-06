@@ -408,7 +408,7 @@ if (Sys.info()['sysname'] == "Darwin"){
   system(
     sprintf(
       "git remote add origin https://colinfay:%s@github.com/ThinkR-open/golemmetrics", 
-      Sys.getenv("GITHUB_TOKEN")
+      Sys.getenv("GITHUB_PAT")
     )
   )
   

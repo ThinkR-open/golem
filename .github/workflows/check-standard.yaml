@@ -82,10 +82,11 @@ jobs:
         
       - name: Manual Test
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_PAT }}
+          GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          Rscript -e 'source("inst/mantests/build.R")'
- 
+          source("inst/mantests/build.R")
+        shell: Rscript {0}
+        
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main
