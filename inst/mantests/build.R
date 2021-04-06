@@ -1,7 +1,3 @@
-print(Sys.getenv())
-print(getwd())
-print(list.files())
-
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
 
@@ -389,7 +385,7 @@ if (Sys.info()['sysname'] == "Linux"){
   install.packages("rsconnect")
   rsconnect::writeManifest()
   install.packages("knitr")
-  knitr::knit("readme.Rmd")
+  knitr::knit("README.Rmd")
 }
 
 # Restore old wd
