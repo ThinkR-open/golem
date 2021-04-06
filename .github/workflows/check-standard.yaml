@@ -87,6 +87,17 @@ jobs:
           source("inst/mantests/build.R")
         shell: Rscript {0}
         
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@master
+        if: runner.os == 'macOS'
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.ACCESS_TOKEN }}
+        with:
+          source-directory: 'inst/golemmetrics'
+          destination-github-username: 'thinkr-open'
+          destination-repository-name: 'golemmetrics'
+          user-email: carles3@pina.cat  
+          
       - name: Upload check results
         if: failure()
         uses: actions/upload-artifact@main

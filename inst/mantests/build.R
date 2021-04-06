@@ -34,6 +34,8 @@ if (Sys.getenv("CI", "local") == "local"){
 # This will be our golem app
 
 
+
+
 if (dir.exists(temp_app)) {
   unlink(temp_app, TRUE, TRUE)
 }
@@ -45,6 +47,8 @@ install.packages(
   lib = temp_lib, 
   repo = "https://cran.rstudio.com/"
 )
+
+cli::cat_boxx(getwd())
 
 cli::cat_rule("Install golem")
 
