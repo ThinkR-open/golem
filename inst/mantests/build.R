@@ -382,43 +382,8 @@ cli::cat_rule("Testing 03_dev")
 
 cat_ok()
 
-if (Sys.info()['sysname'] == "Darwin"){
-  install_cran("git2r")
-  
-  repo_bare <- git2r::init()
-  
-  git2r::config(
-    repo_bare,
-    global = TRUE,
-    user.name = "Colin Fay", 
-    user.email = "contact@colinfay.me"
-  )
-  
-  system("git branch -M main")
-  
-  git2r::add(
-    repo_bare, 
-    path = list.files(getwd())
-  )
-  
-  git2r::commit(
-    repo_bare,
-    message = sprintf(
-      "Deploy %s", 
-      Sys.time()
-    )
-  )
-  
-  
-  system(
-    sprintf(
-      "git remote add origin https://colinfay:%s@github.com/ThinkR-open/golemmetrics", 
-      Sys.getenv("GITHUB_PAT")
-    )
-  )
-  
-  system("git push --force --set-upstream origin main")
-  
+if (Sys.info()['sysname'] == "Linux"){
+  usethis::use_git()
 }
 
 # Restore old wd
