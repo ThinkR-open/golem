@@ -374,11 +374,10 @@ remotes::install_local(targz)
 
 cli::cat_rule("Testing 03_dev")
 
-#golem::add_dockerfile()
-
 cat_ok()
 
 if (Sys.info()['sysname'] == "Linux"){
+  golem::add_dockerfile()
   usethis::use_git()
   dir.create(".git/hooks", recursive = TRUE)
   file.create(".git/hooks/pre-commit")
