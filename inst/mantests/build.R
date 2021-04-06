@@ -384,6 +384,8 @@ cat_ok()
 
 if (Sys.info()['sysname'] == "Linux"){
   usethis::use_git()
+  dir.create(".git/hooks", recursive = TRUE)
+  file.create(".git/hooks/pre-commit")
 }
 
 # Restore old wd
