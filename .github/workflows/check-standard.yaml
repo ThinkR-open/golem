@@ -98,7 +98,7 @@ jobs:
         with:
           source-directory: 'inst/golemmetrics'
           destination-github-username: 'colinfay'
-          destination-repository-name: 'thinkr-open'
+          destination-repository-username: 'thinkr-open'
           destination-repository-name: 'golemmetrics'
           user-email: 'contact@colinfay.me'
           target-branch: main
