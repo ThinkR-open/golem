@@ -378,7 +378,7 @@ cat_ok()
 
 if (Sys.info()['sysname'] == "Linux"){
   golem::add_rstudioconnect_file()
-  golem::add_dockerfile()
+  #golem::add_dockerfile()
   usethis::use_git()
   dir.create(".git/hooks", recursive = TRUE)
   file.create(".git/hooks/pre-commit")
