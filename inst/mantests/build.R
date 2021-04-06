@@ -377,6 +377,7 @@ cli::cat_rule("Testing 03_dev")
 cat_ok()
 
 if (Sys.info()['sysname'] == "Linux"){
+  golem::add_rstudioconnect_file()
   golem::add_dockerfile()
   usethis::use_git()
   dir.create(".git/hooks", recursive = TRUE)
