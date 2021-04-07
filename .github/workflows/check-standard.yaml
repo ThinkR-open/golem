@@ -100,7 +100,7 @@ jobs:
           target-branch: main
       
       - name: Push to Docker Hub
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         if: runner.os == 'Linux' 
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
