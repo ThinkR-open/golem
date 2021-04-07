@@ -390,7 +390,8 @@ cat_ok()
 if (Sys.info()['sysname'] == "Linux"){
   golem::add_rstudioconnect_file()
   golem::add_dockerfile(
-    open = FALSE
+    open = FALSE,
+    extra_sysreqs = c("libxml2-dev")
   )
   usethis::use_git()
   dir.create(".git/hooks", recursive = TRUE)
