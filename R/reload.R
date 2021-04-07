@@ -21,6 +21,49 @@ detach_all_attached <- function(){
   return(invisible(TRUE))
 }
 
+check_name_consistency <- function(
+  pkg 
+){
+  
+  old_dir <- setwd(pkg)
+  
+  package_name <- desc::desc_get("Package")
+  pth <- fs::path(pkg, "R", "app_config.R")
+  app_config <- readLines(pth) 
+  
+  where_system.file <- app_config[
+    grep("system.file", app_config)
+  ]
+  
+  setwd(old_dir)
+  
+  if (grepl(
+    package_name, 
+    where_system.file
+  )){
+    
+    return(invisible(TRUE))
+  } else {
+    stop(
+      call. = FALSE,
+      "Package name does not match in DESCRIPTION and `app_sys()`.\n",
+      "\n", 
+      sprintf(
+        "DESCRIPTION: '%s'\n", package_name
+      ),
+      sprintf(
+        "R/app_config.R - app_sys(): '%s'\n", where_system.file
+      ), 
+      "\n", 
+      sprintf(
+        "Please make both these names match before continuing, for example using golem::set_golem_name('%s')",
+        package_name
+      )
+    )
+  }
+  
+}
+
 
 
 
@@ -46,6 +89,10 @@ document_and_reload <- function(
   attach_testthat = FALSE, 
   ...
 ){
+  # We'll start by checking if the package name is correct
+  
+  check_name_consistency(pkg)
+  
   if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
