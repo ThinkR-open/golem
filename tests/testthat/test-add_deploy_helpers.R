@@ -102,7 +102,8 @@ test_that("add_dockerfiles multi repos", {
           to_find <-     "RUN echo \"options(repos = c(bioc1 = 'https://bioconductor.org/packages/3.10/data/annotation', bioc2 = 'https://bioconductor.org/packages/3.10/data/experiment', CRAN = 'https://cran.rstudio.com'), download.file.method = 'libcurl', Ncpus = 4)\" >> /usr/local/lib/R/etc/Rprofile.site"
           # for R <= 3.4
           to_find_old <- "RUN echo \"options(repos = structure(c('https://bioconductor.org/packages/3.10/data/annotation', 'https://bioconductor.org/packages/3.10/data/experiment', 'https://cran.rstudio.com'), .Names = c('bioc1', 'bioc2', 'CRAN')), download.file.method = 'libcurl', Ncpus = 4)\" >> /usr/local/lib/R/etc/Rprofile.site"
-          expect_true(sum(readLines(con = "Dockerfile") %in% c(to_find,to_find_old)  == 1))   
+
+          expect_true(sum(readLines(con = "Dockerfile") %in% c(to_find,to_find_old))  == 1)   
           
           
         }
