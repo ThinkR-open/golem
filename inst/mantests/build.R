@@ -1,3 +1,5 @@
+print(Sys.getenv())
+cat("\n")
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
 
@@ -95,13 +97,22 @@ here::set_here(temp_app)
 
 usethis::use_build_ignore(".here")
 
-usethis::use_dev_package(
-  "golem", 
-  remote = sprintf(
-    "ThinkR-open/golem@%s",
-    Sys.getenv("GITHUB_BASE_REF", "dev")
+if (Sys.getenv("GITHUB_BASE_REF") == ""){
+  usethis::use_dev_package(
+    "golem", 
+    remote = "github::ThinkR-open/golem@dev"
   )
-)
+} else {
+  usethis::use_dev_package(
+    "golem", 
+    remote = sprintf(
+      "github::ThinkR-open/golem@dev",
+      Sys.getenv("GITHUB_BASE_REF")
+    )
+  )
+}
+
+
 
 cat(
   readLines("DESCRIPTION"),
