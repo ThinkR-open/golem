@@ -391,7 +391,7 @@ if (Sys.info()['sysname'] == "Linux"){
   golem::add_rstudioconnect_file()
   golem::add_dockerfile(
     from = "rocker/shiny-verse:4.0.4", 
-    sysreqs = FALSE,
+    extra_sysreqs = c("libxml2-dev"),
     open = FALSE
   )
   usethis::use_git()
