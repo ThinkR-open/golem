@@ -1,6 +1,6 @@
 print(Sys.getenv())
 cat("\n")
-# rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
+#rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
 
 # We prevent the random name from having 
@@ -130,7 +130,7 @@ cat(
   readLines("DESCRIPTION"),
   sep = "\n"
 )
-devtools::check()
+
 cat_ok()
 
 
@@ -288,9 +288,6 @@ expect_true(
   dir.exists("tests")
 )
 
-devtools::test()
-devtools::check()
-
 golem::use_recommended_deps()
 
 cat_ok()
@@ -316,6 +313,10 @@ golem::add_module(
   fct = "golem_logs", 
   js = "golem_stars", 
   utils = "pretty_num"
+)
+
+expect_true(
+  file.exists("R/mod_main.R")
 )
 
 expect_true(
@@ -348,51 +349,6 @@ expect_true(
   file.exists("inst/app/www/golem_stars.js")
 )
 unlink("inst/app/www/golem_stars.js", TRUE, TRUE)
-
-expect_true(
-  file.exists("R/mod_main.R")
-)
-
-ui <- readLines(
-  "R/app_ui.R"
-)
-
-ui <- gsub(
-  fixed = TRUE,
-  'h1("golemmetrics")',
-  'mod_main_ui("main_ui_1")',
-  ui
-)
-
-unlink("R/app_ui.R", TRUE, TRUE)
-
-for (i in 1:length(ui)){
-  write(
-    ui[i], 
-    "R/app_ui.R", 
-    append = TRUE
-  )
-}
-
-server <- readLines(
-  "R/app_server.R"
-)
-
-server <- gsub(
-  '# Your application server logic ',
-  'mod_main_server("main_ui_1")',
-  ui
-)
-
-unlink("R/app_server.R", TRUE, TRUE)
-
-for (i in 1:length(server)){
-  write(
-    server[i],
-    "R/app_server.R",
-    append = TRUE
-  )
-}
 
 golem::document_and_reload()
 
