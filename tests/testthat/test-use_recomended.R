@@ -7,7 +7,7 @@ test_that("test use_recommended_deps",{
         to_add <- c(to_add, i)
       }
     }
-    use_recommended_deps(to_add)
+    use_recommended_deps(recommended = to_add)
     deps <- desc::desc_get_deps(file = "DESCRIPTION")
     expect_true(
       all( to_add %in% deps$package )
