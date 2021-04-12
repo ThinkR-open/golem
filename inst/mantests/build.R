@@ -353,6 +353,47 @@ expect_true(
   file.exists("R/mod_main.R")
 )
 
+ui <- readLines(
+  "R/app_ui.R"
+)
+
+ui <- gsub(
+  fixed = TRUE,
+  'h1("golemmetrics")',
+  'mod_main_ui("main_ui_1")',
+  ui
+)
+
+unlink("R/app_ui.R", TRUE, TRUE)
+
+for (i in 1:length(ui)){
+  write(
+    ui[i], 
+    "R/app_ui.R", 
+    append = TRUE
+  )
+}
+
+server <- readLines(
+  "R/app_server.R"
+)
+
+server <- gsub(
+  '# Your application server logic ',
+  'mod_main_server("main_ui_1")',
+  ui
+)
+
+unlink("R/app_server.R", TRUE, TRUE)
+
+for (i in 1:length(server)){
+  write(
+    server[i],
+    "R/app_server.R",
+    append = TRUE
+  )
+}
+
 golem::document_and_reload()
 
 cat_ok()
