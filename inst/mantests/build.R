@@ -387,6 +387,7 @@ cat_ok()
 if (Sys.info()['sysname'] == "Linux"){
   golem::add_rstudioconnect_file()
   golem::add_dockerfile(
+    repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
     from = "rocker/shiny-verse:4.0.4", 
     extra_sysreqs = c("libxml2-dev"),
     open = FALSE
