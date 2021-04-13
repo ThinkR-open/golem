@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable) [![Travis build status](https://travis-ci.org/ThinkR-open/golem.svg?branch=master)](https://travis-ci.org/ThinkR-open/golem) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ThinkR-open/golem?branch=master&svg=true)](https://ci.appveyor.com/project/ThinkR-open/golem) [![Coverage status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](https://codecov.io/github/ThinkR-open/golem?branch=master) [![CRAN status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html) [![Travis build status](https://travis-ci.org/ThinkR-open/golem.svg?branch=master)](https://travis-ci.org/ThinkR-open/golem) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/ThinkR-open/golem?branch=master&svg=true)](https://ci.appveyor.com/project/ThinkR-open/golem) [![Coverage status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](https://codecov.io/github/ThinkR-open/golem?branch=master) [![CRAN status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
 
  <!-- badges: end -->
 
@@ -44,8 +44,8 @@ This package is part of a series of tools for Shiny, which includes:
 
 *Building Big Shiny Apps*
 
--   Part 1: <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-1/>
--   Part 2: <https://rtask.thinkr.fr/blog/building-big-shiny-apps-a-workflow-2/>
+-   Part 1: <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/>
+-   Part 2: <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/>
 
 ### Slide decks
 
@@ -59,7 +59,7 @@ This package is part of a series of tools for Shiny, which includes:
 -   [Hands-on demonstration of {golem}](https://shinydevseries.com/post/golem-demo/)
 -   useR! 2019 : [A Framework for Building Robust & Production Ready Shiny Apps](https://youtu.be/tCAan6smrjs)
 -   `r  emo::flag("France")` [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
--   rstudio::conf(2020) : [Production-grade Shiny Apps with golem](https://resources.rstudio.com/rstudio-conf-2020/production-grade-shiny-apps-with-golem-colin-fay)
+-   rstudio::conf(2020) : [Production-grade Shiny Apps with golem](https://www.rstudio.com/resources/rstudioconf-2020/production-grade-shiny-apps-with-golem/)
 
 ### Cheatsheet
 
@@ -67,16 +67,17 @@ This package is part of a series of tools for Shiny, which includes:
 
 ### Examples apps
 
-These are examples from the community. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of {golem} or {shiny}.
+These are examples from the community. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of `{golem}` or `{shiny}`.
 
 - <https://github.com/seanhardison1/vcrshiny>
-    - [Link to hosted version](http://seanhardison.shinyapps.io/vcrshiny/)
 - <https://github.com/CDU-data-science-team/healthcareSPC>
-    - [Link to hosted version](https://involve.nottshc.nhs.uk:8443/open_healthcare_spc/)
 - <https://github.com/marton-balazs-kovacs/tenzing>
-    - [Link to hosted version](https://martonbalazskovacs.shinyapps.io/tenzing/)
 - <https://github.com/shahreyar-abeer/cranstars>
-    - [Link to hosted version](https://shahreyar-abeer.shinyapps.io/cranstars/)
+
+You can also find apps at:
+
+- <https://connect.thinkr.fr/connect/>
+- <https://github.com/ColinFay/golemexamples>
 
 ## Installation
 

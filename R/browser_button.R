@@ -1,6 +1,6 @@
 #' Insert an hidden browser button
 #' 
-#' See \url{https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/} for more context.
+#' See \url{https://rtask.thinkr.fr/a-little-trick-for-debugging-shiny/} for more context.
 #'
 #' @return Prints the code to the console.
 #' @export

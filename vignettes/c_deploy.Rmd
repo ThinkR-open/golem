@@ -42,7 +42,7 @@ run_app <- function(
 
 ```
 
-This function might looks a little bit weird, but there's a long story behind it, and you can read more about it [there](https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/).
+This function might looks a little bit weird, but there's a long story behind it, and you can read more about it [there](https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/).
 
 But long story short, this combination of `with_golem_options` & `golem_opts = list(...)` allows you to pass argument to the function to be used inside the application, from UI or from server side, which you can get with `get_golem_options()`.
 
