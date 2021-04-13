@@ -1,6 +1,6 @@
 print(Sys.getenv())
 cat("\n")
-# rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
+#rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
 
 # We prevent the random name from having 
@@ -130,7 +130,7 @@ cat(
   readLines("DESCRIPTION"),
   sep = "\n"
 )
-devtools::check()
+
 cat_ok()
 
 
@@ -288,9 +288,6 @@ expect_true(
   dir.exists("tests")
 )
 
-devtools::test()
-devtools::check()
-
 golem::use_recommended_deps()
 
 cat_ok()
@@ -316,6 +313,10 @@ golem::add_module(
   fct = "golem_logs", 
   js = "golem_stars", 
   utils = "pretty_num"
+)
+
+expect_true(
+  file.exists("R/mod_main.R")
 )
 
 expect_true(
@@ -348,10 +349,6 @@ expect_true(
   file.exists("inst/app/www/golem_stars.js")
 )
 unlink("inst/app/www/golem_stars.js", TRUE, TRUE)
-
-expect_true(
-  file.exists("R/mod_main.R")
-)
 
 golem::document_and_reload()
 
@@ -389,7 +386,12 @@ cat_ok()
 
 if (Sys.info()['sysname'] == "Linux"){
   golem::add_rstudioconnect_file()
-  #golem::add_dockerfile()
+  golem::add_dockerfile(
+    repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest",
+    from = "rocker/shiny-verse:4.0.4", 
+    extra_sysreqs = c("libxml2-dev"),
+    open = FALSE
+  )
   usethis::use_git()
   dir.create(".git/hooks", recursive = TRUE)
   file.create(".git/hooks/pre-commit")
