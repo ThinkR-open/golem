@@ -1,24 +1,28 @@
-# golem (development version)
-
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
-# golem 0.3.0
+# golem 0.3.1
 
 ## New functions
 
+### `add_*`
+
 + You can now create a skeleton for a Shiny input binding using the `golem::add_js_binding("name")` function (#452, @DivadNojnarg)
 
-+ `utils_ui.R` now contains a "make_action_button()" function (#457, @DivadNojnarg)
++ You can now create a skeleton for a Shiny output binding using the `golem::add_js_output_binding("name")` function (@DivadNojnarg)
 
-+ `run_dev()` launches the `run_dev.R` script (#478, @KoderKow)
++ `add_html_template()` creates an htmlTemplate.
 
-+ `use_html_template()` downloads an external HTML page and allow to use it as an `htmlTemplate()`, (#491)
+### `use_*`
 
-+ `is_running()` checks if the current running application is a `{golem}` based application (#366)
++ `use_external_file()` allows to add any file to the `www` folder, `use_external_css_file()`, `use_external_html_template()`, and `use_external_js_file()` will download them from a URL (#295, #491).
 
-+ `use_external_file()` allows to add any file to the `www` folder (#295)
++ `use_internal_css_file()`, `use_internal_file()`, `use_internal_html_template()`, `use_internal_js_file()` functions allow to any file from the current computer to the `www` folder (@KasperThystrup, #529)
 
-+ `use_internal_()` functions allow to any file from the current computer to the `www` folder (@KasperThystrup, #529)
+### Tests helper
+
++ `expect_running()` expects the current shiny app to be running.
+
+### Hooks
 
 + Every `{golem}` project now have a `project_hook` that is launched after the project creation.
 
@@ -26,9 +30,17 @@
 
 + `add_js_` and `add_css_` functions now have a template function, allowing to pass a file constructor.
 
-+ The new `add_html_template()` creates an htmlTemplate.
+### Misc
 
-+ `sanity_check()` function has been added to check for any 'browser()' or commented  #TODO / #TOFIX / #BUG in the code(#1354 @Swechhya) 
++ `is_running()` checks if the current running application is a `{golem}` based application (#366)
+
++ `utils_ui.R` now contains a "make_action_button()" function (#457, @DivadNojnarg)
+
++ `run_dev()` launches the `run_dev.R` script (#478, @KoderKow)
+
++ `run_dev()` performs a check on golem name.
+
++ `sanity_check()` function has been added to check for any 'browser()' or commented  #TODO / #TOFIX / #BUG in the code (#1354 @Swechhya) 
 
 ## New features
 
@@ -44,19 +56,19 @@
 
 + Default tests now test for functions formals (#437)
 
-+ You can now pass arguments to internal roxygenise() & load_all() (#467)
++ You can now pass arguments to internal `roxygenise()` & `load_all()` (#467)
 
 + `Bundle_resources()` now handle subfolders (#446)
 
 + `run_app()` now includes the default arguments of `shinyApp()` (#254, @chasemc)
 
-+ `create_golem()` now adds strict dependencie versions (#466)
++ `create_golem()` now adds strict dependency versions (#466)
 
-+ `{golem}` app now comes with a meta tags "app-builder", which default to "golem", and that can be changed or turn off in `bundle_resources()`
++ `{golem}` app now comes with a meta tags "app-builder", which default to "golem", and that can be changed or turn off in `bundle_resources()`.
 
 + `with_golem_options` can now explicit calls `print` on the `app` object, solving some issues with benchmarking the application. This explicit print can be turned off by setting `print` to FALSE in `with_golem_options` (#148)
 
-+ `dockerignore` is now available
++ `dockerignore` is now available.
 
 + The `add_helpers` and `add_utils` now have roxygen comments (Richard Pilbery, #330)
 
@@ -78,7 +90,7 @@
 
 + `add_` functions no longer append to file if it already exists (#393)
 
-+ `config::get()` is no longer exported to prevent clashing with `base::get()`
++ `config::get()` is no longer exported to prevent namespace conflicts with `base::get()`
  
 + fixed issue with favicon when package is built (#387)
 
@@ -107,7 +119,6 @@
 + `document_and_reload()` now has `export_all = FALSE,helpers = FALSE,attach_testthat = FALSE`, allowing the function to behave more closely to what library() does (#399)
 
 + Dockerfile generation now removes the copied file and tar.gz
-
 
 # golem 0.2.1
 
