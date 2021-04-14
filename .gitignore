@@ -8,3 +8,4 @@ inst/rstudio/.DS_Store
 .RData
 doc
 Meta
+revdep/
