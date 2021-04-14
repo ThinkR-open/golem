@@ -71,6 +71,10 @@ configuration files if the specified config file isn't found.}
 the value of the \code{R_CONFIG_ACTIVE} environment variable
 ("default" if the variable does not exist).}
 }
+\value{
+Used for side-effects for the setters, and values from the
+config in the getters.
+}
 \description{
 Set and get a series of options to be used with \code{{golem}}.
 These options are found inside the \code{golem-config.yml} file, found in most cases

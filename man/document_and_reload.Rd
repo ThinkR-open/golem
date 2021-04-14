@@ -41,6 +41,9 @@ which more closely mimics the environment within test files.}
 
 \item{...}{Other arguments passed to \code{pkgload::load_all()}}
 }
+\value{
+Used for side-effects
+}
 \description{
 This function calls \code{rstudioapi::documentSaveAll()},
 \code{roxygen2::roxygenise()} and \code{pkgload::load_all()}.

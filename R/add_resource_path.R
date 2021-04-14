@@ -1,12 +1,14 @@
 #' Add resource path
 #'
 #' @inheritParams shiny::addResourcePath
-#' @param warn_empty Boolean. By default FALSE, if TRUE display message if directory is empty.
+#' @param warn_empty Boolean. Default is `FALSE`.
+#'     If TRUE display message if directory is empty.
 #'
 #' @importFrom shiny addResourcePath
 #' 
 #' @export
 #'
+#' @return Used for side effects.
 add_resource_path <- function(
   prefix, 
   directoryPath,
@@ -14,7 +16,9 @@ add_resource_path <- function(
 ){
   
   list_f <- length(
-    list.files(path = directoryPath)
+    list.files(
+      path = directoryPath
+    )
   ) == 0
   
   if ( list_f ) {

@@ -1,20 +1,20 @@
 #' Add a favicon to your shinyapp
 #'
 #' @param path Path to your favicon file (.ico or .png) 
-#' @param pkg Path to the root of the package. Default is `get_golem_wd()`
-#' @param method Method to be used for downloading files, 'curl' is default see [utils::download.file]
+#' @inheritParams add_module
+#' @param method Method to be used for downloading files, 'curl' is default see [utils::download.file()].
 #' @rdname favicon
 #' @export
 #' 
 #' @importFrom attempt stop_if_not
 #' @importFrom fs path_abs path file_copy
+#' 
+#' @return Used for side-effects.
 #'
 #' @examples
-#' \donttest{
 #' if (interactive()){
 #'   use_favicon()
 #'   use_favicon(path='path/to/your/favicon.ico')
-#' }
 #' }
 use_favicon <- function(
   path, 
@@ -38,7 +38,6 @@ use_favicon <- function(
   
   if ( !local ){
     
-    
     if (getRversion() >= "3.5"){
     try_online <- attempt::attempt(
       curlGetHeaders(path), 
@@ -57,8 +56,7 @@ use_favicon <- function(
     )
     
     }
-    
-    
+  
     destfile <- tempfile(
       fileext = paste0(".",ext),
       pattern = "favicon"
@@ -147,6 +145,8 @@ remove_favicon <- function(
 #'
 #' @export
 #' @importFrom htmltools tags
+#' 
+#' @return An HTML tag.
 favicon <- function( 
   ico = "favicon", 
   rel="shortcut icon", 

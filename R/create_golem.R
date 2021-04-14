@@ -1,16 +1,23 @@
-#' Create a package for Shiny App using golem
+#' Create a package for a Shiny App using `{golem}`
 #'
-#' @param path Name of the folder to create the package in. This will also be 
-#'     used as the package name.
-#' @param check_name When using this function in the console, you can prevent 
-#'      the package name from being checked. 
-#' @param open Boolean open the created project
-#' @param package_name Package name to use.By default it's `basename(path)` but if path == '.' and `package_name` 
-#' not explicitly given, then `basename(getwd())` will be used.
-#' @param without_comments Boolean start project without golem comments
-#' @param project_hook A function executed as a hook after project creation. Can be used to change the default `{golem}` structure.
-#' to override the files and content. This function is executed 
+#' @param path Name of the folder to create the package in. 
+#'     This will also be used as the package name.
+#' @param check_name Should we check that the package name is 
+#'     correct according to CRAN requirements.
+#' @param open Boolean. Open the created project?
+#' @param package_name Package name to use. By default, {golem} uses
+#'     `basename(path)`. If `path == '.'` & `package_name` is
+#'     not explicitly set, then `basename(getwd())` will be used.
+#' @param without_comments Boolean. Start project without golem comments
+#' @param project_hook A function executed as a hook after project 
+#'     creation. Can be used to change the default `{golem}` structure.
+#'     to override the files and content. This function is executed just 
+#'     after the project is created.
 #' @param ... Arguments passed to the `project_hook()` function.  
+#' 
+#' @note 
+#' For compatibility issue, this function turns `options(shiny.autoload.r)`
+#' to `FALSE`. See https://github.com/ThinkR-open/golem/issues/468 for more background.
 #'
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
@@ -18,7 +25,10 @@
 #' @importFrom usethis use_latest_dependencies
 #' @importFrom fs path_abs path_file path dir_copy path_expand
 #' @importFrom yaml write_yaml
+#' 
 #' @export
+#' 
+#' @return The path, invisibly.
 create_golem <- function(
   path, 
   check_name = TRUE,
@@ -160,6 +170,8 @@ create_golem <- function(
   write("if (file.exists(home_profile)){", ".Rprofile", append = TRUE)
   write("  source(home_profile)", ".Rprofile", append = TRUE)
   write("}", ".Rprofile", append = TRUE)
+  write("rm(home_profile)", ".Rprofile", append = TRUE)
+  
   write("# Setting shiny.autoload.r to FALSE ", ".Rprofile", append = TRUE)
   write("options(shiny.autoload.r = FALSE)", ".Rprofile", append = TRUE)
   cat_green_tick("Appended")

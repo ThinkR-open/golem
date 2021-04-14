@@ -1,22 +1,33 @@
 #' Sanity check for R files in the project
 #' 
-#' This function is used check for any 'browser()' or commented
+#' This function is used check for any `browser()`` or commented
 #' #TODO / #TOFIX / #BUG in the code
+#' 
+#' @inheritParams add_module
+#' 
 #' @rdname sanity_check
 #' @export
+#' 
 #' @importFrom rstudioapi sourceMarkers
-#' @importFrom rstudioapi getActiveProject
-sanity_check<- function(){
-  active_project_dir <- rstudioapi::getActiveProject()
-  all_R_files <-list.files(path = active_project_dir, pattern = "\\.R$", recursive = TRUE)
+#' 
+#' @return A DataFrame if any of the words has been found.
+sanity_check<- function(
+  pkg = get_golem_wd()
+){
+  all_R_files <- list.files(
+    path = pkg, 
+    pattern = "\\.R$", 
+    recursive = TRUE
+  )
+  
   to_find <- c('browser()', '#TODO', '#TOFIX', '#BUG', '# TODO', '# TOFIX', '# BUG')
+  
   source_markers <- data.frame()
-
-
+  
   for(file_name in all_R_files){
-    file <- readLines(file_name)
-
-    for ( word in to_find){
+    file <- readLines(file_name, warn = FALSE)
+    
+    for ( word in to_find ){
       line_number <- grep(word, file, fixed = TRUE)
       if(length(line_number) > 0){
         df <- data.frame(
@@ -30,11 +41,13 @@ sanity_check<- function(){
       }
     }
   }
-
+  
   if(length(source_markers) > 0){
-    rstudioapi::sourceMarkers("sanity_check", markers = source_markers)
-  }
-  else{
-    message("No errors found. Sanity check passed successfully.")
+    if (rstudioapi::hasFun("sourceMarkers")){
+      rstudioapi::sourceMarkers("sanity_check", markers = source_markers)
+    } 
+    return(source_markers)
+  } else{
+    cat_green_tick("Sanity check passed successfully.")
   }
 }

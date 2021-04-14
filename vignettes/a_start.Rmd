@@ -193,7 +193,12 @@ golem::use_utils_server()
 
 ## Try the app
 
-To run the app, go to the `dev/run_dev.R` file, and launch the all thing.
+To run the app, launch : 
+
+```{r}
+golem::run_dev()
+```
+
 
 You're now set! You've successfully initiated the project and can go to dev/02_dev.R.
 

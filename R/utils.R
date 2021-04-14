@@ -216,6 +216,7 @@ open_or_go_to <- function(
     rstudioapi::hasFun("navigateToFile")
   ){
     rstudioapi::navigateToFile(where)
+    
   } else {
     cat_red_bullet(
       sprintf(
@@ -224,6 +225,7 @@ open_or_go_to <- function(
       )
     )
   }
+  invisible(where)
 }
 
 desc_exist <- function(pkg){
@@ -343,3 +345,11 @@ file_ext <- function (x) {
   pos <- regexpr("\\.([[:alnum:]]+)$", x)
   ifelse(pos > -1L, substring(x, pos + 1L), "")
 }
+
+#' @importFrom utils menu
+yesno <- function (...) 
+{
+  cat(paste0(..., collapse = ""))
+  menu(c("Yes", "No")) == 1
+}
+

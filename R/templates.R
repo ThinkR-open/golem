@@ -1,6 +1,6 @@
 #' Project Hook
 #'
-#' Project hooks allow to define a function run just after {golem}
+#' Project hooks allow to define a function run just after `{golem}`
 #' project creation.
 #'
 #' @inheritParams create_golem

@@ -7,11 +7,12 @@
 project_hook(path, package_name, ...)
 }
 \arguments{
-\item{path}{Name of the folder to create the package in. This will also be
-used as the package name.}
+\item{path}{Name of the folder to create the package in.
+This will also be used as the package name.}
 
-\item{package_name}{Package name to use.By default it's \code{basename(path)} but if path == '.' and \code{package_name}
-not explicitly given, then \code{basename(getwd())} will be used.}
+\item{package_name}{Package name to use. By default, {golem} uses
+\code{basename(path)}. If \code{path == '.'} & \code{package_name} is
+not explicitly set, then \code{basename(getwd())} will be used.}
 
 \item{...}{Arguments passed from \code{create_golem()}, unused in the default
 function.}
@@ -20,7 +21,7 @@ function.}
 Used for side effects
 }
 \description{
-Project hooks allow to define a function run just after {golem}
+Project hooks allow to define a function run just after \code{{golem}}
 project creation.
 }
 \examples{

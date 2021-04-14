@@ -2,7 +2,8 @@
 #' 
 #' See \url{https://rtask.thinkr.fr/a-little-trick-for-debugging-shiny/} for more context.
 #'
-#' @return Prints the code to the console.
+#' @return Used for side effects.
+#'     Prints the code to the console.
 #' @export
 #' 
 #' @importFrom cli cat_rule cat_line

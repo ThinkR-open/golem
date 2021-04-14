@@ -4,6 +4,8 @@
 #' @param pkg Package name to run the file. Defaults to current active package.
 #' 
 #' @export
+#' 
+#' @return Used for side-effect
 run_dev <- function(
   file, 
   pkg = pkgload::pkg_name()

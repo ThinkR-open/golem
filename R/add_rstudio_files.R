@@ -6,7 +6,11 @@
 add_rstudio_files <- function(
   pkg,
   open, 
-  service = c("RStudio Connect", "Shiny Server", "ShinyApps.io")
+  service = c(
+    "RStudio Connect", 
+    "Shiny Server", 
+    "ShinyApps.io"
+  )
 ){
   service <- match.arg(service)
   where <- path(pkg, "app.R")
@@ -61,12 +65,14 @@ add_rstudio_files <- function(
 #' In previous versions, this function was called add_rconnect_file.
 #'
 #' @inheritParams add_module
-#' @param pkg Where to put the app.R. Default is `get_golem_wd()`.
 #' @aliases add_rconnect_file add_rstudioconnect_file
 #' @export
+#' 
 #' @rdname rstudio_deploy
+#' 
+#' @return The path to the file, invisibly.
+#' 
 #' @examples
-#' \donttest{
 #' # Add a file for Connect
 #' if (interactive()){
 #'    add_rstudioconnect_file()
@@ -79,12 +85,15 @@ add_rstudio_files <- function(
 #' if (interactive()){
 #'     add_shinyappsio_file()
 #' }
-#'}
 add_rstudioconnect_file <- function(
   pkg = get_golem_wd(), 
   open = TRUE
 ){
-  add_rstudio_files(pkg = pkg, open = open, service = "RStudio Connect")
+  add_rstudio_files(
+    pkg = pkg, 
+    open = open, 
+    service = "RStudio Connect"
+  )
 }
 
 #' @rdname rstudio_deploy
@@ -93,7 +102,11 @@ add_shinyappsio_file <- function(
   pkg = get_golem_wd(), 
   open = TRUE
 ){
-  add_rstudio_files(pkg = pkg, open = open, service = "ShinyApps.io")
+  add_rstudio_files(
+    pkg = pkg, 
+    open = open, 
+    service = "ShinyApps.io"
+  )
 }
 
 #' @rdname rstudio_deploy
@@ -102,5 +115,9 @@ add_shinyserver_file <- function(
   pkg = get_golem_wd(), 
   open = TRUE
 ){
-  add_rstudio_files(pkg = pkg, open = open, service = "Shiny Server")
+  add_rstudio_files(
+    pkg = pkg, 
+    open = open, 
+    service = "Shiny Server"
+  )
 }
