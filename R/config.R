@@ -114,6 +114,8 @@ change_app_config_name <- function(
 #' @export
 #' @importFrom yaml read_yaml write_yaml
 #' @importFrom attempt stop_if
+#' 
+#' @return Used for side effects.
 amend_golem_config <- function(
   key,
   value, 

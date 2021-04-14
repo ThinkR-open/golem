@@ -15,7 +15,11 @@ given directory.}
 \item{directoryPath}{The directory that contains the static resources to be
 served.}
 
-\item{warn_empty}{Boolean. By default FALSE, if TRUE display message if directory is empty.}
+\item{warn_empty}{Boolean. Default is \code{FALSE}.
+If TRUE display message if directory is empty.}
+}
+\value{
+Used for side effects.
 }
 \description{
 Add resource path

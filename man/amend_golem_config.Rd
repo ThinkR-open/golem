@@ -25,6 +25,9 @@ the value of the \code{R_CONFIG_ACTIVE} environment variable
 
 \item{talkative}{Should the messages be printed to the console?}
 }
+\value{
+Used for side effects.
+}
 \description{
 Amend golem config file
 }

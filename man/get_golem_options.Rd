@@ -9,6 +9,9 @@ get_golem_options(which = NULL)
 \arguments{
 \item{which}{NULL (default), or the name of an option}
 }
+\value{
+The value of the option.
+}
 \description{
 This function is to be used inside the
 server and UI from your app, in order to call the

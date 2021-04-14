@@ -4,9 +4,15 @@
 \alias{sanity_check}
 \title{Sanity check for R files in the project}
 \usage{
-sanity_check()
+sanity_check(pkg = get_golem_wd())
+}
+\arguments{
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+}
+\value{
+A DataFrame if any of the words has been found.
 }
 \description{
-This function is used check for any 'browser()' or commented
+This function is used check for any `browser()`` or commented
 #TODO / #TOFIX / #BUG in the code
 }

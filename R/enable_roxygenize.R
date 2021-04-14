@@ -1,9 +1,15 @@
 #' Enable documentation generation using roxygen2
 #'
 #' @param path to to Rproj file 
+#' @noRd
 #'
-#'
-enable_roxygenize <- function(path = list.files(path = ".",pattern = "Rproj$",full.names = TRUE)[1]){
+enable_roxygenize <- function(
+  path = list.files(
+    path = ".",
+    pattern = "Rproj$",
+    full.names = TRUE
+  )[1]
+){
   cat_bullet(
     glue::glue("Read {basename(path)} content "), 
     bullet = "info",

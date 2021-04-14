@@ -50,17 +50,19 @@ add_r_files <- function(
 
 #' Add fct_ and utils_ files
 #' 
-#' These function adds files in the R/ folder 
-#' that starts either with fct_ or with utils_
+#' These functions add files in the R/ folder 
+#' that starts either with `fct_` (short for function) 
+#' or with `utils_`.
 #'
 #' @param name The name of the file
-#' @param module If not NULL, the file will be module specific in the naming (you don't need to add the leading `mod_`)
-#' @param pkg The working directory. Default is `get_golem_wd()`.
-#' @param open Should the file be opened once created? 
-#' @param dir_create Should the folder be created if it doesn't exist? 
+#' @param module If not NULL, the file will be module specific 
+#'     in the naming (you don't need to add the leading `mod_`).
+#' @inheritParams  add_module
 #' 
 #' @rdname file_creation
 #' @export
+#' 
+#' @return The path to the file, invisibly.
 add_fct <- function(
   name, 
   module = NULL,
@@ -97,10 +99,10 @@ add_utils <- function(
   )
 }
 
-#' Append roxygen comments to fct_ and utils_ files
+#' Append roxygen comments to `fct_` and `utils_` files
 #' 
-#' This function as boilerplate roxygen comments 
-#' for fct_ and utils_ files
+#' This function add boilerplate roxygen comments 
+#' for fct_ and utils_ files.
 #'
 #' @param name The name of the file
 #' @param path The path to the R script where the module will be written. 
@@ -108,13 +110,18 @@ add_utils <- function(
 #' 
 #' @rdname file_creation
 #' @noRd
-append_roxygen_comment <- function(name, path, ext, export = FALSE) {
+append_roxygen_comment <- function(
+  name,
+  path, 
+  ext, 
+  export = FALSE
+) {
   write_there <- function(...){
     write(..., file = path, append = TRUE)
   }
-
+  
   file_type = " "
-
+  
   if(ext == "utils") {
     file_type = "utility"
   } else {

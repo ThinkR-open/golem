@@ -5,7 +5,7 @@
 #'
 #' @param object the object to test
 #'
-#' @return A testthat result
+#' @return A testthat result.
 #' @export
 #' @rdname testhelpers
 #' 
@@ -48,7 +48,10 @@ expect_shinytaglist <- function(object) {
 #' @importFrom attempt stop_if_not
 #' @importFrom testthat expect_equal quasi_label expect
 #' @importFrom rlang enquo
-expect_html_equal <- function(ui, html){
+expect_html_equal <- function(
+  ui, 
+  html
+){
   stop_if_not(html, file.exists, "Unable to find html file")
   tmp <- tempfile(fileext = ".html")
   save_html(ui, tmp)
@@ -167,6 +170,5 @@ expect_running <- function(sleep){
   Sys.sleep(sleep)
   expect_true(shinyproc$is_alive())
   shinyproc$kill()
-  
-  
+
 }

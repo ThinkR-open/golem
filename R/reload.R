@@ -4,16 +4,26 @@
 #' @importFrom utils sessionInfo
 #'
 #' @export
+#' 
+#' @return TRUE, invisibly.
 detach_all_attached <- function(){
-  all_attached <-  paste("package:", names(sessionInfo()$otherPkgs), sep = "")
+  all_attached <-  paste(
+    "package:", 
+    names(
+      sessionInfo()$otherPkgs
+    ), 
+    sep = ""
+  )
+  
   attempt(
     suppressWarnings(
-      invisible(lapply(
-        all_attached,
-        detach, 
-        character.only = TRUE, 
-        unload = TRUE
-      )
+      invisible(
+        lapply(
+          all_attached,
+          detach, 
+          character.only = TRUE, 
+          unload = TRUE
+        )
       )
     ), 
     silent = TRUE
@@ -28,11 +38,18 @@ check_name_consistency <- function(
   old_dir <- setwd(pkg)
   
   package_name <- desc::desc_get("Package")
-  pth <- fs::path(pkg, "R", "app_config.R")
+  pth <- fs::path(
+    pkg, 
+    "R", 
+    "app_config.R"
+  )
   app_config <- readLines(pth) 
   
   where_system.file <- app_config[
-    grep("system.file", app_config)
+    grep(
+      "system.file", 
+      app_config
+    )
   ]
   
   setwd(old_dir)
@@ -64,9 +81,6 @@ check_name_consistency <- function(
   
 }
 
-
-
-
 #' Document and reload your package
 #' 
 #' This function calls \code{rstudioapi::documentSaveAll()}, 
@@ -75,10 +89,13 @@ check_name_consistency <- function(
 #' @inheritParams add_module
 #' @inheritParams roxygen2::roxygenise
 #' @inheritParams pkgload::load_all
+#' 
 #' @param ... Other arguments passed to `pkgload::load_all()`
 #' @importFrom roxygen2 roxygenise
 #' @importFrom pkgload load_all
 #' @export
+#' 
+#' @return Used for side-effects
 document_and_reload <- function(
   pkg = get_golem_wd(), 
   roclets = NULL, 

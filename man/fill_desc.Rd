@@ -35,6 +35,9 @@ fill_desc(
 
 \item{pkg}{Path to look for the DESCRIPTION. Default is \code{get_golem_wd()}.}
 }
+\value{
+The {desc} object, invisibly.
+}
 \description{
 Fill your description
 }

@@ -3,15 +3,11 @@
 #' You'll probably never have to write this function 
 #' as it is included in the golem template created on 
 #' launch.
-#' 
-#' @note 
-#' For compatibility issue, this function turns `options(shiny.autoload.r)`
-#' to `FALSE`. See https://github.com/ThinkR-open/golem/issues/468 for more background.
 #'
 #' @param app the app object.
 #' @param golem_opts A list of Options to be added to the app
-#' @param print Whether or not to print the app. Default is to FALSE, which 
-#' should be what you need in  99.99% of the cases. In case you need to 
+#' @param print Whether or not to print the app. Default is to `FALSE`, which 
+#' should be what you need 99.99% of the time In case you need to 
 #' actively print the app object, you can set it to `TRUE`.
 #'
 #' @return a shiny.appObj object
@@ -64,6 +60,9 @@ with_golem_options <- function(
 #' @param which NULL (default), or the name of an option
 #' @importFrom shiny getShinyOption
 #' @export
+#' 
+#' @return The value of the option.
+#' 
 #' @examples 
 #' 
 #' \dontrun{

@@ -204,7 +204,7 @@ jq_hide <- function(id) {
 #' 
 #' @importFrom shiny tags HTML
 with_red_star <- function(text) {
-  htmltools::tags$span(
+  shiny::tags$span(
     HTML(
       paste0(
         text,

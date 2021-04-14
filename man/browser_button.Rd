@@ -7,6 +7,7 @@
 browser_button()
 }
 \value{
+Used for side effects.
 Prints the code to the console.
 }
 \description{

@@ -13,7 +13,10 @@
 #' @importFrom desc description
 #' @importFrom cli cat_bullet
 #' @importFrom fs path path_abs
+#' 
 #' @export
+#' 
+#' @return The {desc} object, invisibly.
 fill_desc <- function(
   pkg_name, 
   pkg_title, 
@@ -115,6 +118,11 @@ fill_desc <- function(
     "DESCRIPTION file modified", 
     bullet = "tick", 
     bullet_col = "green"
+  )
+  return(
+    invisible(
+      desc
+    )
   )
 }
 

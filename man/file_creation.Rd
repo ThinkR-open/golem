@@ -24,15 +24,20 @@ add_utils(
 \arguments{
 \item{name}{The name of the file}
 
-\item{module}{If not NULL, the file will be module specific in the naming (you don't need to add the leading \code{mod_})}
+\item{module}{If not NULL, the file will be module specific
+in the naming (you don't need to add the leading \code{mod_}).}
 
-\item{pkg}{The working directory. Default is \code{get_golem_wd()}.}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
-\item{open}{Should the file be opened once created?}
+\item{open}{Should the created file be opened?}
 
-\item{dir_create}{Should the folder be created if it doesn't exist?}
+\item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+}
+\value{
+The path to the file, invisibly.
 }
 \description{
-These function adds files in the R/ folder
-that starts either with fct_ or with utils_
+These functions add files in the R/ folder
+that starts either with \code{fct_} (short for function)
+or with \code{utils_}.
 }

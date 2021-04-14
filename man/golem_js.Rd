@@ -37,6 +37,9 @@ a list with message and id \code{list(message = "", id = "")}. The output of the
 will be sent to \code{input$id}. Example: \code{ golem::invoke_js("confirm", list(message ="Are you sure you want to do that?", id  = "name") )}.}
 }}
 }
+\value{
+Used for side-effects.
+}
 \description{
 \code{activate_js} is used to insert directly some JavaScript functions in your golem.
 By default \code{bundle_ressources()} load these function  automatically for you.

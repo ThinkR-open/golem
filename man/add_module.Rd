@@ -19,31 +19,33 @@ add_module(
 )
 }
 \arguments{
-\item{name}{The name of the module}
+\item{name}{The name of the module.}
 
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
-\item{open}{Should the file be opened?}
+\item{open}{Should the created file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
-\item{fct}{If specified, creates a mod_fct file.}
+\item{fct}{If specified, creates a \code{mod_fct} file.}
 
-\item{utils}{If specified, creates a mod_utils file.}
+\item{utils}{If specified, creates a \code{mod_utils} file.}
 
-\item{js, js_handler}{Name of a javascript or javascript handler file to create
-along the module.}
+\item{js, js_handler}{If specified, creates a module related JavaScript file.}
 
-\item{export}{Logical. Should the module be exported? Default is \code{FALSE}.}
+\item{export}{Should the module be exported? Default is \code{FALSE}.}
 
 \item{module_template}{Function that serves as a module template.}
 
 \item{...}{Arguments to be passed to the \code{module_template} function.}
 }
+\value{
+The path to the file, invisibly.
+}
 \description{
 This function creates a module inside the \verb{R/} folder, based
 on a specific module structure. This function can be used outside
-of a {golem} project.
+of a \code{{golem}} project.
 }
 \note{
 This function will prefix the \code{name} argument with \code{mod_}.

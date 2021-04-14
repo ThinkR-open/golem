@@ -12,6 +12,9 @@ use_utils_server(pkg = get_golem_wd())
 \arguments{
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 }
+\value{
+Used for side-effects.
+}
 \description{
 \describe{
 \item{use_utils_ui}{Copies the golem_utils_ui.R to the R folder.}
