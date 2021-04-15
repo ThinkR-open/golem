@@ -161,20 +161,21 @@ create_golem <- function(
   old <- setwd(path)
   use_latest_dependencies()
   
-  cat_rule("Appending .Rprofile")
-  write("# Sourcing user .Rprofile if it exists ", ".Rprofile", append = TRUE)
-  write("home_profile <- file.path(", ".Rprofile", append = TRUE)
-  write("  Sys.getenv(\"HOME\"), ", ".Rprofile", append = TRUE)
-  write("  \".Rprofile\"", ".Rprofile", append = TRUE)
-  write(")", ".Rprofile", append = TRUE)
-  write("if (file.exists(home_profile)){", ".Rprofile", append = TRUE)
-  write("  source(home_profile)", ".Rprofile", append = TRUE)
-  write("}", ".Rprofile", append = TRUE)
-  write("rm(home_profile)", ".Rprofile", append = TRUE)
-  
-  write("# Setting shiny.autoload.r to FALSE ", ".Rprofile", append = TRUE)
-  write("options(shiny.autoload.r = FALSE)", ".Rprofile", append = TRUE)
-  cat_green_tick("Appended")
+  # No .Rprofile for now
+  # cat_rule("Appending .Rprofile")
+  # write("# Sourcing user .Rprofile if it exists ", ".Rprofile", append = TRUE)
+  # write("home_profile <- file.path(", ".Rprofile", append = TRUE)
+  # write("  Sys.getenv(\"HOME\"), ", ".Rprofile", append = TRUE)
+  # write("  \".Rprofile\"", ".Rprofile", append = TRUE)
+  # write(")", ".Rprofile", append = TRUE)
+  # write("if (file.exists(home_profile)){", ".Rprofile", append = TRUE)
+  # write("  source(home_profile)", ".Rprofile", append = TRUE)
+  # write("}", ".Rprofile", append = TRUE)
+  # write("rm(home_profile)", ".Rprofile", append = TRUE)
+  # 
+  # write("# Setting shiny.autoload.r to FALSE ", ".Rprofile", append = TRUE)
+  # write("options(shiny.autoload.r = FALSE)", ".Rprofile", append = TRUE)
+  # cat_green_tick("Appended")
   
   setwd(old)
   
