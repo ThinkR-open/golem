@@ -3,15 +3,11 @@
 #' You'll probably never have to write this function 
 #' as it is included in the golem template created on 
 #' launch.
-#' 
-#' @note 
-#' For compatibility issue, this function turns `options(shiny.autoload.r)`
-#' to `FALSE`. See https://github.com/ThinkR-open/golem/issues/468 for more background.
 #'
 #' @param app the app object.
 #' @param golem_opts A list of Options to be added to the app
-#' @param print Whether or not to print the app. Default is to FALSE, which 
-#' should be what you need in  99.99% of the cases. In case you need to 
+#' @param print Whether or not to print the app. Default is to `FALSE`, which 
+#' should be what you need 99.99% of the time In case you need to 
 #' actively print the app object, you can set it to `TRUE`.
 #'
 #' @return a shiny.appObj object
@@ -64,6 +60,46 @@ with_golem_options <- function(
 #' @param which NULL (default), or the name of an option
 #' @importFrom shiny getShinyOption
 #' @export
+#' 
+#' @return The value of the option.
+#' 
+#' @examples 
+#' 
+#' \dontrun{
+#'   
+#'   # Define and use golem_options
+#'   
+#'   # 1. Pass parameters to `run_app`
+#'   
+#'   # to set default value, edit run_app like this :
+#'   run_app <- function(
+#'     title = "this",
+#'     content = "that"
+#'   ) {
+#'     with_golem_options(
+#'       app = shinyApp(
+#'         ui = app_ui,
+#'         server = app_server
+#'       ),
+#'       golem_opts = list(
+#'         p1 = p1,
+#'         p3 = p3
+#'       )
+#'     )
+#'   }
+#'   
+#'   # 2. Get the values from the UI side
+#'   
+#'   h1( get_golem_options("title") )
+#'   
+#'   # 3. Get the value from the server-side
+#'   
+#'   output$param <- renderPrint({
+#'     paste("param p2 = ",get_golem_options("p2"))
+#'   })
+#'   
+#' }
+#' 
 get_golem_options <- function(which = NULL){
   
   if (is.null(which)){

@@ -20,6 +20,11 @@ rhub::check_for_cran()
 
 # Deploy
 
+## Local, CRAN or Package Manager ---- 
+## This will build a tar.gz that can be installed locally, 
+## sent to CRAN, or to a package manager
+devtools::build()
+
 ## RStudio ----
 ## If you want to deploy on RStudio related platforms
 golem::add_rstudioconnect_file()

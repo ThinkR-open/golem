@@ -23,9 +23,6 @@ test_that("test document_and_reload",{
 test_that("test detach_all_attached",{
   with_dir(pkg_reload,{
     test <- detach_all_attached()
-    testthat::expect_true(
-      all(as.logical(lapply(test, is.null))
-        )
-    )
+    testthat::expect_true(test)
   })
 })

@@ -137,7 +137,7 @@ These parameters might not be used inside your own function, but __they need to 
 ### Example
 
 ```{r}
-my_tmpl <- function(name, path, ...){
+my_tmpl <- function(name, path, export, ...){
    # Define a template that only write the name of the 
    # module in the file
    write(name, path)
@@ -150,6 +150,56 @@ my_other_tmpl <- function(name, path, ...){
 }
 golem::add_module(name = "custom", module_template = my_other_tmpl)
 ```
+
+
+## JS & CSS templates
+
+### What it is
+
+JavaScript and CSS template allow to use your own functions to add code when creating JavaScript files, JavaScript handlers and CSS files.
+These templates work inside `add_js_file()`, `add_js_handler()` and `add_css_file()`.
+
+### How it works 
+
+The function is called after the file creation. 
+Here is a step by step of what happens when these functions are called: 
+
+1. Name is created
+1. The path is generated
+1. If the file already exists, it opens the file
+1. If the file doesn't exist, R creates it and the `template` function is called
+1. File is generated, and potentially open
+
+(Note that the `template` function is not called if the file already exists).
+
+### Defining your own `template`
+
+You can then define your own function inside your `{golem}` based application, but chances are you will be defining them into your own package. 
+
+File template functions will receive, by default, the following parameters from the `add_*()` function. 
+
++ `path`: the path to the file 
++ `...` further arguments
+
+These parameters might not be used inside your own function, but __they need to be set in the function skeleton__, for compatibility reasons.
+
+### Example
+
+```{r}
+my_tmpl <- function(path, ...){
+   # Define a template that only write the name of the 
+   # module in the file
+  write_there <- function(...){
+    write(..., file = path, append = TRUE)
+  }
+  
+  write_there("body {")
+  write_there("    background-color:red;")
+  write_there("}")
+}
+golem::add_css_file(name = "custom", template = my_tmpl)
+```
+
 
 
 

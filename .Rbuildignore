@@ -20,3 +20,5 @@
 ^CONTRIBUTING\.md$
 ^doc$
 ^Meta$
+^\.github$
+^revdep$

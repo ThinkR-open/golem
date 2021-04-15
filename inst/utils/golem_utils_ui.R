@@ -9,7 +9,7 @@
 #' @examples
 #' list_to_li(c("a","b"))
 #'
-#' @importFrom htmltools tags tagAppendAttributes tagList
+#' @importFrom shiny tags tagAppendAttributes tagList
 list_to_li <- function(list, class = NULL){
   if (is.null(class)){
     tagList(
@@ -36,8 +36,14 @@ list_to_li <- function(list, class = NULL){
   }
   
 }
-
-#' @importFrom htmltools tags tagAppendAttributes tagList
+#' Turn an R list into corresponding HTML paragraph tags
+#'
+#' @param list an R list
+#' @param class a class for the paragraph tags
+#' @examples 
+#' list_to_p(c("This is the first paragraph", "this is the second paragraph"))
+#' @importFrom shiny tags tagAppendAttributes tagList
+#' 
 list_to_p <- function(list, class = NULL){
   if (is.null(class)){
     tagList(
@@ -65,7 +71,7 @@ list_to_p <- function(list, class = NULL){
   
 }
 
-#' @importFrom htmltools tags tagAppendAttributes tagList
+#' @importFrom shiny tags tagAppendAttributes tagList
 named_to_li <- function(list, class = NULL){
   if(is.null(class)){
     res <- mapply(
@@ -140,7 +146,7 @@ tagRemoveAttributes <- function(tag, ...) {
 #' b <- shiny::actionButton("go_filter", "go")
 #' undisplay(b)
 #' 
-#' @importFrom htmltools tagList
+#' @importFrom shiny tagList
 undisplay <- function(tag) {
   # if not already hidden
   if (
@@ -157,7 +163,7 @@ undisplay <- function(tag) {
   tag
 }
 
-#' @importFrom htmltools tagList
+#' @importFrom shiny tagList
 display <- function(tag) {
   if (
     !is.null(tag$attribs$style) && 
@@ -178,7 +184,7 @@ display <- function(tag) {
 #' 
 #' @noRd
 #' 
-#' @importFrom htmltools tags
+#' @importFrom shiny tags
 jq_hide <- function(id) {
   tags$script(sprintf("$('#%s').hide()", id))
 }
@@ -196,9 +202,9 @@ jq_hide <- function(id) {
 #' @examples
 #' with_red_star("Enter your name here")
 #' 
-#' @importFrom htmltools tags HTML
+#' @importFrom shiny tags HTML
 with_red_star <- function(text) {
-  htmltools::tags$span(
+  shiny::tags$span(
     HTML(
       paste0(
         text,
@@ -222,7 +228,7 @@ with_red_star <- function(text) {
 #' @examples
 #' rep_br(5)
 #' 
-#' @importFrom htmltools HTML
+#' @importFrom shiny HTML
 rep_br <- function(times = 1) {
   HTML(rep("<br/>", times = times))
 }
@@ -238,7 +244,7 @@ rep_br <- function(times = 1) {
 #' @examples
 #' enurl("https://www.thinkr.fr", "ThinkR")
 #' 
-#' @importFrom htmltools tags
+#' @importFrom shiny tags
 enurl <- function(url, text){
   tags$a(href = url, text)
 }
@@ -342,10 +348,26 @@ make_action_button <- function(tag, inputId = NULL) {
   # handle id
   if (!is.null(inputId)) {
     if (!is.null(tag$attribs$id)) {
-      cat_red_bullet(
-        paste(
-          "tag already has an id. Please use input$", tag$attribs$id, "to access it from the server side. inputId will be ignored.")
-      )
+      if (requireNamespace("cli")){
+        cli::cat_bullet(
+          bullet = "bullet",
+          bullet_col = "red",
+          paste(
+            "tag already has an id. Please use input$", 
+            tag$attribs$id,
+            "to access it from the server side. inputId will be ignored."
+          )
+        )
+      } else {
+        warning(
+          paste(
+            "tag already has an id. Please use input$", 
+            tag$attribs$id,
+            "to access it from the server side. inputId will be ignored."
+          )
+        )
+      }
+      
     } else {
       tag$attribs$id <- inputId
     }

@@ -11,6 +11,9 @@ run_dev(file, pkg = pkgload::pkg_name())
 
 \item{pkg}{Package name to run the file. Defaults to current active package.}
 }
+\value{
+Used for side-effect
+}
 \description{
 Run run_dev.R
 }

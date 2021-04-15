@@ -45,9 +45,16 @@ dependency files.}
 \item{app_builder}{The name of the app builder to add as a meta tag.
 Turn to NULL if you don't want this meta tag to be included.}
 }
+\value{
+an htmlDependency
+}
 \description{
 This function is a wrapper around \code{htmltools::htmlDependency} that
 automatically bundles the CSS and JavaScript files in \code{inst/app/www}
 and which are created by \code{golem::add_css_file()} , \code{golem::add_js_file()}
 and \code{golem::add_js_handler()}.
+}
+\details{
+This function also preload \code{\link[=activate_js]{activate_js()}} which allows to
+use preconfigured JavaScript functions via \code{\link[=invoke_js]{invoke_js()}}.
 }
