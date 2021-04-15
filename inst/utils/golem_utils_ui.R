@@ -348,26 +348,13 @@ make_action_button <- function(tag, inputId = NULL) {
   # handle id
   if (!is.null(inputId)) {
     if (!is.null(tag$attribs$id)) {
-      if (requireNamespace("cli")){
-        cli::cat_bullet(
-          bullet = "bullet",
-          bullet_col = "red",
-          paste(
-            "tag already has an id. Please use input$", 
-            tag$attribs$id,
-            "to access it from the server side. inputId will be ignored."
-          )
+      warning(
+        paste(
+          "tag already has an id. Please use input$", 
+          tag$attribs$id,
+          "to access it from the server side. inputId will be ignored."
         )
-      } else {
-        warning(
-          paste(
-            "tag already has an id. Please use input$", 
-            tag$attribs$id,
-            "to access it from the server side. inputId will be ignored."
-          )
-        )
-      }
-      
+      )
     } else {
       tag$attribs$id <- inputId
     }
