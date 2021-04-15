@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_golem.R
 \name{create_golem}
 \alias{create_golem}
-\title{Create a package for a Shiny App using \code{{golem}}}
+\title{Create a package for Shiny App using golem}
 \usage{
 create_golem(
   path,
@@ -15,34 +15,24 @@ create_golem(
 )
 }
 \arguments{
-\item{path}{Name of the folder to create the package in.
-This will also be used as the package name.}
+\item{path}{Name of the folder to create the package in. This will also be
+used as the package name.}
 
-\item{check_name}{Should we check that the package name is
-correct according to CRAN requirements.}
+\item{check_name}{When using this function in the console, you can prevent
+the package name from being checked.}
 
-\item{open}{Boolean. Open the created project?}
+\item{open}{Boolean open the created project}
 
-\item{package_name}{Package name to use. By default, {golem} uses
-\code{basename(path)}. If \code{path == '.'} & \code{package_name} is
-not explicitly set, then \code{basename(getwd())} will be used.}
+\item{package_name}{Package name to use.By default it's \code{basename(path)} but if path == '.' and \code{package_name}
+not explicitly given, then \code{basename(getwd())} will be used.}
 
-\item{without_comments}{Boolean. Start project without golem comments}
+\item{without_comments}{Boolean start project without golem comments}
 
-\item{project_hook}{A function executed as a hook after project
-creation. Can be used to change the default \code{{golem}} structure.
-to override the files and content. This function is executed just
-after the project is created.}
+\item{project_hook}{A function executed as a hook after project creation. Can be used to change the default \code{{golem}} structure.
+to override the files and content. This function is executed}
 
 \item{...}{Arguments passed to the \code{project_hook()} function.}
 }
-\value{
-The path, invisibly.
-}
 \description{
-Create a package for a Shiny App using \code{{golem}}
-}
-\note{
-For compatibility issue, this function turns \code{options(shiny.autoload.r)}
-to \code{FALSE}. See https://github.com/ThinkR-open/golem/issues/468 for more background.
+Create a package for Shiny App using golem
 }

@@ -2,38 +2,30 @@
 #' 
 #' This function creates a module inside the `R/` folder, based 
 #' on a specific module structure. This function can be used outside
-#' of a `{golem}` project.
+#' of a {golem} project.
 #' 
-#' @param name The name of the module.
+#' @param name The name of the module
 #' @param pkg Path to the root of the package. Default is `get_golem_wd()`.
-#' @param open Should the created file be opened?
+#' @param open Should the file be opened?
 #' @param dir_create Creates the directory if it doesn't exist, default is `TRUE`.
-#' @param fct If specified, creates a `mod_fct` file.
-#' @param utils If specified, creates a `mod_utils` file.
-#' @param js,js_handler If specified, creates a module related JavaScript file.
-#' @param export Should the module be exported? Default is `FALSE`.
-#' @param module_template Function that serves as a module template.
+#' @param fct The name of the fct file.
+#' @param utils The name of the utils file.
+#' @param export Logical. Should the module be exported? Default is `FALSE`.
 #' @param ... Arguments to be passed to the `module_template` function.
-#' 
 #' @note This function will prefix the `name` argument with `mod_`.
-#' 
 #' @export
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #' @importFrom fs path_abs path file_create
 #' 
 #' @seealso [module_template()]
-#' 
-#' @return The path to the file, invisibly.
 add_module <- function(
   name, 
   pkg = get_golem_wd(), 
   open = TRUE, 
   dir_create = TRUE, 
   fct = NULL, 
-  utils = NULL,
-  js = NULL,
-  js_handler = NULL,
+  utils = NULL, 
   export = FALSE, 
   module_template = golem::module_template, 
   ...
@@ -61,14 +53,6 @@ add_module <- function(
     add_utils(utils, module = name, open = open)
   }
   
-  if (!is.null(js)){
-    add_js_file(js, pkg = pkg, open = open)
-  }
-  
-  if (!is.null(js_handler)){
-    add_js_handler(js_handler, pkg = pkg, open = open)
-  }
-  
   where <- path(
     "R", paste0("mod_", name, ".R")
   )
@@ -88,6 +72,61 @@ add_module <- function(
     )
   }
 }
+
+# This is an idea for shiming moduleServer from {shiny} so that 
+# the server infrastructure is not 
+# 
+# #' shim for moduleServer
+# #' 
+# #' This function is a shim for `shiny::moduleServer` that allows passing 
+# #' arguments via `...`
+# #'
+# #' @inheritParams shiny::moduleServer
+# #' @param ... Arguments to pass to the module server function when it's defined outside of `moduleServer()`
+# #'
+# #' @return The return value, if any, from executing the module server function
+# #' 
+# #' @export
+# #'
+# #' @examples
+# #' name_ui <- function(id){
+# #' ns <- NS(id)
+# #' tagList(
+# #'   actionButton(ns("go"), "go")
+# #' )
+# #' }
+# #' 
+# #' name_server_core <- function(input, output, session, arg) {
+# #'   observeEvent( input$go , {
+# #'     print(arg)
+# #'   })
+# #' }
+# #' 
+# #' name_server <- function(id, arg) {
+# #'   moduleServer(
+# #'    id,
+# #'    name_server_core, 
+# #'    arg = arg
+# #'   )
+# #' }
+# moduleServer <- function(
+#   id, 
+#   module, 
+#   ...,
+#   session = getDefaultReactiveDomain()
+# ) {
+#   if (inherits(session, "MockShinySession")) {
+#     body(module) <- rlang::expr({
+#       session$setEnv(base::environment())
+#       !!body(module)
+#     })
+#     session$setReturned(callModule(module, id, session = session, ...))
+#   }
+#   else {
+#     callModule(module, id, session = session, ...)
+#   }
+# }
+# 
 
 #' Golem Module Template Function
 #' 
@@ -128,22 +167,15 @@ add_module <- function(
 #'
 #' @inheritParams add_module
 #' @param path The path to the R script where the module will be written. 
-#' Note that this path will not be set by the user but via
+#' Note that this path will not be set by the user but internally by 
 #' `add_module()`. 
-#' @param ph_ui,ph_server Texts to insert inside the modules UI and server. 
-#'     For advanced use.
+#' @param ph_ui,ph_server Texts to insert inside the modules UI and server. For advanced use.
+#' @param ... Arguments to be passed to the template, via `add_module()`
 #'
 #' @return Used for side effect
 #' @export
 #' @seealso [add_module()]
-module_template <- function(
-  name, 
-  path, 
-  export, 
-  ph_ui = " ", 
-  ph_server = " ",
-  ...
-){
+module_template <- function(name, path, export, ph_ui = " ", ph_server = " "){
   write_there <- function(...){
     write(..., file = path, append = TRUE)
   }

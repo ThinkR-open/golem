@@ -6,8 +6,6 @@
 #' @param fun A function
 #'
 #' @export
-#' 
-#' @return Used for side-effects
 make_dev <- function(fun){
   function(...){
     if ( golem::app_dev() ){
@@ -26,7 +24,7 @@ make_dev <- function(fun){
 #' @export
 #'
 #' @rdname prod
-#' @return A boolean.
+
 app_prod <- function(){
   getOption( "golem.app.prod" ) %||% FALSE
 }
@@ -45,26 +43,25 @@ app_dev <- function(){
 #' @rdname made_dev
 #' @inheritParams base::cat
 #' @export 
-#' @return A modified function.
-cat_dev <- make_dev(base::cat)
+cat_dev <- make_dev(cat)
 
 #' @rdname made_dev
 #' @export 
 #' @inheritParams base::print
-print_dev <- make_dev(base::print)
+print_dev <- make_dev(print)
 
 #' @rdname made_dev
 #' @export 
 #' @inheritParams base::message
-message_dev <- make_dev(base::message)
+message_dev <- make_dev(message)
 
 #' @rdname made_dev
 #' @export 
 #' @inheritParams base::warning 
-warning_dev <- make_dev(base::warning )
+warning_dev <- make_dev(warning)
 
 #' @rdname made_dev
 #' @export 
 #' @inheritParams base::browser 
-browser_dev <- make_dev(base::browser )
+browser_dev <- make_dev(browser)
 

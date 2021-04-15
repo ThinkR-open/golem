@@ -4,20 +4,14 @@
 #' automatically bundles the CSS and JavaScript files in `inst/app/www`
 #' and which are created by `golem::add_css_file()` , `golem::add_js_file()`
 #' and `golem::add_js_handler()`.
-#' 
-#' This function also preload [activate_js()] which allows to 
-#' use preconfigured JavaScript functions via [invoke_js()].
 #'
 #' @param path The path to the folder where the external files are located.
 #' @param app_title The title of the app, to be used as an application title.
 #' @param app_builder The name of the app builder to add as a meta tag. 
 #' Turn to NULL if you don't want this meta tag to be included. 
 #' @inheritParams htmltools::htmlDependency
-#' 
 #' @importFrom htmltools htmlDependency
 #' @export
-#' 
-#' @return an htmlDependency
 bundle_resources <- function(
   path, 
   app_title,

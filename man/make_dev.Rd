@@ -9,9 +9,6 @@ make_dev(fun)
 \arguments{
 \item{fun}{A function}
 }
-\value{
-Used for side-effects
-}
 \description{
 The function returned will be run only if \code{golem::app_dev()}
 returns TRUE.

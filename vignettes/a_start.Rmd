@@ -138,7 +138,7 @@ If you want to use the MIT license, README, code of conduct, lifecycle badge, a 
 
 ```{r eval = FALSE}
 ## See ?usethis for more information
-usethis::use_mit_license( "Golem User" )  # You can set another license here
+usethis::use_mit_license( name = "Golem User" )  # You can set another license here
 usethis::use_readme_rmd( open = FALSE )
 usethis::use_code_of_conduct()
 usethis::use_lifecycle_badge( "Experimental" )
@@ -193,12 +193,7 @@ golem::use_utils_server()
 
 ## Try the app
 
-To run the app, launch : 
-
-```{r}
-golem::run_dev()
-```
-
+To run the app, go to the `dev/run_dev.R` file, and launch the all thing.
 
 You're now set! You've successfully initiated the project and can go to dev/02_dev.R.
 

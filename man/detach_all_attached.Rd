@@ -6,9 +6,6 @@
 \usage{
 detach_all_attached()
 }
-\value{
-TRUE, invisibly.
-}
 \description{
 Detach all attached package
 }

@@ -16,7 +16,7 @@
 #' + `get_golem_name()`
 #' + `get_golem_version()`
 #' 
-#' @param golem_name Name of the current golem. 
+#' @param golem_name Name of the current golem.
 #' @param golem_version Version of the current golem.
 #' @param golem_wd Working directory of the current golem package.
 #' @param app_prod Is the `{golem}` in prod mode?
@@ -33,9 +33,6 @@
 #' @importFrom attempt stop_if_not
 #' @importFrom yaml read_yaml write_yaml
 #' @importFrom usethis proj_set
-#' 
-#' @return Used for side-effects for the setters, and values from the 
-#'     config in the getters.
 set_golem_options <- function(
   golem_name = pkgload::pkg_name(), 
   golem_version = pkgload::pkg_version(), 
@@ -56,7 +53,7 @@ set_golem_options <- function(
   }
   
   conf_path <- get_current_config(golem_wd, set_options = FALSE)
-  
+   
   stop_if(
     conf_path, 
     is.null, 
@@ -220,12 +217,7 @@ set_golem_name <- function(
   )
   
   # Changing in DESCRIPTION
-  desc <- desc::description$new(
-    file = fs::path(
-      path, 
-      "DESCRIPTION"
-    )
-  )
+  desc <- desc::description$new(file = fs::path(path, "DESCRIPTION"))
   desc$set(
     Package = name
   )

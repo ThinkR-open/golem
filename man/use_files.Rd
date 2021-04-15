@@ -5,10 +5,6 @@
 \alias{use_external_css_file}
 \alias{use_external_html_template}
 \alias{use_external_file}
-\alias{use_internal_js_file}
-\alias{use_internal_css_file}
-\alias{use_internal_html_template}
-\alias{use_internal_file}
 \title{Use Files}
 \usage{
 use_external_js_file(
@@ -46,67 +42,23 @@ use_external_file(
   open = FALSE,
   dir_create = TRUE
 )
-
-use_internal_js_file(
-  path,
-  name,
-  pkg = get_golem_wd(),
-  dir = "inst/app/www",
-  open = FALSE,
-  dir_create = TRUE
-)
-
-use_internal_css_file(
-  path,
-  name,
-  pkg = get_golem_wd(),
-  dir = "inst/app/www",
-  open = FALSE,
-  dir_create = TRUE
-)
-
-use_internal_html_template(
-  path,
-  name = "template.html",
-  pkg = get_golem_wd(),
-  dir = "inst/app/www",
-  open = FALSE,
-  dir_create = TRUE
-)
-
-use_internal_file(
-  path,
-  name,
-  pkg = get_golem_wd(),
-  dir = "inst/app/www",
-  open = FALSE,
-  dir_create = TRUE
-)
 }
 \arguments{
 \item{url}{String representation of URL for the file to be downloaded}
 
-\item{name}{The name of the module.}
+\item{name}{The name of the module}
 
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{dir}{Path to the dir where the file while be created.}
 
-\item{open}{Should the created file be opened?}
+\item{open}{Should the file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
-
-\item{path}{String representation of the local path for the file to be implemented (use_file only)}
-}
-\value{
-The path to the file, invisibly.
 }
 \description{
-These functions download files from external sources and put them inside the \code{inst/app/www} directory.
-The \code{use_internal_} functions will copy internal files, while \code{use_external_} will try to download them
-from a remote location.
+These functions download files from external sources and put them inside the www directory.
 }
 \note{
-See \code{?htmltools::htmlTemplate} and \verb{https://shiny.rstudio.com/articles/templates.html}
-for more information about \code{htmlTemplate}.
+See \code{?htmltools::htmlTemplate} and \verb{https://shiny.rstudio.com/articles/templates.html} for more information about \code{htmlTemplate}.
 }

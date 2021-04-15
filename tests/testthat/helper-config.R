@@ -1,5 +1,4 @@
 ### lib
-library(golem)
 library(withr)
 ### Funs
 remove_file <- function(path){
