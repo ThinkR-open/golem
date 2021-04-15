@@ -15,6 +15,9 @@
 #' @rdname use_recommended 
 #' 
 #' @export
+#' 
+#' @return Used for side-effects.
+#' 
 use_recommended_deps <- function(
   pkg = get_golem_wd(),
   recommended = c("shiny","DT","attempt","glue","htmltools","golem")

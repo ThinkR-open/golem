@@ -68,8 +68,12 @@ Note that it will be passed to \code{normalizePath}.}
 configuration files if the specified config file isn't found.}
 
 \item{config}{Name of configuration to read from. Defaults to
-the value of the \code{R_CONFIG_NAME} environment variable
+the value of the \code{R_CONFIG_ACTIVE} environment variable
 ("default" if the variable does not exist).}
+}
+\value{
+Used for side-effects for the setters, and values from the
+config in the getters.
 }
 \description{
 Set and get a series of options to be used with \code{{golem}}.

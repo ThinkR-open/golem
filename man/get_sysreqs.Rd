@@ -2,17 +2,22 @@
 % Please edit documentation in R/get_sysreqs.R
 \name{get_sysreqs}
 \alias{get_sysreqs}
-\title{get system requirements}
+\title{Get system requirements}
 \usage{
 get_sysreqs(packages, quiet = TRUE, batch_n = 30)
 }
 \arguments{
-\item{packages}{character vector of packages names}
+\item{packages}{character vector. Packages names.}
 
-\item{quiet}{boolean if TRUE the function is quiet}
+\item{quiet}{Boolean. If \code{TRUE} the function is quiet.}
 
-\item{batch_n}{number of simultaneous packages to ask}
+\item{batch_n}{numeric. Number of simultaneous packages to ask.}
+}
+\value{
+A vector of system requirements.
 }
 \description{
-get system requirements
+This function retrieves information about the
+system requirements using the \url{https://sysreqs.r-hub.io}
+API.
 }

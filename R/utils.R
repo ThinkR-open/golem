@@ -167,6 +167,24 @@ cat_downloaded <- function(
   )
 }
 
+cat_start_copy <- function(){
+  cat_line("")
+  cat_rule("Copying file")
+}
+
+cat_copied <- function(
+  where,
+  file = "File"
+){
+  cat_green_tick(
+    sprintf(
+      "%s copied to %s",
+      file,
+      where
+    )
+  )
+}
+
 cat_created <- function(
   where, 
   file = "File"
@@ -198,6 +216,7 @@ open_or_go_to <- function(
     rstudioapi::hasFun("navigateToFile")
   ){
     rstudioapi::navigateToFile(where)
+    
   } else {
     cat_red_bullet(
       sprintf(
@@ -206,6 +225,7 @@ open_or_go_to <- function(
       )
     )
   }
+  invisible(where)
 }
 
 desc_exist <- function(pkg){
@@ -269,7 +289,8 @@ after_creation_message_html_template <- function(
   cat_rule("To use this html file as a template, add the following code in app_ui.R:")
   cat_line(darkgrey('htmlTemplate('))
   cat_line(darkgrey(sprintf('    app_sys("app/www/%s.html"),', name)))
-  cat_line(darkgrey('    # add here the template arguments'))
+  cat_line(darkgrey('    body = tagList()'))
+  cat_line(darkgrey('    # add here other template arguments'))
   cat_line(darkgrey(')'))
 }
 
@@ -324,3 +345,11 @@ file_ext <- function (x) {
   pos <- regexpr("\\.([[:alnum:]]+)$", x)
   ifelse(pos > -1L, substring(x, pos + 1L), "")
 }
+
+#' @importFrom utils menu
+yesno <- function (...) 
+{
+  cat(paste0(..., collapse = ""))
+  menu(c("Yes", "No")) == 1
+}
+

@@ -11,6 +11,7 @@ fill_desc(
   author_first_name,
   author_last_name,
   author_email,
+  author_orcid = NULL,
   repo_url = NULL,
   pkg = get_golem_wd()
 )
@@ -28,9 +29,14 @@ fill_desc(
 
 \item{author_email}{Email of the author}
 
+\item{author_orcid}{ORCID of the author}
+
 \item{repo_url}{URL (if needed)}
 
 \item{pkg}{Path to look for the DESCRIPTION. Default is \code{get_golem_wd()}.}
+}
+\value{
+The {desc} object, invisibly.
 }
 \description{
 Fill your description

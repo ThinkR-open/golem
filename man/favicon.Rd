@@ -20,9 +20,9 @@ favicon(
 \arguments{
 \item{path}{Path to your favicon file (.ico or .png)}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}}
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
-\item{method}{Method to be used for downloading files, 'curl' is default see \link[utils:download.file]{utils::download.file}}
+\item{method}{Method to be used for downloading files, 'curl' is default see \code{\link[utils:download.file]{utils::download.file()}}.}
 
 \item{ico}{path to favicon file}
 
@@ -32,14 +32,17 @@ favicon(
 
 \item{ext}{the extension of the favicon}
 }
+\value{
+Used for side-effects.
+
+An HTML tag.
+}
 \description{
 This function adds the favicon from \code{ico} to your shiny app.
 }
 \examples{
-\donttest{
 if (interactive()){
   use_favicon()
   use_favicon(path='path/to/your/favicon.ico')
-}
 }
 }

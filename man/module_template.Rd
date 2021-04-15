@@ -4,20 +4,21 @@
 \alias{module_template}
 \title{Golem Module Template Function}
 \usage{
-module_template(name, path, export, ph_ui = " ", ph_server = " ")
+module_template(name, path, export, ph_ui = " ", ph_server = " ", ...)
 }
 \arguments{
-\item{name}{The name of the module}
+\item{name}{The name of the module.}
 
 \item{path}{The path to the R script where the module will be written.
-Note that this path will not be set by the user but internally by
+Note that this path will not be set by the user but via
 \code{add_module()}.}
 
-\item{export}{Logical. Should the module be exported? Default is \code{FALSE}.}
+\item{export}{Should the module be exported? Default is \code{FALSE}.}
 
-\item{ph_ui, ph_server}{Texts to insert inside the modules UI and server. For advanced use.}
+\item{ph_ui, ph_server}{Texts to insert inside the modules UI and server.
+For advanced use.}
 
-\item{...}{Arguments to be passed to the template, via \code{add_module()}}
+\item{...}{Arguments to be passed to the \code{module_template} function.}
 }
 \value{
 Used for side effect
