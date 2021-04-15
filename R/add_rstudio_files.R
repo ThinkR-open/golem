@@ -15,6 +15,10 @@ add_rstudio_files <- function(
   service <- match.arg(service)
   where <- path(pkg, "app.R")
   
+  disable_autoload(
+    pkg = pkg
+  )
+  
   
   if (!file_exists(where)){
     file_create( where )
