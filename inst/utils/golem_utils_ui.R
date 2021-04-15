@@ -40,8 +40,13 @@ list_to_li <- function(list, class = NULL){
 #'
 #' @param list an R list
 #' @param class a class for the paragraph tags
+#' 
+#' @return An HTML tag
+#' @noRd
+#' 
 #' @examples 
 #' list_to_p(c("This is the first paragraph", "this is the second paragraph"))
+#' 
 #' @importFrom shiny tags tagAppendAttributes tagList
 #' 
 list_to_p <- function(list, class = NULL){
@@ -208,7 +213,7 @@ with_red_star <- function(text) {
     HTML(
       paste0(
         text,
-        htmltools::tags$span(
+        shiny::tags$span(
           style = "color:red", "*"
         )
       )
@@ -387,7 +392,7 @@ make_action_button <- function(tag, inputId = NULL) {
 #' #' 
 #' #' @importFrom rmarkdown render
 #' #' @importFrom markdown markdownToHTML
-#' #' @importFrom htmltools HTML
+#' #' @importFrom shiny HTML
 #' includeRMarkdown <- function(path){
 #'   
 #'   md <- tempfile(fileext = '.md')
