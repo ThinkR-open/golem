@@ -12,8 +12,6 @@
 #' 
 #' @importFrom cli cat_bullet
 #' @importFrom utils capture.output
-#' 
-#' @return Used for side-effects.
 use_utils_ui <- function(
   pkg = get_golem_wd()
 ){
@@ -21,6 +19,7 @@ use_utils_ui <- function(
     file_name = "golem_utils_ui.R", 
     pkg = pkg
   )
+  usethis::use_package("htmltools")
   
   if (added){
     cat_green_tick("Utils UI added")

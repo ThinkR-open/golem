@@ -25,7 +25,7 @@ expect_running(sleep)
 \item{sleep}{number of seconds}
 }
 \value{
-A testthat result.
+A testthat result
 }
 \description{
 These functions are designed to be used inside the tests

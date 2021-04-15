@@ -22,9 +22,6 @@ browser_dev(...)
 \item{...}{\R objects (see \sQuote{Details} for the types of objects
     allowed).}
 }
-\value{
-A modified function.
-}
 \description{
 This functions will be run only if \code{golem::app_dev()}
 returns TRUE.

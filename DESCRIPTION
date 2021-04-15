@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.3.1
+Version: 0.3.0
 Authors@R: 
     c(person(given = "Colin",
              family = "Fay",
@@ -59,9 +59,9 @@ Imports:
     rlang,
     roxygen2,
     rstudioapi,
-    shiny (>= 1.5.0),
+    shiny,
     testthat,
-    usethis,
+    usethis(>= 1.6.0),
     utils,
     yaml
 Suggests:
@@ -84,5 +84,6 @@ VignetteBuilder:
     knitr
 Encoding: UTF-8
 Language: en-US
+LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9000

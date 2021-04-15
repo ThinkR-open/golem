@@ -35,9 +35,6 @@ the \verb{vignettes/} folder.}
 spelling errors are found. Defaults to \code{FALSE}, which does not error, but
 prints potential spelling errors}
 }
-\value{
-Used for side-effects.
-}
 \description{
 \describe{
 \item{use_recommended_deps}{Adds \code{shiny}, \code{DT}, \code{attempt}, \code{glue}, \code{golem}, \code{htmltools} to dependencies}

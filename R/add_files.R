@@ -1,49 +1,28 @@
 #' Create Files
 #' 
 #' These functions create files inside the `inst/app` folder. 
+#' These functions can be used outside of a {golem} project. 
 #' 
 #' @inheritParams  add_module
 #' @param dir Path to the dir where the file while be created.
-#' @param with_doc_ready For JS file - Should the default file include `$( document ).ready()`?
-#' @param template Function writing in the created file.
-#' You may overwrite this with your own template function.
-#' @param ... Arguments to be passed to the `template` function.
-#' @param initialize For JS file - Whether to add the initialize method.
-#'      Default to FALSE. Some JavaScript API require to initialize components
-#'      before using them.
-#' @param dev Whether to insert console.log calls in the most important 
-#'      methods of the binding. This is only to help building the input binding. 
-#'      Default is FALSE.
-#' @param events List of events to generate event listeners in the subscribe method. 
-#'     For instance, `list(name = c("click", "keyup"), rate_policy = c(FALSE, TRUE))`.
-#'     The list contain names and rate policies to apply to each event. If a rate policy is found, 
-#'     the debounce method with a default delay of 250 ms is applied. You may edit manually according to 
-#'     <https://shiny.rstudio.com/articles/building-inputs.html>
+#' @param with_doc_ready Should the default file include `$( document ).ready()`?
 #' @export
 #' @rdname add_files
-#' @importFrom attempt stop_if
-#' @importFrom rlang is_missing
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #' @importFrom fs path_abs path file_create file_exists
 #' 
 #' @note `add_ui_server_files` will be deprecated in future version of `{golem}`
-#' 
-#' @seealso \code{\link{js_template}}, \code{\link{js_handler_template}}, and \code{\link{css_template}} 
-#' 
-#' @return The path to the file, invisibly.
 add_js_file <- function(
   name, 
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
   dir_create = TRUE, 
-  with_doc_ready = TRUE, 
-  template = golem::js_template,
-  ...
+  with_doc_ready = TRUE
 ){
-  stop_if(
-    is_missing(name),
+  attempt::stop_if(
+    rlang::is_missing(name),
     msg = "Name is required"
   )
   
@@ -75,11 +54,9 @@ add_js_file <- function(
         write(..., file = where, append = TRUE)
       }
       write_there("$( document ).ready(function() {")
-      template(path = where, ...)
+      write_there("  ")
       write_there("});")
-    } else {
-      template(path = where, ...)
-    }
+    } 
     file_created_dance(
       where, 
       after_creation_message_js, 
@@ -99,16 +76,13 @@ add_js_file <- function(
 
 #' @export
 #' @rdname add_files
-#' 
 #' @importFrom fs path_abs path file_create file_exists
 add_js_handler <- function(
   name, 
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
-  dir_create = TRUE,
-  template = golem::js_handler_template,
-  ...
+  dir_create = TRUE
 ){
   attempt::stop_if(
     rlang::is_missing(name),
@@ -139,8 +113,15 @@ add_js_handler <- function(
     
     file_create(where)
     
-    template(path = where, ...)
+    write_there <- function(...){
+      write(..., file = where, append = TRUE)
+    }
     
+    write_there("$( document ).ready(function() {")
+    write_there("  Shiny.addCustomMessageHandler('fun', function(arg) {")
+    write_there("  ")
+    write_there("  })")
+    write_there("});")
     file_created_dance(
       where, 
       after_creation_message_js, 
@@ -156,10 +137,25 @@ add_js_handler <- function(
     )
   }
   
+  
+  
 }
+
+
+
+
 
 #' @export
 #' @rdname add_files
+#' @param initialize Whether to add the initialize method. Default to FALSE. Some JavaScript API 
+#' require to initialize components before using them.
+#' @param dev Whether to insert console.log calls in the most important methods of the binding.
+#' This is only to help building the input binding. Default to FALSE
+#' @param events List of events to generate event listeners in the subscribe method. For instance,
+#' \code{list(name = c("click", "keyup"), rate_policy = c(FALSE, TRUE))}.
+#' The list contain names and rate policies to apply to each event. If a rate policy is found, 
+#' the debounce method with a default delay of 250 ms is applied. You may edit manually according to 
+#' \url{https://shiny.rstudio.com/articles/building-inputs.html}. 
 #' @importFrom fs path_abs path file_create file_exists
 add_js_input_binding <- function(
   name, 
@@ -366,7 +362,7 @@ add_js_output_binding <- function(
     write_there("  }")
     # end
     write_there("});")
-    write_there(sprintf("Shiny.outputBindings.register(%s, 'shiny.whatever');", raw_name))
+    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", raw_name))
     
     
     file_created_dance(
@@ -394,9 +390,7 @@ add_css_file <- function(
   pkg = get_golem_wd(), 
   dir = "inst/app/www",
   open = TRUE, 
-  dir_create = TRUE, 
-  template = golem::css_template,
-  ...
+  dir_create = TRUE
 ){
   attempt::stop_if(
     rlang::is_missing(name),
@@ -428,7 +422,6 @@ add_css_file <- function(
   
   if (!file_exists(where)){
     file_create(where)
-    template(path = where, ...)
     file_created_dance(
       where, 
       after_creation_message_css, 
@@ -494,7 +487,7 @@ add_html_template <- function(
     )
     write_there("  </head>")
     write_there("  <body>")
-    write_there("    {{ body }}")
+    write_there("    ")
     write_there("  </body>")
     write_there("</html>")
     write_there("")

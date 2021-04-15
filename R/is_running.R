@@ -7,7 +7,6 @@
 #' FALSE otherwise. 
 #' @export
 #'
-#' @return A boolean.
 #' @examples
 #' is_running()
 is_running <- function(){

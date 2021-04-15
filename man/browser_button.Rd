@@ -7,9 +7,8 @@
 browser_button()
 }
 \value{
-Used for side effects.
 Prints the code to the console.
 }
 \description{
-See \url{https://rtask.thinkr.fr/a-little-trick-for-debugging-shiny/} for more context.
+See \url{https://rtask.thinkr.fr/blog/a-little-trick-for-debugging-shiny/} for more context.
 }

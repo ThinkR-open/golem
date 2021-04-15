@@ -24,7 +24,7 @@ which defaults to \code{c("collate", "namespace", "rd")}.}
 
 \item{load_code}{A function used to load all the R code in the package
 directory. The default, \code{NULL}, uses the strategy defined by
-the \code{load} roxygen option, which defaults to \code{\link[roxygen2:load]{load_pkgload()}}.
+the \code{load} roxygen option, which defaults to \code{\link[roxygen2:load_pkgload]{load_pkgload()}}.
 See \link[roxygen2]{load} for more details.}
 
 \item{clean}{If \code{TRUE}, roxygen will delete all files previously
@@ -40,9 +40,6 @@ in the NAMESPACE file.}
 which more closely mimics the environment within test files.}
 
 \item{...}{Other arguments passed to \code{pkgload::load_all()}}
-}
-\value{
-Used for side-effects
 }
 \description{
 This function calls \code{rstudioapi::documentSaveAll()},

@@ -4,7 +4,7 @@
 \alias{add_dockerfile}
 \alias{add_dockerfile_shinyproxy}
 \alias{add_dockerfile_heroku}
-\title{Create a Dockerfile for your App}
+\title{Create a Dockerfile for  Shiny App}
 \usage{
 add_dockerfile(
   path = "DESCRIPTION",
@@ -60,40 +60,37 @@ add_dockerfile_heroku(
 
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
-\item{from}{The FROM of the Dockerfile. Default is
-FROM rocker/r-ver:\code{R.Version()$major}.\code{R.Version()$minor}.}
+\item{from}{The FROM of the Dockerfile. Default is FROM rocker/r-ver:
+with \code{R.Version()$major} and \code{R.Version()$minor}.}
 
 \item{as}{The AS of the Dockerfile. Default it NULL.}
 
-\item{port}{The \code{options('shiny.port')} on which to run the App.
+\item{port}{The \code{options('shiny.port')} on which to run the Shiny App.
 Default is 80.}
 
-\item{host}{The \code{options('shiny.host')} on which to run the App.
+\item{host}{The \code{options('shiny.host')} on which to run the Shiny App.
 Default is 0.0.0.0.}
 
-\item{sysreqs}{boolean. If TRUE, the Dockerfile will contain sysreq installation.}
+\item{sysreqs}{boolean to check the system requirements}
 
-\item{repos}{character. The URL(s) of the repositories to use for \code{options("repos")}.}
+\item{repos}{character vector, the base URL of the repositories}
 
-\item{expand}{boolean. If \code{TRUE} each system requirement will have its own \code{RUN} line.}
+\item{expand}{boolean, if \code{TRUE} each system requirement will be known his own RUN line}
 
-\item{open}{boolean. Should the Dockerfile be open after creation? Default is \code{TRUE}.}
+\item{open}{boolean, default is \code{TRUE} open the Dockerfile file}
 
-\item{update_tar_gz}{boolean. If \code{TRUE} and \code{build_golem_from_source} is also \code{TRUE},
-an updated tar.gz is created.}
+\item{update_tar_gz}{boolean, if \code{TRUE} and build_golem_from_source is also \code{TRUE} an updated tar.gz Package is created}
 
-\item{build_golem_from_source}{boolean. If \code{TRUE} no tar.gz is created and
-the Dockerfile directly mount the source folder.}
+\item{build_golem_from_source}{boolean, if \code{TRUE} no tar.gz Package is created and the Dockerfile directly mount the source folder to build it}
 
-\item{extra_sysreqs}{character vector. Extra debian system requirements.
-Will be installed with apt-get install.}
+\item{extra_sysreqs}{extra debian system requirements as character vector. Will be installed with apt-get install}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.
 }
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} creates
-a generic Dockerfile, while \code{add_dockerfile_shinyproxy()} and
+a "classical" Dockerfile, while \code{add_dockerfile_shinyproxy()} and
 \code{add_dockerfile_heroku()} creates platform specific Dockerfile.
 }
 \examples{

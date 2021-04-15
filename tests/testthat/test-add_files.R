@@ -5,19 +5,11 @@ expect_add_file <- function(
   fp
 ){
   
-  fun_nms <- deparse(substitute(fun))
-  
   name <- rand_name()
   # Be sure to remove all files in case there are
   remove_files("inst/app/www", ext)
   # Launch the function
   fun(name, pkg = pak, open = FALSE)
-  if (fun_nms == "add_js_input_binding"){
-    name <- sprintf("input-%s", name)
-  }
-  if (fun_nms == "add_js_output_binding"){
-    name <- sprintf("output-%s", name)
-  }
   # Test that the file exists
   expect_exists(file.path("inst/app/www", paste0(name,".", ext)))
   # Check that the file exsts
@@ -55,7 +47,6 @@ expect_add_file <- function(
 test_that("add_files", {
   
   with_dir(pkg, {
-
     expect_add_file(
       add_css_file, 
       ext = "css", 

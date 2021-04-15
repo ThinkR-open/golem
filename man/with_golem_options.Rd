@@ -11,8 +11,8 @@ with_golem_options(app, golem_opts, print = FALSE)
 
 \item{golem_opts}{A list of Options to be added to the app}
 
-\item{print}{Whether or not to print the app. Default is to \code{FALSE}, which
-should be what you need 99.99\% of the time In case you need to
+\item{print}{Whether or not to print the app. Default is to FALSE, which
+should be what you need in  99.99\% of the cases. In case you need to
 actively print the app object, you can set it to \code{TRUE}.}
 }
 \value{
@@ -22,4 +22,8 @@ a shiny.appObj object
 You'll probably never have to write this function
 as it is included in the golem template created on
 launch.
+}
+\note{
+For compatibility issue, this function turns \code{options(shiny.autoload.r)}
+to \code{FALSE}. See https://github.com/ThinkR-open/golem/issues/468 for more background.
 }
