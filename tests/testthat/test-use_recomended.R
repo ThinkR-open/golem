@@ -1,4 +1,5 @@
 test_that("test use_recommended_deps",{
+  testthat::skip_on_cran()
   with_dir(pkg,{
     packages <- c('shiny', 'DT', 'attempt', 'glue', 'golem', 'htmltools')
     to_add <- c()
