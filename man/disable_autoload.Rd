@@ -13,15 +13,11 @@ disable_autoload(pkg = get_golem_wd())
 The path to the file, invisibly.
 }
 \description{
-This function creates a module inside the \verb{R/} folder, based
-on a specific module structure. This function can be used outside
-of a \code{{golem}} project.
+Disabling Shiny Autoload of R Scripts
 }
 \examples{
 if (interactive()){
   disable_autoload()
 }
-}
-\seealso{
-\code{\link[=module_template]{module_template()}}
+
 }
