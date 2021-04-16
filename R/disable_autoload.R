@@ -1,6 +1,6 @@
 #' Disabling Shiny Autoload of R Scripts
 #'
-#' @inherit add_module
+#' @inheritParams add_module
 #'
 #' @export
 #'
@@ -8,6 +8,8 @@
 #' if (interactive()){
 #'   disable_autoload()
 #' }
+#' 
+#' @return The path to the file, invisibly.
 disable_autoload <- function(
   pkg = get_golem_wd()
 ){
