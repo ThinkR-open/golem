@@ -66,7 +66,7 @@ ui <- readLines("R/app_ui.R")
 ui <- append(
   ui,
   c(
-    ',mod_my_first_module_ui("my_first_module_ui_1")'
+    ',mod_my_first_module_ui("my_first_module_1")'
   ), 
   grep(
     "h1", 
@@ -79,7 +79,7 @@ server <- readLines("R/app_server.R")
 server <- append(
   server,
   c(
-    'callModule(mod_my_first_module_server, "my_first_module_ui_1")'
+    'callModule(mod_my_first_module_server, "my_first_module_1")'
   ), 
   grep(
     "first level callModules", 

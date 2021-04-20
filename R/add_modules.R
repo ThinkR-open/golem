@@ -187,10 +187,10 @@ module_template <- function(
     write_there("    ")
     
     write_there("## To be copied in the UI")
-    write_there(sprintf('# mod_%s_ui("%s_ui_1")', name, name))
+    write_there(sprintf('# mod_%s_ui("%s_1")', name, name))
     write_there("    ")
     write_there("## To be copied in the server")
-    write_there(sprintf('# callModule(mod_%s_server, "%s_ui_1")', name, name))
+    write_there(sprintf('# callModule(mod_%s_server, "%s_1")', name, name))
     
     
   } else {
@@ -212,10 +212,10 @@ module_template <- function(
     write_there("    ")
     
     write_there("## To be copied in the UI")
-    write_there(sprintf('# mod_%s_ui("%s_ui_1")', name, name))
+    write_there(sprintf('# mod_%s_ui("%s_1")', name, name))
     write_there("    ")
     write_there("## To be copied in the server")
-    write_there(sprintf('# mod_%s_server("%s_ui_1")', name, name))
+    write_there(sprintf('# mod_%s_server("%s_1")', name, name))
     
   }
 }
