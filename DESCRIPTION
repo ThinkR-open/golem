@@ -45,7 +45,7 @@ Depends:
     R (>= 3.0)
 Imports: 
     attempt (>= 0.3.0),
-    cli,
+    cli (>= 2.0.0),
     config,
     crayon,
     desc,

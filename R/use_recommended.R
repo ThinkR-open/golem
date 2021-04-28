@@ -27,7 +27,7 @@ use_recommended_deps <- function(
   for ( i in sort(recommended)){
     try(use_package(i))
   }
-  cat_green_tick("Dependencies added")
+  cli::cli_alert_success("Dependencies added")
 }
 
 
@@ -80,7 +80,7 @@ use_recommended_tests <- function (
   }
   
   
-  cat_green_tick("Tests added")
+  cli::cli_alert_success("Tests added")
 } 
 
 
