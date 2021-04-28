@@ -1,8 +1,24 @@
-# golem (development version)
-
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
-# golem 0.3.1
+# golem (development version)
+
+## Deprecated
+
+### Soft deprecated
+
+### Hard deprecated
+
+## New functions
+
+## New features
+
++ Modules ID no longer contain an `_ui_` element, (#651, @MargotBr)
+
+## Bug fix
+
+## Internal changes
+
+# golem 0.3.1 (CRAN Version)
 
 ## New functions
 
