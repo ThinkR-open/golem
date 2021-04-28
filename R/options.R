@@ -49,7 +49,7 @@ set_golem_options <- function(
     path = golem_wd
   )
   
-  cat_if_talk <- function(..., fun = cat_green_tick){
+  cat_if_talk <- function(..., fun = cli::cli_alert_success){
     if (talkative){
       fun(...)
     }
@@ -146,7 +146,7 @@ set_golem_things <- function(
     is.null, 
     "Unable to retrieve golem config file."
   )
-  cat_if_talk <- function(..., fun = cat_green_tick){
+  cat_if_talk <- function(..., fun = cli::cli_alert_success){
     if (talkative){
       fun(...)
     }

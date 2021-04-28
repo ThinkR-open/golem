@@ -557,7 +557,7 @@ add_ui_server_files <- function(
     
     cat_created(where, "ui file")
   } else {
-    cat_green_tick("UI file already exists.")
+    cli::cli_alert_success("UI file already exists.")
   }
   
   # server
@@ -579,7 +579,7 @@ add_ui_server_files <- function(
     )
     cat_created(where, "server file")
   } else {
-    cat_green_tick("server file already exists.")
+    cli::cli_alert_success("server file already exists.")
   }
   
 }
