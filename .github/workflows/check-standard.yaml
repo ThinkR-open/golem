@@ -87,7 +87,7 @@ jobs:
         shell: Rscript {0}
         
       - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@master
+        uses: cpina/github-action-push-to-another-repository@main
         if: runner.os == 'Linux' 
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
