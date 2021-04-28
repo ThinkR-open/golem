@@ -18,7 +18,7 @@
 
 ## Internal changes
 
-+ Switched internal cat_green_tick to cli::cli_alert_success()
++ Switched internal cat_green_tick to `cli::cli_alert_success()` (#655)
 
 # golem 0.3.1 (CRAN Version)
 
