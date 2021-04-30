@@ -102,15 +102,6 @@ remove_comments <- function(file) {
 }
 
 #' @importFrom cli cat_bullet
-cli::cli_alert_success <- function(...){
-  cat_bullet(
-    ..., 
-    bullet = "tick", 
-    bullet_col = "green"
-  )
-}
-
-#' @importFrom cli cat_bullet
 cat_red_bullet <- function(...){
   cat_bullet(
     ..., 
