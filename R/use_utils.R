@@ -23,7 +23,7 @@ use_utils_ui <- function(
   )
   
   if (added){
-    cli::cli_alert_success("Utils UI added")
+    cat_green_tick("Utils UI added")
   }
 }
 #' @export
@@ -36,7 +36,7 @@ use_utils_server <- function(
     pkg = pkg
   )
   if (added){
-    cli::cli_alert_success("Utils server added")
+    cat_green_tick("Utils server added")
   }
 } 
 
