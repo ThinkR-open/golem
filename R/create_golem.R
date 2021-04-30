@@ -48,7 +48,7 @@ create_golem <- function(
   if (check_name){
     cat_rule("Checking package name")
     getFromNamespace("check_package_name", "usethis")(package_name)
-    cli::cli_alert_success("Valid package name")
+    cat_green_tick("Valid package name")
   }
   
   if (dir_exists(path)){
@@ -65,7 +65,7 @@ create_golem <- function(
     path, 
     recurse = TRUE
   )
-  cli::cli_alert_success("Created package directory")
+  cat_green_tick("Created package directory")
   
   
   if ( rstudioapi::isAvailable() ) { 
@@ -117,7 +117,7 @@ create_golem <- function(
     }
   }
 
-  cli::cli_alert_success("Copied app skeleton")
+  cat_green_tick("Copied app skeleton")
   
   cat_rule("Setting the default config")
   yml_path <- path(path, "inst/golem-config.yml")
@@ -131,7 +131,7 @@ create_golem <- function(
   conf$default$golem_version <- "0.0.0.9000"
   write_yaml(conf, yml_path)
   
-  cli::cli_alert_success("Configured app")
+  cat_green_tick("Configured app")
   cat_rule("Running project hook function")
   old <- setwd(path)
   # TODO fix
@@ -143,7 +143,7 @@ create_golem <- function(
   project_hook(path = path, package_name = package_name, ...)
   setwd(old)
   
-  cli::cli_alert_success("All set")
+  cat_green_tick("All set")
   
   if ( without_comments == TRUE ) {
     files <- list.files(
@@ -175,7 +175,7 @@ create_golem <- function(
   # 
   # write("# Setting shiny.autoload.r to FALSE ", ".Rprofile", append = TRUE)
   # write("options(shiny.autoload.r = FALSE)", ".Rprofile", append = TRUE)
-  # cli::cli_alert_success("Appended")
+  # cat_green_tick("Appended")
   
   setwd(old)
   

@@ -89,7 +89,7 @@ use_favicon <- function(
       to, 
       overwrite = TRUE
     )
-    cli::cli_alert_success(
+    cat_green_tick(
       sprintf(
         "favicon.%s created at %s", 
         ext, 
@@ -117,7 +117,7 @@ remove_favicon <- function(
   path = "inst/app/www/favicon.ico"
 ){
   if (file_exists(path)){
-    cli::cli_alert_success(
+    cat_green_tick(
       sprintf(
         "Removing favicon at %s", 
         path

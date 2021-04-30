@@ -102,6 +102,15 @@ remove_comments <- function(file) {
 }
 
 #' @importFrom cli cat_bullet
+cat_green_tick <- function(...){
+  cat_bullet(
+    ..., 
+    bullet = "tick", 
+    bullet_col = "green"
+  )
+}
+
+#' @importFrom cli cat_bullet
 cat_red_bullet <- function(...){
   cat_bullet(
     ..., 
@@ -149,7 +158,7 @@ cat_downloaded <- function(
   where, 
   file = "File"
 ){
-  cli::cli_alert_success(
+  cat_green_tick(
     sprintf(
       "%s downloaded at %s",
       file, 
@@ -167,7 +176,7 @@ cat_copied <- function(
   where,
   file = "File"
 ){
-  cli::cli_alert_success(
+  cat_green_tick(
     sprintf(
       "%s copied to %s",
       file,
@@ -180,7 +189,7 @@ cat_created <- function(
   where, 
   file = "File"
 ){
-  cli::cli_alert_success(
+  cat_green_tick(
     sprintf(
       "%s created at %s",
       file, 
@@ -192,7 +201,7 @@ cat_created <- function(
 # File made dance
 
 cat_automatically_linked <- function(){
-  cli::cli_alert_success(
+  cat_green_tick(
     'File automatically linked in `golem_add_external_resources()`.'
   )
 }
@@ -308,7 +317,7 @@ file_already_there_dance <- function(
   where, 
   open_file
 ){
-  cli::cli_alert_success("File already exists.")
+  cat_green_tick("File already exists.")
   open_or_go_to(
     where = where,
     open_file = open_file

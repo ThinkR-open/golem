@@ -24,5 +24,5 @@ enable_roxygenize <- function(
   source[["PackageRoxygenize"]]<- "rd,collate,namespace"
   yaml::write_yaml(x = source,file=path)
   
-  cli::cli_alert_success("Done") 
+  cat_green_tick("Done") 
 }
