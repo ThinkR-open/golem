@@ -48,6 +48,6 @@ sanity_check<- function(
     } 
     return(source_markers)
   } else{
-    cli::cli_alert_success("Sanity check passed successfully.")
+    cat_green_tick("Sanity check passed successfully.")
   }
 }

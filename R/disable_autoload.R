@@ -28,7 +28,7 @@ disable_autoload <- function(
       "# Disabling shiny autoload\n\n# See ?shiny::loadSupport for more information",
       fls
     )
-    cli::cli_alert_success("Created")
+    cat_green_tick("Created")
   }
   return(
     invisible(

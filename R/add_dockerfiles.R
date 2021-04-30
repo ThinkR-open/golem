@@ -335,7 +335,7 @@ dock_from_desc <- function(
     system_requirement <- unique(
       get_sysreqs(packages = packages)
     )
-    cli::cli_alert_success("Done") # TODO animated version ?
+    cat_green_tick("Done") # TODO animated version ?
     
   } else{
     system_requirement <- NULL
@@ -479,7 +479,7 @@ dock_from_desc <- function(
           
         } else {
           usethis::use_build_ignore(files = out)
-        cli::cli_alert_success(
+        cat_green_tick(
           sprintf(
             " %s_%s.tar.gz created.", 
             read.dcf(path)[1], 
