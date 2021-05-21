@@ -22,7 +22,6 @@
 <meta property="og:description" content="golem">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
-<meta name="robots" content="noindex">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 --><!--[if lt IE 9]>
@@ -57,7 +56,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -65,7 +64,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -95,6 +94,9 @@
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -114,7 +116,7 @@
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -128,13 +130,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="c_deploy_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Deploying Apps with {golem}</h1>
                         <h4 class="author">Colin Fay</h4>
             
-            <h4 class="date">2020-07-30</h4>
+            <h4 class="date">2021-05-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/c_deploy.Rmd"><code>vignettes/c_deploy.Rmd</code></a></small>
       <div class="hidden name"><code>c_deploy.Rmd</code></div>
@@ -151,22 +153,24 @@ $(document).ready(function () {
 <h2 class="hasAnchor">
 <a href="#about-the-run_app-function" class="anchor"></a>About the <code>run_app()</code> function</h2>
 <p>When launching the app, you might have noticed that the <code>dev/run_dev.R</code> function calls <code>run_app()</code>, which has the following structure:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">run_app</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(
-  <span class="no">...</span>
-) {
-  <span class="fu"><a href="../reference/with_golem_options.html">with_golem_options</a></span>(
-    <span class="kw">app</span> <span class="kw">=</span> <span class="fu">shinyApp</span>(
-      <span class="kw">ui</span> <span class="kw">=</span> <span class="no">app_ui</span>,
-      <span class="kw">server</span> <span class="kw">=</span> <span class="no">app_server</span>
-    ),
-    <span class="kw">golem_opts</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">...</span>)
-  )
-}</pre></body></html></div>
-<p>This function might looks a little bit weird, but there’s a long story behind it, and you can read more about it <a href="https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/">there</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span>
+  <span class="va">...</span>
+<span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="../reference/with_golem_options.html">with_golem_options</a></span><span class="op">(</span>
+    app <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html">shinyApp</a></span><span class="op">(</span>
+      ui <span class="op">=</span> <span class="va">app_ui</span>, 
+      server <span class="op">=</span> <span class="va">app_server</span>
+    <span class="op">)</span>, 
+    golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="op">}</span></code></pre></div>
+<p>This function might looks a little bit weird, but there’s a long story behind it, and you can read more about it <a href="https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/">there</a>.</p>
 <p>But long story short, this combination of <code>with_golem_options</code> &amp; <code>golem_opts = list(...)</code> allows you to pass argument to the function to be used inside the application, from UI or from server side, which you can get with <code><a href="../reference/get_golem_options.html">get_golem_options()</a></code>.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu">run_app</span>(<span class="kw">this</span> <span class="kw">=</span> <span class="st">"that"</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">run_app</span><span class="op">(</span>this <span class="op">=</span> <span class="st">"that"</span><span class="op">)</span>
 <span class="co"># And in the app </span>
-<span class="no">this</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_golem_options.html">get_golem_options</a></span>(<span class="st">"this"</span>)</pre></body></html></div>
+<span class="va">this</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_golem_options.html">get_golem_options</a></span><span class="op">(</span><span class="st">"this"</span><span class="op">)</span></code></pre></div>
 <p>The idea is to provide more flexibility for deployment on each platform you want to run your app on.</p>
 </div>
 <div id="deploying-apps-with-golem" class="section level2">
@@ -177,21 +181,23 @@ $(document).ready(function () {
 <div id="rstudio-products" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rstudio-products" class="anchor"></a>RStudio Products</h3>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/rstudio_deploy.html">add_rstudioconnect_file</a></span>()
-<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/rstudio_deploy.html">add_shinyappsio_file</a></span>()
-<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/rstudio_deploy.html">add_shinyserver_file</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_rstudioconnect_file.html">add_rstudioconnect_file</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_rstudioconnect_file.html">add_shinyappsio_file</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_rstudioconnect_file.html">add_shinyserver_file</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="docker" class="section level3">
 <h3 class="hasAnchor">
 <a href="#docker" class="anchor"></a>Docker</h3>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># If you want to deploy via a generic Dockerfile</span>
-<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile</a></span>()
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># If you want to deploy via a generic Dockerfile</span>
+<span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_dockerfile.html">add_dockerfile</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># If you want to deploy to ShinyProxy</span>
-<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_shinyproxy</a></span>()
+<span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_dockerfile.html">add_dockerfile_shinyproxy</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># If you want to deploy to Heroku</span>
-<span class="kw pkg">golem</span><span class="kw ns">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_heroku</a></span>()</pre></body></html></div>
+<span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_dockerfile.html">add_dockerfile_heroku</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>

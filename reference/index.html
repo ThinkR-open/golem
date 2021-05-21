@@ -47,7 +47,7 @@
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -96,7 +96,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -104,7 +104,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -134,6 +134,9 @@
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -148,7 +151,7 @@
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -179,7 +182,260 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-create-files" class="hasAnchor"><a href="#section-create-files" class="anchor"></a>Create files</h2>
+          <p class="section-desc"><p>These functions create files inside the inst/app folder. These functions can be used outside of a golem project.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="add_files.html">add_js_file()</a></code> <code><a href="add_files.html">add_js_handler()</a></code> <code><a href="add_files.html">add_js_input_binding()</a></code> <code><a href="add_files.html">add_js_output_binding()</a></code> <code><a href="add_files.html">add_css_file()</a></code> <code><a href="add_files.html">add_html_template()</a></code> <code><a href="add_files.html">add_ui_server_files()</a></code> </p>
+        </td>
+        <td><p>Create Files</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-create-a-dockerfile" class="hasAnchor"><a href="#section-create-a-dockerfile" class="anchor"></a>Create a Dockerfile</h2>
+          <p class="section-desc"><p>Build a container containing your Shiny App. <code><a href="../reference/add_dockerfile.html">add_dockerfile()</a></code> creates a “classical” Dockerfile, while <code><a href="../reference/add_dockerfile.html">add_dockerfile_shinyproxy()</a></code> and <code><a href="../reference/add_dockerfile.html">add_dockerfile_heroku()</a></code> creates platform specific Dockerfile.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="dockerfiles.html">add_dockerfile()</a></code> <code><a href="dockerfiles.html">add_dockerfile_shinyproxy()</a></code> <code><a href="dockerfiles.html">add_dockerfile_heroku()</a></code> </p>
+        </td>
+        <td><p>Create a Dockerfile for your App</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-use-files" class="hasAnchor"><a href="#section-use-files" class="anchor"></a>Use files</h2>
+          <p class="section-desc"><p><code>use_external_js_file</code> and <code>use_external_css_file</code>download files from external sources and install them inside the appropriate directory. <code>use_utils_ui</code> copies the golem_utils_ui.R to the R folder and <code>use_utils_server</code> copies the golem_utils_server.R to the R folder.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="use_files.html">use_external_js_file()</a></code> <code><a href="use_files.html">use_external_css_file()</a></code> <code><a href="use_files.html">use_external_html_template()</a></code> <code><a href="use_files.html">use_external_file()</a></code> <code><a href="use_files.html">use_internal_js_file()</a></code> <code><a href="use_files.html">use_internal_css_file()</a></code> <code><a href="use_files.html">use_internal_html_template()</a></code> <code><a href="use_files.html">use_internal_file()</a></code> </p>
+        </td>
+        <td><p>Use Files</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="utils_files.html">use_utils_ui()</a></code> <code><a href="utils_files.html">use_utils_server()</a></code> </p>
+        </td>
+        <td><p>Use the utils files</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-add-fct-and-utils-files" class="hasAnchor"><a href="#section-add-fct-and-utils-files" class="anchor"></a>Add fct_ and utils_ files</h2>
+          <p class="section-desc"><p>Add fct_ and utils_ files</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="file_creation.html">add_fct()</a></code> <code><a href="file_creation.html">add_utils()</a></code> </p>
+        </td>
+        <td><p>Add fct_ and utils_ files</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-add-an-app-r" class="hasAnchor"><a href="#section-add-an-app-r" class="anchor"></a>Add an app.R</h2>
+          <p class="section-desc"><p>Add an app.R at the root of your package to deploy on RStudio Connect</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="rstudio_deploy.html">add_rstudioconnect_file()</a></code> <code><a href="rstudio_deploy.html">add_shinyappsio_file()</a></code> <code><a href="rstudio_deploy.html">add_shinyserver_file()</a></code> </p>
+        </td>
+        <td><p>Add an app.R at the root of your package to deploy on RStudio Connect</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-mode-detection" class="hasAnchor"><a href="#section-mode-detection" class="anchor"></a>Mode detection</h2>
+          <p class="section-desc"><p>Is the app in dev mode or prod mode?</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="prod.html">app_prod()</a></code> <code><a href="prod.html">app_dev()</a></code> </p>
+        </td>
+        <td><p>Is the app in dev mode or prod mode?</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-dev-dependent-functions" class="hasAnchor"><a href="#section-dev-dependent-functions" class="anchor"></a>Dev dependent functions</h2>
+          <p class="section-desc"><p>This functions will be run only if <code><a href="../reference/app_prod.html">golem::app_dev()</a></code> returns TRUE.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="made_dev.html">cat_dev()</a></code> <code><a href="made_dev.html">print_dev()</a></code> <code><a href="made_dev.html">message_dev()</a></code> <code><a href="made_dev.html">warning_dev()</a></code> <code><a href="made_dev.html">browser_dev()</a></code> </p>
+        </td>
+        <td><p>Functions already made dev dependent</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-test-helpers" class="hasAnchor"><a href="#section-test-helpers" class="anchor"></a>Test helpers</h2>
+          <p class="section-desc"><p>These functions are designed to be used inside the tests in your Shiny app package.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="testhelpers.html">expect_shinytag()</a></code> <code><a href="testhelpers.html">expect_shinytaglist()</a></code> <code><a href="testhelpers.html">expect_html_equal()</a></code> <code><a href="testhelpers.html">expect_running()</a></code> </p>
+        </td>
+        <td><p>Test helpers</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-favicon-functions" class="hasAnchor"><a href="#section-favicon-functions" class="anchor"></a>Favicon functions</h2>
+          <p class="section-desc"><p>This function adds the favicon from ico to your shiny app.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="favicon.html">use_favicon()</a></code> <code><a href="favicon.html">remove_favicon()</a></code> <code><a href="favicon.html">favicon()</a></code> </p>
+        </td>
+        <td><p>Add a favicon to your shinyapp</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-addins" class="hasAnchor"><a href="#section-addins" class="anchor"></a>Addins</h2>
+          <p class="section-desc"><p><code><a href="../reference/addins.html">insert_ns()</a></code> takes a selected character vector and wrap it in <code>ns()</code>. The series of <code>go_to_*()</code> addins help you go to common files used in developing a {golem} application.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="addins.html">insert_ns()</a></code> <code><a href="addins.html">go_to_start()</a></code> <code><a href="addins.html">go_to_dev()</a></code> <code><a href="addins.html">go_to_deploy()</a></code> <code><a href="addins.html">go_to_run_dev()</a></code> <code><a href="addins.html">go_to_app_ui()</a></code> <code><a href="addins.html">go_to_app_server()</a></code> <code><a href="addins.html">go_to_run_app()</a></code> </p>
+        </td>
+        <td><p><code>{golem}</code> addins</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-javascript-interaction-functions" class="hasAnchor"><a href="#section-javascript-interaction-functions" class="anchor"></a>JavaScript interaction functions</h2>
+          <p class="section-desc"><p><code>activate_js</code> is used in your UI to insert directly the JavaScript functions contained in golem. These functions can be called from the server with <code>invoke_js</code>. <code>invoke_js</code> can also be used to launch any JS function created inside a Shiny JavaScript handler.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="golem_js.html">activate_js()</a></code> <code><a href="golem_js.html">invoke_js()</a></code> </p>
+        </td>
+        <td><p>Interact with JavaScript built-in Functions</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-options" class="hasAnchor"><a href="#section-options" class="anchor"></a>Options</h2>
+          <p class="section-desc"><p>Set and get a series of options to be used with <a href="https://github.com/ThinkR-open/golem">golem</a>. These options are found inside the <code>golem-config.yml</code> file, found in most cases inside the inst folder.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="golem_opts.html">set_golem_options()</a></code> <code><a href="golem_opts.html">set_golem_wd()</a></code> <code><a href="golem_opts.html">set_golem_name()</a></code> <code><a href="golem_opts.html">set_golem_version()</a></code> <code><a href="golem_opts.html">get_golem_wd()</a></code> <code><a href="golem_opts.html">get_golem_name()</a></code> <code><a href="golem_opts.html">get_golem_version()</a></code> </p>
+        </td>
+        <td><p><code>{golem}</code> options</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-add-recommended-elements" class="hasAnchor"><a href="#section-add-recommended-elements" class="anchor"></a>Add recommended elements</h2>
+          <p class="section-desc"><p><code>use_recommended_deps</code> adds shiny, DT, attempt, glue, golem, htmltools to dependencies <code>use_recommended_tests</code> adds a test folder and copy the golem tests</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="use_recommended.html">use_recommended_deps()</a></code> <code><a href="use_recommended.html">use_recommended_tests()</a></code> </p>
+        </td>
+        <td><p>Add recommended elements</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-misc" class="hasAnchor"><a href="#section-misc" class="anchor"></a>Misc</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -191,33 +447,27 @@
       <tr>
         
         <td>
-          <p><code><a href="add_files.html">add_js_file()</a></code> <code><a href="add_files.html">add_js_handler()</a></code> <code><a href="add_files.html">add_js_binding()</a></code> <code><a href="add_files.html">add_css_file()</a></code> <code><a href="add_files.html">add_ui_server_files()</a></code> </p>
-        </td>
-        <td><p>Create Files</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="add_module.html">add_module()</a></code> </p>
         </td>
         <td><p>Create a module</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="add_resource_path.html">add_resource_path()</a></code> </p>
-        </td>
-        <td><p>Add resource path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="addins.html">insert_ns()</a></code> <code><a href="addins.html">go_to_start()</a></code> <code><a href="addins.html">go_to_dev()</a></code> <code><a href="addins.html">go_to_deploy()</a></code> <code><a href="addins.html">go_to_run_dev()</a></code> <code><a href="addins.html">go_to_app_ui()</a></code> <code><a href="addins.html">go_to_app_server()</a></code> <code><a href="addins.html">go_to_run_app()</a></code> </p>
-        </td>
-        <td><p><code>{golem}</code> addins</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="amend_golem_config.html">amend_golem_config()</a></code> </p>
         </td>
         <td><p>Amend golem config file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="create_golem.html">create_golem()</a></code> </p>
+        </td>
+        <td><p>Create a package for a Shiny App using <code>{golem}</code></p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="add_resource_path.html">add_resource_path()</a></code> </p>
+        </td>
+        <td><p>Add resource path</p></td>
       </tr><tr>
         
         <td>
@@ -233,21 +483,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="create_golem.html">create_golem()</a></code> </p>
-        </td>
-        <td><p>Create a package for Shiny App using golem</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="detach_all_attached.html">detach_all_attached()</a></code> </p>
         </td>
         <td><p>Detach all attached package</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dockerfiles.html">add_dockerfile()</a></code> <code><a href="dockerfiles.html">add_dockerfile_shinyproxy()</a></code> <code><a href="dockerfiles.html">add_dockerfile_heroku()</a></code> </p>
-        </td>
-        <td><p>Create a Dockerfile for  Shiny App</p></td>
       </tr><tr>
         
         <td>
@@ -257,105 +495,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="favicon.html">use_favicon()</a></code> <code><a href="favicon.html">remove_favicon()</a></code> <code><a href="favicon.html">favicon()</a></code> </p>
-        </td>
-        <td><p>Add a favicon to your shinyapp</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="file_creation.html">add_fct()</a></code> <code><a href="file_creation.html">add_utils()</a></code> </p>
-        </td>
-        <td><p>Add fct_ and utils_ files</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="fill_desc.html">fill_desc()</a></code> </p>
         </td>
         <td><p>Fill your description</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="get_golem_options.html">get_golem_options()</a></code> </p>
-        </td>
-        <td><p>Get all or one golem options</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_sysreqs.html">get_sysreqs()</a></code> </p>
-        </td>
-        <td><p>get system requirements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="golem.html">golem</a></code> </p>
-        </td>
-        <td><p>A package for building Shiny App</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="golem_js.html">activate_js()</a></code> <code><a href="golem_js.html">invoke_js()</a></code> </p>
-        </td>
-        <td><p>Interact with JavaScript built-in Functions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="golem_opts.html">set_golem_options()</a></code> <code><a href="golem_opts.html">set_golem_wd()</a></code> <code><a href="golem_opts.html">set_golem_name()</a></code> <code><a href="golem_opts.html">set_golem_version()</a></code> <code><a href="golem_opts.html">get_golem_wd()</a></code> <code><a href="golem_opts.html">get_golem_name()</a></code> <code><a href="golem_opts.html">get_golem_version()</a></code> </p>
-        </td>
-        <td><p><code>{golem}</code> options</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="made_dev.html">cat_dev()</a></code> <code><a href="made_dev.html">print_dev()</a></code> <code><a href="made_dev.html">message_dev()</a></code> <code><a href="made_dev.html">warning_dev()</a></code> <code><a href="made_dev.html">browser_dev()</a></code> </p>
-        </td>
-        <td><p>Functions already made dev dependent</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="make_dev.html">make_dev()</a></code> </p>
         </td>
         <td><p>Make a function dependent to dev mode</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="prod.html">app_prod()</a></code> <code><a href="prod.html">app_dev()</a></code> </p>
-        </td>
-        <td><p>Is the app in dev mode or prod mode?</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="rstudio_deploy.html">add_rstudioconnect_file()</a></code> <code><a href="rstudio_deploy.html">add_shinyappsio_file()</a></code> <code><a href="rstudio_deploy.html">add_shinyserver_file()</a></code> </p>
-        </td>
-        <td><p>Add an app.R at the root of your package to deploy on RStudio Connect</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="run_dev.html">run_dev()</a></code> </p>
-        </td>
-        <td><p>Run run_dev.R</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="testhelpers.html">expect_shinytag()</a></code> <code><a href="testhelpers.html">expect_shinytaglist()</a></code> <code><a href="testhelpers.html">expect_html_equal()</a></code> <code><a href="testhelpers.html">expect_running()</a></code> </p>
-        </td>
-        <td><p>Test helpers</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_files.html">use_external_js_file()</a></code> <code><a href="use_files.html">use_external_css_file()</a></code> </p>
-        </td>
-        <td><p>Use Files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_recommended.html">use_recommended_deps()</a></code> <code><a href="use_recommended.html">use_recommended_tests()</a></code> </p>
-        </td>
-        <td><p>Add recommended elements</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="utils_files.html">use_utils_ui()</a></code> <code><a href="utils_files.html">use_utils_server()</a></code> </p>
-        </td>
-        <td><p>Use the utils files</p></td>
       </tr><tr>
         
         <td>

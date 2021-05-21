@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a package for Shiny App using golem — create_golem • golem</title>
+<title>Create a package for a Shiny App using {golem} — create_golem • golem</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,13 +42,13 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Create a package for Shiny App using golem — create_golem" />
-<meta property="og:description" content="Create a package for Shiny App using golem" />
+<meta property="og:title" content="Create a package for a Shiny App using {golem} — create_golem" />
+<meta property="og:description" content="Create a package for a Shiny App using {golem}" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -97,7 +97,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -105,7 +105,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,6 +135,9 @@
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -149,7 +152,7 @@
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -166,56 +169,72 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a package for Shiny App using golem</h1>
+    <h1>Create a package for a Shiny App using <code>{golem}</code></h1>
     <small class="dont-index">Source: <a href='https://github.com/ThinkR-open/golem/blob/master/R/create_golem.R'><code>R/create_golem.R</code></a></small>
     <div class="hidden name"><code>create_golem.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a package for Shiny App using golem</p>
+    <p>Create a package for a Shiny App using <code>{golem}</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_golem</span>(
-  <span class='no'>path</span>,
-  <span class='kw'>check_name</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>package_name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span>(<span class='no'>path</span>),
-  <span class='kw'>without_comments</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>create_golem</span><span class='op'>(</span>
+  <span class='va'>path</span>,
+  check_name <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  open <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  package_name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/basename.html'>basename</a></span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>,
+  without_comments <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  project_hook <span class='op'>=</span> <span class='fu'>golem</span><span class='fu'>::</span><span class='va'><a href='project_hook.html'>project_hook</a></span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>path</th>
-      <td><p>Name of the folder to create the package in. This will also be
-used as the package name.</p></td>
+      <td><p>Name of the folder to create the package in.
+This will also be used as the package name.</p></td>
     </tr>
     <tr>
       <th>check_name</th>
-      <td><p>When using this function in the console, you can prevent
-the package name from being checked.</p></td>
+      <td><p>Should we check that the package name is
+correct according to CRAN requirements.</p></td>
     </tr>
     <tr>
       <th>open</th>
-      <td><p>Boolean open the created project</p></td>
+      <td><p>Boolean. Open the created project?</p></td>
     </tr>
     <tr>
       <th>package_name</th>
-      <td><p>Package name to use.By default it's <code><a href='https://rdrr.io/r/base/basename.html'>basename(path)</a></code> but if path == '.' and <code>package_name</code>
-not explicitly given, then <code><a href='https://rdrr.io/r/base/basename.html'>basename(getwd())</a></code> will be used.</p></td>
+      <td><p>Package name to use. By default, golem uses
+<code><a href='https://rdrr.io/r/base/basename.html'>basename(path)</a></code>. If <code>path == '.'</code> &amp; <code>package_name</code> is
+not explicitly set, then <code><a href='https://rdrr.io/r/base/basename.html'>basename(getwd())</a></code> will be used.</p></td>
     </tr>
     <tr>
       <th>without_comments</th>
-      <td><p>Boolean start project without golem comments</p></td>
+      <td><p>Boolean. Start project without golem comments</p></td>
+    </tr>
+    <tr>
+      <th>project_hook</th>
+      <td><p>A function executed as a hook after project
+creation. Can be used to change the default <code>{golem}</code> structure.
+to override the files and content. This function is executed just
+after the project is created.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>not used</p></td>
+      <td><p>Arguments passed to the <code><a href='project_hook.html'>project_hook()</a></code> function.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The path, invisibly.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>For compatibility issue, this function turns <code><a href='https://rdrr.io/r/base/options.html'>options(shiny.autoload.r)</a></code>
+to <code>FALSE</code>. See https://github.com/ThinkR-open/golem/issues/468 for more background.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

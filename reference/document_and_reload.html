@@ -49,7 +49,7 @@ roxygen2::roxygenise() and pkgload::load_all()." />
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -98,7 +98,7 @@ roxygen2::roxygenise() and pkgload::load_all()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -106,7 +106,7 @@ roxygen2::roxygenise() and pkgload::load_all()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -136,6 +136,9 @@ roxygen2::roxygenise() and pkgload::load_all()." />
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -150,7 +153,7 @@ roxygen2::roxygenise() and pkgload::load_all()." />
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -177,23 +180,23 @@ roxygen2::roxygenise() and pkgload::load_all()." />
 <code><a href='https://roxygen2.r-lib.org/reference/roxygenize.html'>roxygen2::roxygenise()</a></code> and <code><a href='https://rdrr.io/pkg/pkgload/man/load_all.html'>pkgload::load_all()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>document_and_reload</span>(
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
-  <span class='kw'>roclets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>load_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>helpers</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>attach_testthat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>document_and_reload</span><span class='op'>(</span>
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  roclets <span class='op'>=</span> <span class='cn'>NULL</span>,
+  load_code <span class='op'>=</span> <span class='cn'>NULL</span>,
+  clean <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  export_all <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  helpers <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  attach_testthat <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
+      <td><p>Path to the root of the package. Default is <code><a href='set_golem_options.html'>get_golem_wd()</a></code>.</p></td>
     </tr>
     <tr>
       <th>roclets</th>
@@ -234,6 +237,9 @@ which more closely mimics the environment within test files.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Used for side-effects</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

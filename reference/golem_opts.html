@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>{golem}</code> options — set_golem_options • golem</title>
+<title>{golem} options — set_golem_options • golem</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,7 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="<code>{golem}</code> options — set_golem_options" />
+<meta property="og:title" content="{golem} options — set_golem_options" />
 <meta property="og:description" content="Set and get a series of options to be used with {golem}.
 These options are found inside the golem-config.yml file, found in most cases
 inside the inst folder." />
@@ -50,7 +50,7 @@ inside the inst folder." />
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -99,7 +99,7 @@ inside the inst folder." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@ inside the inst folder." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -137,6 +137,9 @@ inside the inst folder." />
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -151,7 +154,7 @@ inside the inst folder." />
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -179,41 +182,41 @@ These options are found inside the <code>golem-config.yml</code> file, found in 
 inside the <code>inst</code> folder.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>set_golem_options</span>(
-  <span class='kw'>golem_name</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_name</a></span>(),
-  <span class='kw'>golem_version</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_version</a></span>(),
-  <span class='kw'>golem_wd</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(),
-  <span class='kw'>app_prod</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+    <pre class="usage"><span class='fu'>set_golem_options</span><span class='op'>(</span>
+  golem_name <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_name</a></span><span class='op'>(</span><span class='op'>)</span>,
+  golem_version <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_version</a></span><span class='op'>(</span><span class='op'>)</span>,
+  golem_wd <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span><span class='op'>(</span><span class='op'>)</span>,
+  app_prod <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  talkative <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>set_golem_wd</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(), <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'>set_golem_wd</span><span class='op'>(</span>path <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span><span class='op'>(</span><span class='op'>)</span>, talkative <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='fu'>set_golem_name</span>(
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_name</a></span>(),
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(),
-  <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+<span class='fu'>set_golem_name</span><span class='op'>(</span>
+  name <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_name</a></span><span class='op'>(</span><span class='op'>)</span>,
+  path <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span><span class='op'>(</span><span class='op'>)</span>,
+  talkative <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>set_golem_version</span>(
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_version</a></span>(),
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>(),
-  <span class='kw'>talkative</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+<span class='fu'>set_golem_version</span><span class='op'>(</span>
+  version <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_version</a></span><span class='op'>(</span><span class='op'>)</span>,
+  path <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span><span class='op'>(</span><span class='op'>)</span>,
+  talkative <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>get_golem_wd</span>(<span class='kw'>use_parent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>())
+<span class='fu'>get_golem_wd</span><span class='op'>(</span>use_parent <span class='op'>=</span> <span class='cn'>TRUE</span>, path <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>get_golem_name</span>(
-  <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"R_CONFIG_ACTIVE"</span>, <span class='st'>"default"</span>),
-  <span class='kw'>use_parent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>()
-)
+<span class='fu'>get_golem_name</span><span class='op'>(</span>
+  config <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"R_CONFIG_ACTIVE"</span>, <span class='st'>"default"</span><span class='op'>)</span>,
+  use_parent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  path <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
 
-<span class='fu'>get_golem_version</span>(
-  <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"R_CONFIG_ACTIVE"</span>, <span class='st'>"default"</span>),
-  <span class='kw'>use_parent</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span>()
-)</pre>
+<span class='fu'>get_golem_version</span><span class='op'>(</span>
+  config <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span><span class='op'>(</span><span class='st'>"R_CONFIG_ACTIVE"</span>, <span class='st'>"default"</span><span class='op'>)</span>,
+  use_parent <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  path <span class='op'>=</span> <span class='fu'>pkgload</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkg_path</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -259,18 +262,22 @@ configuration files if the specified config file isn't found.</p></td>
     <tr>
       <th>config</th>
       <td><p>Name of configuration to read from. Defaults to
-the value of the <code>R_CONFIG_NAME</code> environment variable
+the value of the <code>R_CONFIG_ACTIVE</code> environment variable
 ("default" if the variable does not exist).</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Used for side-effects for the setters, and values from the
+config in the getters.</p>
     <h2 class="hasAnchor" id="set-functions"><a class="anchor" href="#set-functions"></a>Set Functions</h2>
 
     
 
 <ul>
 <li><p><code>set_golem_options()</code> sets all the options, with the defaults from the functions below.</p></li>
-<li><p><code>set_golem_wd()</code> defaults to <code><a href='https://rdrr.io/pkg/here/man/here.html'>here::here()</a></code>, which is the package root when starting a golem.</p></li>
+<li><p><code>set_golem_wd()</code> defaults to <code><a href='https://here.r-lib.org//reference/here.html'>here::here()</a></code>, which is the package root when starting a golem.</p></li>
 <li><p><code>set_golem_name()</code> defaults <code><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkgload::pkg_name()</a></code></p></li>
 <li><p><code>set_golem_version()</code> defaults <code><a href='https://rdrr.io/pkg/pkgload/man/packages.html'>pkgload::pkg_version()</a></code></p></li>
 </ul>

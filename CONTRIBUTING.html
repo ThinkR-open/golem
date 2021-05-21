@@ -47,7 +47,7 @@
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -96,7 +96,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -104,7 +104,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -134,6 +134,9 @@
       <a href="articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -148,7 +151,7 @@
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,7 +174,7 @@
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>First of all, thank you for taking time to contribute to <code>{golem}</code>!</p>
+<p>First of all, thank you for taking time to contribute to <a href="https://github.com/ThinkR-open/golem">golem</a>!</p>
 <div id="what-you-can-help-with" class="section level3">
 <h3 class="hasAnchor">
 <a href="#what-you-can-help-with" class="anchor"></a>What you can help with</h3>
@@ -212,7 +215,8 @@
 <li><p>Make the changes locally.</p></li>
 <li><p>Be sure to have a <code><a href="https://devtools.r-lib.org//reference/check.html">devtools::check()</a></code> that return 0 errors, 0 warnings and 0 mistakes</p></li>
 </ol>
-<div class="sourceCode" id="cb3"><html><pre class="r"><span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/check.html">check</a></span>()</pre></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/check.html">check</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>If ever you have some errors, please specify it in your commit message / PR comment</p>
 <ol>
 <li><p>PR the change <strong>into golem dev branch</strong>, not straight to master</p></li>

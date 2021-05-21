@@ -51,7 +51,7 @@ and golem::add_js_handler()." />
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -100,7 +100,7 @@ and golem::add_js_handler()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -108,7 +108,7 @@ and golem::add_js_handler()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -138,6 +138,9 @@ and golem::add_js_handler()." />
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -152,7 +155,7 @@ and golem::add_js_handler()." />
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -177,21 +180,22 @@ and golem::add_js_handler()." />
     <div class="ref-description">
     <p>This function is a wrapper around <code><a href='https://rdrr.io/pkg/htmltools/man/htmlDependency.html'>htmltools::htmlDependency</a></code> that
 automatically bundles the CSS and JavaScript files in <code>inst/app/www</code>
-and which are created by <code><a href='add_files.html'>golem::add_css_file()</a></code> , <code><a href='add_files.html'>golem::add_js_file()</a></code>
-and <code><a href='add_files.html'>golem::add_js_handler()</a></code>.</p>
+and which are created by <code><a href='add_js_file.html'>golem::add_css_file()</a></code> , <code><a href='add_js_file.html'>golem::add_js_file()</a></code>
+and <code><a href='add_js_file.html'>golem::add_js_handler()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>bundle_resources</span>(
-  <span class='no'>path</span>,
-  <span class='no'>app_title</span>,
-  <span class='kw'>name</span> <span class='kw'>=</span> <span class='st'>"golem_resources"</span>,
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"0.0.1"</span>,
-  <span class='kw'>meta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>head</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>attachment</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>all_files</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>bundle_resources</span><span class='op'>(</span>
+  <span class='va'>path</span>,
+  <span class='va'>app_title</span>,
+  name <span class='op'>=</span> <span class='st'>"golem_resources"</span>,
+  version <span class='op'>=</span> <span class='st'>"0.0.1"</span>,
+  meta <span class='op'>=</span> <span class='cn'>NULL</span>,
+  head <span class='op'>=</span> <span class='cn'>NULL</span>,
+  attachment <span class='op'>=</span> <span class='cn'>NULL</span>,
+  package <span class='op'>=</span> <span class='cn'>NULL</span>,
+  all_files <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  app_builder <span class='op'>=</span> <span class='st'>"golem"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -238,8 +242,20 @@ dependency files. If <code>FALSE</code>, only the files specified in
 <code>script</code>, <code>stylesheet</code>, and <code>attachment</code> are treated as
 dependency files.</p></td>
     </tr>
+    <tr>
+      <th>app_builder</th>
+      <td><p>The name of the app builder to add as a meta tag.
+Turn to NULL if you don't want this meta tag to be included.</p></td>
+    </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>an htmlDependency</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This function also preload <code><a href='activate_js.html'>activate_js()</a></code> which allows to
+use preconfigured JavaScript functions via <code><a href='activate_js.html'>invoke_js()</a></code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

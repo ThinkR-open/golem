@@ -50,7 +50,7 @@ parameters passed to run_app()." />
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -99,7 +99,7 @@ parameters passed to run_app()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@ parameters passed to run_app()." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -137,6 +137,9 @@ parameters passed to run_app()." />
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -151,7 +154,7 @@ parameters passed to run_app()." />
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -179,7 +182,7 @@ server and UI from your app, in order to call the
 parameters passed to <code>run_app()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_golem_options</span>(<span class='kw'>which</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_golem_options</span><span class='op'>(</span>which <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,7 +193,48 @@ parameters passed to <code>run_app()</code>.</p>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>The value of the option.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+  
+  <span class='co'># Define and use golem_options</span>
+  
+  <span class='co'># 1. Pass parameters to `run_app`</span>
+  
+  <span class='co'># to set default value, edit run_app like this :</span>
+  <span class='va'>run_app</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span>
+    <span class='va'>title</span> <span class='op'>=</span> <span class='st'>"this"</span>,
+    <span class='va'>content</span> <span class='op'>=</span> <span class='st'>"that"</span>
+  <span class='op'>)</span> <span class='op'>{</span>
+    <span class='fu'><a href='with_golem_options.html'>with_golem_options</a></span><span class='op'>(</span>
+      app <span class='op'>=</span> <span class='fu'>shinyApp</span><span class='op'>(</span>
+        ui <span class='op'>=</span> <span class='va'>app_ui</span>,
+        server <span class='op'>=</span> <span class='va'>app_server</span>
+      <span class='op'>)</span>,
+      golem_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+        p1 <span class='op'>=</span> <span class='va'>p1</span>,
+        p3 <span class='op'>=</span> <span class='va'>p3</span>
+      <span class='op'>)</span>
+    <span class='op'>)</span>
+  <span class='op'>}</span>
+  
+  <span class='co'># 2. Get the values from the UI side</span>
+  
+  <span class='fu'>h1</span><span class='op'>(</span> <span class='fu'>get_golem_options</span><span class='op'>(</span><span class='st'>"title"</span><span class='op'>)</span> <span class='op'>)</span>
+  
+  <span class='co'># 3. Get the value from the server-side</span>
+  
+  <span class='va'>output</span><span class='op'>$</span><span class='va'>param</span> <span class='op'>&lt;-</span> <span class='fu'>renderPrint</span><span class='op'>(</span><span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='st'>"param p2 = "</span>,<span class='fu'>get_golem_options</span><span class='op'>(</span><span class='st'>"p2"</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+  
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -43,12 +43,14 @@
 <script src="../pkgdown.js"></script>
 
 <meta property="og:title" content="Use Files — use_external_js_file" />
-<meta property="og:description" content="These functions download files from external sources and install them inside the appropriate directory." />
+<meta property="og:description" content="These functions download files from external sources and put them inside the inst/app/www directory.
+The use_internal_ functions will copy internal files, while use_external_ will try to download them
+from a remote location." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -97,7 +99,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -105,7 +107,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -135,6 +137,9 @@
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -149,7 +154,7 @@
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -172,26 +177,82 @@
     </div>
 
     <div class="ref-description">
-    <p>These functions download files from external sources and install them inside the appropriate directory.</p>
+    <p>These functions download files from external sources and put them inside the <code>inst/app/www</code> directory.
+The <code>use_internal_</code> functions will copy internal files, while <code>use_external_</code> will try to download them
+from a remote location.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use_external_js_file</span>(
-  <span class='no'>url</span>,
-  <span class='no'>name</span>,
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
-  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)
+    <pre class="usage"><span class='fu'>use_external_js_file</span><span class='op'>(</span>
+  <span class='va'>url</span>,
+  <span class='va'>name</span>,
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"inst/app/www"</span>,
+  open <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dir_create <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
 
-<span class='fu'>use_external_css_file</span>(
-  <span class='no'>url</span>,
-  <span class='no'>name</span>,
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
-  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='st'>"inst/app/www"</span>,
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+<span class='fu'>use_external_css_file</span><span class='op'>(</span>
+  <span class='va'>url</span>,
+  <span class='va'>name</span>,
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"inst/app/www"</span>,
+  open <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dir_create <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'>use_external_html_template</span><span class='op'>(</span>
+  <span class='va'>url</span>,
+  name <span class='op'>=</span> <span class='st'>"template.html"</span>,
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"inst/app/www"</span>,
+  open <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dir_create <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'>use_external_file</span><span class='op'>(</span>
+  <span class='va'>url</span>,
+  <span class='va'>name</span>,
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"inst/app/www"</span>,
+  open <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dir_create <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'>use_internal_js_file</span><span class='op'>(</span>
+  <span class='va'>path</span>,
+  <span class='va'>name</span>,
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"inst/app/www"</span>,
+  open <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dir_create <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'>use_internal_css_file</span><span class='op'>(</span>
+  <span class='va'>path</span>,
+  <span class='va'>name</span>,
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"inst/app/www"</span>,
+  open <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dir_create <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'>use_internal_html_template</span><span class='op'>(</span>
+  <span class='va'>path</span>,
+  name <span class='op'>=</span> <span class='st'>"template.html"</span>,
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"inst/app/www"</span>,
+  open <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dir_create <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span>
+
+<span class='fu'>use_internal_file</span><span class='op'>(</span>
+  <span class='va'>path</span>,
+  <span class='va'>name</span>,
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  dir <span class='op'>=</span> <span class='st'>"inst/app/www"</span>,
+  open <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dir_create <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,11 +263,11 @@
     </tr>
     <tr>
       <th>name</th>
-      <td><p>The name of the module</p></td>
+      <td><p>The name of the module.</p></td>
     </tr>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
+      <td><p>Path to the root of the package. Default is <code><a href='set_golem_options.html'>get_golem_wd()</a></code>.</p></td>
     </tr>
     <tr>
       <th>dir</th>
@@ -214,14 +275,25 @@
     </tr>
     <tr>
       <th>open</th>
-      <td><p>Should the file be opened?</p></td>
+      <td><p>Should the created file be opened?</p></td>
     </tr>
     <tr>
       <th>dir_create</th>
       <td><p>Creates the directory if it doesn't exist, default is <code>TRUE</code>.</p></td>
     </tr>
+    <tr>
+      <th>path</th>
+      <td><p>String representation of the local path for the file to be implemented (use_file only)</p></td>
+    </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The path to the file, invisibly.</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>See <code><a href='https://rdrr.io/pkg/htmltools/man/htmlTemplate.html'>?htmltools::htmlTemplate</a></code> and <code>https://shiny.rstudio.com/articles/templates.html</code>
+for more information about <code>htmlTemplate</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

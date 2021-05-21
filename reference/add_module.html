@@ -45,12 +45,12 @@
 <meta property="og:title" content="Create a module — add_module" />
 <meta property="og:description" content="This function creates a module inside the R/ folder, based
 on a specific module structure. This function can be used outside
-of a golem project." />
+of a {golem} project." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -99,7 +99,7 @@ of a golem project." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@ of a golem project." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -137,6 +137,9 @@ of a golem project." />
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -151,7 +154,7 @@ of a golem project." />
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -176,35 +179,37 @@ of a golem project." />
     <div class="ref-description">
     <p>This function creates a module inside the <code>R/</code> folder, based
 on a specific module structure. This function can be used outside
-of a golem project.</p>
+of a <code>{golem}</code> project.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>add_module</span>(
-  <span class='no'>name</span>,
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>(),
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>dir_create</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>fct</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>utils</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>export</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ph_ui</span> <span class='kw'>=</span> <span class='st'>" "</span>,
-  <span class='kw'>ph_server</span> <span class='kw'>=</span> <span class='st'>" "</span>
-)</pre>
+    <pre class="usage"><span class='fu'>add_module</span><span class='op'>(</span>
+  <span class='va'>name</span>,
+  pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span>,
+  open <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  dir_create <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  fct <span class='op'>=</span> <span class='cn'>NULL</span>,
+  utils <span class='op'>=</span> <span class='cn'>NULL</span>,
+  js <span class='op'>=</span> <span class='cn'>NULL</span>,
+  js_handler <span class='op'>=</span> <span class='cn'>NULL</span>,
+  export <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  module_template <span class='op'>=</span> <span class='fu'>golem</span><span class='fu'>::</span><span class='va'><a href='module_template.html'>module_template</a></span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>The name of the module</p></td>
+      <td><p>The name of the module.</p></td>
     </tr>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
+      <td><p>Path to the root of the package. Default is <code><a href='set_golem_options.html'>get_golem_wd()</a></code>.</p></td>
     </tr>
     <tr>
       <th>open</th>
-      <td><p>Should the file be opened?</p></td>
+      <td><p>Should the created file be opened?</p></td>
     </tr>
     <tr>
       <th>dir_create</th>
@@ -212,25 +217,39 @@ of a golem project.</p>
     </tr>
     <tr>
       <th>fct</th>
-      <td><p>The name of the fct file.</p></td>
+      <td><p>If specified, creates a <code>mod_fct</code> file.</p></td>
     </tr>
     <tr>
       <th>utils</th>
-      <td><p>The name of the utils file.</p></td>
+      <td><p>If specified, creates a <code>mod_utils</code> file.</p></td>
+    </tr>
+    <tr>
+      <th>js, js_handler</th>
+      <td><p>If specified, creates a module related JavaScript file.</p></td>
     </tr>
     <tr>
       <th>export</th>
-      <td><p>Logical. Should the module be exported? Default is <code>FALSE</code>.</p></td>
+      <td><p>Should the module be exported? Default is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
-      <th>ph_ui, ph_server</th>
-      <td><p>Texts to insert inside the modules UI and server. For advanced use.</p></td>
+      <th>module_template</th>
+      <td><p>Function that serves as a module template.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Arguments to be passed to the <code>module_template</code> function.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>The path to the file, invisibly.</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>This function will prefix the <code>name</code> argument with <code>mod_</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='module_template.html'>module_template()</a></code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

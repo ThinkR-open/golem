@@ -22,7 +22,6 @@
 <meta property="og:description" content="golem">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
-<meta name="robots" content="noindex">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 --><!--[if lt IE 9]>
@@ -57,7 +56,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -65,7 +64,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -95,6 +94,9 @@
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -114,7 +116,7 @@
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -128,7 +130,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="e_config_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using golem config</h1>
@@ -141,12 +143,13 @@
 
     
     
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">golem</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ThinkR-open/golem">golem</a></span><span class="op">)</span></code></pre></div>
 <div id="about-instgolem-config-yml" class="section level2">
 <h2 class="hasAnchor">
 <a href="#about-instgolem-config-yml" class="anchor"></a>About <code>inst/golem-config.yml</code>
 </h2>
-<p>When you start a new <code>{golem}</code> application, you’ll find a file called <code>golem-config.yml</code> in the <code>inst/</code> folder.</p>
+<p>When you start a new <a href="https://github.com/ThinkR-open/golem">golem</a> application, you’ll find a file called <code>golem-config.yml</code> in the <code>inst/</code> folder.</p>
 <p>By default, this file contains the name of your app, its version, and the default working directory (which is the root of your package).</p>
 <p>This config file is based on the <a href="https://github.com/rstudio/config"><code>{config}</code></a> format, which allows you to create configuration files for different application contexts. Please refer to this package documentation for more information.</p>
 </div>
@@ -168,44 +171,47 @@ dev:
 <li>production/app_prod might be used for adding elements that are to be used once the app is in production.</li>
 <li>dev/golem_wd is in a <code>dev</code> config because the only moment you might reliably use this config is while developing your app. Use the <code>app_sys()</code> function if you want to rely on the package path once the app is deployed.</li>
 </ul>
-<p>The good news is that if you don’t want/need to use <code>{config}</code>, you can safely ignore this file, <strong>just leave it where it is: it is used internally by the <code>{golem}</code> functions</strong>.</p>
+<p>The good news is that if you don’t want/need to use <a href="https://github.com/rstudio/config">config</a>, you can safely ignore this file, <strong>just leave it where it is: it is used internally by the <a href="https://github.com/ThinkR-open/golem">golem</a> functions</strong>.</p>
 <p>These options are globally set with:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/golem_opts.html">set_golem_options</a></span>()
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/set_golem_options.html">set_golem_options</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; ── Setting {golem} options in `golem-config.yml` ───────────────────────────────</span>
 <span class="co">#&gt; ✔ Setting `golem_wd` to here::here()</span>
 <span class="co">#&gt; You can change golem working directory with set_golem_wd('path/to/wd')</span>
 <span class="co">#&gt; ✔ Setting `golem_name` to golex</span>
 <span class="co">#&gt; ✔ Setting `golem_version` to 0.0.0.9000</span>
 <span class="co">#&gt; ✔ Setting `app_prod` to FALSE</span>
-<span class="co">#&gt; ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────</span>
-<span class="co">#&gt; ✔ Setting active project to '/tmp/Rtmp1NdyX3/golex'</span></pre></body></html></div>
+<span class="co">#&gt; ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────</span></code></pre></div>
 <p>The functions reading the options in this config file are:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/golem_opts.html">get_golem_name</a></span>()
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/set_golem_options.html">get_golem_name</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "golex"</span>
-<span class="fu"><a href="../reference/golem_opts.html">get_golem_wd</a></span>()
-<span class="co">#&gt; [1] "/tmp/Rtmp1NdyX3/golex"</span>
-<span class="fu"><a href="../reference/golem_opts.html">get_golem_version</a></span>()
-<span class="co">#&gt; [1] "0.0.0.9000"</span></pre></body></html></div>
+<span class="fu"><a href="../reference/set_golem_options.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] "/private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpfKsm5N/golex"</span>
+<span class="fu"><a href="../reference/set_golem_options.html">get_golem_version</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] "0.0.0.9000"</span></code></pre></div>
 <p>You can set these with:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/golem_opts.html">set_golem_name</a></span>(<span class="st">"this"</span>)
-<span class="fu"><a href="../reference/golem_opts.html">set_golem_wd</a></span>(<span class="st">"."</span>)
-<span class="fu"><a href="../reference/golem_opts.html">set_golem_version</a></span>(<span class="st">"0.0.1"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/set_golem_options.html">set_golem_name</a></span><span class="op">(</span><span class="st">"this"</span><span class="op">)</span>
+<span class="fu"><a href="../reference/set_golem_options.html">set_golem_wd</a></span><span class="op">(</span><span class="st">"."</span><span class="op">)</span>
+<span class="fu"><a href="../reference/set_golem_options.html">set_golem_version</a></span><span class="op">(</span><span class="st">"0.0.1"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="using-golem-config" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-golem-config" class="anchor"></a>Using <code>golem-config</code>
 </h2>
-<p>If you’re already familiar with the <code>{config}</code> package, you can use this file just as any config file.</p>
-<p><code>{golem}</code> comes with an <code><a href="../reference/amend_golem_config.html">amend_golem_config()</a></code> function to add elements to it.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/amend_golem_config.html">amend_golem_config</a></span>(
-  <span class="kw">key</span> <span class="kw">=</span> <span class="st">"where"</span>,
-  <span class="kw">value</span> <span class="kw">=</span> <span class="st">"indev"</span>
-)
-<span class="fu"><a href="../reference/amend_golem_config.html">amend_golem_config</a></span>(
-  <span class="kw">key</span> <span class="kw">=</span> <span class="st">"where"</span>,
-  <span class="kw">value</span> <span class="kw">=</span> <span class="st">"inprod"</span>,
-  <span class="kw">config</span> <span class="kw">=</span> <span class="st">"production"</span>
-)</pre></body></html></div>
+<p>If you’re already familiar with the <a href="https://github.com/rstudio/config">config</a> package, you can use this file just as any config file.</p>
+<p><a href="https://github.com/ThinkR-open/golem">golem</a> comes with an <code><a href="../reference/amend_golem_config.html">amend_golem_config()</a></code> function to add elements to it.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/amend_golem_config.html">amend_golem_config</a></span><span class="op">(</span>
+  key <span class="op">=</span> <span class="st">"where"</span>, 
+  value <span class="op">=</span> <span class="st">"indev"</span>
+<span class="op">)</span>
+<span class="fu"><a href="../reference/amend_golem_config.html">amend_golem_config</a></span><span class="op">(</span>
+  key <span class="op">=</span> <span class="st">"where"</span>, 
+  value <span class="op">=</span> <span class="st">"inprod"</span>, 
+  config <span class="op">=</span> <span class="st">"production"</span>
+<span class="op">)</span></code></pre></div>
 <p>Will result in a <code>golem-config.yml</code> file as such:</p>
 <pre><code>default:
   golem_name: golex
@@ -216,28 +222,30 @@ production:
   app_prod: yes
   where: inprod
 dev:
-  golem_wd: /tmp/Rtmp1NdyX3/golex</code></pre>
+  golem_wd: /private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpfKsm5N/golex</code></pre>
 </div>
 <div id="app_config-r" class="section level2">
 <h2 class="hasAnchor">
 <a href="#app_config-r" class="anchor"></a><code>app_config.R</code>
 </h2>
 <p>In <code>R/app_config.R</code>, you’ll find a <code>get_golem_config()</code> function that allows you to retrieve config from this config file:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="kw pkg">pkgload</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/pkgload/man/load_all.html">load_all</a></span>()
-<span class="co">#&gt; Loading golex</span>
-<span class="fu">get_golem_config</span>(
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">pkgload</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pkgload/man/load_all.html">load_all</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; ℹ Loading golex</span>
+<span class="fu">get_golem_config</span><span class="op">(</span>
   <span class="st">"where"</span>
-)
+<span class="op">)</span>
 <span class="co">#&gt; [1] "indev"</span>
-<span class="fu">get_golem_config</span>(
-  <span class="st">"where"</span>,
-  <span class="kw">config</span> <span class="kw">=</span> <span class="st">"production"</span>
-)
-<span class="co">#&gt; [1] "inprod"</span></pre></body></html></div>
-<p>Or using the env var (default <code>{config}</code> behavior):</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="st">"R_CONFIG_ACTIVE"</span> <span class="kw">=</span> <span class="st">"production"</span>)
-<span class="fu">get_golem_config</span>(<span class="st">"where"</span>)
-<span class="co">#&gt; [1] "inprod"</span></pre></body></html></div>
+<span class="fu">get_golem_config</span><span class="op">(</span>
+  <span class="st">"where"</span>, 
+  config <span class="op">=</span> <span class="st">"production"</span>
+<span class="op">)</span>
+<span class="co">#&gt; [1] "inprod"</span></code></pre></div>
+<p>Or using the env var (default <a href="https://github.com/rstudio/config">config</a> behavior):</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span><span class="st">"R_CONFIG_ACTIVE"</span> <span class="op">=</span> <span class="st">"production"</span><span class="op">)</span>
+<span class="fu">get_golem_config</span><span class="op">(</span><span class="st">"where"</span><span class="op">)</span>
+<span class="co">#&gt; [1] "inprod"</span></code></pre></div>
 </div>
 <div id="golem_config-vs-golem_options" class="section level2">
 <h2 class="hasAnchor">
@@ -249,13 +257,13 @@ dev:
 <li>The <code>golem-config.yml</code> file</li>
 </ul>
 <p>The big difference between these two is that the golem options from <code>run_app()</code> are meant to be configured during runtime: you’ll be doing <code>run_app(val = "this")</code>, whereas the <code>golem-config</code> is meant to be used in the back-end, and will not be linked to the parameters passed to <code>run_app()</code> (even if this is technically possible, this is not the main objective),.</p>
-<p>It’s also linked to the <code>R_CONFIG_ACTIVE</code> environment variable, just as any <code>{config}</code> file.</p>
-<p>The idea is also that the <code>golem-config.yml</code> file is shareable across <code>{golem}</code> projects (<code>golem_opts</code> are application specific), and will be tracked by version control systems.</p>
+<p>It’s also linked to the <code>R_CONFIG_ACTIVE</code> environment variable, just as any <a href="https://github.com/rstudio/config">config</a> file.</p>
+<p>The idea is also that the <code>golem-config.yml</code> file is shareable across <a href="https://github.com/ThinkR-open/golem">golem</a> projects (<code>golem_opts</code> are application specific), and will be tracked by version control systems.</p>
 </div>
 <div id="note-for-golem-0-2-0-users" class="section level2">
 <h2 class="hasAnchor">
 <a href="#note-for-golem-0-2-0-users" class="anchor"></a>Note for <code>{golem}</code> &lt; 0.2.0 users</h2>
-<p>If you’ve built an app with <code>{golem}</code> before the version 0.2.0, this config file doesn’t exist: you’ll be prompted to create it if you update a newer version of <code>{golem}</code>.</p>
+<p>If you’ve built an app with <a href="https://github.com/ThinkR-open/golem">golem</a> before the version 0.2.0, this config file doesn’t exist: you’ll be prompted to create it if you update a newer version of <a href="https://github.com/ThinkR-open/golem">golem</a>.</p>
 </div>
   </div>
 

@@ -54,7 +54,7 @@ use_utils_serverCopies the golem_utils_server.R to the R folder.
 <meta name="twitter:card" content="summary" />
 
 
-<meta name="robots" content="noindex">
+
 
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -103,7 +103,7 @@ use_utils_serverCopies the golem_utils_server.R to the R folder.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9024</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -111,7 +111,7 @@ use_utils_serverCopies the golem_utils_server.R to the R folder.
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -141,6 +141,9 @@ use_utils_serverCopies the golem_utils_server.R to the R folder.
       <a href="../articles/e_config.html">Using golem config</a>
     </li>
     <li>
+      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+    </li>
+    <li>
       <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
     </li>
   </ul>
@@ -155,7 +158,7 @@ use_utils_serverCopies the golem_utils_server.R to the R folder.
         </li>
         <li>
   <a href="https://github.com/ThinkR-open/golem/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -179,7 +182,7 @@ use_utils_serverCopies the golem_utils_server.R to the R folder.
 
     <div class="ref-description">
     
-<dl'>
+<dl>
 <dt>use_utils_ui</dt><dd><p>Copies the golem_utils_ui.R to the R folder.</p></dd>
 <dt>use_utils_server</dt><dd><p>Copies the golem_utils_server.R to the R folder.</p></dd>
 
@@ -187,19 +190,22 @@ use_utils_serverCopies the golem_utils_server.R to the R folder.
 
     </div>
 
-    <pre class="usage"><span class='fu'>use_utils_ui</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())
+    <pre class="usage"><span class='fu'>use_utils_ui</span><span class='op'>(</span>pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>use_utils_server</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='fu'><a href='golem_opts.html'>get_golem_wd</a></span>())</pre>
+<span class='fu'>use_utils_server</span><span class='op'>(</span>pkg <span class='op'>=</span> <span class='fu'><a href='set_golem_options.html'>get_golem_wd</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pkg</th>
-      <td><p>Path to the root of the package. Default is <code><a href='golem_opts.html'>get_golem_wd()</a></code>.</p></td>
+      <td><p>Path to the root of the package. Default is <code><a href='set_golem_options.html'>get_golem_wd()</a></code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Used for side-effects.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
