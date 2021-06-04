@@ -59,6 +59,6 @@ drop_nulls <- function(x){
 #' @inheritParams reactiveValuesToList
 #' 
 #' @noRd
-rv <- shiny::reactiveValues
-rvtl <- shiny::reactiveValuesToList
+rv <- function(...) shiny::reactiveValues(...)
+rvtl <- function(...) shiny::reactiveValuesToList()
 
