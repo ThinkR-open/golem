@@ -60,5 +60,5 @@ drop_nulls <- function(x){
 #' 
 #' @noRd
 rv <- function(...) shiny::reactiveValues(...)
-rvtl <- function(...) shiny::reactiveValuesToList()
+rvtl <- function(...) shiny::reactiveValuesToList(...)
 
