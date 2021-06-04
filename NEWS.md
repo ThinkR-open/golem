@@ -20,6 +20,8 @@
 
 + recommended tests now use `expect_type()` instead of `expect_is`, which was deprecated from `{testthat}` (#671)
 
++ Fixed check warning when using `golem::use_utils_server()` (#678)
+
 ## Internal changes
 
 # golem 0.3.1 (CRAN Version)
