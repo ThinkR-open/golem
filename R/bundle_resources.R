@@ -64,16 +64,18 @@ bundle_resources <- function(
       )
     # For some reason `htmlDependency` doesn't bundle css, 
     # So add them by hand
-    css_nms <- paste0(
-      basename(path), 
-      "/", 
-      list.files(
+    css_nms <- list.files(
         path,
         pattern = "\\.css$", 
         recursive = TRUE
       ) 
-    )
-    
+    if(length(css_nms) != 0){
+      css_nms <- paste0(
+        basename(path), 
+        "/", 
+        css_nms
+      )
+    }
     for (i in css_nms ){
       res[[
         length(res) + 1
