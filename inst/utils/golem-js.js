@@ -59,6 +59,14 @@ $( document ).ready(function() {
     return input;
   });
   
+  Shiny.addCustomMessageHandler('tosize', function(args) {
+    document.getElementById(args.id).setAttribute("style","height:" + args.size + ";width:100%");
+  });
+
+  Shiny.addCustomMessageHandler ('resize',function (message) {
+    $(window).trigger('resize');
+  });
+  
 });
 
 
