@@ -148,7 +148,7 @@ expect_running <- function(sleep){
   if (go_for_pkgload){
     # Using pkgload because we can
     shinyproc <- processx::process$new(
-      command = normalizePath(file.path(Sys.getenv("R_HOME"),'R')),
+      command = normalizePath(file.path(Sys.getenv("R_HOME"),'bin','R')),
       c(
         "-e",
         "pkgload::load_all(here::here());run_app()"
@@ -158,7 +158,7 @@ expect_running <- function(sleep){
     # Using the temps libPaths because we can
     shinyproc <- processx::process$new(
       echo_cmd = TRUE,
-      command = normalizePath(file.path(Sys.getenv("R_HOME"),'R')),
+      command = normalizePath(file.path(Sys.getenv("R_HOME"),'bin','R')),
       c(
         "-e",
         sprintf("library(%s, lib = '%s');run_app()", pkg_name, .libPaths())
