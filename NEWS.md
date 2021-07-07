@@ -16,11 +16,17 @@
 
 + run_dev now has `options(shiny.port = httpuv::randomPort())` to prevent the browser from caching the CSS & JS files (#675)
 
++ You can now specify the path to R in `expect_running()`. 
+
 ## Bug fix
 
 + recommended tests now use `expect_type()` instead of `expect_is`, which was deprecated from `{testthat}` (#671)
 
-+ Fixed check warning when using `golem::use_utils_server()` (#678)
++ Fixed check warning when using `golem::use_utils_server()` (#678),
+
++ Fixed issue with expect_running & path to R (#700, @waiteb5)
+
++ `expect_running()` now find R.exe on windows. 
 
 ## Internal changes
 

@@ -66,9 +66,13 @@ expect_html_equal <- function(
 #' @export
 #' @rdname testhelpers
 #' @param sleep number of seconds
+#' @param R_path path to R. If NULL, the function will try to guess where R is.
 #' @importFrom testthat skip_on_cran expect_true
 #' @importFrom testthat skip_if_not
-expect_running <- function(sleep){
+expect_running <- function(
+  sleep, 
+  R_path = NULL
+){
   
   skip_on_cran()
   
@@ -145,10 +149,20 @@ expect_running <- function(sleep){
     go_for_pkgload <- FALSE
   }
   
+  if (is.null(R_path)){
+    if (tolower(.Platform$OS.type) == "windows"){
+      r_ <- normalizePath(file.path(Sys.getenv("R_HOME"),'bin', 'R.exe'))
+    } else {
+      r_ <- normalizePath(file.path(Sys.getenv("R_HOME"),'bin', 'R'))
+    }
+  } else {
+    r_ <- R_path
+  }
+
   if (go_for_pkgload){
     # Using pkgload because we can
     shinyproc <- processx::process$new(
-      command = normalizePath(file.path(Sys.getenv("R_HOME"),'bin','R')),
+      command = r_ ,
       c(
         "-e",
         "pkgload::load_all(here::here());run_app()"
@@ -158,7 +172,7 @@ expect_running <- function(sleep){
     # Using the temps libPaths because we can
     shinyproc <- processx::process$new(
       echo_cmd = TRUE,
-      command = normalizePath(file.path(Sys.getenv("R_HOME"),'bin','R')),
+      command = r_,
       c(
         "-e",
         sprintf("library(%s, lib = '%s');run_app()", pkg_name, .libPaths())
@@ -170,5 +184,5 @@ expect_running <- function(sleep){
   Sys.sleep(sleep)
   expect_true(shinyproc$is_alive())
   shinyproc$kill()
-
+  
 }
