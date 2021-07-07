@@ -98,7 +98,7 @@ in your Shiny app package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9001</span>
       </span>
     </div>
 
@@ -186,7 +186,7 @@ in your Shiny app package.</p>
 
 <span class='fu'>expect_html_equal</span><span class='op'>(</span><span class='va'>ui</span>, <span class='va'>html</span><span class='op'>)</span>
 
-<span class='fu'>expect_running</span><span class='op'>(</span><span class='va'>sleep</span><span class='op'>)</span></pre>
+<span class='fu'>expect_running</span><span class='op'>(</span><span class='va'>sleep</span>, R_path <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,6 +206,10 @@ in your Shiny app package.</p>
     <tr>
       <th>sleep</th>
       <td><p>number of seconds</p></td>
+    </tr>
+    <tr>
+      <th>R_path</th>
+      <td><p>path to R. If NULL, the function will try to guess where R is.</p></td>
     </tr>
     </table>
 

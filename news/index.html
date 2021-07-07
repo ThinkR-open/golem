@@ -96,7 +96,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9001</span>
       </span>
     </div>
 
@@ -196,12 +196,20 @@
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
-<li>Modules ID no longer contain an <code>_ui_</code> element, (<a href='https://github.com/ThinkR-open/golem/issues/651'>#651</a>, <a href='https://github.com/MargotBr'>@MargotBr</a>)</li>
+<li><p>Modules ID no longer contain an <code>_ui_</code> element, (<a href='https://github.com/ThinkR-open/golem/issues/651'>#651</a>, <a href='https://github.com/MargotBr'>@MargotBr</a>)</p></li>
+<li><p>run_dev now has <code><a href="https://rdrr.io/r/base/options.html">options(shiny.port = httpuv::randomPort())</a></code> to prevent the browser from caching the CSS &amp; JS files (<a href='https://github.com/ThinkR-open/golem/issues/675'>#675</a>)</p></li>
+<li><p>You can now specify the path to R in <code><a href="../reference/expect_shinytag.html">expect_running()</a></code>.</p></li>
 </ul>
 </div>
 <div id="bug-fix" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fix" class="anchor"></a>Bug fix</h2>
+<ul>
+<li><p>recommended tests now use <code>expect_type()</code> instead of <code>expect_is</code>, which was deprecated from <a href="https://testthat.r-lib.org">testthat</a> (<a href='https://github.com/ThinkR-open/golem/issues/671'>#671</a>)</p></li>
+<li><p>Fixed check warning when using <code><a href="../reference/use_utils_ui.html">golem::use_utils_server()</a></code> (<a href='https://github.com/ThinkR-open/golem/issues/678'>#678</a>),</p></li>
+<li><p>Fixed issue with expect_running &amp; path to R (<a href='https://github.com/ThinkR-open/golem/issues/700'>#700</a>, <a href='https://github.com/waiteb5'>@waiteb5</a>)</p></li>
+<li><p><code><a href="../reference/expect_shinytag.html">expect_running()</a></code> now find R.exe on windows.</p></li>
+</ul>
 </div>
 <div id="internal-changes" class="section level2">
 <h2 class="hasAnchor">
