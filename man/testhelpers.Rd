@@ -13,7 +13,7 @@ expect_shinytaglist(object)
 
 expect_html_equal(ui, html)
 
-expect_running(sleep)
+expect_running(sleep, R_path = NULL)
 }
 \arguments{
 \item{object}{the object to test}
@@ -23,6 +23,8 @@ expect_running(sleep)
 \item{html}{html file to compare to ui}
 
 \item{sleep}{number of seconds}
+
+\item{R_path}{path to R. If NULL, the function will try to guess where R is.}
 }
 \value{
 A testthat result.
