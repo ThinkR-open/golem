@@ -67,8 +67,7 @@ expect_html_equal <- function(
 #' @rdname testhelpers
 #' @param sleep number of seconds
 #' @param R_path path to R. If NULL, the function will try to guess where R is.
-#' @importFrom testthat skip_on_cran expect_true
-#' @importFrom testthat skip_if_not
+#' @importFrom testthat skip_on_cran expect_true skip_if_not skip_if_not_installed
 expect_running <- function(
   sleep, 
   R_path = NULL
@@ -78,6 +77,8 @@ expect_running <- function(
   
   # Ok for now we'll get back to this
   skip_if_not(interactive())
+  
+  skip_if_not_installed("processx")
   
   # Oh boy using testthat and processx is a mess
   # 

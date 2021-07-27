@@ -28,6 +28,8 @@
 
 + `expect_running()` now find R.exe on windows. 
 
++ `use_recommended_tests()` no longer add `{processx}` to the `DESCRIPTION` (#710)
+
 ## Internal changes
 
 # golem 0.3.1 (CRAN Version)

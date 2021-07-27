@@ -53,10 +53,8 @@ use_recommended_tests <- function (
   )){
     without_warning(use_testthat)()
   }
-  if (requireNamespace("processx")){
-    capture.output(use_package("processx")) 
-  } else {
-    stop("Please install the {processx} package to add these tests.")
+  if (!requireNamespace("processx")){
+    stop("Please install the {processx} package to add the recommended tests.")
   }
   
   stop_if(
