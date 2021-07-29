@@ -12,6 +12,8 @@
 
 ## New features
 
++ The run_dev function has autoreload parameter to mimic the operation of the options(shiny.autoreload = TRUE)..
+
 + Modules ID no longer contain an `_ui_` element, (#651, @MargotBr)
 
 + run_dev now has `options(shiny.port = httpuv::randomPort())` to prevent the browser from caching the CSS & JS files (#675)

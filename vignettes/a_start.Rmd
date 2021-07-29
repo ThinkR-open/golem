@@ -199,6 +199,11 @@ To run the app, launch :
 golem::run_dev()
 ```
 
+To active autoreload feature:
+
+```{r}
+golem::run_dev(autoreload = TRUE)
+```
 
 You're now set! You've successfully initiated the project and can go to dev/02_dev.R.
 

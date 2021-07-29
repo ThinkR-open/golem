@@ -47,8 +47,11 @@ pkgdown::build_site()
 # Dev
 attachment::att_to_description(
   extra.suggests = c("pkgdown", "rcmdcheck", "covr"), #, "DT"),
-  pkg_ignore = c("mypkg", "s", "pkgbuild", "processx", "rsconnect"))
+  pkg_ignore = c("mypkg", "s", "pkgbuild", "later" ,"digest" ,"processx", "rsconnect", 'i'))
 usethis::use_package("pkgbuild", type = "Suggests")
 usethis::use_package("processx", type = "Suggests")
+usethis::use_package("later", type = "Suggests")
+usethis::use_package("digest", type = "Suggests")
 usethis::use_package("rsconnect", type = "Suggests")
+usethis::use_package("R6", type = "Suggests")
 

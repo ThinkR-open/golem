@@ -4,16 +4,21 @@
 \alias{run_dev}
 \title{Run run_dev.R}
 \usage{
-run_dev(file, pkg = pkgload::pkg_name())
+run_dev(file, pkg = pkgload::pkg_name(), autoreload = FALSE)
 }
 \arguments{
-\item{file}{File path to \code{run_dev.R}. Defaults to \code{R/run_dev.R}.}
+\item{file}{File path to \code{run_dev.R}. Defaults to \code{dev/run_dev.R}.}
 
 \item{pkg}{Package name to run the file. Defaults to current active package.}
+
+\item{autoreload}{by default FALSE. If TRUE, it will reload app for changment.}
 }
 \value{
 Used for side-effect
 }
 \description{
 Run run_dev.R
+}
+\details{
+Allows to mimic the operation of options(shiny.autoreload = TRUE) if autoreload is TRUE. To stop the autoreload, you have to use golem::stop_autoreload() or restart the R session.
 }

@@ -23,7 +23,7 @@
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject
 #' @importFrom usethis use_latest_dependencies
-#' @importFrom fs path_abs path_file path dir_copy path_expand
+#' @importFrom fs path_abs path_file path dir_copy path_expand dir_exists
 #' @importFrom yaml write_yaml
 #' 
 #' @export
