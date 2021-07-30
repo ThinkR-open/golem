@@ -79,8 +79,10 @@ golemLaunch <- R6::R6Class(
     run_dev = new.env(),
     #' @field hash hash to now save time of files
     hash = character(0),
-    #' @field path_to_run_dev to the run_dev script
+    #' @field path_to_run_dev path to the run_dev script
     path_to_run_dev = character(0),
+    #' @field file file to run
+    file = character(0),
     #' @description
     #' Create new object to interact with the dev app 
     #' @param file path of the script to run
@@ -89,9 +91,9 @@ golemLaunch <- R6::R6Class(
     #' @return object to interact with dev app
     initialize = function(file = "dev/run_dev.R",
                           path = golem::get_golem_wd()) {
-      
       dev <- file.path(path, "dev")
       self$dir_of_app <- path
+      self$file <- file
       if (!dir.exists(dev)) {
         stop("You must be inside a package initialize with {golem}")
       }
@@ -101,7 +103,7 @@ golemLaunch <- R6::R6Class(
       if (file.exists(self$path_to_run_dev)) {
         self$auto_reload()
       } else {
-        stop("We don't find this run_dev")
+        stop("We don't find this file")
       }
     },
     #' @description
@@ -118,7 +120,7 @@ golemLaunch <- R6::R6Class(
         supervise = TRUE,
         "Rscript", c( 
           "-e",
-          "options(shiny.launch.browser=TRUE);golem::run_dev(autoreload = FALSE)"
+          glue::glue("options(shiny.launch.browser=TRUE);golem::run_dev(file = '{self$file}', autoreload = FALSE)")
         )
       )
     },
