@@ -63,6 +63,8 @@ This package is part of a series of tools for Shiny, which includes:
   - 🇫🇷 [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
   - rstudio::conf(2020) : [Production-grade Shiny Apps with
     golem](https://www.rstudio.com/resources/rstudioconf-2020/production-grade-shiny-apps-with-golem/)
+  - 🇫🇷 Rencontres R 2021 : [Conception d’applications Shiny avec
+    {golem}](https://www.youtube.com/watch?v=0f5Me1PFGDs)
 
 ### Cheatsheet
 
