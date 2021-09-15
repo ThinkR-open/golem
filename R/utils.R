@@ -244,7 +244,7 @@ after_creation_message_js <- function(
   ) {
     if ( 
       fs::path_abs(dir) != fs::path_abs("inst/app/www") & 
-      packageVersion("golem") < "0.2.0"
+      utils::packageVersion("golem") < "0.2.0"
     ){
       cat_red_bullet(
         sprintf(
@@ -266,7 +266,7 @@ after_creation_message_css <- function(
     desc_exist(pkg)
   ) {
     if (fs::path_abs(dir) != fs::path_abs("inst/app/www") & 
-        packageVersion("golem") < "0.2.0"
+        utils::packageVersion("golem") < "0.2.0"
     ){
       cat_red_bullet(
         sprintf(
@@ -353,3 +353,44 @@ yesno <- function (...)
   menu(c("Yes", "No")) == 1
 }
 
+# Checking that a package is installed
+check_is_installed <- function(
+  pak,
+  ...
+){
+  
+  if (
+    !requireNamespace(pak, ..., quietly = TRUE)
+  ){
+    stop(
+      sprintf(
+        "The {%s} package is required to run this function.\nYou can install it with `install.packages('%s')`.",
+        pak, 
+        pak
+      ), 
+      call. = FALSE
+    )
+  }
+  
+}
+
+required_version <- function(
+  pak,
+  version
+){
+  
+  if (
+    utils::packageVersion(pak) < version
+  ){
+    stop(
+      sprintf(
+        "This function require the version '%s' of the {%s} package.\nYou can update with `install.packages('%s')`.",
+        version,
+        pak, 
+        pak
+      ), 
+      call. = FALSE
+    )
+  }
+  
+}

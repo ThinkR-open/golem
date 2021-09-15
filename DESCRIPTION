@@ -49,11 +49,9 @@ Imports:
     config,
     crayon,
     desc,
-    dockerfiler,
     fs,
     here,
     htmltools,
-    jsonlite,
     pkgload,
     remotes,
     rlang,
@@ -67,6 +65,7 @@ Imports:
 Suggests:
     covr,
     devtools,
+    dockerfiler (>= 0.1.4),
     glue,
     knitr,
     pkgdown,
@@ -85,4 +84,4 @@ VignetteBuilder:
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

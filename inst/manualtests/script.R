@@ -7,7 +7,7 @@ remotes::install_local("/golem/golem.tar.gz")
 setwd("/tmp")
 
 library(golem)
-packageVersion("golem")
+utils::packageVersion("golem")
 
 library(testthat)
 

@@ -170,7 +170,7 @@ module_template <- function(
   write_there("}")
   write_there("    ")
   
-  if (packageVersion("shiny") < "1.5"){
+  if (utils::packageVersion("shiny") < "1.5"){
     
     write_there(sprintf("#' %s Server Function", name))
     write_there("#'")
