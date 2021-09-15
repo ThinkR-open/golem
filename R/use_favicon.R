@@ -62,7 +62,7 @@ use_favicon <- function(
       pattern = "favicon"
     )
     
-    download.file(
+    utils::download.file(
       path, 
       destfile, 
       method = method
