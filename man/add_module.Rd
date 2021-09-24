@@ -15,6 +15,7 @@ add_module(
   js_handler = NULL,
   export = FALSE,
   module_template = golem::module_template,
+  with_test = FALSE,
   ...
 )
 }
@@ -36,6 +37,8 @@ add_module(
 \item{export}{Should the module be exported? Default is \code{FALSE}.}
 
 \item{module_template}{Function that serves as a module template.}
+
+\item{with_test}{should the module be created with tests?}
 
 \item{...}{Arguments to be passed to the \code{module_template} function.}
 }

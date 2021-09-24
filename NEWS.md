@@ -14,6 +14,8 @@
 
 ## New features
 
++ `add_modules()` now comes with a `with_test` parameter that can be turned on to add a test file to the module (#719)
+
 + /!\ All docker related functions have been moved to `{dockerfiler}`. This is more or less a breaking change, cause you'll need to install `{dockerfiler}` > 0.1.4 in order to build the Dockerfile __but__ `{golem}` will ask you to install `{dockerfiler}` > 0.1.4 if it can't find it, (#412)
 
 + Modules ID no longer contain an `_ui_` element, (#651, @MargotBr)
