@@ -289,6 +289,17 @@ use_module_test <- function(name,
     # - Testing output
     # expect_true(inherits(output$tbl$html, \"html\"))")
     write_there("})")
+    write_there(" ")
+    write_there("test_that(\"module ui works\", {")
+    write_there(sprintf("  ui <- mod_%s_ui(id = \"test\")", name))
+    write_there("  golem::expect_shinytaglist(ui)")
+    write_there("  # Check that formals have not been removed")
+    write_there(sprintf("  fmls <- formals(mod_%s_ui)", name))
+    write_there("  for (i in c(\"id\")){")
+    write_there("    expect_true(i %in% names(fmls))")
+    write_there("  }")
+    write_there("})")
+    write_there(" ")
 
     cat_created(path)
   } else {
