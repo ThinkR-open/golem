@@ -13,6 +13,7 @@
 #' @param js,js_handler If specified, creates a module related JavaScript file.
 #' @param export Should the module be exported? Default is `FALSE`.
 #' @param module_template Function that serves as a module template.
+#' @param with_test should the module be created with tests?
 #' @param ... Arguments to be passed to the `module_template` function.
 #'
 #' @note This function will prefix the `name` argument with `mod_`.
@@ -35,6 +36,7 @@ add_module <- function(name,
                        js_handler = NULL,
                        export = FALSE,
                        module_template = golem::module_template,
+                       with_test = FALSE,
                        ...) {
   name <- file_path_sans_ext(name)
 
@@ -83,6 +85,14 @@ add_module <- function(name,
     file_already_there_dance(
       where = where,
       open_file = open
+    )
+  }
+
+  if (with_test) {
+    use_module_test(
+      name = name,
+      pkg = pkg,
+      open = open
     )
   }
 }
