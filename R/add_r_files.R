@@ -33,7 +33,11 @@ add_r_files <- function(
     
     if(file_exists(where) & is.null(module)) {
       # Must be a function or utility file being created
-      append_roxygen_comment(name = name, path = where, ext = ext)
+      append_roxygen_comment(
+        name = name, 
+        path = where, 
+        ext = ext
+        )
     }
     
     cat_created(where)
