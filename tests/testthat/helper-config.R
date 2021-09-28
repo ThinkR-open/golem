@@ -19,7 +19,10 @@ remove_files <- function(path, pattern = NULL){
 
 expect_exists <- function(fls) {
   
-  act <- quasi_label(rlang::enquo(fls), arg = "fls")
+  act <- list(
+    val = fls, 
+    lab = fls
+  )
   
   act$val <- file.exists(fls)
   expect(
