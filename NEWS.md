@@ -38,6 +38,8 @@
 
 ## Internal changes
 
+- `{testthat}` and `{rlang}` are no longer hard dependencies (#742)
+
 # golem 0.3.1 (CRAN Version)
 
 ## New functions
