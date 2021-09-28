@@ -22,7 +22,6 @@
 #' @export
 #' @rdname add_files
 #' @importFrom attempt stop_if
-#' @importFrom rlang is_missing
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #' @importFrom fs path_abs path file_create file_exists
@@ -43,7 +42,7 @@ add_js_file <- function(
   ...
 ){
   stop_if(
-    is_missing(name),
+    missing(name),
     msg = "Name is required"
   )
   
@@ -111,7 +110,7 @@ add_js_handler <- function(
   ...
 ){
   attempt::stop_if(
-    rlang::is_missing(name),
+    missing(name),
     msg = "Name is required"
   )
   
@@ -175,7 +174,7 @@ add_js_input_binding <- function(
   )
 ){
   attempt::stop_if(
-    rlang::is_missing(name),
+    missing(name),
     msg = "Name is required"
   )
   
@@ -316,7 +315,7 @@ add_js_output_binding <- function(
   dir_create = TRUE
 ){
   attempt::stop_if(
-    rlang::is_missing(name),
+    missing(name),
     msg = "Name is required"
   )
   
@@ -399,7 +398,7 @@ add_css_file <- function(
   ...
 ){
   attempt::stop_if(
-    rlang::is_missing(name),
+    missing(name),
     msg = "Name is required"
   )
   

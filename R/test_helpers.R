@@ -1,6 +1,6 @@
 #' Test helpers
-#' 
-#' These functions are designed to be used inside the tests 
+#'
+#' These functions are designed to be used inside the tests
 #' in your Shiny app package.
 #'
 #' @param object the object to test
@@ -8,16 +8,15 @@
 #' @return A testthat result.
 #' @export
 #' @rdname testhelpers
-#' 
-#' @importFrom testthat quasi_label expect
-#' @importFrom rlang enquo
 #'
 #' @examples
 #' expect_shinytag(shiny::tags$span("1"))
 expect_shinytag <- function(object) {
-  act <- quasi_label(enquo(object), arg = "object")
+  check_is_installed("testthat")
+  check_is_installed("rlang")
+  act <- testthat::quasi_label(rlang::enquo(object), arg = "object")
   act$class <- class(object)
-  expect(
+  testthat::expect(
     "shiny.tag" %in% act$class,
     sprintf("%s has class %s, not class 'shiny.tag'.", act$lab, paste(act$class, collapse = ", "))
   )
@@ -26,14 +25,14 @@ expect_shinytag <- function(object) {
 
 #' @export
 #' @rdname testhelpers
-#' @importFrom testthat quasi_label expect
-#' @importFrom rlang enquo
 #' @examples
 #' expect_shinytaglist(shiny::tagList(1))
 expect_shinytaglist <- function(object) {
-  act <- quasi_label(enquo(object), arg = "object")
+  check_is_installed("testthat")
+  check_is_installed("rlang")
+  act <- testthat::quasi_label(rlang::enquo(object), arg = "object")
   act$class <- class(object)
-  expect(
+  testthat::expect(
     "shiny.tag.list" %in% act$class,
     sprintf("%s has class '%s', not class 'shiny.tag.list'.", act$lab, paste(act$class, collapse = ", "))
   )
@@ -43,23 +42,21 @@ expect_shinytaglist <- function(object) {
 #' @export
 #' @rdname testhelpers
 #' @param ui output of an UI function
-#' @param html html file to compare to ui 
+#' @param html html file to compare to ui
 #' @importFrom htmltools save_html
 #' @importFrom attempt stop_if_not
-#' @importFrom testthat expect_equal quasi_label expect
-#' @importFrom rlang enquo
-expect_html_equal <- function(
-  ui, 
-  html
-){
+expect_html_equal <- function(ui,
+                              html) {
+  check_is_installed("testthat")
+  check_is_installed("rlang")
   stop_if_not(html, file.exists, "Unable to find html file")
   tmp <- tempfile(fileext = ".html")
   save_html(ui, tmp)
-  expect_equal(
+  testthat::expect_equal(
     readLines(tmp),
-    readLines(html), 
-    label = "ui",  
-    expected.label = "html document" 
+    readLines(html),
+    label = "ui",
+    expected.label = "html document"
   )
 }
 
@@ -67,47 +64,45 @@ expect_html_equal <- function(
 #' @rdname testhelpers
 #' @param sleep number of seconds
 #' @param R_path path to R. If NULL, the function will try to guess where R is.
-#' @importFrom testthat skip_on_cran expect_true skip_if_not skip_if_not_installed
-expect_running <- function(
-  sleep, 
-  R_path = NULL
-){
-  
-  skip_on_cran()
-  
+expect_running <- function(sleep,
+                           R_path = NULL) {
+  check_is_installed("testthat")
+  testthat::skip_if_not_installed("pkgload")
+  testthat::skip_if_not_installed("processx")
+  testthat::skip_on_cran()
+
   # Ok for now we'll get back to this
-  skip_if_not(interactive())
-  
-  skip_if_not_installed("processx")
-  
+  testthat::skip_if_not(interactive())
+
+
   # Oh boy using testthat and processx is a mess
-  # 
-  # We want to launch the app in a background process, 
+  #
+  # We want to launch the app in a background process,
   # but we don't have access to the same stuff depending on
   # where we call the tests
-  # 
-  # + We can launch with pkgload::load_all(), but __only__ if the 
+  #
+  # + We can launch with pkgload::load_all(), but __only__ if the
   #   current wd is the same as the golem wd
-  # + We can launch with library(lib = ) but __only__ if we are in the 
+  # + We can launch with library(lib = ) but __only__ if we are in the
   #   non interactive testthat environment, __where the current package
   #   has been installed in a temporary library__
-  # 
-  # There are six ways to call tests: 
-  # 
-  # - (1) Running the test interactively (i.e cmd A + cmd Enter): 
+  #
+  # There are six ways to call tests:
+  #
+  # - (1) Running the test interactively (i.e cmd A + cmd Enter):
   #   + We're in interactive mode
   #   + We're not in testthat so no Sys.getenv("TESTTHAT_PKG")
   #   + The libPath is the default one
-  #   + the wd is the golem path 
+  #   + the wd is the golem path
   #   + We can use pkgload::load_all()
-  #   
+  #
   # - (2) Running the test inside the console, with devtools::test()
   #   + We're in interactive mode
   #   + We're in testthat so there is a Sys.getenv("TESTTHAT_PKG" )
   #   + The libPath is the default one
-  #   + the wd is the golem path 
+  #   + the wd is the golem path
   #   + We can use pkgload::load_all()
-  #   
+  #
   # - (3) Running the test inside the console, with devtools::check()
   #   + We're not interactive mode
   #   + We're in testthat so there is a Sys.getenv("TESTTHAT_PKG" )
@@ -115,55 +110,55 @@ expect_running <- function(
   #   + The libPath is a temp one
   #   + We can't use pkgload
   #   + We can library()
-  #   
+  #
   # - (4) Clicking on the "Run Tests" button on test file File
   #   + We're not in interactive mode
   #   + We're not in testthat so there is a Sys.getenv("TESTTHAT_PKG" )
-  #   + the wd is the golem path 
+  #   + the wd is the golem path
   #   + We can use pkgload
-  #   
+  #
   # - (5) Clicking on the "Test" button in RStudio Build Pane
   #   + We're not in interactive mode
   #   + We're not in testthat so no Sys.getenv("TESTTHAT_PKG" )
-  #   + the wd is the golem path 
+  #   + the wd is the golem path
   #   + We can use pkgload
-  #   This one is actually the tricky one: we need to detect that we 
-  #   are in testthat but non interactively, and inside the golem wd. 
-  #   
+  #   This one is actually the tricky one: we need to detect that we
+  #   are in testthat but non interactively, and inside the golem wd.
+  #
   # - (6) Clicking on the "Check" button in RStudio Build Pane
   #   + We're not interactive mode
   #   + We're in testthat so there is a Sys.getenv("TESTTHAT_PKG" )
   #   + the wd is a temp dir
-  #   + The libPath is a temp one 
+  #   + The libPath is a temp one
   #   + We can't use pkgload
   #   + We can library()
-  #   
-  #   So two sum up, two times where we can do library(): is when 
+  #
+  #   So two sum up, two times where we can do library(): is when
   #   we're not in an child process launched
-  
-  if (Sys.getenv("CALLR_CHILD_R_LIBS_USER" ) == "") {
+
+  if (Sys.getenv("CALLR_CHILD_R_LIBS_USER") == "") {
     pkg_name <- pkgload::pkg_name()
     # We are not in RCMDCHECK
     go_for_pkgload <- TRUE
   } else {
-    pkg_name <- Sys.getenv("TESTTHAT_PKG" )
+    pkg_name <- Sys.getenv("TESTTHAT_PKG")
     go_for_pkgload <- FALSE
   }
-  
-  if (is.null(R_path)){
-    if (tolower(.Platform$OS.type) == "windows"){
-      r_ <- normalizePath(file.path(Sys.getenv("R_HOME"),'bin', 'R.exe'))
+
+  if (is.null(R_path)) {
+    if (tolower(.Platform$OS.type) == "windows") {
+      r_ <- normalizePath(file.path(Sys.getenv("R_HOME"), "bin", "R.exe"))
     } else {
-      r_ <- normalizePath(file.path(Sys.getenv("R_HOME"),'bin', 'R'))
+      r_ <- normalizePath(file.path(Sys.getenv("R_HOME"), "bin", "R"))
     }
   } else {
     r_ <- R_path
   }
 
-  if (go_for_pkgload){
+  if (go_for_pkgload) {
     # Using pkgload because we can
     shinyproc <- processx::process$new(
-      command = r_ ,
+      command = r_,
       c(
         "-e",
         "pkgload::load_all(here::here());run_app()"
@@ -177,13 +172,12 @@ expect_running <- function(
       c(
         "-e",
         sprintf("library(%s, lib = '%s');run_app()", pkg_name, .libPaths())
-      ), 
+      ),
       stdout = "|", stderr = "|"
     )
   }
-  
+
   Sys.sleep(sleep)
-  expect_true(shinyproc$is_alive())
+  testthat::expect_true(shinyproc$is_alive())
   shinyproc$kill()
-  
 }
