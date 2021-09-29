@@ -44,7 +44,6 @@ expect_shinytaglist <- function(object) {
 #' @param ui output of an UI function
 #' @param html deprecated
 #' @param ... arguments passed  to `testthat::expect_snapshot()`
-#' @importFrom htmltools save_html
 #' @importFrom attempt stop_if_not
 expect_html_equal <- function(ui,
                               html,

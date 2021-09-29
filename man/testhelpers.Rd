@@ -11,7 +11,7 @@ expect_shinytag(object)
 
 expect_shinytaglist(object)
 
-expect_html_equal(ui, html)
+expect_html_equal(ui, html, ...)
 
 expect_running(sleep, R_path = NULL)
 }
@@ -20,7 +20,9 @@ expect_running(sleep, R_path = NULL)
 
 \item{ui}{output of an UI function}
 
-\item{html}{html file to compare to ui}
+\item{html}{deprecated}
+
+\item{...}{arguments passed  to \code{testthat::expect_snapshot()}}
 
 \item{sleep}{number of seconds}
 

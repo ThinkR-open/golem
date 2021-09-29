@@ -41,8 +41,8 @@ An HTML tag.
 This function adds the favicon from \code{ico} to your shiny app.
 }
 \examples{
-if (interactive()){
+if (interactive()) {
   use_favicon()
-  use_favicon(path='path/to/your/favicon.ico')
+  use_favicon(path = "path/to/your/favicon.ico")
 }
 }
