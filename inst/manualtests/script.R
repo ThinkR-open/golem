@@ -1,5 +1,7 @@
 # This scripts tests that {golem} can actually build an app
 
+Sys.setenv("GITHUB_PAT", Sys.getenv("ACCESS_TOKEN"))
+
 install.packages("remotes")
 
 remotes::install_local("/golem/golem.tar.gz")
@@ -12,7 +14,7 @@ utils::packageVersion("golem")
 library(testthat)
 
 # Create the golem
-golem::create_golem( "gogolele", open = FALSE)
+golem::create_golem("gogolele", open = FALSE)
 setwd("/tmp/gogolele/")
 
 usethis::use_mit_license("Golem")
@@ -26,10 +28,10 @@ golem::use_recommended_deps()
 golem::use_utils_ui()
 golem::use_utils_server()
 
-golem::add_module( 
-  name = "my_first_module", 
-  ph_ui = "#ui_plop", 
-  ph_server = "#server_plop", 
+golem::add_module(
+  name = "my_first_module",
+  ph_ui = "#ui_plop",
+  ph_server = "#server_plop",
   open = FALSE
 )
 
@@ -39,9 +41,9 @@ mod1 <- append(
   c(
     "actionButton(ns('go'), 'go'),",
     "plotOutput(ns('plot'))"
-  ), 
+  ),
   grep(
-    "ui_plop", 
+    "ui_plop",
     mod1
   )
 )
@@ -54,9 +56,9 @@ mod1 <- append(
     "output$plot <- renderPlot({",
     "   graphics::plot(datasets::iris)",
     "})"
-  ), 
+  ),
   grep(
-    "server_plop", 
+    "server_plop",
     mod1
   )
 )
@@ -67,9 +69,9 @@ ui <- append(
   ui,
   c(
     ',mod_my_first_module_ui("my_first_module_1")'
-  ), 
+  ),
   grep(
-    "h1", 
+    "h1",
     ui
   )
 )
@@ -80,9 +82,9 @@ server <- append(
   server,
   c(
     'callModule(mod_my_first_module_server, "my_first_module_1")'
-  ), 
+  ),
   grep(
-    "first level callModules", 
+    "first level callModules",
     server
   )
 )
