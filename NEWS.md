@@ -8,11 +8,15 @@
 
 ### Hard deprecated
 
++ The `html` parameter in `expect_html_equal()` is no longer in use (#55).
+
 ## New functions
 
 + `use_module_test()` creates a test skeleton for a module (#725)
 
 ## New features
+
++ `expect_html_equal()` now uses `testthat::expect_snapshot()` (#55).
 
 + `add_modules()` now comes with a `with_test` parameter that can be turned on to add a test file to the module (#719)
 
