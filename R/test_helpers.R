@@ -42,21 +42,26 @@ expect_shinytaglist <- function(object) {
 #' @export
 #' @rdname testhelpers
 #' @param ui output of an UI function
-#' @param html html file to compare to ui
+#' @param html deprecated
+#' @param ... arguments passed  to `testthat::expect_snapshot()`
 #' @importFrom htmltools save_html
 #' @importFrom attempt stop_if_not
 expect_html_equal <- function(ui,
-                              html) {
+                              html,
+                              ...) {
   check_is_installed("testthat")
+  required_version("testthat", "3.0.0")
   check_is_installed("rlang")
-  stop_if_not(html, file.exists, "Unable to find html file")
-  tmp <- tempfile(fileext = ".html")
-  save_html(ui, tmp)
-  testthat::expect_equal(
-    readLines(tmp),
-    readLines(html),
-    label = "ui",
-    expected.label = "html document"
+
+  if (!missing(html)) {
+    message(
+      "`html` is no longer used inside `expect_html_equal()`"
+    )
+  }
+
+  testthat::expect_snapshot(
+    x = ui,
+    ...
   )
 }
 
