@@ -129,7 +129,7 @@ amend_golem_config <- function(
     is.null, 
     "Unable to retrieve golem config file."
   )
-  conf <- read_yaml(conf_path, eval.expr = TRUE)
+  conf <- read_yaml(conf_path, eval.expr = FALSE)
   conf[[config]][[key]] <- value
   write_yaml(
     conf, 
