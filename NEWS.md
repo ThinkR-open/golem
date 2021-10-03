@@ -15,6 +15,7 @@
 + `use_module_test()` creates a test skeleton for a module (#725)
 
 ## New features
++ `use_recommended_tests()` now comes with `testServer` (#720).
 
 + `expect_html_equal()` now uses `testthat::expect_snapshot()` (#55).
 
