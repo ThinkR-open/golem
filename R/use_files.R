@@ -75,6 +75,7 @@ use_external_js_file <- function(
     dir, 
     name,
     open, 
+    open_or_go_to = FALSE,
     catfun = cat_downloaded
   )
   
@@ -140,6 +141,7 @@ use_external_css_file <- function(
     dir, 
     name,
     open, 
+    open_or_go_to = FALSE,
     catfun = cat_downloaded
   )
   
@@ -197,7 +199,8 @@ use_external_html_template <- function(
     pkg, 
     dir, 
     name,
-    open
+    open,
+    open_or_go_to = FALSE
   )
   
 }
