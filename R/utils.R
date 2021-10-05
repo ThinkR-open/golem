@@ -312,7 +312,9 @@ file_created_dance <- function(
       open_or_go_to(
       where = where,
       open_file = open_file
-    )
+  ) else {
+      return(invisible(where))
+    }
   }
 }
 
