@@ -18,14 +18,6 @@ test_that("app server", {
   }
 })
 
-# Configure this test to fit your need
-test_that(
-  "app launches",{
-    golem::expect_running(sleep = 5)
-  }
-)
-
-
 # Configure this test to fit your need. 
 # testServer() function makes it possible to test code in server functions and modules, without needing to run the full Shiny application
 testServer(app_server, {
@@ -40,3 +32,10 @@ testServer(app_server, {
   # - Checking output
   # expect_equal(output$txt, "Text")
 })
+
+# Configure this test to fit your need
+test_that(
+  "app launches",{
+    golem::expect_running(sleep = 5)
+  }
+)
