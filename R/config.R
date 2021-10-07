@@ -104,6 +104,27 @@ change_app_config_name <- function(
   write(app_config, pth )
 }
 
+
+# find and tag expressions in a yaml
+# used internally in `amend_golem_config`
+
+find_and_tag_exprs <- function(conf_path) {
+  conf <- yaml::read_yaml(conf_path, eval.expr = FALSE)
+  conf.eval <- yaml::read_yaml(conf_path, eval.expr = TRUE)
+  
+  expr_list <- lapply(names(conf), function(x) {
+    conf[[x]][!conf[[x]] %in% conf.eval[[x]] ]
+  })
+  names(expr_list) <- names(conf)
+  expr_list <- Filter(function(x) length(x) > 0, expr_list)
+  add_expr_tag <- function(tag) {
+    attr(tag[[1]], "tag") = "!expr"
+    tag
+  }
+  tagged_exprs <- lapply(expr_list, add_expr_tag)
+  modifyList(conf, tagged_exprs)
+}
+
 #' Amend golem config file
 #'
 #' @param key key of the value to add in `config`
@@ -129,7 +150,7 @@ amend_golem_config <- function(
     is.null, 
     "Unable to retrieve golem config file."
   )
-  conf <- read_yaml(conf_path, eval.expr = TRUE)
+  conf <- find_and_tag_exprs(conf_path)
   conf[[config]][[key]] <- value
   write_yaml(
     conf, 
