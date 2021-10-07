@@ -15,6 +15,9 @@
 + `use_module_test()` creates a test skeleton for a module (#725)
 
 ## New features
+
++ `create_golem()` now comes with `with_git` parameter that can be used to initialize git repository while creating a project template
+
 + `use_recommended_tests()` now comes with `testServer` (#720).
 
 + `expect_html_equal()` now uses `testthat::expect_snapshot()` (#55).
