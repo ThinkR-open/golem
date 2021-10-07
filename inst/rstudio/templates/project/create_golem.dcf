@@ -20,3 +20,9 @@ Widget: CheckboxInput
 Label: Perform a Check on the name
 Default: On
 Position: left
+
+Parameter: with_git
+Widget: CheckboxInput
+Label: Create a git repository
+Default: Off
+Position: left
