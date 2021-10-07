@@ -11,6 +11,7 @@ create_golem(
   package_name = basename(path),
   without_comments = FALSE,
   project_hook = golem::project_hook,
+  with_git = FALSE,
   ...
 )
 }
@@ -33,6 +34,8 @@ not explicitly set, then \code{basename(getwd())} will be used.}
 creation. Can be used to change the default \code{{golem}} structure.
 to override the files and content. This function is executed just
 after the project is created.}
+
+\item{with_git}{Boolean. Initialize git repository}
 
 \item{...}{Arguments passed to the \code{project_hook()} function.}
 }
