@@ -54,11 +54,15 @@ create_golem <- function(
   }
   
   if (dir_exists(path)){
-    res <- yesno(
-      paste("The path", path, "already exists, override?")
-    )
-    if (!res){
-      return(invisible(NULL))
+    if (interactive()) {
+      res <- yesno(
+        paste("The path", path, "already exists, override?")
+      )
+      if (!res){
+        return(invisible(NULL))
+      }
+    } else {
+      stop(paste("The path", path, "already exists."))
     }
   }
   

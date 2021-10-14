@@ -36,24 +36,34 @@ create_if_needed <- function(
   # If it doesn't exist, ask if we are allowed 
   # to create it
   if (dont_exist){
-    ask <- yesno(
-      sprintf(
-        "The %s %s doesn't exist, create?", 
-        basename(path), 
-        type
+    if (interactive()) {
+      ask <- yesno(
+        sprintf(
+          "The %s %s doesn't exist, create?", 
+          basename(path), 
+          type
+        )
       )
-    )
-    # Return early if the user doesn't allow 
-    if (!ask) {
-      return(FALSE)
-    } else {
-      # Create the file 
-      if (type == "file"){
-        file_create(path)
-        write(content, path, append = TRUE)
-      } else if (type == "directory"){
-        dir_create(path, recurse = TRUE)
+      # Return early if the user doesn't allow 
+      if (!ask) {
+        return(FALSE)
+      } else {
+        # Create the file 
+        if (type == "file"){
+          file_create(path)
+          write(content, path, append = TRUE)
+        } else if (type == "directory"){
+          dir_create(path, recurse = TRUE)
+        }
       }
+    } else {
+      stop(
+        sprintf(
+          "The %s %s doesn't exist.", 
+          basename(path), 
+          type
+        )
+      )
     }
   } 
   
@@ -66,7 +76,11 @@ create_if_needed <- function(
 check_file_exist <- function(file){
   res <- TRUE
   if (file_exists(file)){
-    res <- yesno("This file already exists, override?")
+    if (interactive()) {
+      res <- yesno("This file already exists, override?")
+    } else {
+      res <- TRUE
+    }
   }
   return(res)
 }
@@ -76,7 +90,11 @@ check_file_exist <- function(file){
 check_dir_exist <- function(dir){
   res <- TRUE
   if (!dir_exists(dir)){ 
-    res <- yesno(sprintf("The %s does not exists, create?", dir))
+    if (interactive()) {
+      res <- yesno(sprintf("The %s does not exists, create?", dir))
+    } else {
+      res <- FALSE
+    }
   }
   return(res)
 }
