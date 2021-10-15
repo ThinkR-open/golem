@@ -107,7 +107,7 @@ change_app_config_name <- function(
 
 # find and tag expressions in a yaml
 # used internally in `amend_golem_config`
-
+#' @importFrom utils modifyList
 find_and_tag_exprs <- function(conf_path) {
   conf <- yaml::read_yaml(conf_path, eval.expr = FALSE)
   conf.eval <- yaml::read_yaml(conf_path, eval.expr = TRUE)
@@ -158,4 +158,3 @@ amend_golem_config <- function(
   )
   invisible(TRUE)
 }
-
