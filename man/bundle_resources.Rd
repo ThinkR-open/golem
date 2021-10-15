@@ -35,7 +35,7 @@ Details.}
 
 \item{package}{An R package name to indicate where to find the \code{src}
 directory when \code{src} is a relative path (see
-\code{\link[htmltools]{resolveDependencies}}).}
+\code{\link[htmltools:resolveDependencies]{resolveDependencies()}}).}
 
 \item{all_files}{Whether all files under the \code{src} directory are
 dependency files. If \code{FALSE}, only the files specified in
