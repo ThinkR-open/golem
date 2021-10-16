@@ -4,6 +4,7 @@
 \alias{js_handler_template}
 \alias{js_template}
 \alias{css_template}
+\alias{sass_template}
 \title{Golem's default custom templates}
 \usage{
 js_handler_template(path, name = "fun", code = " ")
@@ -11,6 +12,8 @@ js_handler_template(path, name = "fun", code = " ")
 js_template(path, code = " ")
 
 css_template(path, code = " ")
+
+sass_template(path, code = " ")
 }
 \arguments{
 \item{path}{The path to the JS script where this template will be written.}
