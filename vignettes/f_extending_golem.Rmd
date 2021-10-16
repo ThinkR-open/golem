@@ -152,12 +152,12 @@ golem::add_module(name = "custom", module_template = my_other_tmpl)
 ```
 
 
-## JS & CSS templates
+## JS & CSS & SASS templates
 
 ### What it is
 
-JavaScript and CSS template allow to use your own functions to add code when creating JavaScript files, JavaScript handlers and CSS files.
-These templates work inside `add_js_file()`, `add_js_handler()` and `add_css_file()`.
+JavaScript, CSS and Sass template allow to use your own functions to add code when creating JavaScript files, JavaScript handlers and CSS or Sass files.
+These templates work inside `add_js_file()`, `add_js_handler()`, `add_css_file()` and `add_sass_file()`.
 
 ### How it works 
 

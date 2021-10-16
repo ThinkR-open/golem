@@ -63,6 +63,12 @@ test_that("add_files", {
       fp = fp
     )
     expect_add_file(
+      add_sass_file,
+      ext = "sass",
+      pak = pkg,
+      fp = fp
+    )
+    expect_add_file(
       add_js_file, 
       ext = "js", 
       pak = pkg,
