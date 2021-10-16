@@ -448,6 +448,74 @@ add_css_file <- function(
 #' @export
 #' @rdname add_files
 #' @importFrom fs path_abs path file_create file_exists
+#' @importFrom cli cli_alert_info
+add_sass_file <- function(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE,
+  template = golem::sass_template,
+  ...
+) {
+  attempt::stop_if(
+    missing(name),
+    msg = "Name is required"
+  )
+
+  name <- file_path_sans_ext(name)
+
+  old <- setwd(path_abs(pkg))
+  on.exit(setwd(old))
+
+  dir_created <- create_if_needed(
+    dir,
+    type = "directory"
+  )
+
+  if (!dir_created) {
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+
+  dir_abs <- path_abs(dir)
+
+  where <- path(
+    dir_abs, sprintf(
+      "%s.sass",
+      name
+    )
+  )
+
+  if (!file_exists(where)) {
+    file_create(where)
+    template(path = where, ...)
+    file_created_dance(
+      where,
+      after_creation_message_sass,
+      pkg,
+      dir_abs,
+      name,
+      open
+    )
+    
+    add_sass_code(where = where, dir = dir, name = name)
+
+    cli_alert_info(
+      "After running the compilation, your CSS file will be automatically link in `golem_add_external_resources()`."
+    )
+
+  } else {
+    file_already_there_dance(
+      where = where,
+      open_file = open
+    )
+  }
+}
+
+#' @export
+#' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
 add_html_template <- function(
   name = "template.html", 
   pkg = get_golem_wd(), 

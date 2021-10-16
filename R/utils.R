@@ -280,6 +280,26 @@ after_creation_message_css <- function(
   }
 }
 
+after_creation_message_sass <- function(
+  pkg,
+  dir,
+  name
+) {
+  if (
+    desc_exist(pkg)
+  ) {
+    if (fs::path_abs(dir) != fs::path_abs("inst/app/www") &
+        utils::packageVersion("golem") < "0.2.0"
+    ) {
+      cat_red_bullet(
+        sprintf(
+          'After compile your Sass file, to link your css file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`'
+        )
+      )
+    }
+  }
+}
+
 after_creation_message_html_template <- function(
   pkg, 
   dir, 
@@ -398,5 +418,34 @@ required_version <- function(
       call. = FALSE
     )
   }
-  
+
+}
+
+#' @importFrom fs file_exists
+add_sass_code <- function(where, dir, name) {
+  if (file_exists(where)) {
+    if (file_exists("dev/run_dev.R")) {
+      lines <- readLines("dev/run_dev.R")
+      new_lines <- append(
+        x = lines,
+        values = c(
+          "# Sass code compilation",
+          sprintf(
+            'sass::sass(input = sass::sass_file("%s/%s.sass"), output = "%s/%s.css", cache = NULL)',
+            dir, name, dir, name
+          ),
+          ""
+        ),
+        after = 0
+      )
+      writeLines(
+        text = new_lines,
+        con = "dev/run_dev.R"
+      )
+
+      cat_green_tick(
+        "Code added in run_dev.R to compile your Sass file to CSS file."
+      )
+    }
+  }
 }
