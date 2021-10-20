@@ -1,5 +1,5 @@
 test_that("active_js", {
-  expect_is(activate_js(),'shiny.tag')
+  expect_s3_class(activate_js(), "shiny.tag")
 })
 
 
