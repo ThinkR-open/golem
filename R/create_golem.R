@@ -40,24 +40,24 @@ create_golem <- function(
   with_git = FALSE,
   ...
 ) {
- 
+  
   path <- path_expand(path)
   
   if (path == '.' & package_name == path_file(path)){
     package_name <- path_file(getwd())
   }
   
-  if (check_name){
+  if ( check_name ){
     cat_rule("Checking package name")
     getFromNamespace("check_package_name", "usethis")(package_name)
     cat_green_tick("Valid package name")
   }
   
-  if (dir_exists(path)){
+  if ( dir_exists(path) ) {
     res <- yesno(
       paste("The path", path, "already exists, override?")
     )
-    if (!res){
+    if ( !res ) {
       return(invisible(NULL))
     }
   }
@@ -69,47 +69,43 @@ create_golem <- function(
   )
   cat_green_tick("Created package directory")
   
-  
   if ( rstudioapi::isAvailable() ) { 
     cat_rule("Rstudio project initialisation")
     rproj_path <- rstudioapi::initializeProject(path = path)
-    
-    if (file.exists(rproj_path)){
-      
-    enable_roxygenize(path = rproj_path)
-      
-    }else{
+    if ( file.exists(rproj_path) ) {
+      enable_roxygenize(path = rproj_path)
+    } else {
       stop("can't create .Rproj file ")
-      
     }
-
   }
-  
-
   
   cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
-
+  
   # Copy over whole directory
   dir_copy(path = from, new_path = path, overwrite = TRUE)
   
   # Listing copied files ***from source directory***
-  copied_files <- list.files(path = from,
-                             full.names = FALSE,
-                             all.files = TRUE,
-                             recursive = TRUE)
-
+  copied_files <- list.files(
+    path = from,
+    full.names = FALSE,
+    all.files = TRUE,
+    recursive = TRUE
+  )
+  
   # Going through copied files to replace package name
-  for (f in copied_files) {
+  for ( f in copied_files ) {
     copied_file <- file.path(path, f)
-
-    if (grepl("^REMOVEME", f)) {
-      file.rename(from = copied_file,
-                  to = file.path(path, gsub("REMOVEME", "", f)))
+    
+    if ( grepl("^REMOVEME", f) ) {
+      file.rename(
+        from = copied_file,
+        to = file.path(path, gsub("REMOVEME", "", f))
+      )
       copied_file <- file.path(path, gsub("REMOVEME", "", f))
     }
     
-    if (!grepl("ico$", copied_file)) {
+    if ( !grepl("ico$", copied_file) ) {
       try({
         replace_word(
           file = copied_file,
@@ -118,7 +114,7 @@ create_golem <- function(
       }, silent = TRUE)
     }
   }
-
+  
   cat_green_tick("Copied app skeleton")
   
   cat_rule("Setting the default config")
@@ -139,7 +135,7 @@ create_golem <- function(
   # TODO fix
   # for some weird reason test() fails here when using golem::
   # and I don't have time to search why rn
-  if (substitute(project_hook) == "golem::project_hook"){
+  if ( substitute(project_hook) == "golem::project_hook" ){
     project_hook <- getFromNamespace("project_hook", "golem")
   }
   project_hook(path = path, package_name = package_name, ...)
@@ -159,19 +155,17 @@ create_golem <- function(
       remove_comments(file)
     }
   }
-
-  if(with_git) {
+  
+  if ( with_git ) {
     cat_rule("Initializing git repository")
-      
     git_output <- system("git init", ignore.stdout = TRUE, ignore.stderr = TRUE )
-
-    if(git_output) {
+    if ( git_output ) {
       cat_red_bullet("Error initializing git epository")
-    }else {
-       cat_green_tick("Initialized git repository")
+    } else {
+      cat_green_tick("Initialized git repository")
     }
   }
-
+  
   old <- setwd(path)
   use_latest_dependencies()
   
@@ -205,8 +199,6 @@ create_golem <- function(
       "To continue working on your app, start editing the 01_start.R file."
     )
   )
-  
-  
   
   if ( open & rstudioapi::isAvailable() ) { 
     rstudioapi::openProject(path = path)
