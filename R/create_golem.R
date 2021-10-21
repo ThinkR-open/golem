@@ -158,7 +158,11 @@ create_golem <- function(
   
   if ( with_git ) {
     cat_rule("Initializing git repository")
-    git_output <- system("git init", ignore.stdout = TRUE, ignore.stderr = TRUE )
+    git_output <- system(
+      command = paste("git init", path),
+      ignore.stdout = TRUE,
+      ignore.stderr = TRUE
+    )
     if ( git_output ) {
       cat_red_bullet("Error initializing git epository")
     } else {

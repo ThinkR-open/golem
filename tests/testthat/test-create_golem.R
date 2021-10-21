@@ -53,7 +53,6 @@ dir.create(dummy_dir)
 
 withr::with_dir(dummy_dir, {
   
-  print(dummy_dir)
   ## Default
   test_that("golem is created and properly populated", {
     dummy_golem_path <- file.path(dummy_dir, "koko")
@@ -71,7 +70,7 @@ withr::with_dir(dummy_dir, {
     
     expect_true(is_properly_populated_golem(dummy_golem_path))
     expect_true(is_with_comments(dummy_golem_path))
-    # expect_true(dir.exists(file.path(dummy_golem_path, ".git/")))
+    expect_true(dir.exists(file.path(dummy_golem_path, ".git/")))
   })
   
   ## without_comments
