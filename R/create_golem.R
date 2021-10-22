@@ -24,7 +24,7 @@
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject
 #' @importFrom usethis use_latest_dependencies
-#' @importFrom fs path_abs path_file path dir_copy path_expand
+#' @importFrom fs dir_copy dir_create
 #' @importFrom yaml write_yaml
 #' 
 #' @export
@@ -41,11 +41,7 @@ create_golem <- function(
   ...
 ) {
   
-  path <- path_expand(path)
-  
-  if (path == '.' & package_name == path_file(path)){
-    package_name <- path_file(getwd())
-  }
+  path <- normalizePath(path, mustWork = FALSE)
   
   if ( check_name ){
     cat_rule("Checking package name")
@@ -53,7 +49,7 @@ create_golem <- function(
     cat_green_tick("Valid package name")
   }
   
-  if ( dir_exists(path) ) {
+  if ( dir.exists(path) ) {
     res <- yesno(
       paste("The path", path, "already exists, override?")
     )
@@ -84,7 +80,7 @@ create_golem <- function(
   
   # Copy over whole directory
   dir_copy(path = from, new_path = path, overwrite = TRUE)
-  
+
   # Listing copied files ***from source directory***
   copied_files <- list.files(
     path = from,
@@ -111,14 +107,16 @@ create_golem <- function(
           file = copied_file,
           pattern = "shinyexample",
           replace = package_name)
-      }, silent = TRUE)
+      },
+      silent = TRUE)
     }
+
   }
   
   cat_green_tick("Copied app skeleton")
   
   cat_rule("Setting the default config")
-  yml_path <- path(path, "inst/golem-config.yml")
+  yml_path <- file.path(path, "inst/golem-config.yml")
   
   conf <- yaml::read_yaml(yml_path, eval.expr = TRUE)
   
@@ -146,8 +144,8 @@ create_golem <- function(
   if ( without_comments == TRUE ) {
     files <- list.files(
       path = c(
-        path(path, "dev"),
-        path(path, "R")
+        file.path(path, "dev"),
+        file.path(path, "R")
       ), 
       full.names = TRUE
     )
@@ -198,7 +196,7 @@ create_golem <- function(
       "A new golem named ", 
       package_name, 
       " was created at ", 
-      path_abs(path),
+      normalizePath(path),
       " .\n", 
       "To continue working on your app, start editing the 01_start.R file."
     )
@@ -210,7 +208,7 @@ create_golem <- function(
   
   return( 
     invisible(
-      path_abs(path)
+      normalizePath(path)
     ) 
   )
 }
