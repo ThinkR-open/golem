@@ -22,7 +22,7 @@
 #'
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
-#' @importFrom rstudioapi isAvailable openProject
+#' @importFrom rstudioapi isAvailable openProject hasFun
 #' @importFrom usethis use_latest_dependencies
 #' @importFrom fs path_abs path_file path dir_copy path_expand
 #' @importFrom yaml write_yaml
@@ -74,7 +74,7 @@ create_golem <- function(
   cat_green_tick("Created package directory")
   
   
-  if ( rstudioapi::isAvailable() ) { 
+  if (rstudioapi::isAvailable() & rstudioapi::hasFun("initializeProject")) { 
     cat_rule("Rstudio project initialisation")
     rproj_path <- rstudioapi::initializeProject(path = path)
     
@@ -212,7 +212,7 @@ create_golem <- function(
   
   
   
-  if ( open & rstudioapi::isAvailable() ) { 
+  if (open & rstudioapi::isAvailable() & rstudioapi::hasFun("openProject")) {
     rstudioapi::openProject(path = path)
   }
   

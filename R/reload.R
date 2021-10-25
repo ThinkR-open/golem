@@ -93,6 +93,7 @@ check_name_consistency <- function(
 #' @param ... Other arguments passed to `pkgload::load_all()`
 #' @importFrom roxygen2 roxygenise
 #' @importFrom pkgload load_all
+#' @importFrom rstudioapi isAvailable hasFun documentSaveAll
 #' @export
 #' 
 #' @return Used for side-effects
@@ -110,7 +111,7 @@ document_and_reload <- function(
   
   check_name_consistency(pkg)
   
-  if (rstudioapi::hasFun("documentSaveAll")) {
+  if (rstudioapi::isAvailable() & rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
   roxed <- try({
@@ -148,8 +149,8 @@ document_and_reload <- function(
   
 }
 
-dialog_if_has <- function(title, message, url = ""){
-  if (rstudioapi::hasFun("showDialog")) {
+dialog_if_has <- function(title, message, url = "") {
+  if (rstudioapi::isAvailable() & rstudioapi::hasFun("showDialog")) {
     rstudioapi::showDialog(title, message, url)
   }
 }
