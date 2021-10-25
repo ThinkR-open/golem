@@ -15,16 +15,26 @@ NULL
 
 #' @rdname addins
 #' @aliases addins
-insert_ns <- function () {
+insert_ns <- function() {
+
+  stop_if_not(
+    rstudioapi::hasFun("getSourceEditorContext"),
+    msg = "Your version of RStudio does not support `getSourceEditorContext`"
+  )
 
   curr_editor <- rstudioapi::getSourceEditorContext()
-  
+
   id <- curr_editor$id
   sel_rng <- curr_editor$selection[[1]]$range
   sel_text <- curr_editor$selection[[1]]$text
-  
+
   mod_text <- paste0("ns(", sel_text, ")")
-  
+
+  stop_if_not(
+    rstudioapi::hasFun("modifyRange"),
+    msg = "Your version of RStudio does not support `modifyRange`"
+  )
+
   rstudioapi::modifyRange(sel_rng, mod_text, id = id)
 }
 

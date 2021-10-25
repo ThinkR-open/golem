@@ -31,7 +31,7 @@
 #' 
 #' @importFrom usethis use_build_ignore
 #' @importFrom desc desc_get_deps
-#' @importFrom rstudioapi navigateToFile isAvailable
+#' @importFrom rstudioapi navigateToFile isAvailable hasFun
 #' @importFrom fs path path_file
 #' 
 #' @examples
@@ -104,7 +104,7 @@ add_dockerfile <- function(
   dock$write(output)
   
   if (open) {
-    if (rstudioapi::isAvailable()) {
+    if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
       rstudioapi::navigateToFile(output)
     } else {
       try(file.edit(output))
@@ -169,7 +169,7 @@ add_dockerfile_shinyproxy <- function(
   dock$write(output)
   
   if (open) {
-    if (rstudioapi::isAvailable()) {
+    if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
       rstudioapi::navigateToFile(output)
     } else {
       try(file.edit(output))
@@ -268,7 +268,7 @@ add_dockerfile_heroku <- function(
     sprintf("You can replace %s with another app name.", apps_h)
   )
   if (open) {
-    if (rstudioapi::isAvailable()) {
+    if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
       rstudioapi::navigateToFile(output)
     } else {
       try(file.edit(output))

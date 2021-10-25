@@ -137,7 +137,7 @@ create_golem <- function(
   
   old <- setwd(path)
   # TODO fix
-  # for some weird reason test() fails here when using golem::
+  # for some weird reason test() fails here when using golem::create_golem
   # and I don't have time to search why rn
   if ( substitute(project_hook) == "golem::project_hook" ){
     project_hook <- getFromNamespace("project_hook", "golem")
