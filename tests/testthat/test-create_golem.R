@@ -71,6 +71,24 @@ withr::with_dir(dummy_dir, {
     expect_true(is_properly_populated_golem(dummy_golem_rstudio_ui_path))
     expect_true(is_with_comments(dummy_golem_rstudio_ui_path))
     expect_false(dir.exists(file.path(dummy_golem_rstudio_ui_path, ".git/")))
+
+
+    ## overwrite
+    expect_error(
+      create_golem(dummy_golem_path, open = FALSE),
+      regexp = "^Project directory already exists\\."
+    )
+    expect_error(
+      create_golem(dummy_golem_rstudio_ui_path, open = FALSE),
+      regexp = "^Project directory already exists\\."
+    )
+
+    create_golem(dummy_golem_path, open = FALSE, overwrite = TRUE)
+    expect_true(is_properly_populated_golem(dummy_golem_path))
+
+    create_golem(dummy_golem_rstudio_ui_path, open = FALSE, overwrite = TRUE)
+    expect_true(is_properly_populated_golem(dummy_golem_rstudio_ui_path))
+
   })
   
   ## with git

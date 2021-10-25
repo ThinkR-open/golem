@@ -5,6 +5,7 @@
 #' @param check_name Should we check that the package name is 
 #'     correct according to CRAN requirements.
 #' @param open Boolean. Open the created project?
+#' @param overwrite Boolean. Should the already existing project be overwritten ?
 #' @param package_name Package name to use. By default, {golem} uses
 #'     `basename(path)`. If `path == '.'` & `package_name` is
 #'     not explicitly set, then `basename(getwd())` will be used.
@@ -23,8 +24,8 @@
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject
-#' @importFrom usethis use_latest_dependencies
-#' @importFrom fs dir_copy dir_create
+#' @importFrom usethis use_latest_dependencies create_project
+#' @importFrom fs dir_copy
 #' @importFrom yaml write_yaml
 #' 
 #' @export
@@ -34,6 +35,7 @@ create_golem <- function(
   path, 
   check_name = TRUE,
   open = TRUE,
+  overwrite = FALSE,
   package_name = basename(path),
   without_comments = FALSE,
   project_hook = golem::project_hook,
@@ -50,29 +52,28 @@ create_golem <- function(
   }
   
   if ( dir.exists(path) ) {
-    res <- yesno(
-      paste("The path", path, "already exists, override?")
-    )
-    if ( !res ) {
-      return(invisible(NULL))
-    }
-  }
-  
-  cat_rule("Creating dir")
-  dir_create(
-    path, 
-    recurse = TRUE
-  )
-  cat_green_tick("Created package directory")
-  
-  if ( rstudioapi::isAvailable() ) { 
-    cat_rule("Rstudio project initialisation")
-    rproj_path <- rstudioapi::initializeProject(path = path)
-    if ( file.exists(rproj_path) ) {
-      enable_roxygenize(path = rproj_path)
+
+    if ( !isTRUE(overwrite) ) {
+      stop(
+        paste(
+          "Project directory already exists. \n",
+          "Set `create_golem(overwrite = TRUE)` to overwrite anyway.\n",
+          "Becareful this will restore a brand new golem. \n",
+          "You might be at risk of loosing your work !"
+        ),
+        call. = FALSE
+      )
     } else {
-      stop("can't create .Rproj file ")
+      cat_red_bullet("Overwriting existing project.")
     }
+
+  } else {
+    cat_rule("Creating dir")
+    usethis::create_project(
+      path = path,
+      open = FALSE,
+    )
+    cat_green_tick("Created package directory")
   }
   
   cat_rule("Copying package skeleton")
