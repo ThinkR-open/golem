@@ -23,7 +23,7 @@
 #'
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
-#' @importFrom rstudioapi isAvailable openProject
+#' @importFrom rstudioapi isAvailable openProject hasFun
 #' @importFrom usethis use_latest_dependencies create_project
 #' @importFrom fs dir_copy
 #' @importFrom yaml write_yaml
