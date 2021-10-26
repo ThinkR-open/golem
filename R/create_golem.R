@@ -51,8 +51,9 @@ create_golem <- function(
     cat_green_tick("Valid package name")
   }
   
+  
   if ( dir.exists(path) ) {
-
+    
     if ( !isTRUE(overwrite) ) {
       stop(
         paste(
@@ -66,7 +67,7 @@ create_golem <- function(
     } else {
       cat_red_bullet("Overwriting existing project.")
     }
-
+    
   } else {
     cat_rule("Creating dir")
     usethis::create_project(
@@ -76,12 +77,13 @@ create_golem <- function(
     cat_green_tick("Created package directory")
   }
   
+  
   cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
   
   # Copy over whole directory
   dir_copy(path = from, new_path = path, overwrite = TRUE)
-
+  
   # Listing copied files ***from source directory***
   copied_files <- list.files(
     path = from,
@@ -111,16 +113,16 @@ create_golem <- function(
       },
       silent = TRUE)
     }
-
+    
   }
   
   cat_green_tick("Copied app skeleton")
   
+  
   cat_rule("Setting the default config")
+  
   yml_path <- file.path(path, "inst/golem-config.yml")
-  
   conf <- yaml::read_yaml(yml_path, eval.expr = TRUE)
-  
   yaml_golem_wd <- "here::here()"
   attr(yaml_golem_wd, "tag") <- "!expr"
   conf$dev$golem_wd <- yaml_golem_wd
@@ -129,8 +131,8 @@ create_golem <- function(
   write_yaml(conf, yml_path)
   
   cat_green_tick("Configured app")
-
-
+  
+  
   cat_rule("Running project hook function")
   
   old <- setwd(path)
@@ -196,8 +198,8 @@ create_golem <- function(
   
   setwd(old)
   
-  cat_rule("Done")
   
+  cat_rule("Done")
   cat_line(
     paste0(
       "A new golem named ", 
