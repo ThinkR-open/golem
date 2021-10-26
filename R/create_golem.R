@@ -209,15 +209,22 @@ create_golem <- function(
     )
   )
   
-  if ( isTRUE(open) & rstudioapi::isAvailable() ) { 
-    rstudioapi::openProject(path = path)
+  
+  if ( isTRUE(open) ) {
+    if( rstudioapi::isAvailable() & rstudioapi::hasFun("openProject") ) { 
+      rstudioapi::openProject(path = path)
+    } else {
+      setwd(path)
+    }
   }
+  
   
   return( 
     invisible(
       normalizePath(path)
     ) 
   )
+  
 }
 
 # to be used in RStudio "new project" GUI

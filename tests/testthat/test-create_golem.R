@@ -91,6 +91,16 @@ withr::with_dir(dummy_dir, {
 
   })
   
+  ## open 
+  test_that("open == TRUE sets wd to project directory in non-interactive mode", {
+    dummy_golem_path <- file.path(dummy_dir, "sesame")
+    expect_identical(getwd(), dummy_dir)
+    create_golem(dummy_golem_path, open = TRUE)
+    expect_identical(getwd(), dummy_golem_path)
+    # Set wd back to test dir
+    setwd(dummy_dir)
+  })
+  
   ## with git
   test_that("git is activated", {
     dummy_golem_path <- file.path(dummy_dir, "gigit")
