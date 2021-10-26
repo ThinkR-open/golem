@@ -129,7 +129,10 @@ create_golem <- function(
   write_yaml(conf, yml_path)
   
   cat_green_tick("Configured app")
+
+
   cat_rule("Running project hook function")
+  
   old <- setwd(path)
   # TODO fix
   # for some weird reason test() fails here when using golem::
@@ -142,7 +145,8 @@ create_golem <- function(
   
   cat_green_tick("All set")
   
-  if ( without_comments == TRUE ) {
+  
+  if ( isTRUE(without_comments) ) {
     files <- list.files(
       path = c(
         file.path(path, "dev"),
@@ -155,7 +159,8 @@ create_golem <- function(
     }
   }
   
-  if ( with_git ) {
+  
+  if ( isTRUE(with_git) ) {
     cat_rule("Initializing git repository")
     git_output <- system(
       command = paste("git init", path),
@@ -168,6 +173,7 @@ create_golem <- function(
       cat_green_tick("Initialized git repository")
     }
   }
+  
   
   old <- setwd(path)
   use_latest_dependencies()
@@ -203,7 +209,7 @@ create_golem <- function(
     )
   )
   
-  if ( open & rstudioapi::isAvailable() ) { 
+  if ( isTRUE(open) & rstudioapi::isAvailable() ) { 
     rstudioapi::openProject(path = path)
   }
   
