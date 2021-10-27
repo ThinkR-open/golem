@@ -21,9 +21,17 @@ add_r_files <- function(
     cat_dir_necessary()
     return(invisible(FALSE))
   }
+  
   if (!is.null(module)){
+    if (!is_existing_module(module)) {
+      stop(
+        "The mentionned 'module' does not yet exist.",
+        call. = FALSE
+      )
+    } 
     module <- paste0("mod_", module, "_")
   }
+  
   where <- path(
     "R", paste0(module, ext, "_", name, ".R")
   )

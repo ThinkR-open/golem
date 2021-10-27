@@ -467,3 +467,20 @@ add_sass_code <- function(where, dir, name) {
     }
   }
 }
+
+
+#' Check if a module already exists
+#' 
+#' Assumes it is called at the root of a golem project.
+#' 
+#' @param module A character string. The name of a potentially existing module
+#' @return Boolean. Does the module exist or not ?
+#' @noRd
+is_existing_module <- function(module) {
+  existing_module_files <- list.files("R/", pattern = "^mod_")
+  existing_module_names <- sub(
+    "^mod_([[:alnum:]_]+)\\.R$", "\\1", 
+    existing_module_files
+  )
+  module %in% existing_module_names
+}
