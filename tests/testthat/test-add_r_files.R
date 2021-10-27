@@ -18,6 +18,16 @@ test_that("add_fct and add_utils", {
     expect_true(file.exists(sprintf("R/mod_%s_fct_ui.R", rand)))    
     expect_true(file.exists(sprintf("R/mod_%s_utils_ui.R", rand)))    
     
+    # If module not yet created an error is thrown
+    expect_error(
+      add_fct("ui", module = "notyetcreated", pkg = pkg, open = FALSE),
+      regexp = "^The mentionned 'module' does not yet exist.$"
+    )
+    expect_error(
+      add_utils("ui", module = "notyetcreated", pkg = pkg, open = FALSE),
+      regexp = "^The mentionned 'module' does not yet exist.$"
+    )
+    
     remove_file(sprintf("R/mod_%s.R", rand))
     remove_file(sprintf("R/mod_%s_fct_ui.R", rand))
     remove_file(sprintf("R/mod_%s_utils_ui.R", rand))
