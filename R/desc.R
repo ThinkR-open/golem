@@ -10,7 +10,6 @@
 #' @param repo_url URL (if needed)
 #' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
 #'
-#' @importFrom desc description
 #' @importFrom cli cat_bullet
 #' @importFrom fs path path_abs
 #'
@@ -28,6 +27,9 @@ fill_desc <- function(
   repo_url = NULL,
   pkg = get_golem_wd()
 ) {
+
+  check_is_installed("desc")
+  required_version("desc", "1.4.0")
 
   path <- path_abs(pkg)
 

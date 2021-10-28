@@ -30,7 +30,6 @@
 #' @rdname dockerfiles
 #' 
 #' @importFrom usethis use_build_ignore
-#' @importFrom desc desc_get_deps
 #' @importFrom rstudioapi navigateToFile isAvailable
 #' @importFrom fs path path_file
 #' 
@@ -304,7 +303,6 @@ alert_build <- function(
 #' #' @inheritParams add_dockerfile
 #' #' @importFrom utils installed.packages packageVersion
 #' #' @importFrom remotes dev_package_deps
-#' #' @importFrom desc desc_get_deps desc_get
 #' #' @importFrom usethis use_build_ignore
 #' #' @noRd
 #' dock_from_desc <- function(
@@ -322,8 +320,8 @@ alert_build <- function(
 #'   build_golem_from_source = TRUE,
 #'   extra_sysreqs = NULL
 #' ){
-#'   
-#'   packages <- desc_get_deps(path)$package
+#'   #' # TODO : check if {desc} is installed if uncommented
+#'   packages <- desc::desc_get_deps(path)$package
 #'   packages <- packages[packages != "R"] # remove R
 #'   packages <- packages[ !packages %in% c(
 #'     "base", "boot", "class", "cluster", 
@@ -352,6 +350,7 @@ alert_build <- function(
 #'     system_requirement <- NULL
 #'   }
 #'   
+#' # TODO : check if {desc} is installed if uncommented
 #'   sr <- desc::desc_get(file = path,keys = "SystemRequirements" )
 #'   
 #'   if ( length(extra_sysreqs)>0 ){

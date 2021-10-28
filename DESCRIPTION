@@ -45,7 +45,6 @@ Imports:
     cli (>= 2.0.0),
     config,
     crayon,
-    desc,
     fs,
     here,
     htmltools,
@@ -75,7 +74,8 @@ Suggests:
     stringr,
     testthat,
     tools,
-    withr
+    withr,
+    desc (>= 1.4.0)
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

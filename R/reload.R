@@ -36,8 +36,12 @@ check_name_consistency <- function(
 ){
   
   old_dir <- setwd(pkg)
-  
+
+  check_is_installed("desc")
+  required_version("desc", "1.4.0")
+
   package_name <- desc::desc_get("Package")
+
   pth <- fs::path(
     pkg, 
     "R", 
