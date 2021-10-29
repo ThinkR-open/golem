@@ -231,7 +231,19 @@ module_template <- function(name,
 use_module_test <- function(name,
                             pkg = get_golem_wd(),
                             open = TRUE) {
-
+  
+  # Remove the extension if any
+  name <- file_path_sans_ext(name)
+  # Remove the "mod_" if any
+  name <- mod_remove(name)
+  
+  if (!is_existing_module(name)) {
+    stop(
+      "The mentionned 'module' does not yet exist.",
+      call. = FALSE
+    )
+  }
+  
   # We need both testthat, usethis & fs
   check_is_installed("testthat")
   check_is_installed("usethis")
@@ -239,12 +251,7 @@ use_module_test <- function(name,
 
   old <- setwd(fs::path_abs(pkg))
   on.exit(setwd(old))
-
-  # Remove the extension if any
-  name <- file_path_sans_ext(name)
-  # Remove the "mod_" if any
-  name <- mod_remove(name)
-
+  
   uses_testthat <- getFromNamespace(
     "uses_testthat",
     "usethis"
