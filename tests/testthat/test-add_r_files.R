@@ -28,6 +28,20 @@ test_that("add_fct and add_utils", {
       regexp = "^The mentionned 'module' does not yet exist.$"
     )
     
+    # Module file passed instead of name
+    mod_ploup_file <- "R/mod_ploup.R"
+    remove_file(mod_ploup_file)
+    add_module("ploup", pkg = pkg, open = FALSE)
+    add_fct("fct", module = basename(mod_ploup_file), pkg = pkg, open = FALSE)
+    add_utils("utils", module = basename(mod_ploup_file), pkg = pkg, open = FALSE)
+    expect_true(file.exists("R/mod_ploup_fct_fct.R"))
+    expect_true(file.exists("R/mod_ploup_utils_utils.R"))
+    
+    
+    remove_file(mod_ploup_file)
+    remove_file("R/mod_ploup_fct_fct.R")
+    remove_file("R/mod_ploup_utils_utils.R")
+    
     remove_file(sprintf("R/mod_%s.R", rand))
     remove_file(sprintf("R/mod_%s_fct_ui.R", rand))
     remove_file(sprintf("R/mod_%s_utils_ui.R", rand))
