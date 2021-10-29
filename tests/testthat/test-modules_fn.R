@@ -30,4 +30,8 @@ test_that("module_fn work", {
     mod_remove("a_mod_a"),
     "a_mod_a"
   )
+  expect_equal(
+    mod_remove("mod_mod1"),
+    "mod1"
+  )
 })
