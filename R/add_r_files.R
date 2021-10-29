@@ -23,6 +23,10 @@ add_r_files <- function(
   }
   
   if (!is.null(module)){
+    # Remove the extension if any
+    module <- file_path_sans_ext(module)
+    # Remove the "mod_" if any
+    module <- mod_remove(module)
     if (!is_existing_module(module)) {
       stop(
         "The mentionned 'module' does not yet exist.",
