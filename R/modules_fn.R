@@ -52,23 +52,7 @@ add_module <- function(name,
     cat_dir_necessary()
     return(invisible(FALSE))
   }
-
-  if (!is.null(fct)) {
-    add_fct(fct, module = name, open = open)
-  }
-
-  if (!is.null(utils)) {
-    add_utils(utils, module = name, open = open)
-  }
-
-  if (!is.null(js)) {
-    add_js_file(js, pkg = pkg, open = open)
-  }
-
-  if (!is.null(js_handler)) {
-    add_js_handler(js_handler, pkg = pkg, open = open)
-  }
-
+  
   where <- path(
     "R", paste0("mod_", name, ".R")
   )
@@ -87,7 +71,23 @@ add_module <- function(name,
       open_file = open
     )
   }
-
+  
+  if (!is.null(fct)) {
+    add_fct(fct, module = name, open = open)
+  }
+  
+  if (!is.null(utils)) {
+    add_utils(utils, module = name, open = open)
+  }
+  
+  if (!is.null(js)) {
+    add_js_file(js, pkg = pkg, open = open)
+  }
+  
+  if (!is.null(js_handler)) {
+    add_js_handler(js_handler, pkg = pkg, open = open)
+  }
+  
   if (with_test) {
     use_module_test(
       name = name,
