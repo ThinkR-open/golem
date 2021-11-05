@@ -15,6 +15,9 @@
 + `use_module_test()` creates a test skeleton for a module (#725)
 
 ## New features
+
++ `use_external_*` functions no longer suggest to "Go to" (#713, @novica)
+
 + `use_recommended_tests()` now comes with `testServer` (#720).
 
 + `expect_html_equal()` now uses `testthat::expect_snapshot()` (#55).
@@ -30,6 +33,8 @@
 + You can now specify the path to R in `expect_running()`. 
 
 ## Bug fix
+
++ `golem::amend_config()` now keeps the `!expr`  (#709, @teofiln)
 
 + recommended tests now use `expect_type()` instead of `expect_is`, which was deprecated from `{testthat}` (#671)
 
