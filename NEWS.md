@@ -16,6 +16,8 @@
 
 ## New features
 
++ `use_external_*` functions no longer suggest to "Go to" (#713, @novica)
++ 
 + `create_golem()` now comes with `with_git` parameter that can be used to initialize git repository while creating a project template
 
 + `use_recommended_tests()` now comes with `testServer` (#720).
@@ -33,6 +35,8 @@
 + You can now specify the path to R in `expect_running()`. 
 
 ## Bug fix
+
++ `golem::amend_config()` now keeps the `!expr`  (#709, @teofiln)
 
 + recommended tests now use `expect_type()` instead of `expect_is`, which was deprecated from `{testthat}` (#671)
 

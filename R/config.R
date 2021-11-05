@@ -47,37 +47,47 @@ get_current_config <- function(
   }
   
   if (!file_exists(path_conf)){
-    ask <- yesno(
-      sprintf(
-        "The %s file doesn't exist, create?", 
-        basename(path_conf)
+    if (interactive()) {
+      ask <- yesno(
+        sprintf(
+          "The %s file doesn't exist, create?", 
+          basename(path_conf)
+        )
       )
-    )
-    # Return early if the user doesn't allow 
-    if (!ask) return(NULL)
-    
-    file_copy(
-      path = golem_sys("shinyexample/inst/golem-config.yml"), 
-      new_path = path(
-        path, "inst/golem-config.yml"
+      # Return early if the user doesn't allow 
+      if (!ask) return(NULL)
+      
+      file_copy(
+        path = golem_sys("shinyexample/inst/golem-config.yml"), 
+        new_path = path(
+          path, "inst/golem-config.yml"
+        )
       )
-    )
-    file_copy(
-      path = golem_sys("shinyexample/R/app_config.R"), 
-      new_path = file.path(
-        path, "R/app_config.R"
+      file_copy(
+        path = golem_sys("shinyexample/R/app_config.R"), 
+        new_path = file.path(
+          path, "R/app_config.R"
+        )
       )
-    )
-    replace_word(
-      path(
-        path, "R/app_config.R"
-      ), 
-      "shinyexample", 
-      pkg_name()
-    )
-    if (set_options){
-      set_golem_options()
+      replace_word(
+        path(
+          path, "R/app_config.R"
+        ), 
+        "shinyexample", 
+        pkg_name()
+      )
+      if (set_options){
+        set_golem_options()
+      }
+    } else {
+      stop(
+        sprintf(
+          "The %s file doesn't exist.", 
+          basename(path_conf)
+        )
+      )
     }
+
   }
   
   return(

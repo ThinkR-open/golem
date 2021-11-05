@@ -53,22 +53,6 @@ add_module <- function(name,
     return(invisible(FALSE))
   }
 
-  if (!is.null(fct)) {
-    add_fct(fct, module = name, open = open)
-  }
-
-  if (!is.null(utils)) {
-    add_utils(utils, module = name, open = open)
-  }
-
-  if (!is.null(js)) {
-    add_js_file(js, pkg = pkg, open = open)
-  }
-
-  if (!is.null(js_handler)) {
-    add_js_handler(js_handler, pkg = pkg, open = open)
-  }
-
   where <- path(
     "R", paste0("mod_", name, ".R")
   )
@@ -86,6 +70,22 @@ add_module <- function(name,
       where = where,
       open_file = open
     )
+  }
+
+  if (!is.null(fct)) {
+    add_fct(fct, module = name, open = open)
+  }
+
+  if (!is.null(utils)) {
+    add_utils(utils, module = name, open = open)
+  }
+
+  if (!is.null(js)) {
+    add_js_file(js, pkg = pkg, open = open)
+  }
+
+  if (!is.null(js_handler)) {
+    add_js_handler(js_handler, pkg = pkg, open = open)
   }
 
   if (with_test) {
@@ -232,6 +232,22 @@ use_module_test <- function(name,
                             pkg = get_golem_wd(),
                             open = TRUE) {
 
+  # Remove the extension if any
+  name <- file_path_sans_ext(name)
+  # Remove the "mod_" if any
+  name <- mod_remove(name)
+
+  if (!is_existing_module(name)) {
+    stop(
+      sprintf(
+        "The module '%s' does not exist.\nYou can call `golem::add_module('%s')` to create it.",
+        name,
+        name
+      ),
+      call. = FALSE
+    )
+  }
+
   # We need both testthat, usethis & fs
   check_is_installed("testthat")
   check_is_installed("usethis")
@@ -239,11 +255,6 @@ use_module_test <- function(name,
 
   old <- setwd(fs::path_abs(pkg))
   on.exit(setwd(old))
-
-  # Remove the extension if any
-  name <- file_path_sans_ext(name)
-  # Remove the "mod_" if any
-  name <- mod_remove(name)
 
   uses_testthat <- getFromNamespace(
     "uses_testthat",
