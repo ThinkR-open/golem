@@ -468,7 +468,6 @@ add_sass_code <- function(where, dir, name) {
   }
 }
 
-
 #' Check if a module already exists
 #' 
 #' Assumes it is called at the root of a golem project.
