@@ -30,6 +30,14 @@ Authors@R:
              family = "Granjon",
              role = "ctb",
              email = "dgranjon@ymail.com"),
+      person(given = "Arthur",
+             family = "Bréant",
+             role = "ctb",
+             email = "arthur@thinkr.fr"),
+      person(given = "Antoine",
+             family = "Languillaume",
+             role = "ctb",
+             email = "antoine@thinkr.fr"),                    
       person(given = "ThinkR",
              role = "cph"))
 Description: An opinionated framework for building a production-ready
