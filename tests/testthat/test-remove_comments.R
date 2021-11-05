@@ -1,40 +1,53 @@
 test_that("Tests remove_comments on comments", {
-    comments <- c(
-        "# This is a first line comment",
-        "#And a second line comment",
-        "## Maybe a more complicated comment"
-    )
-
-    temp_wih_comments <- tempfile(fileext = ".R")
-    write(
-        x = comments,
-        file = temp_wih_comments,
-        append = TRUE
-    )
-    remove_comments(temp_wih_comments)
-    expect_true(file.exists(temp_wih_comments))
-    expect_true(file.size(temp_wih_comments) == 0)
-    expect_equal(readLines(temp_wih_comments), character(0))
+    with_dir(pkg, {
+        comments <- c(
+            "# This is a first line comment",
+            "#And a second line comment",
+            "## Maybe a more complicated comment"
+        )
+        burn_after_reading(
+            file = "with_comments.R",
+            exp = {
+                write(
+                    x = comments,
+                    file = "with_comments.R",
+                    append = TRUE
+                )
+                remove_comments("with_comments.R")
+                expect_true(file.exists("with_comments.R"))
+                expect_true(file.size("with_comments.R") == 0)
+                expect_equal(readLines("with_comments.R"), character(0))
+            }
+        )
+    })
 })
 
 test_that("Tests remove_comments on roxygen comments", {
-    roxygen_comments <- c(
-        "#' A title",
-        "#'",
-        "#' @param",
-        "#' @return",
-        "#' @examples",
-        "#'"
-    )
-
-    temp_wih_roxygen_comments <- tempfile(fileext = ".R")
-    write(
-        x = roxygen_comments,
-        file = temp_wih_roxygen_comments,
-        append = TRUE
-    )
-    remove_comments(temp_wih_roxygen_comments)
-    expect_true(file.exists(temp_wih_roxygen_comments))
-    expect_true(file.size(temp_wih_roxygen_comments) > 0)
-    expect_equal(readLines(temp_wih_roxygen_comments), roxygen_comments)
+    with_dir(pkg, {
+        roxygen_comments <- c(
+            "#' A title",
+            "#'",
+            "#' @param",
+            "#' @return",
+            "#' @examples",
+            "#'"
+        )
+        burn_after_reading(
+            file = "with_roxygen_comments.R",
+            exp = {
+                write(
+                    x = roxygen_comments,
+                    file = "with_roxygen_comments.R",
+                    append = TRUE
+                )
+                remove_comments("with_roxygen_comments.R")
+                expect_true(file.exists("with_roxygen_comments.R"))
+                expect_true(file.size("with_roxygen_comments.R") > 0)
+                expect_equal(
+                    readLines("with_roxygen_comments.R"),
+                    roxygen_comments
+                )
+            }
+        )
+    })
 })
