@@ -12,12 +12,18 @@
 
 ## New functions
 
++ `add_sass_file()` creates a .sass file in inst/app/www (#768)
+
 + `use_module_test()` creates a test skeleton for a module (#725)
 
 ## New features
 
++ `{golem}` now checks if a module exists before adding a module related file (#779)
+
++ Every `{rstudioapi}` calls is now conditionned by the availabily of this function (#776)
+
 + `use_external_*` functions no longer suggest to "Go to" (#713, @novica)
-+ 
+ 
 + `create_golem()` now comes with `with_git` parameter that can be used to initialize git repository while creating a project template
 
 + `use_recommended_tests()` now comes with `testServer` (#720).
@@ -50,7 +56,9 @@
 
 ## Internal changes
 
-- `{testthat}` and `{rlang}` are no longer hard dependencies (#742)
++ Create `{golem}` is more robust and now comes with an `overwrite` argument (#777)
+
++ `{testthat}` and `{rlang}` are no longer hard dependencies (#742)
 
 # golem 0.3.1 (CRAN Version)
 
