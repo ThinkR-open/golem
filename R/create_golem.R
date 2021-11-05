@@ -59,8 +59,8 @@ create_golem <- function(
         paste(
           "Project directory already exists. \n",
           "Set `create_golem(overwrite = TRUE)` to overwrite anyway.\n",
-          "Becareful this will restore a brand new golem. \n",
-          "You might be at risk of loosing your work !"
+          "Be careful this will restore a brand new golem. \n",
+          "You might be at risk of losing your work !"
         ),
         call. = FALSE
       )
