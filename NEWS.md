@@ -17,6 +17,8 @@
 ## New features
 
 + `use_external_*` functions no longer suggest to "Go to" (#713, @novica)
++ 
++ `create_golem()` now comes with `with_git` parameter that can be used to initialize git repository while creating a project template
 
 + `use_recommended_tests()` now comes with `testServer` (#720).
 

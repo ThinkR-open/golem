@@ -47,37 +47,47 @@ get_current_config <- function(
   }
   
   if (!file_exists(path_conf)){
-    ask <- yesno(
-      sprintf(
-        "The %s file doesn't exist, create?", 
-        basename(path_conf)
+    if (interactive()) {
+      ask <- yesno(
+        sprintf(
+          "The %s file doesn't exist, create?", 
+          basename(path_conf)
+        )
       )
-    )
-    # Return early if the user doesn't allow 
-    if (!ask) return(NULL)
-    
-    file_copy(
-      path = golem_sys("shinyexample/inst/golem-config.yml"), 
-      new_path = path(
-        path, "inst/golem-config.yml"
+      # Return early if the user doesn't allow 
+      if (!ask) return(NULL)
+      
+      file_copy(
+        path = golem_sys("shinyexample/inst/golem-config.yml"), 
+        new_path = path(
+          path, "inst/golem-config.yml"
+        )
       )
-    )
-    file_copy(
-      path = golem_sys("shinyexample/R/app_config.R"), 
-      new_path = file.path(
-        path, "R/app_config.R"
+      file_copy(
+        path = golem_sys("shinyexample/R/app_config.R"), 
+        new_path = file.path(
+          path, "R/app_config.R"
+        )
       )
-    )
-    replace_word(
-      path(
-        path, "R/app_config.R"
-      ), 
-      "shinyexample", 
-      pkg_name()
-    )
-    if (set_options){
-      set_golem_options()
+      replace_word(
+        path(
+          path, "R/app_config.R"
+        ), 
+        "shinyexample", 
+        pkg_name()
+      )
+      if (set_options){
+        set_golem_options()
+      }
+    } else {
+      stop(
+        sprintf(
+          "The %s file doesn't exist.", 
+          basename(path_conf)
+        )
+      )
     }
+
   }
   
   return(
@@ -102,6 +112,27 @@ change_app_config_name <- function(
     name
   )
   write(app_config, pth )
+}
+
+
+# find and tag expressions in a yaml
+# used internally in `amend_golem_config`
+#' @importFrom utils modifyList
+find_and_tag_exprs <- function(conf_path) {
+  conf <- yaml::read_yaml(conf_path, eval.expr = FALSE)
+  conf.eval <- yaml::read_yaml(conf_path, eval.expr = TRUE)
+  
+  expr_list <- lapply(names(conf), function(x) {
+    conf[[x]][!conf[[x]] %in% conf.eval[[x]] ]
+  })
+  names(expr_list) <- names(conf)
+  expr_list <- Filter(function(x) length(x) > 0, expr_list)
+  add_expr_tag <- function(tag) {
+    attr(tag[[1]], "tag") = "!expr"
+    tag
+  }
+  tagged_exprs <- lapply(expr_list, add_expr_tag)
+  modifyList(conf, tagged_exprs)
 }
 
 #' Amend golem config file
@@ -129,7 +160,7 @@ amend_golem_config <- function(
     is.null, 
     "Unable to retrieve golem config file."
   )
-  conf <- read_yaml(conf_path, eval.expr = TRUE)
+  conf <- find_and_tag_exprs(conf_path)
   conf[[config]][[key]] <- value
   write_yaml(
     conf, 
@@ -137,4 +168,3 @@ amend_golem_config <- function(
   )
   invisible(TRUE)
 }
-

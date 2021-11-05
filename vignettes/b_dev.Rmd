@@ -88,12 +88,13 @@ These two function create `R/fct_helpers.R` and `R/utils_helpers.R`, two file yo
 
 ### Add external files
 
-These functions create external dependencies (JavaScript and CSS). `add_js_file()` creates a simple JavaScript file, while `add_js_handler()` adds a file with a skeleton for shiny custom handlers.
+These functions create external dependencies (JavaScript, CSS and Sass). `add_js_file()` creates a simple JavaScript file, while `add_js_handler()` adds a file with a skeleton for shiny custom handlers.
 
 ```{r}
 golem::add_js_file("script")
 golem::add_js_handler("script")
 golem::add_css_file("custom")
+golem::add_sass_file("custom")
 ```
 
 Note: While the general philosophy of `{golem}` is being based on the idea that you're building a package, these functions can be used outside of a `{golem}` project. 

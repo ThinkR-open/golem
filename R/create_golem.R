@@ -13,6 +13,7 @@
 #'     creation. Can be used to change the default `{golem}` structure.
 #'     to override the files and content. This function is executed just 
 #'     after the project is created.
+#' @param with_git Boolean. Initialize git repository
 #' @param ... Arguments passed to the `project_hook()` function.  
 #' 
 #' @note 
@@ -36,6 +37,7 @@ create_golem <- function(
   package_name = basename(path),
   without_comments = FALSE,
   project_hook = golem::project_hook,
+  with_git = FALSE,
   ...
 ) {
  
@@ -52,11 +54,15 @@ create_golem <- function(
   }
   
   if (dir_exists(path)){
-    res <- yesno(
-      paste("The path", path, "already exists, override?")
-    )
-    if (!res){
-      return(invisible(NULL))
+    if (interactive()) {
+      res <- yesno(
+        paste("The path", path, "already exists, override?")
+      )
+      if (!res){
+        return(invisible(NULL))
+      }
+    } else {
+      stop(paste("The path", path, "already exists."))
     }
   }
   
@@ -157,7 +163,19 @@ create_golem <- function(
       remove_comments(file)
     }
   }
-  
+
+  if(with_git) {
+    cat_rule("Initializing git repository")
+      
+    git_output <- system("git init", ignore.stdout = TRUE, ignore.stderr = TRUE )
+
+    if(git_output) {
+      cat_red_bullet("Error initializing git epository")
+    }else {
+       cat_green_tick("Initialized git repository")
+    }
+  }
+
   old <- setwd(path)
   use_latest_dependencies()
   
@@ -223,7 +241,8 @@ create_golem_gui <- function(path,...){
     open = FALSE,
     without_comments = dots$without_comments,
     project_hook = project_hook, 
-    check_name = dots$check_name
+    check_name = dots$check_name,
+    with_git = dots$with_git
   )
 }
 
