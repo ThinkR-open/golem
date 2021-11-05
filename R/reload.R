@@ -1,6 +1,6 @@
 #' Detach all attached package
 #' 
-#' @importFrom attempt attempt
+#' @importFrom attempt attempt stop_if_not
 #' @importFrom utils sessionInfo
 #'
 #' @export
@@ -37,10 +37,12 @@ check_name_consistency <- function(
   
   old_dir <- setwd(pkg)
 
-  check_is_installed("desc")
-  required_version("desc", "1.4.0")
+  stop_if_not(
+    .x = desc_exist(pkg),
+    msg = "Can't find your DESCRIPTION file. Are you in a {golem} package ?"
+  )
 
-  package_name <- desc::desc_get("Package")
+  package_name <- as.data.frame(read.dcf("DESCRIPTION"))$Package
 
   pth <- fs::path(
     pkg, 

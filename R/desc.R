@@ -29,7 +29,6 @@ fill_desc <- function(
 ) {
 
   check_is_installed("desc")
-  required_version("desc", "1.4.0")
 
   path <- path_abs(pkg)
 
