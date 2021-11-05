@@ -8,7 +8,7 @@
 #' @rdname sanity_check
 #' @export
 #' 
-#' @importFrom rstudioapi sourceMarkers
+#' @importFrom rstudioapi sourceMarkers hasFun isAvailable
 #' 
 #' @return A DataFrame if any of the words has been found.
 sanity_check<- function(
@@ -42,12 +42,12 @@ sanity_check<- function(
     }
   }
   
-  if(length(source_markers) > 0){
-    if (rstudioapi::hasFun("sourceMarkers")){
+  if (length(source_markers) > 0) {
+    if (rstudioapi::isAvailable() & rstudioapi::hasFun("sourceMarkers")) {
       rstudioapi::sourceMarkers("sanity_check", markers = source_markers)
-    } 
+    }
     return(source_markers)
-  } else{
+  } else {
     cat_green_tick("Sanity check passed successfully.")
   }
 }
