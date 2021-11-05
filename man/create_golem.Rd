@@ -8,6 +8,7 @@ create_golem(
   path,
   check_name = TRUE,
   open = TRUE,
+  overwrite = FALSE,
   package_name = basename(path),
   without_comments = FALSE,
   project_hook = golem::project_hook,
@@ -23,6 +24,8 @@ This will also be used as the package name.}
 correct according to CRAN requirements.}
 
 \item{open}{Boolean. Open the created project?}
+
+\item{overwrite}{Boolean. Should the already existing project be overwritten ?}
 
 \item{package_name}{Package name to use. By default, {golem} uses
 \code{basename(path)}. If \code{path == '.'} & \code{package_name} is
