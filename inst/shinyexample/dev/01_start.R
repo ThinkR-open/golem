@@ -46,9 +46,6 @@ usethis::use_git()
 ## Create a template for tests
 golem::use_recommended_tests()
 
-## Use Recommended Packages ----
-golem::use_recommended_deps()
-
 ## Favicon ----
 # If you want to change the favicon (default is golem's one)
 golem::use_favicon() # path = "path/to/ico". Can be an online file. 
