@@ -70,7 +70,6 @@ Suggests:
     covr,
     devtools,
     dockerfiler (>= 0.1.4),
-    glue,
     knitr,
     pkgbuild,
     pkgdown,
