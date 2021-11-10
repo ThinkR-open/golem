@@ -1,3 +1,12 @@
+# Your application UI logic
+#' @import shiny
+ui <- fluidPage(
+  h1("shinyexample")
+)
+
+
+# you should not have to edit the lines below
+
 #' The application User-Interface
 #' 
 #' @param request Internal parameter for `{shiny}`. 
@@ -8,10 +17,8 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
-    # Your application UI logic 
-    fluidPage(
-      h1("shinyexample")
-    )
+     
+    ui
   )
 }
 
