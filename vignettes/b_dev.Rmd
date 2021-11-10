@@ -37,11 +37,14 @@ To run the app, go to the `dev/run_dev.R` file, and run the all thing.
 
 ### Add dependencies
 
-To be called each time you need a new package as a dependency:
+Amend DESCRIPTION with dependencies read from package code parsing.
+This function with parse your code and detect `@import` `@importFrom` and `::` to fill the Imports Fields in `DESCRIPTION`
+
 
 ```{r}
-usethis::use_package("pkg")
+attachment::att_amend_desc()
 ```
+
 
 About [package dependencies](https://r-pkgs.org/namespace.html).
 
