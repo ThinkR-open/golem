@@ -22,6 +22,13 @@ use_recommended_deps <- function(
   pkg = get_golem_wd(),
   recommended = c("shiny","DT","attempt","glue","htmltools","golem")
 ){
+  
+  
+  .Deprecated(
+    "golem::use_recommended_deps", 
+    msg = "use_recommended_deps() is deprecated because useless."
+  )
+  
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
   for ( i in sort(recommended)){
