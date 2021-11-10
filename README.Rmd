@@ -39,6 +39,7 @@ This package is part of a series of tools for Shiny, which includes:
 ### The Book :
 
 -   <https://engineering-shiny.org/>
+-   [paper version of the book “Engineering Production-Grade Shiny Apps”](https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022)
 
 ### Blog posts :
 
