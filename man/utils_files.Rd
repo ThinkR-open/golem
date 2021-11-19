@@ -6,7 +6,7 @@
 \alias{use_utils_server}
 \title{Use the utils files}
 \usage{
-use_utils_ui(pkg = get_golem_wd(), with_test = TRUE)
+use_utils_ui(pkg = get_golem_wd(), with_test = FALSE)
 
 use_utils_test_ui(pkg = get_golem_wd())
 
