@@ -18,6 +18,8 @@
 
 ## New features
 
++ All `with_test` params are now TRUE in the dev script (#801)
+  
 + `test-golem-recommended` now has two new tests for `app_sys` and `get_golem_config` (#751)
 
 + `use_recommended_ui()` now comes with a `with_test` parameter that adds a test file for the UI functions (#625)
