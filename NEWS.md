@@ -18,6 +18,8 @@
 
 ## New features
 
++ `test-golem-recommended` now has two new tests for `app_sys` and `get_golem_config` (#751)
+
 + `use_recommended_ui()` now comes with a `with_test` parameter that adds a test file for the UI functions (#625)
 
 + `{golem}` now checks if a module exists before adding a module related file (#779)
