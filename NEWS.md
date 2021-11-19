@@ -18,6 +18,8 @@
 
 ## New features
 
++ `use_recommended_ui()` now comes with a `with_test` parameter that adds a test file for the UI functions (#65)
+
 + `{golem}` now checks if a module exists before adding a module related file (#779)
 
 + Every `{rstudioapi}` calls is now conditionned by the availabily of this function (#776)
