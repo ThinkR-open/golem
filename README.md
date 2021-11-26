@@ -116,7 +116,10 @@ Create a new package with the project template:
 ## Step by step guide
 
 See full documentation in the {pkgdown} website:
-<https://thinkr-open.github.io/golem/index.html>
+
+\[CRAN\] <https://thinkr-open.github.io/golem/>
+
+\[dev\] <https://thinkr-open.github.io/golem/dev>
 
 After project creation, you’ll land on `dev/01_start.R`. There are also
 `dev/02_dev.R` and `dev/03_deploy.R`
