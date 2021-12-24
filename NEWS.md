@@ -18,6 +18,8 @@
 
 ## New features
 
++ `use_code_of_conduct()` in dev script now has the contact param (#812)
+
 + All `with_test` params are now TRUE in the dev script (#801)
   
 + `test-golem-recommended` now has two new tests for `app_sys` and `get_golem_config` (#751)
