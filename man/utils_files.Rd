@@ -4,6 +4,7 @@
 \alias{use_utils_ui}
 \alias{use_utils_test_ui}
 \alias{use_utils_server}
+\alias{use_utils_test_server}
 \title{Use the utils files}
 \usage{
 use_utils_ui(pkg = get_golem_wd(), with_test = FALSE)
@@ -13,6 +14,8 @@ use_utils_test_ui(pkg = get_golem_wd())
 use_utils_server(pkg = get_golem_wd(), with_test = FALSE)
 
 use_utils_test_ui(pkg = get_golem_wd())
+
+use_utils_test_server(pkg = get_golem_wd())
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
