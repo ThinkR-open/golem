@@ -38,7 +38,7 @@ use_utils_ui <- function(pkg = get_golem_wd(),
       ) {
         file_already_there_dance(
           where = pth,
-          open = FALSE
+          open_file = FALSE
         )
       } else {
         use_utils_test_ui()
@@ -57,13 +57,14 @@ use_utils_test_ui <- function(pkg = get_golem_wd()) {
   )
 
   if (added) {
-    cat_green_tick("Tests on utils UI added")
+    cat_green_tick("Tests on utils_ui added")
   }
 }
 
 #' @export
 #' @rdname utils_files
-use_utils_server <- function(pkg = get_golem_wd()) {
+use_utils_server <- function(pkg = get_golem_wd(),
+                             with_test = FALSE) {
   added <- use_utils(
     file_name = "golem_utils_server.R",
     folder_name = "R",
@@ -71,6 +72,39 @@ use_utils_server <- function(pkg = get_golem_wd()) {
   )
   if (added) {
     cat_green_tick("Utils server added")
+
+    if (with_test) {
+      if (!isTRUE(dir.exists("tests"))) {
+        use_testthat()
+      }
+      pth <- path(
+        pkg, "tests", "testthat", "test-golem_utils_server.R"
+      )
+      if (
+        file.exists(pth)
+      ) {
+        file_already_there_dance(
+          where = pth,
+          open_file = FALSE
+        )
+      } else {
+        # use_utils_test_server()
+      }
+    }
+  }
+}
+
+#' @export
+#' @rdname utils_files
+use_utils_test_ui <- function(pkg = get_golem_wd()) {
+  added <- use_utils(
+    file_name = "test-golem_utils_server.R",
+    folder_name = "tests/testthat",
+    pkg = pkg
+  )
+
+  if (added) {
+    cat_green_tick("Tests on utils_server added")
   }
 }
 
