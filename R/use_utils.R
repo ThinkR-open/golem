@@ -88,17 +88,17 @@ use_utils_server <- function(pkg = get_golem_wd(),
           open_file = FALSE
         )
       } else {
-        # use_utils_test_server()
+        use_utils_test_server()
       }
     }
   }
 }
 
-#' @export
-#' @rdname utils_files
-use_utils_test_ui <- function(pkg = get_golem_wd()) {
+use_utils_test_ <- function(pkg = get_golem_wd(),
+                            type = c("ui", "server")) {
+  type <- match.arg(type)
   added <- use_utils(
-    file_name = "test-golem_utils_server.R",
+    file_name = sprintf("test-golem_utils_%s.R", type),
     folder_name = "tests/testthat",
     pkg = pkg
   )
@@ -107,6 +107,18 @@ use_utils_test_ui <- function(pkg = get_golem_wd()) {
     cat_green_tick("Tests on utils_server added")
   }
 }
+
+#' @export
+#' @rdname utils_files
+use_utils_test_ui <- function(pkg = get_golem_wd()) {
+  use_utils_test_(pkg, "ui")
+}
+#' @export
+#' @rdname utils_files
+use_utils_test_server <- function(pkg = get_golem_wd()) {
+  use_utils_test_(pkg, "server")
+}
+
 
 #' @importFrom fs file_copy path_abs path_file
 use_utils <- function(file_name,
