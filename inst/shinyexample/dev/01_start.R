@@ -56,7 +56,7 @@ golem::remove_favicon()
 
 ## Add helper functions ----
 golem::use_utils_ui(with_test = TRUE)
-golem::use_utils_server()
+golem::use_utils_server(with_test = TRUE)
 
 # You're now set! ----
 
