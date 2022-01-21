@@ -32,7 +32,7 @@ test_that("test use_favicon online fail",{
     golem::remove_favicon()
     expect_false(file.exists("inst/app/www/favicon.ico"))
     if (getRversion() >= "3.5"){
-    expect_error(use_favicon(path = "https://fr.wikipedia.org//static/favicon/dontexist.ico"))
+      expect_error(use_favicon(path = "https://fr.wikipedia.org//static/favicon/dontexist.ico"))
     }
     expect_false(file.exists("inst/app/www/favicon.ico"))
   })
@@ -40,10 +40,9 @@ test_that("test use_favicon online fail",{
 
 test_that("test favicon",{
   with_dir(pkg,{
-    expect_is(
+    expect_s3_class(
       favicon("jean","jean"),
       "shiny.tag"
     )
   })
 })
-

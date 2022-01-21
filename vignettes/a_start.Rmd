@@ -18,7 +18,7 @@ $(document).ready(function () {
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>", 
+  comment = "#>",
   eval = FALSE
 )
 ```
@@ -74,10 +74,10 @@ This command allows you to create "illegally-named" package (for example, `1234`
 Once you've got that, a new RStudio project will be launched. Here is the structure of this project:
 
 ```{r echo = FALSE, eval = TRUE}
-z <- capture.output( fs::dir_tree(x))
+z <- capture.output(fs::dir_tree(x))
 z <- z[-1]
 w <- lapply(
-  z, function(x){
+  z, function(x) {
     cat(x, "\n")
   }
 )
@@ -112,14 +112,14 @@ First, fill the DESCRIPTION by adding information about the package that will co
 
 ```{r }
 golem::fill_desc(
-  pkg_name = "shinyexample", # The Name of the package containing the App 
-  pkg_title = "PKG_TITLE", # The Title of the package containing the App 
-  pkg_description = "PKG_DESC.", # The Description of the package containing the App 
+  pkg_name = "shinyexample", # The Name of the package containing the App
+  pkg_title = "PKG_TITLE", # The Title of the package containing the App
+  pkg_description = "PKG_DESC.", # The Description of the package containing the App
   author_first_name = "AUTHOR_FIRST", # Your First Name
-  author_last_name = "AUTHOR_LAST",  # Your Last Name
-  author_email = "AUTHOR@MAIL.COM",      # Your Email
+  author_last_name = "AUTHOR_LAST", # Your Last Name
+  author_email = "AUTHOR@MAIL.COM", # Your Email
   repo_url = NULL # The (optional) URL of the GitHub Repo
-)    
+)
 ```
 
 About [the DESCRIPTION file](https://r-pkgs.org/description.html).
@@ -138,11 +138,11 @@ If you want to use the MIT license, README, code of conduct, lifecycle badge, a 
 
 ```{r eval = FALSE}
 ## See ?usethis for more information
-usethis::use_mit_license( "Golem User" )  # You can set another license here
-usethis::use_readme_rmd( open = FALSE )
+usethis::use_mit_license("Golem User") # You can set another license here
+usethis::use_readme_rmd(open = FALSE)
 usethis::use_code_of_conduct()
-usethis::use_lifecycle_badge( "Experimental" )
-usethis::use_news_md( open = FALSE )
+usethis::use_lifecycle_badge("Experimental")
+usethis::use_news_md(open = FALSE)
 ```
 
 See [`{usethis}`](https://usethis.r-lib.org/) for more info about these functions.
@@ -173,7 +173,7 @@ golem::use_recommended_deps()
 # Remove current favicon
 golem::remove_favicon()
 # Add a new one
-golem::use_favicon( path = "path/to/favicon")
+golem::use_favicon(path = "path/to/favicon")
 ```
 
 Note that you can add an url, and the favicon will be downloaded to the `inst/app/www` folder. 

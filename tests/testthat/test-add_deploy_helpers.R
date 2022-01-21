@@ -1,4 +1,5 @@
 test_that("add_dockerfiles", {
+  skip_if_not_installed("dockerfiler", "0.1.4")
   with_dir(pkg, {
     
     for (fun in list(
@@ -24,6 +25,7 @@ test_that("add_dockerfiles", {
   })
 })
 test_that("add_dockerfiles repos variation", {
+  skip_if_not_installed("dockerfiler", "0.1.4")
   with_dir(pkg, {
     
     for (fun in list(
@@ -67,7 +69,7 @@ test_that("add_dockerfiles repos variation", {
 })
 test_that("add_dockerfiles multi repos", {
   
-  
+  skip_if_not_installed("dockerfiler", "0.1.4")
   
   repos = c(
     bioc1 = "https://bioconductor.org/packages/3.10/data/annotation",
@@ -118,6 +120,7 @@ test_that("add_dockerfiles multi repos", {
 })
 
 test_that("add_rstudio_files", {
+  
   with_dir(pkg, {
     
     for (fun in list(

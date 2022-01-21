@@ -8,15 +8,65 @@
 
 ### Hard deprecated
 
++ The `html` parameter in `expect_html_equal()` is no longer in use (#55).
+
 ## New functions
+
++ `add_sass_file()` creates a .sass file in inst/app/www (#768)
+
++ `use_module_test()` creates a test skeleton for a module (#725)
 
 ## New features
 
++ `use_code_of_conduct()` in dev script now has the contact param (#812)
+
++ All `with_test` params are now TRUE in the dev script (#801)
+  
++ `test-golem-recommended` now has two new tests for `app_sys` and `get_golem_config` (#751)
+
++ `use_utils_ui()` `use_utils_server()` & now come with a `with_test` parameter that adds a test file for theses functions (#625 & #801)
+
++ `{golem}` now checks if a module exists before adding a module related file (#779)
+
++ Every `{rstudioapi}` calls is now conditionned by the availabily of this function (#776)
+
++ `use_external_*` functions no longer suggest to "Go to" (#713, @novica)
+ 
++ `create_golem()` now comes with `with_git` parameter that can be used to initialize git repository while creating a project template
+
++ `use_recommended_tests()` now comes with `testServer` (#720).
+
++ `expect_html_equal()` now uses `testthat::expect_snapshot()` (#55).
+
++ `add_modules()`, `add_fct()` and `add_utils()` now come with a `with_test` parameter that can be turned on to add a test file to the module (#719 & #141)
+
++ /!\ All docker related functions have been moved to `{dockerfiler}`. This is more or less a breaking change, cause you'll need to install `{dockerfiler}` > 0.1.4 in order to build the Dockerfile __but__ `{golem}` will ask you to install `{dockerfiler}` > 0.1.4 if it can't find it, (#412)
+
 + Modules ID no longer contain an `_ui_` element, (#651, @MargotBr)
+
++ run_dev now has `options(shiny.port = httpuv::randomPort())` to prevent the browser from caching the CSS & JS files (#675)
+
++ You can now specify the path to R in `expect_running()`. 
 
 ## Bug fix
 
++ `golem::amend_config()` now keeps the `!expr`  (#709, @teofiln)
+
++ recommended tests now use `expect_type()` instead of `expect_is`, which was deprecated from `{testthat}` (#671)
+
++ Fixed check warning when using `golem::use_utils_server()` (#678),
+
++ Fixed issue with expect_running & path to R (#700, @waiteb5)
+
++ `expect_running()` now find R.exe on windows. 
+
++ `use_recommended_tests()` no longer add `{processx}` to the `DESCRIPTION` (#710)
+
 ## Internal changes
+
++ Create `{golem}` is more robust and now comes with an `overwrite` argument (#777)
+
++ `{testthat}` and `{rlang}` are no longer hard dependencies (#742)
 
 # golem 0.3.1 (CRAN Version)
 

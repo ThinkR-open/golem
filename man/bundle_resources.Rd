@@ -14,7 +14,8 @@ bundle_resources(
   attachment = NULL,
   package = NULL,
   all_files = TRUE,
-  app_builder = "golem"
+  app_builder = "golem",
+  with_sparkles = FALSE
 )
 }
 \arguments{
@@ -35,7 +36,7 @@ Details.}
 
 \item{package}{An R package name to indicate where to find the \code{src}
 directory when \code{src} is a relative path (see
-\code{\link[htmltools]{resolveDependencies}}).}
+\code{\link[htmltools:resolveDependencies]{resolveDependencies()}}).}
 
 \item{all_files}{Whether all files under the \code{src} directory are
 dependency files. If \code{FALSE}, only the files specified in
@@ -44,6 +45,8 @@ dependency files.}
 
 \item{app_builder}{The name of the app builder to add as a meta tag.
 Turn to NULL if you don't want this meta tag to be included.}
+
+\item{with_sparkles}{C'est quand que tu vas mettre des paillettes dans ma vie Kevin?}
 }
 \value{
 an htmlDependency

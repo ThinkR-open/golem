@@ -36,24 +36,34 @@ create_if_needed <- function(
   # If it doesn't exist, ask if we are allowed 
   # to create it
   if (dont_exist){
-    ask <- yesno(
-      sprintf(
-        "The %s %s doesn't exist, create?", 
-        basename(path), 
-        type
+    if (interactive()) {
+      ask <- yesno(
+        sprintf(
+          "The %s %s doesn't exist, create?", 
+          basename(path), 
+          type
+        )
       )
-    )
-    # Return early if the user doesn't allow 
-    if (!ask) {
-      return(FALSE)
-    } else {
-      # Create the file 
-      if (type == "file"){
-        file_create(path)
-        write(content, path, append = TRUE)
-      } else if (type == "directory"){
-        dir_create(path, recurse = TRUE)
+      # Return early if the user doesn't allow 
+      if (!ask) {
+        return(FALSE)
+      } else {
+        # Create the file 
+        if (type == "file"){
+          file_create(path)
+          write(content, path, append = TRUE)
+        } else if (type == "directory"){
+          dir_create(path, recurse = TRUE)
+        }
       }
+    } else {
+      stop(
+        sprintf(
+          "The %s %s doesn't exist.", 
+          basename(path), 
+          type
+        )
+      )
     }
   } 
   
@@ -66,7 +76,11 @@ create_if_needed <- function(
 check_file_exist <- function(file){
   res <- TRUE
   if (file_exists(file)){
-    res <- yesno("This file already exists, override?")
+    if (interactive()) {
+      res <- yesno("This file already exists, override?")
+    } else {
+      res <- TRUE
+    }
   }
   return(res)
 }
@@ -76,7 +90,11 @@ check_file_exist <- function(file){
 check_dir_exist <- function(dir){
   res <- TRUE
   if (!dir_exists(dir)){ 
-    res <- yesno(sprintf("The %s does not exists, create?", dir))
+    if (interactive()) {
+      res <- yesno(sprintf("The %s does not exists, create?", dir))
+    } else {
+      res <- FALSE
+    }
   }
   return(res)
 }
@@ -244,7 +262,7 @@ after_creation_message_js <- function(
   ) {
     if ( 
       fs::path_abs(dir) != fs::path_abs("inst/app/www") & 
-      packageVersion("golem") < "0.2.0"
+      utils::packageVersion("golem") < "0.2.0"
     ){
       cat_red_bullet(
         sprintf(
@@ -266,7 +284,7 @@ after_creation_message_css <- function(
     desc_exist(pkg)
   ) {
     if (fs::path_abs(dir) != fs::path_abs("inst/app/www") & 
-        packageVersion("golem") < "0.2.0"
+        utils::packageVersion("golem") < "0.2.0"
     ){
       cat_red_bullet(
         sprintf(
@@ -276,6 +294,26 @@ after_creation_message_css <- function(
       )
     } else {
       cat_automatically_linked()
+    }
+  }
+}
+
+after_creation_message_sass <- function(
+  pkg,
+  dir,
+  name
+) {
+  if (
+    desc_exist(pkg)
+  ) {
+    if (fs::path_abs(dir) != fs::path_abs("inst/app/www") &
+        utils::packageVersion("golem") < "0.2.0"
+    ) {
+      cat_red_bullet(
+        sprintf(
+          'After compile your Sass file, to link your css file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`'
+        )
+      )
     }
   }
 }
@@ -301,16 +339,22 @@ file_created_dance <- function(
   dir, 
   name, 
   open_file, 
+  open_or_go_to = TRUE,
   catfun = cat_created
 ){
   catfun(where)
   
   fun(pkg, dir, name)
   
-  open_or_go_to(
-    where = where,
-    open_file = open_file
-  )
+  if (open_or_go_to){
+    open_or_go_to(
+      where = where,
+      open_file = open_file
+    )} 
+  else {
+      return(invisible(where))
+    }
+  
 }
 
 file_already_there_dance <- function(
@@ -353,3 +397,89 @@ yesno <- function (...)
   menu(c("Yes", "No")) == 1
 }
 
+# Checking that a package is installed
+check_is_installed <- function(
+  pak,
+  ...
+){
+  
+  if (
+    !requireNamespace(pak, ..., quietly = TRUE)
+  ){
+    stop(
+      sprintf(
+        "The {%s} package is required to run this function.\nYou can install it with `install.packages('%s')`.",
+        pak, 
+        pak
+      ), 
+      call. = FALSE
+    )
+  }
+  
+}
+
+required_version <- function(
+  pak,
+  version
+){
+  
+  if (
+    utils::packageVersion(pak) < version
+  ){
+    stop(
+      sprintf(
+        "This function require the version '%s' of the {%s} package.\nYou can update with `install.packages('%s')`.",
+        version,
+        pak, 
+        pak
+      ), 
+      call. = FALSE
+    )
+  }
+
+}
+
+#' @importFrom fs file_exists
+add_sass_code <- function(where, dir, name) {
+  if (file_exists(where)) {
+    if (file_exists("dev/run_dev.R")) {
+      lines <- readLines("dev/run_dev.R")
+      new_lines <- append(
+        x = lines,
+        values = c(
+          "# Sass code compilation",
+          sprintf(
+            'sass::sass(input = sass::sass_file("%s/%s.sass"), output = "%s/%s.css", cache = NULL)',
+            dir, name, dir, name
+          ),
+          ""
+        ),
+        after = 0
+      )
+      writeLines(
+        text = new_lines,
+        con = "dev/run_dev.R"
+      )
+
+      cat_green_tick(
+        "Code added in run_dev.R to compile your Sass file to CSS file."
+      )
+    }
+  }
+}
+
+#' Check if a module already exists
+#' 
+#' Assumes it is called at the root of a golem project.
+#' 
+#' @param module A character string. The name of a potentially existing module
+#' @return Boolean. Does the module exist or not ?
+#' @noRd
+is_existing_module <- function(module) {
+  existing_module_files <- list.files("R/", pattern = "^mod_")
+  existing_module_names <- sub(
+    "^mod_([[:alnum:]_]+)\\.R$", "\\1", 
+    existing_module_files
+  )
+  module %in% existing_module_names
+}

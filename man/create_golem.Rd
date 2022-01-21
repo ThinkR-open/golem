@@ -8,9 +8,11 @@ create_golem(
   path,
   check_name = TRUE,
   open = TRUE,
+  overwrite = FALSE,
   package_name = basename(path),
   without_comments = FALSE,
   project_hook = golem::project_hook,
+  with_git = FALSE,
   ...
 )
 }
@@ -23,6 +25,8 @@ correct according to CRAN requirements.}
 
 \item{open}{Boolean. Open the created project?}
 
+\item{overwrite}{Boolean. Should the already existing project be overwritten ?}
+
 \item{package_name}{Package name to use. By default, {golem} uses
 \code{basename(path)}. If \code{path == '.'} & \code{package_name} is
 not explicitly set, then \code{basename(getwd())} will be used.}
@@ -33,6 +37,8 @@ not explicitly set, then \code{basename(getwd())} will be used.}
 creation. Can be used to change the default \code{{golem}} structure.
 to override the files and content. This function is executed just
 after the project is created.}
+
+\item{with_git}{Boolean. Initialize git repository}
 
 \item{...}{Arguments passed to the \code{project_hook()} function.}
 }

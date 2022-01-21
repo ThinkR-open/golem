@@ -39,6 +39,7 @@ This package is part of a series of tools for Shiny, which includes:
 ### The Book :
 
 -   <https://engineering-shiny.org/>
+-   [paper version of the book “Engineering Production-Grade Shiny Apps”](https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022)
 
 ### Blog posts :
 
@@ -47,11 +48,15 @@ This package is part of a series of tools for Shiny, which includes:
 -   Part 1: <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/>
 -   Part 2: <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/>
 
+[*Make a Fitness App from scratch*](https://towardsdatascience.com/production-grade-r-shiny-with-golem-prototyping-51b03f37c2a9)
+
 ### Slide decks
 
 -   useR! 2019 : [A Framework for Building Robust & Production Ready Shiny Apps](https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf)
 -   ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with {golem}](https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem)
 -   rstudio::conf(2020) : [Production-grade Shiny Apps with golem](https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem)
+-   barcelonar (2019-12-03) : [Engineering Production-Grade Shiny Apps with
+{golem}](https://www.barcelonar.org/presentations/BarcelonaR_Building_Production_Grade_Shiny_Apps_with_golem.pdf)
 
 ### Video
 
@@ -104,7 +109,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/ThinkR-open/golem/mas
 
 ## Step by step guide
 
-See full documentation in the {pkgdown} website: <https://thinkr-open.github.io/golem/index.html>
+See full documentation in the {pkgdown} website: 
+
+[CRAN] <https://thinkr-open.github.io/golem/> 
+
+[dev] <https://thinkr-open.github.io/golem/dev>
 
 After project creation, you'll land on `dev/01_start.R`. There are also `dev/02_dev.R` and `dev/03_deploy.R`
 

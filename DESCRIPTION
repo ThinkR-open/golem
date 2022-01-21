@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.3.1.9000
+Version: 0.3.1.9005
 Authors@R: 
     c(person(given = "Colin",
              family = "Fay",
@@ -11,9 +11,7 @@ Authors@R:
              family = "Guyader",
              role = "aut",
              email = "vincent@thinkr.fr",
-             comment = c(ORCID = "0000-0003-0671-9270",
-             "previous maintainer"
-             )),
+             comment = c(ORCID = "0000-0003-0671-9270", "previous maintainer")),
       person(given = "Sébastien",
              family = "Rochette",
              role = "aut",
@@ -31,13 +29,20 @@ Authors@R:
       person(given = "David",
              family = "Granjon",
              role = "ctb",
-             email = "dgranjon@ymail.com"),   
+             email = "dgranjon@ymail.com"),
+      person(given = "Arthur",
+             family = "Bréant",
+             role = "ctb",
+             email = "arthur@thinkr.fr"),
+      person(given = "Antoine",
+             family = "Languillaume",
+             role = "ctb",
+             email = "antoine@thinkr.fr"),                    
       person(given = "ThinkR",
              role = "cph"))
-Description: An opinionated framework for building a
-    production-ready 'Shiny' application. This package contains a series
-    of tools for building a robust 'Shiny' application from start to
-    finish.
+Description: An opinionated framework for building a production-ready
+    'Shiny' application. This package contains a series of tools for
+    building a robust 'Shiny' application from start to finish.
 License: MIT + file LICENSE
 URL: https://github.com/ThinkR-open/golem
 BugReports: https://github.com/ThinkR-open/golem/issues
@@ -49,40 +54,39 @@ Imports:
     config,
     crayon,
     desc,
-    dockerfiler,
     fs,
     here,
     htmltools,
-    jsonlite,
     pkgload,
     remotes,
-    rlang,
     roxygen2,
     rstudioapi,
     shiny (>= 1.5.0),
-    testthat,
     usethis,
     utils,
     yaml
 Suggests:
+    rlang,
     covr,
     devtools,
-    glue,
+    dockerfiler (>= 0.1.4),
     knitr,
+    pkgbuild,
     pkgdown,
+    processx,
     purrr,
     rcmdcheck,
     rmarkdown,
+    rsconnect,
     spelling,
     stringr,
+    testthat,
     tools,
-    withr,
-    pkgbuild,
-    processx,
-    rsconnect
+    withr
 VignetteBuilder: 
     knitr
+Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

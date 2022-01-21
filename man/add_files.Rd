@@ -6,6 +6,7 @@
 \alias{add_js_input_binding}
 \alias{add_js_output_binding}
 \alias{add_css_file}
+\alias{add_sass_file}
 \alias{add_html_template}
 \alias{add_ui_server_files}
 \title{Create Files}
@@ -57,6 +58,16 @@ add_css_file(
   open = TRUE,
   dir_create = TRUE,
   template = golem::css_template,
+  ...
+)
+
+add_sass_file(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE,
+  template = golem::sass_template,
   ...
 )
 

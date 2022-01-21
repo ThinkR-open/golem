@@ -1,37 +1,27 @@
-bad_last_line <- function(file){
-  bad_file <- tryCatch({
-    readLines(con = file)
-  }, warning = function(w){
-    return(TRUE)
-  })
-  if (typeof(bad_file) == "logical"){
-    return(TRUE)
+# Check that every file has a proper EOF
+# Given that reading a file with improper EOF
+# Throws a warning, we'll expect_silent() the readLines()
+with_dir(pkg, {
+  r_files <- list.files(pattern = ".*R$", recursive = TRUE, full.names = TRUE)
+
+  for (i in r_files) {
+    expect_silent(
+      readLines(i)
+    )
   }
-  FALSE
-}
+  js_files <- list.files(pattern = ".*js$", recursive = TRUE)
 
-files_with_bad_lines <- function(){
-  r_files <- list.files(pattern = ".*R$", recursive = TRUE)
-  last_lines <- r_files %>%
-    purrr::map_lgl(bad_last_line)
-  
-  invalid_r_file <- function(r_file){
-    if (last_lines[which(r_files == r_file)]){
-      return(TRUE)
-    }
-    FALSE
+  for (i in js_files) {
+    expect_silent(
+      readLines(i)
+    )
   }
-  
-  Filter(invalid_r_file, r_files)
-}
 
-add_final_empty_line <- function(files){
-  purrr::walk(files, function(file){
-    write("\n", file = file, append = TRUE)
-  })
-}
+  css_files <- list.files(pattern = ".*css$", recursive = TRUE)
 
-test_that("proper_file_endings", {
-  bad_files <- files_with_bad_lines()
-  expect_equal(length(bad_files), 0)
+  for (i in css_files) {
+    expect_silent(
+      readLines(i)
+    )
+  }
 })
