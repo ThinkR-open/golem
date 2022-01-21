@@ -6,6 +6,8 @@
 
 ### Soft deprecated
 
++ `use_recommended_deps()` is now soft deprecated (#786)
+
 ### Hard deprecated
 
 + The `html` parameter in `expect_html_equal()` is no longer in use (#55).
