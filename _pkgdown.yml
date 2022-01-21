@@ -1,139 +1,159 @@
 template:
   package: thinkrtemplate
-hexURL:
-  https://github.com/ThinkR-open/golem/blob/master/inst/rstudio/templates/project/golem.png?raw=true
+hexURL: https://github.com/ThinkR-open/golem/blob/master/inst/rstudio/templates/project/golem.png?raw=true
+
+development:
+  mode: auto
+
+  reference:
+    - title: Launch app
+      desc: Function `run_dev()` will execute the content of dev/run_dev.R and launch the application
+      contents:
+        - run_dev
 
 reference:
-- title: Create files
-  desc: These functions create files inside the inst/app folder. These functions can be used outside of a golem project.
-  contents: 
-   - add_css_file
-   - add_html_template
-   - add_js_file
-   - add_js_handler
-   - add_js_input_binding
-   - add_js_output_binding
-   - add_ui_server_files
-   
-- title: Create a Dockerfile
-  desc: |
-    Build a container containing your Shiny App. `add_dockerfile()` creates a "classical" Dockerfile, 
-    while `add_dockerfile_shinyproxy()` and `add_dockerfile_heroku()` creates platform specific Dockerfile.
-  contents:
-    - add_dockerfile
-    - add_dockerfile_shinyproxy
-    - add_dockerfile_heroku
-    
-- title: Use files
-  desc: |
-    `use_external_js_file` and `use_external_css_file`download files from external sources and install 
-    them inside the appropriate directory. `use_utils_ui` copies the golem_utils_ui.R to the R folder and `use_utils_server`
-    copies the golem_utils_server.R to the R folder.
-  contents:
-    - use_external_js_file
-    - use_external_css_file
-    - use_utils_ui
-    - use_utils_server
-    
-- title: 	Add fct_ and utils_ files
-  desc: 	Add fct_ and utils_ files
-  contents:
-   - add_fct
-   - add_utils
-   
-- title: Add an app.R
-  desc: Add an app.R at the root of your package to deploy on RStudio Connect
-  contents:
-    - add_rstudioconnect_file
-    - add_shinyappsio_file
-    - add_shinyserver_file
+  - title: Create files
+    desc: These functions create files inside the inst/app folder. These functions can be used outside of a golem project.
+    contents:
+      - add_css_file
+      - add_html_template
+      - add_js_file
+      - add_js_handler
+      - add_js_input_binding
+      - add_js_output_binding
+      - add_ui_server_files
 
-- title: Mode detection
-  desc: Is the app in dev mode or prod mode?
-  contents:
-    - app_prod
-    - app_dev
-    
-- title: Dev dependent functions
-  desc: This functions will be run only if `golem::app_dev()` returns TRUE.
-  contents:
-    - cat_dev
-    - print_dev
-    - message_dev
-    - warning_dev
-    - browser_dev
-    
-- title: Test helpers
-  desc: These functions are designed to be used inside the tests in your Shiny app package.
-  contents:
-    - expect_shinytag
-    - expect_shinytaglist
-    - expect_html_equal
-    - expect_running
-    
-- title: 	Favicon functions
-  desc: This function adds the favicon from ico to your shiny app.
-  contents:
-    - use_favicon
-    - use_favicon
-    - favicon
-    
-- title: Addins
-  desc: |
-    `insert_ns()` takes a selected character vector and wrap it in `ns()`. The series of `go_to_*()` 
-    addins help you go to common files used in developing a {golem} application.
-  contents:
-    - insert_ns
-    - go_to_start
-    - go_to_dev
-    - go_to_deploy
-    - go_to_run_dev
-    - go_to_app_ui
-    - go_to_app_server
-    - go_to_run_app
-    
-- title: JavaScript interaction functions
-  desc: |
-    `activate_js` is used in your UI to insert directly the JavaScript functions contained in golem. 
-    These functions can be called from the server with `invoke_js`. `invoke_js` can also be used to launch
-    any JS function created inside a Shiny JavaScript handler.
-  contents:
-    - activate_js
-    - invoke_js
-    
-- title: Options
-  desc: |
-    Set and get a series of options to be used with `{golem}`. These options are found inside the 
-    `golem-config.yml` file, found in most cases inside the inst folder.
-  contents: 
-    - set_golem_options
-    - set_golem_wd
-    - set_golem_name
-    - set_golem_version
-    - get_golem_wd
-    - get_golem_name
-    - get_golem_version
+  - title: Create a Dockerfile
+    desc: |
+      Build a container containing your Shiny App. `add_dockerfile()` creates a "classical" Dockerfile, 
+      while `add_dockerfile_shinyproxy()` and `add_dockerfile_heroku()` creates platform specific Dockerfile.
+    contents:
+      - add_dockerfile
+      - add_dockerfile_shinyproxy
+      - add_dockerfile_heroku
 
-- title: Add recommended elements
-  desc: |
-    `use_recommended_deps` adds shiny, DT, attempt, glue, golem, htmltools to dependencies
-    `use_recommended_tests` adds a test folder and copy the golem tests
-  contents:
-    - use_recommended_deps
-    - use_recommended_tests
+  - title: Use files
+    desc: |
+      `use_external_js_file` and `use_external_css_file`download files from external sources and install 
+      them inside the appropriate directory. `use_utils_ui` copies the golem_utils_ui.R to the R folder and `use_utils_server`
+      copies the golem_utils_server.R to the R folder.
+    contents:
+      - use_external_js_file
+      - use_external_css_file
+      - use_utils_ui
+      - use_utils_server
 
-- title: 	Misc
-  contents:
-    - add_module
-    - amend_golem_config
-    - create_golem
-    - add_resource_path
-    - browser_button
-    - bundle_resources
-    - amend_golem_config
-    - detach_all_attached
-    - document_and_reload
-    - fill_desc
-    - make_dev
-    - with_golem_options
-    
+  - title: Add fct_ and utils_ files
+    desc: Add fct_ and utils_ files
+    contents:
+      - add_fct
+      - add_utils
+
+  - title: Add an app.R
+    desc: Add an app.R at the root of your package to deploy on RStudio Connect
+    contents:
+      - add_rstudioconnect_file
+      - add_shinyappsio_file
+      - add_shinyserver_file
+
+  - title: Mode detection
+    desc: Is the app in dev mode or prod mode?
+    contents:
+      - app_prod
+      - app_dev
+
+  - title: Dev dependent functions
+    desc: This functions will be run only if `golem::app_dev()` returns TRUE.
+    contents:
+      - cat_dev
+      - print_dev
+      - message_dev
+      - warning_dev
+      - browser_dev
+
+  - title: Test helpers
+    desc: These functions are designed to be used inside the tests in your Shiny app package.
+    contents:
+      - expect_shinytag
+      - expect_shinytaglist
+      - expect_html_equal
+      - expect_running
+
+  - title: Favicon functions
+    desc: This function adds the favicon from ico to your shiny app.
+    contents:
+      - use_favicon
+      - use_favicon
+      - favicon
+
+  - title: Addins
+    desc: |
+      `insert_ns()` takes a selected character vector and wrap it in `ns()`. The series of `go_to_*()` 
+      addins help you go to common files used in developing a {golem} application.
+    contents:
+      - insert_ns
+      - go_to_start
+      - go_to_dev
+      - go_to_deploy
+      - go_to_run_dev
+      - go_to_app_ui
+      - go_to_app_server
+      - go_to_run_app
+
+  - title: JavaScript interaction functions
+    desc: |
+      `activate_js` is used in your UI to insert directly the JavaScript functions contained in golem. 
+      These functions can be called from the server with `invoke_js`. `invoke_js` can also be used to launch
+      any JS function created inside a Shiny JavaScript handler.
+    contents:
+      - activate_js
+      - invoke_js
+
+  - title: Options
+    desc: |
+      Set and get a series of options to be used with `{golem}`. These options are found inside the 
+      `golem-config.yml` file, found in most cases inside the inst folder.
+    contents:
+      - set_golem_options
+      - set_golem_wd
+      - set_golem_name
+      - set_golem_version
+      - get_golem_wd
+      - get_golem_name
+      - get_golem_version
+
+  - title: Add recommended elements
+    desc: |
+      `use_recommended_deps` adds shiny, DT, attempt, glue, golem, htmltools to dependencies
+      `use_recommended_tests` adds a test folder and copy the golem tests
+    contents:
+      - use_recommended_deps
+      - use_recommended_tests
+
+  - title: Misc
+    contents:
+      - add_module
+      - amend_golem_config
+      - create_golem
+      - add_resource_path
+      - browser_button
+      - bundle_resources
+      - amend_golem_config
+      - detach_all_attached
+      - document_and_reload
+      - fill_desc
+      - make_dev
+      - with_golem_options
+
+  - title: internal
+    contents:
+      - disable_autoload
+      - get_golem_options
+      - get_sysreqs
+      - golem
+      - is_running
+      - module_template
+      - project_hook
+      - sanity_check
+      - js_handler_template
+      - use_module_test

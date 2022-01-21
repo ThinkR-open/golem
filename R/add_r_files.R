@@ -4,7 +4,8 @@ add_r_files <- function(name,
                         module = "",
                         pkg = get_golem_wd(),
                         open = TRUE,
-                        dir_create = TRUE) {
+                        dir_create = TRUE,
+                        with_test = FALSE) {
   name <- file_path_sans_ext(name)
 
   old <- setwd(path_abs(pkg))
@@ -28,10 +29,10 @@ add_r_files <- function(name,
     if (!is_existing_module(module)) {
       stop(
         sprintf(
-          "The module '%s' does not exist.\nYou can call `golem::add_module('%s')` to create it.", 
-          module, 
+          "The module '%s' does not exist.\nYou can call `golem::add_module('%s')` to create it.",
+          module,
           module
-          ),
+        ),
         call. = FALSE
       )
     }
@@ -62,6 +63,17 @@ add_r_files <- function(name,
     )
   }
 
+  if (with_test) {
+    check_is_installed("usethis")
+    usethis::use_test(
+      basename(
+        file_path_sans_ext(
+          where
+        )
+      )
+    )
+  }
+
   open_or_go_to(where, open)
 }
 
@@ -84,14 +96,16 @@ add_fct <- function(name,
                     module = NULL,
                     pkg = get_golem_wd(),
                     open = TRUE,
-                    dir_create = TRUE) {
+                    dir_create = TRUE,
+                    with_test = FALSE) {
   add_r_files(
     name,
     module,
     ext = "fct",
     pkg = pkg,
     open = open,
-    dir_create = dir_create
+    dir_create = dir_create,
+    with_test = with_test
   )
 }
 
@@ -101,14 +115,16 @@ add_utils <- function(name,
                       module = NULL,
                       pkg = get_golem_wd(),
                       open = TRUE,
-                      dir_create = TRUE) {
+                      dir_create = TRUE,
+                      with_test = FALSE) {
   add_r_files(
     name,
     module,
     ext = "utils",
     pkg = pkg,
     open = open,
-    dir_create = dir_create
+    dir_create = dir_create,
+    with_test = with_test
   )
 }
 

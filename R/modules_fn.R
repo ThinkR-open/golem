@@ -256,12 +256,10 @@ use_module_test <- function(name,
   old <- setwd(fs::path_abs(pkg))
   on.exit(setwd(old))
 
-  uses_testthat <- getFromNamespace(
-    "uses_testthat",
-    "usethis"
-  )
 
-  if (!uses_testthat(pkg)) {
+  if (!dir.exists(
+    path(pkg, "tests", "testthat")
+  )) {
     usethis::use_testthat()
   }
 

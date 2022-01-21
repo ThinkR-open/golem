@@ -20,6 +20,14 @@
 
 ## New features
 
++ `use_code_of_conduct()` in dev script now has the contact param (#812)
+
++ All `with_test` params are now TRUE in the dev script (#801)
+  
++ `test-golem-recommended` now has two new tests for `app_sys` and `get_golem_config` (#751)
+
++ `use_utils_ui()` `use_utils_server()` & now come with a `with_test` parameter that adds a test file for theses functions (#625 & #801)
+
 + `{golem}` now checks if a module exists before adding a module related file (#779)
 
 + Every `{rstudioapi}` calls is now conditionned by the availabily of this function (#776)
@@ -32,7 +40,7 @@
 
 + `expect_html_equal()` now uses `testthat::expect_snapshot()` (#55).
 
-+ `add_modules()` now comes with a `with_test` parameter that can be turned on to add a test file to the module (#719)
++ `add_modules()`, `add_fct()` and `add_utils()` now come with a `with_test` parameter that can be turned on to add a test file to the module (#719 & #141)
 
 + /!\ All docker related functions have been moved to `{dockerfiler}`. This is more or less a breaking change, cause you'll need to install `{dockerfiler}` > 0.1.4 in order to build the Dockerfile __but__ `{golem}` will ask you to install `{dockerfiler}` > 0.1.4 if it can't find it, (#412)
 
@@ -55,6 +63,8 @@
 + `expect_running()` now find R.exe on windows. 
 
 + `use_recommended_tests()` no longer add `{processx}` to the `DESCRIPTION` (#710)
+
++ `bundle_resource()` does not include empty stylesheet anymore (#689, @erikvona)
 
 ## Internal changes
 

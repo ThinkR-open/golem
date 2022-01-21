@@ -31,6 +31,8 @@ This package is part of a series of tools for Shiny, which includes:
 ### The Book :
 
 -   <https://engineering-shiny.org/>
+-   [paper version of the book “Engineering Production-Grade Shiny
+    Apps”](https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022)
 
 ### Blog posts :
 
@@ -114,7 +116,10 @@ Create a new package with the project template:
 ## Step by step guide
 
 See full documentation in the {pkgdown} website:
-<https://thinkr-open.github.io/golem/index.html>
+
+\[CRAN\] <https://thinkr-open.github.io/golem/>
+
+\[dev\] <https://thinkr-open.github.io/golem/dev>
 
 After project creation, you’ll land on `dev/01_start.R`. There are also
 `dev/02_dev.R` and `dev/03_deploy.R`
