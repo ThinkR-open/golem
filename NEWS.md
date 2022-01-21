@@ -62,6 +62,8 @@
 
 + `use_recommended_tests()` no longer add `{processx}` to the `DESCRIPTION` (#710)
 
++ `bundle_resource()` does not include empty stylesheet anymore (#689, @erikvona)
+
 ## Internal changes
 
 + Create `{golem}` is more robust and now comes with an `overwrite` argument (#777)
