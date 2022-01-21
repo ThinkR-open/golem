@@ -35,7 +35,6 @@ bundle_resources <- function(path,
       list.files(path)
     ) > 0
   ) {
-    res <- list()
     res[[
     length(res) + 1
     ]] <- htmltools::htmlDependency(
@@ -63,23 +62,31 @@ bundle_resources <- function(path,
     )
     # For some reason `htmlDependency` doesn't bundle css,
     # So add them by hand
-    css_nms <- paste0(
-      basename(path),
-      "/",
-      list.files(
-        path,
-        pattern = "\\.css$",
-        recursive = TRUE
-      )
+    css_list <- list.files(
+      path,
+      pattern = "\\.css$",
+      recursive = TRUE
     )
 
-    for (i in css_nms) {
-      res[[
-      length(res) + 1
-      ]] <- tags$link(
-        href = i,
-        rel = "stylesheet"
+    if (length(css_list) > 0) {
+      css_nms <- paste0(
+        basename(path),
+        "/",
+        list.files(
+          path,
+          pattern = "\\.css$",
+          recursive = TRUE
+        )
       )
+
+      for (i in css_nms) {
+        res[[
+        length(res) + 1
+        ]] <- tags$link(
+          href = i,
+          rel = "stylesheet"
+        )
+      }
     }
 
     if (with_sparkles) {
