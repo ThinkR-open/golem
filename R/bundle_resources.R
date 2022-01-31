@@ -19,17 +19,20 @@
 #' @export
 #'
 #' @return an htmlDependency
-bundle_resources <- function(path,
-                             app_title,
-                             name = "golem_resources",
-                             version = "0.0.1",
-                             meta = NULL,
-                             head = NULL,
-                             attachment = NULL,
-                             package = NULL,
-                             all_files = TRUE,
-                             app_builder = "golem",
-                             with_sparkles = FALSE) {
+bundle_resources <- function(
+  path,
+  app_title,
+  name = "golem_resources",
+  version = "0.0.1",
+  meta = NULL,
+  head = NULL,
+  attachment = NULL,
+  package = NULL,
+  all_files = TRUE,
+  app_builder = "golem",
+  with_sparkles = FALSE
+) {
+  res <- list()
   if (
     length(
       list.files(path)
@@ -88,21 +91,21 @@ bundle_resources <- function(path,
         )
       }
     }
-
-    if (with_sparkles) {
-      res[[
-      length(res) + 1
-      ]] <- htmlDependency(
-        "sparkles",
-        version = utils::packageVersion("golem"),
-        src = system.file(
-          "utils",
-          package = "golem"
-        ),
-        script = "sparkle.js"
-      )
-    }
-
-    res
   }
+
+  if (with_sparkles) {
+    res[[
+    length(res) + 1
+    ]] <- htmlDependency(
+      "sparkles",
+      version = utils::packageVersion("golem"),
+      src = system.file(
+        "utils",
+        package = "golem"
+      ),
+      script = "sparkle.js"
+    )
+  }
+
+  res
 }
