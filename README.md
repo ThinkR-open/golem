@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -21,24 +22,26 @@ shiny applications.
 
 This package is part of a series of tools for Shiny, which includes:
 
--   `{golem}` - <https://github.com/ThinkR-open/golem>
--   `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
--   `{fakir}` - <https://github.com/ThinkR-open/fakir>
--   `{shinysnippets}` - <https://github.com/ThinkR-open/shinysnippets>
+  - `{golem}` - <https://github.com/ThinkR-open/golem>
+  - `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
+  - `{fakir}` - <https://github.com/ThinkR-open/fakir>
+  - `{shinysnippets}` - <https://github.com/ThinkR-open/shinysnippets>
 
 ## Resources
 
 ### The Book :
 
--   <https://engineering-shiny.org/>
+  - <https://engineering-shiny.org/>
+  - [paper version of the book “Engineering Production-Grade Shiny
+    Apps”](https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022)
 
 ### Blog posts :
 
 *Building Big Shiny Apps*
 
--   Part 1:
+  - Part 1:
     <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/>
--   Part 2:
+  - Part 2:
     <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/>
 
 [*Make a Fitness App from
@@ -46,32 +49,32 @@ scratch*](https://towardsdatascience.com/production-grade-r-shiny-with-golem-pro
 
 ### Slide decks
 
--   useR! 2019 : [A Framework for Building Robust & Production Ready
+  - useR\! 2019 : [A Framework for Building Robust & Production Ready
     Shiny
     Apps](https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf)
--   ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with
+  - ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with
     {golem}](https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem)
--   rstudio::conf(2020) : [Production-grade Shiny Apps with
+  - rstudio::conf(2020) : [Production-grade Shiny Apps with
     golem](https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem)
--   barcelonar (2019-12-03) : [Engineering Production-Grade Shiny Apps
+  - barcelonar (2019-12-03) : [Engineering Production-Grade Shiny Apps
     with
     {golem}](https://www.barcelonar.org/presentations/BarcelonaR_Building_Production_Grade_Shiny_Apps_with_golem.pdf)
 
 ### Video
 
--   [{golem} and Effective Shiny Development
+  - [{golem} and Effective Shiny Development
     Methods](https://www.youtube.com/watch?v=OU1-CkSVdTI)
--   [Hands-on demonstration of
+  - [Hands-on demonstration of
     {golem}](https://shinydevseries.com/post/golem-demo/)
--   useR! 2019 : [A Framework for Building Robust & Production Ready
+  - useR\! 2019 : [A Framework for Building Robust & Production Ready
     Shiny Apps](https://youtu.be/tCAan6smrjs)
--   🇫🇷 [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
--   rstudio::conf(2020) : [Production-grade Shiny Apps with
+  - 🇫🇷 [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
+  - rstudio::conf(2020) : [Production-grade Shiny Apps with
     golem](https://www.rstudio.com/resources/rstudioconf-2020/production-grade-shiny-apps-with-golem/)
 
 ### Cheatsheet
 
--   [{golem} cheatsheet](https://thinkr.fr/golem_cheatsheet_v0.1.pdf)
+  - [{golem} cheatsheet](https://thinkr.fr/golem_cheatsheet_v0.1.pdf)
 
 ### Examples apps
 
@@ -79,26 +82,30 @@ These are examples from the community. Please note that they may not
 necessarily be written in a canonical fashion and may have been written
 with different versions of `{golem}` or `{shiny}`.
 
--   <https://github.com/seanhardison1/vcrshiny>
--   <https://github.com/CDU-data-science-team/healthcareSPC>
--   <https://github.com/marton-balazs-kovacs/tenzing>
--   <https://github.com/shahreyar-abeer/cranstars>
+  - <https://github.com/seanhardison1/vcrshiny>
+  - <https://github.com/CDU-data-science-team/healthcareSPC>
+  - <https://github.com/marton-balazs-kovacs/tenzing>
+  - <https://github.com/shahreyar-abeer/cranstars>
 
 You can also find apps at:
 
--   <https://connect.thinkr.fr/connect/>
--   <https://github.com/ColinFay/golemexamples>
+  - <https://connect.thinkr.fr/connect/>
+  - <https://github.com/ColinFay/golemexamples>
 
 ## Installation
 
--   You can install the stable version from CRAN with:
+  - You can install the stable version from CRAN with:
+
+<!-- end list -->
 
 ``` r
 install.packages("golem")
 ```
 
--   You can install the development version from
+  - You can install the development version from
     [GitHub](https://github.com/Thinkr-open/golem) with:
+
+<!-- end list -->
 
 ``` r
 # install.packages("remotes")
@@ -107,14 +114,18 @@ remotes::install_github("Thinkr-open/golem")
 
 ## Launch the project
 
-Create a new package with the project template:
+Create a new package with the project
+template:
 
 <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png" width="80%" style="display: block; margin: auto;" />
 
 ## Step by step guide
 
 See full documentation in the {pkgdown} website:
-<https://thinkr-open.github.io/golem/index.html>
+
+\[CRAN\] <https://thinkr-open.github.io/golem/>
+
+\[dev\] <https://thinkr-open.github.io/golem/dev>
 
 After project creation, you’ll land on `dev/01_start.R`. There are also
 `dev/02_dev.R` and `dev/03_deploy.R`
@@ -145,3 +156,17 @@ Vignette for a detailed walkthrough.
 Please note that this project is released with a [Contributor Code of
 Conduct](https://www.contributor-covenant.org/version/1/0/0/code-of-conduct.html).
 By participating in this project you agree to abide by its terms.
+
+## Note for the contributors
+
+Please style the files according to `grkstyle::grk_style_transformer()`
+
+``` r
+# If you work in RStudio
+options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
+
+# If you work in VSCode
+options(languageserver.formatting_style = function(options) {
+  grkstyle::grk_style_transformer()
+})
+```

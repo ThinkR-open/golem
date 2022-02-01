@@ -1,6 +1,8 @@
 ### lib
 library(golem)
 library(withr)
+old_usethis.quiet <- getOption("usethis.quiet")
+options("usethis.quiet" = TRUE)
 ### Funs
 remove_file <- function(path) {
   if (file.exists(path)) unlink(path, force = TRUE)

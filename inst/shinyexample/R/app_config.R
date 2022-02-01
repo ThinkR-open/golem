@@ -19,6 +19,7 @@ app_sys <- function(...){
 #' @param config GOLEM_CONFIG_ACTIVE value. If unset, R_CONFIG_ACTIVE. 
 #' If unset, "default".
 #' @param use_parent Logical, scan the parent directory for config file.
+#' @param file Location of the config file
 #' 
 #' @noRd
 get_golem_config <- function(
@@ -30,13 +31,14 @@ get_golem_config <- function(
       "default"
     )
   ), 
-  use_parent = TRUE
+  use_parent = TRUE,
+  # Modify this if your config file is somewhere else
+  file = app_sys("golem-config.yml")
 ){
   config::get(
     value = value, 
     config = config, 
-    # Modify this if your config file is somewhere else:
-    file = app_sys("golem-config.yml"), 
+    file = file, 
     use_parent = use_parent
   )
 }
