@@ -20,6 +20,8 @@
 
 ## New features
 
++ The `02_dev.R` file now suggests using `attachment::att_amend_desc()` (#787)
+
 + `use_code_of_conduct()` in dev script now has the contact param (#812)
 
 + All `with_test` params are now TRUE in the dev script (#801)
