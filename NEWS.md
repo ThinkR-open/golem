@@ -54,6 +54,8 @@
 
 ## Bug fix
 
++ We now require the correct `{usethis}` version (822)
+
 + `golem::amend_config()` now keeps the `!expr`  (#709, @teofiln)
 
 + recommended tests now use `expect_type()` instead of `expect_is`, which was deprecated from `{testthat}` (#671)
