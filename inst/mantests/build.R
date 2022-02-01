@@ -73,8 +73,9 @@ cli::cat_rule("Install crystalmountains")
 
 install_github(
   "thinkr-open/crystalmountains",
-  lib.loc = temp_lib, ,
-  auth_token = Sys.getenv("ACCESS_TOKEN")
+  lib.loc = temp_lib,
+  ,
+  auth_token = Sys.getenv("GITHUB_PAT")
 )
 
 # Going to the temp dir and create a new golem
