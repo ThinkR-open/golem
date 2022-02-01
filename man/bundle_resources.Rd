@@ -14,7 +14,8 @@ bundle_resources(
   attachment = NULL,
   package = NULL,
   all_files = TRUE,
-  app_builder = "golem"
+  app_builder = "golem",
+  with_sparkles = FALSE
 )
 }
 \arguments{
@@ -44,6 +45,8 @@ dependency files.}
 
 \item{app_builder}{The name of the app builder to add as a meta tag.
 Turn to NULL if you don't want this meta tag to be included.}
+
+\item{with_sparkles}{C'est quand que tu vas mettre des paillettes dans ma vie Kevin?}
 }
 \value{
 an htmlDependency

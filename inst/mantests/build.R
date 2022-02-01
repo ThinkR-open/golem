@@ -291,10 +291,23 @@ expect_true(
 
 golem::use_recommended_deps()
 
+golem::use_utils_ui(with_test = TRUE)
+expect_true(
+  file.exists("R/golem_utils_ui.R")
+)
+expect_true(
+  file.exists("tests/testthat/test-golem_utils_ui.R")
+)
+
+golem::use_utils_server()
+expect_true(
+  file.exists("R/golem_utils_server.R")
+)
+
 cat_ok()
 
 # Going through 02_dev ----
-cli::cat_rule("Going through 01_start.R")
+cli::cat_rule("Going through 02_dev.R")
 
 cli::cat_rule("Testing usepackage")
 if (!requireNamespace("cranlogs")) {

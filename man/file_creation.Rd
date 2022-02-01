@@ -10,7 +10,8 @@ add_fct(
   module = NULL,
   pkg = get_golem_wd(),
   open = TRUE,
-  dir_create = TRUE
+  dir_create = TRUE,
+  with_test = FALSE
 )
 
 add_utils(
@@ -18,7 +19,8 @@ add_utils(
   module = NULL,
   pkg = get_golem_wd(),
   open = TRUE,
-  dir_create = TRUE
+  dir_create = TRUE,
+  with_test = FALSE
 )
 }
 \arguments{
@@ -32,6 +34,8 @@ in the naming (you don't need to add the leading \code{mod_}).}
 \item{open}{Should the created file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+
+\item{with_test}{should the module be created with tests?}
 }
 \value{
 The path to the file, invisibly.

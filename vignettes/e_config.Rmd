@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 library(golem)
 x <- file.path(
-  tempdir(), 
+  tempdir(),
   "golex"
 )
 unlink(x, TRUE, TRUE)
@@ -40,7 +40,8 @@ This config file is based on the [`{config}`](https://github.com/rstudio/config)
 Here is what the default config file looks like:
 
 ```{r echo = FALSE, comment= ""}
-glue::as_glue(
+cat(
+  sep = "\n",
   readLines(
     "inst/golem-config.yml"
   )
@@ -84,12 +85,12 @@ If you're already familiar with the `{config}` package, you can use this file ju
 
 ```{r}
 amend_golem_config(
-  key = "where", 
+  key = "where",
   value = "indev"
 )
 amend_golem_config(
-  key = "where", 
-  value = "inprod", 
+  key = "where",
+  value = "inprod",
   config = "production"
 )
 ```
@@ -97,7 +98,8 @@ amend_golem_config(
 Will result in a `golem-config.yml` file as such:
 
 ```{r echo = FALSE, comment= ""}
-glue::as_glue(
+cat(
+  sep = "\n",
   readLines(
     file.path(x, "inst/golem-config.yml")
   )
@@ -114,7 +116,7 @@ get_golem_config(
   "where"
 )
 get_golem_config(
-  "where", 
+  "where",
   config = "production"
 )
 ```

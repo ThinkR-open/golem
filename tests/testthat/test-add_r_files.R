@@ -6,11 +6,14 @@ test_that("add_fct and add_utils", {
     remove_file(util_file)
     remove_file(fct_file)
     remove_file(mod)
-    add_fct("ui", pkg = pkg, open = FALSE)
-    add_utils("ui", pkg = pkg, open = FALSE)
+    add_fct("ui", pkg = pkg, open = FALSE, with_test = TRUE)
+    add_utils("ui", pkg = pkg, open = FALSE, with_test = TRUE)
 
     expect_true(file.exists(util_file))
     expect_true(file.exists(fct_file))
+    expect_true(file.exists("tests/testthat/test-utils_ui.R"))
+    expect_true(file.exists("tests/testthat/test-fct_ui.R"))
+
     rand <- rand_name()
     add_module(rand, pkg = pkg, open = FALSE)
     add_fct("ui", rand, pkg = pkg, open = FALSE)

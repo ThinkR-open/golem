@@ -25,7 +25,7 @@ golem::set_golem_options()
 
 golem::use_recommended_tests()
 golem::use_recommended_deps()
-golem::use_utils_ui()
+golem::use_utils_ui(with_test = TRUE)
 golem::use_utils_server()
 
 golem::add_module(
