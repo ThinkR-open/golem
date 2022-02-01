@@ -18,7 +18,7 @@ $(document).ready(function () {
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>", 
+  comment = "#>",
   eval = FALSE
 )
 ```
@@ -37,10 +37,12 @@ To run the app, go to the `dev/run_dev.R` file, and run the all thing.
 
 ### Add dependencies
 
-To be called each time you need a new package as a dependency:
+You can use `attachment::att_amend_desc()` to parse the code in your `.R` files, detect `@import` `@importFrom` and `::`, and fill your `DESCRIPTION` accordingly.
+
+Note that the `{attachment}` package should be installed on your machine. 
 
 ```{r}
-usethis::use_package("pkg")
+attachment::att_amend_desc()
 ```
 
 About [package dependencies](https://r-pkgs.org/namespace.html).
@@ -50,27 +52,25 @@ About [package dependencies](https://r-pkgs.org/namespace.html).
 The `golem::add_module()` functions creates a module in the `R` folder. The file and the modules will be named after the `name` parameter, by adding `mod_` to the R file, and `mod_*_ui` and `mod_*_server` to the UI and server functions.
 
 ```{r}
-golem::add_module( name = "my_first_module" ) # Name of the module
+golem::add_module(name = "my_first_module") # Name of the module
 ```
 
 The new file will contain:
 
 ```{r}
 # mod_UI
-mod_my_first_module_ui <- function(id){
+mod_my_first_module_ui <- function(id) {
   ns <- NS(id)
-  tagList(
-  
-  )
+  tagList()
 }
 
-mod_my_first_module_server <- function(input, output, session){
+mod_my_first_module_server <- function(input, output, session) {
   ns <- session$ns
 }
-    
+
 ## To be copied in the UI
 # mod_my_first_module_ui("my_first_module_1")
-    
+
 ## To be copied in the server
 # callModule(mod_my_first_module_server, "my_first_module_1")
 ```
@@ -80,8 +80,8 @@ At the end of the file, you will find a piece of code that has to be copied and 
 ## Add function files 
 
 ```{r}
-golem::add_fct( "helpers" ) 
-golem::add_utils( "helpers" )
+golem::add_fct("helpers")
+golem::add_utils("helpers")
 ```
 
 These two function create `R/fct_helpers.R` and `R/utils_helpers.R`, two file you can use to add business logic functions.
@@ -136,7 +136,7 @@ About [data in a package](https://r-pkgs.org/data.html).
 Add more tests to your application:
 
 ```{r}
-usethis::use_test( "app" )
+usethis::use_test("app")
 ```
 
 About [testing a package](https://r-pkgs.org/tests.html).
@@ -167,9 +167,9 @@ There's a series of tools to make your app behave differently whether it's in de
 Setting this options at the beginning of your dev process allows to make your app behave in a specific way when you are in dev mode. For example, printing message to the console with `cat_dev()`.
 
 ```{r eval = TRUE}
-options( "golem.app.prod" = TRUE)
+options("golem.app.prod" = TRUE)
 golem::cat_dev("hey\n")
-options( "golem.app.prod" = FALSE)
+options("golem.app.prod" = FALSE)
 golem::cat_dev("hey\n")
 ```
 
@@ -178,7 +178,7 @@ You can then make any function being "dev-dependent" with the `make_dev()` funct
 ```{r eval = TRUE}
 log_dev <- golem::make_dev(log)
 log_dev(10)
-options( "golem.app.prod" = TRUE)
+options("golem.app.prod" = TRUE)
 log_dev(10)
 ```
 
