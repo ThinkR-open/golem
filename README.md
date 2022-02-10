@@ -18,6 +18,15 @@ status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/
 `{golem}` is an opinionated framework for building production-grade
 shiny applications.
 
+## About
+
+You’re reading the doc about version :
+
+``` r
+desc::desc_get_version()
+#> [1] '0.3.2'
+```
+
 ## Tool series
 
 This package is part of a series of tools for Shiny, which includes:

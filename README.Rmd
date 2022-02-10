@@ -25,6 +25,15 @@ knitr::opts_chunk$set(
 
 `{golem}` is an opinionated framework for building production-grade shiny applications.
 
+## About
+
+You're reading the doc about version : 
+
+```{r eval = TRUE}
+desc::desc_get_version()
+```
+
+
 ## Tool series
 
 This package is part of a series of tools for Shiny, which includes:
@@ -140,7 +149,7 @@ Please note that this project is released with a [Contributor Code of Conduct](h
 
 Please style the files according to `grkstyle::grk_style_transformer()`
 
-```{r}
+```{r eval = FALSE}
 # If you work in RStudio
 options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
 
