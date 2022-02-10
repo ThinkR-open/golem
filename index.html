@@ -19,10 +19,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A Framework for Robust Shiny Applications">
-<meta property="og:description" content="An opinionated framework for building a
-    production-ready Shiny application. This package contains a series
-    of tools for building a robust Shiny application from start to
-    finish.">
+<meta property="og:description" content="An opinionated framework for building a production-ready
+    Shiny application. This package contains a series of tools for
+    building a robust Shiny application from start to finish.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax
@@ -47,6 +46,8 @@
 -->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -59,18 +60,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -118,7 +113,7 @@
 </div>
         </li>
         <li>
-  <a href="https://github.com/ThinkR-open/golem/">
+  <a href="https://github.com/ThinkR-open/golem/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -138,150 +133,174 @@
 
 
 <!-- badges: end -->
-<div id="golem-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#golem-" class="anchor"></a>{golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120">
+<div class="section level1">
+<div class="page-header"><h1 id="golem-">{golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#golem-"></a>
 </h1></div>
-<p><a href="https://github.com/ThinkR-open/golem">golem</a> is an opinionated framework for building production-grade shiny applications.</p>
-<div id="tool-series" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tool-series" class="anchor"></a>Tool series</h2>
+<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> is an opinionated framework for building production-grade shiny applications.</p>
+<div class="section level2">
+<h2 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
+</h2>
+<p>You’re reading the doc about version :</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">desc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/desc/man/desc_get_version.html" class="external-link">desc_get_version</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] '0.3.2'</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="tool-series">Tool series<a class="anchor" aria-label="anchor" href="#tool-series"></a>
+</h2>
 <p>This package is part of a series of tools for Shiny, which includes:</p>
 <ul>
 <li>
-<a href="https://github.com/ThinkR-open/golem">golem</a> - <a href="https://github.com/ThinkR-open/golem" class="uri">https://github.com/ThinkR-open/golem</a>
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> - <a href="https://github.com/ThinkR-open/golem" class="external-link uri">https://github.com/ThinkR-open/golem</a>
 </li>
 <li>
-<code>{shinipsum}</code> - <a href="https://github.com/ThinkR-open/shinipsum" class="uri">https://github.com/ThinkR-open/shinipsum</a>
+<a href="https://github.com/Thinkr-open/shinipsum" class="external-link">shinipsum</a> - <a href="https://github.com/ThinkR-open/shinipsum" class="external-link uri">https://github.com/ThinkR-open/shinipsum</a>
 </li>
 <li>
-<code>{fakir}</code> - <a href="https://github.com/ThinkR-open/fakir" class="uri">https://github.com/ThinkR-open/fakir</a>
+<code>{fakir}</code> - <a href="https://github.com/ThinkR-open/fakir" class="external-link uri">https://github.com/ThinkR-open/fakir</a>
 </li>
 <li>
-<code>{shinysnippets}</code> - <a href="https://github.com/ThinkR-open/shinysnippets" class="uri">https://github.com/ThinkR-open/shinysnippets</a>
+<code>{shinysnippets}</code> - <a href="https://github.com/ThinkR-open/shinysnippets" class="external-link uri">https://github.com/ThinkR-open/shinysnippets</a>
 </li>
 </ul>
 </div>
-<div id="resources" class="section level2">
-<h2 class="hasAnchor">
-<a href="#resources" class="anchor"></a>Resources</h2>
-<div id="the-book-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-book-" class="anchor"></a>The Book :</h3>
+<div class="section level2">
+<h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>
+</h2>
+<div class="section level3">
+<h3 id="the-book-">The Book :<a class="anchor" aria-label="anchor" href="#the-book-"></a>
+</h3>
 <ul>
-<li><a href="https://engineering-shiny.org/" class="uri">https://engineering-shiny.org/</a></li>
+<li><a href="https://engineering-shiny.org/" class="external-link uri">https://engineering-shiny.org/</a></li>
+<li><a href="https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022" class="external-link">paper version of the book “Engineering Production-Grade Shiny Apps”</a></li>
 </ul>
 </div>
-<div id="blog-posts-" class="section level3">
-<h3 class="hasAnchor">
-<a href="#blog-posts-" class="anchor"></a>Blog posts :</h3>
+<div class="section level3">
+<h3 id="blog-posts-">Blog posts :<a class="anchor" aria-label="anchor" href="#blog-posts-"></a>
+</h3>
 <p><em>Building Big Shiny Apps</em></p>
 <ul>
-<li>Part 1: <a href="https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/" class="uri">https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/</a>
+<li>Part 1: <a href="https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/" class="external-link uri">https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/</a>
 </li>
-<li>Part 2: <a href="https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/" class="uri">https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/</a>
+<li>Part 2: <a href="https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/" class="external-link uri">https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/</a>
+</li>
+</ul>
+<p><a href="https://towardsdatascience.com/production-grade-r-shiny-with-golem-prototyping-51b03f37c2a9" class="external-link"><em>Make a Fitness App from scratch</em></a></p>
+</div>
+<div class="section level3">
+<h3 id="slide-decks">Slide decks<a class="anchor" aria-label="anchor" href="#slide-decks"></a>
+</h3>
+<ul>
+<li>useR! 2019 : <a href="https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf" class="external-link">A Framework for Building Robust &amp; Production Ready Shiny Apps</a>
+</li>
+<li>ThinkR x RStudio Roadshow,Paris : <a href="https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem" class="external-link">Production-grade Shiny Apps with {golem}</a>
+</li>
+<li>rstudio::conf(2020) : <a href="https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem" class="external-link">Production-grade Shiny Apps with golem</a>
+</li>
+<li>barcelonar (2019-12-03) : <a href="https://www.barcelonar.org/presentations/BarcelonaR_Building_Production_Grade_Shiny_Apps_with_golem.pdf" class="external-link">Engineering Production-Grade Shiny Apps with {golem}</a>
 </li>
 </ul>
 </div>
-<div id="slide-decks" class="section level3">
-<h3 class="hasAnchor">
-<a href="#slide-decks" class="anchor"></a>Slide decks</h3>
+<div class="section level3">
+<h3 id="video">Video<a class="anchor" aria-label="anchor" href="#video"></a>
+</h3>
 <ul>
-<li>useR! 2019 : <a href="https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf">A Framework for Building Robust &amp; Production Ready Shiny Apps</a>
+<li><a href="https://www.youtube.com/watch?v=OU1-CkSVdTI" class="external-link">{golem} and Effective Shiny Development Methods</a></li>
+<li><a href="https://shinydevseries.com/post/golem-demo/" class="external-link">Hands-on demonstration of {golem}</a></li>
+<li>useR! 2019 : <a href="https://youtu.be/tCAan6smrjs" class="external-link">A Framework for Building Robust &amp; Production Ready Shiny Apps</a>
 </li>
-<li>ThinkR x RStudio Roadshow,Paris : <a href="https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem">Production-grade Shiny Apps with {golem}</a>
+<li>🇫🇷 <a href="https://youtu.be/6qI4NzxlAFU" class="external-link">Introduction to {golem}</a>
 </li>
-<li>rstudio::conf(2020) : <a href="https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem">Production-grade Shiny Apps with golem</a>
+<li>rstudio::conf(2020) : <a href="https://www.rstudio.com/resources/rstudioconf-2020/production-grade-shiny-apps-with-golem/" class="external-link">Production-grade Shiny Apps with golem</a>
 </li>
 </ul>
 </div>
-<div id="video" class="section level3">
-<h3 class="hasAnchor">
-<a href="#video" class="anchor"></a>Video</h3>
+<div class="section level3">
+<h3 id="cheatsheet">Cheatsheet<a class="anchor" aria-label="anchor" href="#cheatsheet"></a>
+</h3>
 <ul>
-<li><a href="https://www.youtube.com/watch?v=OU1-CkSVdTI">{golem} and Effective Shiny Development Methods</a></li>
-<li><a href="https://shinydevseries.com/post/golem-demo/">Hands-on demonstration of {golem}</a></li>
-<li>useR! 2019 : <a href="https://youtu.be/tCAan6smrjs">A Framework for Building Robust &amp; Production Ready Shiny Apps</a>
-</li>
-<li>🇫🇷 <a href="https://youtu.be/6qI4NzxlAFU">Introduction to {golem}</a>
-</li>
-<li>rstudio::conf(2020) : <a href="https://www.rstudio.com/resources/rstudioconf-2020/production-grade-shiny-apps-with-golem/">Production-grade Shiny Apps with golem</a>
-</li>
-<li>🇫🇷 Rencontres R 2021 : <a href="https://www.youtube.com/watch?v=0f5Me1PFGDs">Conception d’applications Shiny avec {golem}</a>
-</li>
+<li><a href="https://thinkr.fr/golem_cheatsheet_v0.1.pdf" class="external-link">{golem} cheatsheet</a></li>
 </ul>
 </div>
-<div id="cheatsheet" class="section level3">
-<h3 class="hasAnchor">
-<a href="#cheatsheet" class="anchor"></a>Cheatsheet</h3>
+<div class="section level3">
+<h3 id="examples-apps">Examples apps<a class="anchor" aria-label="anchor" href="#examples-apps"></a>
+</h3>
+<p>These are examples from the community. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> or <a href="https://shiny.rstudio.com/" class="external-link">shiny</a>.</p>
 <ul>
-<li><a href="https://thinkr.fr/golem_cheatsheet_v0.1.pdf">{golem} cheatsheet</a></li>
-</ul>
-</div>
-<div id="examples-apps" class="section level3">
-<h3 class="hasAnchor">
-<a href="#examples-apps" class="anchor"></a>Examples apps</h3>
-<p>These are examples from the community. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of <a href="https://github.com/ThinkR-open/golem">golem</a> or <a href="https://shiny.rstudio.com/">shiny</a>.</p>
-<ul>
-<li><a href="https://github.com/seanhardison1/vcrshiny" class="uri">https://github.com/seanhardison1/vcrshiny</a></li>
-<li><a href="https://github.com/CDU-data-science-team/healthcareSPC" class="uri">https://github.com/CDU-data-science-team/healthcareSPC</a></li>
-<li><a href="https://github.com/marton-balazs-kovacs/tenzing" class="uri">https://github.com/marton-balazs-kovacs/tenzing</a></li>
-<li><a href="https://github.com/shahreyar-abeer/cranstars" class="uri">https://github.com/shahreyar-abeer/cranstars</a></li>
+<li><a href="https://github.com/seanhardison1/vcrshiny" class="external-link uri">https://github.com/seanhardison1/vcrshiny</a></li>
+<li><a href="https://github.com/CDU-data-science-team/healthcareSPC" class="external-link uri">https://github.com/CDU-data-science-team/healthcareSPC</a></li>
+<li><a href="https://github.com/marton-balazs-kovacs/tenzing" class="external-link uri">https://github.com/marton-balazs-kovacs/tenzing</a></li>
+<li><a href="https://github.com/shahreyar-abeer/cranstars" class="external-link uri">https://github.com/shahreyar-abeer/cranstars</a></li>
 </ul>
 <p>You can also find apps at:</p>
 <ul>
-<li><a href="https://connect.thinkr.fr/connect/" class="uri">https://connect.thinkr.fr/connect/</a></li>
-<li><a href="https://github.com/ColinFay/golemexamples" class="uri">https://github.com/ColinFay/golemexamples</a></li>
+<li><a href="https://connect.thinkr.fr/connect/" class="external-link uri">https://connect.thinkr.fr/connect/</a></li>
+<li><a href="https://github.com/ColinFay/golemexamples" class="external-link uri">https://github.com/ColinFay/golemexamples</a></li>
 </ul>
 </div>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <ul>
 <li>You can install the stable version from CRAN with:</li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"golem"</span><span class="op">)</span></code></pre></div>
-<ul>
-<li>You can install the development version from <a href="https://github.com/Thinkr-open/golem">GitHub</a> with:</li>
-</ul>
 <!-- end list --><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"golem"</span><span class="op">)</span></code></pre></div>
+<ul>
+<li>You can install the development version from <a href="https://github.com/Thinkr-open/golem" class="external-link">GitHub</a> with:</li>
+</ul>
+<!-- end list --><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Thinkr-open/golem"</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Thinkr-open/golem"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="launch-the-project" class="section level2">
-<h2 class="hasAnchor">
-<a href="#launch-the-project" class="anchor"></a>Launch the project</h2>
+<div class="section level2">
+<h2 id="launch-the-project">Launch the project<a class="anchor" aria-label="anchor" href="#launch-the-project"></a>
+</h2>
 <p>Create a new package with the project template:</p>
 <p><img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
-<div id="step-by-step-guide" class="section level2">
-<h2 class="hasAnchor">
-<a href="#step-by-step-guide" class="anchor"></a>Step by step guide</h2>
-<p>See full documentation in the {pkgdown} website: <a href="https://thinkr-open.github.io/golem/index.html" class="uri">https://thinkr-open.github.io/golem/index.html</a></p>
+<div class="section level2">
+<h2 id="step-by-step-guide">Step by step guide<a class="anchor" aria-label="anchor" href="#step-by-step-guide"></a>
+</h2>
+<p>See full documentation in the {pkgdown} website:</p>
+<p>[CRAN] <a href="https://thinkr-open.github.io/golem/" class="external-link uri">https://thinkr-open.github.io/golem/</a></p>
+<p>[dev] <a href="https://thinkr-open.github.io/golem/dev" class="external-link uri">https://thinkr-open.github.io/golem/dev</a></p>
 <p>After project creation, you’ll land on <code>dev/01_start.R</code>. There are also <code>dev/02_dev.R</code> and <code>dev/03_deploy.R</code></p>
 <p>These files are used to keep a track of all the steps you’ll be following while building your app.</p>
-<div id="step-1--getting-started" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-1--getting-started" class="anchor"></a>Step 1 : Getting Started</h3>
-<p>Read <a href="https://thinkr-open.github.io/golem/articles/a_start.html">the Getting Started</a> Vignette for a detailed walkthrough.</p>
+<div class="section level3">
+<h3 id="step-1--getting-started">Step 1 : Getting Started<a class="anchor" aria-label="anchor" href="#step-1--getting-started"></a>
+</h3>
+<p>Read <a href="https://thinkr-open.github.io/golem/articles/a_start.html" class="external-link">the Getting Started</a> Vignette for a detailed walkthrough.</p>
 </div>
-<div id="step-2--day-to-day-dev" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-2--day-to-day-dev" class="anchor"></a>Step 2 : Day to Day Dev</h3>
-<p>Read <a href="https://thinkr-open.github.io/golem/articles/b_dev.html">Day to Day Dev</a> Vignette for a detailed walkthrough.</p>
+<div class="section level3">
+<h3 id="step-2--day-to-day-dev">Step 2 : Day to Day Dev<a class="anchor" aria-label="anchor" href="#step-2--day-to-day-dev"></a>
+</h3>
+<p>Read <a href="https://thinkr-open.github.io/golem/articles/b_dev.html" class="external-link">Day to Day Dev</a> Vignette for a detailed walkthrough.</p>
 </div>
-<div id="step-3-deploy" class="section level3">
-<h3 class="hasAnchor">
-<a href="#step-3-deploy" class="anchor"></a>Step 3: deploy</h3>
-<p>Read <a href="https://thinkr-open.github.io/golem/articles/c_deploy.html">Deploying Apps with {golem}</a> Vignette for a detailed walkthrough.</p>
+<div class="section level3">
+<h3 id="step-3-deploy">Step 3: deploy<a class="anchor" aria-label="anchor" href="#step-3-deploy"></a>
+</h3>
+<p>Read <a href="https://thinkr-open.github.io/golem/articles/c_deploy.html" class="external-link">Deploying Apps with {golem}</a> Vignette for a detailed walkthrough.</p>
 </div>
 </div>
-<div id="coc" class="section level2">
-<h2 class="hasAnchor">
-<a href="#coc" class="anchor"></a>CoC</h2>
-<p>Please note that this project is released with a <a href="https://www.contributor-covenant.org/version/1/0/0/code-of-conduct.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+<div class="section level2">
+<h2 id="coc">CoC<a class="anchor" aria-label="anchor" href="#coc"></a>
+</h2>
+<p>Please note that this project is released with a <a href="https://www.contributor-covenant.org/version/1/0/0/code-of-conduct.html" class="external-link">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
+</div>
+<div class="section level2">
+<h2 id="note-for-the-contributors">Note for the contributors<a class="anchor" aria-label="anchor" href="#note-for-the-contributors"></a>
+</h2>
+<p>Please style the files according to <code>grkstyle::grk_style_transformer()</code></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># If you work in RStudio</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>styler.addins_style_transformer <span class="op">=</span> <span class="st">"grkstyle::grk_style_transformer()"</span><span class="op">)</span>
+
+<span class="co"># If you work in VSCode</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>languageserver.formatting_style <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">options</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">grkstyle</span><span class="fu">::</span><span class="fu">grk_style_transformer</span><span class="op">(</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 
@@ -289,63 +308,70 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=golem">https://​cloud.r-project.org/​package=golem</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/ThinkR-open/golem/">https://​github.com/​ThinkR-open/​golem/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/ThinkR-open/golem/issues">https://​github.com/​ThinkR-open/​golem/​issues</a>
-</li>
+<li><a href="https://github.com/ThinkR-open/golem/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ThinkR-open/golem/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Colin Fay <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0001-7343-1846" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Vincent Guyader <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-0671-9270" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> <br><small>(previous maintainer)</small>
-</li>
-<li>Sébastien Rochette <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-1565-9313" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Cervan Girard <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4816-4624" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing golem</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
-<li><a href="https://github.com/ThinkR-open/golem/actions"><img src="https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/github/ThinkR-open/golem?branch=master"><img src="https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
-<li><a href="https://cran.r-project.org/package=golem"><img src="https://www.r-pkg.org/badges/version/golem" alt="CRAN status"></a></li>
+<li>Colin Fay <br><small class="roles"> Maintainer, author </small> <a href="https://orcid.org/0000-0001-7343-1846" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Vincent Guyader <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-0671-9270" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Sébastien Rochette <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-1565-9313" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Cervan Girard <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4816-4624" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://github.com/ThinkR-open/golem/actions" class="external-link"><img src="https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/github/ThinkR-open/golem?branch=master" class="external-link"><img src="https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+<li><a href="https://cran.r-project.org/package=golem" class="external-link"><img src="https://www.r-pkg.org/badges/version/golem" alt="CRAN status"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="thinkr">
-  <p>golem is a  <strong>ThinkR</strong> package. Learn more at <a href="https://rtask.thinkr.fr">rtask.thinkr.fr</a>.</p>
+  <p></p>
+<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
 <div class="author">
   <p>
-    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+    Developed by .
+    Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
 
@@ -354,6 +380,8 @@
 
   
 
+
+  
 
   </body>
 </html>

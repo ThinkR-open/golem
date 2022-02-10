@@ -44,6 +44,8 @@
 -->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -56,18 +58,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -115,7 +111,7 @@
 </div>
         </li>
         <li>
-  <a href="https://github.com/ThinkR-open/golem/">
+  <a href="https://github.com/ThinkR-open/golem/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -136,22 +132,22 @@
       <h1 data-toc-skip>Extending {golem}</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/f_extending_golem.Rmd"><code>vignettes/f_extending_golem.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/f_extending_golem.Rmd" class="external-link"><code>vignettes/f_extending_golem.Rmd</code></a></small>
       <div class="hidden name"><code>f_extending_golem.Rmd</code></div>
 
     </div>
 
     
     
-<p>This Vignette discusses how you can extend <a href="https://github.com/ThinkR-open/golem">golem</a>.</p>
-<div id="project-hooks" class="section level2">
-<h2 class="hasAnchor">
-<a href="#project-hooks" class="anchor"></a>Project Hooks</h2>
-<div id="what-it-is" class="section level3">
-<h3 class="hasAnchor">
-<a href="#what-it-is" class="anchor"></a>What it is</h3>
-<p>The <code><a href="../reference/create_golem.html">create_golem()</a></code> function comes with a <code>project_hook</code> parameter, a function run just after the <a href="https://github.com/ThinkR-open/golem">golem</a> project creation. It can be used to modify the project structure automatically just after its creation.</p>
-<p>This allows to define custom behavior when creating <a href="https://github.com/ThinkR-open/golem">golem</a> based app, that can be used for:</p>
+<p>This Vignette discusses how you can extend <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>.</p>
+<div class="section level2">
+<h2 id="project-hooks">Project Hooks<a class="anchor" aria-label="anchor" href="#project-hooks"></a>
+</h2>
+<div class="section level3">
+<h3 id="what-it-is">What it is<a class="anchor" aria-label="anchor" href="#what-it-is"></a>
+</h3>
+<p>The <code><a href="../reference/create_golem.html">create_golem()</a></code> function comes with a <code>project_hook</code> parameter, a function run just after the <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> project creation. It can be used to modify the project structure automatically just after its creation.</p>
+<p>This allows to define custom behavior when creating <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> based app, that can be used for:</p>
 <ul>
 <li><p>Adding a different front-end template in <code>R/app_ui.R</code></p></li>
 <li><p>Changing configuration options in <code>inst/golem-config.yml</code></p></li>
@@ -160,24 +156,23 @@
 <li><p>etc.</p></li>
 </ul>
 </div>
-<div id="how-it-works" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-it-works" class="anchor"></a>How it works</h3>
-<p>The function is called <strong>after</strong> the default project has been created, and is executed <strong>in the directory of the created package</strong>. Here is a rough step by step of what happens when a project is created with <a href="https://github.com/ThinkR-open/golem">golem</a>:</p>
+<div class="section level3">
+<h3 id="how-it-works">How it works<a class="anchor" aria-label="anchor" href="#how-it-works"></a>
+</h3>
+<p>The function is called <strong>after</strong> the default project has been created, and is executed <strong>in the directory of the created package</strong>. Here is a rough step by step of what happens when a project is created with <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>:</p>
 <ol style="list-style-type: decimal">
 <li>The package name is generated</li>
 <li>The directory that will receive the package is created</li>
-<li>Default <a href="https://github.com/ThinkR-open/golem">golem</a> template is copied and pasted</li>
+<li>Default <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> template is copied and pasted</li>
 <li>R moves to the directory of the newly created project, and runs the <code>project_hook</code> function</li>
 <li>R moves back to the previous directory, and removes comments if needed</li>
 <li>Project is open</li>
 </ol>
 </div>
-<div id="defining-your-own-project_hook" class="section level3">
-<h3 class="hasAnchor">
-<a href="#defining-your-own-project_hook" class="anchor"></a>Defining your own <code>project_hook</code>
+<div class="section level3">
+<h3 id="defining-your-own-project_hook">Defining your own <code>project_hook</code><a class="anchor" aria-label="anchor" href="#defining-your-own-project_hook"></a>
 </h3>
-<p>The best way to extend <a href="https://github.com/ThinkR-open/golem">golem</a> project hook functionality is by defining this <code>project_hook</code> function in an external package. This will allow this function to be used inside the <a href="https://github.com/ThinkR-open/golem">golem</a> creation RStudio project creation widget:</p>
+<p>The best way to extend <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> project hook functionality is by defining this <code>project_hook</code> function in an external package. This will allow this function to be used inside the <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> creation RStudio project creation widget:</p>
 <p><img src="rstudioprojecthook.png"></p>
 <blockquote>
 <p>Note that inside this widget, the function should be explicitely namespaced (pkg::fun)</p>
@@ -194,49 +189,49 @@
 </ul>
 <p>These parameters might not be used inside your own hook, but <strong>they need to be set in the hook function skeleton</strong>, for compatibility reasons.</p>
 </div>
-<div id="example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h3>
+<div class="section level3">
+<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h3>
 <p>Here is an example of a function that can be used to remove the <code>dev/</code> folder:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">no_dev</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span>, <span class="va">package_name</span>, <span class="va">...</span><span class="op">)</span><span class="op">{</span>
-   <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/delete.html">dir_delete</a></span><span class="op">(</span><span class="st">"dev"</span><span class="op">)</span>
+   <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="st">"dev"</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="fu"><a href="../reference/create_golem.html">create_golem</a></span><span class="op">(</span><span class="st">"ici"</span>, project_hook <span class="op">=</span> <span class="va">no_dev</span><span class="op">)</span></code></pre></div>
 <p>This one will create a CSS:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">new_css</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span>, <span class="va">package_name</span>, <span class="va">...</span><span class="op">)</span><span class="op">{</span>
   
-  <span class="va">css_path</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/path_math.html">path_abs</a></span><span class="op">(</span><span class="st">"inst/app/www/custom.css"</span><span class="op">)</span>
+  <span class="va">css_path</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path_math.html" class="external-link">path_abs</a></span><span class="op">(</span><span class="st">"inst/app/www/custom.css"</span><span class="op">)</span>
   
-  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/create.html">file_create</a></span><span class="op">(</span><span class="va">css_path</span><span class="op">)</span>
+  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">file_create</a></span><span class="op">(</span><span class="va">css_path</span><span class="op">)</span>
   
   <span class="va">write_there</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/write.html">write</a></span><span class="op">(</span><span class="va">...</span>, file <span class="op">=</span> <span class="va">css_path</span>, append <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/write.html" class="external-link">write</a></span><span class="op">(</span><span class="va">...</span>, file <span class="op">=</span> <span class="va">css_path</span>, append <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
   <span class="op">}</span>
   
   <span class="fu">write_there</span><span class="op">(</span><span class="st">"body {"</span><span class="op">)</span>
   <span class="fu">write_there</span><span class="op">(</span><span class="st">"    background-color:red;"</span><span class="op">)</span>
   <span class="fu">write_there</span><span class="op">(</span><span class="st">"}"</span><span class="op">)</span>
   
-  <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cat_line.html">cat_bullet</a></span><span class="op">(</span><span class="st">"CSS generated"</span><span class="op">)</span>
+  <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cat_line.html" class="external-link">cat_bullet</a></span><span class="op">(</span><span class="st">"CSS generated"</span><span class="op">)</span>
   
 <span class="op">}</span>
 
 <span class="fu"><a href="../reference/create_golem.html">create_golem</a></span><span class="op">(</span><span class="st">"ici"</span>, project_hook <span class="op">=</span> <span class="va">new_css</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="module-templates" class="section level2">
-<h2 class="hasAnchor">
-<a href="#module-templates" class="anchor"></a>Module templates</h2>
-<div id="what-it-is-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#what-it-is-1" class="anchor"></a>What it is</h3>
-<p>Module templates are a way to define your own content for creating the module script in <code>R/</code>. It allows to extend <a href="https://github.com/ThinkR-open/golem">golem</a> module template functionality by creating your own content inside the module file.</p>
+<div class="section level2">
+<h2 id="module-templates">Module templates<a class="anchor" aria-label="anchor" href="#module-templates"></a>
+</h2>
+<div class="section level3">
+<h3 id="what-it-is-1">What it is<a class="anchor" aria-label="anchor" href="#what-it-is-1"></a>
+</h3>
+<p>Module templates are a way to define your own content for creating the module script in <code>R/</code>. It allows to extend <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> module template functionality by creating your own content inside the module file.</p>
 </div>
-<div id="how-it-works-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-it-works-1" class="anchor"></a>How it works</h3>
+<div class="section level3">
+<h3 id="how-it-works-1">How it works<a class="anchor" aria-label="anchor" href="#how-it-works-1"></a>
+</h3>
 <p>The function is called after the file(s) creation. Here is a step by step of what happens when the <code>add_module</code> function is called:</p>
 <ol style="list-style-type: decimal">
 <li>Name is created, and so is the <code>R/</code> directory if needed.</li>
@@ -248,11 +243,10 @@
 </ol>
 <p>(Note that the <code>module_template</code> function is not called if the file already exists).</p>
 </div>
-<div id="defining-your-own-module_template" class="section level3">
-<h3 class="hasAnchor">
-<a href="#defining-your-own-module_template" class="anchor"></a>Defining your own <code>module_template</code>
+<div class="section level3">
+<h3 id="defining-your-own-module_template">Defining your own <code>module_template</code><a class="anchor" aria-label="anchor" href="#defining-your-own-module_template"></a>
 </h3>
-<p>You can then define your own function inside your <a href="https://github.com/ThinkR-open/golem">golem</a> based application, but chances are you will be defining them into your own package.</p>
+<p>You can then define your own function inside your <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> based application, but chances are you will be defining them into your own package.</p>
 <p>Module template functions will receive, by default, the following parameters from <code>add_modules()</code>.</p>
 <ul>
 <li>
@@ -267,35 +261,35 @@
 </ul>
 <p>These parameters might not be used inside your own function, but <strong>they need to be set in the function skeleton</strong>, for compatibility reasons.</p>
 </div>
-<div id="example-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#example-1" class="anchor"></a>Example</h3>
+<div class="section level3">
+<h3 id="example-1">Example<a class="anchor" aria-label="anchor" href="#example-1"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_tmpl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span>, <span class="va">path</span>, <span class="va">export</span>, <span class="va">...</span><span class="op">)</span><span class="op">{</span>
    <span class="co"># Define a template that only write the name of the </span>
    <span class="co"># module in the file</span>
-   <span class="fu"><a href="https://rdrr.io/r/base/write.html">write</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">path</span><span class="op">)</span>
+   <span class="fu"><a href="https://rdrr.io/r/base/write.html" class="external-link">write</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">path</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_module.html">add_module</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"custom"</span>, module_template <span class="op">=</span> <span class="va">my_tmpl</span><span class="op">)</span>
 
 <span class="va">my_other_tmpl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">name</span>, <span class="va">path</span>, <span class="va">...</span><span class="op">)</span><span class="op">{</span>
    <span class="co"># Copy and paste a file from somewhere else</span>
-   <span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span><span class="va">...</span>, <span class="va">path</span><span class="op">)</span>
+   <span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span><span class="va">...</span>, <span class="va">path</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_module.html">add_module</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"custom"</span>, module_template <span class="op">=</span> <span class="va">my_other_tmpl</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="js-css-templates" class="section level2">
-<h2 class="hasAnchor">
-<a href="#js-css-templates" class="anchor"></a>JS &amp; CSS templates</h2>
-<div id="what-it-is-2" class="section level3">
-<h3 class="hasAnchor">
-<a href="#what-it-is-2" class="anchor"></a>What it is</h3>
-<p>JavaScript and CSS template allow to use your own functions to add code when creating JavaScript files, JavaScript handlers and CSS files. These templates work inside <code><a href="../reference/add_js_file.html">add_js_file()</a></code>, <code><a href="../reference/add_js_file.html">add_js_handler()</a></code> and <code><a href="../reference/add_js_file.html">add_css_file()</a></code>.</p>
+<div class="section level2">
+<h2 id="js-css-sass-templates">JS &amp; CSS &amp; SASS templates<a class="anchor" aria-label="anchor" href="#js-css-sass-templates"></a>
+</h2>
+<div class="section level3">
+<h3 id="what-it-is-2">What it is<a class="anchor" aria-label="anchor" href="#what-it-is-2"></a>
+</h3>
+<p>JavaScript, CSS and Sass template allow to use your own functions to add code when creating JavaScript files, JavaScript handlers and CSS or Sass files. These templates work inside <code><a href="../reference/add_files.html">add_js_file()</a></code>, <code><a href="../reference/add_files.html">add_js_handler()</a></code>, <code><a href="../reference/add_files.html">add_css_file()</a></code> and <code><a href="../reference/add_files.html">add_sass_file()</a></code>.</p>
 </div>
-<div id="how-it-works-2" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-it-works-2" class="anchor"></a>How it works</h3>
+<div class="section level3">
+<h3 id="how-it-works-2">How it works<a class="anchor" aria-label="anchor" href="#how-it-works-2"></a>
+</h3>
 <p>The function is called after the file creation. Here is a step by step of what happens when these functions are called:</p>
 <ol style="list-style-type: decimal">
 <li>Name is created</li>
@@ -306,11 +300,10 @@
 </ol>
 <p>(Note that the <code>template</code> function is not called if the file already exists).</p>
 </div>
-<div id="defining-your-own-template" class="section level3">
-<h3 class="hasAnchor">
-<a href="#defining-your-own-template" class="anchor"></a>Defining your own <code>template</code>
+<div class="section level3">
+<h3 id="defining-your-own-template">Defining your own <code>template</code><a class="anchor" aria-label="anchor" href="#defining-your-own-template"></a>
 </h3>
-<p>You can then define your own function inside your <a href="https://github.com/ThinkR-open/golem">golem</a> based application, but chances are you will be defining them into your own package.</p>
+<p>You can then define your own function inside your <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> based application, but chances are you will be defining them into your own package.</p>
 <p>File template functions will receive, by default, the following parameters from the <code>add_*()</code> function.</p>
 <ul>
 <li>
@@ -320,22 +313,22 @@
 </ul>
 <p>These parameters might not be used inside your own function, but <strong>they need to be set in the function skeleton</strong>, for compatibility reasons.</p>
 </div>
-<div id="example-2" class="section level3">
-<h3 class="hasAnchor">
-<a href="#example-2" class="anchor"></a>Example</h3>
+<div class="section level3">
+<h3 id="example-2">Example<a class="anchor" aria-label="anchor" href="#example-2"></a>
+</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">my_tmpl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span>, <span class="va">...</span><span class="op">)</span><span class="op">{</span>
    <span class="co"># Define a template that only write the name of the </span>
    <span class="co"># module in the file</span>
   <span class="va">write_there</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">{</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/write.html">write</a></span><span class="op">(</span><span class="va">...</span>, file <span class="op">=</span> <span class="va">path</span>, append <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/base/write.html" class="external-link">write</a></span><span class="op">(</span><span class="va">...</span>, file <span class="op">=</span> <span class="va">path</span>, append <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
   <span class="op">}</span>
   
   <span class="fu">write_there</span><span class="op">(</span><span class="st">"body {"</span><span class="op">)</span>
   <span class="fu">write_there</span><span class="op">(</span><span class="st">"    background-color:red;"</span><span class="op">)</span>
   <span class="fu">write_there</span><span class="op">(</span><span class="st">"}"</span><span class="op">)</span>
 <span class="op">}</span>
-<span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_js_file.html">add_css_file</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"custom"</span>, template <span class="op">=</span> <span class="va">my_tmpl</span><span class="op">)</span></code></pre></div>
+<span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_files.html">add_css_file</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"custom"</span>, template <span class="op">=</span> <span class="va">my_tmpl</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -351,13 +344,14 @@
 
 
       <footer><div class="thinkr">
-  <p>golem is a  <strong>ThinkR</strong> package. Learn more at <a href="https://rtask.thinkr.fr">rtask.thinkr.fr</a>.</p>
+  <p></p>
+<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
 <div class="author">
   <p>
-    Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.
-    Site built by <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+    Developed by .
+    Site built by <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
   </p>
 </div>
 
@@ -366,6 +360,8 @@
 
   
 
+
+  
 
   </body>
 </html>
