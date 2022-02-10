@@ -1,13 +1,11 @@
 # # For setting back old usethis settings
 try({
-  if (exists("orig_test")){
+  if (exists("orig_test")) {
     usethis::proj_set(orig_test)
   }
-  if (exists("pkg")){
+  if (exists("pkg")) {
     unlink(pkg, TRUE, TRUE)
   }
-  
- 
+
+  options("usethis.quiet" = old_usethis.quiet)
 })
-
-

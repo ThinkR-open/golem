@@ -378,8 +378,7 @@ make_action_button <- function(tag, inputId = NULL) {
 
 # UNCOMMENT AND USE 
 # 
-# usethis::use_package("markdown")
-# usethis::use_package("rmarkdown")
+# attachment::att_amend_desc()
 #   
 # To use this part of the UI
 #   

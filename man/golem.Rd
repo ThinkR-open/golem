@@ -30,6 +30,8 @@ Other contributors:
 \itemize{
   \item Novica Nakov \email{nnovica@gmail.com} [contributor]
   \item David Granjon \email{dgranjon@ymail.com} [contributor]
+  \item Arthur Bréant \email{arthur@thinkr.fr} [contributor]
+  \item Antoine Languillaume \email{antoine@thinkr.fr} [contributor]
   \item ThinkR [copyright holder]
 }
 

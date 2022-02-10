@@ -5,20 +5,17 @@
 #' @export
 #'
 #' @examples
-#' if (interactive()){
+#' if (interactive()) {
 #'   disable_autoload()
 #' }
-#' 
 #' @return The path to the file, invisibly.
-disable_autoload <- function(
-  pkg = get_golem_wd()
-){
+disable_autoload <- function(pkg = get_golem_wd()) {
   fls <- fs::path(
-    pkg, 
+    pkg,
     "R",
     "_disable_autoload.R"
   )
-  if (fs::file_exists(fls)){
+  if (fs::file_exists(fls)) {
     cat_red_bullet(
       "_disable_autoload.R already exists, skipping its creation."
     )
@@ -35,5 +32,4 @@ disable_autoload <- function(
       fls
     )
   )
-  
 }

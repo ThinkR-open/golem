@@ -35,14 +35,14 @@ project_hook <- function(path, package_name, ...) {
 #' @export
 #' @seealso [add_js_handler()]
 js_handler_template <- function(
-  path, 
-  name = "fun", 
+  path,
+  name = "fun",
   code = " "
 ) {
   write_there <- function(...) {
     write(..., file = path, append = TRUE)
   }
-  
+
   write_there("$( document ).ready(function() {")
   write_there(
     sprintf("  Shiny.addCustomMessageHandler('%s', function(arg) {", name)
@@ -55,25 +55,38 @@ js_handler_template <- function(
 #' @export
 #' @rdname template
 js_template <- function(
-  path, 
+  path,
   code = " "
 ) {
   write_there <- function(...) {
     write(..., file = path, append = TRUE)
   }
-  
+
   write_there(code)
 }
 
 #' @export
 #' @rdname template
 css_template <- function(
-  path, 
+  path,
   code = " "
 ) {
   write_there <- function(...) {
     write(..., file = path, append = TRUE)
   }
-  
+
+  write_there(code)
+}
+
+#' @export
+#' @rdname template
+sass_template <- function(
+  path,
+  code = " "
+) {
+  write_there <- function(...) {
+    write(..., file = path, append = TRUE)
+  }
+
   write_there(code)
 }

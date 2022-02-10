@@ -5,4 +5,3 @@ test_that("add_resource_path", {
     )
   })
 })
-

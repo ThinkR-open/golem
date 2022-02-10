@@ -16,8 +16,7 @@ The path to the file, invisibly.
 Disabling Shiny Autoload of R Scripts
 }
 \examples{
-if (interactive()){
+if (interactive()) {
   disable_autoload()
 }
-
 }

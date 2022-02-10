@@ -29,15 +29,15 @@ In previous versions, this function was called add_rconnect_file.
 }
 \examples{
 # Add a file for Connect
-if (interactive()){
-   add_rstudioconnect_file()
+if (interactive()) {
+  add_rstudioconnect_file()
 }
 # Add a file for Shiny Server
-if (interactive()){
-    add_shinyserver_file()
+if (interactive()) {
+  add_shinyserver_file()
 }
 # Add a file for Shinyapps.io
-if (interactive()){
-    add_shinyappsio_file()
+if (interactive()) {
+  add_shinyappsio_file()
 }
 }
