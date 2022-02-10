@@ -5,13 +5,13 @@ hexURL: https://github.com/ThinkR-open/golem/blob/master/inst/rstudio/templates/
 development:
   mode: auto
 
-  reference:
-    - title: Launch app
-      desc: Function `run_dev()` will execute the content of dev/run_dev.R and launch the application
-      contents:
-        - run_dev
-
 reference:
+
+  - title: Launch app
+    desc: Function `run_dev()` will execute the content of dev/run_dev.R and launch the application
+    contents:
+      - run_dev
+
   - title: Create files
     desc: These functions create files inside the inst/app folder. These functions can be used outside of a golem project.
     contents:
