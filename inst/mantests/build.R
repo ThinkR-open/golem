@@ -71,11 +71,20 @@ install_local(
 
 cli::cat_rule("Install crystalmountains")
 
-install_github(
-  "thinkr-open/crystalmountains",
+tmp_cm <- tempfile(fileext = ".zip")
+download.file(
+  "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
+  tmp_cm
+)
+unzip(tmp_cm, exdir = )
+
+remotes::install_local(
+  file.path(
+    dirname(tmp_cm),
+    "crystalmountains-main"
+  ),
   lib.loc = temp_lib,
-  ,
-  auth_token = Sys.getenv("GITHUB_PAT")
+  update = "never"
 )
 
 # Going to the temp dir and create a new golem
