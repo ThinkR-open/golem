@@ -1,4 +1,4 @@
-print(Sys.getenv())
+
 cat("\n")
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
@@ -74,21 +74,21 @@ cli::cat_rule("Install crystalmountains")
 tmp_cm <- tempfile(fileext = ".zip")
 download.file(
   "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
-  tmp_cm
+  "main.zip"
 )
-unzip(tmp_cm, exdir = )
+unzip(tmp_cm)
 
 remotes::install_local(
-  file.path(
-    dirname(tmp_cm),
-    "crystalmountains-main"
-  ),
+  "crystalmountains-main",
   lib.loc = temp_lib,
   update = "never"
 )
+unlink("crystalmountains-main")
 
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
+
+setwd(tempdir())
 
 library(golem)
 
