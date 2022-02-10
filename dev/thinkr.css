@@ -1,0 +1,70 @@
+.container-fluid.main-container {
+    margin-top: 80px;
+}
+h1.title {
+    margin-top: 80px;
+}
+.container-fluid.main-container h1.title {
+    margin-top: 0px;
+}
+.logos {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    left: 0;
+    background: white;
+    border-bottom: solid 1px grey;
+}
+.logos img {
+    margin: 5px;
+    display: block;
+    height: 60px;
+}
+a {
+    color: #15b7d6;
+}
+h1 {
+    color: #DE633C;
+}
+h2 {
+    color: #15b7d6;
+}
+
+/* body */
+body > .container .row {
+    margin-top: 51px;
+}
+
+/* navbar position fixed */
+.navbar-default {
+    background-color: #3b4450;
+    border-color: #3b4450;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background-color: #DE633C;
+    border-radius: 3px;
+}
+.navbar-default .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    background-color: #15b7d6;
+}
+.navbar .version.label.label-default {
+    border-radius: 3px;
+    background-color: #222;
+}
+
+.navbar-brand {
+    background-image: url(logo-thinkr.png);
+    background-size: 32px auto;
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    padding-left: 55px;
+}
+
+.btn-xs, .btn-group-xs > .btn {
+    border-radius: 3px;
+}
+
+code {
+    font-size: 80%;
+}

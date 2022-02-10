@@ -1,0 +1,13 @@
+pandoc: 2.7.3
+pkgdown: 2.0.2
+pkgdown_sha: ~
+articles:
+  a_start: a_start.html
+  b_dev: b_dev.html
+  c_deploy: c_deploy.html
+  d_js: d_js.html
+  e_config: e_config.html
+  f_extending_golem: f_extending_golem.html
+  z_golem_cheatsheet: z_golem_cheatsheet.html
+last_built: 2022-02-10T14:11Z
+
