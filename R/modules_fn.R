@@ -26,18 +26,20 @@
 #' @seealso [module_template()]
 #'
 #' @return The path to the file, invisibly.
-add_module <- function(name,
-                       pkg = get_golem_wd(),
-                       open = TRUE,
-                       dir_create = TRUE,
-                       fct = NULL,
-                       utils = NULL,
-                       js = NULL,
-                       js_handler = NULL,
-                       export = FALSE,
-                       module_template = golem::module_template,
-                       with_test = FALSE,
-                       ...) {
+add_module <- function(
+  name,
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE,
+  fct = NULL,
+  utils = NULL,
+  js = NULL,
+  js_handler = NULL,
+  export = FALSE,
+  module_template = golem::module_template,
+  with_test = FALSE,
+  ...
+) {
   name <- file_path_sans_ext(name)
 
   old <- setwd(path_abs(pkg))
@@ -54,7 +56,8 @@ add_module <- function(name,
   }
 
   where <- path(
-    "R", paste0("mod_", name, ".R")
+    "R",
+    paste0("mod_", name, ".R")
   )
 
   if (!file_exists(where)) {
@@ -143,12 +146,14 @@ add_module <- function(name,
 #' @return Used for side effect
 #' @export
 #' @seealso [add_module()]
-module_template <- function(name,
-                            path,
-                            export,
-                            ph_ui = " ",
-                            ph_server = " ",
-                            ...) {
+module_template <- function(
+  name,
+  path,
+  export,
+  ph_ui = " ",
+  ph_server = " ",
+  ...
+) {
   write_there <- function(...) {
     write(..., file = path, append = TRUE)
   }
@@ -228,9 +233,11 @@ module_template <- function(name,
 #'
 #' @return Used for side effect. Returns the path invisibly.
 #' @export
-use_module_test <- function(name,
-                            pkg = get_golem_wd(),
-                            open = TRUE) {
+use_module_test <- function(
+  name,
+  pkg = get_golem_wd(),
+  open = TRUE
+) {
 
   # Remove the extension if any
   name <- file_path_sans_ext(name)

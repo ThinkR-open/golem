@@ -99,16 +99,16 @@ a generic Dockerfile, while \code{add_dockerfile_shinyproxy()} and
 \examples{
 \donttest{
 # Add a standard Dockerfile
-if (interactive()){
-   add_dockerfile()
+if (interactive()) {
+  add_dockerfile()
 }
 # Add a Dockerfile for ShinyProxy
-if (interactive()){
-    add_dockerfile_shinyproxy()
+if (interactive()) {
+  add_dockerfile_shinyproxy()
 }
 # Add a Dockerfile for Heroku
-if (interactive()){
-    add_dockerfile_heroku()
+if (interactive()) {
+  add_dockerfile_heroku()
 }
 }
 }

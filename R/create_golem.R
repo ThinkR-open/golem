@@ -31,15 +31,17 @@
 #' @export
 #'
 #' @return The path, invisibly.
-create_golem <- function(path,
-                         check_name = TRUE,
-                         open = TRUE,
-                         overwrite = FALSE,
-                         package_name = basename(path),
-                         without_comments = FALSE,
-                         project_hook = golem::project_hook,
-                         with_git = FALSE,
-                         ...) {
+create_golem <- function(
+  path,
+  check_name = TRUE,
+  open = TRUE,
+  overwrite = FALSE,
+  package_name = basename(path),
+  without_comments = FALSE,
+  project_hook = golem::project_hook,
+  with_git = FALSE,
+  ...
+) {
   path <- normalizePath(path, mustWork = FALSE)
 
   if (check_name) {

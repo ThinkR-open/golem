@@ -1,148 +1,159 @@
 test_that("add_dockerfiles", {
   skip_if_not_installed("dockerfiler", "0.1.4")
   with_dir(pkg, {
-    
     for (fun in list(
-      add_dockerfile, 
-      add_dockerfile_heroku, 
+      add_dockerfile,
+      add_dockerfile_heroku,
       add_dockerfile_shinyproxy
-    )){
+    )) {
       burn_after_reading(
-        "Dockerfile", {
+        "Dockerfile",
+        {
           output <- testthat::capture_output(
             fun(pkg = pkg, sysreqs = FALSE, open = FALSE)
           )
           expect_exists("Dockerfile")
           test <- stringr::str_detect(
-            output, 
+            output,
             "Dockerfile created at Dockerfile"
           )
           expect_true(test)
         }
       )
     }
-    
   })
 })
 test_that("add_dockerfiles repos variation", {
   skip_if_not_installed("dockerfiler", "0.1.4")
   with_dir(pkg, {
-    
     for (fun in list(
-      add_dockerfile, 
-      add_dockerfile_heroku, 
+      add_dockerfile,
+      add_dockerfile_heroku,
       add_dockerfile_shinyproxy
-    )){
+    )) {
       burn_after_reading(
-        c("Dockerfile1","Dockerfile2"), {
+        c("Dockerfile1", "Dockerfile2"),
+        {
           output1 <- testthat::capture_output(
-            fun(pkg = pkg, sysreqs = FALSE, open = FALSE, repos =  "https://cran.rstudio.com/",output = "Dockerfile1")
+            fun(
+              pkg = pkg,
+              sysreqs = FALSE,
+              open = FALSE,
+              repos = "https://cran.rstudio.com/",
+              output = "Dockerfile1"
+            )
           )
           output2 <- testthat::capture_output(
-            fun(pkg = pkg, sysreqs = FALSE, open = FALSE, repos =  c("https://cran.rstudio.com/"),output = "Dockerfile2")
+            fun(
+              pkg = pkg,
+              sysreqs = FALSE,
+              open = FALSE,
+              repos = c("https://cran.rstudio.com/"),
+              output = "Dockerfile2"
+            )
           )
           expect_exists("Dockerfile1")
           expect_exists("Dockerfile2")
-          
-          
+
+
           test1 <- stringr::str_detect(
-            output1, 
+            output1,
             "Dockerfile created at Dockerfile"
           )
           expect_true(test1)
           test2 <- stringr::str_detect(
-            output2, 
+            output2,
             "Dockerfile created at Dockerfile"
           )
           expect_true(test2)
-          expect_true(all(readLines(con = "Dockerfile1")== readLines(con = "Dockerfile2")))
-          
+          expect_true(
+            all(
+              readLines(con = "Dockerfile1") == readLines(con = "Dockerfile2")
+            )
+          )
         }
-        
-        
-        
-        
       )
     }
-    
   })
 })
 test_that("add_dockerfiles multi repos", {
-  
   skip_if_not_installed("dockerfiler", "0.1.4")
-  
-  repos = c(
+
+  repos <- c(
     bioc1 = "https://bioconductor.org/packages/3.10/data/annotation",
-    bioc2 = 'https://bioconductor.org/packages/3.10/data/experiment',
-    CRAN = 'https://cran.rstudio.com'
+    bioc2 = "https://bioconductor.org/packages/3.10/data/experiment",
+    CRAN = "https://cran.rstudio.com"
   )
-  
-  
+
+
   with_dir(pkg, {
-    
     for (fun in list(
-      add_dockerfile, 
-      add_dockerfile_heroku, 
+      add_dockerfile,
+      add_dockerfile_heroku,
       add_dockerfile_shinyproxy
-    )){
+    )) {
       burn_after_reading(
-        "Dockerfile", {
+        "Dockerfile",
+        {
           output <- testthat::capture_output(
-            fun(pkg = pkg, sysreqs = FALSE, open = FALSE, repos =  repos,output = "Dockerfile")
+            fun(
+              pkg = pkg,
+              sysreqs = FALSE,
+              open = FALSE,
+              repos = repos,
+              output = "Dockerfile"
+            )
           )
 
           expect_exists("Dockerfile")
-          
-          
+
+
           test <- stringr::str_detect(
-            output, 
+            output,
             "Dockerfile created at Dockerfile"
           )
           expect_true(test)
-          
-          
-          to_find <-     "RUN echo \"options(repos = c(bioc1 = 'https://bioconductor.org/packages/3.10/data/annotation', bioc2 = 'https://bioconductor.org/packages/3.10/data/experiment', CRAN = 'https://cran.rstudio.com'), download.file.method = 'libcurl', Ncpus = 4)\" >> /usr/local/lib/R/etc/Rprofile.site"
+
+
+          to_find <- "RUN echo \"options(repos = c(bioc1 = 'https://bioconductor.org/packages/3.10/data/annotation', bioc2 = 'https://bioconductor.org/packages/3.10/data/experiment', CRAN = 'https://cran.rstudio.com'), download.file.method = 'libcurl', Ncpus = 4)\" >> /usr/local/lib/R/etc/Rprofile.site"
           # for R <= 3.4
           to_find_old <- "RUN echo \"options(repos = structure(c('https://bioconductor.org/packages/3.10/data/annotation', 'https://bioconductor.org/packages/3.10/data/experiment', 'https://cran.rstudio.com'), .Names = c('bioc1', 'bioc2', 'CRAN')), download.file.method = 'libcurl', Ncpus = 4)\" >> /usr/local/lib/R/etc/Rprofile.site"
 
-          expect_true(sum(readLines(con = "Dockerfile") %in% c(to_find,to_find_old))  == 1)   
-          
-          
+          expect_true(
+            sum(
+              readLines(con = "Dockerfile") %in% c(to_find, to_find_old)
+            ) == 1
+          )
         }
-        
-        
-        
-        
       )
     }
-    
   })
 })
 
 test_that("add_rstudio_files", {
-  
   with_dir(pkg, {
-    
     for (fun in list(
-      add_rstudioconnect_file, 
-      add_shinyappsio_file, 
+      add_rstudioconnect_file,
+      add_shinyappsio_file,
       add_shinyserver_file
-    )){
+    )) {
       burn_after_reading(
-        "app.R", {
+        "app.R",
+        {
           output <- testthat::capture_output(
-            fun(pkg = pkg, open = FALSE)
+            fun(
+              pkg = pkg,
+              open = FALSE
+            )
           )
           expect_exists("app.R")
           test <- stringr::str_detect(
-            output, 
+            output,
             "ile created at .*/app.R"
           )
           expect_true(test)
         }
       )
     }
-    
   })
 })
-

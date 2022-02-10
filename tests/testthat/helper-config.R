@@ -10,8 +10,10 @@ remove_file <- function(path) {
 
 remove_files <- function(path, pattern = NULL) {
   fls <- list.files(
-    path, pattern,
-    full.names = TRUE, recursive = TRUE
+    path,
+    pattern,
+    full.names = TRUE,
+    recursive = TRUE
   )
   if (length(fls) > 0) {
     res <- lapply(fls, function(x) {

@@ -38,10 +38,13 @@ insert_ns <- function() {
 }
 
 #' @importFrom fs path file_exists
-go_to <- function(file,
-                  wd = golem::get_golem_wd()) {
+go_to <- function(
+  file,
+  wd = golem::get_golem_wd()
+) {
   file <- path(
-    wd, file
+    wd,
+    file
   )
   if (!file_exists(file)) {
     message(file, "not found.")

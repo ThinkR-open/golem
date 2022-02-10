@@ -45,9 +45,11 @@ expect_shinytaglist <- function(object) {
 #' @param html deprecated
 #' @param ... arguments passed  to `testthat::expect_snapshot()`
 #' @importFrom attempt stop_if_not
-expect_html_equal <- function(ui,
-                              html,
-                              ...) {
+expect_html_equal <- function(
+  ui,
+  html,
+  ...
+) {
   check_is_installed("testthat")
   required_version("testthat", "3.0.0")
   check_is_installed("rlang")
@@ -68,8 +70,10 @@ expect_html_equal <- function(ui,
 #' @rdname testhelpers
 #' @param sleep number of seconds
 #' @param R_path path to R. If NULL, the function will try to guess where R is.
-expect_running <- function(sleep,
-                           R_path = NULL) {
+expect_running <- function(
+  sleep,
+  R_path = NULL
+) {
   check_is_installed("testthat")
   testthat::skip_if_not_installed("pkgload")
   testthat::skip_if_not_installed("processx")
@@ -177,7 +181,8 @@ expect_running <- function(sleep,
         "-e",
         sprintf("library(%s, lib = '%s');run_app()", pkg_name, .libPaths())
       ),
-      stdout = "|", stderr = "|"
+      stdout = "|",
+      stderr = "|"
     )
   }
 

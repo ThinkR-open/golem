@@ -6,11 +6,18 @@ is_properly_populated_golem <- function(path) {
   # All files excepts *.Rproj which changes based on the project name
   expected_files <- c(
     "DESCRIPTION",
-    "dev/01_start.R", "dev/02_dev.R", "dev/03_deploy.R", "dev/run_dev.R",
-    "inst/app/www/favicon.ico", "inst/golem-config.yml",
+    "dev/01_start.R",
+    "dev/02_dev.R",
+    "dev/03_deploy.R",
+    "dev/run_dev.R",
+    "inst/app/www/favicon.ico",
+    "inst/golem-config.yml",
     "man/run_app.Rd",
     "NAMESPACE",
-    "R/app_config.R", "R/app_server.R", "R/app_ui.R", "R/run_app.R"
+    "R/app_config.R",
+    "R/app_server.R",
+    "R/app_ui.R",
+    "R/run_app.R"
   )
 
   if (rstudioapi::isAvailable()) {

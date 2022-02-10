@@ -15,8 +15,10 @@
 #' @importFrom usethis use_testthat
 #'
 #' @return Used for side-effects.
-use_utils_ui <- function(pkg = get_golem_wd(),
-                         with_test = FALSE) {
+use_utils_ui <- function(
+  pkg = get_golem_wd(),
+  with_test = FALSE
+) {
   added <- use_utils(
     file_name = "golem_utils_ui.R",
     folder_name = "R",
@@ -31,7 +33,10 @@ use_utils_ui <- function(pkg = get_golem_wd(),
         use_testthat()
       }
       pth <- path(
-        pkg, "tests", "testthat", "test-golem_utils_ui.R"
+        pkg,
+        "tests",
+        "testthat",
+        "test-golem_utils_ui.R"
       )
       if (
         file.exists(pth)
@@ -63,8 +68,10 @@ use_utils_test_ui <- function(pkg = get_golem_wd()) {
 
 #' @export
 #' @rdname utils_files
-use_utils_server <- function(pkg = get_golem_wd(),
-                             with_test = FALSE) {
+use_utils_server <- function(
+  pkg = get_golem_wd(),
+  with_test = FALSE
+) {
   added <- use_utils(
     file_name = "golem_utils_server.R",
     folder_name = "R",
@@ -78,7 +85,10 @@ use_utils_server <- function(pkg = get_golem_wd(),
         use_testthat()
       }
       pth <- path(
-        pkg, "tests", "testthat", "test-golem_utils_server.R"
+        pkg,
+        "tests",
+        "testthat",
+        "test-golem_utils_server.R"
       )
       if (
         file.exists(pth)
@@ -94,8 +104,10 @@ use_utils_server <- function(pkg = get_golem_wd(),
   }
 }
 
-use_utils_test_ <- function(pkg = get_golem_wd(),
-                            type = c("ui", "server")) {
+use_utils_test_ <- function(
+  pkg = get_golem_wd(),
+  type = c("ui", "server")
+) {
   type <- match.arg(type)
   added <- use_utils(
     file_name = sprintf("test-golem_utils_%s.R", type),
@@ -121,9 +133,11 @@ use_utils_test_server <- function(pkg = get_golem_wd()) {
 
 
 #' @importFrom fs file_copy path_abs path_file
-use_utils <- function(file_name,
-                      folder_name,
-                      pkg = get_golem_wd()) {
+use_utils <- function(
+  file_name,
+  folder_name,
+  pkg = get_golem_wd()
+) {
   old <- setwd(
     path_abs(pkg)
   )

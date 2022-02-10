@@ -4,10 +4,10 @@
 #' @noRd
 #'
 enable_roxygenize <- function(path = list.files(
-                                path = ".",
-                                pattern = "Rproj$",
-                                full.names = TRUE
-                              )[1]) {
+    path = ".",
+    pattern = "Rproj$",
+    full.names = TRUE
+  )[1]) {
   cat_bullet(
     sprintf("Reading %s content ", basename(path)),
     bullet = "info",

@@ -16,9 +16,11 @@
 #'   use_favicon()
 #'   use_favicon(path = "path/to/your/favicon.ico")
 #' }
-use_favicon <- function(path,
-                        pkg = get_golem_wd(),
-                        method = "curl") {
+use_favicon <- function(
+  path,
+  pkg = get_golem_wd(),
+  method = "curl"
+) {
   if (missing(path)) {
     path <- golem_sys("shinyexample/inst/app/www", "favicon.ico")
   }
@@ -140,10 +142,12 @@ remove_favicon <- function(path = "inst/app/www/favicon.ico") {
 #' @importFrom shiny tags
 #'
 #' @return An HTML tag.
-favicon <- function(ico = "favicon",
-                    rel = "shortcut icon",
-                    resources_path = "www",
-                    ext = "ico") {
+favicon <- function(
+  ico = "favicon",
+  rel = "shortcut icon",
+  resources_path = "www",
+  ext = "ico"
+) {
   ico <- fs::path(
     resources_path,
     ico,

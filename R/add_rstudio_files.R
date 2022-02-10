@@ -5,29 +5,28 @@
 #' @importFrom fs path file_create path_file
 add_rstudio_files <- function(
   pkg,
-  open, 
+  open,
   service = c(
-    "RStudio Connect", 
-    "Shiny Server", 
+    "RStudio Connect",
+    "Shiny Server",
     "ShinyApps.io"
   )
-){
+) {
   service <- match.arg(service)
   where <- path(pkg, "app.R")
-  
+
   disable_autoload(
     pkg = pkg
   )
-  
-  
-  if (!file_exists(where)){
-    file_create( where )
-    
-    write_there <- function(..., here = where){
+
+  if (!file_exists(where)) {
+    file_create(where)
+
+    write_there <- function(..., here = where) {
       write(..., here, append = TRUE)
     }
-    
-    use_build_ignore( path_file(where) )
+
+    use_build_ignore(path_file(where))
     use_build_ignore("rsconnect")
     write_there("# Launch the ShinyApp (Do not remove this comment)")
     write_there("# To deploy, run: rsconnect::deployApp()")
@@ -37,11 +36,11 @@ add_rstudio_files <- function(
     write_there("options( \"golem.app.prod\" = TRUE)")
     write_there(
       sprintf(
-        "%s::run_app() # add parameters here (if any)", 
+        "%s::run_app() # add parameters here (if any)",
         get_golem_name()
       )
     )
-    
+
     x <- capture.output(use_package("pkgload"))
     cat_created(where)
     cat_line("To deploy, run:")
@@ -52,50 +51,49 @@ add_rstudio_files <- function(
         service
       )
     )
-    
+
     open_or_go_to(where, open)
   } else {
     file_already_there_dance(
-      where = where, 
+      where = where,
       open_file = open
     )
   }
-  
 }
 
 #' Add an app.R at the root of your package to deploy on RStudio Connect
 #'
-#' @note 
+#' @note
 #' In previous versions, this function was called add_rconnect_file.
 #'
 #' @inheritParams add_module
 #' @aliases add_rconnect_file add_rstudioconnect_file
 #' @export
-#' 
+#'
 #' @rdname rstudio_deploy
-#' 
+#'
 #' @return The path to the file, invisibly.
-#' 
+#'
 #' @examples
 #' # Add a file for Connect
-#' if (interactive()){
-#'    add_rstudioconnect_file()
+#' if (interactive()) {
+#'   add_rstudioconnect_file()
 #' }
 #' # Add a file for Shiny Server
-#' if (interactive()){
-#'     add_shinyserver_file()
+#' if (interactive()) {
+#'   add_shinyserver_file()
 #' }
 #' # Add a file for Shinyapps.io
-#' if (interactive()){
-#'     add_shinyappsio_file()
+#' if (interactive()) {
+#'   add_shinyappsio_file()
 #' }
 add_rstudioconnect_file <- function(
-  pkg = get_golem_wd(), 
+  pkg = get_golem_wd(),
   open = TRUE
-){
+) {
   add_rstudio_files(
-    pkg = pkg, 
-    open = open, 
+    pkg = pkg,
+    open = open,
     service = "RStudio Connect"
   )
 }
@@ -103,12 +101,12 @@ add_rstudioconnect_file <- function(
 #' @rdname rstudio_deploy
 #' @export
 add_shinyappsio_file <- function(
-  pkg = get_golem_wd(), 
+  pkg = get_golem_wd(),
   open = TRUE
-){
+) {
   add_rstudio_files(
-    pkg = pkg, 
-    open = open, 
+    pkg = pkg,
+    open = open,
     service = "ShinyApps.io"
   )
 }
@@ -116,12 +114,12 @@ add_shinyappsio_file <- function(
 #' @rdname rstudio_deploy
 #' @export
 add_shinyserver_file <- function(
-  pkg = get_golem_wd(), 
+  pkg = get_golem_wd(),
   open = TRUE
-){
+) {
   add_rstudio_files(
-    pkg = pkg, 
-    open = open, 
+    pkg = pkg,
+    open = open,
     service = "Shiny Server"
   )
 }

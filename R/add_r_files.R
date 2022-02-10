@@ -1,11 +1,13 @@
 #' @importFrom fs path_abs path file_create
-add_r_files <- function(name,
-                        ext = c("fct", "utils"),
-                        module = "",
-                        pkg = get_golem_wd(),
-                        open = TRUE,
-                        dir_create = TRUE,
-                        with_test = FALSE) {
+add_r_files <- function(
+  name,
+  ext = c("fct", "utils"),
+  module = "",
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE,
+  with_test = FALSE
+) {
   name <- file_path_sans_ext(name)
 
   old <- setwd(path_abs(pkg))
@@ -40,7 +42,8 @@ add_r_files <- function(name,
   }
 
   where <- path(
-    "R", paste0(module, ext, "_", name, ".R")
+    "R",
+    paste0(module, ext, "_", name, ".R")
   )
 
   if (!file_exists(where)) {
@@ -92,12 +95,14 @@ add_r_files <- function(name,
 #' @export
 #'
 #' @return The path to the file, invisibly.
-add_fct <- function(name,
-                    module = NULL,
-                    pkg = get_golem_wd(),
-                    open = TRUE,
-                    dir_create = TRUE,
-                    with_test = FALSE) {
+add_fct <- function(
+  name,
+  module = NULL,
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE,
+  with_test = FALSE
+) {
   add_r_files(
     name,
     module,
@@ -111,12 +116,14 @@ add_fct <- function(name,
 
 #' @rdname file_creation
 #' @export
-add_utils <- function(name,
-                      module = NULL,
-                      pkg = get_golem_wd(),
-                      open = TRUE,
-                      dir_create = TRUE,
-                      with_test = FALSE) {
+add_utils <- function(
+  name,
+  module = NULL,
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE,
+  with_test = FALSE
+) {
   add_r_files(
     name,
     module,
@@ -139,10 +146,12 @@ add_utils <- function(name,
 #'
 #' @rdname file_creation
 #' @noRd
-append_roxygen_comment <- function(name,
-                                   path,
-                                   ext,
-                                   export = FALSE) {
+append_roxygen_comment <- function(
+  name,
+  path,
+  ext,
+  export = FALSE
+) {
   write_there <- function(...) {
     write(..., file = path, append = TRUE)
   }
