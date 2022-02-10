@@ -94,26 +94,23 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.3.1.9000" id="golem-0319000-development-version">golem 0.3.1.9000+ (development version)<a class="anchor" aria-label="anchor" href="#golem-0319000-development-version"></a></h2>
-<div class="section level3">
-<h3 id="deprecated-0-3-1-9000">Deprecated<a class="anchor" aria-label="anchor" href="#deprecated-0-3-1-9000"></a></h3>
+<h2 class="page-header" data-toc-text="0.3.2" id="golem-032">golem 0.3.2<a class="anchor" aria-label="anchor" href="#golem-032"></a></h2>
 <div class="section level4">
-<h4 id="soft-deprecated-0-3-1-9000">Soft deprecated<a class="anchor" aria-label="anchor" href="#soft-deprecated-0-3-1-9000"></a></h4>
+<h4 id="soft-deprecated-0-3-2">Soft deprecated<a class="anchor" aria-label="anchor" href="#soft-deprecated-0-3-2"></a></h4>
 <ul><li>
 <code><a href="../reference/use_recommended.html">use_recommended_deps()</a></code> is now soft deprecated (<a href="https://github.com/ThinkR-open/golem/issues/786" class="external-link">#786</a>)</li>
 </ul></div>
 <div class="section level4">
-<h4 id="hard-deprecated-0-3-1-9000">Hard deprecated<a class="anchor" aria-label="anchor" href="#hard-deprecated-0-3-1-9000"></a></h4>
+<h4 id="hard-deprecated-0-3-2">Hard deprecated<a class="anchor" aria-label="anchor" href="#hard-deprecated-0-3-2"></a></h4>
 <ul><li>The <code>html</code> parameter in <code><a href="../reference/testhelpers.html">expect_html_equal()</a></code> is no longer in use (<a href="https://github.com/ThinkR-open/golem/issues/55" class="external-link">#55</a>).</li>
 </ul></div>
-</div>
 <div class="section level3">
-<h3 id="new-functions-0-3-1-9000">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-3-1-9000"></a></h3>
+<h3 id="new-functions-0-3-2">New functions<a class="anchor" aria-label="anchor" href="#new-functions-0-3-2"></a></h3>
 <ul><li><p><code><a href="../reference/add_files.html">add_sass_file()</a></code> creates a .sass file in inst/app/www (<a href="https://github.com/ThinkR-open/golem/issues/768" class="external-link">#768</a>)</p></li>
 <li><p><code><a href="../reference/use_module_test.html">use_module_test()</a></code> creates a test skeleton for a module (<a href="https://github.com/ThinkR-open/golem/issues/725" class="external-link">#725</a>)</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="new-features-0-3-1-9000">New features<a class="anchor" aria-label="anchor" href="#new-features-0-3-1-9000"></a></h3>
+<h3 id="new-features-0-3-2">New features<a class="anchor" aria-label="anchor" href="#new-features-0-3-2"></a></h3>
 <ul><li><p>The <code>02_dev.R</code> file now suggests using <code><a href="https://thinkr-open.github.io/attachment//reference/att_amend_desc.html" class="external-link">attachment::att_amend_desc()</a></code> (<a href="https://github.com/ThinkR-open/golem/issues/787" class="external-link">#787</a>)</p></li>
 <li><p><code>use_code_of_conduct()</code> in dev script now has the contact param (<a href="https://github.com/ThinkR-open/golem/issues/812" class="external-link">#812</a>)</p></li>
 <li><p>All <code>with_test</code> params are now TRUE in the dev script (<a href="https://github.com/ThinkR-open/golem/issues/801" class="external-link">#801</a>)</p></li>
@@ -132,7 +129,7 @@
 <li><p>You can now specify the path to R in <code><a href="../reference/testhelpers.html">expect_running()</a></code>.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fix-0-3-1-9000">Bug fix<a class="anchor" aria-label="anchor" href="#bug-fix-0-3-1-9000"></a></h3>
+<h3 id="bug-fix-0-3-2">Bug fix<a class="anchor" aria-label="anchor" href="#bug-fix-0-3-2"></a></h3>
 <ul><li><p>We now require the correct <a href="https://usethis.r-lib.org" class="external-link">usethis</a> version (822)</p></li>
 <li><p><code>golem::amend_config()</code> now keeps the <code>!expr</code> (<a href="https://github.com/ThinkR-open/golem/issues/709" class="external-link">#709</a>, <a href="https://github.com/teofiln" class="external-link">@teofiln</a>)</p></li>
 <li><p>recommended tests now use <code>expect_type()</code> instead of <code>expect_is</code>, which was deprecated from <a href="https://testthat.r-lib.org" class="external-link">testthat</a> (<a href="https://github.com/ThinkR-open/golem/issues/671" class="external-link">#671</a>)</p></li>
@@ -143,7 +140,7 @@
 <li><p><code>bundle_resource()</code> does not include empty stylesheet anymore (<a href="https://github.com/ThinkR-open/golem/issues/689" class="external-link">#689</a>, <a href="https://github.com/erikvona" class="external-link">@erikvona</a>)</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="internal-changes-0-3-1-9000">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-3-1-9000"></a></h3>
+<h3 id="internal-changes-0-3-2">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-3-2"></a></h3>
 <ul><li><p>Create <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> is more robust and now comes with an <code>overwrite</code> argument (<a href="https://github.com/ThinkR-open/golem/issues/777" class="external-link">#777</a>)</p></li>
 <li><p><a href="https://testthat.r-lib.org" class="external-link">testthat</a> and <a href="https://rlang.r-lib.org" class="external-link">rlang</a> are no longer hard dependencies (<a href="https://github.com/ThinkR-open/golem/issues/742" class="external-link">#742</a>)</p></li>
 </ul></div>
