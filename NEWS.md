@@ -52,6 +52,8 @@
 
 ## Bug fix
 
++ Fixed a bug in the printing of the htmlTemplate code (#827)
+
 + We now require the correct `{usethis}` version (822)
 
 + `golem::amend_config()` now keeps the `!expr`  (#709, @teofiln)
