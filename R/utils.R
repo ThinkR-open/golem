@@ -336,7 +336,7 @@ after_creation_message_html_template <- function(
   cat_line("")
   cat_rule("To use this html file as a template, add the following code in app_ui.R:")
   cat_line(darkgrey("htmlTemplate("))
-  cat_line(darkgrey(sprintf('    app_sys("app/www/%s.html"),', name)))
+  cat_line(darkgrey(sprintf('    app_sys("app/www/%s.html"),', file_path_sans_ext(name))))
   cat_line(darkgrey("    body = tagList()"))
   cat_line(darkgrey("    # add here other template arguments"))
   cat_line(darkgrey(")"))
