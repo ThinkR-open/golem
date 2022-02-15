@@ -74,7 +74,7 @@ scratch*](https://towardsdatascience.com/production-grade-r-shiny-with-golem-pro
   - [{golem} and Effective Shiny Development
     Methods](https://www.youtube.com/watch?v=OU1-CkSVdTI)
   - [Hands-on demonstration of
-    {golem}](https://shinydevseries.com/post/golem-demo/)
+    {golem}](https://www.youtube.com/watch?v=3-p9XLvoJV0)
   - useR\! 2019 : [A Framework for Building Robust & Production Ready
     Shiny Apps](https://youtu.be/tCAan6smrjs)
   - 🇫🇷 [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
