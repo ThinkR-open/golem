@@ -58,7 +58,6 @@ Imports:
     here,
     htmltools,
     pkgload,
-    remotes,
     roxygen2,
     rstudioapi,
     shiny (>= 1.5.0),
