@@ -72,6 +72,7 @@ add_dockerfile <- function(
   extra_sysreqs = NULL
 ) {
   check_is_installed("dockerfiler")
+
   required_version("dockerfiler", "0.1.4")
 
   where <- path(pkg, output)
