@@ -136,7 +136,7 @@ See full documentation in the {pkgdown} website:
 
 \[CRAN\] <https://thinkr-open.github.io/golem/>
 
-\[dev\] <https://thinkr-open.github.io/golem/dev>
+\[dev\] <https://thinkr-open.github.io/golem/dev/>
 
 After project creation, you’ll land on `dev/01_start.R`. There are also
 `dev/02_dev.R` and `dev/03_deploy.R`
