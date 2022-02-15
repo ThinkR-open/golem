@@ -18,6 +18,8 @@
 
 ## New features
 
++ The `remove_favicon()` is now commented in the dev script (#832)
+
 + The `02_dev.R` file now suggests using `attachment::att_amend_desc()` (#787)
 
 + `use_code_of_conduct()` in dev script now has the contact param (#812)
