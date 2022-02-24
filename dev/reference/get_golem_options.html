@@ -34,7 +34,7 @@ parameters passed to run_app()."><meta property="og:image" content="/logo.png"><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.1.9010</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.2.9001</span>
       </span>
     </div>
 
@@ -118,40 +118,38 @@ parameters passed to <code>run_app()</code>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  </span>
-<span class="r-in">  <span class="co"># Define and use golem_options</span></span>
-<span class="r-in">  </span>
-<span class="r-in">  <span class="co"># 1. Pass parameters to `run_app`</span></span>
-<span class="r-in">  </span>
-<span class="r-in">  <span class="co"># to set default value, edit run_app like this :</span></span>
-<span class="r-in">  <span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
-<span class="r-in">    <span class="va">title</span> <span class="op">=</span> <span class="st">"this"</span>,</span>
-<span class="r-in">    <span class="va">content</span> <span class="op">=</span> <span class="st">"that"</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="with_golem_options.html">with_golem_options</a></span><span class="op">(</span></span>
-<span class="r-in">      app <span class="op">=</span> <span class="fu">shinyApp</span><span class="op">(</span></span>
-<span class="r-in">        ui <span class="op">=</span> <span class="va">app_ui</span>,</span>
-<span class="r-in">        server <span class="op">=</span> <span class="va">app_server</span></span>
-<span class="r-in">      <span class="op">)</span>,</span>
-<span class="r-in">      golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">        p1 <span class="op">=</span> <span class="va">p1</span>,</span>
-<span class="r-in">        p3 <span class="op">=</span> <span class="va">p3</span></span>
-<span class="r-in">      <span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Define and use golem_options</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># 1. Pass parameters to `run_app`</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># to set default value, edit run_app like this :</span></span>
+<span class="r-in"><span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
+<span class="r-in">  <span class="va">title</span> <span class="op">=</span> <span class="st">"this"</span>,</span>
+<span class="r-in">  <span class="va">content</span> <span class="op">=</span> <span class="st">"that"</span></span>
+<span class="r-in"><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in">  <span class="fu"><a href="with_golem_options.html">with_golem_options</a></span><span class="op">(</span></span>
+<span class="r-in">    app <span class="op">=</span> <span class="fu">shinyApp</span><span class="op">(</span></span>
+<span class="r-in">      ui <span class="op">=</span> <span class="va">app_ui</span>,</span>
+<span class="r-in">      server <span class="op">=</span> <span class="va">app_server</span></span>
+<span class="r-in">    <span class="op">)</span>,</span>
+<span class="r-in">    golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span class="r-in">      p1 <span class="op">=</span> <span class="va">p1</span>,</span>
+<span class="r-in">      p3 <span class="op">=</span> <span class="va">p3</span></span>
 <span class="r-in">    <span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in">  </span>
-<span class="r-in">  <span class="co"># 2. Get the values from the UI side</span></span>
-<span class="r-in">  </span>
-<span class="r-in">  <span class="fu">h1</span><span class="op">(</span> <span class="fu">get_golem_options</span><span class="op">(</span><span class="st">"title"</span><span class="op">)</span> <span class="op">)</span></span>
-<span class="r-in">  </span>
-<span class="r-in">  <span class="co"># 3. Get the value from the server-side</span></span>
-<span class="r-in">  </span>
-<span class="r-in">  <span class="va">output</span><span class="op">$</span><span class="va">param</span> <span class="op">&lt;-</span> <span class="fu">renderPrint</span><span class="op">(</span><span class="op">{</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"param p2 = "</span>,<span class="fu">get_golem_options</span><span class="op">(</span><span class="st">"p2"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span><span class="op">)</span></span>
-<span class="r-in">  </span>
+<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span class="op">}</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># 2. Get the values from the UI side</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu">h1</span><span class="op">(</span><span class="fu">get_golem_options</span><span class="op">(</span><span class="st">"title"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># 3. Get the value from the server-side</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">output</span><span class="op">$</span><span class="va">param</span> <span class="op">&lt;-</span> <span class="fu">renderPrint</span><span class="op">(</span><span class="op">{</span></span>
+<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"param p2 = "</span>, <span class="fu">get_golem_options</span><span class="op">(</span><span class="st">"p2"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">}</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-in"></span>
 </code></pre></div>
