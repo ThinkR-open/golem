@@ -57,6 +57,7 @@ Imports:
     fs,
     here,
     htmltools,
+    rlang,
     pkgload,
     roxygen2,
     rstudioapi,
@@ -65,7 +66,6 @@ Imports:
     utils,
     yaml
 Suggests:
-    rlang,
     covr,
     devtools,
     dockerfiler (>= 0.1.4),
