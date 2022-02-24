@@ -67,7 +67,10 @@ add_r_files <- function(
   }
 
   if (with_test) {
-    check_is_installed("usethis")
+    rlang::check_installed(
+      "usethis",
+      "to build the test structure."
+    )
     usethis::use_test(
       basename(
         file_path_sans_ext(

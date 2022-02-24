@@ -71,9 +71,11 @@ add_dockerfile <- function(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
 ) {
-  check_is_installed("dockerfiler")
-
-  required_version("dockerfiler", "0.1.4")
+  rlang::check_installed(
+    "dockerfiler",
+    "to create Dockerfile using {golem}.",
+    version = "0.1.4"
+  )
 
   where <- path(pkg, output)
 
@@ -142,8 +144,11 @@ add_dockerfile_shinyproxy <- function(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
 ) {
-  check_is_installed("dockerfiler")
-  required_version("dockerfiler", "0.1.4")
+  rlang::check_installed(
+    "dockerfiler",
+    "to create Dockerfile using {golem}.",
+    version = "0.1.4"
+  )
 
   where <- path(pkg, output)
 
@@ -206,8 +211,11 @@ add_dockerfile_heroku <- function(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
 ) {
-  check_is_installed("dockerfiler")
-  required_version("dockerfiler", "0.1.4")
+  rlang::check_installed(
+    "dockerfiler",
+    "to create Dockerfile using {golem}.",
+    version = "0.1.4"
+  )
 
   where <- path(pkg, output)
 
