@@ -1,6 +1,29 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
-# golem 0.3.2 
+# golem 0.3.2.9000+
+
+### Soft deprecated
+
+
+### Hard deprecated
+
+
+## New functions
+
+
+## New features
+
++ Soft dependency check is now done via `rlang::check_installed()` (#835)
+
+## Bug fix
+
+
+
+## Internal changes
+
+
+
+# golem 0.3.2 (CRAN VERSION)
 
 ### Soft deprecated
 
