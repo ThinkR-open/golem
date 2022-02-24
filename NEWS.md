@@ -1,6 +1,6 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
-# golem 0.3.2
+# golem 0.3.2 
 
 ### Soft deprecated
 
