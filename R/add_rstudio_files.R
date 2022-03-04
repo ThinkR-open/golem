@@ -1,7 +1,6 @@
 #' @importFrom utils capture.output
 #' @importFrom cli cat_bullet
 #' @importFrom usethis use_build_ignore use_package
-#' @importFrom pkgload pkg_name
 #' @importFrom fs path file_create path_file
 add_rstudio_files <- function(
   pkg,
@@ -40,8 +39,14 @@ add_rstudio_files <- function(
         get_golem_name()
       )
     )
+    rlang::check_installed(
+      "pkgload",
+      reason = "to deploy on RStudio products."
+    )
 
-    x <- capture.output(use_package("pkgload"))
+    # We add {pkgload} as a dep because it's required to deploy on Connect & stuff
+    usethis::use_package("pkgload")
+
     cat_created(where)
     cat_line("To deploy, run:")
     cat_bullet(darkgrey("rsconnect::deployApp()\n"))

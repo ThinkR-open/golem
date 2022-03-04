@@ -7,8 +7,8 @@
 #' @section Set Functions:
 #' + `set_golem_options()` sets all the options, with the defaults from the functions below.
 #' + `set_golem_wd()` defaults to `here::here()`, which is the package root when starting a golem.
-#' + `set_golem_name()` defaults `pkgload::pkg_name()`
-#' + `set_golem_version()` defaults `pkgload::pkg_version()`
+#' + `set_golem_name()` defaults `golem::pkg_name()`
+#' + `set_golem_version()` defaults `golem::pkg_version()`
 #'
 #' @section Get Functions:
 #' Reads the information from `golem-config.yml`
@@ -37,8 +37,8 @@
 #' @return Used for side-effects for the setters, and values from the
 #'     config in the getters.
 set_golem_options <- function(
-  golem_name = pkgload::pkg_name(),
-  golem_version = pkgload::pkg_version(),
+  golem_name = golem::pkg_name(),
+  golem_version = golem::pkg_version(),
   golem_wd = pkgload::pkg_path(),
   app_prod = FALSE,
   talkative = TRUE
@@ -54,7 +54,10 @@ set_golem_options <- function(
     }
   }
 
-  conf_path <- get_current_config(golem_wd, set_options = FALSE)
+  conf_path <- get_current_config(
+    golem_wd,
+    set_options = FALSE
+  )
 
   stop_if(
     conf_path,
@@ -198,7 +201,7 @@ set_golem_wd <- function(
 #' @rdname golem_opts
 #' @importFrom fs path_abs
 set_golem_name <- function(
-  name = pkgload::pkg_name(),
+  name = golem::pkg_name(),
   path = pkgload::pkg_path(),
   talkative = TRUE
 ) {
@@ -309,7 +312,7 @@ get_golem_name <- function(
     path = path
   )
   if (is.null(nm)) {
-    nm <- pkgload::pkg_name()
+    nm <- golem::pkg_name()
   }
   nm
 }

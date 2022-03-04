@@ -11,8 +11,8 @@
 \title{\code{{golem}} options}
 \usage{
 set_golem_options(
-  golem_name = pkgload::pkg_name(),
-  golem_version = pkgload::pkg_version(),
+  golem_name = golem::pkg_name(),
+  golem_version = golem::pkg_version(),
   golem_wd = pkgload::pkg_path(),
   app_prod = FALSE,
   talkative = TRUE
@@ -21,7 +21,7 @@ set_golem_options(
 set_golem_wd(path = pkgload::pkg_path(), talkative = TRUE)
 
 set_golem_name(
-  name = pkgload::pkg_name(),
+  name = golem::pkg_name(),
   path = pkgload::pkg_path(),
   talkative = TRUE
 )
@@ -85,8 +85,8 @@ inside the \code{inst} folder.
 \itemize{
 \item \code{set_golem_options()} sets all the options, with the defaults from the functions below.
 \item \code{set_golem_wd()} defaults to \code{here::here()}, which is the package root when starting a golem.
-\item \code{set_golem_name()} defaults \code{pkgload::pkg_name()}
-\item \code{set_golem_version()} defaults \code{pkgload::pkg_version()}
+\item \code{set_golem_name()} defaults \code{golem::pkg_name()}
+\item \code{set_golem_version()} defaults \code{golem::pkg_version()}
 }
 }
 

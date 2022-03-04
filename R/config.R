@@ -37,7 +37,6 @@ guess_where_config <- function(
 }
 
 #' @importFrom fs file_copy path
-#' @importFrom pkgload pkg_name
 get_current_config <- function(
   path = ".",
   set_options = TRUE
@@ -86,7 +85,7 @@ get_current_config <- function(
           "R/app_config.R"
         ),
         "shinyexample",
-        pkg_name()
+        golem::pkg_name()
       )
       if (set_options) {
         set_golem_options()
