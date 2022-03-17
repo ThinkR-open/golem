@@ -15,6 +15,7 @@
 
 ## Dependencies ----
 ## Amend DESCRIPTION with dependencies read from package code parsing
+## install.package('attachment') # if needed.
 attachment::att_amend_desc()
 
 ## Add modules ----
