@@ -1,4 +1,3 @@
-#' @importFrom attachment create_renv_for_prod
 add_dockerfile_with_renv_ <- function(
   path = ".",
   lockfile = NULL,
@@ -18,7 +17,7 @@ add_dockerfile_with_renv_ <- function(
   check_is_installed("renv")
   check_is_installed("dockerfiler")
   required_version("dockerfiler", "0.1.5.0001")
-  
+  check_is_installed("attachment")
   dir.create(output_dir)
   if ( is.null(lockfile)){
     lockfile <-attachment::create_renv_for_prod(path = path,output = file.path(output_dir,"renv.lock.prod"))
