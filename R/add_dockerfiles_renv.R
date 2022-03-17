@@ -1,10 +1,4 @@
-#' add_dockerfile_with_renv_
-#'
-#' @param lockfile
-#' @param output_dir
-#'
-#' @export
-#'
+#' @importFrom attachment create_renv_for_prod
 add_dockerfile_with_renv_ <- function(
   path = ".",
   lockfile = NULL,
@@ -27,7 +21,7 @@ add_dockerfile_with_renv_ <- function(
   
   dir.create(output_dir)
   if ( is.null(lockfile)){
-    lockfile <-create_renv_for_prod(path = path,output = file.path(output_dir,"renv.lock.prod"))
+    lockfile <-attachment::create_renv_for_prod(path = path,output = file.path(output_dir,"renv.lock.prod"))
   }
   
   file.copy(from = lockfile,to = output_dir)
@@ -47,7 +41,7 @@ add_dockerfile_with_renv_ <- function(
   
   # if (!build_from_source) {
   if (update_tar_gz) {
-    old_version <- list.files(path = output_dir,pattern = 'paste0(golem::get_golem_name(), "_*.tar.gz")',full.names = TRUE)
+    old_version <- list.files(path = output_dir,pattern = paste0(golem::get_golem_name(), "_*.*.tar.gz"),full.names = TRUE)
     # file.remove(old_version)
     if (length(old_version) > 0) {
       lapply(old_version, file.remove)
@@ -104,13 +98,60 @@ add_dockerfile_with_renv_ <- function(
   my_dock
 }
 
+
+
+#' @param path path to the Package/golem source folder to deploy.
+#' @param lockfile path to the renv.lock file to use. default is `NULL` 
+#' @param output_dir folder to export everything deployment related.
+#' @param from The FROM of the Dockerfile. Default is
+#'     FROM rocker/r-ver:`R.Version()$major`.`R.Version()$minor`.
+#' @param as The AS of the Dockerfile. Default it NULL.
+#' @param port The `options('shiny.port')` on which to run the App.
+#'     Default is 80.
+#' @param host The `options('shiny.host')` on which to run the App.
+#'    Default is 0.0.0.0.
+#' @param sysreqs boolean. If TRUE, the Dockerfile will contain sysreq installation.
+#' @param repos character. The URL(s) of the repositories to use for `options("repos")`.
+#' @param expand boolean. If `TRUE` each system requirement will have its own `RUN` line.
+#' @param open boolean. Should the Dockerfile be open after creation? Default is `TRUE`.
+#' @param build_golem_from_source boolean. If `TRUE` no tar.gz is created and
+#'     the Dockerfile directly mount the source folder.
+#' @param update_tar_gz boolean. If `TRUE` and `build_golem_from_source` is also `TRUE`,
+#'     an updated tar.gz is created.
+#' @param extra_sysreqs character vector. Extra debian system requirements.
+#'    Will be installed with apt-get install.
+
+
+
+
+
+
+
+
+
+
+#' @param path 
+#' @param lockfile 
+#' @param output_dir 
+#' @param distro 
+#' @param FROM 
+#' @param AS 
+#' @param sysreqs 
+#' @param port 
+#' @param host 
+#' @param repos 
+#' @param expand 
+#' @param open 
+#' @param extra_sysreqs 
+#' @param update_tar_gz 
+#'
 #' @export
 add_dockerfile_with_renv <-function( path = ".",
                                      lockfile = NULL,
                                      output_dir = fs::path(tempdir(), "deploy"),
                                      distro = "focal",
-                                     FROM = "rocker/verse",
-                                     AS = NULL,
+                                     from = "rocker/verse",
+                                     as = NULL,
                                      sysreqs = TRUE,
                                      port = 80,
                                      host = "0.0.0.0",
@@ -125,8 +166,8 @@ add_dockerfile_with_renv <-function( path = ".",
     lockfile = lockfile,
     output_dir = output_dir,
     distro = distro,
-    FROM = FROM,
-    AS = AS,
+    FROM = from,
+    AS = as,
     sysreqs = sysreqs,
     repos = repos,
     expand = expand,
@@ -185,13 +226,27 @@ docker run -p %s:%s %s
   
 }
 
+#' @param path 
+#'
+#' @param lockfile 
+#' @param output_dir 
+#' @param distro 
+#' @param FROM 
+#' @param AS 
+#' @param sysreqs 
+#' @param repos 
+#' @param expand 
+#' @param extra_sysreqs 
+#' @param open 
+#' @param update_tar_gz 
+#'
 #' @export
 add_dockerfile_with_renv_shinyproxy <- function(path = ".",
                                                 lockfile = NULL,
                                                 output_dir = fs::path(tempdir(), "deploy"),
                                                 distro = "focal",
-                                                FROM = "rocker/verse",
-                                                AS = NULL,
+                                                from = "rocker/verse",
+                                                as = NULL,
                                                 sysreqs = TRUE,
                                                 repos = c(CRAN = "https://cran.rstudio.com/"),
                                                 expand = FALSE,
@@ -203,8 +258,8 @@ add_dockerfile_with_renv_shinyproxy <- function(path = ".",
     lockfile = lockfile,
     output_dir = output_dir,
     distro = distro,
-    FROM = FROM,
-    AS = AS,
+    from = from,
+    as = as,
     sysreqs = sysreqs,
     repos = repos,
     expand = expand,
