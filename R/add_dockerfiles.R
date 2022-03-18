@@ -1,7 +1,7 @@
 #' Create a Dockerfile for your App
 #'
-#' Build a container containing your Shiny App. `add_dockerfile()` creates
-#' a generic Dockerfile, while `add_dockerfile_shinyproxy()` and
+#' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` creates
+#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`, `add_dockerfile_with_renv_shinyproxy()`  and
 #' `add_dockerfile_heroku()` creates platform specific Dockerfile.
 #'
 #' @inheritParams add_module
