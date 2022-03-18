@@ -138,8 +138,8 @@ See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
 The \code{{dockerfiler}} object, invisibly.
 }
 \description{
-Build a container containing your Shiny App. \code{add_dockerfile()} creates
-a generic Dockerfile, while \code{add_dockerfile_shinyproxy()} and
+Build a container containing your Shiny App. \code{add_dockerfile()} and \code{add_dockerfile_with_renv()} creates
+a generic Dockerfile, while \code{add_dockerfile_shinyproxy()}, \code{add_dockerfile_with_renv_shinyproxy()}  and
 \code{add_dockerfile_heroku()} creates platform specific Dockerfile.
 }
 \examples{

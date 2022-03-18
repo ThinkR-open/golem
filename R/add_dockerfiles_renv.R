@@ -35,8 +35,7 @@ add_dockerfile_with_renv_ <- function(
   
   
   my_dock <- dockerfiler::Dockerfile$new(FROM = paste0(golem::get_golem_name(),"_socle"))
-  my_dock$RUN(dockerfiler::r(renv::restore()))
-  
+  my_dock$RUN("R -e 'renv::restore()'")
   # if (!build_from_source) {
   if (update_tar_gz) {
     old_version <- list.files(path = output_dir,pattern = paste0(golem::get_golem_name(), "_*.*.tar.gz"),full.names = TRUE)
