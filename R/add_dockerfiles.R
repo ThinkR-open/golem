@@ -9,7 +9,12 @@
 #' @param path path to the DESCRIPTION file to use as an input.
 #' @param output name of the Dockerfile output.
 #' @param from The FROM of the Dockerfile. Default is
-#'     FROM rocker/r-ver:`R.Version()$major`.`R.Version()$minor`.
+#'     
+#'     FROM rocker/verse
+#'     
+#'     without renv.lock file passed  
+#'     `R.Version()$major`.`R.Version()$minor` is used as tag
+#'     
 #' @param as The AS of the Dockerfile. Default it NULL.
 #' @param port The `options('shiny.port')` on which to run the App.
 #'     Default is 80.
@@ -18,13 +23,12 @@
 #' @param sysreqs boolean. If TRUE, the Dockerfile will contain sysreq installation.
 #' @param repos character. The URL(s) of the repositories to use for `options("repos")`.
 #' @param expand boolean. If `TRUE` each system requirement will have its own `RUN` line.
-#' @param open boolean. Should the Dockerfile be open after creation? Default is `TRUE`.
+#' @param open boolean. Should the Dockerfile/README be open after creation? Default is `TRUE`.
 #' @param build_golem_from_source boolean. If `TRUE` no tar.gz is created and
 #'     the Dockerfile directly mount the source folder.
 #' @param update_tar_gz boolean. If `TRUE` and `build_golem_from_source` is also `TRUE`,
 #'     an updated tar.gz is created.
 #' @param extra_sysreqs character vector. Extra debian system requirements.
-#'    Will be installed with apt-get install.
 #'
 #' @export
 #' @rdname dockerfiles
@@ -40,10 +44,26 @@
 #' if (interactive()) {
 #'   add_dockerfile()
 #' }
+#' # Crete a 'deploy' folder containing everything needed to deploy 
+#' # the golem using docker based on {renv}
+#' if (interactive()) {
+#'   add_dockerfile_with_renv(
+#'   # lockfile = "renv.lock", # uncomment to use existing renv.lock file
+#'   output_dir = "deploy")
+#' }
 #' # Add a Dockerfile for ShinyProxy
 #' if (interactive()) {
 #'   add_dockerfile_shinyproxy()
 #' }
+#' 
+#' # Crete a 'deploy' folder containing everything needed to deploy 
+#' # the golem with ShinyProxy using docker based on {renv}
+#' if (interactive()) {
+#'   add_dockerfile_with_renv(
+#'   # lockfile = "renv.lock",# uncomment to use existing renv.lock file
+#'    output_dir = "deploy")
+#' }
+#' 
 #' # Add a Dockerfile for Heroku
 #' if (interactive()) {
 #'   add_dockerfile_heroku()
@@ -55,7 +75,7 @@ add_dockerfile <- function(
   output = "Dockerfile",
   pkg = get_golem_wd(),
   from = paste0(
-    "rocker/r-ver:",
+    "rocker/verse:",
     R.Version()$major,
     ".",
     R.Version()$minor
@@ -128,7 +148,7 @@ add_dockerfile_shinyproxy <- function(
   output = "Dockerfile",
   pkg = get_golem_wd(),
   from = paste0(
-    "rocker/r-ver:",
+    "rocker/verse:",
     R.Version()$major,
     ".",
     R.Version()$minor
@@ -192,7 +212,7 @@ add_dockerfile_heroku <- function(
   output = "Dockerfile",
   pkg = get_golem_wd(),
   from = paste0(
-    "rocker/r-ver:",
+    "rocker/verse:",
     R.Version()$major,
     ".",
     R.Version()$minor
