@@ -19,7 +19,7 @@ add_dockerfile_with_renv_ <- function(
   check_is_installed("attachment")
   dir.create(output_dir)
   if ( is.null(lockfile)){
-    lockfile <-attachment::create_renv_for_prod(path = path,output = file.path(output_dir,"renv.lock.prod"))
+    lockfile <-attachment::create_renv_for_prod(path = source_folder,output = file.path(output_dir,"renv.lock.prod"))
   }
   
   file.copy(from = lockfile,to = output_dir)
