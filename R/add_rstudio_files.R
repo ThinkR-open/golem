@@ -14,6 +14,8 @@ add_rstudio_files <- function(
   service <- match.arg(service)
   where <- path(pkg, "app.R")
 
+  rlang::check_installed("pkgload")
+
   disable_autoload(
     pkg = pkg
   )

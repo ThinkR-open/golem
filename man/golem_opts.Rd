@@ -13,37 +13,37 @@
 set_golem_options(
   golem_name = golem::pkg_name(),
   golem_version = golem::pkg_version(),
-  golem_wd = pkgload::pkg_path(),
+  golem_wd = golem::pkg_path(),
   app_prod = FALSE,
   talkative = TRUE
 )
 
-set_golem_wd(path = pkgload::pkg_path(), talkative = TRUE)
+set_golem_wd(path = golem::pkg_path(), talkative = TRUE)
 
 set_golem_name(
   name = golem::pkg_name(),
-  path = pkgload::pkg_path(),
+  path = golem::pkg_path(),
   talkative = TRUE
 )
 
 set_golem_version(
-  version = pkgload::pkg_version(),
-  path = pkgload::pkg_path(),
+  version = golem::pkg_version(),
+  path = golem::pkg_path(),
   talkative = TRUE
 )
 
-get_golem_wd(use_parent = TRUE, path = pkgload::pkg_path())
+get_golem_wd(use_parent = TRUE, path = golem::pkg_path())
 
 get_golem_name(
   config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
   use_parent = TRUE,
-  path = pkgload::pkg_path()
+  path = golem::pkg_path()
 )
 
 get_golem_version(
   config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
   use_parent = TRUE,
-  path = pkgload::pkg_path()
+  path = golem::pkg_path()
 )
 }
 \arguments{

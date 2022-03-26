@@ -39,7 +39,7 @@
 set_golem_options <- function(
   golem_name = golem::pkg_name(),
   golem_version = golem::pkg_version(),
-  golem_wd = pkgload::pkg_path(),
+  golem_wd = golem::pkg_path(),
   app_prod = FALSE,
   talkative = TRUE
 ) {
@@ -175,7 +175,7 @@ set_golem_things <- function(
 #' @rdname golem_opts
 #' @importFrom fs path_abs
 set_golem_wd <- function(
-  path = pkgload::pkg_path(),
+  path = golem::pkg_path(),
   talkative = TRUE
 ) {
   path <- path_abs(path)
@@ -202,7 +202,7 @@ set_golem_wd <- function(
 #' @importFrom fs path_abs
 set_golem_name <- function(
   name = golem::pkg_name(),
-  path = pkgload::pkg_path(),
+  path = golem::pkg_path(),
   talkative = TRUE
 ) {
   path <- path_abs(path)
@@ -240,8 +240,8 @@ set_golem_name <- function(
 #' @rdname golem_opts
 #' @importFrom fs path_abs
 set_golem_version <- function(
-  version = pkgload::pkg_version(),
-  path = pkgload::pkg_path(),
+  version = golem::pkg_version(),
+  path = golem::pkg_path(),
   talkative = TRUE
 ) {
   path <- path_abs(path)
@@ -288,7 +288,7 @@ get_golem_things <- function(
 #' @rdname golem_opts
 get_golem_wd <- function(
   use_parent = TRUE,
-  path = pkgload::pkg_path()
+  path = golem::pkg_path()
 ) {
   get_golem_things(
     value = "golem_wd",
@@ -303,7 +303,7 @@ get_golem_wd <- function(
 get_golem_name <- function(
   config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
   use_parent = TRUE,
-  path = pkgload::pkg_path()
+  path = golem::pkg_path()
 ) {
   nm <- get_golem_things(
     value = "golem_name",
@@ -322,7 +322,7 @@ get_golem_name <- function(
 get_golem_version <- function(
   config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
   use_parent = TRUE,
-  path = pkgload::pkg_path()
+  path = golem::pkg_path()
 ) {
   get_golem_things(
     value = "golem_version",

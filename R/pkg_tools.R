@@ -1,3 +1,4 @@
+# Getting the DESCRIPTION file in a data.frame
 daf_desc <- function(
   path,
   entry

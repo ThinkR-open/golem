@@ -3,11 +3,14 @@
 \name{pkg_name}
 \alias{pkg_name}
 \alias{pkg_version}
+\alias{pkg_path}
 \title{Package tools}
 \usage{
 pkg_name(path = ".")
 
 pkg_version()
+
+pkg_path(path = ".", depth = 3)
 }
 \arguments{
 \item{path}{Path to use to read the DESCRIPTION}
