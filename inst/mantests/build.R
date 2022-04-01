@@ -16,9 +16,10 @@ fakename <- sprintf(
   gsub("[ :-]", "", Sys.time())
 )
 
+setwd(tempdir(check = TRUE))
+
 # Just so that I can use this script locally too,
 # I set a temporary lib
-#
 cli::cat_rule("Set up for lib")
 
 if (Sys.getenv("CI", "local") == "local") {
@@ -72,6 +73,7 @@ install_local(
 cli::cat_rule("Install crystalmountains")
 
 tmp_cm <- tempfile(fileext = ".zip")
+
 download.file(
   "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
   "main.zip"
