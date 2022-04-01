@@ -16,8 +16,6 @@ fakename <- sprintf(
   gsub("[ :-]", "", Sys.time())
 )
 
-setwd(tempdir(check = TRUE))
-
 # Just so that I can use this script locally too,
 # I set a temporary lib
 cli::cat_rule("Set up for lib")
@@ -69,6 +67,8 @@ library(fs, lib.loc = temp_lib)
 install_local(
   lib.loc = temp_lib
 )
+
+setwd(tempdir(check = TRUE))
 
 cli::cat_rule("Install crystalmountains")
 
