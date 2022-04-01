@@ -68,30 +68,28 @@ install_local(
   lib.loc = temp_lib
 )
 
-setwd(tempdir(check = TRUE))
-
-cli::cat_rule("Install crystalmountains")
-
-tmp_cm <- tempfile(fileext = ".zip")
-
-download.file(
-  "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
-  "main.zip"
-)
-
-unzip(tmp_cm)
-
-remotes::install_local(
-  "crystalmountains-main",
-  lib.loc = temp_lib,
-  update = "never"
-)
-unlink("crystalmountains-main", TRUE, TRUE)
-
-# Going to the temp dir and create a new golem
-cli::cat_rule("Creating a golem based app")
 
 withr::with_tempdir({
+  cli::cat_rule("Install crystalmountains")
+
+  tmp_cm <- tempfile(fileext = ".zip")
+
+  download.file(
+    "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
+    "main.zip"
+  )
+
+  unzip(tmp_cm)
+
+  remotes::install_local(
+    "crystalmountains-main",
+    lib.loc = temp_lib,
+    update = "never"
+  )
+  unlink("crystalmountains-main", TRUE, TRUE)
+
+  # Going to the temp dir and create a new golem
+  cli::cat_rule("Creating a golem based app")
   library(golem)
 
   create_golem(
