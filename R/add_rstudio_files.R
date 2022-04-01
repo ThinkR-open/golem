@@ -14,7 +14,14 @@ add_rstudio_files <- function(
   service <- match.arg(service)
   where <- path(pkg, "app.R")
 
-  rlang::check_installed("pkgload")
+  rlang::check_installed(
+    "pkgload",
+    reason = "to deploy on RStudio products."
+  )
+
+  rlang::check_installed("usethis")
+
+  usethis::use_package("pkgload")
 
   disable_autoload(
     pkg = pkg
@@ -40,10 +47,6 @@ add_rstudio_files <- function(
         "%s::run_app() # add parameters here (if any)",
         get_golem_name()
       )
-    )
-    rlang::check_installed(
-      "pkgload",
-      reason = "to deploy on RStudio products."
     )
 
     # We add {pkgload} as a dep because it's required to deploy on Connect & stuff

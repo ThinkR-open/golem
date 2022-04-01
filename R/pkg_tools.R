@@ -1,16 +1,18 @@
 # Getting the DESCRIPTION file in a data.frame
 daf_desc <- function(
-  path,
+  path = ".",
   entry
 ) {
-  unname(
-    as.data.frame(
-      read.dcf(
-        normalizePath(
-          file.path(path, "DESCRIPTION")
+  unlist(
+    unname(
+      as.data.frame(
+        read.dcf(
+          normalizePath(
+            file.path(path, "DESCRIPTION")
+          )
         )
-      )
-    )[entry]
+      )[entry]
+    )
   )
 }
 
@@ -28,7 +30,7 @@ pkg_name <- function(path = ".") {
 }
 #' @export
 #' @rdname pkg_tools
-pkg_version <- function() {
+pkg_version <- function(path = ".") {
   daf_desc(path, "Version")
 }
 #' @export
