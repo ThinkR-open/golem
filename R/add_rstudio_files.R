@@ -21,8 +21,6 @@ add_rstudio_files <- function(
 
   rlang::check_installed("usethis")
 
-  usethis::use_package("pkgload")
-
   disable_autoload(
     pkg = pkg
   )
