@@ -22,6 +22,8 @@ daf_desc <- function(
 #' inside your project while developing
 #'
 #' @param path Path to use to read the DESCRIPTION
+#' @param depth Number of parent directory to visit before
+#'   deciding we are not in a package.
 #'
 #' @export
 #' @rdname pkg_tools

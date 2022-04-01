@@ -76,6 +76,7 @@ download.file(
   "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
   "main.zip"
 )
+
 unzip(tmp_cm)
 
 remotes::install_local(
@@ -83,7 +84,7 @@ remotes::install_local(
   lib.loc = temp_lib,
   update = "never"
 )
-unlink("crystalmountains-main")
+unlink("crystalmountains-main", TRUE, TRUE)
 
 # Going to the temp dir and create a new golem
 cli::cat_rule("Creating a golem based app")
