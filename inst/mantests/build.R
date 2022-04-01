@@ -20,12 +20,12 @@ fakename <- sprintf(
 # I set a temporary lib
 cli::cat_rule("Set up for lib")
 
+temp_app <- file.path(tempdir(), "golemmetrics")
+
 if (Sys.getenv("CI", "local") == "local") {
   # If I'm on the CI, we don't change the lib
-  temp_app <- file.path(getwd(), "inst", "golemmetrics")
   temp_lib <- .libPaths()
 } else {
-  temp_app <- file.path(getwd(), "inst", "golemmetrics")
   temp_lib <- file.path(tempdir(), "temp_lib")
   .libPaths(c(temp_lib, .libPaths()))
 }
