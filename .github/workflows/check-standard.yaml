@@ -85,7 +85,7 @@ jobs:
 
       - name: Manual Test
         env:
-          GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           source("inst/mantests/build.R")
         shell: Rscript {0}
