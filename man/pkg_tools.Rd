@@ -8,7 +8,7 @@
 \usage{
 pkg_name(path = ".")
 
-pkg_version()
+pkg_version(path = ".")
 
 pkg_path(path = ".", depth = 3)
 }
