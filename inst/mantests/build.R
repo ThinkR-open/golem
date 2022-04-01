@@ -72,17 +72,17 @@ install_local(
 withr::with_tempdir({
   cli::cat_rule("Install crystalmountains")
 
-  tmp_cm <- tempfile(fileext = ".zip")
+  # tmp_cm <- tempfile(fileext = ".zip")
 
-  download.file(
-    "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
-    "main.zip"
-  )
+  # download.file(
+  #   "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
+  #   "main.zip"
+  # )
 
-  unzip(tmp_cm)
+  # unzip(tmp_cm)
 
-  remotes::install_local(
-    "crystalmountains-main",
+  remotes::install_github(
+    "thinkr-open/crystalmountains",
     lib.loc = temp_lib,
     update = "never"
   )
