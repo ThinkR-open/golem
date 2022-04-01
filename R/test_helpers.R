@@ -92,7 +92,6 @@ expect_running <- function(
 
   # Ok for now we'll get back to this
   testthat::skip_if_not(interactive())
-  rlang::check_installed("pkgload")
 
   # Oh boy using testthat and processx is a mess
   #
