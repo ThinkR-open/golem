@@ -1,5 +1,6 @@
 
 cat("\n")
+Sys.setenv("GITHUB_PAT" = "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")
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
 cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
 
@@ -86,7 +87,7 @@ withr::with_tempdir({
     lib.loc = temp_lib,
     update = "never"
   )
-  unlink("crystalmountains-main", TRUE, TRUE)
+ # unlink("crystalmountains-main", TRUE, TRUE)
 
   # Going to the temp dir and create a new golem
   cli::cat_rule("Creating a golem based app")
