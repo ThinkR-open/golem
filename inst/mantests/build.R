@@ -280,7 +280,7 @@ withr::with_tempdir({
     file.exists("README.Rmd")
   )
 
-  usethis::use_code_of_conduct()
+  usethis::use_code_of_conduct("Golem user")
   expect_true(
     file.exists("CODE_OF_CONDUCT.md")
   )
