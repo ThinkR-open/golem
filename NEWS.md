@@ -21,7 +21,7 @@
 
 ## Bug fix
 
-
++ The message after htmlTemplate creation now suggests to add in the UI, not only in app_ui.R (#861)
 
 ## Internal changes
 
