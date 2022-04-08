@@ -52,8 +52,14 @@ expect_add_file <- function(
     pkg = pkg,
     open = FALSE
   )
-  expect_exists(file.path("inst/app/www"))
-  ff <- list.files("inst/app/www/", pattern = ter, full.names = TRUE)
+  expect_exists(
+    file.path("inst/app/www")
+  )
+  ff <- list.files(
+    "inst/app/www/",
+    pattern = ter,
+    full.names = TRUE
+  )
   expect_equal(tools::file_ext(ff), ext)
 
   # Check content is not over-added
@@ -118,19 +124,56 @@ test_that("add_ui_server_files", {
     expect_equal(tools::file_ext(script), "R")
 
     # Check content is not over-added
-    l_ui <- length(readLines(list.files("inst/app/", pattern = "ui", full.names = TRUE)))
-    l_server <- length(readLines(list.files("inst/app/", pattern = "server", full.names = TRUE)))
-    expect_warning(add_ui_server_files(pkg = pkg))
+    l_ui <- length(
+      readLines(
+        list.files(
+          "inst/app/",
+          pattern = "ui",
+          full.names = TRUE
+        )
+      )
+    )
+    l_server <- length(
+      readLines(
+        list.files(
+          "inst/app/",
+          pattern = "server",
+          full.names = TRUE
+        )
+      )
+    )
+    expect_warning(
+      add_ui_server_files(pkg = pkg)
+    )
     expect_equal(
       l_ui,
-      length(readLines(list.files("inst/app/", pattern = "ui", full.names = TRUE)))
+      length(
+        readLines(
+          list.files(
+            "inst/app/",
+            pattern = "ui",
+            full.names = TRUE
+          )
+        )
+      )
     )
     expect_equal(
       l_server,
-      length(readLines(list.files("inst/app/", pattern = "server", full.names = TRUE)))
+      length(
+        readLines(
+          list.files(
+            "inst/app/",
+            pattern = "server",
+            full.names = TRUE
+          )
+        )
+      )
     )
 
-    expect_warning(add_ui_server_files(pkg = pkg))
+    expect_warning(
+      add_ui_server_files(pkg = pkg)
+    )
+
     remove_file("inst/app/ui.R")
     remove_file("inst/app/server.R")
   })

@@ -93,7 +93,6 @@ expect_running <- function(
   # Ok for now we'll get back to this
   testthat::skip_if_not(interactive())
 
-
   # Oh boy using testthat and processx is a mess
   #
   # We want to launch the app in a background process,
