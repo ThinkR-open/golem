@@ -1,3 +1,16 @@
+talk_once <- function(.f,msg=""){
+  talk <- TRUE
+  function(...){
+    if (talk){
+      talk <<- FALSE
+      message(msg)
+    } 
+    .f(...)
+  }
+}
+
+
+
 #' Create a Dockerfile for your App
 #'
 #' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` creates
@@ -70,7 +83,7 @@
 #' }
 #' }
 #' @return The `{dockerfiler}` object, invisibly.
-add_dockerfile <- function(
+add_dockerfile <- talk_once(function(
   path = "DESCRIPTION",
   output = "Dockerfile",
   pkg = get_golem_wd(),
@@ -91,6 +104,10 @@ add_dockerfile <- function(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
 ) {
+  
+  
+  
+  
   check_is_installed("dockerfiler")
 
   required_version("dockerfiler", "0.1.4")
@@ -138,12 +155,20 @@ add_dockerfile <- function(
   )
 
   return(invisible(dock))
-}
+},"
+
+This function does not always generate the most stable Dockerfile.
+A more reliable solution would be to use golem::add_dockerfile_with_renv().
+
+")
+
+
+
 
 #' @export
 #' @rdname dockerfiles
 #' @importFrom fs path path_file
-add_dockerfile_shinyproxy <- function(
+add_dockerfile_shinyproxy <- talk_once(function(
   path = "DESCRIPTION",
   output = "Dockerfile",
   pkg = get_golem_wd(),
@@ -164,7 +189,6 @@ add_dockerfile_shinyproxy <- function(
 ) {
   check_is_installed("dockerfiler")
   required_version("dockerfiler", "0.1.4")
-
   where <- path(pkg, output)
 
   usethis::use_build_ignore(output)
@@ -202,12 +226,17 @@ add_dockerfile_shinyproxy <- function(
   )
 
   return(invisible(dock))
-}
+},"
+
+This function does not always generate the most stable Dockerfile.
+A more reliable solution would be to use golem::add_dockerfile_with_renv_shinyproxy().
+
+")
 
 #' @export
 #' @rdname dockerfiles
 #' @importFrom fs path path_file
-add_dockerfile_heroku <- function(
+add_dockerfile_heroku <- talk_once(function(
   path = "DESCRIPTION",
   output = "Dockerfile",
   pkg = get_golem_wd(),
@@ -228,7 +257,6 @@ add_dockerfile_heroku <- function(
 ) {
   check_is_installed("dockerfiler")
   required_version("dockerfiler", "0.1.4")
-
   where <- path(pkg, output)
 
   usethis::use_build_ignore(output)
@@ -296,7 +324,12 @@ add_dockerfile_heroku <- function(
   }
   usethis::use_build_ignore(files = output)
   return(invisible(dock))
-}
+},"
+
+This function does not always generate the most stable Dockerfile.
+A more reliable solution would be to use golem::add_dockerfile_with_renv().
+
+")
 
 alert_build <- function(
   path,
