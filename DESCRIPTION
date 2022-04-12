@@ -68,7 +68,7 @@ Suggests:
     rlang,
     covr,
     devtools,
-    dockerfiler (>= 0.1.4),
+    dockerfiler (>= 0.1.5.0002),
     knitr,
     pkgbuild,
     pkgdown,
@@ -82,7 +82,7 @@ Suggests:
     testthat,
     tools,
     withr,
-    attachment
+    attachment (>= 0.2.4.9001)
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

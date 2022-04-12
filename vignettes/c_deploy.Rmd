@@ -144,3 +144,15 @@ golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy",lockfile =  "re
 
 ```
 
+> this functions will create a "deploy" folder containing : 
+
+```{txt}
+deploy/
++-- Dockerfile
++-- Dockerfile_socle
++-- yourgolem_0.0.0.9000.tar.gz
++-- README
+\-- renv.lock.prod
+```
+
+then follow the README file

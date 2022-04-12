@@ -15,7 +15,7 @@ add_dockerfile_with_renv_ <- function(
 ){
   check_is_installed("renv")
   check_is_installed("dockerfiler")
-  required_version("dockerfiler", "0.1.5.0001")
+  required_version("dockerfiler", "0.1.5.0002")
   check_is_installed("attachment")
   dir.create(output_dir)
   if ( is.null(lockfile)){
