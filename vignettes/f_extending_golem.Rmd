@@ -24,7 +24,7 @@ This Vignette discusses how you can extend `{golem}`.
 The `create_golem()` function comes with a `project_hook` parameter, a function run just after the `{golem}` project creation. 
 It can be used to modify the project structure automatically just after its creation. 
 
-This allows to define custom behavior when creating `{golem}` based app, that can be used for:
+This allows you to define custom behavior when creating `{golem}` based app, that can be used for:
 
 + Adding a different front-end template in `R/app_ui.R` 
 
