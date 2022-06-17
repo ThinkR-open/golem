@@ -35,6 +35,7 @@ add_dockerfile_with_renv_ <- function(
   
   
   my_dock <- dockerfiler::Dockerfile$new(FROM = paste0(golem::get_golem_name(),"_socle"))
+  my_dock$RUN("COPY renv.lock.prod renv.lock")
   my_dock$RUN("R -e 'renv::restore()'")
   # if (!build_from_source) {
   if (update_tar_gz) {
@@ -112,7 +113,7 @@ add_dockerfile_with_renv_ <- function(
 #' @inheritParams add_dockerfile
 #' @rdname dockerfiles
 #' @export
-add_dockerfile_with_renv <-function( source_folder = ".",
+add_dockerfile_with_renv <- function( source_folder = ".",
                                      lockfile = NULL,
                                      output_dir = fs::path(tempdir(), "deploy"),
                                      distro = "focal",
