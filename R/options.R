@@ -40,7 +40,8 @@ set_golem_options <- function(
 	golem_version = golem::pkg_version(),
 	golem_wd = golem::pkg_path(),
 	app_prod = FALSE,
-	talkative = TRUE
+	talkative = TRUE,
+	config_file = path(golem_wd, "inst/golem-config.yml")
 ) {
 
 	# TODO here we'll run the
@@ -57,12 +58,6 @@ set_golem_options <- function(
 	# to keep the wd as an expr if it is the
 	# same as golem::pkg_path(), otherwise
 	# we use the explicit path
-	if (golem_wd == golem::pkg_path()) {
-		path <- "golem::pkg_path()"
-		attr(path, "tag") <- "!expr"
-	} else {
-		path <- golem_wd
-	}
 
 	set_golem_wd(
 		path = path,
@@ -103,40 +98,15 @@ set_golem_things <- function(
 	key,
 	value,
 	path,
-	talkative,
+	talkative = TRUE,
 	config = "default"
 ) {
-	conf_path <- get_current_config(path, set_options = FALSE)
-	stop_if(
-		conf_path,
-		is.null,
-		"Unable to retrieve golem config file."
-	)
-	cat_if_talk <- function(..., fun = cat_green_tick) {
-		if (talkative) {
-			fun(...)
-		}
-	}
-
-	cat_if_talk(
-		sprintf(
-			"Setting `%s` to %s",
-			key,
-			value
-		)
-	)
-
-	if (key == "golem_wd") {
-		cat_if_talk(
-			"You can change golem working directory with set_golem_wd('path/to/wd')",
-			fun = cat_line
-		)
-	}
-
 	amend_golem_config(
 		key = key,
 		value = value,
-		config = config
+		config = config,
+		pkg = path,
+		talkative = talkative
 	)
 
 	invisible(path)
@@ -149,16 +119,19 @@ set_golem_wd <- function(
 	path = golem::pkg_path(),
 	talkative = TRUE
 ) {
-	if (path == golem::pkg_path()) {
-		path <- "golem::pkg_path()"
-		attr(path, "tag") <- "!expr"
+	if (
+		path == "golem::pkg_path()" |
+			path == golem::pkg_path()
+	) {
+		golem_yaml_path <- "golem::pkg_path()"
+		attr(golem_yaml_path, "tag") <- "!expr"
 	} else {
-		path <- path_abs(path)
+		golem_yaml_path <- path_abs(path)
 	}
 
 	set_golem_things(
 		"golem_wd",
-		path,
+		golem_yaml_path,
 		path,
 		talkative = talkative,
 		config = "dev"
