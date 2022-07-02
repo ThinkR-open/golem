@@ -248,7 +248,7 @@ withr::with_tempdir({
   golem::set_golem_options()
   expect_equal(
     golem::get_golem_wd(),
-    here::here()
+    golem::golem_path()
   )
   expect_equal(
     golem::get_golem_name(),
