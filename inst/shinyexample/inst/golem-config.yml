@@ -7,5 +7,5 @@ production:
   app_prod: yes
   
 dev: 
-  golem_wd: !exp here::here()
+  golem_wd: !exp golem::golem_path()
 
