@@ -188,6 +188,27 @@ amend_golem_config <- function(
 		is.null,
 		"Unable to retrieve golem config file."
 	)
+	cat_if_talk <- function(..., fun = cat_green_tick) {
+		if (talkative) {
+			fun(...)
+		}
+	}
+
+	cat_if_talk(
+		sprintf(
+			"Setting `%s` to %s",
+			key,
+			value
+		)
+	)
+
+	if (key == "golem_wd") {
+		cat_if_talk(
+			"You can change golem working directory with set_golem_wd('path/to/wd')",
+			fun = cat_line
+		)
+	}
+
 	conf <- find_and_tag_exprs(conf_path)
 	conf[[config]][[key]] <- value
 	write_yaml(
