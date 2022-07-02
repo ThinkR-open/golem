@@ -149,11 +149,11 @@ set_golem_wd <- function(
 	path = golem::pkg_path(),
 	talkative = TRUE
 ) {
-	path <- path_abs(path)
-
 	if (path == golem::pkg_path()) {
 		path <- "golem::pkg_path()"
 		attr(path, "tag") <- "!expr"
+	} else {
+		path <- path_abs(path)
 	}
 
 	set_golem_things(
