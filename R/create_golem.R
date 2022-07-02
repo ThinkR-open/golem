@@ -132,20 +132,9 @@ create_golem <- function(
 		path_to_golem
 	)
 
-
-
 	cat_green_tick("Copied app skeleton")
 
 	old <- setwd(path_to_golem)
-
-	cat_rule("Changing the app name")
-
-	set_golem_name(
-		package_name,
-		path_to_golem
-	)
-
-	cat_green_tick("Configured app")
 
 	cat_rule("Running project hook function")
 
