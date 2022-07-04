@@ -12,7 +12,10 @@ get_golem_things <- function(
 	use_parent = TRUE,
 	path
 ) {
-	conf_path <- get_current_config(path, set_options = TRUE)
+	conf_path <- get_current_config(
+		path,
+		set_options = TRUE
+	)
 	stop_if(
 		conf_path,
 		is.null,
@@ -33,12 +36,16 @@ get_golem_wd <- function(
 	use_parent = TRUE,
 	path = golem::pkg_path()
 ) {
-	get_golem_things(
+	pth <- get_golem_things(
 		value = "golem_wd",
 		config = "dev",
 		use_parent = use_parent,
 		path = path
 	)
+    if (is.null(pth)) {
+        pth <- golem::pkg_path()
+    }
+    return(pth)
 }
 
 #' @export
@@ -63,7 +70,7 @@ get_golem_name <- function(
 	if (is.null(nm)) {
 		nm <- golem::pkg_name()
 	}
-	nm
+	return(nm)
 }
 
 #' @export
@@ -79,10 +86,14 @@ get_golem_version <- function(
 	use_parent = TRUE,
 	path = golem::pkg_path()
 ) {
-	get_golem_things(
+	vers <- get_golem_things(
 		value = "golem_version",
 		config = config,
 		use_parent = use_parent,
 		path = path
 	)
+    if (is.null(vers)) {
+        vers <- golem::pkg_version()
+    }
+    return(vers)
 }
