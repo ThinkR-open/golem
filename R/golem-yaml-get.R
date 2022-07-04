@@ -2,7 +2,13 @@
 #' @importFrom config get
 get_golem_things <- function(
 	value,
-	config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
+	config = config = Sys.getenv(
+    "GOLEM_CONFIG_ACTIVE",
+    Sys.getenv(
+      "R_CONFIG_ACTIVE",
+      "default"
+    )
+  ),
 	use_parent = TRUE,
 	path
 ) {
@@ -38,7 +44,13 @@ get_golem_wd <- function(
 #' @export
 #' @rdname golem_opts
 get_golem_name <- function(
-	config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
+	config = Sys.getenv(
+    "GOLEM_CONFIG_ACTIVE",
+    Sys.getenv(
+      "R_CONFIG_ACTIVE",
+      "default"
+    )
+  ),
 	use_parent = TRUE,
 	path = golem::pkg_path()
 ) {
@@ -57,7 +69,13 @@ get_golem_name <- function(
 #' @export
 #' @rdname golem_opts
 get_golem_version <- function(
-	config = Sys.getenv("R_CONFIG_ACTIVE", "default"),
+	config = Sys.getenv(
+    "GOLEM_CONFIG_ACTIVE",
+    Sys.getenv(
+      "R_CONFIG_ACTIVE",
+      "default"
+    )
+  ),
 	use_parent = TRUE,
 	path = golem::pkg_path()
 ) {
