@@ -299,7 +299,7 @@ withr::with_tempdir({
     dir.exists("tests")
   )
 
-  golem::use_recommended_deps()
+  # golem::use_recommended_deps()
 
   golem::use_utils_ui(with_test = TRUE)
   expect_true(
