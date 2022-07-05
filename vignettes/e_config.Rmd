@@ -1,5 +1,5 @@
 ---
-title: "Using golem config"
+title: "config"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{config}

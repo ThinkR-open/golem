@@ -1,5 +1,5 @@
 ---
-title: "Deploying Apps with {golem}"
+title: "c_deploy"
 author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

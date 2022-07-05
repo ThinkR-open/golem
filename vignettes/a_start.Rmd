@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with {golem}"
+title: "a_start"
 author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -156,14 +156,6 @@ golem::use_recommended_tests()
 ```
 
 About [tests in a package](https://r-pkgs.org/tests.html).
-
-### Use Recommended Packages
-
-This will add "shiny", "DT", "attempt", "glue", "htmltools", and "golem" as a dependency to your package.
-
-```{r}
-golem::use_recommended_deps()
-```
 
 ### Add various tools
 

@@ -1,5 +1,5 @@
 ---
-title: "Using {golem} js functions"
+title: "d_js"
 author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
