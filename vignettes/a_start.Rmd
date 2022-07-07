@@ -122,7 +122,7 @@ golem::fill_desc(
 )
 ```
 
-About [the DESCRIPTION file](https://r-pkgs.org/description.html).
+About [the DESCRIPTION file](https://r-pkgs.org/Metadata.html#sec-description).
 
 ### Add `{golem}` options
 
@@ -155,7 +155,7 @@ Create a template for tests:
 golem::use_recommended_tests()
 ```
 
-About [tests in a package](https://r-pkgs.org/tests.html).
+About [tests in a package](https://r-pkgs.org/testing-basics.html).
 
 ### Use Recommended Packages
 
