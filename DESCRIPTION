@@ -1,11 +1,11 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.3.2.00001
+Version: 0.3.3
 Authors@R: 
     c(person(given = "Colin",
              family = "Fay",
              role = c("cre", "aut"),
-             email = "contact@colinfay.me",
+             email = "vincent@thinkr.fr",
              comment = c(ORCID = "0000-0001-7343-1846")),
       person(given = "Vincent",
              family = "Guyader",
