@@ -78,7 +78,6 @@ add_dockerfile_with_renv_ <- function(
       if (missing(out)) {
         cat_red_bullet("Error during tar.gz building")
       } else {
-        use_build_ignore(files = out)
         cat_green_tick(
           sprintf(
             " %s created.",
