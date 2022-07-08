@@ -95,7 +95,7 @@ golem::add_dockerfile_heroku()
 ```{txt}
 deploy/
 +-- Dockerfile
-+-- Dockerfile_socle
++-- Dockerfile_base
 +-- yourgolem_0.0.0.9000.tar.gz
 +-- README
 \-- renv.lock.prod
@@ -149,7 +149,7 @@ golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy",lockfile =  "re
 ```{txt}
 deploy/
 +-- Dockerfile
-+-- Dockerfile_socle
++-- Dockerfile_base
 +-- yourgolem_0.0.0.9000.tar.gz
 +-- README
 \-- renv.lock.prod

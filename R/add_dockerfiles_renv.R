@@ -18,6 +18,12 @@ add_dockerfile_with_renv_ <- function(
   required_version("dockerfiler", "0.2.0")
   check_is_installed("attachment")
   dir.create(output_dir)
+  
+  # add output_dir in Rbuildignore if the output is inside the golem
+  if (normalizePath(dirname(output_dir)) == normalizePath(source_folder)) {
+    usethis::use_build_ignore(output_dir)
+  }
+  
   if ( is.null(lockfile)){
     lockfile <-attachment::create_renv_for_prod(path = source_folder,output = file.path(output_dir,"renv.lock.prod"))
   }
@@ -30,11 +36,11 @@ add_dockerfile_with_renv_ <- function(
                                        sysreqs = sysreqs,expand = expand,
                                        extra_sysreqs = extra_sysreqs
   )
-  socle$write(as = file.path(output_dir, "Dockerfile_socle"))
+  socle$write(as = file.path(output_dir, "Dockerfile_base"))
   
   
   
-  my_dock <- dockerfiler::Dockerfile$new(FROM = paste0(golem::get_golem_name(),"_socle"))
+  my_dock <- dockerfiler::Dockerfile$new(FROM = paste0(golem::get_golem_name(),"_base"))
   my_dock$COPY("renv.lock.prod","renv.lock")
   my_dock$RUN("R -e 'renv::restore()'")
   # if (!build_from_source) {
@@ -152,10 +158,10 @@ add_dockerfile_with_renv <- function( source_folder = ".",
   base_dock
   base_dock$write(as = file.path(output_dir, "Dockerfile"))
   
-  out <- sprintf("docker build -f Dockerfile_socle --progress=plain -t %s .
+  out <- sprintf("docker build -f Dockerfile_base --progress=plain -t %s .
 docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
-# then go to 127.0.0.1:%s",paste0(golem::get_golem_name(),'_socle'),
+# then go to 127.0.0.1:%s",paste0(golem::get_golem_name(),'_base'),
                  paste0(golem::get_golem_name(),':latest'),
                  port,
                  port,
