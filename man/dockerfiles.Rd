@@ -8,11 +8,52 @@
 \alias{add_dockerfile_with_renv_shinyproxy}
 \title{Create a Dockerfile for your App}
 \usage{
-add_dockerfile(...)
+add_dockerfile(
+  path = "DESCRIPTION",
+  output = "Dockerfile",
+  pkg = get_golem_wd(),
+  from = paste0("rocker/verse:", R.Version()$major, ".", R.Version()$minor),
+  as = NULL,
+  port = 80,
+  host = "0.0.0.0",
+  sysreqs = TRUE,
+  repos = c(CRAN = "https://cran.rstudio.com/"),
+  expand = FALSE,
+  open = TRUE,
+  update_tar_gz = TRUE,
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
+)
 
-add_dockerfile_shinyproxy(...)
+add_dockerfile_shinyproxy(
+  path = "DESCRIPTION",
+  output = "Dockerfile",
+  pkg = get_golem_wd(),
+  from = paste0("rocker/verse:", R.Version()$major, ".", R.Version()$minor),
+  as = NULL,
+  sysreqs = TRUE,
+  repos = c(CRAN = "https://cran.rstudio.com/"),
+  expand = FALSE,
+  open = TRUE,
+  update_tar_gz = TRUE,
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
+)
 
-add_dockerfile_heroku(...)
+add_dockerfile_heroku(
+  path = "DESCRIPTION",
+  output = "Dockerfile",
+  pkg = get_golem_wd(),
+  from = paste0("rocker/verse:", R.Version()$major, ".", R.Version()$minor),
+  as = NULL,
+  sysreqs = TRUE,
+  repos = c(CRAN = "https://cran.rstudio.com/"),
+  expand = FALSE,
+  open = TRUE,
+  update_tar_gz = TRUE,
+  build_golem_from_source = TRUE,
+  extra_sysreqs = NULL
+)
 
 add_dockerfile_with_renv(
   source_folder = ".",
@@ -47,7 +88,43 @@ add_dockerfile_with_renv_shinyproxy(
 )
 }
 \arguments{
-\item{...}{Arguments to be passed to the \code{module_template} function.}
+\item{path}{path to the DESCRIPTION file to use as an input.}
+
+\item{output}{name of the Dockerfile output.}
+
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+
+\item{from}{The FROM of the Dockerfile. Default is
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{FROM rocker/verse
+
+without renv.lock file passed  
+`R.Version()$major`.`R.Version()$minor` is used as tag
+}\if{html}{\out{</div>}}}
+
+\item{as}{The AS of the Dockerfile. Default it NULL.}
+
+\item{port}{The \code{options('shiny.port')} on which to run the App.
+Default is 80.}
+
+\item{host}{The \code{options('shiny.host')} on which to run the App.
+Default is 0.0.0.0.}
+
+\item{sysreqs}{boolean. If TRUE, the Dockerfile will contain sysreq installation.}
+
+\item{repos}{character. The URL(s) of the repositories to use for \code{options("repos")}.}
+
+\item{expand}{boolean. If \code{TRUE} each system requirement will have its own \code{RUN} line.}
+
+\item{open}{boolean. Should the Dockerfile/README be open after creation? Default is \code{TRUE}.}
+
+\item{update_tar_gz}{boolean. If \code{TRUE} and \code{build_golem_from_source} is also \code{TRUE},
+an updated tar.gz is created.}
+
+\item{build_golem_from_source}{boolean. If \code{TRUE} no tar.gz is created and
+the Dockerfile directly mount the source folder.}
+
+\item{extra_sysreqs}{character vector. Extra debian system requirements.}
 
 \item{source_folder}{path to the Package/golem source folder to deploy.
 default is current folder '.'}
@@ -58,40 +135,6 @@ default is current folder '.'}
 
 \item{distro}{One of "focal", "bionic", "xenial", "centos7", or "centos8".
 See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
-
-\item{from}{The FROM of the Dockerfile. Default is\preformatted{FROM rocker/verse
-
-without renv.lock file passed  
-`R.Version()$major`.`R.Version()$minor` is used as tag
-}}
-
-\item{as}{The AS of the Dockerfile. Default it NULL.}
-
-\item{sysreqs}{boolean. If TRUE, the Dockerfile will contain sysreq installation.}
-
-\item{port}{The \code{options('shiny.port')} on which to run the App.
-Default is 80.}
-
-\item{host}{The \code{options('shiny.host')} on which to run the App.
-Default is 0.0.0.0.}
-
-\item{repos}{character. The URL(s) of the repositories to use for \code{options("repos")}.}
-
-\item{expand}{boolean. If \code{TRUE} each system requirement will have its own \code{RUN} line.}
-
-\item{open}{boolean. Should the Dockerfile/README be open after creation? Default is \code{TRUE}.}
-
-\item{extra_sysreqs}{character vector. Extra debian system requirements.}
-
-\item{update_tar_gz}{boolean. If \code{TRUE} and \code{build_golem_from_source} is also \code{TRUE},
-an updated tar.gz is created.}
-
-\item{path}{path to the DESCRIPTION file to use as an input.}
-
-\item{output}{name of the Dockerfile output.}
-
-\item{build_golem_from_source}{boolean. If \code{TRUE} no tar.gz is created and
-the Dockerfile directly mount the source folder.}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.

@@ -83,7 +83,52 @@ talk_once <- function(.f,msg=""){
 #' }
 #' }
 #' @return The `{dockerfiler}` object, invisibly.
-add_dockerfile <- talk_once(function(
+#' 
+#' 
+#' 
+
+
+add_dockerfile <- function(
+    path = "DESCRIPTION",
+    output = "Dockerfile",
+    pkg = get_golem_wd(),
+    from = paste0(
+      "rocker/verse:",
+      R.Version()$major,
+      ".",
+      R.Version()$minor
+    ),
+    as = NULL,
+    port = 80,
+    host = "0.0.0.0",
+    sysreqs = TRUE,
+    repos = c(CRAN = "https://cran.rstudio.com/"),
+    expand = FALSE,
+    open = TRUE,
+    update_tar_gz = TRUE,
+    build_golem_from_source = TRUE,
+    extra_sysreqs = NULL
+) {
+  add_dockerfile_(
+    path = path,
+    output = output,
+    pkg = pkg,
+    from = from,
+    as = as,
+    port = port,
+    host = host,
+    sysreqs = sysreqs,
+    repos = repos,
+    expand = expand,
+    open = open,
+    update_tar_gz = update_tar_gz,
+    build_golem_from_source = build_golem_from_source,
+    extra_sysreqs = extra_sysreqs
+      )
+}
+
+
+add_dockerfile_ <- talk_once(function(
   path = "DESCRIPTION",
   output = "Dockerfile",
   pkg = get_golem_wd(),
@@ -104,9 +149,6 @@ add_dockerfile <- talk_once(function(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
 ) {
-  
-  
-  
   
   check_is_installed("dockerfiler")
 
@@ -165,10 +207,53 @@ A more reliable solution would be to use golem::add_dockerfile_with_renv().
 
 
 
+
+
+
 #' @export
 #' @rdname dockerfiles
-#' @importFrom fs path path_file
-add_dockerfile_shinyproxy <- talk_once(function(
+#'  @importFrom fs path path_file
+#'  
+#'  
+#'  
+add_dockerfile_shinyproxy <-function(  path = "DESCRIPTION",
+                                       output = "Dockerfile",
+                                       pkg = get_golem_wd(),
+                                       from = paste0(
+                                         "rocker/verse:",
+                                         R.Version()$major,
+                                         ".",
+                                         R.Version()$minor
+                                       ),
+                                       as = NULL,
+                                       sysreqs = TRUE,
+                                       repos = c(CRAN = "https://cran.rstudio.com/"),
+                                       expand = FALSE,
+                                       open = TRUE,
+                                       update_tar_gz = TRUE,
+                                       build_golem_from_source = TRUE,
+                                       extra_sysreqs = NULL
+){
+add_dockerfile_shinyproxy_(
+    
+    path = path,
+    output = output,
+    pkg = pkg,
+    from = from,
+    as = as,
+    sysreqs = sysreqs,
+    repos = repos,
+    expand = expand,
+    open = open,
+    update_tar_gz = update_tar_gz,
+    build_golem_from_source = build_golem_from_source,
+    extra_sysreqs = extra_sysreqs
+    
+  )
+  
+}
+
+add_dockerfile_shinyproxy_ <- talk_once(function(
   path = "DESCRIPTION",
   output = "Dockerfile",
   pkg = get_golem_wd(),
@@ -233,10 +318,57 @@ A more reliable solution would be to use golem::add_dockerfile_with_renv_shinypr
 
 ")
 
+
+
 #' @export
 #' @rdname dockerfiles
 #' @importFrom fs path path_file
-add_dockerfile_heroku <- talk_once(function(
+#' 
+#' 
+#' 
+add_dockerfile_heroku <- function(
+    path = "DESCRIPTION",
+    output = "Dockerfile",
+    pkg = get_golem_wd(),
+    from = paste0(
+      "rocker/verse:",
+      R.Version()$major,
+      ".",
+      R.Version()$minor
+    ),
+    as = NULL,
+    sysreqs = TRUE,
+    repos = c(CRAN = "https://cran.rstudio.com/"),
+    expand = FALSE,
+    open = TRUE,
+    update_tar_gz = TRUE,
+    build_golem_from_source = TRUE,
+    extra_sysreqs = NULL
+) {
+  
+  add_dockerfile_heroku_(
+    
+    path = path,
+    output = output,
+    pkg = pkg,
+    from = from,
+    as = as,
+    sysreqs = sysreqs,
+    repos = repos,
+    expand = expand,
+    open = open,
+    update_tar_gz = update_tar_gz,
+    build_golem_from_source = build_golem_from_source,
+    extra_sysreqs = extra_sysreqs
+    
+  )
+}
+
+
+
+
+
+add_dockerfile_heroku_ <- talk_once(function(
   path = "DESCRIPTION",
   output = "Dockerfile",
   pkg = get_golem_wd(),
