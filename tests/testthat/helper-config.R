@@ -55,13 +55,6 @@ fakename <- sprintf(
   paste0(sample(safe_let(), 10, TRUE), collapse = ""),
   gsub("[ :-]", "", Sys.time())
 )
-fakename2 <- sprintf(
-  "%s%s",
-  paste0(sample(safe_let(), 10, TRUE), collapse = ""),
-  gsub("[ :-]", "", Sys.time())
-)
-
-
 
 
 ## random dir
@@ -73,20 +66,8 @@ create_golem(file.path(tpdir, fakename), open = FALSE)
 pkg <- file.path(tpdir, fakename)
 
 
-
 fp <- file.path("inst/app", randir)
 dir.create(file.path(pkg, fp), recursive = TRUE)
-
-
-
-tpdir2 <- normalizePath(tempdir())
-unlink(file.path(tpdir2, fakename2), recursive = TRUE)
-create_golem(file.path(tpdir2, fakename2), open = FALSE)
-pkg2 <- file.path(tpdir2, fakename2)
-fp2 <- file.path("inst/app", randir)
-dir.create(file.path(pkg, fp2), recursive = TRUE)
-
-
 
 rand_name <- function() {
   paste0(sample(safe_let(), 10, TRUE), collapse = "")
@@ -98,9 +79,4 @@ withr::with_dir(pkg, {
   orig_test <- set_golem_wd(pkg)
   usethis::use_mit_license("Golem")
 })
-withr::with_dir(pkg2, {
-  set_golem_options()
-  usethis::proj_set(pkg)
-  orig_test <- set_golem_wd(pkg)
-  usethis::use_mit_license("Golem")
-})
+
