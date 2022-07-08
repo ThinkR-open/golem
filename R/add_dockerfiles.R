@@ -212,10 +212,7 @@ A more reliable solution would be to use golem::add_dockerfile_with_renv().
 
 #' @export
 #' @rdname dockerfiles
-#'  @importFrom fs path path_file
-#'  
-#'  
-#'  
+#' @importFrom fs path path_file
 add_dockerfile_shinyproxy <-function(  path = "DESCRIPTION",
                                        output = "Dockerfile",
                                        pkg = get_golem_wd(),
@@ -323,9 +320,6 @@ A more reliable solution would be to use golem::add_dockerfile_with_renv_shinypr
 #' @export
 #' @rdname dockerfiles
 #' @importFrom fs path path_file
-#' 
-#' 
-#' 
 add_dockerfile_heroku <- function(
     path = "DESCRIPTION",
     output = "Dockerfile",
