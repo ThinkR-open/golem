@@ -200,7 +200,7 @@ add_dockerfile_ <- talk_once(function(
 },"
 
 This function does not always generate the most stable Dockerfile.
-A more reliable solution would be to use golem::add_dockerfile_with_renv().
+A more reliable solution would be to use golem::add_dockerfile_with_renv() instead.
 
 ")
 
@@ -311,7 +311,7 @@ add_dockerfile_shinyproxy_ <- talk_once(function(
 },"
 
 This function does not always generate the most stable Dockerfile.
-A more reliable solution would be to use golem::add_dockerfile_with_renv_shinyproxy().
+A more reliable solution would be to use golem::add_dockerfile_with_renv_shinyproxy() instead..
 
 ")
 
@@ -453,7 +453,7 @@ add_dockerfile_heroku_ <- talk_once(function(
 },"
 
 This function does not always generate the most stable Dockerfile.
-A more reliable solution would be to use golem::add_dockerfile_with_renv().
+A more reliable solution would be to use golem::add_dockerfile_with_renv() instead.
 
 ")
 
