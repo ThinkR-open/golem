@@ -152,6 +152,9 @@ default is current folder '.'}
 
 \item{distro}{One of "focal", "bionic", "xenial", "centos7", or "centos8".
 See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
+
+\item{dockerfile_cmd}{What is the CMD to add to the Dockerfile. If NULL, the default,
+the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}');\{appname\}::run_app()\\}}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.
