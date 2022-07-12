@@ -117,6 +117,7 @@ add_dockerfile_with_renv_ <- function(
 #' @param output_dir folder to export everything deployment related.
 #' @param distro One of "focal", "bionic", "xenial", "centos7", or "centos8".
 #' See available distributions at https://hub.docker.com/r/rstudio/r-base/.
+#' @param dockerfile_cmd What is the CMD to add to the Dockerfile.
 #' @inheritParams add_dockerfile
 #' @rdname dockerfiles
 #' @export
@@ -135,7 +136,12 @@ add_dockerfile_with_renv <- function(
   open = TRUE,
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
-  dockerfile_cmd = NULL
+  dockerfile_cmd = sprintf(
+    "R -e \"options('shiny.port'=%s,shiny.host='%s');%s::run_app()\"",
+    port,
+    host,
+    golem::get_golem_name()
+  )
 ) {
   base_dock <- add_dockerfile_with_renv_(
     source_folder = source_folder,
