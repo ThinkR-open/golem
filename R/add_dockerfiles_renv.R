@@ -286,12 +286,7 @@ add_dockerfile_with_renv_heroku <- function(
   }
 
   write_there("From your command line, run:\n")
-  write_there(
-    sprintf(
-      "cd %s\n",
-      normalizePath(output_dir)
-    )
-  )
+
   write_there(
     sprintf(
       "docker build -f Dockerfile_base --progress=plain -t %s .",
