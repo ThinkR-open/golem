@@ -6,6 +6,7 @@
 \alias{add_dockerfile_heroku}
 \alias{add_dockerfile_with_renv}
 \alias{add_dockerfile_with_renv_shinyproxy}
+\alias{add_dockerfile_with_renv_heroku}
 \title{Create a Dockerfile for your App}
 \usage{
 add_dockerfile(
@@ -69,10 +70,26 @@ add_dockerfile_with_renv(
   expand = FALSE,
   open = TRUE,
   extra_sysreqs = NULL,
-  update_tar_gz = TRUE
+  update_tar_gz = TRUE,
+  dockerfile_cmd = NULL
 )
 
 add_dockerfile_with_renv_shinyproxy(
+  source_folder = ".",
+  lockfile = NULL,
+  output_dir = fs::path(tempdir(), "deploy"),
+  distro = "focal",
+  from = "rocker/verse",
+  as = NULL,
+  sysreqs = TRUE,
+  repos = c(CRAN = "https://cran.rstudio.com/"),
+  expand = FALSE,
+  extra_sysreqs = NULL,
+  open = TRUE,
+  update_tar_gz = TRUE
+)
+
+add_dockerfile_with_renv_heroku(
   source_folder = ".",
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
@@ -98,7 +115,7 @@ add_dockerfile_with_renv_shinyproxy(
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{FROM rocker/verse
 
-without renv.lock file passed  
+without renv.lock file passed
 `R.Version()$major`.`R.Version()$minor` is used as tag
 }\if{html}{\out{</div>}}}
 
@@ -135,6 +152,9 @@ default is current folder '.'}
 
 \item{distro}{One of "focal", "bionic", "xenial", "centos7", or "centos8".
 See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
+
+\item{dockerfile_cmd}{What is the CMD to add to the Dockerfile. If NULL, the default,
+the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}');\{appname\}::run_app()\\}}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.
@@ -150,24 +170,26 @@ a generic Dockerfile, while \code{add_dockerfile_shinyproxy()}, \code{add_docker
 if (interactive()) {
   add_dockerfile()
 }
-# Crete a 'deploy' folder containing everything needed to deploy 
+# Crete a 'deploy' folder containing everything needed to deploy
 # the golem using docker based on {renv}
 if (interactive()) {
   add_dockerfile_with_renv(
-  # lockfile = "renv.lock", # uncomment to use existing renv.lock file
-  output_dir = "deploy")
+    # lockfile = "renv.lock", # uncomment to use existing renv.lock file
+    output_dir = "deploy"
+  )
 }
 # Add a Dockerfile for ShinyProxy
 if (interactive()) {
   add_dockerfile_shinyproxy()
 }
 
-# Crete a 'deploy' folder containing everything needed to deploy 
+# Crete a 'deploy' folder containing everything needed to deploy
 # the golem with ShinyProxy using docker based on {renv}
 if (interactive()) {
   add_dockerfile_with_renv(
-  # lockfile = "renv.lock",# uncomment to use existing renv.lock file
-   output_dir = "deploy")
+    # lockfile = "renv.lock",# uncomment to use existing renv.lock file
+    output_dir = "deploy"
+  )
 }
 
 # Add a Dockerfile for Heroku

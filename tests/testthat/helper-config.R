@@ -3,6 +3,12 @@ library(golem)
 library(withr)
 old_usethis.quiet <- getOption("usethis.quiet")
 options("usethis.quiet" = TRUE)
+# Small hack to prevent warning from rlang::lang() in tests
+# This should be managed in {attempt} later on
+x <- suppressWarnings({
+  rlang::lang(print)
+})
+
 ### Funs
 remove_file <- function(path) {
   if (file.exists(path)) unlink(path, force = TRUE)
@@ -79,4 +85,3 @@ withr::with_dir(pkg, {
   orig_test <- set_golem_wd(pkg)
   usethis::use_mit_license("Golem")
 })
-
