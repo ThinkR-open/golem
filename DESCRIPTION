@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.3.2
+Version: 0.3.3
 Authors@R: 
     c(person(given = "Colin",
              family = "Fay",
@@ -68,7 +68,7 @@ Suggests:
     rlang,
     covr,
     devtools,
-    dockerfiler (>= 0.1.4),
+    dockerfiler (>= 0.2.0),
     knitr,
     pkgbuild,
     pkgdown,
@@ -82,11 +82,11 @@ Suggests:
     testthat,
     tools,
     withr,
-    attachment
+    attachment (>= 0.2.5)
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
