@@ -4,6 +4,14 @@ guess_where_config <- function(
   path = ".",
   file = "inst/golem-config.yml"
 ) {
+  # Trying with "golem.config.path" option
+  custom_path <- getOption("golem.config.path")
+  if (
+    !is.null(custom_path) &&
+    file.exists(custom_path)
+      ) {
+    return(path_abs(custom_path))
+  }
   # Trying the path
   ret_path <- path(
     path,

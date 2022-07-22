@@ -12,7 +12,7 @@ test_that("config works", {
       value = "inprod",
       config = "production"
     )
-
+    
     expect_equal(config::get("where", file = "inst/golem-config.yml"), "indev")
     expect_equal(config::get("where", config = "production", file = "inst/golem-config.yml"), "inprod")
     where_conf <- withr::with_envvar(
@@ -28,9 +28,81 @@ test_that("config works", {
     set_golem_version("0.0.0.9001")
     expect_equal(get_golem_version(), "0.0.0.9001")
     set_golem_version("0.0.0.9000")
-
+    
     set_golem_wd(normalizePath("inst"))
     expect_equal(normalizePath(get_golem_wd()), normalizePath("inst"))
     set_golem_wd(pkg)
   })
+})
+
+test_that("golem-config.yml can be moved to another location", {
+  
+  path_dummy_golem <- tempfile(pattern = "dummygolem")
+  
+  golem::create_golem(
+    path = path_dummy_golem,
+    open = FALSE
+  )
+  
+  old_wd <- setwd(path_dummy_golem)
+  on.exit(setwd(old_wd))
+  
+  # The good config path is returned
+  expect_equal(
+    golem:::guess_where_config(),
+    file.path(
+      path_dummy_golem,
+      "inst/golem-config.yml"
+    )
+  )
+  # document_and_reload does not throw an error
+  expect_error(
+    document_and_reload(),
+    regexp = NA
+  )
+  expect_equal(
+    get_golem_name(),
+    basename(path_dummy_golem)
+  )
+  expect_equal(
+    get_golem_wd(),
+    path_dummy_golem
+  )
+
+  ## Move config file
+  dir.create(
+    "inst/config"
+  )
+  file.copy(
+    from = "inst/golem-config.yml",
+    to = "inst/config/golem-config.yml"
+  )
+  file.remove(
+    "inst/golem-config.yml"
+  )
+  
+  withr::with_options(
+    list("golem.config.path" = "inst/config/golem-config.yml"),
+    {
+      # The good config path is returned
+      expect_equal(
+        golem:::guess_where_config(),
+        file.path(
+          path_dummy_golem,
+          "inst/config/golem-config.yml"
+        )
+      )
+      # document_and_reload does not throw an error
+      expect_error(
+        document_and_reload(),
+        regexp = NA
+      )
+      expect_equal(
+        get_golem_name(),
+        basename(path_dummy_golem)
+      )
+    }
+  )
+  
+  
 })
