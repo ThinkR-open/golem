@@ -6,12 +6,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A Framework for Robust Shiny Applications • golem</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Bootstrap --><link href="cosmo.css" rel="stylesheet">
 <link href="thinkr.css" rel="stylesheet">
@@ -22,7 +16,6 @@
 <meta property="og:description" content="An opinionated framework for building a production-ready
     Shiny application. This package contains a series of tools for
     building a robust Shiny application from start to finish.">
-<meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -60,7 +53,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
       </span>
     </div>
 
@@ -70,7 +63,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -132,8 +125,7 @@
   <div class="contents col-md-9">
 
 
-<!-- badges: end -->
-<div class="section level1">
+<!-- badges: end --><div class="section level1">
 <div class="page-header"><h1 id="golem-">{golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#golem-"></a>
 </h1></div>
 <p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> is an opinionated framework for building production-grade shiny applications.</p>
@@ -142,8 +134,8 @@
 </h2>
 <p>You’re reading the doc about version :</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">desc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/desc/man/desc_get_version.html" class="external-link">desc_get_version</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] '0.3.2'</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">desc</span><span class="fu">::</span><span class="fu"><a href="http://r-lib.github.io/desc/reference/desc_get_version.html" class="external-link">desc_get_version</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] '0.3.3'</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="tool-series">Tool series<a class="anchor" aria-label="anchor" href="#tool-series"></a>
@@ -220,9 +212,7 @@
 <div class="section level3">
 <h3 id="cheatsheet">Cheatsheet<a class="anchor" aria-label="anchor" href="#cheatsheet"></a>
 </h3>
-<ul>
-<li><a href="https://thinkr.fr/golem_cheatsheet_v0.1.pdf" class="external-link">{golem} cheatsheet</a></li>
-</ul>
+<ul><li><a href="https://thinkr.fr/golem_cheatsheet_v0.1.pdf" class="external-link">{golem} cheatsheet</a></li></ul>
 </div>
 <div class="section level3">
 <h3 id="examples-apps">Examples apps<a class="anchor" aria-label="anchor" href="#examples-apps"></a>
@@ -230,7 +220,7 @@
 <p>These are examples from the community. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> or <a href="https://shiny.rstudio.com/" class="external-link">shiny</a>.</p>
 <ul>
 <li><a href="https://github.com/seanhardison1/vcrshiny" class="external-link uri">https://github.com/seanhardison1/vcrshiny</a></li>
-<li><a href="https://github.com/CDU-data-science-team/healthcareSPC" class="external-link uri">https://github.com/CDU-data-science-team/healthcareSPC</a></li>
+<li><a href="https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC" class="external-link uri">https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC</a></li>
 <li><a href="https://github.com/marton-balazs-kovacs/tenzing" class="external-link uri">https://github.com/marton-balazs-kovacs/tenzing</a></li>
 <li><a href="https://github.com/shahreyar-abeer/cranstars" class="external-link uri">https://github.com/shahreyar-abeer/cranstars</a></li>
 </ul>
@@ -244,17 +234,13 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<ul>
-<li>You can install the stable version from CRAN with:</li>
-</ul>
-<!-- end list --><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"golem"</span><span class="op">)</span></code></pre></div>
-<ul>
-<li>You can install the development version from <a href="https://github.com/Thinkr-open/golem" class="external-link">GitHub</a> with:</li>
-</ul>
-<!-- end list --><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Thinkr-open/golem"</span><span class="op">)</span></code></pre></div>
+<ul><li>You can install the stable version from CRAN with:</li></ul>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"golem"</span><span class="op">)</span></span></code></pre></div>
+<ul><li>You can install the development version from <a href="https://github.com/Thinkr-open/golem" class="external-link">GitHub</a> with:</li></ul>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Thinkr-open/golem"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="launch-the-project">Launch the project<a class="anchor" aria-label="anchor" href="#launch-the-project"></a>
@@ -296,13 +282,13 @@
 </h2>
 <p>Please style the files according to <code>grkstyle::grk_style_transformer()</code></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># If you work in RStudio</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>styler.addins_style_transformer <span class="op">=</span> <span class="st">"grkstyle::grk_style_transformer()"</span><span class="op">)</span>
-
-<span class="co"># If you work in VSCode</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>languageserver.formatting_style <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">options</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu">grkstyle</span><span class="fu">::</span><span class="fu">grk_style_transformer</span><span class="op">(</span><span class="op">)</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># If you work in RStudio</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>styler.addins_style_transformer <span class="op">=</span> <span class="st">"grkstyle::grk_style_transformer()"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># If you work in VSCode</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>languageserver.formatting_style <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">options</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">grkstyle</span><span class="fu">::</span><span class="fu">grk_style_transformer</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 
@@ -351,15 +337,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
-<li><a href="https://github.com/ThinkR-open/golem/actions" class="external-link"><img src="https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/github/ThinkR-open/golem?branch=master" class="external-link"><img src="https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
-<li><a href="https://cran.r-project.org/package=golem" class="external-link"><img src="https://www.r-pkg.org/badges/version/golem" alt="CRAN status"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
@@ -367,7 +345,7 @@
 
       <footer><div class="thinkr">
   <p></p>
-<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
 <div class="author">
