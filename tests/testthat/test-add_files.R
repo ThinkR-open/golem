@@ -102,6 +102,18 @@ test_that("add_files", {
       pak = pkg,
       fp = fp
     )
+    expect_add_file(
+      add_html_template,
+      ext = "html",
+      pak = pkg,
+      fp = fp
+    )
+    expect_add_file(
+      add_partial_html_template,
+      ext = "html",
+      pak = pkg,
+      fp = fp
+    )
   })
 })
 
