@@ -1,6 +1,6 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
-# golem 0.3.3.9000+
+# golem 0.3.2.9000+
 
 ### Soft deprecated
 
@@ -25,15 +25,6 @@
 
 ## Internal changes
 
-# golem 0.3.3
-
-## New functions
-
-+ `add_dockerfile_with_renv()`, `add_dockerfile_with_renv_heroku()` and `add_dockerfile_with_renv_shinyproxy()` build Dockerfiles that rely on `{renv}`
-
-### Soft deprecated
-
-+ `add_dockerfile`, `add_dockerfile_shinyproxy()` and `add_dockerfile_heroku()` now recommend to switch to their `_with_renv_` counterpart
 
 
 # golem 0.3.2 (CRAN VERSION)

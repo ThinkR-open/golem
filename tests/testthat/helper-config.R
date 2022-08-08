@@ -3,12 +3,6 @@ library(golem)
 library(withr)
 old_usethis.quiet <- getOption("usethis.quiet")
 options("usethis.quiet" = TRUE)
-# Small hack to prevent warning from rlang::lang() in tests
-# This should be managed in {attempt} later on
-x <- suppressWarnings({
-  rlang::lang(print)
-})
-
 ### Funs
 remove_file <- function(path) {
   if (file.exists(path)) unlink(path, force = TRUE)
@@ -62,16 +56,13 @@ fakename <- sprintf(
   gsub("[ :-]", "", Sys.time())
 )
 
-
-## random dir
-randir <- paste0(sample(safe_let(), 10, TRUE), collapse = "")
-
 tpdir <- normalizePath(tempdir())
 unlink(file.path(tpdir, fakename), recursive = TRUE)
 create_golem(file.path(tpdir, fakename), open = FALSE)
 pkg <- file.path(tpdir, fakename)
 
-
+## random dir
+randir <- paste0(sample(safe_let(), 10, TRUE), collapse = "")
 fp <- file.path("inst/app", randir)
 dir.create(file.path(pkg, fp), recursive = TRUE)
 

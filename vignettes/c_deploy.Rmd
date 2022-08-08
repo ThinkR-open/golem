@@ -69,10 +69,6 @@ golem::add_shinyserver_file()
 
 ### Docker 
 
-#### without using {renv}
-
-
-
 ```{r}
 # If you want to deploy via a generic Dockerfile
 golem::add_dockerfile()
@@ -84,75 +80,3 @@ golem::add_dockerfile_shinyproxy()
 golem::add_dockerfile_heroku()
 ```
 
-#### using {renv}
-
-
-#### CASE 1 : you didn't use renv during developpment process
-
-
-> this functions will create a "deploy" folder containing : 
-
-```{txt}
-deploy/
-+-- Dockerfile
-+-- Dockerfile_base
-+-- yourgolem_0.0.0.9000.tar.gz
-+-- README
-\-- renv.lock.prod
-```
-
-then follow the README file
-
-
-```{r}
-# If you want to deploy via a generic Dockerfile
-golem::add_dockerfile_with_renv(output_dir = "deploy")
-
-# If you want to deploy to ShinyProxy
-golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy")
-
-```
-
-If you would like to use {renv} during developpement, you can init a renv.lock file with
-
-```{r}
-attachment::create_renv_for_dev(dev_pkg = c("renv", "devtools", "roxygen2", 
-  "usethis", "pkgload", "testthat", "remotes", "covr", "attachment", 
-  "pak", "dockerfiler","golem"))
-```
-an activate {renv} with
-
-```{r}
-renv::activate()
-```
-
-
-
-
-
-#### CASE 2 : you already have a renv.lock file for your project
-
-
-```{r}
-
-# If you want to deploy via a generic Dockerfile
-golem::add_dockerfile_with_renv(output_dir = "deploy",lockfile =  "renv.lock")
-
-# If you want to deploy to ShinyProxy
-golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy",lockfile =  "renv.lock")
-
-
-```
-
-> this functions will create a "deploy" folder containing : 
-
-```{txt}
-deploy/
-+-- Dockerfile
-+-- Dockerfile_base
-+-- yourgolem_0.0.0.9000.tar.gz
-+-- README
-\-- renv.lock.prod
-```
-
-then follow the README file

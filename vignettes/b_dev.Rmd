@@ -45,7 +45,7 @@ Note that the `{attachment}` package should be installed on your machine.
 attachment::att_amend_desc()
 ```
 
-About [package dependencies](https://r-pkgs.org/Metadata.html#sec-namespace).
+About [package dependencies](https://r-pkgs.org/namespace.html).
 
 ### Add modules
 
@@ -139,7 +139,7 @@ Add more tests to your application:
 usethis::use_test("app")
 ```
 
-About [testing a package](https://r-pkgs.org/testing-basics.html).
+About [testing a package](https://r-pkgs.org/tests.html).
 
 ## Documentation
 
