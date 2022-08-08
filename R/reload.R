@@ -88,8 +88,6 @@ check_name_consistency <- function(pkg) {
 #' @inheritParams pkgload::load_all
 #'
 #' @param ... Other arguments passed to `pkgload::load_all()`
-#' @importFrom roxygen2 roxygenise
-#' @importFrom pkgload load_all
 #' @importFrom rstudioapi isAvailable hasFun documentSaveAll
 #' @export
 #'
@@ -107,12 +105,14 @@ document_and_reload <- function(
   # We'll start by checking if the package name is correct
 
   check_name_consistency(pkg)
+  rlang::check_installed("pkgload")
+  rlang::check_installed("roxygen2")
 
   if (rstudioapi::isAvailable() & rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
   roxed <- try({
-    roxygenise(
+    roxygen2::roxygenise(
       package.dir = pkg,
       roclets = roclets,
       load_code = load_code,
@@ -127,7 +127,7 @@ document_and_reload <- function(
     return(invisible(FALSE))
   }
   loaded <- try({
-    load_all(
+    pkgload::load_all(
       pkg,
       export_all = export_all,
       helpers = helpers,
