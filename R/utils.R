@@ -17,8 +17,8 @@ darkgrey <- function(x) {
 }
 
 #' @importFrom fs dir_exists file_exists
-dir_not_exist <- Negate(dir_exists)
-file_not_exist <- Negate(file_exists)
+dir_not_exist <- Negate(fs::dir_exists)
+file_not_exist <- Negate(fs::file_exists)
 
 #' @importFrom fs dir_create file_create
 create_if_needed <- function(

@@ -76,59 +76,7 @@ test_that("add_dockerfiles repos variation", {
     }
   })
 })
-test_that("add_dockerfiles multi repos", {
-  skip_if_not_installed("dockerfiler", "0.1.4")
 
-  repos <- c(
-    bioc1 = "https://bioconductor.org/packages/3.10/data/annotation",
-    bioc2 = "https://bioconductor.org/packages/3.10/data/experiment",
-    CRAN = "https://cran.rstudio.com"
-  )
-
-
-  with_dir(pkg, {
-    for (fun in list(
-      add_dockerfile,
-      add_dockerfile_heroku,
-      add_dockerfile_shinyproxy
-    )) {
-      burn_after_reading(
-        "Dockerfile",
-        {
-          output <- testthat::capture_output(
-            fun(
-              pkg = pkg,
-              sysreqs = FALSE,
-              open = FALSE,
-              repos = repos,
-              output = "Dockerfile"
-            )
-          )
-
-          expect_exists("Dockerfile")
-
-
-          test <- stringr::str_detect(
-            output,
-            "Dockerfile created at Dockerfile"
-          )
-          expect_true(test)
-
-
-          to_find <- "RUN echo \"options(repos = c(bioc1 = 'https://bioconductor.org/packages/3.10/data/annotation', bioc2 = 'https://bioconductor.org/packages/3.10/data/experiment', CRAN = 'https://cran.rstudio.com'), download.file.method = 'libcurl', Ncpus = 4)\" >> /usr/local/lib/R/etc/Rprofile.site"
-          # for R <= 3.4
-          to_find_old <- "RUN echo \"options(repos = structure(c('https://bioconductor.org/packages/3.10/data/annotation', 'https://bioconductor.org/packages/3.10/data/experiment', 'https://cran.rstudio.com'), .Names = c('bioc1', 'bioc2', 'CRAN')), download.file.method = 'libcurl', Ncpus = 4)\" >> /usr/local/lib/R/etc/Rprofile.site"
-
-          expect_true(
-            sum(
-              readLines(con = "Dockerfile") %in% c(to_find, to_find_old)
-            ) == 1
-          )
-        }
-      )
-    }
-  })
-})
 
 test_that("add_rstudio_files", {
   with_dir(pkg, {
