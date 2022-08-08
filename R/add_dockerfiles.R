@@ -9,10 +9,21 @@ talk_once <- function(.f, msg = "") {
   }
 }
 
+talk_once <- function(.f, msg = "") {
+  talk <- TRUE
+  function(...) {
+    if (talk) {
+      talk <<- FALSE
+      cat_red_bullet(msg)
+    }
+    .f(...)
+  }
+}
+
 #' Create a Dockerfile for your App
 #'
-#' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` creates
-#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`, `add_dockerfile_with_renv_shinyproxy()`  and
+#' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` and `add_dockerfile_with_renv()` creates
+#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`, `add_dockerfile_with_renv_shinyproxy()` , `add_dockerfile_with_renv_shinyproxy()`  and
 #' `add_dockerfile_heroku()` creates platform specific Dockerfile.
 #'
 #' @inheritParams add_module
@@ -34,7 +45,7 @@ talk_once <- function(.f, msg = "") {
 #' @param sysreqs boolean. If TRUE, the Dockerfile will contain sysreq installation.
 #' @param repos character. The URL(s) of the repositories to use for `options("repos")`.
 #' @param expand boolean. If `TRUE` each system requirement will have its own `RUN` line.
-#' @param open boolean. Should the Dockerfile/README be open after creation? Default is `TRUE`.
+#' @param open boolean. Should the Dockerfile/README/README be open after creation? Default is `TRUE`.
 #' @param build_golem_from_source boolean. If `TRUE` no tar.gz is created and
 #'     the Dockerfile directly mount the source folder.
 #' @param update_tar_gz boolean. If `TRUE` and `build_golem_from_source` is also `TRUE`,
@@ -63,10 +74,28 @@ talk_once <- function(.f, msg = "") {
 #'     output_dir = "deploy"
 #'   )
 #' }
+#' # Crete a 'deploy' folder containing everything needed to deploy
+#' # the golem using docker based on {renv}
+#' if (interactive()) {
+#'   add_dockerfile_with_renv(
+#'     # lockfile = "renv.lock", # uncomment to use existing renv.lock file
+#'     output_dir = "deploy"
+#'   )
+#' }
 #' # Add a Dockerfile for ShinyProxy
 #' if (interactive()) {
 #'   add_dockerfile_shinyproxy()
 #' }
+#'
+#' # Crete a 'deploy' folder containing everything needed to deploy
+#' # the golem with ShinyProxy using docker based on {renv}
+#' if (interactive()) {
+#'   add_dockerfile_with_renv(
+#'     # lockfile = "renv.lock",# uncomment to use existing renv.lock file
+#'     output_dir = "deploy"
+#'   )
+#' }
+#'
 #'
 #' # Crete a 'deploy' folder containing everything needed to deploy
 #' # the golem with ShinyProxy using docker based on {renv}
@@ -150,47 +179,47 @@ add_dockerfile_ <- talk_once(
       reason = "to build a Dockerfile."
     )
 
-    where <- path(pkg, output)
+      where <- path(pkg, output)
 
-    usethis::use_build_ignore(path_file(where))
+      usethis::use_build_ignore(path_file(where))
 
-    dock <- dockerfiler::dock_from_desc(
-      path = path,
-      FROM = from,
-      AS = as,
-      sysreqs = sysreqs,
-      repos = repos,
-      expand = expand,
-      build_from_source = build_golem_from_source,
-      update_tar_gz = update_tar_gz,
-      extra_sysreqs = extra_sysreqs
-    )
-
-    dock$EXPOSE(port)
-
-    dock$CMD(
-      sprintf(
-        "R -e \"options('shiny.port'=%s,shiny.host='%s');%s::run_app()\"",
-        port,
-        host,
-        read.dcf(path)[1]
+      dock <- dockerfiler::dock_from_desc(
+        path = path,
+        FROM = from,
+        AS = as,
+        sysreqs = sysreqs,
+        repos = repos,
+        expand = expand,
+        build_from_source = build_golem_from_source,
+        update_tar_gz = update_tar_gz,
+        extra_sysreqs = extra_sysreqs
       )
-    )
 
-    dock$write(output)
+      dock$EXPOSE(port)
 
-    if (open) {
-      if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
-        rstudioapi::navigateToFile(output)
-      } else {
-        try(file.edit(output))
+      dock$CMD(
+        sprintf(
+          "R -e \"options('shiny.port'=%s,shiny.host='%s');%s::run_app()\"",
+          port,
+          host,
+          read.dcf(path)[1]
+        )
+      )
+
+      dock$write(output)
+
+      if (open) {
+        if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
+          rstudioapi::navigateToFile(output)
+        } else {
+          try(file.edit(output))
+        }
       }
-    }
-    alert_build(
-      path = path,
-      output = output,
-      build_golem_from_source = build_golem_from_source
-    )
+      alert_build(
+        path = path,
+        output = output,
+        build_golem_from_source = build_golem_from_source
+      )
 
     return(invisible(dock))
   },
@@ -262,39 +291,39 @@ add_dockerfile_shinyproxy_ <- talk_once(
     )
     where <- path(pkg, output)
 
-    usethis::use_build_ignore(output)
+      usethis::use_build_ignore(output)
 
-    dock <- dockerfiler::dock_from_desc(
-      path = path,
-      FROM = from,
-      AS = as,
-      sysreqs = sysreqs,
-      repos = repos,
-      expand = expand,
-      build_from_source = build_golem_from_source,
-      update_tar_gz = update_tar_gz,
-      extra_sysreqs = extra_sysreqs
-    )
+      dock <- dockerfiler::dock_from_desc(
+        path = path,
+        FROM = from,
+        AS = as,
+        sysreqs = sysreqs,
+        repos = repos,
+        expand = expand,
+        build_from_source = build_golem_from_source,
+        update_tar_gz = update_tar_gz,
+        extra_sysreqs = extra_sysreqs
+      )
 
-    dock$EXPOSE(3838)
-    dock$CMD(sprintf(
-      " [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0');%s::run_app()\"]",
-      read.dcf(path)[1]
-    ))
-    dock$write(output)
+      dock$EXPOSE(3838)
+      dock$CMD(sprintf(
+        " [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0');%s::run_app()\"]",
+        read.dcf(path)[1]
+      ))
+      dock$write(output)
 
-    if (open) {
-      if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
-        rstudioapi::navigateToFile(output)
-      } else {
-        try(file.edit(output))
+      if (open) {
+        if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
+          rstudioapi::navigateToFile(output)
+        } else {
+          try(file.edit(output))
+        }
       }
-    }
-    alert_build(
-      path,
-      output,
-      build_golem_from_source = build_golem_from_source
-    )
+      alert_build(
+        path,
+        output,
+        build_golem_from_source = build_golem_from_source
+      )
 
     return(invisible(dock))
   },
@@ -366,33 +395,33 @@ add_dockerfile_heroku_ <- talk_once(
     )
     where <- path(pkg, output)
 
-    usethis::use_build_ignore(output)
+      usethis::use_build_ignore(output)
 
-    dock <- dockerfiler::dock_from_desc(
-      path = path,
-      FROM = from,
-      AS = as,
-      sysreqs = sysreqs,
-      repos = repos,
-      expand = expand,
-      build_from_source = build_golem_from_source,
-      update_tar_gz = update_tar_gz,
-      extra_sysreqs = extra_sysreqs
-    )
-
-    dock$CMD(
-      sprintf(
-        "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');%s::run_app()\"",
-        read.dcf(path)[1]
+      dock <- dockerfiler::dock_from_desc(
+        path = path,
+        FROM = from,
+        AS = as,
+        sysreqs = sysreqs,
+        repos = repos,
+        expand = expand,
+        build_from_source = build_golem_from_source,
+        update_tar_gz = update_tar_gz,
+        extra_sysreqs = extra_sysreqs
       )
-    )
-    dock$write(output)
 
-    alert_build(
-      path = path,
-      output = output,
-      build_golem_from_source = build_golem_from_source
-    )
+      dock$CMD(
+        sprintf(
+          "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');%s::run_app()\"",
+          read.dcf(path)[1]
+        )
+      )
+      dock$write(output)
+
+      alert_build(
+        path = path,
+        output = output,
+        build_golem_from_source = build_golem_from_source
+      )
 
     apps_h <- gsub(
       "\\.",

@@ -82,7 +82,7 @@ Suggests:
     testthat,
     tools,
     withr,
-    attachment (>= 0.2.5)
+    attachment (>= 0.2.5) (>= 0.2.5)
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
