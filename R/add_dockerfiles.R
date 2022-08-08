@@ -144,9 +144,11 @@ add_dockerfile_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    check_is_installed("dockerfiler")
-
-    required_version("dockerfiler", "0.1.4")
+    rlang::check_installed(
+      "dockerfiler",
+      version = "0.2.0",
+      reason = "to build a Dockerfile."
+    )
 
     where <- path(pkg, output)
 
@@ -253,8 +255,11 @@ add_dockerfile_shinyproxy_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    check_is_installed("dockerfiler")
-    required_version("dockerfiler", "0.1.4")
+    rlang::check_installed(
+      "dockerfiler",
+      version = "0.2.0",
+      reason = "to build a Dockerfile."
+    )
     where <- path(pkg, output)
 
     usethis::use_build_ignore(output)
@@ -354,8 +359,11 @@ add_dockerfile_heroku_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    check_is_installed("dockerfiler")
-    required_version("dockerfiler", "0.1.4")
+    rlang::check_installed(
+      "dockerfiler",
+      version = "0.2.0",
+      reason = "to build a Dockerfile."
+    )
     where <- path(pkg, output)
 
     usethis::use_build_ignore(output)
