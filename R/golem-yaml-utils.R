@@ -9,42 +9,42 @@
 #
 #' @importFrom utils modifyList
 find_and_tag_exprs <- function(conf_path) {
-	conf <- yaml::read_yaml(
-		conf_path,
-		eval.expr = FALSE
-	)
-	conf.eval <- yaml::read_yaml(
-		conf_path,
-		eval.expr = TRUE
-	)
+  conf <- yaml::read_yaml(
+    conf_path,
+    eval.expr = FALSE
+  )
+  conf.eval <- yaml::read_yaml(
+    conf_path,
+    eval.expr = TRUE
+  )
 
-	expr_list <- lapply(
-		names(conf),
-		function(x) {
-			conf[[x]][!conf[[x]] %in% conf.eval[[x]]]
-		}
-	)
+  expr_list <- lapply(
+    names(conf),
+    function(x) {
+      conf[[x]][!conf[[x]] %in% conf.eval[[x]]]
+    }
+  )
 
-	names(expr_list) <- names(conf)
+  names(expr_list) <- names(conf)
 
-	expr_list <- Filter(
-		function(x) length(x) > 0,
-		expr_list
-	)
+  expr_list <- Filter(
+    function(x) length(x) > 0,
+    expr_list
+  )
 
-	add_expr_tag <- function(tag) {
-		attr(tag[[1]], "tag") <- "!expr"
-		tag
-	}
-	tagged_exprs <- lapply(
-		expr_list,
-		add_expr_tag
-	)
+  add_expr_tag <- function(tag) {
+    attr(tag[[1]], "tag") <- "!expr"
+    tag
+  }
+  tagged_exprs <- lapply(
+    expr_list,
+    add_expr_tag
+  )
 
-	modifyList(
-		conf,
-		tagged_exprs
-	)
+  modifyList(
+    conf,
+    tagged_exprs
+  )
 }
 
 #' Amend golem config file
@@ -60,51 +60,51 @@ find_and_tag_exprs <- function(conf_path) {
 #'
 #' @return Used for side effects.
 amend_golem_config <- function(
-	key,
-	value,
-	config = "default",
-	pkg = golem::pkg_path(),
-	talkative = TRUE
+  key,
+  value,
+  config = "default",
+  pkg = golem::pkg_path(),
+  talkative = TRUE
 ) {
-	conf_path <- get_current_config(pkg)
+  conf_path <- get_current_config(pkg)
 
-	stop_if(
-		conf_path,
-		is.null,
-		"Unable to retrieve golem config file."
-	)
+  stop_if(
+    conf_path,
+    is.null,
+    "Unable to retrieve golem config file."
+  )
 
-	cat_if_talk <- function(
-	...,
-	fun = cat_green_tick
-	) {
-		if (talkative) {
-			fun(...)
-		}
-	}
+  cat_if_talk <- function(
+  ...,
+  fun = cat_green_tick
+  ) {
+    if (talkative) {
+      fun(...)
+    }
+  }
 
-	cat_if_talk(
-		sprintf(
-			"Setting `%s` to %s",
-			key,
-			value
-		)
-	)
+  cat_if_talk(
+    sprintf(
+      "Setting `%s` to %s",
+      key,
+      value
+    )
+  )
 
-	if (key == "golem_wd") {
-		cat_if_talk(
-			"You can change golem working directory with set_golem_wd('path/to/wd')",
-			fun = cat_line
-		)
-	}
+  if (key == "golem_wd") {
+    cat_if_talk(
+      "You can change golem working directory with set_golem_wd('path/to/wd')",
+      fun = cat_line
+    )
+  }
 
-	conf <- find_and_tag_exprs(conf_path)
-	conf[[config]][[key]] <- value
+  conf <- find_and_tag_exprs(conf_path)
+  conf[[config]][[key]] <- value
 
-	write_yaml(
-		conf,
-		conf_path
-	)
+  write_yaml(
+    conf,
+    conf_path
+  )
 
-	invisible(TRUE)
+  invisible(TRUE)
 }

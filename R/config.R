@@ -10,45 +10,45 @@
 #' @importFrom attempt attempt is_try_error
 #' @importFrom fs path path_abs
 guess_where_config <- function(
-	path = ".",
-	file = "inst/golem-config.yml"
+  path = ".",
+  file = "inst/golem-config.yml"
 ) {
-	# We'll try to guess where the path
-	# to the golem-config file is
+  # We'll try to guess where the path
+  # to the golem-config file is
 
-	# This one should be correct in 99% of the case
-	# => current directory /inst/golem-config.yml
-	ret_path <- path(
-		path,
-		file
-	)
-	if (file_exists(ret_path)) {
-		return(path_abs(ret_path))
-	}
+  # This one should be correct in 99% of the case
+  # => current directory /inst/golem-config.yml
+  ret_path <- path(
+    path,
+    file
+  )
+  if (file_exists(ret_path)) {
+    return(path_abs(ret_path))
+  }
 
-	# Maybe for some reason we are in inst/
-	ret_path <- "golem-config.yml"
-	if (file_exists(ret_path)) {
-		return(path_abs(ret_path))
-	}
+  # Maybe for some reason we are in inst/
+  ret_path <- "golem-config.yml"
+  if (file_exists(ret_path)) {
+    return(path_abs(ret_path))
+  }
 
-	# Trying with pkg_path
-	ret_path <- attempt({
-		path(
-			golem::pkg_path(),
-			"inst/golem-config.yml"
-		)
-	})
+  # Trying with pkg_path
+  ret_path <- attempt({
+    path(
+      golem::pkg_path(),
+      "inst/golem-config.yml"
+    )
+  })
 
-	if (
-		!is_try_error(ret_path) &
-			file_exists(ret_path)
-	) {
-		return(
-			path_abs(ret_path)
-		)
-	}
-	return(NULL)
+  if (
+    !is_try_error(ret_path) &
+      file_exists(ret_path)
+  ) {
+    return(
+      path_abs(ret_path)
+    )
+  }
+  return(NULL)
 }
 
 #' Get the path to the current config File
@@ -64,85 +64,85 @@ guess_where_config <- function(
 #' @export
 get_current_config <- function(path = ".") {
 
-	# We check wether we can guess where the config file is
-	path_conf <- guess_where_config(path)
+  # We check wether we can guess where the config file is
+  path_conf <- guess_where_config(path)
 
-	# We default to inst/ if this doesn't exist
-	if (is.null(path_conf)) {
-		path_conf <- path(
-			path,
-			"inst/golem-config.yml"
-		)
-	}
+  # We default to inst/ if this doesn't exist
+  if (is.null(path_conf)) {
+    path_conf <- path(
+      path,
+      "inst/golem-config.yml"
+    )
+  }
 
-	if (!file_exists(path_conf)) {
-		if (interactive()) {
-			ask <- yesno(
-				sprintf(
-					"The %s file doesn't exist.\nIt's possible that you might not be in a {golem} based project.\n Do you want to create the {golem} files?",
-					basename(path_conf)
-				)
-			)
-			# Return early if the user doesn't allow
-			if (!ask) {
-				return(NULL)
-			}
+  if (!file_exists(path_conf)) {
+    if (interactive()) {
+      ask <- yesno(
+        sprintf(
+          "The %s file doesn't exist.\nIt's possible that you might not be in a {golem} based project.\n Do you want to create the {golem} files?",
+          basename(path_conf)
+        )
+      )
+      # Return early if the user doesn't allow
+      if (!ask) {
+        return(NULL)
+      }
 
-			file_copy(
-				path = golem_sys("shinyexample/inst/golem-config.yml"),
-				new_path = path(
-					path,
-					"inst/golem-config.yml"
-				)
-			)
-			file_copy(
-				path = golem_sys("shinyexample/R/app_config.R"),
-				new_path = file.path(
-					path,
-					"R/app_config.R"
-				)
-			)
-			replace_word(
-				path(
-					path,
-					"R/app_config.R"
-				),
-				"shinyexample",
-				golem::pkg_name()
-			)
-			# TODO This should also create the dev folder
-		} else {
-			stop(
-				sprintf(
-					"The %s file doesn't exist.",
-					basename(path_conf)
-				)
-			)
-		}
-	}
+      file_copy(
+        path = golem_sys("shinyexample/inst/golem-config.yml"),
+        new_path = path(
+          path,
+          "inst/golem-config.yml"
+        )
+      )
+      file_copy(
+        path = golem_sys("shinyexample/R/app_config.R"),
+        new_path = file.path(
+          path,
+          "R/app_config.R"
+        )
+      )
+      replace_word(
+        path(
+          path,
+          "R/app_config.R"
+        ),
+        "shinyexample",
+        golem::pkg_name()
+      )
+      # TODO This should also create the dev folder
+    } else {
+      stop(
+        sprintf(
+          "The %s file doesn't exist.",
+          basename(path_conf)
+        )
+      )
+    }
+  }
 
-	return(
-		invisible(path_conf)
-	)
+  return(
+    invisible(path_conf)
+  )
 }
 
 # This function changes the name of the
 # package in app_config when you need to
 # set the {golem} name
 change_app_config_name <- function(
-	name,
-	path = get_golem_wd()
+  name,
+  path = get_golem_wd()
 ) {
-	pth <- fs::path(path, "R", "app_config.R")
-	app_config <- readLines(pth)
+  pth <- fs::path(path, "R", "app_config.R")
+  app_config <- readLines(pth)
 
-	where_system.file <- grep("system.file", app_config)
+  where_system.file <- grep("system.file", app_config)
 
-	app_config[
-		where_system.file
-	] <- sprintf(
-		'  system.file(..., package = "%s")',
-		name
-	)
-	write(app_config, pth)
+  app_config[
+    where_system.file
+  ] <- sprintf(
+    '  system.file(..., package = "%s")',
+    name
+  )
+  write(app_config, pth)
 }
