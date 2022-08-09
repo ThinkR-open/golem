@@ -17,6 +17,7 @@ guess_where_config <- function(
   # to the golem-config file is
 
   # This one should be correct in 99% of the case
+  # If we don't change the default values of the params.
   # => current directory /inst/golem-config.yml
   ret_path <- path(
     path,
