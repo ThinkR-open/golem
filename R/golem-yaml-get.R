@@ -13,8 +13,7 @@ get_golem_things <- function(
   path
 ) {
   conf_path <- get_current_config(
-    path,
-    set_options = TRUE
+    path
   )
   stop_if(
     conf_path,
