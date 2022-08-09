@@ -49,7 +49,7 @@ set_golem_options(
 \item{use_parent}{\code{TRUE} to scan parent directories for
 configuration files if the specified config file isn't found.}
 
-\item{path}{The path to set the golem working directory.
+\item{path, pkg}{The path to set the golem working directory.
 Note that it will be passed to \code{normalizePath}.}
 
 \item{config}{Name of configuration to read from. Defaults to
@@ -83,7 +83,7 @@ inside the \code{inst} folder.
 
 \itemize{
 \item \code{set_golem_options()} sets all the options, with the defaults from the functions below.
-\item \code{set_golem_wd()} defaults to \code{here::here()}, which is the package root when starting a golem.
+\item \code{set_golem_wd()} defaults to \code{golem::golem_wd()}, which is the package root when starting a golem.
 \item \code{set_golem_name()} defaults \code{golem::pkg_name()}
 \item \code{set_golem_version()} defaults \code{golem::pkg_version()}
 }

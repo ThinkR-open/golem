@@ -6,7 +6,7 @@
 #'
 #' @section Set Functions:
 #' + `set_golem_options()` sets all the options, with the defaults from the functions below.
-#' + `set_golem_wd()` defaults to `here::here()`, which is the package root when starting a golem.
+#' + `set_golem_wd()` defaults to `golem::golem_wd()`, which is the package root when starting a golem.
 #' + `set_golem_name()` defaults `golem::pkg_name()`
 #' + `set_golem_version()` defaults `golem::pkg_version()`
 #'
@@ -20,7 +20,7 @@
 #' @param golem_version Version of the current golem.
 #' @param golem_wd Working directory of the current golem package.
 #' @param app_prod Is the `{golem}` in prod mode?
-#' @param path The path to set the golem working directory.
+#' @param path,pkg The path to set the golem working directory.
 #'     Note that it will be passed to `normalizePath`.
 #' @param talkative Should the messages be printed to the console?
 #' @param name The name of the app

@@ -27,8 +27,8 @@
 # }
 
 #' @export
-#' @rdname golem_opts
 #' @importFrom fs path_abs
+#' @rdname golem_opts
 set_golem_wd <- function(
   golem_wd = golem::pkg_path(),
   pkg = golem::pkg_path(),
@@ -63,7 +63,6 @@ set_golem_name <- function(
   pkg = golem::pkg_path(),
   talkative = TRUE
 ) {
-
   path <- path_abs(pkg)
 
   # Changing in YAML
