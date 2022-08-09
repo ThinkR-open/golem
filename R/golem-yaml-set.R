@@ -63,6 +63,9 @@ set_golem_name <- function(
   pkg = golem::pkg_path(),
   talkative = TRUE
 ) {
+
+  path <- path_abs(pkg)
+
   # Changing in YAML
   amend_golem_config(
     key = "golem_name",
@@ -74,7 +77,7 @@ set_golem_name <- function(
   # Changing in app-config.R
   change_app_config_name(
     name = name,
-    path = pkg
+    path = path
   )
 
   # Changing in DESCRIPTION
@@ -102,7 +105,7 @@ set_golem_version <- function(
   pkg = golem::pkg_path(),
   talkative = TRUE
 ) {
-  path <- path_abs(path)
+  path <- path_abs(pkg)
 
   # Changing in YAML
   amend_golem_config(
@@ -115,7 +118,7 @@ set_golem_version <- function(
 
   desc <- desc::description$new(
     file = fs::path(
-      pkg,
+      path,
       "DESCRIPTION"
     )
   )
