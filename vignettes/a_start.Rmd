@@ -77,7 +77,8 @@ Once you've got that, a new RStudio project will be launched. Here is the struct
 z <- capture.output(fs::dir_tree(x))
 z <- z[-1]
 w <- lapply(
-  z, function(x) {
+  z,
+  function(x) {
     cat(x, "\n")
   }
 )
@@ -155,7 +156,15 @@ Create a template for tests:
 golem::use_recommended_tests()
 ```
 
-About [tests in a package](https://r-pkgs.org/testing-basics.html).
+About [tests in a package](https://r-pkgs.org/tests.html).
+
+### Use Recommended Packages
+
+This will add "shiny", "DT", "attempt", "glue", "htmltools", and "golem" as a dependency to your package.
+
+```{r}
+golem::use_recommended_deps()
+```
 
 ### Add various tools
 
