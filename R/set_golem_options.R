@@ -20,11 +20,12 @@
 #' @param golem_version Version of the current golem.
 #' @param golem_wd Working directory of the current golem package.
 #' @param app_prod Is the `{golem}` in prod mode?
-#' @param path,pkg The path to set the golem working directory.
+#' @param pkg The path to set the golem working directory.
 #'     Note that it will be passed to `normalizePath`.
 #' @param talkative Should the messages be printed to the console?
 #' @param name The name of the app
 #' @param version The version of the app
+#' @param config_file path to the {golem} config file
 #' @inheritParams config::get
 #'
 #' @rdname golem_opts

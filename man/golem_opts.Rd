@@ -5,23 +5,30 @@
 \alias{get_golem_wd}
 \alias{get_golem_name}
 \alias{get_golem_version}
+\alias{set_golem_wd}
 \alias{set_golem_name}
 \alias{set_golem_version}
 \alias{set_golem_options}
 \title{\code{{golem}} options}
 \usage{
-get_golem_wd(use_parent = TRUE, path = golem::pkg_path())
+get_golem_wd(use_parent = TRUE, pkg = golem::pkg_path())
 
 get_golem_name(
   config = Sys.getenv("GOLEM_CONFIG_ACTIVE", Sys.getenv("R_CONFIG_ACTIVE", "default")),
   use_parent = TRUE,
-  path = golem::pkg_path()
+  pkg = golem::pkg_path()
 )
 
 get_golem_version(
   config = Sys.getenv("GOLEM_CONFIG_ACTIVE", Sys.getenv("R_CONFIG_ACTIVE", "default")),
   use_parent = TRUE,
-  path = golem::pkg_path()
+  pkg = golem::pkg_path()
+)
+
+set_golem_wd(
+  golem_wd = golem::pkg_path(),
+  pkg = golem::pkg_path(),
+  talkative = TRUE
 )
 
 set_golem_name(
@@ -49,16 +56,18 @@ set_golem_options(
 \item{use_parent}{\code{TRUE} to scan parent directories for
 configuration files if the specified config file isn't found.}
 
-\item{path, pkg}{The path to set the golem working directory.
+\item{pkg}{The path to set the golem working directory.
 Note that it will be passed to \code{normalizePath}.}
 
 \item{config}{Name of configuration to read from. Defaults to
 the value of the \code{R_CONFIG_ACTIVE} environment variable
 ("default" if the variable does not exist).}
 
-\item{name}{The name of the app}
+\item{golem_wd}{Working directory of the current golem package.}
 
 \item{talkative}{Should the messages be printed to the console?}
+
+\item{name}{The name of the app}
 
 \item{version}{The version of the app}
 
@@ -66,9 +75,9 @@ the value of the \code{R_CONFIG_ACTIVE} environment variable
 
 \item{golem_version}{Version of the current golem.}
 
-\item{golem_wd}{Working directory of the current golem package.}
-
 \item{app_prod}{Is the \code{{golem}} in prod mode?}
+
+\item{config_file}{path to the {golem} config file}
 }
 \value{
 Used for side-effects for the setters, and values from the

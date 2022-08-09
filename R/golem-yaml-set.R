@@ -1,31 +1,3 @@
-
-#' Set things in golem config
-#'
-#' @param key,value entries in the yaml
-#' @param path path to the config file
-#' @param talkative Should things be printed?
-#' @param config config context to write to
-#'
-#' @noRd
-#'
-# set_golem_things <- function(
-# 	key,
-# 	value,
-# 	config_file,
-# 	talkative = TRUE,
-# 	config = "default"
-# ) {
-# 	amend_golem_config(
-# 		key = key,
-# 		value = value,
-# 		config = config,
-# 		pkg = config_file,
-# 		talkative = talkative
-# 	)
-
-# 	invisible(path)
-# }
-
 #' @export
 #' @importFrom fs path_abs
 #' @rdname golem_opts
@@ -130,3 +102,31 @@ set_golem_version <- function(
 
   invisible(version)
 }
+
+
+#' Set things in golem config
+#'
+#' @param key,value entries in the yaml
+#' @param path path to the config file
+#' @param talkative Should things be printed?
+#' @param config config context to write to
+#'
+#' @noRd
+#'
+# set_golem_things <- function(
+# 	key,
+# 	value,
+# 	config_file,
+# 	talkative = TRUE,
+# 	config = "default"
+# ) {
+# 	amend_golem_config(
+# 		key = key,
+# 		value = value,
+# 		config = config,
+# 		pkg = config_file,
+# 		talkative = talkative
+# 	)
+
+# 	invisible(path)
+# }
