@@ -584,6 +584,63 @@ add_html_template <- function(
   }
 }
 
+#' @export
+#' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
+add_partial_html_template <- function(
+  name = "partial_template.html",
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE
+) {
+  name <- file_path_sans_ext(name)
+
+  old <- setwd(path_abs(pkg))
+  on.exit(setwd(old))
+
+  dir_created <- create_if_needed(
+    dir,
+    type = "directory"
+  )
+
+  if (!dir_created) {
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+
+  dir <- path_abs(dir)
+
+  where <- path(
+    dir,
+    sprintf(
+      "%s.html",
+      name
+    )
+  )
+
+  if (!file_exists(where)) {
+    file_create(where)
+    write_there <- function(...) write(..., file = where, append = TRUE)
+    write_there("<div>")
+    write_there("  {{ content }}")
+    write_there("</div>")
+    write_there("")
+    file_created_dance(
+      where,
+      after_creation_message_html_template,
+      pkg,
+      dir,
+      name,
+      open
+    )
+  } else {
+    file_already_there_dance(
+      where = where,
+      open_file = open
+    )
+  }
+}
 
 #' @export
 #' @rdname add_files
