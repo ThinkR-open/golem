@@ -10,6 +10,8 @@
 
 ## New functions
 
++ Add `add_partial_html_template()` to create a partial html template, with "just" a div and a `{{ }}` (@nathansquan #858).
+
 
 ## New features
 
