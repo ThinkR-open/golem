@@ -23,8 +23,7 @@ use_recommended_deps <- function(
   recommended = c("shiny", "DT", "attempt", "glue", "htmltools", "golem")
 ) {
   .Deprecated(
-    "golem::use_recommended_deps",
-    msg <- "use_recommended_deps() is soft deprecated and will be removed in future versions of {golem}."
+    msg = "use_recommended_deps() is soft deprecated and will be removed in future versions of {golem}."
   )
 
   old <- setwd(path_abs(pkg))
