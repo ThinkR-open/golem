@@ -25,6 +25,8 @@
 
 + The message after htmlTemplate creation now suggests to add in the UI, not only in app_ui.R (#861)
 
++ The Deprecation message for `use_recommended_deps` no longer suggest to user `use_recommended_deps` (#900)
+
 ## Internal changes
 
 # golem 0.3.3
