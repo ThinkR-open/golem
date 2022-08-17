@@ -59,7 +59,7 @@ set_golem_name <- function(
     )
   )
   desc$set(
-    Package = name
+    Package = as.character(name)
   )
   desc$write(
     file = "DESCRIPTION"
