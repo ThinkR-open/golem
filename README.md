@@ -23,7 +23,7 @@ You’re reading the doc about version :
 
 ``` r
 desc::desc_get_version()
-#> [1] '0.3.3'
+#> [1] '0.3.3.9000'
 ```
 
 ## Tool series
@@ -81,6 +81,8 @@ scratch*](https://towardsdatascience.com/production-grade-r-shiny-with-golem-pro
     golem](https://www.rstudio.com/resources/rstudioconf-2020/production-grade-shiny-apps-with-golem/)
 -   🇫🇷 Rencontres R 2021 : [Conception d’applications Shiny avec
     {golem}](https://www.youtube.com/watch?v=0f5Me1PFGDs)
+-   🇫🇷 [Déploiement d’une application {shiny} dans docker avec {renv} et
+    {golem}](https://www.youtube.com/watch?v=diCG4t76k78)
 
 ### Cheatsheet
 
