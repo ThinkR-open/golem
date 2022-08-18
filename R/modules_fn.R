@@ -40,6 +40,7 @@ add_module <- function(
   with_test = FALSE,
   ...
 ) {
+  check_name_length(name)
   name <- file_path_sans_ext(name)
 
   old <- setwd(path_abs(pkg))

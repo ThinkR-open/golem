@@ -10,6 +10,8 @@ add_r_files <- function(
 ) {
   name <- file_path_sans_ext(name)
 
+  check_name_length(name)
+
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 

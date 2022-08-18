@@ -1,3 +1,14 @@
+check_name_length <- function(name) {
+  stop_if(
+    name,
+    ~ length(.x) > 1,
+    sprintf(
+      "`name` should be of length 1. Got %d.",
+      length(name)
+    )
+  )
+}
+
 #' Create Files
 #'
 #' These functions create files inside the `inst/app` folder.
@@ -43,8 +54,10 @@ add_js_file <- function(
 ) {
   stop_if(
     missing(name),
-    msg = "Name is required"
+    msg = "`name` is required"
   )
+
+  check_name_length(name)
 
   name <- file_path_sans_ext(name)
 
@@ -112,8 +125,10 @@ add_js_handler <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "Name is required"
+    msg = "`name` is required"
   )
+
+  check_name_length(name)
 
   name <- file_path_sans_ext(name)
 
@@ -176,8 +191,10 @@ add_js_input_binding <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "Name is required"
+    msg = "`name` is required"
   )
+
+  check_name_length(name)
 
   attempt::stop_if(
     length(events$name) == 0,
@@ -317,8 +334,10 @@ add_js_output_binding <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "Name is required"
+    msg = "`name` is required"
   )
+
+  check_name_length(name)
 
   raw_name <- name
 
@@ -400,8 +419,10 @@ add_css_file <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "Name is required"
+    msg = "`name` is required"
   )
+
+  check_name_length(name)
 
   name <- file_path_sans_ext(name)
 
@@ -462,8 +483,10 @@ add_sass_file <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "Name is required"
+    msg = "`name` is required"
   )
+
+  check_name_length(name)
 
   name <- file_path_sans_ext(name)
 
@@ -502,7 +525,11 @@ add_sass_file <- function(
       open
     )
 
-    add_sass_code(where = where, dir = dir, name = name)
+    add_sass_code(
+      where = where,
+      dir = dir,
+      name = name
+    )
 
     cli_alert_info(
       "After running the compilation, your CSS file will be automatically link in `golem_add_external_resources()`."
@@ -526,6 +553,8 @@ add_html_template <- function(
   dir_create = TRUE
 ) {
   name <- file_path_sans_ext(name)
+
+  check_name_length(name)
 
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
@@ -595,6 +624,7 @@ add_partial_html_template <- function(
   dir_create = TRUE
 ) {
   name <- file_path_sans_ext(name)
+  check_name_length(name)
 
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
@@ -691,7 +721,6 @@ add_ui_server_files <- function(
     dir,
     "server.R"
   )
-
 
   if (!file_exists(where)) {
     file_create(where)

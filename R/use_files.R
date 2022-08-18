@@ -33,6 +33,8 @@ use_external_js_file <- function(
     name <- basename(url)
   }
 
+  check_name_length(name)
+
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.js", name)
 
@@ -98,6 +100,8 @@ use_external_css_file <- function(
   if (missing(name)) {
     name <- basename(url)
   }
+
+  check_name_length(name)
 
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.css", name)
@@ -166,6 +170,8 @@ use_external_html_template <- function(
     file_path_sans_ext(name)
   )
 
+  check_name_length(name)
+
   dir_created <- create_if_needed(
     dir,
     type = "directory"
@@ -216,9 +222,12 @@ use_external_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
+  check_name_length(name)
+
   if (missing(name)) {
     name <- basename(url)
   }
+
 
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
@@ -263,6 +272,7 @@ use_internal_js_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
+  check_name_length(name)
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
@@ -328,6 +338,8 @@ use_internal_css_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
+  check_name_length(name)
+
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
@@ -396,6 +408,8 @@ use_internal_html_template <- function(
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
+  check_name_length(name)
+
   new_file <- sprintf(
     "%s.html",
     file_path_sans_ext(name)
@@ -453,6 +467,8 @@ use_internal_file <- function(
   if (missing(name)) {
     name <- basename(path)
   }
+
+  check_name_length(name)
 
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
