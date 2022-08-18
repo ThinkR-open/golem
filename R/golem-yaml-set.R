@@ -6,9 +6,10 @@ set_golem_wd <- function(
   pkg = golem::pkg_path(),
   talkative = TRUE
 ) {
+
   if (
     golem_wd == "golem::pkg_path()" |
-      golem_wd == golem::pkg_path()
+     normalizePath(golem_wd) == normalizePath(golem::pkg_path())
   ) {
     golem_yaml_path <- "golem::pkg_path()"
     attr(golem_yaml_path, "tag") <- "!expr"
@@ -59,7 +60,7 @@ set_golem_name <- function(
     )
   )
   desc$set(
-    Package = as.character(name)
+    Package = name
   )
   desc$write(
     file = "DESCRIPTION"

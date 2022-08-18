@@ -3,7 +3,8 @@ daf_desc <- function(
   path = ".",
   entry
 ) {
-  unlist(
+  as.character(
+    unlist(
     unname(
       as.data.frame(
         read.dcf(
@@ -13,6 +14,7 @@ daf_desc <- function(
         )
       )[entry]
     )
+  )
   )
 }
 
