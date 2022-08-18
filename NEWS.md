@@ -27,6 +27,8 @@
 
 + The Deprecation message for `use_recommended_deps` no longer suggest to user `use_recommended_deps` (#900)
 
++ The setting of the config file has been unified so that we are sure to keep the !expr in `golem_set_wd()`, and the codebase has been simplified for this (#709).
+
 ## Internal changes
 
 # golem 0.3.3
