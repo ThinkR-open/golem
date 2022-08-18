@@ -3,7 +3,8 @@ daf_desc <- function(
   path = ".",
   entry
 ) {
-  unlist(
+  as.character(
+    unlist(
     unname(
       as.data.frame(
         read.dcf(
@@ -14,6 +15,7 @@ daf_desc <- function(
       )[entry]
     )
   )
+  )
 }
 
 #' Package tools
@@ -22,8 +24,6 @@ daf_desc <- function(
 #' inside your project while developing
 #'
 #' @param path Path to use to read the DESCRIPTION
-#' @param depth Number of parent directory to visit before
-#'   deciding we are not in a package.
 #'
 #' @export
 #' @rdname pkg_tools
@@ -37,28 +37,7 @@ pkg_version <- function(path = ".") {
 }
 #' @export
 #' @rdname pkg_tools
-pkg_path <- function(
-  path = ".",
-  depth = 3
-) {
-  # We use depth 3 bcs it's the deepest you can be
-  # i.e. inst/app/www/
-  path <- normalizePath(path)
-  if (file.exists(file.path(path, "DESCRIPTION"))) {
-    return(path)
-  }
-  for (i in 1:depth) {
-    path <- dirname(path)
-    if (
-      file.exists(
-        file.path(
-          path,
-          "DESCRIPTION"
-        )
-      )
-    ) {
-      return(path)
-    }
-  }
-  stop("Unable to locate the package path.")
+pkg_path <- function(path = ".") {
+  rlang::check_installed("here")
+  here::here()
 }

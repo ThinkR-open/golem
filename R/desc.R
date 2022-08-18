@@ -69,10 +69,10 @@ fill_desc <- function(
   )
   set_golem_version(
     version = "0.0.0.9000",
-    path = path
+    pkg = path
   )
   desc$set(
-    Package = pkg_name
+    Package = as.character(pkg_name)
   )
   change_app_config_name(
     name = pkg_name,
