@@ -57,7 +57,7 @@ Imports:
     here,
     fs,
     htmltools,
-    rlang,
+    rlang (>= 1.0.0),
     rstudioapi,
     shiny (>= 1.5.0),
     usethis (>= 1.6.0),
