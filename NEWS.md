@@ -2,10 +2,10 @@
 
 # golem 0.3.3.9000+
 
-### Soft deprecated
+## Soft deprecated
 
 
-### Hard deprecated
+## Hard deprecated
 
 
 ## New functions
@@ -13,13 +13,15 @@
 + Add `add_partial_html_template()` to create a partial html template, with "just" a div and a `{{ }}` (@nathansquan #858).
 
 
-## New features
+## New features / user visible changes
 
 + The following hard dependencies have been moved to soft dependencies, as you'll only need them while developing: `{pkgload}`, `{roxygen2}`
 
 + Soft dependency check is now done via `rlang::check_installed()` (#835)
 
 + `golem::run_dev()` has been refactored to match the behavior of other functions, notably it now uses `golem::get_golem_wd()` to find the current working dir.
+
++ `{golem}` now depends on `{rlang}` version >= 1.0.0
 
 ## Bug fix
 
