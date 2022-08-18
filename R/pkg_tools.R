@@ -5,16 +5,16 @@ daf_desc <- function(
 ) {
   as.character(
     unlist(
-    unname(
-      as.data.frame(
-        read.dcf(
-          normalizePath(
-            file.path(path, "DESCRIPTION")
+      unname(
+        as.data.frame(
+          read.dcf(
+            normalizePath(
+              file.path(path, "DESCRIPTION")
+            )
           )
-        )
-      )[entry]
+        )[entry]
+      )
     )
-  )
   )
 }
 
