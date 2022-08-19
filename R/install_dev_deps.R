@@ -20,7 +20,7 @@
 #' @param force_install If force_install is installed,
 #'  then the user is not interactively asked
 #'  to install them.
-#' @param .... further arguments passed to the install function.
+#' @param ... further arguments passed to the install function.
 #'
 #' @export
 #'

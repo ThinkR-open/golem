@@ -11,7 +11,7 @@ install_dev_deps(force_install = FALSE, ...)
 then the user is not interactively asked
 to install them.}
 
-\item{....}{further arguments passed to the install function.}
+\item{...}{further arguments passed to the install function.}
 }
 \description{
 This function will run rlang::check_installed() on:
