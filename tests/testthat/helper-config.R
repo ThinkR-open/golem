@@ -79,6 +79,9 @@ rand_name <- function() {
 }
 
 withr::with_dir(pkg, {
+  # Some weird things with {here}
+  unloadNamespace("here")
+  here::set_here(".")
   set_golem_options()
   usethis::proj_set(pkg)
   orig_test <- set_golem_wd(
