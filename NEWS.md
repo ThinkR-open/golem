@@ -31,6 +31,8 @@
 
 + The setting of the config file has been unified so that we are sure to keep the !expr in `golem_set_wd()`, and the codebase has been simplified for this (#709).
 
++ The functions adding files can no longer take a `name` argument that has length() > 1. This used to cause some bugs (#781)
+
 ## Internal changes
 
 # golem 0.3.3
