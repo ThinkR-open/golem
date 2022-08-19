@@ -41,7 +41,7 @@ if (dir.exists(temp_app)) {
 dir.create(temp_lib, recursive = TRUE)
 
 install.packages(
-  c("remotes", "desc", "testthat", "cli", "fs", "cranlogs"),
+  c("remotes", "desc", "testthat", "cli", "fs", "cranlogs", "pak"),
   lib = temp_lib,
   repo = "https://cran.rstudio.com/"
 )
@@ -68,6 +68,10 @@ install_local(
   lib.loc = temp_lib
 )
 
+golem::install_dev_deps(
+  force_install = TRUE, 
+  lib = temp_lib
+)
 
 withr::with_tempdir({
   cli::cat_rule("Install crystalmountains")
