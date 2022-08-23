@@ -33,6 +33,8 @@
 
 + The functions adding files can no longer take a `name` argument that has length() > 1. This used to cause some bugs (#781)
 
++ The typo in `install.packages()` in 02_dev.R has been corrected (@asiripanich)
+
 ## Internal changes
 
 # golem 0.3.3
