@@ -79,7 +79,6 @@ create_golem <- function(
     mustWork = FALSE
   )
 
-
   if (check_name) {
     cat_rule("Checking package name")
     getFromNamespace("check_package_name", "usethis")(package_name)
@@ -107,6 +106,7 @@ create_golem <- function(
       path = path_to_golem,
       open = FALSE,
     )
+    here::set_here(path_to_golem)
     cat_green_tick("Created package directory")
   }
 
