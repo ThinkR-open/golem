@@ -12,9 +12,21 @@ fs_dir_exists <- function(path) {
   fs::dir_exists(path)
 }
 
-fs_dir_create <- function(where) {
+fs_dir_create <- function(
+  path,
+  ...,
+  mode = "u=rwx,go=rx",
+  recurse = TRUE,
+  recursive
+) {
   check_fs_installed()
-  fs::dir_create(where)
+  fs::dir_create(
+    path,
+    ...,
+    mode = mode,
+    recurse = recurse,
+    recursive = recursive
+  )
 }
 
 
@@ -50,8 +62,8 @@ fs_file_copy <- function(
 ) {
   check_fs_installed()
   fs::file_copy(
-    path,
-    new_path,
+    path = path,
+    new_path = new_path,
     overwrite
   )
 }
