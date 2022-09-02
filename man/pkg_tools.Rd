@@ -10,7 +10,7 @@ pkg_name(path = ".")
 
 pkg_version(path = ".")
 
-pkg_path(path = ".")
+pkg_path()
 }
 \arguments{
 \item{path}{Path to use to read the DESCRIPTION}
