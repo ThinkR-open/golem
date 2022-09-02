@@ -41,10 +41,17 @@ add_dockerfile_with_renv_ <- function(
   }
 
   if (is.null(lockfile)) {
-    lockfile <- attachment::create_renv_for_prod(path = source_folder, output = file.path(output_dir, "renv.lock.prod"))
+    lockfile <- attachment::create_renv_for_prod(
+      path = source_folder,
+      output = file.path(output_dir, "renv.lock.prod")
+    )
   }
 
-  fs_file_copy(from = lockfile, to = output_dir)
+  fs_file_copy(
+    path = lockfile,
+    new_path = output_dir,
+    overwrite = TRUE
+  )
 
   socle <- dockerfiler::dock_from_renv(
     lockfile = lockfile,
