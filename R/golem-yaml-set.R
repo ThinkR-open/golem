@@ -23,7 +23,7 @@ set_golem_wd <- function(
     talkative = talkative
   )
 
-  invisible(path)
+  invisible(golem_yaml_path)
 }
 
 #' @export
