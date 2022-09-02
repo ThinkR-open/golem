@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 library(golem)
 x <- file.path(
@@ -43,11 +44,11 @@ This config file is based on the [`{config}`](https://github.com/rstudio/config)
 
 Here is what the default config file looks like:
 
-```{r echo = FALSE, comment= "", }
+```{r echo = FALSE, comment= "", eval = TRUE}
 cat(
   sep = "\n",
   readLines(
-    "inst/golem-config.yml"
+    "inst/shinyexample/golem-config.yml"
   )
 )
 ```
