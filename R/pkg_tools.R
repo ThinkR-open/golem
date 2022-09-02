@@ -38,6 +38,7 @@ pkg_version <- function(path = ".") {
 #' @export
 #' @rdname pkg_tools
 pkg_path <- function(path = ".") {
-  rlang::check_installed("here")
-  here::here()
+  # rlang::check_installed("here")
+  # here::here()
+  getwd()
 }
