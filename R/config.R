@@ -9,7 +9,7 @@
 
 #' @importFrom attempt attempt is_try_error
 guess_where_config <- function(
-  path = ".",
+  path = getwd(),
   file = "inst/golem-config.yml"
 ) {
   # We'll try to guess where the path
@@ -60,7 +60,7 @@ guess_where_config <- function(
 #' @param path Path to start looking for the config
 #'
 #' @export
-get_current_config <- function(path = ".") {
+get_current_config <- function(path = getwd()) {
 
   # We check wether we can guess where the config file is
   path_conf <- guess_where_config(path)
