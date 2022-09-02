@@ -58,7 +58,6 @@ talk_once <- function(.f, msg = "") {
 #' @importFrom usethis use_build_ignore
 #' @importFrom desc desc_get_deps
 #' @importFrom rstudioapi navigateToFile isAvailable hasFun
-#' @importFrom fs path path_file
 #'
 #' @examples
 #' \donttest{
@@ -179,9 +178,9 @@ add_dockerfile_ <- talk_once(
       reason = "to build a Dockerfile."
     )
 
-    where <- path(pkg, output)
+    where <- fs_path(pkg, output)
 
-    usethis::use_build_ignore(path_file(where))
+    usethis::use_build_ignore(basename(where))
 
     dock <- dockerfiler::dock_from_desc(
       path = path,
@@ -228,7 +227,6 @@ add_dockerfile_ <- talk_once(
 
 #' @export
 #' @rdname dockerfiles
-#' @importFrom fs path path_file
 add_dockerfile_shinyproxy <- function(
   path = "DESCRIPTION",
   output = "Dockerfile",
@@ -289,7 +287,7 @@ add_dockerfile_shinyproxy_ <- talk_once(
       version = "0.2.0",
       reason = "to build a Dockerfile."
     )
-    where <- path(pkg, output)
+    where <- fs_path(pkg, output)
 
     usethis::use_build_ignore(output)
 
@@ -332,7 +330,6 @@ add_dockerfile_shinyproxy_ <- talk_once(
 
 #' @export
 #' @rdname dockerfiles
-#' @importFrom fs path path_file
 add_dockerfile_heroku <- function(
   path = "DESCRIPTION",
   output = "Dockerfile",
@@ -393,7 +390,7 @@ add_dockerfile_heroku_ <- talk_once(
       version = "0.2.0",
       reason = "to build a Dockerfile."
     )
-    where <- path(pkg, output)
+    where <- fs_path(pkg, output)
 
     usethis::use_build_ignore(output)
 

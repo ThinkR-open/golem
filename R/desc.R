@@ -12,7 +12,6 @@
 #'
 #' @importFrom desc description
 #' @importFrom cli cat_bullet
-#' @importFrom fs path path_abs
 #'
 #' @export
 #'
@@ -28,10 +27,10 @@ fill_desc <- function(
   repo_url = NULL,
   pkg = get_golem_wd()
 ) {
-  path <- path_abs(pkg)
+  path <- fs_path_abs(pkg)
 
   desc <- desc::description$new(
-    file = path(path, "DESCRIPTION")
+    file = fs_path(path, "DESCRIPTION")
   )
 
   if (!is.null(author_orcid) & !is.character(author_orcid)) {

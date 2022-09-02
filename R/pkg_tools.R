@@ -9,7 +9,7 @@ daf_desc <- function(
         as.data.frame(
           read.dcf(
             normalizePath(
-              file.path(path, "DESCRIPTION")
+              fs_path(path, "DESCRIPTION")
             )
           )
         )[entry]
@@ -37,7 +37,8 @@ pkg_version <- function(path = ".") {
 }
 #' @export
 #' @rdname pkg_tools
-pkg_path <- function(path = ".") {
-  rlang::check_installed("here")
-  here::here()
+pkg_path <- function() {
+  # rlang::check_installed("here")
+  # here::here()
+  getwd()
 }

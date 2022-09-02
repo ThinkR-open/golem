@@ -4,7 +4,7 @@
 \alias{get_current_config}
 \title{Get the path to the current config File}
 \usage{
-get_current_config(path = ".")
+get_current_config(path = getwd())
 }
 \arguments{
 \item{path}{Path to start looking for the config}

@@ -19,7 +19,8 @@ x <- file.path(
 )
 unlink(x, TRUE, TRUE)
 
-create_golem(x, package_name = "golex", open = FALSE)
+x <- golem::create_golem(x, package_name = "golex", open = FALSE)
+old <- setwd(x)
 knitr::opts_knit$set(root.dir = x)
 ```
 
@@ -43,13 +44,17 @@ This config file is based on the [`{config}`](https://github.com/rstudio/config)
 
 Here is what the default config file looks like:
 
-```{r echo = FALSE, comment= "", }
-cat(
-  sep = "\n",
-  readLines(
-    "inst/golem-config.yml"
-  )
-)
+```
+default:
+  golem_name: golex
+  golem_version: 0.0.0.9000
+  app_prod: no
+
+production:
+  app_prod: yes
+
+dev:
+  golem_wd: !expr golem::pkg_path()
 ```
 
 + default/golem_name, default/golem_version, default/app_prod are usable across the whole life of your golem app: while developing, and also when in production. 

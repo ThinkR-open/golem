@@ -76,22 +76,13 @@ golem::install_dev_deps(
 withr::with_tempdir({
   cli::cat_rule("Install crystalmountains")
 
-  # tmp_cm <- tempfile(fileext = ".zip")
-
-  # download.file(
-  #   "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
-  #   "main.zip"
-  # )
-
-  # unzip(tmp_cm)
-
   remotes::install_github(
     "thinkr-open/crystalmountains",
     lib.loc = temp_lib,
     update = "never"
   )
-  # unlink("crystalmountains-main", TRUE, TRUE)
 
+  here::set_here(getwd())
   # Going to the temp dir and create a new golem
   cli::cat_rule("Creating a golem based app")
   library(golem)
