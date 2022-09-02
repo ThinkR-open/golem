@@ -46,7 +46,7 @@ set_golem_version(
 set_golem_options(
   golem_name = golem::pkg_name(),
   golem_version = golem::pkg_version(),
-  golem_wd = here::here(),
+  golem_wd = golem::pkg_path(),
   app_prod = FALSE,
   talkative = TRUE,
   config_file = golem::get_current_config(golem_wd)

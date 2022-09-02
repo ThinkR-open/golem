@@ -9,7 +9,7 @@
 
 #' @importFrom attempt attempt is_try_error
 guess_where_config <- function(
-  path = getwd(),
+  path = golem::pkg_path(),
   file = "inst/golem-config.yml"
 ) {
   # We'll try to guess where the path
