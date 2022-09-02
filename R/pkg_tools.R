@@ -9,7 +9,7 @@ daf_desc <- function(
         as.data.frame(
           read.dcf(
             normalizePath(
-              file.path(path, "DESCRIPTION")
+              fs_path(path, "DESCRIPTION")
             )
           )
         )[entry]

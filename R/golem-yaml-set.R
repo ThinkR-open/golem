@@ -1,5 +1,4 @@
 #' @export
-#' @importFrom fs path_abs
 #' @rdname golem_opts
 set_golem_wd <- function(
   golem_wd = golem::pkg_path(),
@@ -13,7 +12,7 @@ set_golem_wd <- function(
     golem_yaml_path <- "golem::pkg_path()"
     attr(golem_yaml_path, "tag") <- "!expr"
   } else {
-    golem_yaml_path <- path_abs(golem_wd)
+    golem_yaml_path <- fs_path_abs(golem_wd)
   }
 
   amend_golem_config(
@@ -29,13 +28,12 @@ set_golem_wd <- function(
 
 #' @export
 #' @rdname golem_opts
-#' @importFrom fs path_abs
 set_golem_name <- function(
   name = golem::pkg_name(),
   pkg = golem::pkg_path(),
   talkative = TRUE
 ) {
-  path <- path_abs(pkg)
+  path <- fs_path_abs(pkg)
 
   # Changing in YAML
   amend_golem_config(
@@ -53,7 +51,7 @@ set_golem_name <- function(
 
   # Changing in DESCRIPTION
   desc <- desc::description$new(
-    file = fs::path(
+    file = fs_path(
       path,
       "DESCRIPTION"
     )
@@ -70,13 +68,12 @@ set_golem_name <- function(
 
 #' @export
 #' @rdname golem_opts
-#' @importFrom fs path_abs
 set_golem_version <- function(
   version = golem::pkg_version(),
   pkg = golem::pkg_path(),
   talkative = TRUE
 ) {
-  path <- path_abs(pkg)
+  path <- fs_path_abs(pkg)
 
   # Changing in YAML
   amend_golem_config(
@@ -88,7 +85,7 @@ set_golem_version <- function(
   )
 
   desc <- desc::description$new(
-    file = fs::path(
+    file = fs_path(
       path,
       "DESCRIPTION"
     )

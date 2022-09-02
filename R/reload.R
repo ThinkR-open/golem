@@ -35,7 +35,7 @@ check_name_consistency <- function(pkg) {
   old_dir <- setwd(pkg)
 
   package_name <- desc::desc_get("Package")
-  pth <- fs::path(
+  pth <- fs_path(
     pkg,
     "R",
     "app_config.R"

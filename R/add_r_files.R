@@ -1,4 +1,3 @@
-#' @importFrom fs path_abs path file_create
 add_r_files <- function(
   name,
   ext = c("fct", "utils"),
@@ -12,7 +11,7 @@ add_r_files <- function(
 
   check_name_length(name)
 
-  old <- setwd(path_abs(pkg))
+  old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -43,15 +42,15 @@ add_r_files <- function(
     module <- paste0("mod_", module, "_")
   }
 
-  where <- path(
+  where <- fs_path(
     "R",
     paste0(module, ext, "_", name, ".R")
   )
 
-  if (!file_exists(where)) {
-    file_create(where)
+  if (!fs_file_exists(where)) {
+    fs_file_create(where)
 
-    if (file_exists(where) & is.null(module)) {
+    if (fs_file_exists(where) & is.null(module)) {
       # Must be a function or utility file being created
       append_roxygen_comment(
         name = name,

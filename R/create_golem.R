@@ -58,7 +58,6 @@ replace_package_name <- function(
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject hasFun
 #' @importFrom usethis use_latest_dependencies create_project
-#' @importFrom fs dir_copy
 #' @importFrom yaml write_yaml
 #'
 #' @export
@@ -75,7 +74,11 @@ create_golem <- function(
   with_git = FALSE,
   ...
 ) {
-  path_to_golem <- normalizePath(path, mustWork = FALSE)
+  path_to_golem <- normalizePath(
+    path,
+    mustWork = FALSE
+  )
+
 
   if (check_name) {
     cat_rule("Checking package name")
@@ -84,7 +87,7 @@ create_golem <- function(
   }
 
 
-  if (dir.exists(path_to_golem)) {
+  if (fs_dir_exists(path_to_golem)) {
     if (!isTRUE(overwrite)) {
       stop(
         paste(
@@ -112,7 +115,7 @@ create_golem <- function(
   from <- golem_sys("shinyexample")
 
   # Copy over whole directory
-  dir_copy(
+  fs_dir_copy(
     path = from,
     new_path = path_to_golem,
     overwrite = TRUE

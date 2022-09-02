@@ -44,7 +44,7 @@ add_dockerfile_with_renv_ <- function(
     lockfile <- attachment::create_renv_for_prod(path = source_folder, output = file.path(output_dir, "renv.lock.prod"))
   }
 
-  file.copy(from = lockfile, to = output_dir)
+  fs_file_copy(from = lockfile, to = output_dir)
 
   socle <- dockerfiler::dock_from_renv(
     lockfile = lockfile,
@@ -289,7 +289,10 @@ add_dockerfile_with_renv_heroku <- function(
     )
   )
 
-  readme_output <- file.path(output_dir, "README")
+  readme_output <- fs_path(
+    output_dir,
+    "README"
+  )
 
   write_there <- function(...) {
     write(..., file = readme_output, append = TRUE)

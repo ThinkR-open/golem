@@ -29,13 +29,12 @@ get_golem_things <- function(
 }
 
 #' @export
-#' @importFrom fs path_abs
 #' @rdname golem_opts
 get_golem_wd <- function(
   use_parent = TRUE,
   pkg = golem::pkg_path()
 ) {
-  path <- path_abs(pkg)
+  path <- fs_path_abs(pkg)
 
   pth <- get_golem_things(
     value = "golem_wd",
@@ -50,7 +49,6 @@ get_golem_wd <- function(
 }
 
 #' @export
-#' @importFrom fs path_abs
 #' @rdname golem_opts
 get_golem_name <- function(
   config = Sys.getenv(
@@ -63,7 +61,7 @@ get_golem_name <- function(
   use_parent = TRUE,
   pkg = golem::pkg_path()
 ) {
-  path <- path_abs(pkg)
+  path <- fs_path_abs(pkg)
   nm <- get_golem_things(
     value = "golem_name",
     config = config,
@@ -77,7 +75,6 @@ get_golem_name <- function(
 }
 
 #' @export
-#' @importFrom fs path_abs
 #' @rdname golem_opts
 get_golem_version <- function(
   config = Sys.getenv(
@@ -90,7 +87,7 @@ get_golem_version <- function(
   use_parent = TRUE,
   pkg = golem::pkg_path()
 ) {
-  path <- path_abs(pkg)
+  path <- fs_path_abs(pkg)
   vers <- get_golem_things(
     value = "golem_version",
     config = config,
