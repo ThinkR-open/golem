@@ -10,7 +10,6 @@
 #' @param recommended A vector of recommended packages.
 #' @param spellcheck Whether or not to use a spellcheck test.
 #'
-#' @importFrom usethis use_testthat use_package
 #' @importFrom fs path_abs
 #' @rdname use_recommended
 #'
@@ -26,12 +25,17 @@ use_recommended_deps <- function(
     "golem::use_recommended_deps",
     msg <- "use_recommended_deps() is soft deprecated and will be removed in future versions of {golem}."
   )
+  
+  rlang::check_installed(
+    "usethis",
+    reason = "to add dependencies to DESCRIPTION."
+  )
 
   old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   for (i in sort(recommended)) {
-    try(use_package(i))
+    try(usethis::use_package(i))
   }
 
   cat_green_tick("Dependencies added")
@@ -40,7 +44,6 @@ use_recommended_deps <- function(
 
 #' @rdname use_recommended
 #' @export
-#' @importFrom usethis use_testthat use_package use_spell_check
 #' @importFrom utils capture.output
 #' @importFrom attempt without_warning stop_if
 #' @importFrom fs path_abs path file_exists
@@ -51,6 +54,11 @@ use_recommended_tests <- function(
   lang = "en-US",
   error = FALSE
 ) {
+  rlang::check_installed(
+    "usethis",
+    reason = "to use unit tests and check spelling."
+  )
+  
   old <- setwd(path_abs(pkg))
 
   on.exit(setwd(old))
@@ -58,7 +66,7 @@ use_recommended_tests <- function(
   if (!dir.exists(
     path(path_abs(pkg), "tests")
   )) {
-    without_warning(use_testthat)()
+    without_warning(usethis::use_testthat)()
   }
   if (!requireNamespace("processx")) {
     stop("Please install the {processx} package to add the recommended tests.")
@@ -77,13 +85,12 @@ use_recommended_tests <- function(
   )
 
   if (spellcheck) {
-    use_spell_check(
+    usethis::use_spell_check(
       vignettes = vignettes,
       lang = lang,
       error = error
     )
   }
-
 
   cat_green_tick("Tests added")
 }

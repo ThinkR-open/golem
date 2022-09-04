@@ -24,7 +24,6 @@
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject hasFun
-#' @importFrom usethis use_latest_dependencies create_project
 #' @importFrom fs dir_copy
 #' @importFrom yaml write_yaml
 #'
@@ -42,6 +41,11 @@ create_golem <- function(
   with_git = FALSE,
   ...
 ) {
+  rlang::check_installed(
+    "usethis",
+    reason = "to create projects and use the last version for the dependencies."
+  )
+  
   path <- normalizePath(path, mustWork = FALSE)
 
   if (check_name) {
@@ -177,7 +181,7 @@ create_golem <- function(
 
 
   old <- setwd(path)
-  use_latest_dependencies()
+  usethis::use_latest_dependencies()
 
   # No .Rprofile for now
   # cat_rule("Appending .Rprofile")

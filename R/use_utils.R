@@ -12,13 +12,17 @@
 #'
 #' @importFrom cli cat_bullet
 #' @importFrom utils capture.output
-#' @importFrom usethis use_testthat
 #'
 #' @return Used for side-effects.
 use_utils_ui <- function(
   pkg = get_golem_wd(),
   with_test = FALSE
 ) {
+  rlang::check_installed(
+    "usethis",
+    reason = "to use unit tests."
+  )
+  
   added <- use_utils(
     file_name = "golem_utils_ui.R",
     folder_name = "R",
@@ -30,7 +34,7 @@ use_utils_ui <- function(
 
     if (with_test) {
       if (!isTRUE(dir.exists("tests"))) {
-        use_testthat()
+        usethis::use_testthat()
       }
       pth <- path(
         pkg,
@@ -82,7 +86,7 @@ use_utils_server <- function(
 
     if (with_test) {
       if (!isTRUE(dir.exists("tests"))) {
-        use_testthat()
+        usethis::use_testthat()
       }
       pth <- path(
         pkg,
