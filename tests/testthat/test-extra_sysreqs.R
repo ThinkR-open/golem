@@ -1,3 +1,5 @@
+skip_if_not_installed("dockerfiler", minimum_version = "0.2.0")
+
 test_that("test extra sysreqs", {
   with_dir(pkg, {
     for (fun in list(
