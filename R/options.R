@@ -32,6 +32,7 @@
 #' @export
 #' @importFrom attempt stop_if_not
 #' @importFrom yaml read_yaml write_yaml
+#' @importFrom usethis proj_set
 #'
 #' @return Used for side-effects for the setters, and values from the
 #'     config in the getters.
@@ -42,11 +43,6 @@ set_golem_options <- function(
   app_prod = FALSE,
   talkative = TRUE
 ) {
-  rlang::check_installed(
-    "usethis",
-    reason = "to set project path."
-  )
-  
   change_app_config_name(
     name = golem_name,
     path = golem_wd
@@ -134,7 +130,7 @@ set_golem_options <- function(
     "Setting {usethis} project as `golem_wd`",
     fun = cli::cat_rule
   )
-  usethis::proj_set(golem_wd)
+  proj_set(golem_wd)
 }
 
 #' @importFrom yaml read_yaml write_yaml

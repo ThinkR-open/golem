@@ -1,5 +1,6 @@
 #' @importFrom utils capture.output
 #' @importFrom cli cat_bullet
+#' @importFrom usethis use_build_ignore use_package
 #' @importFrom fs path file_create path_file
 add_rstudio_files <- function(
   pkg,
@@ -18,10 +19,7 @@ add_rstudio_files <- function(
     reason = "to deploy on RStudio products."
   )
 
-  rlang::check_installed(
-    "usethis",
-    reason = "to add dependencies to DESCRIPTION and ignore files in the build."
-  )
+  rlang::check_installed("usethis")
 
   disable_autoload(
     pkg = pkg
@@ -34,9 +32,8 @@ add_rstudio_files <- function(
       write(..., here, append = TRUE)
     }
 
-    usethis::use_build_ignore(path_file(where))
-    usethis::use_build_ignore("rsconnect")
-    
+    use_build_ignore(path_file(where))
+    use_build_ignore("rsconnect")
     write_there("# Launch the ShinyApp (Do not remove this comment)")
     write_there("# To deploy, run: rsconnect::deployApp()")
     write_there("# Or use the blue button on top of this file")

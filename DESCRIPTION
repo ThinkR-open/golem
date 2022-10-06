@@ -60,6 +60,7 @@ Imports:
     rlang,
     rstudioapi,
     shiny (>= 1.5.0),
+    usethis (>= 1.6.0),
     utils,
     yaml
 Suggests:
@@ -80,7 +81,6 @@ Suggests:
     stringr,
     testthat,
     tools,
-    usethis (>= 1.6.0),
     withr,
     attachment (>= 0.2.5)
 VignetteBuilder: 
