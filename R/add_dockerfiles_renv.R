@@ -26,10 +26,6 @@ add_dockerfile_with_renv_ <- function(
     version = "0.2.5",
     reason = "to build a Dockerfile."
   )
-  rlang::check_installed(
-    "usethis",
-    reason = "to ignore files in the build."
-  )
 
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on
