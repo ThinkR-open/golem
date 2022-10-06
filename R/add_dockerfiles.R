@@ -44,7 +44,6 @@ talk_once <- function(.f, msg = "") {
 #' @export
 #' @rdname dockerfiles
 #'
-#' @importFrom usethis use_build_ignore
 #' @importFrom desc desc_get_deps
 #' @importFrom rstudioapi navigateToFile isAvailable hasFun
 #' @importFrom fs path path_file
@@ -148,6 +147,11 @@ add_dockerfile_ <- talk_once(
       "dockerfiler",
       version = "0.2.0",
       reason = "to build a Dockerfile."
+    )
+    
+    rlang::check_installed(
+      "usethis",
+      reason = "to ignore files in the build."
     )
 
     where <- path(pkg, output)
@@ -260,6 +264,12 @@ add_dockerfile_shinyproxy_ <- talk_once(
       version = "0.2.0",
       reason = "to build a Dockerfile."
     )
+    
+    rlang::check_installed(
+      "usethis",
+      reason = "to ignore files in the build."
+    )
+    
     where <- path(pkg, output)
 
     usethis::use_build_ignore(output)
@@ -364,6 +374,12 @@ add_dockerfile_heroku_ <- talk_once(
       version = "0.2.0",
       reason = "to build a Dockerfile."
     )
+    
+    rlang::check_installed(
+      "usethis",
+      reason = "to ignore files in the build."
+    )
+    
     where <- path(pkg, output)
 
     usethis::use_build_ignore(output)
