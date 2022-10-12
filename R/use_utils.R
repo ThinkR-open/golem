@@ -12,7 +12,6 @@
 #'
 #' @importFrom cli cat_bullet
 #' @importFrom utils capture.output
-#' @importFrom usethis use_testthat
 #'
 #' @return Used for side-effects.
 use_utils_ui <- function(

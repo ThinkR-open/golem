@@ -37,7 +37,7 @@ add_dockerfile_with_renv_ <- function(
 
   # add output_dir in Rbuildignore if the output is inside the golem
   if (normalizePath(dirname(output_dir)) == normalizePath(source_folder)) {
-    usethis::use_build_ignore(output_dir)
+    usethis_use_build_ignore(output_dir)
   }
 
   if (is.null(lockfile)) {

@@ -55,12 +55,10 @@ Imports:
     crayon,
     desc,
     here,
-    fs,
     htmltools,
     rlang (>= 1.0.0),
     rstudioapi,
     shiny (>= 1.5.0),
-    usethis (>= 1.6.0),
     utils,
     yaml
 Suggests:
@@ -83,7 +81,9 @@ Suggests:
     tools,
     withr,
     attachment (>= 0.2.5),
-    renv
+    renv,
+    usethis (>= 1.6.0),
+    fs
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
