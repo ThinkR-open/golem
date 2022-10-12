@@ -29,7 +29,7 @@ use_utils_ui <- function(
 
     if (with_test) {
       if (!isTRUE(fs_dir_exists("tests"))) {
-        use_testthat()
+        usethis_use_testthat()
       }
       pth <- fs_path(
         pkg,
@@ -81,7 +81,7 @@ use_utils_server <- function(
 
     if (with_test) {
       if (!isTRUE(fs_dir_exists("tests"))) {
-        use_testthat()
+        usethis_use_testthat()
       }
       pth <- fs_path(
         pkg,

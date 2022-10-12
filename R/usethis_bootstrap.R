@@ -95,8 +95,8 @@ usethis_use_test <- function(
     reason = "to add tests."
   )
   usethis::use_test(
-    edition,
-    parallel
+    name,
+    open
   )
 }
 
