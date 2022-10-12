@@ -67,7 +67,7 @@ talk_once <- function(.f, msg = "") {
 #' }
 #' # Crete a 'deploy' folder containing everything needed to deploy
 #' # the golem using docker based on {renv}
-#' if (interactive() & requireNamespace("dockerfiler")) {
+#' if (interactive()) {
 #'   add_dockerfile_with_renv(
 #'     # lockfile = "renv.lock", # uncomment to use existing renv.lock file
 #'     output_dir = "deploy"
