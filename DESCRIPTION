@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.3.3.9007
+Version: 0.3.4
 Authors@R: 
     c(person(given = "Colin",
              family = "Fay",
@@ -82,7 +82,8 @@ Suggests:
     testthat,
     tools,
     withr,
-    attachment (>= 0.2.5)
+    attachment (>= 0.2.5),
+    renv
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
