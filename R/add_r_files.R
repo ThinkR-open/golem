@@ -67,7 +67,6 @@ add_r_files <- function(
   }
 
   if (with_test) {
-    check_is_installed("usethis")
     usethis::use_test(
       basename(
         file_path_sans_ext(

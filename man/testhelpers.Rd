@@ -35,7 +35,3 @@ A testthat result.
 These functions are designed to be used inside the tests
 in your Shiny app package.
 }
-\examples{
-expect_shinytag(shiny::tags$span("1"))
-expect_shinytaglist(shiny::tagList(1))
-}

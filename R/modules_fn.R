@@ -257,7 +257,6 @@ use_module_test <- function(
 
   # We need both testthat, usethis & fs
   check_is_installed("testthat")
-  check_is_installed("usethis")
   check_is_installed("fs")
 
   old <- setwd(fs::path_abs(pkg))
