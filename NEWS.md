@@ -15,7 +15,7 @@
 
 ## New features / user visible changes
 
-+ The following hard dependencies have been moved to soft dependencies, as you'll only need them while developing: `{pkgload}`, `{roxygen2}`, `{fs}`
++ The following hard dependencies have been moved to soft dependencies, as you'll only need them while developing: `{pkgload}`, `{roxygen2}`, `{fs}`, `{usethis}`
 
 + Soft dependency check is now done via `rlang::check_installed()` (#835)
 
