@@ -18,38 +18,38 @@ server and UI from your app, in order to call the
 parameters passed to \code{run_app()}.
 }
 \examples{
-\dontrun{
 
 # Define and use golem_options
+if (interactive()) {
+  # 1. Pass parameters to `run_app`
 
-# 1. Pass parameters to `run_app`
+  # to set default value, edit run_app like this :
 
-# to set default value, edit run_app like this :
-run_app <- function(
+  run_app <- function(
   title = "this",
   content = "that"
-) {
-  with_golem_options(
-    app = shinyApp(
-      ui = app_ui,
-      server = app_server
-    ),
-    golem_opts = list(
-      p1 = p1,
-      p3 = p3
+  ) {
+    with_golem_options(
+      app = shinyApp(
+        ui = app_ui,
+        server = app_server
+      ),
+      golem_opts = list(
+        p1 = p1,
+        p3 = p3
+      )
     )
-  )
-}
+  }
 
-# 2. Get the values from the UI side
+  # 2. Get the values from the UI side
 
-h1(get_golem_options("title"))
+  h1(get_golem_options("title"))
 
-# 3. Get the value from the server-side
+  # 3. Get the value from the server-side
 
-output$param <- renderPrint({
-  paste("param p2 = ", get_golem_options("p2"))
-})
+  output$param <- renderPrint({
+    paste("param p2 = ", get_golem_options("p2"))
+  })
 }
 
 }

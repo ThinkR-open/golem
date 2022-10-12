@@ -52,25 +52,25 @@ talk_once <- function(.f, msg = "") {
 #' @examples
 #' \donttest{
 #' # Add a standard Dockerfile
-#' if (interactive()) {
+#' if (interactive() & requireNamespace("dockerfiler")) {
 #'   add_dockerfile()
 #' }
 #' # Crete a 'deploy' folder containing everything needed to deploy
 #' # the golem using docker based on {renv}
-#' if (interactive()) {
+#' if (interactive() & requireNamespace("dockerfiler")) {
 #'   add_dockerfile_with_renv(
 #'     # lockfile = "renv.lock", # uncomment to use existing renv.lock file
 #'     output_dir = "deploy"
 #'   )
 #' }
 #' # Add a Dockerfile for ShinyProxy
-#' if (interactive()) {
+#' if (interactive() & requireNamespace("dockerfiler")) {
 #'   add_dockerfile_shinyproxy()
 #' }
 #'
 #' # Crete a 'deploy' folder containing everything needed to deploy
 #' # the golem with ShinyProxy using docker based on {renv}
-#' if (interactive()) {
+#' if (interactive() & requireNamespace("dockerfiler")) {
 #'   add_dockerfile_with_renv(
 #'     # lockfile = "renv.lock",# uncomment to use existing renv.lock file
 #'     output_dir = "deploy"
@@ -78,7 +78,7 @@ talk_once <- function(.f, msg = "") {
 #' }
 #'
 #' # Add a Dockerfile for Heroku
-#' if (interactive()) {
+#' if (interactive() & requireNamespace("dockerfiler")) {
 #'   add_dockerfile_heroku()
 #' }
 #' }

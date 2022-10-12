@@ -8,9 +8,6 @@
 #' @return A testthat result.
 #' @export
 #' @rdname testhelpers
-#'
-#' @examples
-#' expect_shinytag(shiny::tags$span("1"))
 expect_shinytag <- function(object) {
   rlang::check_installed(
     "testthat",
@@ -27,8 +24,6 @@ expect_shinytag <- function(object) {
 
 #' @export
 #' @rdname testhelpers
-#' @examples
-#' expect_shinytaglist(shiny::tagList(1))
 expect_shinytaglist <- function(object) {
   rlang::check_installed(
     "testthat",
