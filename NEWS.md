@@ -1,6 +1,6 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
-# golem 0.3.3.9000+
+# golem 0.3.4.9000+
 
 ## Soft deprecated
 
@@ -36,6 +36,10 @@
 + The typo in `install.packages()` in 02_dev.R has been corrected (@asiripanich)
 
 ## Internal changes
+
+# golem 0.3.4.
+
+This version has a small internal change in the tests, so that it can stay on CRAN.
 
 # golem 0.3.3
 
