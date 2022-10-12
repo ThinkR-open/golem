@@ -9,17 +9,6 @@ talk_once <- function(.f, msg = "") {
   }
 }
 
-talk_once <- function(.f, msg = "") {
-  talk <- TRUE
-  function(...) {
-    if (talk) {
-      talk <<- FALSE
-      cat_red_bullet(msg)
-    }
-    .f(...)
-  }
-}
-
 #' Create a Dockerfile for your App
 #'
 #' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` and `add_dockerfile_with_renv()` creates
