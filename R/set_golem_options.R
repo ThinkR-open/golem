@@ -32,7 +32,6 @@
 #'
 #' @export
 #' @importFrom attempt stop_if_not
-#' @importFrom usethis proj_set
 #'
 #' @return Used for side-effects for the setters, and values from the
 #'     config in the getters.
@@ -96,5 +95,5 @@ set_golem_options <- function(
     )
   }
 
-  proj_set(golem_wd)
+  usethis_proj_set(golem_wd)
 }

@@ -266,7 +266,7 @@ use_module_test <- function(
   if (!fs_dir_exists(
     fs_path(pkg, "tests", "testthat")
   )) {
-    usethis::use_testthat()
+    usethis_use_testthat()
   }
 
   path <- fs_path(

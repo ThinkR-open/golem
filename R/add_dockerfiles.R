@@ -9,17 +9,6 @@ talk_once <- function(.f, msg = "") {
   }
 }
 
-talk_once <- function(.f, msg = "") {
-  talk <- TRUE
-  function(...) {
-    if (talk) {
-      talk <<- FALSE
-      cat_red_bullet(msg)
-    }
-    .f(...)
-  }
-}
-
 #' Create a Dockerfile for your App
 #'
 #' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` and `add_dockerfile_with_renv()` creates
@@ -55,7 +44,6 @@ talk_once <- function(.f, msg = "") {
 #' @export
 #' @rdname dockerfiles
 #'
-#' @importFrom usethis use_build_ignore
 #' @importFrom desc desc_get_deps
 #' @importFrom rstudioapi navigateToFile isAvailable hasFun
 #'
@@ -162,7 +150,9 @@ add_dockerfile_ <- talk_once(
 
     where <- fs_path(pkg, output)
 
-    usethis::use_build_ignore(basename(where))
+    usethis_use_build_ignore(
+      basename(where)
+    )
 
     dock <- dockerfiler::dock_from_desc(
       path = path,
@@ -271,7 +261,7 @@ add_dockerfile_shinyproxy_ <- talk_once(
     )
     where <- fs_path(pkg, output)
 
-    usethis::use_build_ignore(output)
+    usethis_use_build_ignore(output)
 
     dock <- dockerfiler::dock_from_desc(
       path = path,
@@ -374,7 +364,7 @@ add_dockerfile_heroku_ <- talk_once(
     )
     where <- fs_path(pkg, output)
 
-    usethis::use_build_ignore(output)
+    usethis_use_build_ignore(output)
 
     dock <- dockerfiler::dock_from_desc(
       path = path,
@@ -437,7 +427,7 @@ add_dockerfile_heroku_ <- talk_once(
         try(file.edit(output))
       }
     }
-    usethis::use_build_ignore(files = output)
+    usethis_use_build_ignore(files = output)
     return(invisible(dock))
   },
   "
