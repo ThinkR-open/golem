@@ -10,6 +10,10 @@ Update in the tests for CRAN (commented a test that made new version of testthat
 
 Update in the tests for CRAN (skip not installed + examples).
 
+# golem 0.3.4.
+
+This version has a small internal change in the tests, so that it can stay on CRAN.
+
 # golem 0.3.3
 
 ## New functions
