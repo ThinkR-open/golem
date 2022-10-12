@@ -1,5 +1,5 @@
 ---
-title: "Using golem config"
+title: "e_config"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{config}
@@ -19,12 +19,17 @@ x <- file.path(
 )
 unlink(x, TRUE, TRUE)
 
-create_golem(x, package_name = "golex", open = FALSE)
+x <- golem::create_golem(x, package_name = "golex", open = FALSE)
+old <- setwd(x)
 knitr::opts_knit$set(root.dir = x)
 ```
 
 ```{r setup}
 library(golem)
+```
+
+```{r echo = FALSE}
+old <- setwd(x)
 ```
 
 ## About `inst/golem-config.yml`
@@ -39,13 +44,17 @@ This config file is based on the [`{config}`](https://github.com/rstudio/config)
 
 Here is what the default config file looks like:
 
-```{r echo = FALSE, comment= ""}
-cat(
-  sep = "\n",
-  readLines(
-    "inst/golem-config.yml"
-  )
-)
+```
+default:
+  golem_name: golex
+  golem_version: 0.0.0.9000
+  app_prod: no
+
+production:
+  app_prod: yes
+
+dev:
+  golem_wd: !expr golem::pkg_path()
 ```
 
 + default/golem_name, default/golem_version, default/app_prod are usable across the whole life of your golem app: while developing, and also when in production. 
@@ -58,6 +67,15 @@ These options are globally set with:
 
 ```{r}
 set_golem_options()
+```
+
+```{r echo = FALSE, comment= "", }
+cat(
+  sep = "\n",
+  readLines(
+    "inst/golem-config.yml"
+  )
+)
 ```
 
 The functions reading the options in this config file are: 
@@ -74,6 +92,15 @@ You can set these with:
 set_golem_name("this")
 set_golem_wd(".")
 set_golem_version("0.0.1")
+```
+
+```{r echo = FALSE, comment= "", }
+cat(
+  sep = "\n",
+  readLines(
+    "inst/golem-config.yml"
+  )
+)
 ```
 
 
@@ -94,6 +121,7 @@ amend_golem_config(
   config = "production"
 )
 ```
+
 
 Will result in a `golem-config.yml` file as such:
 
@@ -144,3 +172,7 @@ The idea is also that the `golem-config.yml` file is shareable across `{golem}` 
 ## Note for `{golem}` < 0.2.0 users 
 
 If you've built an app with `{golem}` before the version 0.2.0, this config file doesn't exist: you'll be prompted to create it if you update a newer version of `{golem}`. 
+
+```{r echo = FALSE}
+setwd(old)
+```

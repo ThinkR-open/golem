@@ -9,6 +9,12 @@ expect_add_file <- function(
   name <- rand_name()
   # Be sure to remove all files in case there are
   remove_files("inst/app/www", ext)
+
+  # Checking that check_name_length is throwing an error
+  expect_error(
+    fun(c("a", "b")),
+  )
+
   # Launch the function
   fun(name, pkg = pak, open = FALSE)
   if (fun_nms == "add_js_input_binding") {
@@ -105,6 +111,18 @@ test_that("add_files", {
     expect_add_file(
       add_js_output_binding,
       ext = "js",
+      pak = pkg,
+      fp = fp
+    )
+    expect_add_file(
+      add_html_template,
+      ext = "html",
+      pak = pkg,
+      fp = fp
+    )
+    expect_add_file(
+      add_partial_html_template,
+      ext = "html",
       pak = pkg,
       fp = fp
     )

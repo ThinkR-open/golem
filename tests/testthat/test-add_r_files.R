@@ -9,6 +9,13 @@ test_that("add_fct and add_utils", {
     add_fct("ui", pkg = pkg, open = FALSE, with_test = TRUE)
     add_utils("ui", pkg = pkg, open = FALSE, with_test = TRUE)
 
+    expect_error(
+      add_fct(c("a", "b")),
+    )
+    expect_error(
+      add_utils(c("a", "b")),
+    )
+
     expect_true(file.exists(util_file))
     expect_true(file.exists(fct_file))
     expect_true(file.exists("tests/testthat/test-utils_ui.R"))
@@ -20,6 +27,10 @@ test_that("add_fct and add_utils", {
     add_utils("ui", rand, pkg = pkg, open = FALSE)
     expect_true(file.exists(sprintf("R/mod_%s_fct_ui.R", rand)))
     expect_true(file.exists(sprintf("R/mod_%s_utils_ui.R", rand)))
+
+    expect_error(
+      add_module(c("a", "b")),
+    )
 
     # If module not yet created an error is thrown
     expect_error(

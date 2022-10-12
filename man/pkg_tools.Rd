@@ -10,13 +10,10 @@ pkg_name(path = ".")
 
 pkg_version(path = ".")
 
-pkg_path(path = ".", depth = 3)
+pkg_path()
 }
 \arguments{
 \item{path}{Path to use to read the DESCRIPTION}
-
-\item{depth}{Number of parent directory to visit before
-deciding we are not in a package.}
 }
 \description{
 These are functions to help you navigate

@@ -1,5 +1,5 @@
 ---
-title: "Deploying Apps with {golem}"
+title: "c_deploy"
 author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -18,7 +18,7 @@ $(document).ready(function () {
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>", 
+  comment = "#>",
   eval = FALSE
 )
 ```
@@ -28,18 +28,15 @@ knitr::opts_chunk$set(
 When launching the app, you might have noticed that the `dev/run_dev.R` function calls `run_app()`, which has the following structure:
 
 ```{r}
-run_app <- function(
-  ...
-) {
+run_app <- function(...) {
   with_golem_options(
     app = shinyApp(
-      ui = app_ui, 
+      ui = app_ui,
       server = app_server
-    ), 
+    ),
     golem_opts = list(...)
   )
 }
-
 ```
 
 This function might looks a little bit weird, but there's a long story behind it, and you can read more about it [there](https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/).
@@ -48,7 +45,7 @@ But long story short, this combination of `with_golem_options` & `golem_opts = l
 
 ```{r}
 run_app(this = "that")
-# And in the app 
+# And in the app
 this <- get_golem_options("this")
 ```
 
@@ -92,7 +89,7 @@ golem::add_dockerfile_heroku()
 
 > this functions will create a "deploy" folder containing : 
 
-```{txt}
+```
 deploy/
 +-- Dockerfile
 +-- Dockerfile_base
@@ -110,15 +107,25 @@ golem::add_dockerfile_with_renv(output_dir = "deploy")
 
 # If you want to deploy to ShinyProxy
 golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy")
-
 ```
 
 If you would like to use {renv} during developpement, you can init a renv.lock file with
 
 ```{r}
-attachment::create_renv_for_dev(dev_pkg = c("renv", "devtools", "roxygen2", 
-  "usethis", "pkgload", "testthat", "remotes", "covr", "attachment", 
-  "pak", "dockerfiler","golem"))
+attachment::create_renv_for_dev(dev_pkg = c(
+  "renv",
+  "devtools",
+  "roxygen2",
+  "usethis",
+  "pkgload",
+  "testthat",
+  "remotes",
+  "covr",
+  "attachment",
+  "pak",
+  "dockerfiler",
+  "golem"
+))
 ```
 an activate {renv} with
 
@@ -136,17 +143,15 @@ renv::activate()
 ```{r}
 
 # If you want to deploy via a generic Dockerfile
-golem::add_dockerfile_with_renv(output_dir = "deploy",lockfile =  "renv.lock")
+golem::add_dockerfile_with_renv(output_dir = "deploy", lockfile = "renv.lock")
 
 # If you want to deploy to ShinyProxy
-golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy",lockfile =  "renv.lock")
-
-
+golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy", lockfile = "renv.lock")
 ```
 
 > this functions will create a "deploy" folder containing : 
 
-```{txt}
+```
 deploy/
 +-- Dockerfile
 +-- Dockerfile_base

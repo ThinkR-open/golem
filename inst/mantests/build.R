@@ -41,7 +41,7 @@ if (dir.exists(temp_app)) {
 dir.create(temp_lib, recursive = TRUE)
 
 install.packages(
-  c("remotes", "desc", "testthat", "cli", "fs", "cranlogs"),
+  c("remotes", "desc", "testthat", "cli", "fs", "cranlogs", "pak"),
   lib = temp_lib,
   repo = "https://cran.rstudio.com/"
 )
@@ -68,26 +68,21 @@ install_local(
   lib.loc = temp_lib
 )
 
+golem::install_dev_deps(
+  force_install = TRUE, 
+  lib = temp_lib
+)
 
 withr::with_tempdir({
   cli::cat_rule("Install crystalmountains")
-
-  # tmp_cm <- tempfile(fileext = ".zip")
-
-  # download.file(
-  #   "https://github.com/ThinkR-open/crystalmountains/archive/refs/heads/main.zip",
-  #   "main.zip"
-  # )
-
-  # unzip(tmp_cm)
 
   remotes::install_github(
     "thinkr-open/crystalmountains",
     lib.loc = temp_lib,
     update = "never"
   )
-  # unlink("crystalmountains-main", TRUE, TRUE)
 
+  here::set_here(getwd())
   # Going to the temp dir and create a new golem
   cli::cat_rule("Creating a golem based app")
   library(golem)
@@ -248,7 +243,7 @@ withr::with_tempdir({
   golem::set_golem_options()
   expect_equal(
     golem::get_golem_wd(),
-    here::here()
+    golem::pkg_path()
   )
   expect_equal(
     golem::get_golem_name(),
@@ -299,7 +294,7 @@ withr::with_tempdir({
     dir.exists("tests")
   )
 
-  golem::use_recommended_deps()
+  # golem::use_recommended_deps()
 
   golem::use_utils_ui(with_test = TRUE)
   expect_true(

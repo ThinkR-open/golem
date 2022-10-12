@@ -1,5 +1,5 @@
 ---
-title: "Day to Day Dev with {golem}"
+title: "b_dev"
 author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

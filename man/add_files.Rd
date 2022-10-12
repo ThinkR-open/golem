@@ -8,6 +8,7 @@
 \alias{add_css_file}
 \alias{add_sass_file}
 \alias{add_html_template}
+\alias{add_partial_html_template}
 \alias{add_ui_server_files}
 \title{Create Files}
 \usage{
@@ -73,6 +74,14 @@ add_sass_file(
 
 add_html_template(
   name = "template.html",
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE
+)
+
+add_partial_html_template(
+  name = "partial_template.html",
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,

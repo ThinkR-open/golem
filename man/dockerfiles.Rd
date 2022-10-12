@@ -133,7 +133,7 @@ Default is 0.0.0.0.}
 
 \item{expand}{boolean. If \code{TRUE} each system requirement will have its own \code{RUN} line.}
 
-\item{open}{boolean. Should the Dockerfile/README be open after creation? Default is \code{TRUE}.}
+\item{open}{boolean. Should the Dockerfile/README/README be open after creation? Default is \code{TRUE}.}
 
 \item{update_tar_gz}{boolean. If \code{TRUE} and \code{build_golem_from_source} is also \code{TRUE},
 an updated tar.gz is created.}
@@ -160,8 +160,8 @@ the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}')
 The \code{{dockerfiler}} object, invisibly.
 }
 \description{
-Build a container containing your Shiny App. \code{add_dockerfile()} and \code{add_dockerfile_with_renv()} creates
-a generic Dockerfile, while \code{add_dockerfile_shinyproxy()}, \code{add_dockerfile_with_renv_shinyproxy()}  and
+Build a container containing your Shiny App. \code{add_dockerfile()} and \code{add_dockerfile_with_renv()} and \code{add_dockerfile_with_renv()} creates
+a generic Dockerfile, while \code{add_dockerfile_shinyproxy()}, \code{add_dockerfile_with_renv_shinyproxy()} , \code{add_dockerfile_with_renv_shinyproxy()}  and
 \code{add_dockerfile_heroku()} creates platform specific Dockerfile.
 }
 \examples{
@@ -178,6 +178,14 @@ if (interactive() & requireNamespace("dockerfiler")) {
     output_dir = "deploy"
   )
 }
+# Crete a 'deploy' folder containing everything needed to deploy
+# the golem using docker based on {renv}
+if (interactive()) {
+  add_dockerfile_with_renv(
+    # lockfile = "renv.lock", # uncomment to use existing renv.lock file
+    output_dir = "deploy"
+  )
+}
 # Add a Dockerfile for ShinyProxy
 if (interactive() & requireNamespace("dockerfiler")) {
   add_dockerfile_shinyproxy()
@@ -186,6 +194,16 @@ if (interactive() & requireNamespace("dockerfiler")) {
 # Crete a 'deploy' folder containing everything needed to deploy
 # the golem with ShinyProxy using docker based on {renv}
 if (interactive() & requireNamespace("dockerfiler")) {
+  add_dockerfile_with_renv(
+    # lockfile = "renv.lock",# uncomment to use existing renv.lock file
+    output_dir = "deploy"
+  )
+}
+
+
+# Crete a 'deploy' folder containing everything needed to deploy
+# the golem with ShinyProxy using docker based on {renv}
+if (interactive()) {
   add_dockerfile_with_renv(
     # lockfile = "renv.lock",# uncomment to use existing renv.lock file
     output_dir = "deploy"

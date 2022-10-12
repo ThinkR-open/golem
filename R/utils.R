@@ -16,22 +16,18 @@ darkgrey <- function(x) {
   x <- crayon::make_style("darkgrey")(x)
 }
 
-#' @importFrom fs dir_exists file_exists
-dir_not_exist <- Negate(fs::dir_exists)
-file_not_exist <- Negate(fs::file_exists)
-
-#' @importFrom fs dir_create file_create
 create_if_needed <- function(
   path,
   type = c("file", "directory"),
   content = NULL
 ) {
   type <- match.arg(type)
+
   # Check if file or dir already exist
   if (type == "file") {
-    dont_exist <- file_not_exist(path)
+    dont_exist <- Negate(fs_file_exists)(path)
   } else if (type == "directory") {
-    dont_exist <- dir_not_exist(path)
+    dont_exist <- Negate(fs_dir_exists)(path)
   }
   # If it doesn't exist, ask if we are allowed
   # to create it
@@ -50,10 +46,10 @@ create_if_needed <- function(
       } else {
         # Create the file
         if (type == "file") {
-          file_create(path)
+          fs_file_create(path)
           write(content, path, append = TRUE)
         } else if (type == "directory") {
-          dir_create(path, recurse = TRUE)
+          fs_dir_create(path, recurse = TRUE)
         }
       }
     } else {
@@ -72,28 +68,13 @@ create_if_needed <- function(
   return(TRUE)
 }
 
-#' @importFrom fs file_exists
 check_file_exist <- function(file) {
   res <- TRUE
-  if (file_exists(file)) {
+  if (fs_file_exists(file)) {
     if (interactive()) {
       res <- yesno("This file already exists, override?")
     } else {
       res <- TRUE
-    }
-  }
-  return(res)
-}
-
-# TODO Remove from codebase
-#' @importFrom fs dir_exists
-check_dir_exist <- function(dir) {
-  res <- TRUE
-  if (!dir_exists(dir)) {
-    if (interactive()) {
-      res <- yesno(sprintf("The %s does not exists, create?", dir))
-    } else {
-      res <- FALSE
     }
   }
   return(res)
@@ -161,13 +142,13 @@ cat_exists <- function(where) {
   cat_red_bullet(
     sprintf(
       "[Skipped] %s already exists.",
-      path_file(where)
+      basename(where)
     )
   )
   cat_info(
     sprintf(
       "If you want replace it, remove the %s file first.",
-      path_file(where)
+      basename(where)
     )
   )
 }
@@ -257,7 +238,7 @@ open_or_go_to <- function(
 }
 
 desc_exist <- function(pkg) {
-  file_exists(
+  fs_file_exists(
     paste0(pkg, "/DESCRIPTION")
   )
 }
@@ -271,7 +252,7 @@ after_creation_message_js <- function(
     desc_exist(pkg)
   ) {
     if (
-      fs::path_abs(dir) != fs::path_abs("inst/app/www") &
+      fs_path_abs(dir) != fs_path_abs("inst/app/www") &
         utils::packageVersion("golem") < "0.2.0"
     ) {
       cat_red_bullet(
@@ -293,7 +274,7 @@ after_creation_message_css <- function(
   if (
     desc_exist(pkg)
   ) {
-    if (fs::path_abs(dir) != fs::path_abs("inst/app/www") &
+    if (fs_path_abs(dir) != fs_path_abs("inst/app/www") &
       utils::packageVersion("golem") < "0.2.0"
     ) {
       cat_red_bullet(
@@ -316,7 +297,7 @@ after_creation_message_sass <- function(
   if (
     desc_exist(pkg)
   ) {
-    if (fs::path_abs(dir) != fs::path_abs("inst/app/www") &
+    if (fs_path_abs(dir) != fs_path_abs("inst/app/www") &
       utils::packageVersion("golem") < "0.2.0"
     ) {
       cat_red_bullet(
@@ -405,10 +386,9 @@ yesno <- function(...) {
   menu(c("Yes", "No")) == 1
 }
 
-#' @importFrom fs file_exists
 add_sass_code <- function(where, dir, name) {
-  if (file_exists(where)) {
-    if (file_exists("dev/run_dev.R")) {
+  if (fs_file_exists(where)) {
+    if (fs_file_exists("dev/run_dev.R")) {
       lines <- readLines("dev/run_dev.R")
       new_lines <- append(
         x = lines,
@@ -452,4 +432,18 @@ is_existing_module <- function(module) {
     existing_module_files
   )
   module %in% existing_module_names
+}
+
+# This function is used for checking
+# that  the name argument of the function
+# creating files is not of length() > 1
+check_name_length <- function(name) {
+  stop_if(
+    name,
+    ~ length(.x) > 1,
+    sprintf(
+      "`name` should be of length 1. Got %d.",
+      length(name)
+    )
+  )
 }
