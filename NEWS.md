@@ -1,5 +1,30 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
+# golem 0.3.3.9000+
+
+### Soft deprecated
+
+
+### Hard deprecated
+
+
+## New functions
+
+
+## New features
+
++ The following hard dependencies have been moved to soft dependencies, as you'll only need them while developing: `{pkgload}`, `{roxygen2}`
+
++ Soft dependency check is now done via `rlang::check_installed()` (#835)
+
++ `golem::run_dev()` has been refactored to match the behavior of other functions, notably it now uses `golem::get_golem_wd()` to find the current working dir.
+
+## Bug fix
+
++ The message after htmlTemplate creation now suggests to add in the UI, not only in app_ui.R (#861)
+
+## Internal changes
+
 # golem 0.3.3
 
 ## New functions
@@ -10,7 +35,8 @@
 
 + `add_dockerfile`, `add_dockerfile_shinyproxy()` and `add_dockerfile_heroku()` now recommend to switch to their `_with_renv_` counterpart
 
-# golem 0.3.2
+
+# golem 0.3.2 (CRAN VERSION)
 
 ### Soft deprecated
 
@@ -61,6 +87,8 @@
 + You can now specify the path to R in `expect_running()`. 
 
 ## Bug fix
+
++ Fixed a bug in the printing of the htmlTemplate code (#827)
 
 + We now require the correct `{usethis}` version (822)
 

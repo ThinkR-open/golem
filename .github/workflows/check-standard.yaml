@@ -83,12 +83,13 @@ jobs:
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
-      # - name: Manual Test
-      #   env:
-      #     GITHUB_PAT: ${{ secrets.ACCESS_TOKEN }}
-      #   run: |
-      #     source("inst/mantests/build.R")
-      #   shell: Rscript {0}
+      - name: Manual Test
+        if: runner.os != 'Windows'
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          source("inst/mantests/build.R")
+        shell: Rscript {0}
 
       # - name: Pushes to another repository
       #   uses: cpina/github-action-push-to-another-repository@main
@@ -97,7 +98,7 @@ jobs:
       #     API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       #   with:
       #     source-directory: "inst/golemmetrics"
-      #     destination-github-username: "Colin Fay"
+      #     destination-github-username: "colinfay"
       #     destination-repository-username: "thinkr-open"
       #     destination-repository-name: "golemmetrics"
       #     user-email: contact@colinfay.me

@@ -12,10 +12,20 @@ add_dockerfile_with_renv_ <- function(
   update_tar_gz = TRUE
   # build_golem_from_source = TRUE,
 ) {
-  check_is_installed("renv")
-  check_is_installed("dockerfiler")
-  required_version("dockerfiler", "0.2.0")
-  check_is_installed("attachment")
+  rlang::check_installed(
+    "renv",
+    reason = "to build a Dockerfile."
+  )
+  rlang::check_installed(
+    "dockerfiler",
+    version = "0.2.0",
+    reason = "to build a Dockerfile."
+  )
+  rlang::check_installed(
+    "attachment",
+    version = "0.2.5",
+    reason = "to build a Dockerfile."
+  )
 
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on

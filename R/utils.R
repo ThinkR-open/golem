@@ -334,9 +334,9 @@ after_creation_message_html_template <- function(
   name
 ) {
   cat_line("")
-  cat_rule("To use this html file as a template, add the following code in app_ui.R:")
+  cat_rule("To use this html file as a template, add the following code in your UI:")
   cat_line(darkgrey("htmlTemplate("))
-  cat_line(darkgrey(sprintf('    app_sys("app/www/%s.html"),', name)))
+  cat_line(darkgrey(sprintf('    app_sys("app/www/%s.html"),', file_path_sans_ext(name))))
   cat_line(darkgrey("    body = tagList()"))
   cat_line(darkgrey("    # add here other template arguments"))
   cat_line(darkgrey(")"))
@@ -403,44 +403,6 @@ file_ext <- function(x) {
 yesno <- function(...) {
   cat(paste0(..., collapse = ""))
   menu(c("Yes", "No")) == 1
-}
-
-# Checking that a package is installed
-check_is_installed <- function(
-  pak,
-  ...
-) {
-  if (
-    !requireNamespace(pak, ..., quietly = TRUE)
-  ) {
-    stop(
-      sprintf(
-        "The {%s} package is required to run this function.\nYou can install it with `install.packages('%s')`.",
-        pak,
-        pak
-      ),
-      call. = FALSE
-    )
-  }
-}
-
-required_version <- function(
-  pak,
-  version
-) {
-  if (
-    utils::packageVersion(pak) < version
-  ) {
-    stop(
-      sprintf(
-        "This function require the version '%s' of the {%s} package.\nYou can update with `install.packages('%s')`.",
-        version,
-        pak,
-        pak
-      ),
-      call. = FALSE
-    )
-  }
 }
 
 #' @importFrom fs file_exists
