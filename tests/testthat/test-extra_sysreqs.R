@@ -1,3 +1,5 @@
+skip_if_not_installed("dockerfiler", minimum_version = "0.2.0")
+
 test_that("test extra sysreqs", {
   skip_if_not_installed("renv")
   skip_if_not_installed("dockerfiler", "0.2.0")
