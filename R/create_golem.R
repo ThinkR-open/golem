@@ -232,7 +232,10 @@ create_golem <- function(
 
 
   if (isTRUE(open)) {
-    if (rstudioapi::isAvailable() & rstudioapi::hasFun("openProject")) {
+    if (
+      rlang::is_installed("rstudioapi") &&
+      rstudioapi::isAvailable() && rstudioapi::hasFun("openProject")
+    ) {
       rstudioapi::openProject(path = path)
     } else {
       setwd(path)

@@ -41,7 +41,9 @@ sanity_check <- function(pkg = get_golem_wd()) {
   }
 
   if (length(source_markers) > 0) {
-    if (rstudioapi::isAvailable() & rstudioapi::hasFun("sourceMarkers")) {
+    if (
+      rlang::is_installed("rstudioapi") && rstudioapi::isAvailable() &&rstudioapi::hasFun("sourceMarkers"
+      )) {
       rstudioapi::sourceMarkers("sanity_check", markers = source_markers)
     }
     return(source_markers)

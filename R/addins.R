@@ -17,16 +17,16 @@ NULL
 #' @aliases addins
 insert_ns <- function() {
   stop_if_not(
-    rstudioapi::hasFun("getSourceEditorContext"),
+    rstudioapi_hasFun("getSourceEditorContext"),
     msg = "Your version of RStudio does not support `getSourceEditorContext`"
   )
 
   stop_if_not(
-    rstudioapi::hasFun("modifyRange"),
+    rstudioapi_hasFun("modifyRange"),
     msg = "Your version of RStudio does not support `modifyRange`"
   )
 
-  curr_editor <- rstudioapi::getSourceEditorContext()
+  curr_editor <- rstudioapi_getSourceEditorContext()
 
   id <- curr_editor$id
   sel_rng <- curr_editor$selection[[1]]$range
@@ -34,7 +34,11 @@ insert_ns <- function() {
 
   mod_text <- paste0("ns(", sel_text, ")")
 
-  rstudioapi::modifyRange(sel_rng, mod_text, id = id)
+  rstudioapi_modifyRange(
+    sel_rng, 
+    mod_text, 
+    id = id
+  )
 }
 
 go_to <- function(
@@ -50,11 +54,11 @@ go_to <- function(
   }
 
   stop_if_not(
-    rstudioapi::hasFun("navigateToFile"),
+    rstudioapi_hasFun("navigateToFile"),
     msg = "Your version of RStudio does not support `navigateToFile`"
   )
 
-  rstudioapi::navigateToFile(file)
+  rstudioapi_navigateToFile(file)
 }
 
 #' @rdname addins

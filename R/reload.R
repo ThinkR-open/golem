@@ -107,7 +107,11 @@ document_and_reload <- function(
   check_name_consistency(pkg)
   rlang::check_installed("pkgload")
 
-  if (rstudioapi::isAvailable() & rstudioapi::hasFun("documentSaveAll")) {
+  if (
+    rlang::is_installed("rstudioapi") &&
+    rstudioapi::isAvailable() &&
+    rstudioapi::hasFun("documentSaveAll")
+  ) {
     rstudioapi::documentSaveAll()
   }
   roxed <- try({
@@ -144,8 +148,15 @@ document_and_reload <- function(
   }
 }
 
-dialog_if_has <- function(title, message, url = "") {
-  if (rstudioapi::isAvailable() & rstudioapi::hasFun("showDialog")) {
+dialog_if_has <- function(
+  title, 
+  message, 
+  url = ""
+) {
+  if (
+    rlang::is_installed("rstudioapi") && 
+    rstudioapi::isAvailable() && rstudioapi::hasFun("showDialog")
+  ) {
     rstudioapi::showDialog(title, message, url)
   }
 }
