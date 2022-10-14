@@ -13,7 +13,9 @@ test_that("test extra sysreqs", {
       burn_after_reading(
         "Dockerfile",
         {
-          output <- testthat::capture_output(
+        withr::with_options(
+          c("golem.quiet" =  FALSE),{
+            output <- testthat::capture_output(
             fun(
               pkg = pkg,
               sysreqs = FALSE,
@@ -22,7 +24,7 @@ test_that("test extra sysreqs", {
               output = "Dockerfile"
             )
           )
-
+        })
           expect_exists("Dockerfile")
           test <- stringr::str_detect(
             output,

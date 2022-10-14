@@ -113,7 +113,9 @@ create_golem <- function(
       path = path_to_golem,
       open = FALSE
     )
-    here::set_here(path_to_golem)
+    if (!file.exists(".here")){
+      here::set_here(path_to_golem)
+    }
     cat_green_tick("Created package directory")
   }
 

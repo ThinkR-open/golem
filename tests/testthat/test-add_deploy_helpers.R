@@ -12,9 +12,14 @@ test_that("add_dockerfiles", {
       burn_after_reading(
         "Dockerfile",
         {
-          output <- testthat::capture_output(
-            fun(pkg = pkg, sysreqs = FALSE, open = FALSE)
+          withr::with_options(
+            c("golem.quiet" =  FALSE),{
+              output <- testthat::capture_output(
+                fun(pkg = pkg, sysreqs = FALSE, open = FALSE)
+              )
+            }
           )
+          
           expect_exists("Dockerfile")
           test <- stringr::str_detect(
             output,
@@ -37,27 +42,29 @@ test_that("add_dockerfiles repos variation", {
       burn_after_reading(
         c("Dockerfile1", "Dockerfile2"),
         {
-          output1 <- testthat::capture_output(
-            fun(
-              pkg = pkg,
-              sysreqs = FALSE,
-              open = FALSE,
-              repos = "https://cran.rstudio.com/",
-              output = "Dockerfile1"
+          withr::with_options(
+            c("golem.quiet" =  FALSE),{
+            output1 <- testthat::capture_output(
+              fun(
+                pkg = pkg,
+                sysreqs = FALSE,
+                open = FALSE,
+                repos = "https://cran.rstudio.com/",
+                output = "Dockerfile1"
+              )
             )
-          )
-          output2 <- testthat::capture_output(
-            fun(
-              pkg = pkg,
-              sysreqs = FALSE,
-              open = FALSE,
-              repos = c("https://cran.rstudio.com/"),
-              output = "Dockerfile2"
+            output2 <- testthat::capture_output(
+              fun(
+                pkg = pkg,
+                sysreqs = FALSE,
+                open = FALSE,
+                repos = c("https://cran.rstudio.com/"),
+                output = "Dockerfile2"
+              )
             )
-          )
-          expect_exists("Dockerfile1")
-          expect_exists("Dockerfile2")
-
+            expect_exists("Dockerfile1")
+            expect_exists("Dockerfile2")
+          })
 
           test1 <- stringr::str_detect(
             output1,
@@ -91,12 +98,15 @@ test_that("add_rstudio_files", {
       burn_after_reading(
         "app.R",
         {
-          output <- testthat::capture_output(
-            fun(
-              pkg = pkg,
-              open = FALSE
-            )
+        withr::with_options(
+          c("golem.quiet" =  FALSE),{
+            output <- testthat::capture_output(
+              fun(
+                pkg = pkg,
+                open = FALSE
+              )
           )
+        })
           expect_exists("app.R")
           test <- stringr::str_detect(
             output,
