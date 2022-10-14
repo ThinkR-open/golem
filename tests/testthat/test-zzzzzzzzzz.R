@@ -4,7 +4,9 @@ try({
     usethis::proj_set(orig_test)
   }
   if (exists("pkg")) {
-    unlink(pkg, TRUE, TRUE)
+    try({
+      unlink(pkg, TRUE, TRUE)
+    })
   }
 
   options("usethis.quiet" = old_usethis.quiet)

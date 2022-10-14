@@ -7,6 +7,9 @@ check_pkgload_installed <- function() {
 	)
 }
 
+uses_testthat <- getFromNamespace( "uses_testthat", "pkgload" )
+
+
 pkgload_load_all <- function(
 	path = ".",
 	reset = TRUE,

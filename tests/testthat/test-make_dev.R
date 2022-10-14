@@ -60,7 +60,10 @@ test_that("test print_dev", {
 
 
 test_that("test browser_button", {
-  output <- capture_output_lines(browser_button())
+  withr::with_options(
+    c("golem.quiet" =  FALSE),{
+    output <- capture_output_lines(browser_button())
+  })
   expect_true(
     grepl('actionButton\\("browser", "browser"\\)', output[2])
   )

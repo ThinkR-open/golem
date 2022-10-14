@@ -1,17 +1,20 @@
 
 test_that("desc works", {
   with_dir(pkg, {
-    output <- capture_output(
-      fill_desc(
-        fakename,
-        "newtitle",
-        "Newdescription.",
-        "firstname",
-        "lastname",
-        "name@test.com",
-        "http://repo_url.com"
+    withr::with_options(
+      c("golem.quiet" =  FALSE),{
+        output <- capture_output(
+          fill_desc(
+            fakename,
+            "newtitle",
+            "Newdescription.",
+            "firstname",
+            "lastname",
+            "name@test.com",
+            "http://repo_url.com"
+          )
       )
-    )
+    })
     add_desc <- c(
       fakename,
       "newtitle",
