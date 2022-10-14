@@ -135,10 +135,6 @@ use_utils <- function(
   folder_name,
   pkg = get_golem_wd()
 ) {
-  rlang::check_installed(
-    "fs",
-    reason = "for file manipulation."
-  )
 
   old <- setwd(
     fs_path_abs(pkg)

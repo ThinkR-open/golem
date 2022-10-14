@@ -106,13 +106,12 @@ document_and_reload <- function(
 
   check_name_consistency(pkg)
   rlang::check_installed("pkgload")
-  rlang::check_installed("roxygen2")
 
   if (rstudioapi::isAvailable() & rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
   roxed <- try({
-    roxygen2::roxygenise(
+    roxygen2_roxygenise(
       package.dir = pkg,
       roclets = roclets,
       load_code = load_code,
@@ -127,7 +126,7 @@ document_and_reload <- function(
     return(invisible(FALSE))
   }
   loaded <- try({
-    pkgload::load_all(
+    pkgload_load_all(
       pkg,
       export_all = export_all,
       helpers = helpers,

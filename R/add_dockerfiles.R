@@ -160,11 +160,6 @@ add_dockerfile_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    rlang::check_installed(
-      "dockerfiler",
-      version = "0.2.0",
-      reason = "to build a Dockerfile."
-    )
 
     where <- fs_path(pkg, output)
 
@@ -172,7 +167,7 @@ add_dockerfile_ <- talk_once(
       basename(where)
     )
 
-    dock <- dockerfiler::dock_from_desc(
+    dock <- dockerfiler_dock_from_desc(
       path = path,
       FROM = from,
       AS = as,
@@ -272,16 +267,12 @@ add_dockerfile_shinyproxy_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    rlang::check_installed(
-      "dockerfiler",
-      version = "0.2.0",
-      reason = "to build a Dockerfile."
-    )
+    
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(output)
 
-    dock <- dockerfiler::dock_from_desc(
+    dock <- dockerfiler_dock_from_desc(
       path = path,
       FROM = from,
       AS = as,
@@ -375,16 +366,12 @@ add_dockerfile_heroku_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    rlang::check_installed(
-      "dockerfiler",
-      version = "0.2.0",
-      reason = "to build a Dockerfile."
-    )
+    
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(output)
 
-    dock <- dockerfiler::dock_from_desc(
+    dock <- dockerfiler_dock_from_desc(
       path = path,
       FROM = from,
       AS = as,
