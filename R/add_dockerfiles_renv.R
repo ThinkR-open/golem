@@ -16,17 +16,7 @@ add_dockerfile_with_renv_ <- function(
     "renv",
     reason = "to build a Dockerfile."
   )
-  rlang::check_installed(
-    "dockerfiler",
-    version = "0.2.0",
-    reason = "to build a Dockerfile."
-  )
-  rlang::check_installed(
-    "attachment",
-    version = "0.2.5",
-    reason = "to build a Dockerfile."
-  )
-
+  
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on
   x <- suppressWarnings({
@@ -41,7 +31,7 @@ add_dockerfile_with_renv_ <- function(
   }
 
   if (is.null(lockfile)) {
-    lockfile <- attachment::create_renv_for_prod(
+    lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
       output = file.path(output_dir, "renv.lock.prod")
     )
@@ -53,7 +43,7 @@ add_dockerfile_with_renv_ <- function(
     overwrite = TRUE
   )
 
-  socle <- dockerfiler::dock_from_renv(
+  socle <- dockerfiler_dock_from_renv(
     lockfile = lockfile,
     distro = distro,
     FROM = FROM,
@@ -66,7 +56,10 @@ add_dockerfile_with_renv_ <- function(
 
   socle$write(as = file.path(output_dir, "Dockerfile_base"))
 
-  my_dock <- dockerfiler::Dockerfile$new(FROM = paste0(golem::get_golem_name(), "_base"))
+  my_dock <- dockerfiler_Dockerfile()$new(
+    FROM = paste0(golem::get_golem_name(), 
+    "_base"
+  ))
 
   my_dock$COPY("renv.lock.prod", "renv.lock")
 
