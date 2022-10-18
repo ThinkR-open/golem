@@ -1,5 +1,9 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
+# golem 0.3.4
+
+Update in the tests for CRAN.
+
 # golem 0.3.3
 
 ## New functions
