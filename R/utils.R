@@ -309,6 +309,26 @@ after_creation_message_sass <- function(
   }
 }
 
+after_creation_message <- function(
+  pkg,
+  dir,
+  name
+) {
+  if (
+    desc_exist(pkg)
+  ) {
+    if (fs_path_abs(dir) != fs_path_abs("inst/app/www") &
+      utils::packageVersion("golem") < "0.2.0"
+    ) {
+      cat_red_bullet(
+        sprintf(
+          'Go to the `golem_add_external_resources()` function in `app_ui.R` if you want to link your file`'
+        )
+      )
+    }
+  }
+}
+
 after_creation_message_html_template <- function(
   pkg,
   dir,

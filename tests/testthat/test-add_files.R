@@ -76,6 +76,35 @@ expect_add_file <- function(
   remove_files("inst/app/www", ext)
 }
 
+expect_add_file_without_ext <- function(
+  fun,
+  name,
+  pak,
+  fp
+) {
+  fun_nms <- deparse(substitute(fun))
+
+  # Be sure to remove all files in case there are
+  remove_files("inst/app/www", name)
+
+  # Checking that check_name_length is throwing an error
+  expect_error(
+    fun(c("a", "b")),
+  )
+
+  # Launch the function
+  fun(name, pkg = pak, open = FALSE)
+
+  expect_exists(
+    file.path(
+      "inst/app/www",
+      paste0(name)
+    )
+  )
+
+  remove_files("inst/app/www", name)
+}
+
 test_that("add_files", {
   with_dir(pkg, {
     expect_add_file(
@@ -123,6 +152,18 @@ test_that("add_files", {
     expect_add_file(
       add_partial_html_template,
       ext = "html",
+      pak = pkg,
+      fp = fp
+    )
+    expect_add_file_without_ext(
+      add_file,
+      name = "random.R",
+      pak = pkg,
+      fp = fp
+    )
+    expect_add_file_without_ext(
+      add_file,
+      name = "random",
       pak = pkg,
       fp = fp
     )
