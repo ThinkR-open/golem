@@ -34,7 +34,7 @@ golem::add_js_file("script")
 golem::add_js_handler("handlers")
 golem::add_css_file("custom")
 golem::add_sass_file("custom")
-golem::add_file("file")
+golem::add_any_file("file.json")
 
 ## Add internal datasets ----
 ## If you have data in your package

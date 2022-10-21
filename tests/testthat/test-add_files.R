@@ -167,6 +167,18 @@ test_that("add_files", {
       pak = pkg,
       fp = fp
     )
+    expect_add_file_without_ext(
+      add_any_file,
+      name = "random",
+      pak = pkg,
+      fp = fp
+    )
+    expect_add_file_without_ext(
+      add_any_file,
+      name = "random.json",
+      pak = pkg,
+      fp = fp
+    )
   })
 })
 

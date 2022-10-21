@@ -526,7 +526,7 @@ add_sass_file <- function(
 #' @export
 #' @rdname add_files
 #' @importFrom tools file_ext
-add_file <- function(
+add_any_file <- function(
   name,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
@@ -543,41 +543,6 @@ add_file <- function(
   check_name_length(name)
 
   extension <- file_ext(name)
-
-  if (extension == "css") {
-    add_css_file(
-      name = name,
-      pkg = pkg,
-      dir = dir,
-      open = open,
-      dir_create = dir_create,
-      template = template,
-      ...
-    )
-    return(invisible(FALSE))
-  } else if (extension == "js") {
-    add_js_file(
-      name = name,
-      pkg = pkg,
-      dir = dir,
-      open = open,
-      dir_create = dir_create,
-      template = template,
-      ...
-    )
-    return(invisible(FALSE))
-  } else if (extension == "sass") {
-    add_sass_file(
-      name = name,
-      pkg = pkg,
-      dir = dir,
-      open = open,
-      dir_create = dir_create,
-      template = template,
-      ...
-    )
-    return(invisible(FALSE))
-  }
 
   name <- file_path_sans_ext(name)
 
@@ -630,6 +595,70 @@ add_file <- function(
     file_already_there_dance(
       where = where,
       open_file = open
+    )
+  }
+}
+
+#' @export
+#' @rdname add_files
+#' @importFrom tools file_ext
+add_file <- function(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE,
+  template = golem::css_template,
+  ...
+) {
+  attempt::stop_if(
+    missing(name),
+    msg = "`name` is required"
+  )
+
+  check_name_length(name)
+
+  extension <- file_ext(name)
+
+  if (extension == "css") {
+    add_css_file(
+      name = name,
+      pkg = pkg,
+      dir = dir,
+      open = open,
+      dir_create = dir_create,
+      template = template,
+      ...
+    )
+  } else if (extension == "js") {
+    add_js_file(
+      name = name,
+      pkg = pkg,
+      dir = dir,
+      open = open,
+      dir_create = dir_create,
+      template = template,
+      ...
+    )
+  } else if (extension == "sass") {
+    add_sass_file(
+      name = name,
+      pkg = pkg,
+      dir = dir,
+      open = open,
+      dir_create = dir_create,
+      template = template,
+      ...
+    )
+  } else {
+    add_any_file(
+      name = name,
+      pkg = pkg,
+      dir = dir,
+      open = open,
+      dir_create = dir_create,
+      template = template,
+      ...
     )
   }
 }
