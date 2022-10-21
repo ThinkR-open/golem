@@ -11,8 +11,10 @@ talk_once <- function(.f, msg = "") {
 
 #' Create a Dockerfile for your App
 #'
-#' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` and `add_dockerfile_with_renv()` creates
-#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`, `add_dockerfile_with_renv_shinyproxy()` , `add_dockerfile_with_renv_shinyproxy()`  and
+#' Build a container containing your Shiny App. `add_dockerfile()` and
+#' `add_dockerfile_with_renv()` and `add_dockerfile_with_renv()` creates
+#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`,
+#' `add_dockerfile_with_renv_shinyproxy()` , `add_dockerfile_with_renv_shinyproxy()` and
 #' `add_dockerfile_heroku()` creates platform specific Dockerfile.
 #'
 #' @inheritParams add_module
@@ -31,7 +33,8 @@ talk_once <- function(.f, msg = "") {
 #'     Default is 80.
 #' @param host The `options('shiny.host')` on which to run the App.
 #'    Default is 0.0.0.0.
-#' @param sysreqs boolean. If TRUE, the Dockerfile will contain sysreq installation.
+#' @param sysreqs boolean. If TRUE, RUN statements to install packages
+#' system requirements will be included in the Dockerfile.
 #' @param repos character. The URL(s) of the repositories to use for `options("repos")`.
 #' @param expand boolean. If `TRUE` each system requirement will have its own `RUN` line.
 #' @param open boolean. Should the Dockerfile/README/README be open after creation? Default is `TRUE`.
