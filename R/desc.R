@@ -10,7 +10,6 @@
 #' @param repo_url URL (if needed)
 #' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
 #'
-#' @importFrom desc description
 #' @importFrom cli cat_bullet
 #'
 #' @export
@@ -29,7 +28,7 @@ fill_desc <- function(
 ) {
   path <- fs_path_abs(pkg)
 
-  desc <- desc::description$new(
+  desc <- desc_description(
     file = fs_path(path, "DESCRIPTION")
   )
 

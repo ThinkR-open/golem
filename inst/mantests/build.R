@@ -69,7 +69,7 @@ install_local(
 )
 
 golem::install_dev_deps(
-  force_install = TRUE, 
+  force_install = TRUE,
   lib = temp_lib
 )
 
@@ -145,19 +145,19 @@ withr::with_tempdir({
     file.exists("LICENSE")
   )
   expect_true(
-    desc::desc_get("License") == "MIT + file LICENSE"
+    desc_get("License") == "MIT + file LICENSE"
   )
   cat_ok()
 
   cli::cat_rule("Checking the DESCRIPTION is correct")
   expect_true(
-    desc::desc_get("Package") == "golemmetrics"
+    desc_get("Package") == "golemmetrics"
   )
   expect_true(
-    desc::desc_get("Title") == "An Amazing Shiny App"
+    desc_get("Title") == "An Amazing Shiny App"
   )
   expect_true(
-    all(desc::desc_get_deps()$package %in% c("config", "golem", "shiny"))
+    all(desc_get_deps()$package %in% c("config", "golem", "shiny"))
   )
   cat_ok()
 
@@ -209,31 +209,31 @@ withr::with_tempdir({
 
   cli::cat_rule("checking package name")
   expect_equal(
-    desc::desc_get_field("Package"),
+    desc_get_field("Package"),
     "golemmetrics"
   )
   cat_ok()
   cli::cat_rule("checking pkg_title name")
   expect_equal(
-    desc::desc_get_field("Title"),
+    desc_get_field("Title"),
     "A App with Metrics about 'Golem'"
   )
   cat_ok()
   cli::cat_rule("checking package name")
   expect_equal(
-    desc::desc_get_field("Description"),
+    desc_get_field("Description"),
     "Read metrics about {golem}."
   )
   cat_ok()
   cli::cat_rule("checking package name")
   expect_equal(
-    as.character(desc::desc_get_author()),
+    as.character(desc_get_author()),
     "Colin Fay <colin@thinkr.fr> [cre, aut]"
   )
   cat_ok()
   cli::cat_rule("checking package version")
   expect_equal(
-    as.character(desc::desc_get_version()),
+    as.character(desc_get_version()),
     "0.0.0.9000"
   )
   cat_ok()
@@ -264,7 +264,7 @@ withr::with_tempdir({
   # usethis::use_mit_license( "Golem User" )
 
   expect_equal(
-    desc::desc_get_field("License"),
+    desc_get_field("License"),
     "MIT + file LICENSE"
   )
   expect_true(
@@ -320,7 +320,7 @@ withr::with_tempdir({
   }
   usethis::use_package("cranlogs")
   expect_true(
-    "cranlogs" %in% desc::desc_get_deps()$package
+    "cranlogs" %in% desc_get_deps()$package
   )
   cat_ok()
 

@@ -197,6 +197,11 @@ create_golem <- function(
 
 
   old <- setwd(path_to_golem)
+
+  if (!requireNamespace("desc", quietly = TRUE)) {
+    check_desc_installed()
+  } # incase of {desc} not installed by {usethis}
+
   usethis_use_latest_dependencies()
 
   # No .Rprofile for now

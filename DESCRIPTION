@@ -53,7 +53,6 @@ Imports:
     cli (>= 2.0.0),
     config,
     crayon,
-    desc,
     here,
     htmltools,
     rlang (>= 1.0.0),
@@ -83,7 +82,8 @@ Suggests:
     attachment (>= 0.2.5),
     renv,
     usethis (>= 1.6.0),
-    fs
+    fs,
+    desc
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
