@@ -523,6 +523,146 @@ add_sass_file <- function(
 
 #' @export
 #' @rdname add_files
+#' @importFrom tools file_ext
+add_any_file <- function(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE,
+  template = golem::css_template,
+  ...
+) {
+  attempt::stop_if(
+    missing(name),
+    msg = "`name` is required"
+  )
+
+  check_name_length(name)
+
+  extension <- file_ext(name)
+
+  name <- file_path_sans_ext(name)
+
+  old <- setwd(fs_path_abs(pkg))
+  on.exit(setwd(old))
+
+  dir_created <- create_if_needed(
+    dir,
+    type = "directory"
+  )
+
+  if (!dir_created) {
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+
+  dir <- fs_path_abs(dir)
+
+  if (extension != "") {
+    where <- fs_path(
+      dir,
+      sprintf(
+        "%s.%s",
+        name,
+        extension
+      )
+    )
+  } else {
+    where <- fs_path(
+      dir,
+      sprintf(
+        "%s",
+        name
+      )
+    )
+  }
+
+  if (!fs_file_exists(where)) {
+    fs_file_create(where)
+    template(path = where, ...)
+    file_created_dance(
+      where,
+      after_creation_message,
+      pkg,
+      dir,
+      name,
+      open
+    )
+  } else {
+    file_already_there_dance(
+      where = where,
+      open_file = open
+    )
+  }
+}
+
+#' @export
+#' @rdname add_files
+#' @importFrom tools file_ext
+add_file <- function(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE,
+  template = golem::css_template,
+  ...
+) {
+  attempt::stop_if(
+    missing(name),
+    msg = "`name` is required"
+  )
+
+  check_name_length(name)
+
+  extension <- file_ext(name)
+
+  if (extension == "css") {
+    add_css_file(
+      name = name,
+      pkg = pkg,
+      dir = dir,
+      open = open,
+      dir_create = dir_create,
+      template = template,
+      ...
+    )
+  } else if (extension == "js") {
+    add_js_file(
+      name = name,
+      pkg = pkg,
+      dir = dir,
+      open = open,
+      dir_create = dir_create,
+      template = template,
+      ...
+    )
+  } else if (extension == "sass") {
+    add_sass_file(
+      name = name,
+      pkg = pkg,
+      dir = dir,
+      open = open,
+      dir_create = dir_create,
+      template = template,
+      ...
+    )
+  } else {
+    add_any_file(
+      name = name,
+      pkg = pkg,
+      dir = dir,
+      open = open,
+      dir_create = dir_create,
+      template = template,
+      ...
+    )
+  }
+}
+
+#' @export
+#' @rdname add_files
 add_html_template <- function(
   name = "template.html",
   pkg = get_golem_wd(),
