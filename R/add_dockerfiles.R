@@ -73,14 +73,6 @@ talk_once <- function(.f, msg = "") {
 #'     output_dir = "deploy"
 #'   )
 #' }
-#' # Crete a 'deploy' folder containing everything needed to deploy
-#' # the golem using docker based on {renv}
-#' if (interactive()) {
-#'   add_dockerfile_with_renv(
-#'     # lockfile = "renv.lock", # uncomment to use existing renv.lock file
-#'     output_dir = "deploy"
-#'   )
-#' }
 #' # Add a Dockerfile for ShinyProxy
 #' if (interactive() & requireNamespace("dockerfiler")) {
 #'   add_dockerfile_shinyproxy()
@@ -89,16 +81,6 @@ talk_once <- function(.f, msg = "") {
 #' # Crete a 'deploy' folder containing everything needed to deploy
 #' # the golem with ShinyProxy using docker based on {renv}
 #' if (interactive() & requireNamespace("dockerfiler")) {
-#'   add_dockerfile_with_renv(
-#'     # lockfile = "renv.lock",# uncomment to use existing renv.lock file
-#'     output_dir = "deploy"
-#'   )
-#' }
-#'
-#'
-#' # Crete a 'deploy' folder containing everything needed to deploy
-#' # the golem with ShinyProxy using docker based on {renv}
-#' if (interactive()) {
 #'   add_dockerfile_with_renv(
 #'     # lockfile = "renv.lock",# uncomment to use existing renv.lock file
 #'     output_dir = "deploy"

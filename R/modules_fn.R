@@ -256,17 +256,8 @@ use_module_test <- function(
   }
 
   # We need both testthat, usethis & fs
-  rlang::check_installed(
-    "usethis",
-    "to build the test structure."
-  )
-  rlang::check_installed(
-    "testthat",
-    "to build the test structure."
-  )
-  rlang::check_installed(
-    "fs"
-  )
+  check_is_installed("testthat")
+  check_is_installed("fs")
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
