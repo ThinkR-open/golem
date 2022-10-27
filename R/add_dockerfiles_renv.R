@@ -16,7 +16,7 @@ add_dockerfile_with_renv_ <- function(
     "renv",
     reason = "to build a Dockerfile."
   )
-  
+
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on
   x <- suppressWarnings({
@@ -57,9 +57,11 @@ add_dockerfile_with_renv_ <- function(
   socle$write(as = file.path(output_dir, "Dockerfile_base"))
 
   my_dock <- dockerfiler_Dockerfile()$new(
-    FROM = paste0(golem::get_golem_name(), 
-    "_base"
-  ))
+    FROM = paste0(
+      golem::get_golem_name(),
+      "_base"
+    )
+  )
 
   my_dock$COPY("renv.lock.prod", "renv.lock")
 

@@ -81,7 +81,7 @@ rand_name <- function() {
 withr::with_dir(pkg, {
   # Some weird things with {here}
   unloadNamespace("here")
-  if (!file.exists(".here")){
+  if (!file.exists(".here")) {
     here::set_here(path_to_golem)
   }
   set_golem_options()

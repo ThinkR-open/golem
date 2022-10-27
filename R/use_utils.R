@@ -135,7 +135,6 @@ use_utils <- function(
   folder_name,
   pkg = get_golem_wd()
 ) {
-
   old <- setwd(
     fs_path_abs(pkg)
   )

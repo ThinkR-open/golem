@@ -2,7 +2,8 @@
 test_that("desc works", {
   with_dir(pkg, {
     withr::with_options(
-      c("golem.quiet" =  FALSE),{
+      c("golem.quiet" = FALSE),
+      {
         output <- capture_output(
           fill_desc(
             pkg_name = fakename,
@@ -14,8 +15,9 @@ test_that("desc works", {
             repo_url = "http://repo_url.com",
             pkg_version = "0.0.0.9000"
           )
-      )
-    })
+        )
+      }
+    )
     add_desc <- c(
       fakename,
       "newtitle",

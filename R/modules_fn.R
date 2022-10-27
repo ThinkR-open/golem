@@ -260,7 +260,7 @@ use_module_test <- function(
     "testthat",
     "to build the test structure."
   )
-  
+
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 

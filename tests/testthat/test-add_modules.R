@@ -16,9 +16,11 @@ test_that("add_module", {
     ## Test message of function
     remove_file("R/mod_output.R")
     withr::with_options(
-      c("golem.quiet" =  FALSE),{
-      output <- testthat::capture_output(add_module("output", open = FALSE))
-    })
+      c("golem.quiet" = FALSE),
+      {
+        output <- testthat::capture_output(add_module("output", open = FALSE))
+      }
+    )
     expect_true(
       stringr::str_detect(output, "File created at R/mod_output.R")
     )

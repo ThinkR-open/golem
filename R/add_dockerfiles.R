@@ -145,7 +145,6 @@ add_dockerfile_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(
@@ -252,7 +251,6 @@ add_dockerfile_shinyproxy_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(output)
@@ -351,7 +349,6 @@ add_dockerfile_heroku_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(output)

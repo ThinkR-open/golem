@@ -115,10 +115,10 @@ remove_comments <- function(file) {
 cat_green_tick <- function(...) {
   do_if_unquiet({
     cat_bullet(
-        ...,
-        bullet = "tick",
-        bullet_col = "green"
-      )
+      ...,
+      bullet = "tick",
+      bullet_col = "green"
+    )
   })
 }
 
@@ -144,9 +144,7 @@ cat_info <- function(...) {
   })
 }
 
-cat_rule <- function(
-  ...
-) {
+cat_rule <- function(...) {
   do_if_unquiet({
     cli::cat_rule(
       ...
@@ -154,11 +152,9 @@ cat_rule <- function(
   })
 }
 
-cat_line <- function(
-  ...
-) {
+cat_line <- function(...) {
   do_if_unquiet({
-   cli::cat_line(
+    cli::cat_line(
       ...
     )
   })
@@ -480,18 +476,16 @@ check_name_length <- function(name) {
   )
 }
 
-do_if_unquiet <- function(
-  expr
-){
-  if(
-    !  getOption(
-      "golem.quiet", 
+do_if_unquiet <- function(expr) {
+  if (
+    !getOption(
+      "golem.quiet",
       getOption(
-        "usethis.quiet", 
+        "usethis.quiet",
         default = FALSE
-        )
+      )
     )
-  ){
+  ) {
     force(expr)
   }
 }
