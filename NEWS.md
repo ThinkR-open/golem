@@ -17,6 +17,7 @@
 + `golem::run_dev()` has been refactored to match the behavior of other functions, notably it now uses `golem::get_golem_wd()` to find the current working dir.
 + `{golem}` now depends on `{rlang}` version >= 1.0.0
 + Functions that print to the console are now quiet if `options("golem.quiet" = TRUE)`, #793
++ Small documentation update in dockerfile related functions (#939)
 
 ## Bug fix
 
