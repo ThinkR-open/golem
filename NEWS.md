@@ -18,7 +18,8 @@ Update in the tests for CRAN (skip not installed + examples).
 
 + `add_dockerfile`, `add_dockerfile_shinyproxy()` and `add_dockerfile_heroku()` now recommend to switch to their `_with_renv_` counterpart
 
-# golem 0.3.2
+
+# golem 0.3.2 (CRAN VERSION)
 
 ### Soft deprecated
 
@@ -69,6 +70,8 @@ Update in the tests for CRAN (skip not installed + examples).
 + You can now specify the path to R in `expect_running()`. 
 
 ## Bug fix
+
++ Fixed a bug in the printing of the htmlTemplate code (#827)
 
 + We now require the correct `{usethis}` version (822)
 

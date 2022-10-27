@@ -37,16 +37,15 @@ insert_ns <- function() {
   rstudioapi::modifyRange(sel_rng, mod_text, id = id)
 }
 
-#' @importFrom fs path file_exists
 go_to <- function(
   file,
   wd = golem::get_golem_wd()
 ) {
-  file <- path(
+  file <- fs_path(
     wd,
     file
   )
-  if (!file_exists(file)) {
+  if (!fs_file_exists(file)) {
     message(file, "not found.")
   }
 

@@ -12,10 +12,20 @@ add_dockerfile_with_renv_ <- function(
   update_tar_gz = TRUE
   # build_golem_from_source = TRUE,
 ) {
-  check_is_installed("renv")
-  check_is_installed("dockerfiler")
-  required_version("dockerfiler", "0.2.0")
-  check_is_installed("attachment")
+  rlang::check_installed(
+    "renv",
+    reason = "to build a Dockerfile."
+  )
+  rlang::check_installed(
+    "dockerfiler",
+    version = "0.2.0",
+    reason = "to build a Dockerfile."
+  )
+  rlang::check_installed(
+    "attachment",
+    version = "0.2.5",
+    reason = "to build a Dockerfile."
+  )
 
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on
@@ -31,10 +41,17 @@ add_dockerfile_with_renv_ <- function(
   }
 
   if (is.null(lockfile)) {
-    lockfile <- attachment::create_renv_for_prod(path = source_folder, output = file.path(output_dir, "renv.lock.prod"))
+    lockfile <- attachment::create_renv_for_prod(
+      path = source_folder,
+      output = file.path(output_dir, "renv.lock.prod")
+    )
   }
 
-  file.copy(from = lockfile, to = output_dir)
+  fs_file_copy(
+    path = lockfile,
+    new_path = output_dir,
+    overwrite = TRUE
+  )
 
   socle <- dockerfiler::dock_from_renv(
     lockfile = lockfile,
@@ -279,7 +296,10 @@ add_dockerfile_with_renv_heroku <- function(
     )
   )
 
-  readme_output <- file.path(output_dir, "README")
+  readme_output <- fs_path(
+    output_dir,
+    "README"
+  )
 
   write_there <- function(...) {
     write(..., file = readme_output, append = TRUE)

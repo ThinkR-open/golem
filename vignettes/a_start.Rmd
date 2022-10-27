@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with {golem}"
+title: "a_start"
 author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -77,7 +77,8 @@ Once you've got that, a new RStudio project will be launched. Here is the struct
 z <- capture.output(fs::dir_tree(x))
 z <- z[-1]
 w <- lapply(
-  z, function(x) {
+  z,
+  function(x) {
     cat(x, "\n")
   }
 )
@@ -155,7 +156,7 @@ Create a template for tests:
 golem::use_recommended_tests()
 ```
 
-About [tests in a package](https://r-pkgs.org/testing-basics.html).
+About [tests in a package](https://r-pkgs.org/tests.html).
 
 ### Use Recommended Packages
 

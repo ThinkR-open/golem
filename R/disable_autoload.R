@@ -10,12 +10,12 @@
 #' }
 #' @return The path to the file, invisibly.
 disable_autoload <- function(pkg = get_golem_wd()) {
-  fls <- fs::path(
+  fls <- fs_path(
     pkg,
     "R",
     "_disable_autoload.R"
   )
-  if (fs::file_exists(fls)) {
+  if (fs_file_exists(fls)) {
     cat_red_bullet(
       "_disable_autoload.R already exists, skipping its creation."
     )

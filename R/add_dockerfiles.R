@@ -9,10 +9,21 @@ talk_once <- function(.f, msg = "") {
   }
 }
 
+talk_once <- function(.f, msg = "") {
+  talk <- TRUE
+  function(...) {
+    if (talk) {
+      talk <<- FALSE
+      cat_red_bullet(msg)
+    }
+    .f(...)
+  }
+}
+
 #' Create a Dockerfile for your App
 #'
-#' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` creates
-#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`, `add_dockerfile_with_renv_shinyproxy()`  and
+#' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` and `add_dockerfile_with_renv()` creates
+#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`, `add_dockerfile_with_renv_shinyproxy()` , `add_dockerfile_with_renv_shinyproxy()`  and
 #' `add_dockerfile_heroku()` creates platform specific Dockerfile.
 #'
 #' @inheritParams add_module
@@ -34,7 +45,7 @@ talk_once <- function(.f, msg = "") {
 #' @param sysreqs boolean. If TRUE, the Dockerfile will contain sysreq installation.
 #' @param repos character. The URL(s) of the repositories to use for `options("repos")`.
 #' @param expand boolean. If `TRUE` each system requirement will have its own `RUN` line.
-#' @param open boolean. Should the Dockerfile/README be open after creation? Default is `TRUE`.
+#' @param open boolean. Should the Dockerfile/README/README be open after creation? Default is `TRUE`.
 #' @param build_golem_from_source boolean. If `TRUE` no tar.gz is created and
 #'     the Dockerfile directly mount the source folder.
 #' @param update_tar_gz boolean. If `TRUE` and `build_golem_from_source` is also `TRUE`,
@@ -47,7 +58,6 @@ talk_once <- function(.f, msg = "") {
 #' @importFrom usethis use_build_ignore
 #' @importFrom desc desc_get_deps
 #' @importFrom rstudioapi navigateToFile isAvailable hasFun
-#' @importFrom fs path path_file
 #'
 #' @examples
 #' \donttest{
@@ -144,13 +154,15 @@ add_dockerfile_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    check_is_installed("dockerfiler")
+    rlang::check_installed(
+      "dockerfiler",
+      version = "0.2.0",
+      reason = "to build a Dockerfile."
+    )
 
-    required_version("dockerfiler", "0.1.4")
+    where <- fs_path(pkg, output)
 
-    where <- path(pkg, output)
-
-    usethis::use_build_ignore(path_file(where))
+    usethis::use_build_ignore(basename(where))
 
     dock <- dockerfiler::dock_from_desc(
       path = path,
@@ -197,7 +209,6 @@ add_dockerfile_ <- talk_once(
 
 #' @export
 #' @rdname dockerfiles
-#' @importFrom fs path path_file
 add_dockerfile_shinyproxy <- function(
   path = "DESCRIPTION",
   output = "Dockerfile",
@@ -253,9 +264,12 @@ add_dockerfile_shinyproxy_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    check_is_installed("dockerfiler")
-    required_version("dockerfiler", "0.1.4")
-    where <- path(pkg, output)
+    rlang::check_installed(
+      "dockerfiler",
+      version = "0.2.0",
+      reason = "to build a Dockerfile."
+    )
+    where <- fs_path(pkg, output)
 
     usethis::use_build_ignore(output)
 
@@ -298,7 +312,6 @@ add_dockerfile_shinyproxy_ <- talk_once(
 
 #' @export
 #' @rdname dockerfiles
-#' @importFrom fs path path_file
 add_dockerfile_heroku <- function(
   path = "DESCRIPTION",
   output = "Dockerfile",
@@ -354,9 +367,12 @@ add_dockerfile_heroku_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    check_is_installed("dockerfiler")
-    required_version("dockerfiler", "0.1.4")
-    where <- path(pkg, output)
+    rlang::check_installed(
+      "dockerfiler",
+      version = "0.2.0",
+      reason = "to build a Dockerfile."
+    )
+    where <- fs_path(pkg, output)
 
     usethis::use_build_ignore(output)
 

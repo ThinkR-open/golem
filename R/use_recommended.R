@@ -11,7 +11,6 @@
 #' @param spellcheck Whether or not to use a spellcheck test.
 #'
 #' @importFrom usethis use_testthat use_package
-#' @importFrom fs path_abs
 #' @rdname use_recommended
 #'
 #' @export
@@ -23,11 +22,10 @@ use_recommended_deps <- function(
   recommended = c("shiny", "DT", "attempt", "glue", "htmltools", "golem")
 ) {
   .Deprecated(
-    "golem::use_recommended_deps",
-    msg <- "use_recommended_deps() is soft deprecated and will be removed in future versions of {golem}."
+    msg = "use_recommended_deps() is soft deprecated and will be removed in future versions of {golem}."
   )
 
-  old <- setwd(path_abs(pkg))
+  old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
   for (i in sort(recommended)) {
@@ -43,7 +41,6 @@ use_recommended_deps <- function(
 #' @importFrom usethis use_testthat use_package use_spell_check
 #' @importFrom utils capture.output
 #' @importFrom attempt without_warning stop_if
-#' @importFrom fs path_abs path file_exists
 use_recommended_tests <- function(
   pkg = get_golem_wd(),
   spellcheck = TRUE,
@@ -51,12 +48,17 @@ use_recommended_tests <- function(
   lang = "en-US",
   error = FALSE
 ) {
-  old <- setwd(path_abs(pkg))
+  old <- setwd(fs_path_abs(pkg))
+
+  rlang::check_installed(
+    "fs",
+    reason = "for file & directory manipulation."
+  )
 
   on.exit(setwd(old))
 
-  if (!dir.exists(
-    path(path_abs(pkg), "tests")
+  if (!fs_dir_exists(
+    fs_path(fs_path_abs(pkg), "tests")
   )) {
     without_warning(use_testthat)()
   }
@@ -65,14 +67,14 @@ use_recommended_tests <- function(
   }
 
   stop_if(
-    path(old, "tests", "testthat", "test-golem-recommended.R"),
-    file_exists,
+    fs_path(old, "tests", "testthat", "test-golem-recommended.R"),
+    fs_file_exists,
     "test-golem-recommended.R already exists. \nPlease remove it first if you need to reinsert it."
   )
 
-  file_copy(
+  fs_file_copy(
     golem_sys("utils", "test-golem-recommended.R"),
-    path(old, "tests", "testthat"),
+    fs_path(old, "tests", "testthat"),
     overwrite = TRUE
   )
 
