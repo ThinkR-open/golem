@@ -13,6 +13,7 @@ fill_desc(
   author_email,
   author_orcid = NULL,
   repo_url = NULL,
+  pkg_version = "0.0.0.9000",
   pkg = get_golem_wd()
 )
 }
@@ -32,6 +33,8 @@ fill_desc(
 \item{author_orcid}{ORCID of the author}
 
 \item{repo_url}{URL (if needed)}
+
+\item{pkg_version}{The version of the package. Default is 0.0.0.9000}
 
 \item{pkg}{Path to look for the DESCRIPTION. Default is \code{get_golem_wd()}.}
 }

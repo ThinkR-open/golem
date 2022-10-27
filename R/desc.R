@@ -8,6 +8,7 @@
 #' @param author_email Email of the author
 #' @param author_orcid ORCID of the author
 #' @param repo_url URL (if needed)
+#' @param pkg_version The version of the package. Default is 0.0.0.9000
 #' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
 #'
 #' @importFrom desc description
@@ -25,6 +26,7 @@ fill_desc <- function(
   author_email,
   author_orcid = NULL,
   repo_url = NULL,
+  pkg_version = "0.0.0.9000",
   pkg = get_golem_wd()
 ) {
   path <- fs_path_abs(pkg)
@@ -64,10 +66,10 @@ fill_desc <- function(
     keys = "Maintainer"
   )
   desc$set_version(
-    version = "0.0.0.9000"
+    version = pkg_version
   )
   set_golem_version(
-    version = "0.0.0.9000",
+    version = pkg_version,
     pkg = path
   )
   desc$set(

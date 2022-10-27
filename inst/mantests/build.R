@@ -204,7 +204,8 @@ withr::with_tempdir({
     author_first_name = "Colin", # Your First Name
     author_last_name = "Fay", # Your Last Name
     author_email = "colin@thinkr.fr", # Your Email
-    repo_url = NULL # The URL of the GitHub Repo (optional)
+    repo_url = NULL, # The URL of the GitHub Repo (optional)
+    pkg_version = "0.0.0.9000" # The Version of the package containing the App
   )
 
   cli::cat_rule("checking package name")
