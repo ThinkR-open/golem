@@ -172,7 +172,7 @@ if (interactive() & requireNamespace("dockerfiler")) {
 }
 # Crete a 'deploy' folder containing everything needed to deploy
 # the golem using docker based on {renv}
-if (interactive()) {
+if (interactive() & requireNamespace("dockerfiler")) {
   add_dockerfile_with_renv(
     # lockfile = "renv.lock", # uncomment to use existing renv.lock file
     output_dir = "deploy"
