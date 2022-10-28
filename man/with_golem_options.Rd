@@ -4,12 +4,19 @@
 \alias{with_golem_options}
 \title{Add Golem options to a Shiny App}
 \usage{
-with_golem_options(app, golem_opts, print = FALSE)
+with_golem_options(
+  app,
+  golem_opts,
+  maintenance_page = golem::maintenance_page,
+  print = FALSE
+)
 }
 \arguments{
 \item{app}{the app object.}
 
 \item{golem_opts}{A list of Options to be added to the app}
+
+\item{maintenance_page}{an html_document or a shiny tag list. By default is golem page}
 
 \item{print}{Whether or not to print the app. Default is to \code{FALSE}, which
 should be what you need 99.99\% of the time In case you need to
