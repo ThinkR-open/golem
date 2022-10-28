@@ -34,7 +34,7 @@ detach_all_attached <- function() {
 check_name_consistency <- function(pkg) {
   old_dir <- setwd(pkg)
 
-  package_name <- desc::desc_get("Package")
+  package_name <- desc_get(keys = "Package")
   pth <- fs_path(
     pkg,
     "R",

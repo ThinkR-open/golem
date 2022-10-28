@@ -1,5 +1,6 @@
 
 test_that("desc works", {
+  testthat::skip_if_not_installed("desc")
   with_dir(pkg, {
     withr::with_options(
       c("golem.quiet" = FALSE),

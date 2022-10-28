@@ -27,12 +27,7 @@ knitr::opts_chunk$set(
 
 ## About
 
-You're reading the doc about version : 
-
-```{r eval = TRUE}
-desc::desc_get_version()
-```
-
+You're reading the doc about version : ``r as.data.frame(read.dcf("DESCRIPTION"))$Version ``
 
 ## Tool series
 
