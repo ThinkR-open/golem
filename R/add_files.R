@@ -601,7 +601,6 @@ add_any_file <- function(
 
 #' @export
 #' @rdname add_files
-#' @importFrom tools file_ext
 add_file <- function(
   name,
   pkg = get_golem_wd(),
