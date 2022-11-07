@@ -14,13 +14,13 @@ with_golem_options(
 \arguments{
 \item{app}{the app object.}
 
-\item{golem_opts}{A list of Options to be added to the app}
+\item{golem_opts}{A list of options to be added to the app}
 
-\item{maintenance_page}{an html_document or a shiny tag list. By default is golem page}
+\item{maintenance_page}{an html_document or a shiny tag list. Default is golem template.}
 
 \item{print}{Whether or not to print the app. Default is to \code{FALSE}, which
-should be what you need 99.99\% of the time In case you need to
-actively print the app object, you can set it to \code{TRUE}.}
+should be what you need 99.99\% of the time. In case you need to
+actively print() the app object, you can set it to \code{TRUE}.}
 }
 \value{
 a shiny.appObj object
