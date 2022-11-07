@@ -198,78 +198,55 @@ my_tmpl <- function(path, ...) {
 golem::add_css_file(name = "custom", template = my_tmpl)
 ```
 
-## Use a maintenance module
+## Turn on the maintenance mode
 
 ## What it is
 
-When you need to pause your application for some reasons: breaking changes, database update, etc., you can use a __maintenance mode__.
-During the maintenance period, your application will be paused and a warning message will be displayed to your users.
+From time to time, you need your application to be unavailbel: database update, API changes, etc.
+In order to keep your app running but make it unavailable, you can use a __maintenance mode__.
+When this maintenance mode is turned on, your application will be paused and a specific page will be displayed to your users.
 
-{golem} comes with a default maintenance page. But, you can replace it with you own maintenance page.
+`{golem}` comes with a default maintenance page, and you can replace it with you own page.
 
 ## How to set the maintenance mode
 
-To use a maintenance mode, you have to create a an environment variable `GOLEM_SET_MAINTENANCE_ACTIVE`.
+The maintenance mode will be turned on whenever the R process detects that the `GOLEM_MAINTENANCE_ACTIVE` environment variable is set to TRUE. 
 
-```{r}
-usethis::edit_r_environ(scope = "project")
+To visualise the maintenance page locally, you can run the following: 
+
+```{r eval = FALSE}
+withr::with_envvar(
+  c("GOLEM_MAINTENANCE_ACTIVE" = TRUE),
+  {
+    golem::run_dev()
+  }
+)
 ```
 
-Then create the environment variable:
 
-```{r}
-GOLEM_SET_MAINTENANCE_ACTIVE=TRUE
+If you're deploying on Posit Connect, you can set this variable in the setup panel. 
+
+If in command line, you can also do 
+
+```
+export GOLEM_MAINTENANCE_ACTIVE=TRUE && Rscript -e "mypkg::run_app()"
 ```
 
-To see the effects, restart your session:
-
-```{r}
-rstudioapi::restartSession()
-```
 
 ## The maintenance page
 
-By default, {golem} comes with a default maintenance page. 
+`{golem}` comes with a default maintenance page, but you can override it and use your own custom page. 
 
-You can override it and use your own custom maintenance page. 
-
-You have to pass a `html_document` or a `shiny tag list`. For that, go to to your `run_app.R` :
+In order to use your own page, you need to pass either an `html_document` or a `tagList` to the `with_golem_options` function in `run_app.R`:
 
 ```{r}
-rstudioapi::navigateToFile("R/run_app.R")
-```
-
-Then, use the `maintenance_page` parameter from `with_golem_options`:
-
-```{r}
-run_app <- function(onStart = NULL,
-                    options = list(),
-                    enableBookmarking = NULL,
-                    uiPattern = "/",
-                    ...) {
-  with_golem_options(
-    app = shinyApp(
-      ui = app_ui,
-      server = app_server,
-      onStart = onStart,
-      options = options,
-      enableBookmarking = enableBookmarking,
-      uiPattern = uiPattern
-    ),
-    golem_opts = list(...),
-    maintenance_page = shiny::htmlTemplate(filename = app_sys("your_custom.html"))
-  )
-}
-```
-
-or: 
-
-```{r}
-run_app <- function(onStart = NULL,
-                    options = list(),
-                    enableBookmarking = NULL,
-                    uiPattern = "/",
-                    ...) {
+run_app <- function(
+  onStart = NULL,
+  options = list(),
+  enableBookmarking = NULL,
+  uiPattern = "/",
+  ...
+) {
   with_golem_options(
     app = shinyApp(
       ui = app_ui,
@@ -284,6 +261,35 @@ run_app <- function(onStart = NULL,
       fluidRow(
         h1("Under maintenance"),
         span("Coming soon...")
+      )
+    )
+  )
+}
+```
+
+or: 
+
+```{r}
+run_app <- function(
+  onStart = NULL,
+  options = list(),
+  enableBookmarking = NULL,
+  uiPattern = "/",
+  ...
+) {
+  with_golem_options(
+    app = shinyApp(
+      ui = app_ui,
+      server = app_server,
+      onStart = onStart,
+      options = options,
+      enableBookmarking = enableBookmarking,
+      uiPattern = uiPattern
+    ),
+    golem_opts = list(...),
+    maintenance_page = shiny::htmlTemplate(
+      filename = app_sys(
+        "custom_maintenance_page.html"
       )
     )
   )
