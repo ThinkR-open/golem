@@ -2,6 +2,9 @@
 
 # 0.3.5.9000+ (dev version)
 
+add_dockerfile_with_renv now works well with uppercase in package name
+
+
 # golem 0.3.5
 
 Update in the tests for CRAN (commented a test that made new version of testthat fail).
