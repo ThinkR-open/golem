@@ -47,12 +47,12 @@ add_dockerfile_with_renv_ <- function(
     )
   }
 
-  fs_file_copy(
-    path = lockfile,
-    new_path = output_dir,
-    overwrite = TRUE
-  )
-
+  # fs_file_copy(
+  #   path = lockfile,
+  #   new_path = output_dir,
+  #   overwrite = TRUE
+  # )
+  file.copy(from = lockfile, to = output_dir)
   socle <- dockerfiler::dock_from_renv(
     lockfile = lockfile,
     distro = distro,
