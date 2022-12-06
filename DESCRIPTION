@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.3.5.9000
+Version: 0.3.5.9003
 Authors@R: 
     c(person(given = "Colin",
              family = "Fay",
@@ -53,14 +53,11 @@ Imports:
     cli (>= 2.0.0),
     config,
     crayon,
-    desc,
     here,
-    fs,
     htmltools,
     rlang (>= 1.0.0),
     rstudioapi,
     shiny (>= 1.5.0),
-    usethis (>= 1.6.0),
     utils,
     yaml
 Suggests:
@@ -83,7 +80,10 @@ Suggests:
     tools,
     withr,
     attachment (>= 0.2.5),
-    renv
+    renv,
+    usethis (>= 1.6.0),
+    fs,
+    desc
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

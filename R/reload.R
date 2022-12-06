@@ -34,7 +34,7 @@ detach_all_attached <- function() {
 check_name_consistency <- function(pkg) {
   old_dir <- setwd(pkg)
 
-  package_name <- desc::desc_get("Package")
+  package_name <- desc_get(keys = "Package")
   pth <- fs_path(
     pkg,
     "R",
@@ -106,13 +106,12 @@ document_and_reload <- function(
 
   check_name_consistency(pkg)
   rlang::check_installed("pkgload")
-  rlang::check_installed("roxygen2")
 
   if (rstudioapi::isAvailable() & rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
   roxed <- try({
-    roxygen2::roxygenise(
+    roxygen2_roxygenise(
       package.dir = pkg,
       roclets = roclets,
       load_code = load_code,
@@ -120,14 +119,14 @@ document_and_reload <- function(
     )
   })
   if (attempt::is_try_error(roxed)) {
-    cli::cat_rule(
+    cat_rule(
       "Error documenting your package"
     )
     dialog_if_has("Alert", "Error documenting your package")
     return(invisible(FALSE))
   }
   loaded <- try({
-    pkgload::load_all(
+    pkgload_load_all(
       pkg,
       export_all = export_all,
       helpers = helpers,
@@ -137,7 +136,7 @@ document_and_reload <- function(
   })
 
   if (attempt::is_try_error(loaded)) {
-    cli::cat_rule(
+    cat_rule(
       "Error loading your package"
     )
     dialog_if_has("Alert", "Error loading your package")

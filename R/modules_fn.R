@@ -255,14 +255,13 @@ use_module_test <- function(
     )
   }
 
-# We need testthat
+
+  # We need testthat
   rlang::check_installed(
     "testthat",
     "to build the test structure."
-  )  
-  
-  
-  
+  )
+
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -270,7 +269,7 @@ use_module_test <- function(
   if (!fs_dir_exists(
     fs_path(pkg, "tests", "testthat")
   )) {
-    usethis::use_testthat()
+    usethis_use_testthat()
   }
 
   path <- fs_path(

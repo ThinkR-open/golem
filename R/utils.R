@@ -113,29 +113,51 @@ remove_comments <- function(file) {
 
 #' @importFrom cli cat_bullet
 cat_green_tick <- function(...) {
-  cat_bullet(
-    ...,
-    bullet = "tick",
-    bullet_col = "green"
-  )
+  do_if_unquiet({
+    cat_bullet(
+      ...,
+      bullet = "tick",
+      bullet_col = "green"
+    )
+  })
 }
 
 #' @importFrom cli cat_bullet
 cat_red_bullet <- function(...) {
-  cat_bullet(
-    ...,
-    bullet = "bullet",
-    bullet_col = "red"
-  )
+  do_if_unquiet({
+    cli::cat_bullet(
+      ...,
+      bullet = "bullet",
+      bullet_col = "red"
+    )
+  })
 }
 
 #' @importFrom cli cat_bullet
 cat_info <- function(...) {
-  cat_bullet(
-    ...,
-    bullet = "arrow_right",
-    bullet_col = "grey"
-  )
+  do_if_unquiet({
+    cli::cat_bullet(
+      ...,
+      bullet = "arrow_right",
+      bullet_col = "grey"
+    )
+  })
+}
+
+cat_rule <- function(...) {
+  do_if_unquiet({
+    cli::cat_rule(
+      ...
+    )
+  })
+}
+
+cat_line <- function(...) {
+  do_if_unquiet({
+    cli::cat_line(
+      ...
+    )
+  })
 }
 
 cat_exists <- function(where) {
@@ -160,8 +182,10 @@ cat_dir_necessary <- function() {
 }
 
 cat_start_download <- function() {
-  cat_line("")
-  cat_rule("Initiating file download")
+  do_if_unquiet({
+    cat_line("")
+    cat_rule("Initiating file download")
+  })
 }
 
 cat_downloaded <- function(
@@ -178,8 +202,10 @@ cat_downloaded <- function(
 }
 
 cat_start_copy <- function() {
-  cat_line("")
-  cat_rule("Copying file")
+  do_if_unquiet({
+    cat_line("")
+    cat_rule("Copying file")
+  })
 }
 
 cat_copied <- function(
@@ -314,13 +340,15 @@ after_creation_message_html_template <- function(
   dir,
   name
 ) {
-  cat_line("")
-  cat_rule("To use this html file as a template, add the following code in your UI:")
-  cat_line(darkgrey("htmlTemplate("))
-  cat_line(darkgrey(sprintf('    app_sys("app/www/%s.html"),', file_path_sans_ext(name))))
-  cat_line(darkgrey("    body = tagList()"))
-  cat_line(darkgrey("    # add here other template arguments"))
-  cat_line(darkgrey(")"))
+  do_if_unquiet({
+    cat_line("")
+    cat_rule("To use this html file as a template, add the following code in your UI:")
+    cat_line(darkgrey("htmlTemplate("))
+    cat_line(darkgrey(sprintf('    app_sys("app/www/%s.html"),', file_path_sans_ext(name))))
+    cat_line(darkgrey("    body = tagList()"))
+    cat_line(darkgrey("    # add here other template arguments"))
+    cat_line(darkgrey(")"))
+  })
 }
 
 file_created_dance <- function(
@@ -447,4 +475,18 @@ check_name_length <- function(name) {
       length(name)
     )
   )
+}
+
+do_if_unquiet <- function(expr) {
+  if (
+    !getOption(
+      "golem.quiet",
+      getOption(
+        "usethis.quiet",
+        default = FALSE
+      )
+    )
+  ) {
+    force(expr)
+  }
 }

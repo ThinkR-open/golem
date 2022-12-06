@@ -16,16 +16,6 @@ add_dockerfile_with_renv_ <- function(
     "renv",
     reason = "to build a Dockerfile."
   )
-  rlang::check_installed(
-    "dockerfiler",
-    version = "0.2.0",
-    reason = "to build a Dockerfile."
-  )
-  rlang::check_installed(
-    "attachment",
-    version = "0.2.5",
-    reason = "to build a Dockerfile."
-  )
 
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on
@@ -37,23 +27,21 @@ add_dockerfile_with_renv_ <- function(
 
   # add output_dir in Rbuildignore if the output is inside the golem
   if (normalizePath(dirname(output_dir)) == normalizePath(source_folder)) {
-    usethis::use_build_ignore(output_dir)
+    usethis_use_build_ignore(output_dir)
   }
 
   if (is.null(lockfile)) {
-    lockfile <- attachment::create_renv_for_prod(
+    lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
       output = file.path(output_dir, "renv.lock.prod")
     )
   }
 
-  # fs_file_copy(
-  #   path = lockfile,
-  #   new_path = output_dir,
-  #   overwrite = TRUE
-  # )
   file.copy(from = lockfile, to = output_dir)
-  socle <- dockerfiler::dock_from_renv(
+
+
+  socle <- dockerfiler_dock_from_renv(
+
     lockfile = lockfile,
     distro = distro,
     FROM = FROM,
@@ -65,6 +53,7 @@ add_dockerfile_with_renv_ <- function(
   )
 
   socle$write(as = file.path(output_dir, "Dockerfile_base"))
+
 
   my_dock <- dockerfiler::Dockerfile$new(FROM = tolower(paste0(golem::get_golem_name(), "_base")))
 

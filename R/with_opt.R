@@ -5,18 +5,28 @@
 #' launch.
 #'
 #' @param app the app object.
-#' @param golem_opts A list of Options to be added to the app
+#' @param golem_opts A list of options to be added to the app
+#' @param maintenance_page an html_document or a shiny tag list. Default is golem template.
 #' @param print Whether or not to print the app. Default is to `FALSE`, which
-#' should be what you need 99.99% of the time In case you need to
-#' actively print the app object, you can set it to `TRUE`.
+#' should be what you need 99.99% of the time. In case you need to
+#' actively print() the app object, you can set it to `TRUE`.
 #'
 #' @return a shiny.appObj object
 #' @export
 with_golem_options <- function(
   app,
   golem_opts,
+  maintenance_page = golem::maintenance_page,
   print = FALSE
 ) {
+
+  # Check if app is in maintenance
+  if (Sys.getenv("GOLEM_MAINTENANCE_ACTIVE", "FALSE") == "TRUE") {
+    app <- shiny::shinyApp(
+      ui = maintenance_page,
+      server = function(input, output, session) {}
+    )
+  }
 
   # Setting the running option
   set_golem_global(
@@ -41,9 +51,9 @@ with_golem_options <- function(
     print <- FALSE
   }
 
-  # Almost all cases will be ok with explicitely printing the
+  # Almost all cases will be ok with not explicitely printing the
   # application object, but for corner cases like direct shinyApp
-  # object manipulation, this feature can be turned off
+  # object manipulation, this feature can be turned on
   if (print) {
     print(app)
   } else {
@@ -104,4 +114,23 @@ get_golem_options <- function(which = NULL) {
   } else {
     getShinyOption("golem_options")[[which]]
   }
+}
+
+#' maintenance_page
+#'
+#' A default html page for maintenance mode
+#'
+#' @importFrom shiny htmlTemplate
+#'
+#' @return an html_document
+#'
+#' @export
+maintenance_page <- function() {
+  shiny::htmlTemplate(
+    filename = system.file(
+      "app",
+      "maintenance.html",
+      package = "golem"
+    )
+  )
 }
