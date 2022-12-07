@@ -57,7 +57,6 @@ replace_package_name <- function(
 #' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
 #' @importFrom rstudioapi isAvailable openProject hasFun
-#' @importFrom usethis use_latest_dependencies create_project
 #' @importFrom yaml write_yaml
 #'
 #' @export
@@ -81,7 +80,15 @@ create_golem <- function(
 
   if (check_name) {
     cat_rule("Checking package name")
-    getFromNamespace("check_package_name", "usethis")(package_name)
+    rlang::check_installed(
+      "usethis",
+      version = "1.6.0",
+      reason = "to check the package name."
+    )
+    getFromNamespace(
+      "check_package_name",
+      "usethis"
+    )(package_name)
     cat_green_tick("Valid package name")
   }
 
@@ -102,11 +109,13 @@ create_golem <- function(
     }
   } else {
     cat_rule("Creating dir")
-    usethis::create_project(
+    usethis_create_project(
       path = path_to_golem,
-      open = FALSE,
+      open = FALSE
     )
-    here::set_here(path_to_golem)
+    if (!file.exists(".here")) {
+      here::set_here(path_to_golem)
+    }
     cat_green_tick("Created package directory")
   }
 
@@ -188,7 +197,12 @@ create_golem <- function(
 
 
   old <- setwd(path_to_golem)
-  use_latest_dependencies()
+
+  if (!requireNamespace("desc", quietly = TRUE)) {
+    check_desc_installed()
+  } # incase of {desc} not installed by {usethis}
+
+  usethis_use_latest_dependencies()
 
   # No .Rprofile for now
   # cat_rule("Appending .Rprofile")

@@ -19,12 +19,7 @@ shiny applications.
 
 ## About
 
-You’re reading the doc about version :
-
-``` r
-desc::desc_get_version()
-#> [1] '0.3.3.9000'
-```
+You’re reading the doc about version : `0.3.4.9002`
 
 ## Tool series
 

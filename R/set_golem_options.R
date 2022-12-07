@@ -32,7 +32,6 @@
 #'
 #' @export
 #' @importFrom attempt stop_if_not
-#' @importFrom usethis proj_set
 #'
 #' @return Used for side-effects for the setters, and values from the
 #'     config in the getters.
@@ -49,7 +48,7 @@ set_golem_options <- function(
   # golem_install_dev_pkg() function
 
   if (talkative) {
-    cli::cat_rule(
+    cat_rule(
       "Setting {golem} options in `golem-config.yml`"
     )
   }
@@ -91,10 +90,10 @@ set_golem_options <- function(
 
   # This part is for {usethis} and {here}
   if (talkative) {
-    cli::cat_rule(
+    cat_rule(
       "Setting {usethis} project as `golem_wd`"
     )
   }
 
-  proj_set(golem_wd)
+  usethis_proj_set(golem_wd)
 }

@@ -10,7 +10,6 @@
 #' @param recommended A vector of recommended packages.
 #' @param spellcheck Whether or not to use a spellcheck test.
 #'
-#' @importFrom usethis use_testthat use_package
 #' @rdname use_recommended
 #'
 #' @export
@@ -29,7 +28,7 @@ use_recommended_deps <- function(
   on.exit(setwd(old))
 
   for (i in sort(recommended)) {
-    try(use_package(i))
+    try(usethis_use_package(i))
   }
 
   cat_green_tick("Dependencies added")
@@ -38,7 +37,6 @@ use_recommended_deps <- function(
 
 #' @rdname use_recommended
 #' @export
-#' @importFrom usethis use_testthat use_package use_spell_check
 #' @importFrom utils capture.output
 #' @importFrom attempt without_warning stop_if
 use_recommended_tests <- function(
@@ -50,17 +48,12 @@ use_recommended_tests <- function(
 ) {
   old <- setwd(fs_path_abs(pkg))
 
-  rlang::check_installed(
-    "fs",
-    reason = "for file & directory manipulation."
-  )
-
   on.exit(setwd(old))
 
   if (!fs_dir_exists(
     fs_path(fs_path_abs(pkg), "tests")
   )) {
-    without_warning(use_testthat)()
+    without_warning(usethis_use_testthat)()
   }
   if (!requireNamespace("processx")) {
     stop("Please install the {processx} package to add the recommended tests.")
@@ -79,13 +72,11 @@ use_recommended_tests <- function(
   )
 
   if (spellcheck) {
-    use_spell_check(
+    usethis_use_spell_check(
       vignettes = vignettes,
       lang = lang,
       error = error
     )
   }
-
-
   cat_green_tick("Tests added")
 }

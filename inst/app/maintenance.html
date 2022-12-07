@@ -1,0 +1,268 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Maintenance</title>
+    <style>
+         :root {
+            --primary: #f15522;
+        }
+        
+        .root {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .canvas {
+            width: 95vmin;
+            height: 95vmin;
+            position: absolute;
+        }
+        
+        .canvas div {
+            position: absolute;
+            box-sizing: border-box;
+        }
+        
+        .desk {
+            width: 90%;
+            height: 0.35%;
+            top: 70%;
+            left: 10%;
+            background-color: #4e4e4e;
+        }
+        
+        .computer-stand-bottom {
+            height: 1.5%;
+            width: 20%;
+            left: 60%;
+            top: 68.5%;
+            background-color: #848388;
+            border-top-right-radius: 3.5vmin;
+            border-top-left-radius: 3.5vmin;
+        }
+        
+        .computer-stand {
+            left: 62.5%;
+            top: 60.5%;
+            height: 8%;
+            width: 15%;
+            background-color: #68676b;
+            clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+        }
+        
+        .computer-bottom {
+            box-shadow: 0 5px 11px rgba(0, 0, 0, 0.25);
+            top: 57%;
+            left: 51.5%;
+            width: 37%;
+            height: 4%;
+            border-bottom-right-radius: 3.5vmin;
+            border-bottom-left-radius: 3.5vmin;
+            background-color: #848388;
+        }
+        
+        .computer-bottom::after {
+            content: "";
+            background-image: url(https://github.com/rstudio/shiny/raw/main/man/figures/logo.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            left: 30%;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        
+        .computer-monitor {
+            top: 37%;
+            left: 51.5%;
+            height: 20%;
+            width: 37%;
+            background-color: #ffffff;
+            border: 1vmin solid #000000;
+            border-top-right-radius: 1.3vmin;
+            border-top-left-radius: 1.3vmin;
+        }
+        
+        .screen {
+            background-image: url(https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            left: 54%;
+            top: 40%;
+            width: 15%;
+            height: 15%;
+        }
+        
+        .screen::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            top: 25%;
+            left: 100%;
+            font-family: monospace;
+            animation-name: example;
+            animation-duration: 8s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+            font-size: 1.7vmin;
+        }
+        
+        @keyframes example {
+            0% {
+                content: "Under Maintenance";
+            }
+            10% {
+                content: "Under Maintenance";
+            }
+            20% {
+                content: "."
+            }
+            30% {
+                content: ".."
+            }
+            40% {
+                content: "..."
+            }
+            50%,
+            90% {
+                content: "Please come back soon..."
+            }
+            100% {
+                content: "This application is under maintenance"
+            }
+        }
+        
+        .golem {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .golem .head {
+            top: 46%;
+            left: 24%;
+            width: 20%;
+            height: 24%;
+            background: var(--primary);
+            border-radius: 80% 80% 40% 40% / 80%;
+            border: 0.35vmin solid #222;
+        }
+        
+        .golem .ear {
+            width: 2.4%;
+            height: 5.5%;
+            background: var(--primary);
+            border-radius: 70% 70% 40% 90% / 50% 50% 100% 90%;
+            border: 0.35vmin solid;
+            border-right-color: var(--primary);
+            top: 52%;
+            transform: rotate(-2deg);
+            left: 27%;
+            box-shadow: -0.25vmin -0.25vmin;
+        }
+        
+        .golem .ear::before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            top: 20%;
+            left: 8%;
+            border: 0.25vmin solid transparent;
+            border-top: 0.4vmin solid;
+            transform: rotate(15deg);
+        }
+        
+        .golem .eyebrow {
+            width: 6%;
+            height: 3%;
+            border-radius: 50%;
+            border: 0.5vmin solid transparent;
+            border-left: 0.35vmin solid transparent;
+            border-top: 0.45vmin solid;
+            top: 52%;
+        }
+        
+        .golem .eyebrow.left {
+            left: 32%;
+        }
+        
+        .golem .eyebrow.right {
+            left: 37.5%;
+        }
+        
+        .golem .eye {
+            width: 3.7%;
+            height: 2.5%;
+            top: 53%;
+            background: #fff;
+            border-radius: 0% 0% 90% 70% / 70%;
+            border: 0.45vmin solid #222;
+        }
+        
+        .golem .eye.left {
+            left: 33.4%;
+            transform: rotate(5deg);
+        }
+        
+        .golem .eye.right {
+            left: 38.4%;
+            transform: rotate(-5deg);
+        }
+        
+        .golem .arm {
+            top: 65%;
+            width: 19%;
+            height: 5%;
+            left: 34%;
+            background: var(--primary);
+            border-radius: 30% 0 / 53%;
+            border: 0.3vmin solid;
+            box-shadow: 5px 5px 11px rgb(0 0 0 / 28%);
+        }
+        
+        .golem .hand {
+            width: 7%;
+            height: 7%;
+            top: 63%;
+            left: 52%;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 0.4vmin solid;
+            border-left: 0.1vmin solid var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class=" root">
+        <div class="canvas">
+            <div class="desk"></div>
+            <div class="computer-stand-bottom"></div>
+            <div class="computer-stand"></div>
+            <div class="computer-monitor"></div>
+            <div class="computer-bottom"></div>
+            <div class="screen"></div>
+            <div class="computer"></div>
+            <div class="golem">
+                <div class="head"></div>
+                <div class="ear"></div>
+                <div class="eyebrow left"></div>
+                <div class="eyebrow right"></div>
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="arm"></div>
+                <div class="hand"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
