@@ -2,9 +2,6 @@
 
 # 0.3.5.9000+ (dev version)
 
-
-add_dockerfile_with_renv now works well with uppercase in package name
-
 ## Soft deprecated
 
 ## Hard deprecated
@@ -29,7 +26,7 @@ add_dockerfile_with_renv now works well with uppercase in package name
 + The setting of the config file has been unified so that we are sure to keep the !expr in `golem_set_wd()`, and the codebase has been simplified for this (#709).
 + The functions adding files can no longer take a `name` argument that has length() > 1. This used to cause some bugs (#781)
 + The typo in `install.packages()` in 02_dev.R has been corrected (@asiripanich)
-
++ `add_dockerfile_with_renv()` now works well with uppercase in package name
 ## Internal changes
 
 
