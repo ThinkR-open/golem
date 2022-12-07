@@ -1,6 +1,7 @@
 test_that("install_dev_deps works", {
   install_dev_deps(
-    force_install = TRUE
+    force_install = TRUE,
+    repos = "https://cran.rstudio.com"
   )
   paks <- unique(
     c(
