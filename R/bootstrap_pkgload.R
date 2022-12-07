@@ -7,7 +7,7 @@ check_pkgload_installed <- function() {
   )
 }
 
-uses_testthat <- getFromNamespace("uses_testthat", "pkgload")
+
 
 
 pkgload_load_all <- function(
@@ -24,6 +24,9 @@ pkgload_load_all <- function(
   warn_conflicts = TRUE
 ) {
   check_roxygen2_installed()
+  check_pkgload_installed()
+
+  uses_testthat <- getFromNamespace("uses_testthat", "pkgload")
   pkgload::load_all(
     path = path,
     reset = reset,

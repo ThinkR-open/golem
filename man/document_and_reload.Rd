@@ -30,15 +30,6 @@ See \link[roxygen2]{load} for more details.}
 \item{clean}{If \code{TRUE}, roxygen will delete all files previously
 created by roxygen before running each roclet.}
 
-\item{export_all}{If \code{TRUE} (the default), export all objects.
-If \code{FALSE}, export only the objects that are listed as exports
-in the NAMESPACE file.}
-
-\item{helpers}{if \code{TRUE} loads \pkg{testthat} test helpers.}
-
-\item{attach_testthat}{If \code{TRUE}, attach \pkg{testthat} to the search path,
-which more closely mimics the environment within test files.}
-
 \item{...}{Other arguments passed to \code{pkgload::load_all()}}
 }
 \value{
