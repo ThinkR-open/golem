@@ -2,6 +2,9 @@
 
 # 0.3.5.9000+ (dev version)
 
+
+add_dockerfile_with_renv now works well with uppercase in package name
+
 ## Soft deprecated
 
 ## Hard deprecated
@@ -28,6 +31,7 @@
 + The typo in `install.packages()` in 02_dev.R has been corrected (@asiripanich)
 
 ## Internal changes
+
 
 
 # golem 0.3.5
