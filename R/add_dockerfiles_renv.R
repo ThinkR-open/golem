@@ -1,27 +1,25 @@
 add_dockerfile_with_renv_ <- function(
-  source_folder = ".",
-  lockfile = NULL,
-  output_dir = fs::path(tempdir(), "deploy"),
-  distro = "focal",
-  FROM = "rocker/verse",
-  AS = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  extra_sysreqs = NULL,
-  update_tar_gz = TRUE,
-  document = FALSE,
-  ...
-  # build_golem_from_source = TRUE,
-) {
-
-   if (is.null(lockfile)) {
-       rlang::check_installed(
-        c("renv","attachment"),
-     reason = "to build a Dockerfile with automatic renv.lock creation. Use the `lockfile` parameter to pass your own `renv.lock` file."
-      )
-
-     }
+    source_folder = ".",
+    lockfile = NULL,
+    output_dir = fs::path(tempdir(), "deploy"),
+    distro = "focal",
+    FROM = "rocker/verse",
+    AS = NULL,
+    sysreqs = TRUE,
+    repos = c(CRAN = "https://cran.rstudio.com/"),
+    expand = FALSE,
+    extra_sysreqs = NULL,
+    update_tar_gz = TRUE,
+    document = FALSE,
+    ...
+    # build_golem_from_source = TRUE,
+    ) {
+  if (is.null(lockfile)) {
+    rlang::check_installed(
+      c("renv", "attachment"),
+      reason = "to build a Dockerfile with automatic renv.lock creation. Use the `lockfile` parameter to pass your own `renv.lock` file."
+    )
+  }
 
 
   # Small hack to prevent warning from rlang::lang() in tests
@@ -38,10 +36,7 @@ add_dockerfile_with_renv_ <- function(
   }
 
   if (is.null(lockfile)) {
-
-
-    if ( isTRUE(document) ){
-
+    if (isTRUE(document)) {
       cli_cat_line("You set `document = TRUE` and you did not pass your own renv.lock file,")
       cli_cat_line("as a consequence {golem} will use `attachment::att_amend_desc()` to update your ")
       cli_cat_line("DESCRIPTION file before creating the renv.lock file")
@@ -57,14 +52,19 @@ add_dockerfile_with_renv_ <- function(
 
     lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
-      check_if_suggests_is_installed = FALSE,  document = document,
+      check_if_suggests_is_installed = FALSE, document = document,
       output = file.path(output_dir, "renv.lock.prod"),
       ...
     )
   }
 
-  file.copy(from = lockfile, to = output_dir)
-  socle <- dockerfiler_dock_from_renv(
+  fs_file_copy(
+    path = lockfile,
+    new_path = output_dir,
+    overwrite = TRUE
+  )
+
+  socle <- dockerfiler::dock_from_renv(
     lockfile = lockfile,
     distro = distro,
     FROM = FROM,
@@ -78,8 +78,7 @@ add_dockerfile_with_renv_ <- function(
   socle$write(as = file.path(output_dir, "Dockerfile_base"))
 
 
-  my_dock <- dockerfiler::Dockerfile$new(FROM = tolower(paste0(golem::get_golem_name(), "_base")))
-
+  my_dock <- dockerfiler::Dockerfile$new(FROM = tolower(tolower(paste0(golem::get_golem_name(), "_base"))))
 
   my_dock$COPY("renv.lock.prod", "renv.lock")
 
@@ -155,24 +154,23 @@ add_dockerfile_with_renv_ <- function(
 #' @rdname dockerfiles
 #' @export
 add_dockerfile_with_renv <- function(
-  source_folder = ".",
-  lockfile = NULL,
-  output_dir = fs::path(tempdir(), "deploy"),
-  distro = "focal",
-  from = "rocker/verse",
-  as = NULL,
-  sysreqs = TRUE,
-  port = 80,
-  host = "0.0.0.0",
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  document = TRUE,
-  extra_sysreqs = NULL,
-  update_tar_gz = TRUE,
-  dockerfile_cmd = NULL,
-  ...
-) {
+    source_folder = ".",
+    lockfile = NULL,
+    output_dir = fs::path(tempdir(), "deploy"),
+    distro = "focal",
+    from = "rocker/verse",
+    as = NULL,
+    sysreqs = TRUE,
+    port = 80,
+    host = "0.0.0.0",
+    repos = c(CRAN = "https://cran.rstudio.com/"),
+    expand = FALSE,
+    open = TRUE,
+    document = TRUE,
+    extra_sysreqs = NULL,
+    update_tar_gz = TRUE,
+    dockerfile_cmd = NULL,
+    ...) {
   base_dock <- add_dockerfile_with_renv_(
     source_folder = source_folder,
     lockfile = lockfile,
@@ -210,8 +208,8 @@ add_dockerfile_with_renv <- function(
 docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
 # then go to 127.0.0.1:%s",
-    tolower(paste0(golem::get_golem_name(), "_base")),
-    tolower(paste0(golem::get_golem_name(), ":latest")),
+    paste0(golem::get_golem_name(), "_base"),
+    paste0(golem::get_golem_name(), ":latest"),
     port,
     port,
     tolower(paste0(golem::get_golem_name(), ":latest")),
@@ -231,21 +229,20 @@ docker run -p %s:%s %s
 #' @export
 #' @export
 add_dockerfile_with_renv_shinyproxy <- function(
-  source_folder = ".",
-  lockfile = NULL,
-  output_dir = fs::path(tempdir(), "deploy"),
-  distro = "focal",
-  from = "rocker/verse",
-  as = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  extra_sysreqs = NULL,
-  open = TRUE,
-  document = TRUE,
-  update_tar_gz = TRUE,
-  ...
-) {
+    source_folder = ".",
+    lockfile = NULL,
+    output_dir = fs::path(tempdir(), "deploy"),
+    distro = "focal",
+    from = "rocker/verse",
+    as = NULL,
+    sysreqs = TRUE,
+    repos = c(CRAN = "https://cran.rstudio.com/"),
+    expand = FALSE,
+    extra_sysreqs = NULL,
+    open = TRUE,
+    document = TRUE,
+    update_tar_gz = TRUE,
+    ...) {
   add_dockerfile_with_renv(
     source_folder = source_folder,
     lockfile = lockfile,
@@ -275,21 +272,20 @@ add_dockerfile_with_renv_shinyproxy <- function(
 #' @export
 #' @export
 add_dockerfile_with_renv_heroku <- function(
-  source_folder = ".",
-  lockfile = NULL,
-  output_dir = fs::path(tempdir(), "deploy"),
-  distro = "focal",
-  from = "rocker/verse",
-  as = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  extra_sysreqs = NULL,
-  open = TRUE,
-  document = TRUE,
-  update_tar_gz = TRUE,
-  ...
-) {
+    source_folder = ".",
+    lockfile = NULL,
+    output_dir = fs::path(tempdir(), "deploy"),
+    distro = "focal",
+    from = "rocker/verse",
+    as = NULL,
+    sysreqs = TRUE,
+    repos = c(CRAN = "https://cran.rstudio.com/"),
+    expand = FALSE,
+    extra_sysreqs = NULL,
+    open = TRUE,
+    document = TRUE,
+    update_tar_gz = TRUE,
+    ...) {
   add_dockerfile_with_renv(
     source_folder = source_folder,
     lockfile = lockfile,
