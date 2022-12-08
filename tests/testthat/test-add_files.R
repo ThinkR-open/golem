@@ -9,12 +9,6 @@ expect_add_file <- function(
   name <- rand_name()
   # Be sure to remove all files in case there are
   remove_files("inst/app/www", ext)
-
-  # Checking that check_name_length is throwing an error
-  expect_error(
-    fun(c("a", "b")),
-  )
-
   # Launch the function
   fun(name, pkg = pak, open = FALSE)
   if (fun_nms == "add_js_input_binding") {
@@ -58,14 +52,8 @@ expect_add_file <- function(
     pkg = pkg,
     open = FALSE
   )
-  expect_exists(
-    file.path("inst/app/www")
-  )
-  ff <- list.files(
-    "inst/app/www/",
-    pattern = ter,
-    full.names = TRUE
-  )
+  expect_exists(file.path("inst/app/www"))
+  ff <- list.files("inst/app/www/", pattern = ter, full.names = TRUE)
   expect_equal(tools::file_ext(ff), ext)
 
   # Check content is not over-added
@@ -114,18 +102,6 @@ test_that("add_files", {
       pak = pkg,
       fp = fp
     )
-    expect_add_file(
-      add_html_template,
-      ext = "html",
-      pak = pkg,
-      fp = fp
-    )
-    expect_add_file(
-      add_partial_html_template,
-      ext = "html",
-      pak = pkg,
-      fp = fp
-    )
   })
 })
 
@@ -142,56 +118,19 @@ test_that("add_ui_server_files", {
     expect_equal(tools::file_ext(script), "R")
 
     # Check content is not over-added
-    l_ui <- length(
-      readLines(
-        list.files(
-          "inst/app/",
-          pattern = "ui",
-          full.names = TRUE
-        )
-      )
-    )
-    l_server <- length(
-      readLines(
-        list.files(
-          "inst/app/",
-          pattern = "server",
-          full.names = TRUE
-        )
-      )
-    )
-    expect_warning(
-      add_ui_server_files(pkg = pkg)
-    )
+    l_ui <- length(readLines(list.files("inst/app/", pattern = "ui", full.names = TRUE)))
+    l_server <- length(readLines(list.files("inst/app/", pattern = "server", full.names = TRUE)))
+    expect_warning(add_ui_server_files(pkg = pkg))
     expect_equal(
       l_ui,
-      length(
-        readLines(
-          list.files(
-            "inst/app/",
-            pattern = "ui",
-            full.names = TRUE
-          )
-        )
-      )
+      length(readLines(list.files("inst/app/", pattern = "ui", full.names = TRUE)))
     )
     expect_equal(
       l_server,
-      length(
-        readLines(
-          list.files(
-            "inst/app/",
-            pattern = "server",
-            full.names = TRUE
-          )
-        )
-      )
+      length(readLines(list.files("inst/app/", pattern = "server", full.names = TRUE)))
     )
 
-    expect_warning(
-      add_ui_server_files(pkg = pkg)
-    )
-
+    expect_warning(add_ui_server_files(pkg = pkg))
     remove_file("inst/app/ui.R")
     remove_file("inst/app/server.R")
   })

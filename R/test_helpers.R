@@ -9,10 +9,8 @@
 #' @export
 #' @rdname testhelpers
 expect_shinytag <- function(object) {
-  rlang::check_installed(
-    "testthat",
-    "to run the tests."
-  )
+  check_is_installed("testthat")
+  check_is_installed("rlang")
   act <- testthat::quasi_label(rlang::enquo(object), arg = "object")
   act$class <- class(object)
   testthat::expect(
@@ -25,11 +23,8 @@ expect_shinytag <- function(object) {
 #' @export
 #' @rdname testhelpers
 expect_shinytaglist <- function(object) {
-  rlang::check_installed(
-    "testthat",
-    "to run the tests.",
-    version = "3.0.0"
-  )
+  check_is_installed("testthat")
+  check_is_installed("rlang")
   act <- testthat::quasi_label(rlang::enquo(object), arg = "object")
   act$class <- class(object)
   testthat::expect(
@@ -50,11 +45,9 @@ expect_html_equal <- function(
   html,
   ...
 ) {
-  rlang::check_installed(
-    "testthat",
-    "to run the tests.",
-    version = "3.0.0"
-  )
+  check_is_installed("testthat")
+  required_version("testthat", "3.0.0")
+  check_is_installed("rlang")
 
   if (!missing(html)) {
     message(
@@ -76,17 +69,14 @@ expect_running <- function(
   sleep,
   R_path = NULL
 ) {
-  rlang::check_installed(
-    "testthat",
-    "to run the tests.",
-    version = "3.0.0"
-  )
+  check_is_installed("testthat")
   testthat::skip_if_not_installed("pkgload")
   testthat::skip_if_not_installed("processx")
   testthat::skip_on_cran()
 
   # Ok for now we'll get back to this
   testthat::skip_if_not(interactive())
+
 
   # Oh boy using testthat and processx is a mess
   #

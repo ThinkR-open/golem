@@ -29,10 +29,10 @@ use_utils_ui <- function(
     cat_green_tick("Utils UI added")
 
     if (with_test) {
-      if (!isTRUE(fs_dir_exists("tests"))) {
+      if (!isTRUE(dir.exists("tests"))) {
         use_testthat()
       }
-      pth <- fs_path(
+      pth <- path(
         pkg,
         "tests",
         "testthat",
@@ -81,10 +81,10 @@ use_utils_server <- function(
     cat_green_tick("Utils server added")
 
     if (with_test) {
-      if (!isTRUE(fs_dir_exists("tests"))) {
+      if (!isTRUE(dir.exists("tests"))) {
         use_testthat()
       }
-      pth <- fs_path(
+      pth <- path(
         pkg,
         "tests",
         "testthat",
@@ -131,32 +131,23 @@ use_utils_test_server <- function(pkg = get_golem_wd()) {
   use_utils_test_(pkg, "server")
 }
 
+
+#' @importFrom fs file_copy path_abs path_file
 use_utils <- function(
   file_name,
   folder_name,
   pkg = get_golem_wd()
 ) {
-  rlang::check_installed(
-    "fs",
-    reason = "for file manipulation."
-  )
-
   old <- setwd(
-    fs_path_abs(pkg)
+    path_abs(pkg)
   )
   on.exit(setwd(old))
-
-  where <- fs_path(
-    fs_path_abs(pkg),
-    folder_name,
-    file_name
-  )
-
-  if (fs_file_exists(where)) {
+  where <- path(path_abs(pkg), folder_name, file_name)
+  if (file_exists(where)) {
     cat_exists(where)
     return(FALSE)
   } else {
-    fs_file_copy(
+    file_copy(
       path = golem_sys("utils", file_name),
       new_path = where
     )

@@ -24,6 +24,7 @@
 #' @importFrom attempt stop_if
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
+#' @importFrom fs path_abs path file_create file_exists
 #'
 #' @note `add_ui_server_files` will be deprecated in future version of `{golem}`
 #'
@@ -42,14 +43,12 @@ add_js_file <- function(
 ) {
   stop_if(
     missing(name),
-    msg = "`name` is required"
+    msg = "Name is required"
   )
-
-  check_name_length(name)
 
   name <- file_path_sans_ext(name)
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -62,15 +61,16 @@ add_js_file <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     sprintf("%s.js", name)
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file.exists(where)) {
+    file_create(where)
+
     if (with_doc_ready) {
       write_there <- function(...) {
         write(..., file = where, append = TRUE)
@@ -99,6 +99,8 @@ add_js_file <- function(
 
 #' @export
 #' @rdname add_files
+#'
+#' @importFrom fs path_abs path file_create file_exists
 add_js_handler <- function(
   name,
   pkg = get_golem_wd(),
@@ -110,14 +112,12 @@ add_js_handler <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "`name` is required"
+    msg = "Name is required"
   )
-
-  check_name_length(name)
 
   name <- file_path_sans_ext(name)
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -130,15 +130,15 @@ add_js_handler <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- file.path(
     dir,
     sprintf("%s.js", name)
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file.exists(where)) {
+    file_create(where)
 
     template(path = where, ...)
 
@@ -160,6 +160,7 @@ add_js_handler <- function(
 
 #' @export
 #' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
 add_js_input_binding <- function(
   name,
   pkg = get_golem_wd(),
@@ -175,10 +176,8 @@ add_js_input_binding <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "`name` is required"
+    msg = "Name is required"
   )
-
-  check_name_length(name)
 
   attempt::stop_if(
     length(events$name) == 0,
@@ -196,7 +195,7 @@ add_js_input_binding <- function(
     sprintf("input-%s", name)
   )
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -209,15 +208,15 @@ add_js_input_binding <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- file.path(
     dir,
     sprintf("%s.js", name)
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file.exists(where)) {
+    file_create(where)
 
     write_there <- function(...) {
       write(..., file = where, append = TRUE)
@@ -308,6 +307,7 @@ add_js_input_binding <- function(
 
 #' @export
 #' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
 add_js_output_binding <- function(
   name,
   pkg = get_golem_wd(),
@@ -317,10 +317,8 @@ add_js_output_binding <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "`name` is required"
+    msg = "Name is required"
   )
-
-  check_name_length(name)
 
   raw_name <- name
 
@@ -328,7 +326,7 @@ add_js_output_binding <- function(
     sprintf("output-%s", name)
   )
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -341,15 +339,15 @@ add_js_output_binding <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- file.path(
     dir,
     sprintf("%s.js", name)
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file.exists(where)) {
+    file_create(where)
 
     write_there <- function(...) {
       write(..., file = where, append = TRUE)
@@ -390,6 +388,7 @@ add_js_output_binding <- function(
 
 #' @export
 #' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
 add_css_file <- function(
   name,
   pkg = get_golem_wd(),
@@ -401,14 +400,12 @@ add_css_file <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "`name` is required"
+    msg = "Name is required"
   )
-
-  check_name_length(name)
 
   name <- file_path_sans_ext(name)
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -421,9 +418,9 @@ add_css_file <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     sprintf(
       "%s.css",
@@ -431,8 +428,8 @@ add_css_file <- function(
     )
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file_exists(where)) {
+    file_create(where)
     template(path = where, ...)
     file_created_dance(
       where,
@@ -452,6 +449,7 @@ add_css_file <- function(
 
 #' @export
 #' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
 #' @importFrom cli cli_alert_info
 add_sass_file <- function(
   name,
@@ -464,14 +462,12 @@ add_sass_file <- function(
 ) {
   attempt::stop_if(
     missing(name),
-    msg = "`name` is required"
+    msg = "Name is required"
   )
-
-  check_name_length(name)
 
   name <- file_path_sans_ext(name)
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -484,9 +480,9 @@ add_sass_file <- function(
     return(invisible(FALSE))
   }
 
-  dir_abs <- fs_path_abs(dir)
+  dir_abs <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir_abs,
     sprintf(
       "%s.sass",
@@ -494,8 +490,8 @@ add_sass_file <- function(
     )
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file_exists(where)) {
+    file_create(where)
     template(path = where, ...)
     file_created_dance(
       where,
@@ -506,11 +502,7 @@ add_sass_file <- function(
       open
     )
 
-    add_sass_code(
-      where = where,
-      dir = dir,
-      name = name
-    )
+    add_sass_code(where = where, dir = dir, name = name)
 
     cli_alert_info(
       "After running the compilation, your CSS file will be automatically link in `golem_add_external_resources()`."
@@ -525,6 +517,7 @@ add_sass_file <- function(
 
 #' @export
 #' @rdname add_files
+#' @importFrom fs path_abs path file_create file_exists
 add_html_template <- function(
   name = "template.html",
   pkg = get_golem_wd(),
@@ -534,9 +527,7 @@ add_html_template <- function(
 ) {
   name <- file_path_sans_ext(name)
 
-  check_name_length(name)
-
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -549,9 +540,9 @@ add_html_template <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     sprintf(
       "%s.html",
@@ -559,8 +550,8 @@ add_html_template <- function(
     )
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file_exists(where)) {
+    file_create(where)
     write_there <- function(...) write(..., file = where, append = TRUE)
     write_there("<!DOCTYPE html>")
     write_there("<html>")
@@ -593,66 +584,10 @@ add_html_template <- function(
   }
 }
 
-#' @export
-#' @rdname add_files
-add_partial_html_template <- function(
-  name = "partial_template.html",
-  pkg = get_golem_wd(),
-  dir = "inst/app/www",
-  open = TRUE,
-  dir_create = TRUE
-) {
-  name <- file_path_sans_ext(name)
-  check_name_length(name)
-
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
-  )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
-
-  dir <- fs_path_abs(dir)
-
-  where <- fs_path(
-    dir,
-    sprintf(
-      "%s.html",
-      name
-    )
-  )
-
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-    write_there <- function(...) write(..., file = where, append = TRUE)
-    write_there("<div>")
-    write_there("  {{ content }}")
-    write_there("</div>")
-    write_there("")
-    file_created_dance(
-      where,
-      after_creation_message_html_template,
-      pkg,
-      dir,
-      name,
-      open
-    )
-  } else {
-    file_already_there_dance(
-      where = where,
-      open_file = open
-    )
-  }
-}
 
 #' @export
 #' @rdname add_files
+#' @importFrom fs path_abs file_create
 add_ui_server_files <- function(
   pkg = get_golem_wd(),
   dir = "inst/app",
@@ -660,7 +595,7 @@ add_ui_server_files <- function(
 ) {
   .Deprecated(msg = "This function will be deprecated in a future version of {golem}.\nPlease comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to stay.")
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -673,13 +608,13 @@ add_ui_server_files <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
   # UI
-  where <- fs_path(dir, "ui.R")
+  where <- path(dir, "ui.R")
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file_exists(where)) {
+    file_create(where)
 
     write_there <- function(...) write(..., file = where, append = TRUE)
 
@@ -700,8 +635,9 @@ add_ui_server_files <- function(
     "server.R"
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+
+  if (!file_exists(where)) {
+    file_create(where)
 
     write_there <- function(...) write(..., file = where, append = TRUE)
 

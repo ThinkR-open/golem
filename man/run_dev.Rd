@@ -4,12 +4,12 @@
 \alias{run_dev}
 \title{Run run_dev.R}
 \usage{
-run_dev(file = "dev/run_dev.R", pkg = get_golem_wd())
+run_dev(file, pkg = pkgload::pkg_name())
 }
 \arguments{
 \item{file}{File path to \code{run_dev.R}. Defaults to \code{R/run_dev.R}.}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Package name to run the file. Defaults to current active package.}
 }
 \value{
 Used for side-effect

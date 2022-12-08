@@ -7,6 +7,7 @@
 #' @export
 #'
 #' @importFrom attempt stop_if_not
+#' @importFrom fs path_abs path file_copy
 #'
 #' @return Used for side-effects.
 #'
@@ -33,7 +34,7 @@ use_favicon <- function(
   )
 
 
-  local <- fs_file_exists(path)
+  local <- fs::file_exists(path)
 
   if (!local) {
     if (getRversion() >= "3.5") {
@@ -64,15 +65,15 @@ use_favicon <- function(
       destfile,
       method = method
     )
-    path <- fs_path_abs(destfile)
+    path <- path_abs(destfile)
   }
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
 
   on.exit(setwd(old))
 
-  to <- fs_path(
-    fs_path_abs(pkg),
+  to <- path(
+    path_abs(pkg),
     "inst/app/www",
     sprintf(
       "favicon.%s",
@@ -81,7 +82,7 @@ use_favicon <- function(
   )
 
   if (!(path == to)) {
-    fs_file_copy(
+    file_copy(
       path,
       to,
       overwrite = TRUE
@@ -108,15 +109,16 @@ use_favicon <- function(
 
 #' @rdname favicon
 #' @export
+#' @importFrom fs file_delete file_exists
 remove_favicon <- function(path = "inst/app/www/favicon.ico") {
-  if (fs_file_exists(path)) {
+  if (file_exists(path)) {
     cat_green_tick(
       sprintf(
         "Removing favicon at %s",
         path
       )
     )
-    fs_file_delete(path)
+    file_delete(path)
   } else {
     cat_red_bullet(
       sprintf(
@@ -146,7 +148,7 @@ favicon <- function(
   resources_path = "www",
   ext = "ico"
 ) {
-  ico <- fs_path(
+  ico <- fs::path(
     resources_path,
     ico,
     ext = ext

@@ -1,6 +1,8 @@
 #' @importFrom utils capture.output
 #' @importFrom cli cat_bullet
 #' @importFrom usethis use_build_ignore use_package
+#' @importFrom pkgload pkg_name
+#' @importFrom fs path file_create path_file
 add_rstudio_files <- function(
   pkg,
   open,
@@ -11,27 +13,20 @@ add_rstudio_files <- function(
   )
 ) {
   service <- match.arg(service)
-  where <- fs_path(pkg, "app.R")
-
-  rlang::check_installed(
-    "pkgload",
-    reason = "to deploy on RStudio products."
-  )
-
-  rlang::check_installed("usethis")
+  where <- path(pkg, "app.R")
 
   disable_autoload(
     pkg = pkg
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file_exists(where)) {
+    file_create(where)
 
     write_there <- function(..., here = where) {
       write(..., here, append = TRUE)
     }
 
-    use_build_ignore(basename(where))
+    use_build_ignore(path_file(where))
     use_build_ignore("rsconnect")
     write_there("# Launch the ShinyApp (Do not remove this comment)")
     write_there("# To deploy, run: rsconnect::deployApp()")
@@ -46,9 +41,7 @@ add_rstudio_files <- function(
       )
     )
 
-    # We add {pkgload} as a dep because it's required to deploy on Connect & stuff
-    usethis::use_package("pkgload")
-
+    x <- capture.output(use_package("pkgload"))
     cat_created(where)
     cat_line("To deploy, run:")
     cat_bullet(darkgrey("rsconnect::deployApp()\n"))

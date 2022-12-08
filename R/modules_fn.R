@@ -21,6 +21,7 @@
 #' @export
 #' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
+#' @importFrom fs path_abs path file_create
 #'
 #' @seealso [module_template()]
 #'
@@ -39,14 +40,13 @@ add_module <- function(
   with_test = FALSE,
   ...
 ) {
-  check_name_length(name)
   name <- file_path_sans_ext(name)
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
-    fs_path(pkg, "R"),
+    path(pkg, "R"),
     type = "directory"
   )
 
@@ -55,13 +55,13 @@ add_module <- function(
     return(invisible(FALSE))
   }
 
-  where <- fs_path(
+  where <- path(
     "R",
     paste0("mod_", name, ".R")
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
+  if (!file_exists(where)) {
+    file_create(where)
 
     module_template(name = name, path = where, export = export, ...)
 
@@ -259,17 +259,17 @@ use_module_test <- function(
   check_is_installed("testthat")
   check_is_installed("fs")
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(fs::path_abs(pkg))
   on.exit(setwd(old))
 
 
-  if (!fs_dir_exists(
-    fs_path(pkg, "tests", "testthat")
+  if (!dir.exists(
+    path(pkg, "tests", "testthat")
   )) {
     usethis::use_testthat()
   }
 
-  path <- fs_path(
+  path <- fs::path(
     pkg,
     "tests",
     "testthat",
@@ -280,8 +280,8 @@ use_module_test <- function(
     ext = "R"
   )
 
-  if (!fs_file_exists(path)) {
-    fs_file_create(path)
+  if (!fs::file_exists(path)) {
+    fs::file_create(path)
 
     write_there <- function(...) {
       write(..., file = path, append = TRUE)

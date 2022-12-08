@@ -15,6 +15,7 @@
 #' @export
 #' @rdname use_files
 #' @importFrom cli cat_bullet
+#' @importFrom fs path_abs path file_exists
 #'
 #' @return The path to the file, invisibly.
 use_external_js_file <- function(
@@ -25,14 +26,12 @@ use_external_js_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   if (missing(name)) {
     name <- basename(url)
   }
-
-  check_name_length(name)
 
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.js", name)
@@ -47,14 +46,14 @@ use_external_js_file <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     new_file
   )
 
-  if (fs_file_exists(where)) {
+  if (file_exists(where)) {
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -84,6 +83,7 @@ use_external_js_file <- function(
 
 #' @export
 #' @rdname use_files
+#' @importFrom fs path_abs file_exists
 use_external_css_file <- function(
   url,
   name,
@@ -92,14 +92,12 @@ use_external_css_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   if (missing(name)) {
     name <- basename(url)
   }
-
-  check_name_length(name)
 
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.css", name)
@@ -114,14 +112,14 @@ use_external_css_file <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     new_file
   )
 
-  if (fs_file_exists(where)) {
+  if (file_exists(where)) {
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -151,6 +149,7 @@ use_external_css_file <- function(
 
 #' @export
 #' @rdname use_files
+#' @importFrom fs path_abs file_exists
 use_external_html_template <- function(
   url,
   name = "template.html",
@@ -159,15 +158,13 @@ use_external_html_template <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   new_file <- sprintf(
     "%s.html",
     file_path_sans_ext(name)
   )
-
-  check_name_length(name)
 
   dir_created <- create_if_needed(
     dir,
@@ -179,14 +176,14 @@ use_external_html_template <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     new_file
   )
 
-  if (fs_file_exists(where)) {
+  if (file_exists(where)) {
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -210,6 +207,7 @@ use_external_html_template <- function(
 
 #' @export
 #' @rdname use_files
+#' @importFrom fs path_abs file_exists
 use_external_file <- function(
   url,
   name,
@@ -218,14 +216,11 @@ use_external_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  check_name_length(name)
-
   if (missing(name)) {
     name <- basename(url)
   }
 
-
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -238,14 +233,14 @@ use_external_file <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     name
   )
 
-  if (fs_file_exists(where)) {
+  if (file_exists(where)) {
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -259,6 +254,7 @@ use_external_file <- function(
 
 #' @export
 #' @rdname use_files
+#' @importFrom fs path_abs file_exists
 use_internal_js_file <- function(
   path,
   name,
@@ -267,8 +263,7 @@ use_internal_js_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  check_name_length(name)
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   if (missing(name)) {
@@ -288,14 +283,14 @@ use_internal_js_file <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     new_file
   )
 
-  if (fs_file_exists(where)) {
+  if (file_exists(where)) {
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -309,7 +304,7 @@ use_internal_js_file <- function(
 
   cat_start_copy()
 
-  fs_file_copy(path, where)
+  file.copy(path, where)
 
   file_created_dance(
     where,
@@ -324,6 +319,7 @@ use_internal_js_file <- function(
 
 #' @export
 #' @rdname use_files
+#' @importFrom fs path_abs file_exists
 use_internal_css_file <- function(
   path,
   name,
@@ -332,9 +328,7 @@ use_internal_css_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  check_name_length(name)
-
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   if (missing(name)) {
@@ -354,14 +348,14 @@ use_internal_css_file <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     new_file
   )
 
-  if (fs_file_exists(where)) {
+  if (file_exists(where)) {
     cat_exists(where)
     return(invisible(FALSE))
   }
@@ -375,7 +369,7 @@ use_internal_css_file <- function(
 
   cat_start_copy()
 
-  fs_file_copy(path, where)
+  file.copy(path, where)
 
   file_created_dance(
     where,
@@ -390,6 +384,7 @@ use_internal_css_file <- function(
 
 #' @export
 #' @rdname use_files
+#' @importFrom fs path_abs file_exists
 use_internal_html_template <- function(
   path,
   name = "template.html",
@@ -398,10 +393,8 @@ use_internal_html_template <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
-
-  check_name_length(name)
 
   new_file <- sprintf(
     "%s.html",
@@ -418,21 +411,21 @@ use_internal_html_template <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     new_file
   )
 
-  if (fs_file_exists(where)) {
+  if (file_exists(where)) {
     cat_exists(where)
     return(invisible(FALSE))
   }
 
   cat_start_copy()
 
-  fs_file_copy(path, where)
+  file.copy(path, where)
 
   cat_copied(where)
 
@@ -448,6 +441,7 @@ use_internal_html_template <- function(
 
 #' @export
 #' @rdname use_files
+#' @importFrom fs path_abs file_exists
 use_internal_file <- function(
   path,
   name,
@@ -460,9 +454,7 @@ use_internal_file <- function(
     name <- basename(path)
   }
 
-  check_name_length(name)
-
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(path_abs(pkg))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -475,21 +467,21 @@ use_internal_file <- function(
     return(invisible(FALSE))
   }
 
-  dir <- fs_path_abs(dir)
+  dir <- path_abs(dir)
 
-  where <- fs_path(
+  where <- path(
     dir,
     name
   )
 
-  if (fs_file_exists(where)) {
+  if (file_exists(where)) {
     cat_exists(where)
     return(invisible(FALSE))
   }
 
   cat_start_copy()
 
-  fs_file_copy(path, where)
+  file.copy(path, where)
 
   cat_copied(where)
 }

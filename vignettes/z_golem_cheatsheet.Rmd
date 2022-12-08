@@ -1,5 +1,5 @@
 ---
-title: "e_golem_cheatsheet"
+title: "{golem} cheatsheet"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{e_golem_cheatsheet}

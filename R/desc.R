@@ -12,6 +12,7 @@
 #'
 #' @importFrom desc description
 #' @importFrom cli cat_bullet
+#' @importFrom fs path path_abs
 #'
 #' @export
 #'
@@ -27,10 +28,10 @@ fill_desc <- function(
   repo_url = NULL,
   pkg = get_golem_wd()
 ) {
-  path <- fs_path_abs(pkg)
+  path <- path_abs(pkg)
 
   desc <- desc::description$new(
-    file = fs_path(path, "DESCRIPTION")
+    file = path(path, "DESCRIPTION")
   )
 
   if (!is.null(author_orcid) & !is.character(author_orcid)) {
@@ -68,10 +69,10 @@ fill_desc <- function(
   )
   set_golem_version(
     version = "0.0.0.9000",
-    pkg = path
+    path = path
   )
   desc$set(
-    Package = as.character(pkg_name)
+    Package = pkg_name
   )
   change_app_config_name(
     name = pkg_name,
