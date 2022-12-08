@@ -1,7 +1,7 @@
 
 cat("\n")
 # rstudioapi::jobRunScript(here::here("inst/mantests/build.R"), workingDir = here::here())
-cat_ok <- function() cli::cat_bullet("Passed", bullet = "tick", bullet_col = "green")
+cat_ok <- function() cli_cat_bullet("Passed", bullet = "tick", bullet_col = "green")
 
 # We prevent the random name from having
 # ui or server inside it
@@ -18,7 +18,7 @@ fakename <- sprintf(
 
 # Just so that I can use this script locally too,
 # I set a temporary lib
-cli::cat_rule("Set up for lib")
+cli_cat_rule("Set up for lib")
 
 temp_app <- file.path(tempdir(), "golemmetrics")
 
@@ -30,7 +30,7 @@ if (Sys.getenv("CI", "local") == "local") {
   .libPaths(c(temp_lib, .libPaths()))
 }
 
-cli::cat_bullet(temp_app)
+cli_cat_bullet(temp_app)
 # This will be our golem app
 
 
@@ -46,7 +46,7 @@ install.packages(
   repo = "https://cran.rstudio.com/"
 )
 
-cli::cat_rule("Install golem")
+cli_cat_rule("Install golem")
 
 library(remotes, lib.loc = temp_lib)
 library(desc, lib.loc = temp_lib)
@@ -74,7 +74,7 @@ golem::install_dev_deps(
 )
 
 withr::with_tempdir({
-  cli::cat_rule("Install crystalmountains")
+  cli_cat_rule("Install crystalmountains")
 
   remotes::install_github(
     "thinkr-open/crystalmountains",
@@ -84,7 +84,7 @@ withr::with_tempdir({
 
   here::set_here(getwd())
   # Going to the temp dir and create a new golem
-  cli::cat_rule("Creating a golem based app")
+  cli_cat_rule("Creating a golem based app")
   library(golem)
 
   create_golem(
@@ -140,7 +140,7 @@ withr::with_tempdir({
   cat_ok()
 
 
-  cli::cat_rule("Checking the hook has set the MIT licence")
+  cli_cat_rule("Checking the hook has set the MIT licence")
   expect_true(
     file.exists("LICENSE")
   )
@@ -149,7 +149,7 @@ withr::with_tempdir({
   )
   cat_ok()
 
-  cli::cat_rule("Checking the DESCRIPTION is correct")
+  cli_cat_rule("Checking the DESCRIPTION is correct")
   expect_true(
     desc_get("Package") == "golemmetrics"
   )
@@ -161,7 +161,7 @@ withr::with_tempdir({
   )
   cat_ok()
 
-  cli::cat_rule("Checking all files are here")
+  cli_cat_rule("Checking all files are here")
 
   expected_files <- c(
     "DESCRIPTION",
@@ -193,8 +193,8 @@ withr::with_tempdir({
 
   # Going through 01_start.R ----
   #
-  cli::cat_rule("Going through 01_start.R")
-  cli::cat_line()
+  cli_cat_rule("Going through 01_start.R")
+  cli_cat_line()
 
   golem::fill_desc(
     pkg = temp_app,
@@ -208,38 +208,38 @@ withr::with_tempdir({
     pkg_version = "0.0.0.9000" # The Version of the package containing the App
   )
 
-  cli::cat_rule("checking package name")
+  cli_cat_rule("checking package name")
   expect_equal(
     desc_get_field("Package"),
     "golemmetrics"
   )
   cat_ok()
-  cli::cat_rule("checking pkg_title name")
+  cli_cat_rule("checking pkg_title name")
   expect_equal(
     desc_get_field("Title"),
     "A App with Metrics about 'Golem'"
   )
   cat_ok()
-  cli::cat_rule("checking package name")
+  cli_cat_rule("checking package name")
   expect_equal(
     desc_get_field("Description"),
     "Read metrics about {golem}."
   )
   cat_ok()
-  cli::cat_rule("checking package name")
+  cli_cat_rule("checking package name")
   expect_equal(
     as.character(desc_get_author()),
     "Colin Fay <colin@thinkr.fr> [cre, aut]"
   )
   cat_ok()
-  cli::cat_rule("checking package version")
+  cli_cat_rule("checking package version")
   expect_equal(
     as.character(desc_get_version()),
     "0.0.0.9000"
   )
   cat_ok()
 
-  cli::cat_rule("set_golem_options")
+  cli_cat_rule("set_golem_options")
 
   golem::set_golem_options()
   expect_equal(
@@ -260,7 +260,7 @@ withr::with_tempdir({
 
   cat_ok()
 
-  cli::cat_rule("Create Common Files")
+  cli_cat_rule("Create Common Files")
 
   # usethis::use_mit_license( "Golem User" )
 
@@ -288,7 +288,7 @@ withr::with_tempdir({
 
   cat_ok()
 
-  cli::cat_rule("use_recommended")
+  cli_cat_rule("use_recommended")
 
   golem::use_recommended_tests(spellcheck = FALSE)
   expect_true(
@@ -313,9 +313,9 @@ withr::with_tempdir({
   cat_ok()
 
   # Going through 02_dev ----
-  cli::cat_rule("Going through 02_dev.R")
+  cli_cat_rule("Going through 02_dev.R")
 
-  cli::cat_rule("Testing usepackage")
+  cli_cat_rule("Testing usepackage")
   if (!requireNamespace("cranlogs")) {
     install.packages("cranlogs")
   }
@@ -325,7 +325,7 @@ withr::with_tempdir({
   )
   cat_ok()
 
-  cli::cat_rule("Testing modules")
+  cli_cat_rule("Testing modules")
   golem::add_module(
     name = "main",
     open = FALSE,
@@ -389,18 +389,18 @@ withr::with_tempdir({
   golem::add_js_handler("handlers", template = crystalmountains::js_handler)
   golem::add_css_file("custom", template = crystalmountains::css_file)
 
-  cli::cat_rule("Testing and installing package")
+  cli_cat_rule("Testing and installing package")
   golem::document_and_reload()
   devtools::test()
   cat_ok()
 
-  cli::cat_rule("Testing 03_dev")
+  cli_cat_rule("Testing 03_dev")
   devtools::check()
   remotes::install_local(force = TRUE)
   targz <- devtools::build()
   remotes::install_local(targz)
 
-  cli::cat_rule("Testing 03_dev")
+  cli_cat_rule("Testing 03_dev")
 
   cat_ok()
 
@@ -427,5 +427,5 @@ withr::with_tempdir({
   # unlink(temp_golem, TRUE, TRUE)
   # unlink(temp_lib, TRUE, TRUE)
 
-  cli::cat_rule("Completed")
+  cli_cat_rule("Completed")
 })

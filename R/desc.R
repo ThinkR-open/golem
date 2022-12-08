@@ -11,7 +11,6 @@
 #' @param pkg_version The version of the package. Default is 0.0.0.9000
 #' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
 #'
-#' @importFrom cli cat_bullet
 #'
 #' @export
 #'
@@ -108,7 +107,7 @@ fill_desc <- function(
     file = "DESCRIPTION"
   )
 
-  cat_bullet(
+  cli_cat_bullet(
     "DESCRIPTION file modified",
     bullet = "tick",
     bullet_col = "green"

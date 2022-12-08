@@ -1,5 +1,4 @@
 #' @importFrom utils capture.output
-#' @importFrom cli cat_bullet
 add_rstudio_files <- function(
   pkg,
   open,
@@ -47,8 +46,8 @@ add_rstudio_files <- function(
     usethis_use_package("pkgload")
 
     cat_created(where)
-    cat_line("To deploy, run:")
-    cat_bullet(darkgrey("rsconnect::deployApp()\n"))
+    cli_cat_line("To deploy, run:")
+    cli_cat_bullet(darkgrey("rsconnect::deployApp()\n"))
     cat_red_bullet(
       sprintf(
         "Note that you'll need to upload the whole package to %s",

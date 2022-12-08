@@ -10,7 +10,6 @@
 #' @export
 #' @rdname utils_files
 #'
-#' @importFrom cli cat_bullet
 #' @importFrom utils capture.output
 #'
 #' @return Used for side-effects.

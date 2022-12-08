@@ -20,7 +20,7 @@ disable_autoload <- function(pkg = get_golem_wd()) {
       "_disable_autoload.R already exists, skipping its creation."
     )
   } else {
-    cat_rule("Creating _disable_autoload.R")
+    cli_cat_rule("Creating _disable_autoload.R")
     write(
       "# Disabling shiny autoload\n\n# See ?shiny::loadSupport for more information",
       fls
