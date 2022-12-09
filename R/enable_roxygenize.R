@@ -8,13 +8,13 @@ enable_roxygenize <- function(path = list.files(
     pattern = "Rproj$",
     full.names = TRUE
   )[1]) {
-  cat_bullet(
+  cli_cat_bullet(
     sprintf("Reading %s content ", basename(path)),
     bullet = "info",
     bullet_col = "green"
   )
   source <- yaml::read_yaml(file = path)
-  cat_bullet(
+  cli_cat_bullet(
     "Enable roxygen2",
     bullet = "info",
     bullet_col = "green"

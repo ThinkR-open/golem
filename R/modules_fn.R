@@ -19,7 +19,6 @@
 #' @note This function will prefix the `name` argument with `mod_`.
 #'
 #' @export
-#' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #'
 #' @seealso [module_template()]

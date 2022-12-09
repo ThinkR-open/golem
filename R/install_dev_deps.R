@@ -62,21 +62,22 @@ install_dev_deps <- function(
   for (
     pak in unique(
       c(
-        "usethis",
-        "pkgload",
-        "dockerfiler",
-        "devtools",
-        "roxygen2",
         "attachment",
-        "rstudioapi",
-        "here",
-        "fs",
+        "cli",
+        "crayon",
         "desc",
+        "devtools",
+        "dockerfiler",
+        "fs",
+        "here",
         "pkgbuild",
+        "pkgload",
         "processx",
+        "roxygen2",
         "rsconnect",
+        "rstudioapi",
         "testthat",
-        "rstudioapi"
+        "usethis"
       )
     )
   ) {

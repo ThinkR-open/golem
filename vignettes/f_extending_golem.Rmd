@@ -92,7 +92,7 @@ new_css <- function(path, package_name, ...) {
   write_there("    background-color:red;")
   write_there("}")
 
-  cli::cat_bullet("CSS generated")
+  cli_cat_bullet("CSS generated")
 }
 
 create_golem("ici", project_hook = new_css)

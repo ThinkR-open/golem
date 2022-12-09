@@ -388,18 +388,18 @@ add_dockerfile_heroku_ <- talk_once(
       )
     )
 
-    cat_rule("From your command line, run:")
-    cat_line("heroku container:login")
-    cat_line(
+    cli_cat_rule("From your command line, run:")
+    cli_cat_line("heroku container:login")
+    cli_cat_line(
       sprintf("heroku create %s", apps_h)
     )
-    cat_line(
+    cli_cat_line(
       sprintf("heroku container:push web --app %s", apps_h)
     )
-    cat_line(
+    cli_cat_line(
       sprintf("heroku container:release web --app %s", apps_h)
     )
-    cat_line(
+    cli_cat_line(
       sprintf("heroku open --app %s", apps_h)
     )
     cat_red_bullet("Be sure to have the heroku CLI installed.")

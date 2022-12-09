@@ -48,7 +48,7 @@ set_golem_options <- function(
   # golem_install_dev_pkg() function
 
   if (talkative) {
-    cat_rule(
+    cli_cat_rule(
       "Setting {golem} options in `golem-config.yml`"
     )
   }
@@ -90,7 +90,7 @@ set_golem_options <- function(
 
   # This part is for {usethis} and {here}
   if (talkative) {
-    cat_rule(
+    cli_cat_rule(
       "Setting {usethis} project as `golem_wd`"
     )
   }

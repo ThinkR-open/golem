@@ -100,7 +100,7 @@ use_favicon <- function(
       "You choose a png favicon, please add `ext = 'png'` to `favicon()` within the `golem_add_external_resources()` function in 'app_ui.R'."
     )
   } else {
-    cat_line(
+    cli_cat_line(
       "Favicon is automatically linked in app_ui via `golem_add_external_resources()`"
     )
   }

@@ -22,7 +22,6 @@
 #' @export
 #' @rdname add_files
 #' @importFrom attempt stop_if
-#' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #'
 #' @note `add_ui_server_files` will be deprecated in future version of `{golem}`
@@ -452,7 +451,6 @@ add_css_file <- function(
 
 #' @export
 #' @rdname add_files
-#' @importFrom cli cli_alert_info
 add_sass_file <- function(
   name,
   pkg = get_golem_wd(),

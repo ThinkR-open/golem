@@ -1,45 +1,21 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.3.5.9004
-Authors@R: 
-    c(person(given = "Colin",
-             family = "Fay",
-             role = c("cre", "aut"),
-             email = "contact@colinfay.me",
-             comment = c(ORCID = "0000-0001-7343-1846")),
-      person(given = "Vincent",
-             family = "Guyader",
-             role = "aut",
-             email = "vincent@thinkr.fr",
-             comment = c(ORCID = "0000-0003-0671-9270", "previous maintainer")),
-      person(given = "Sébastien",
-             family = "Rochette",
-             role = "aut",
-             email = "sebastien@thinkr.fr",
-             comment = c(ORCID = "0000-0002-1565-9313")),
-      person(given = "Cervan",
-             family = "Girard",
-             role = "aut",
-             email = "cervan@thinkr.fr",
-             comment = c(ORCID = "0000-0002-4816-4624")),
-      person(given = "Novica",
-             family = "Nakov",
-             role = "ctb",
-             email = "nnovica@gmail.com"),
-      person(given = "David",
-             family = "Granjon",
-             role = "ctb",
-             email = "dgranjon@ymail.com"),
-      person(given = "Arthur",
-             family = "Bréant",
-             role = "ctb",
-             email = "arthur@thinkr.fr"),
-      person(given = "Antoine",
-             family = "Languillaume",
-             role = "ctb",
-             email = "antoine@thinkr.fr"),                    
-      person(given = "ThinkR",
-             role = "cph"))
+Version: 0.3.5.9005
+Authors@R: c(
+    person("Colin", "Fay", , "contact@colinfay.me", role = c("cre", "aut"),
+           comment = c(ORCID = "0000-0001-7343-1846")),
+    person("Vincent", "Guyader", , "vincent@thinkr.fr", role = "aut",
+           comment = c(ORCID = "0000-0003-0671-9270", "previous maintainer")),
+    person("Sébastien", "Rochette", , "sebastien@thinkr.fr", role = "aut",
+           comment = c(ORCID = "0000-0002-1565-9313")),
+    person("Cervan", "Girard", , "cervan@thinkr.fr", role = "aut",
+           comment = c(ORCID = "0000-0002-4816-4624")),
+    person("Novica", "Nakov", , "nnovica@gmail.com", role = "ctb"),
+    person("David", "Granjon", , "dgranjon@ymail.com", role = "ctb"),
+    person("Arthur", "Bréant", , "arthur@thinkr.fr", role = "ctb"),
+    person("Antoine", "Languillaume", , "antoine@thinkr.fr", role = "ctb"),
+    person("ThinkR", role = "cph")
+  )
 Description: An opinionated framework for building a production-ready
     'Shiny' application. This package contains a series of tools for
     building a robust 'Shiny' application from start to finish.
@@ -50,9 +26,7 @@ Depends:
     R (>= 3.0)
 Imports: 
     attempt (>= 0.3.0),
-    cli (>= 2.0.0),
     config,
-    crayon,
     here,
     htmltools,
     rlang (>= 1.0.0),
@@ -62,6 +36,8 @@ Imports:
     yaml
 Suggests:
     covr,
+    cli (>= 2.0.0),
+    crayon,
     devtools,
     dockerfiler (>= 0.2.0),
     knitr,
