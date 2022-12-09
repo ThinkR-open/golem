@@ -52,7 +52,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9005</span>
       </span>
     </div>
 
@@ -207,7 +207,7 @@
 <span>  <span class="fu">write_there</span><span class="op">(</span><span class="st">"    background-color:red;"</span><span class="op">)</span></span>
 <span>  <span class="fu">write_there</span><span class="op">(</span><span class="st">"}"</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cat_line.html" class="external-link">cat_bullet</a></span><span class="op">(</span><span class="st">"CSS generated"</span><span class="op">)</span></span>
+<span>  <span class="fu">cli_cat_bullet</span><span class="op">(</span><span class="st">"CSS generated"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/create_golem.html">create_golem</a></span><span class="op">(</span><span class="st">"ici"</span>, project_hook <span class="op">=</span> <span class="va">new_css</span><span class="op">)</span></span></code></pre></div>
@@ -321,6 +321,94 @@
 <span>  <span class="fu">write_there</span><span class="op">(</span><span class="st">"}"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/add_files.html">add_css_file</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"custom"</span>, template <span class="op">=</span> <span class="va">my_tmpl</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="turn-on-the-maintenance-mode">Turn on the maintenance mode<a class="anchor" aria-label="anchor" href="#turn-on-the-maintenance-mode"></a>
+</h2>
+<div class="section level3">
+<h3 id="what-it-is-3">What it is<a class="anchor" aria-label="anchor" href="#what-it-is-3"></a>
+</h3>
+<p>From time to time, you need your application to be unavailbel: database update, API changes, etc. In order to keep your app running but make it unavailable, you can use a <strong>maintenance mode</strong>. When this maintenance mode is turned on, your application will be paused and a specific page will be displayed to your users.</p>
+<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with a default maintenance page, and you can replace it with you own page.</p>
+</div>
+<div class="section level3">
+<h3 id="how-to-set-the-maintenance-mode">How to set the maintenance mode<a class="anchor" aria-label="anchor" href="#how-to-set-the-maintenance-mode"></a>
+</h3>
+<p>The maintenance mode will be turned on whenever the R process detects that the <code>GOLEM_MAINTENANCE_ACTIVE</code> environment variable is set to TRUE.</p>
+<p>To visualise the maintenance page locally, you can run the following:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_envvar.html" class="external-link">with_envvar</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GOLEM_MAINTENANCE_ACTIVE"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>  <span class="op">{</span></span>
+<span>    <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/run_dev.html">run_dev</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"GOLEM_MAINTENANCE_ACTIVE"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/run_dev.html">run_dev</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>If you’re deploying on Posit Connect, you can set this variable in the setup panel.</p>
+<p>If in command line, you can also do</p>
+<pre><code>export GOLEM_MAINTENANCE_ACTIVE=TRUE &amp;&amp; Rscript -e "mygolem::run_app()"</code></pre>
+</div>
+<div class="section level3">
+<h3 id="the-maintenance-page">The maintenance page<a class="anchor" aria-label="anchor" href="#the-maintenance-page"></a>
+</h3>
+<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with a default maintenance page, but you can override it and use your own custom page.</p>
+<p>In order to use your own page, you need to pass either an <code>html_document</code> or a <code>tagList</code> to the <code>with_golem_options</code> function in <code>run_app.R</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
+<span>  <span class="va">onStart</span> <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">options</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">enableBookmarking</span> <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">uiPattern</span> <span class="op">=</span> <span class="st">"/"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/with_golem_options.html">with_golem_options</a></span><span class="op">(</span></span>
+<span>    app <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
+<span>      ui <span class="op">=</span> <span class="va">app_ui</span>,</span>
+<span>      server <span class="op">=</span> <span class="va">app_server</span>,</span>
+<span>      onStart <span class="op">=</span> <span class="va">onStart</span>,</span>
+<span>      options <span class="op">=</span> <span class="va">options</span>,</span>
+<span>      enableBookmarking <span class="op">=</span> <span class="va">enableBookmarking</span>,</span>
+<span>      uiPattern <span class="op">=</span> <span class="va">uiPattern</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>,</span>
+<span>    maintenance_page <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/tagList.html" class="external-link">tagList</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h1</a></span><span class="op">(</span><span class="st">"Under maintenance"</span><span class="op">)</span>,</span>
+<span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">span</a></span><span class="op">(</span><span class="st">"Coming soon..."</span><span class="op">)</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>or:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
+<span>  <span class="va">onStart</span> <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">options</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">enableBookmarking</span> <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">uiPattern</span> <span class="op">=</span> <span class="st">"/"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../reference/with_golem_options.html">with_golem_options</a></span><span class="op">(</span></span>
+<span>    app <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
+<span>      ui <span class="op">=</span> <span class="va">app_ui</span>,</span>
+<span>      server <span class="op">=</span> <span class="va">app_server</span>,</span>
+<span>      onStart <span class="op">=</span> <span class="va">onStart</span>,</span>
+<span>      options <span class="op">=</span> <span class="va">options</span>,</span>
+<span>      enableBookmarking <span class="op">=</span> <span class="va">enableBookmarking</span>,</span>
+<span>      uiPattern <span class="op">=</span> <span class="va">uiPattern</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>,</span>
+<span>    maintenance_page <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/htmlTemplate.html" class="external-link">htmlTemplate</a></span><span class="op">(</span></span>
+<span>      filename <span class="op">=</span> <span class="fu">app_sys</span><span class="op">(</span></span>
+<span>        <span class="st">"custom_maintenance_page.html"</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 </div>
   </div>

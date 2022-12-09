@@ -34,7 +34,7 @@ launch."><meta name="twitter:card" content="summary"><meta name="robots" content
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.5.9005</span>
       </span>
     </div>
 
@@ -103,7 +103,12 @@ launch.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">with_golem_options</span><span class="op">(</span><span class="va">app</span>, <span class="va">golem_opts</span>, print <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">with_golem_options</span><span class="op">(</span></span>
+<span>  <span class="va">app</span>,</span>
+<span>  <span class="va">golem_opts</span>,</span>
+<span>  maintenance_page <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="va"><a href="maintenance_page.html">maintenance_page</a></span>,</span>
+<span>  print <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -113,13 +118,17 @@ launch.</p>
 
 
 <dt>golem_opts</dt>
-<dd><p>A list of Options to be added to the app</p></dd>
+<dd><p>A list of options to be added to the app</p></dd>
+
+
+<dt>maintenance_page</dt>
+<dd><p>an html_document or a shiny tag list. Default is golem template.</p></dd>
 
 
 <dt>print</dt>
 <dd><p>Whether or not to print the app. Default is to <code>FALSE</code>, which
-should be what you need 99.99% of the time In case you need to
-actively print the app object, you can set it to <code>TRUE</code>.</p></dd>
+should be what you need 99.99% of the time. In case you need to
+actively print() the app object, you can set it to <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div id="value">
