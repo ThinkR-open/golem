@@ -47,7 +47,7 @@ add_rstudio_files <- function(
 
     cat_created(where)
     cli_cat_line("To deploy, run:")
-    cli_cat_bullet(darkgrey("rsconnect::deployApp()\n"))
+    cli_cat_bullet(crayon_darkgrey("rsconnect::deployApp()\n"))
     cat_red_bullet(
       sprintf(
         "Note that you'll need to upload the whole package to %s",

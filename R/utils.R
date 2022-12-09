@@ -11,10 +11,7 @@ golem_sys <- function(
   )
 }
 
-#  from usethis https://github.com/r-lib/usethis/
-darkgrey <- function(x) {
-  x <- crayon::make_style("darkgrey")(x)
-}
+
 
 create_if_needed <- function(
   path,
@@ -325,11 +322,11 @@ after_creation_message_html_template <- function(
   do_if_unquiet({
     cli_cat_line("")
     cli_cat_line("To use this html file as a template, add the following code in your UI:")
-    cli_cat_line(darkgrey("htmlTemplate("))
-    cli_cat_line(darkgrey(sprintf('    app_sys("app/www/%s.html"),', file_path_sans_ext(name))))
-    cli_cat_line(darkgrey("    body = tagList()"))
-    cli_cat_line(darkgrey("    # add here other template arguments"))
-    cli_cat_line(darkgrey(")"))
+    cli_cat_line(crayon_darkgrey("htmlTemplate("))
+    cli_cat_line(crayon_darkgrey(sprintf('    app_sys("app/www/%s.html"),', file_path_sans_ext(name))))
+    cli_cat_line(crayon_darkgrey("    body = tagList()"))
+    cli_cat_line(crayon_darkgrey("    # add here other template arguments"))
+    cli_cat_line(crayon_darkgrey(")"))
   })
 }
 

@@ -27,7 +27,6 @@ Depends:
 Imports: 
     attempt (>= 0.3.0),
     config,
-    crayon,
     desc,
     here,
     fs,
@@ -40,6 +39,7 @@ Imports:
     yaml
 Suggests:
     cli (>= 2.0.0),
+    crayon,
     covr,
     devtools,
     dockerfiler (>= 0.2.0),
