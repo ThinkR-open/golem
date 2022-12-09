@@ -27,20 +27,17 @@ Depends:
 Imports: 
     attempt (>= 0.3.0),
     config,
-    desc,
     here,
-    fs,
     htmltools,
     rlang (>= 1.0.0),
     rstudioapi,
     shiny (>= 1.5.0),
-    usethis (>= 1.6.0),
     utils,
     yaml
 Suggests:
+    covr,
     cli (>= 2.0.0),
     crayon,
-    covr,
     devtools,
     dockerfiler (>= 0.2.0),
     knitr,
@@ -59,7 +56,10 @@ Suggests:
     tools,
     withr,
     attachment (>= 0.2.5),
-    renv
+    renv,
+    usethis (>= 1.6.0),
+    fs,
+    desc
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
