@@ -10,6 +10,7 @@
 
 + Add `add_partial_html_template()` to create a partial html template, with "just" a div and a `{{ }}` (@nathansquan #858).
 
+
 ## New features / user visible changes
 
 + The following hard dependencies have been moved to soft dependencies, as you'll only need them while developing: `{pkgload}`, `{roxygen2}`, `{fs}`, `{usethis}`, `{cli}`, `{crayon}`
@@ -19,6 +20,8 @@
 + Functions that print to the console are now quiet if `options("golem.quiet" = TRUE)`, #793
 + Small documentation update in dockerfile related functions (#939)
 + `fill_desc()` now allows to set the version (#877)
++ Setting the Environment variable `GOLEM_MAINTENANCE_ACTIVE` to `TRUE` active the maintenance mode of your app
+
 ## Bug fix
 
 + The message after htmlTemplate creation now suggests to add in the UI, not only in app_ui.R (#861)

@@ -12,3 +12,6 @@ an html_document
 \description{
 A default html page for maintenance mode
 }
+\details{
+see the vignette \code{vignette("f_extending_golem", package = "golem")} for details.
+}
