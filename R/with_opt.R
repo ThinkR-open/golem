@@ -123,7 +123,7 @@ get_golem_options <- function(which = NULL) {
 #' @importFrom shiny htmlTemplate
 #'
 #' @return an html_document
-#'
+#' @details see the vignette \code{vignette("f_extending_golem", package = "golem")} for details.
 #' @export
 maintenance_page <- function() {
   shiny::htmlTemplate(
