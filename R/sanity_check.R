@@ -8,7 +8,6 @@
 #' @rdname sanity_check
 #' @export
 #'
-#' @importFrom rstudioapi sourceMarkers hasFun isAvailable
 #'
 #' @return A DataFrame if any of the words has been found.
 sanity_check <- function(pkg = get_golem_wd()) {

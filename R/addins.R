@@ -4,9 +4,7 @@
 #'  The series of `go_to_*()` addins help you go to
 #'  common files used in developing a `{golem}` application.
 #'
-#' @importFrom rstudioapi getSourceEditorContext modifyRange
 #' @importFrom attempt stop_if_not
-#' @importFrom rstudioapi modifyRange
 #'
 #' @aliases addins
 #' @rdname addins
@@ -35,8 +33,8 @@ insert_ns <- function() {
   mod_text <- paste0("ns(", sel_text, ")")
 
   rstudioapi_modifyRange(
-    sel_rng, 
-    mod_text, 
+    sel_rng,
+    mod_text,
     id = id
   )
 }

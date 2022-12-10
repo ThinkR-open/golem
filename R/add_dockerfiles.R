@@ -47,7 +47,6 @@ talk_once <- function(.f, msg = "") {
 #' @export
 #' @rdname dockerfiles
 #'
-#' @importFrom rstudioapi navigateToFile isAvailable hasFun
 #'
 #' @examples
 #' \donttest{

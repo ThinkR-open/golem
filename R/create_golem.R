@@ -55,7 +55,6 @@ replace_package_name <- function(
 #' to `FALSE`. See https://github.com/ThinkR-open/golem/issues/468 for more background.
 #'
 #' @importFrom utils getFromNamespace
-#' @importFrom rstudioapi isAvailable openProject hasFun
 #' @importFrom yaml write_yaml
 #'
 #' @export

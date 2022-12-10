@@ -38,7 +38,7 @@ usethis_use_package <- function(
 
 usethis_create_project <- function(
   path,
-  rstudio = rstudioapi::isAvailable(),
+  rstudio = rstudioapi::isAvailable(), # rstudioap is usethis Imports, so its ok
   open = rlang::is_interactive()
 ) {
   check_usethis_installed(
