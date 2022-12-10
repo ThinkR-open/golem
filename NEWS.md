@@ -1,12 +1,10 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
 
-# golem 0.3.4.9000+
+# 0.3.5.9000+ (dev version)
 
 ## Soft deprecated
 
-
 ## Hard deprecated
-
 
 ## New functions
 
@@ -15,33 +13,34 @@
 
 ## New features / user visible changes
 
-+ The following hard dependencies have been moved to soft dependencies, as you'll only need them while developing: `{pkgload}`, `{roxygen2}`, `{fs}`, `{usethis}`
-
++ The following hard dependencies have been moved to soft dependencies, as you'll only need them while developing: `{pkgload}`, `{roxygen2}`, `{fs}`, `{usethis}`, `{cli}`, `{crayon}`
 + Soft dependency check is now done via `rlang::check_installed()` (#835)
-
 + `golem::run_dev()` has been refactored to match the behavior of other functions, notably it now uses `golem::get_golem_wd()` to find the current working dir.
-
 + `{golem}` now depends on `{rlang}` version >= 1.0.0
-
 + Functions that print to the console are now quiet if `options("golem.quiet" = TRUE)`, #793
++ Small documentation update in dockerfile related functions (#939)
++ `fill_desc()` now allows to set the version (#877)
++ Setting the Environment variable `GOLEM_MAINTENANCE_ACTIVE` to `TRUE` active the maintenance mode of your app
 
 ## Bug fix
 
 + The message after htmlTemplate creation now suggests to add in the UI, not only in app_ui.R (#861)
-
 + The Deprecation message for `use_recommended_deps` no longer suggest to user `use_recommended_deps` (#900)
-
 + The setting of the config file has been unified so that we are sure to keep the !expr in `golem_set_wd()`, and the codebase has been simplified for this (#709).
-
 + The functions adding files can no longer take a `name` argument that has length() > 1. This used to cause some bugs (#781)
-
 + The typo in `install.packages()` in 02_dev.R has been corrected (@asiripanich)
-
++ `add_dockerfile_with_renv()` now works well with uppercase in package name
 ## Internal changes
 
-# golem 0.3.4.
 
-This version has a small internal change in the tests, so that it can stay on CRAN.
+
+# golem 0.3.5
+
+Update in the tests for CRAN (commented a test that made new version of testthat fail).
+
+# golem 0.3.4
+
+Update in the tests for CRAN (skip not installed + examples).
 
 # golem 0.3.3
 

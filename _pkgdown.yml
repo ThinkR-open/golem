@@ -25,7 +25,7 @@ reference:
 
   - title: Create a Dockerfile
     desc: |
-      Build a container containing your Shiny App. `add_dockerfile()` creates a "classical" Dockerfile, 
+      Build a container containing your Shiny App. `add_dockerfile()` creates a "classical" Dockerfile,
       while `add_dockerfile_shinyproxy()` and `add_dockerfile_heroku()` creates platform specific Dockerfile.
     contents:
       - add_dockerfile
@@ -34,7 +34,7 @@ reference:
 
   - title: Use files
     desc: |
-      `use_external_js_file` and `use_external_css_file`download files from external sources and install 
+      `use_external_js_file` and `use_external_css_file`download files from external sources and install
       them inside the appropriate directory. `use_utils_ui` copies the golem_utils_ui.R to the R folder and `use_utils_server`
       copies the golem_utils_server.R to the R folder.
     contents:
@@ -88,7 +88,7 @@ reference:
 
   - title: Addins
     desc: |
-      `insert_ns()` takes a selected character vector and wrap it in `ns()`. The series of `go_to_*()` 
+      `insert_ns()` takes a selected character vector and wrap it in `ns()`. The series of `go_to_*()`
       addins help you go to common files used in developing a {golem} application.
     contents:
       - insert_ns
@@ -102,7 +102,7 @@ reference:
 
   - title: JavaScript interaction functions
     desc: |
-      `activate_js` is used in your UI to insert directly the JavaScript functions contained in golem. 
+      `activate_js` is used in your UI to insert directly the JavaScript functions contained in golem.
       These functions can be called from the server with `invoke_js`. `invoke_js` can also be used to launch
       any JS function created inside a Shiny JavaScript handler.
     contents:
@@ -111,7 +111,7 @@ reference:
 
   - title: Options
     desc: |
-      Set and get a series of options to be used with `{golem}`. These options are found inside the 
+      Set and get a series of options to be used with `{golem}`. These options are found inside the
       `golem-config.yml` file, found in most cases inside the inst folder.
     contents:
       - set_golem_options
@@ -126,9 +126,11 @@ reference:
     desc: |
       `use_recommended_deps` adds shiny, DT, attempt, glue, golem, htmltools to dependencies
       `use_recommended_tests` adds a test folder and copy the golem tests
+      `install_dev_deps` install all packages needed for golem developpement
     contents:
       - use_recommended_deps
       - use_recommended_tests
+      - install_dev_deps
 
   - title: Misc
     contents:
@@ -144,6 +146,7 @@ reference:
       - fill_desc
       - make_dev
       - with_golem_options
+      - maintenance_page
 
   - title: internal
     contents:
@@ -157,3 +160,5 @@ reference:
       - sanity_check
       - js_handler_template
       - use_module_test
+      - get_current_config
+      - pkg_name

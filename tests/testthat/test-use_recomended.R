@@ -1,5 +1,6 @@
 test_that("test use_recommended_deps", {
   testthat::skip_on_cran()
+  testthat::skip_if_not_installed("desc")
   with_dir(pkg, {
     packages <- c("shiny", "DT", "attempt", "glue", "golem", "htmltools")
     to_add <- c()
@@ -11,7 +12,7 @@ test_that("test use_recommended_deps", {
     expect_warning(
       use_recommended_deps(recommended = to_add)
     )
-    deps <- desc::desc_get_deps(file = "DESCRIPTION")
+    deps <- desc_get_deps(file = "DESCRIPTION")
     expect_true(
       all(to_add %in% deps$package)
     )

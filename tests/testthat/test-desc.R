@@ -1,20 +1,24 @@
 
 test_that("desc works", {
+  testthat::skip_if_not_installed("desc")
   with_dir(pkg, {
     withr::with_options(
-      c("golem.quiet" =  FALSE),{
+      c("golem.quiet" = FALSE),
+      {
         output <- capture_output(
           fill_desc(
-            fakename,
-            "newtitle",
-            "Newdescription.",
-            "firstname",
-            "lastname",
-            "name@test.com",
-            "http://repo_url.com"
+            pkg_name = fakename,
+            pkg_title = "newtitle",
+            pkg_description = "Newdescription.",
+            author_first_name = "firstname",
+            author_last_name = "lastname",
+            author_email = "name@test.com",
+            repo_url = "http://repo_url.com",
+            pkg_version = "0.0.0.9000"
           )
-      )
-    })
+        )
+      }
+    )
     add_desc <- c(
       fakename,
       "newtitle",
@@ -22,7 +26,8 @@ test_that("desc works", {
       "firstname",
       "lastname",
       "name@test.com",
-      "http://repo_url.com"
+      "http://repo_url.com",
+      "0.0.0.9000"
     )
     desc <- readLines("DESCRIPTION")
 

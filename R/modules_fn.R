@@ -19,7 +19,6 @@
 #' @note This function will prefix the `name` argument with `mod_`.
 #'
 #' @export
-#' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #'
 #' @seealso [module_template()]
@@ -255,13 +254,12 @@ use_module_test <- function(
     )
   }
 
-  # We need both testthat, usethis & fs
-
+  # We need testthat
   rlang::check_installed(
     "testthat",
     "to build the test structure."
   )
-  
+
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 

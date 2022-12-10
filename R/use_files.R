@@ -14,7 +14,6 @@
 #'
 #' @export
 #' @rdname use_files
-#' @importFrom cli cat_bullet
 #'
 #' @return The path to the file, invisibly.
 use_external_js_file <- function(

@@ -34,7 +34,7 @@ detach_all_attached <- function() {
 check_name_consistency <- function(pkg) {
   old_dir <- setwd(pkg)
 
-  package_name <- desc::desc_get("Package")
+  package_name <- desc_get(keys = "Package")
   pth <- fs_path(
     pkg,
     "R",
@@ -123,7 +123,7 @@ document_and_reload <- function(
     )
   })
   if (attempt::is_try_error(roxed)) {
-    cat_rule(
+    cli_cat_rule(
       "Error documenting your package"
     )
     dialog_if_has("Alert", "Error documenting your package")
@@ -140,7 +140,7 @@ document_and_reload <- function(
   })
 
   if (attempt::is_try_error(loaded)) {
-    cat_rule(
+    cli_cat_rule(
       "Error loading your package"
     )
     dialog_if_has("Alert", "Error loading your package")

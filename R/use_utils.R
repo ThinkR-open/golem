@@ -10,7 +10,6 @@
 #' @export
 #' @rdname utils_files
 #'
-#' @importFrom cli cat_bullet
 #' @importFrom utils capture.output
 #'
 #' @return Used for side-effects.
@@ -135,7 +134,6 @@ use_utils <- function(
   folder_name,
   pkg = get_golem_wd()
 ) {
-
   old <- setwd(
     fs_path_abs(pkg)
   )

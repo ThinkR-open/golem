@@ -11,8 +11,10 @@ talk_once <- function(.f, msg = "") {
 
 #' Create a Dockerfile for your App
 #'
-#' Build a container containing your Shiny App. `add_dockerfile()` and `add_dockerfile_with_renv()` and `add_dockerfile_with_renv()` creates
-#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`, `add_dockerfile_with_renv_shinyproxy()` , `add_dockerfile_with_renv_shinyproxy()`  and
+#' Build a container containing your Shiny App. `add_dockerfile()` and
+#' `add_dockerfile_with_renv()` and `add_dockerfile_with_renv()` creates
+#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`,
+#' `add_dockerfile_with_renv_shinyproxy()` , `add_dockerfile_with_renv_shinyproxy()` and
 #' `add_dockerfile_heroku()` creates platform specific Dockerfile.
 #'
 #' @inheritParams add_module
@@ -31,7 +33,8 @@ talk_once <- function(.f, msg = "") {
 #'     Default is 80.
 #' @param host The `options('shiny.host')` on which to run the App.
 #'    Default is 0.0.0.0.
-#' @param sysreqs boolean. If TRUE, the Dockerfile will contain sysreq installation.
+#' @param sysreqs boolean. If TRUE, RUN statements to install packages
+#' system requirements will be included in the Dockerfile.
 #' @param repos character. The URL(s) of the repositories to use for `options("repos")`.
 #' @param expand boolean. If `TRUE` each system requirement will have its own `RUN` line.
 #' @param open boolean. Should the Dockerfile/README/README be open after creation? Default is `TRUE`.
@@ -44,7 +47,6 @@ talk_once <- function(.f, msg = "") {
 #' @export
 #' @rdname dockerfiles
 #'
-#' @importFrom desc desc_get_deps
 #' @importFrom rstudioapi navigateToFile isAvailable hasFun
 #'
 #' @examples
@@ -61,14 +63,6 @@ talk_once <- function(.f, msg = "") {
 #'     output_dir = "deploy"
 #'   )
 #' }
-#' # Crete a 'deploy' folder containing everything needed to deploy
-#' # the golem using docker based on {renv}
-#' if (interactive()) {
-#'   add_dockerfile_with_renv(
-#'     # lockfile = "renv.lock", # uncomment to use existing renv.lock file
-#'     output_dir = "deploy"
-#'   )
-#' }
 #' # Add a Dockerfile for ShinyProxy
 #' if (interactive() & requireNamespace("dockerfiler")) {
 #'   add_dockerfile_shinyproxy()
@@ -77,16 +71,6 @@ talk_once <- function(.f, msg = "") {
 #' # Crete a 'deploy' folder containing everything needed to deploy
 #' # the golem with ShinyProxy using docker based on {renv}
 #' if (interactive() & requireNamespace("dockerfiler")) {
-#'   add_dockerfile_with_renv(
-#'     # lockfile = "renv.lock",# uncomment to use existing renv.lock file
-#'     output_dir = "deploy"
-#'   )
-#' }
-#'
-#'
-#' # Crete a 'deploy' folder containing everything needed to deploy
-#' # the golem with ShinyProxy using docker based on {renv}
-#' if (interactive()) {
 #'   add_dockerfile_with_renv(
 #'     # lockfile = "renv.lock",# uncomment to use existing renv.lock file
 #'     output_dir = "deploy"
@@ -160,7 +144,6 @@ add_dockerfile_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(
@@ -263,7 +246,6 @@ add_dockerfile_shinyproxy_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(output)
@@ -358,7 +340,6 @@ add_dockerfile_heroku_ <- talk_once(
   build_golem_from_source = TRUE,
   extra_sysreqs = NULL
   ) {
-    
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(output)
@@ -399,18 +380,18 @@ add_dockerfile_heroku_ <- talk_once(
       )
     )
 
-    cat_rule("From your command line, run:")
-    cat_line("heroku container:login")
-    cat_line(
+    cli_cat_rule("From your command line, run:")
+    cli_cat_line("heroku container:login")
+    cli_cat_line(
       sprintf("heroku create %s", apps_h)
     )
-    cat_line(
+    cli_cat_line(
       sprintf("heroku container:push web --app %s", apps_h)
     )
-    cat_line(
+    cli_cat_line(
       sprintf("heroku container:release web --app %s", apps_h)
     )
-    cat_line(
+    cli_cat_line(
       sprintf("heroku open --app %s", apps_h)
     )
     cat_red_bullet("Be sure to have the heroku CLI installed.")

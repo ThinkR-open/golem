@@ -92,7 +92,7 @@ new_css <- function(path, package_name, ...) {
   write_there("    background-color:red;")
   write_there("}")
 
-  cli::cat_bullet("CSS generated")
+  cli_cat_bullet("CSS generated")
 }
 
 create_golem("ici", project_hook = new_css)
@@ -198,6 +198,109 @@ my_tmpl <- function(path, ...) {
 golem::add_css_file(name = "custom", template = my_tmpl)
 ```
 
+## Turn on the maintenance mode
+
+### What it is
+
+From time to time, you need your application to be unavailbel: database update, API changes, etc.
+In order to keep your app running but make it unavailable, you can use a __maintenance mode__.
+When this maintenance mode is turned on, your application will be paused and a specific page will be displayed to your users.
+
+`{golem}` comes with a default maintenance page, and you can replace it with you own page.
+
+### How to set the maintenance mode
+
+The maintenance mode will be turned on whenever the R process detects that the `GOLEM_MAINTENANCE_ACTIVE` environment variable is set to TRUE. 
+
+To visualise the maintenance page locally, you can run the following: 
+
+```{r eval = FALSE}
+withr::with_envvar(
+  c("GOLEM_MAINTENANCE_ACTIVE" = TRUE),
+  {
+    golem::run_dev()
+  }
+)
+```
+
+
+or
+
+```{r eval = FALSE}
+Sys.setenv("GOLEM_MAINTENANCE_ACTIVE" = TRUE)
+golem::run_dev()
+```
 
 
 
+If you're deploying on Posit Connect, you can set this variable in the setup panel. 
+
+If in command line, you can also do 
+
+```
+export GOLEM_MAINTENANCE_ACTIVE=TRUE && Rscript -e "mygolem::run_app()"
+```
+
+
+###  The maintenance page
+
+`{golem}` comes with a default maintenance page, but you can override it and use your own custom page. 
+
+In order to use your own page, you need to pass either an `html_document` or a `tagList` to the `with_golem_options` function in `run_app.R`:
+
+```{r}
+run_app <- function(
+  onStart = NULL,
+  options = list(),
+  enableBookmarking = NULL,
+  uiPattern = "/",
+  ...
+) {
+  with_golem_options(
+    app = shinyApp(
+      ui = app_ui,
+      server = app_server,
+      onStart = onStart,
+      options = options,
+      enableBookmarking = enableBookmarking,
+      uiPattern = uiPattern
+    ),
+    golem_opts = list(...),
+    maintenance_page = tagList(
+      fluidRow(
+        h1("Under maintenance"),
+        span("Coming soon...")
+      )
+    )
+  )
+}
+```
+
+or: 
+
+```{r}
+run_app <- function(
+  onStart = NULL,
+  options = list(),
+  enableBookmarking = NULL,
+  uiPattern = "/",
+  ...
+) {
+  with_golem_options(
+    app = shinyApp(
+      ui = app_ui,
+      server = app_server,
+      onStart = onStart,
+      options = options,
+      enableBookmarking = enableBookmarking,
+      uiPattern = uiPattern
+    ),
+    golem_opts = list(...),
+    maintenance_page = shiny::htmlTemplate(
+      filename = app_sys(
+        "custom_maintenance_page.html"
+      )
+    )
+  )
+}
+```
