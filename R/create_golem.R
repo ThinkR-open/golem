@@ -55,7 +55,6 @@ replace_package_name <- function(
 #' to `FALSE`. See https://github.com/ThinkR-open/golem/issues/468 for more background.
 #'
 #' @importFrom utils getFromNamespace
-#' @importFrom rstudioapi isAvailable openProject hasFun
 #' @importFrom yaml write_yaml
 #'
 #' @export
@@ -236,7 +235,10 @@ create_golem <- function(
 
 
   if (isTRUE(open)) {
-    if (rstudioapi::isAvailable() & rstudioapi::hasFun("openProject")) {
+    if (
+      rlang::is_installed("rstudioapi") &&
+      rstudioapi::isAvailable() && rstudioapi::hasFun("openProject")
+    ) {
       rstudioapi::openProject(path = path)
     } else {
       setwd(path)

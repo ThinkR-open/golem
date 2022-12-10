@@ -47,7 +47,6 @@ talk_once <- function(.f, msg = "") {
 #' @export
 #' @rdname dockerfiles
 #'
-#' @importFrom rstudioapi navigateToFile isAvailable hasFun
 #'
 #' @examples
 #' \donttest{
@@ -176,11 +175,7 @@ add_dockerfile_ <- talk_once(
     dock$write(output)
 
     if (open) {
-      if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
-        rstudioapi::navigateToFile(output)
-      } else {
-        try(file.edit(output))
-      }
+      rstudioapi_navigateToFile(output)
     }
     alert_build(
       path = path,
@@ -274,11 +269,7 @@ add_dockerfile_shinyproxy_ <- talk_once(
     dock$write(output)
 
     if (open) {
-      if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
-        rstudioapi::navigateToFile(output)
-      } else {
-        try(file.edit(output))
-      }
+      rstudioapi_navigateToFile(output)
     }
     alert_build(
       path,
@@ -407,11 +398,7 @@ add_dockerfile_heroku_ <- talk_once(
       sprintf("You can replace %s with another app name.", apps_h)
     )
     if (open) {
-      if (rstudioapi::isAvailable() & rstudioapi::hasFun("navigateToFile")) {
-        rstudioapi::navigateToFile(output)
-      } else {
-        try(file.edit(output))
-      }
+      rstudioapi_navigateToFile(output)
     }
     usethis_use_build_ignore(files = output)
     return(invisible(dock))
