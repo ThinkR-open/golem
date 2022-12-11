@@ -77,13 +77,31 @@ with_golem_options <- function(
 #'
 #' # Define and use golem_options
 #' if (interactive()) {
-#'   # 1. Pass parameters to `run_app`
+#'   # 1. Pass parameters directly to `run_app`
 #'
-#'   # to set default value, edit run_app like this :
+#'   run_app( title="My Golem App", 
+#'            content = "something" )
+#'
+#'   # 2. Get the values 
+#'   # 2.1 from the UI side
+#'
+#'   h1(get_golem_options("title"))
+#'
+#'   # 2.2 from the server-side
+#'
+#'   output$param <- renderPrint({
+#'     paste("param content = ", get_golem_options("content"))
+#'   })
+#'   
+#'   output$param_full <- renderPrint({
+#'      get_golem_options() # list of all golem options as a list.
+#'   })
+#'   
+#'   # 3. If needed, to set default value, edit `run_app` like this :
 #'
 #'   run_app <- function(
-#'   title = "this",
-#'   content = "that"
+#'              title = "this",
+#'              content = "that"
 #'   ) {
 #'     with_golem_options(
 #'       app = shinyApp(
@@ -91,21 +109,12 @@ with_golem_options <- function(
 #'         server = app_server
 #'       ),
 #'       golem_opts = list(
-#'         p1 = p1,
-#'         p3 = p3
+#'       ...
 #'       )
 #'     )
 #'   }
-#'
-#'   # 2. Get the values from the UI side
-#'
-#'   h1(get_golem_options("title"))
-#'
-#'   # 3. Get the value from the server-side
-#'
-#'   output$param <- renderPrint({
-#'     paste("param p2 = ", get_golem_options("p2"))
-#'   })
+#'    
+#'   
 #' }
 #'
 get_golem_options <- function(which = NULL) {
