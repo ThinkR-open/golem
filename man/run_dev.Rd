@@ -4,12 +4,14 @@
 \alias{run_dev}
 \title{Run run_dev.R}
 \usage{
-run_dev(file = "dev/run_dev.R", pkg = get_golem_wd())
+run_dev(file = "dev/run_dev.R", pkg = get_golem_wd(), save_all = TRUE)
 }
 \arguments{
 \item{file}{File path to \code{run_dev.R}. Defaults to \code{R/run_dev.R}.}
 
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+
+\item{save_all}{boolean. If TRUE, save all open file before sourcing \code{file}}
 }
 \value{
 Used for side-effect
