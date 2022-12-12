@@ -101,7 +101,8 @@ with_golem_options <- function(
 #'
 #'   run_app <- function(
 #'              title = "this",
-#'              content = "that"
+#'              content = "that",
+#'              ...
 #'   ) {
 #'     with_golem_options(
 #'       app = shinyApp(
@@ -109,6 +110,8 @@ with_golem_options <- function(
 #'         server = app_server
 #'       ),
 #'       golem_opts = list(
+#'       title = title,
+#'       content = content,
 #'       ...
 #'       )
 #'     )

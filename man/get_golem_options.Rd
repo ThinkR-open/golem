@@ -45,7 +45,8 @@ if (interactive()) {
 
   run_app <- function(
              title = "this",
-             content = "that"
+             content = "that",
+             ...
   ) {
     with_golem_options(
       app = shinyApp(
@@ -53,6 +54,8 @@ if (interactive()) {
         server = app_server
       ),
       golem_opts = list(
+      title = title,
+      content = content,
       ...
       )
     )
