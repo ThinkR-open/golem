@@ -21,6 +21,7 @@
 + Small documentation update in dockerfile related functions (#939)
 + `fill_desc()` now allows to set the version (#877)
 + Setting the Environment variable `GOLEM_MAINTENANCE_ACTIVE` to `TRUE` active the maintenance mode of your app
++ `golem::run_dev()` now save all open documents before sourcing the `dev/run_dev.R` file
 
 ## Bug fix
 
