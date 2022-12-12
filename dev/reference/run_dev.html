@@ -99,7 +99,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">run_dev</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"dev/run_dev.R"</span>, pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">run_dev</span><span class="op">(</span>file <span class="op">=</span> <span class="st">"dev/run_dev.R"</span>, pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, save_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -110,6 +110,10 @@
 
 <dt>pkg</dt>
 <dd><p>Path to the root of the package. Default is <code><a href="golem_opts.html">get_golem_wd()</a></code>.</p></dd>
+
+
+<dt>save_all</dt>
+<dd><p>boolean. If TRUE, save all open file before sourcing <code>file</code></p></dd>
 
 </dl></div>
     <div id="value">
