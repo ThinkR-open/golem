@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.3.5.9005
+Version: 0.4.0
 Authors@R: c(
     person("Colin", "Fay", , "contact@colinfay.me", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0001-7343-1846")),
@@ -22,9 +22,9 @@ Description: An opinionated framework for building a production-ready
 License: MIT + file LICENSE
 URL: https://github.com/ThinkR-open/golem
 BugReports: https://github.com/ThinkR-open/golem/issues
-Depends: 
+Depends:
     R (>= 3.0)
-Imports: 
+Imports:
     attempt (>= 0.3.0),
     config,
     here,
@@ -60,7 +60,7 @@ Suggests:
     fs,
     rstudioapi,
     desc
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8

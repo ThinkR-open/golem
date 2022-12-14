@@ -29,6 +29,7 @@ knitr::opts_chunk$set(
 
 You're reading the doc about version : ``r as.data.frame(read.dcf("DESCRIPTION"))$Version ``
 
+
 ## Tool series
 
 This package is part of a series of tools for Shiny, which includes:
@@ -117,9 +118,9 @@ knitr::include_graphics("https://raw.githubusercontent.com/ThinkR-open/golem/mas
 
 ## Step by step guide
 
-See full documentation in the {pkgdown} website: 
+See full documentation in the {pkgdown} website:
 
-[CRAN] <https://thinkr-open.github.io/golem/> 
+[CRAN] <https://thinkr-open.github.io/golem/>
 
 [dev] <https://thinkr-open.github.io/golem/dev/>
 
