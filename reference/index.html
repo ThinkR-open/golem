@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -47,25 +47,25 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/a_start.html">Getting Started with {golem}</a>
+      <a href="../articles/a_start.html">a_start</a>
     </li>
     <li>
-      <a href="../articles/b_dev.html">Day to Day Dev with {golem}</a>
+      <a href="../articles/b_dev.html">b_dev</a>
     </li>
     <li>
-      <a href="../articles/c_deploy.html">Deploying Apps with {golem}</a>
+      <a href="../articles/c_deploy.html">c_deploy</a>
     </li>
     <li>
-      <a href="../articles/d_js.html">Using {golem} js functions</a>
+      <a href="../articles/d_js.html">d_js</a>
     </li>
     <li>
-      <a href="../articles/e_config.html">Using golem config</a>
+      <a href="../articles/e_config.html">e_config</a>
     </li>
     <li>
-      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+      <a href="../articles/f_extending_golem.html">f_extending_golem</a>
     </li>
     <li>
-      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
+      <a href="../articles/z_golem_cheatsheet.html">e_golem_cheatsheet</a>
     </li>
   </ul></li>
 <li>
@@ -105,7 +105,7 @@
           <p class="section-desc"></p><p>These functions create files inside the inst/app folder. These functions can be used outside of a golem project.</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="add_files.html">add_js_file()</a></code> <code><a href="add_files.html">add_js_handler()</a></code> <code><a href="add_files.html">add_js_input_binding()</a></code> <code><a href="add_files.html">add_js_output_binding()</a></code> <code><a href="add_files.html">add_css_file()</a></code> <code><a href="add_files.html">add_sass_file()</a></code> <code><a href="add_files.html">add_html_template()</a></code> <code><a href="add_files.html">add_ui_server_files()</a></code> </p>
+          <p><code><a href="add_files.html">add_js_file()</a></code> <code><a href="add_files.html">add_js_handler()</a></code> <code><a href="add_files.html">add_js_input_binding()</a></code> <code><a href="add_files.html">add_js_output_binding()</a></code> <code><a href="add_files.html">add_css_file()</a></code> <code><a href="add_files.html">add_sass_file()</a></code> <code><a href="add_files.html">add_html_template()</a></code> <code><a href="add_files.html">add_partial_html_template()</a></code> <code><a href="add_files.html">add_ui_server_files()</a></code> </p>
         </td>
         <td><p>Create Files</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
@@ -197,17 +197,21 @@
           <p class="section-desc"></p><p>Set and get a series of options to be used with <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>. These options are found inside the <code>golem-config.yml</code> file, found in most cases inside the inst folder.</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="golem_opts.html">set_golem_options()</a></code> <code><a href="golem_opts.html">set_golem_wd()</a></code> <code><a href="golem_opts.html">set_golem_name()</a></code> <code><a href="golem_opts.html">set_golem_version()</a></code> <code><a href="golem_opts.html">get_golem_wd()</a></code> <code><a href="golem_opts.html">get_golem_name()</a></code> <code><a href="golem_opts.html">get_golem_version()</a></code> </p>
+          <p><code><a href="golem_opts.html">get_golem_wd()</a></code> <code><a href="golem_opts.html">get_golem_name()</a></code> <code><a href="golem_opts.html">get_golem_version()</a></code> <code><a href="golem_opts.html">set_golem_wd()</a></code> <code><a href="golem_opts.html">set_golem_name()</a></code> <code><a href="golem_opts.html">set_golem_version()</a></code> <code><a href="golem_opts.html">set_golem_options()</a></code> </p>
         </td>
         <td><p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> options</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="add-recommended-elements">Add recommended elements <a href="#add-recommended-elements" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p><code>use_recommended_deps</code> adds shiny, DT, attempt, glue, golem, htmltools to dependencies <code>use_recommended_tests</code> adds a test folder and copy the golem tests</p>
+          <p class="section-desc"></p><p><code>use_recommended_deps</code> adds shiny, DT, attempt, glue, golem, htmltools to dependencies <code>use_recommended_tests</code> adds a test folder and copy the golem tests <code>install_dev_deps</code> install all packages needed for golem developpement</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="use_recommended.html">use_recommended_deps()</a></code> <code><a href="use_recommended.html">use_recommended_tests()</a></code> </p>
         </td>
         <td><p>Add recommended elements</p></td>
+      </tr><tr><td>
+          <p><code><a href="install_dev_deps.html">install_dev_deps()</a></code> </p>
+        </td>
+        <td><p>Install golem dev dependencies</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="misc">Misc <a href="#misc" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
@@ -256,6 +260,10 @@
           <p><code><a href="with_golem_options.html">with_golem_options()</a></code> </p>
         </td>
         <td><p>Add Golem options to a Shiny App</p></td>
+      </tr><tr><td>
+          <p><code><a href="maintenance_page.html">maintenance_page()</a></code> </p>
+        </td>
+        <td><p>maintenance_page</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

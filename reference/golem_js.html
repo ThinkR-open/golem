@@ -33,7 +33,7 @@ By default bundle_ressources() load these function  automatically for you."><met
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -48,25 +48,25 @@ By default bundle_ressources() load these function  automatically for you."><met
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/a_start.html">Getting Started with {golem}</a>
+      <a href="../articles/a_start.html">a_start</a>
     </li>
     <li>
-      <a href="../articles/b_dev.html">Day to Day Dev with {golem}</a>
+      <a href="../articles/b_dev.html">b_dev</a>
     </li>
     <li>
-      <a href="../articles/c_deploy.html">Deploying Apps with {golem}</a>
+      <a href="../articles/c_deploy.html">c_deploy</a>
     </li>
     <li>
-      <a href="../articles/d_js.html">Using {golem} js functions</a>
+      <a href="../articles/d_js.html">d_js</a>
     </li>
     <li>
-      <a href="../articles/e_config.html">Using golem config</a>
+      <a href="../articles/e_config.html">e_config</a>
     </li>
     <li>
-      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+      <a href="../articles/f_extending_golem.html">f_extending_golem</a>
     </li>
     <li>
-      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
+      <a href="../articles/z_golem_cheatsheet.html">e_golem_cheatsheet</a>
     </li>
   </ul></li>
 <li>
@@ -103,7 +103,7 @@ By default <code>bundle_ressources()</code> load these function  automatically f
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">activate_js</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">invoke_js</span><span class="op">(</span><span class="va">fun</span>, <span class="va">...</span>, session <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">invoke_js</span><span class="op">(</span><span class="va">fun</span>, <span class="va">...</span>, session <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/domains.html" class="external-link">getDefaultReactiveDomain</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -185,87 +185,87 @@ to launch any JS function created inside a Shiny JavaScript handler.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidPage</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fu">golem</span><span class="fu">::</span><span class="fu">activate_js</span><span class="op">(</span><span class="op">)</span>, <span class="co"># already loaded in your golem by `bundle_resources()`</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"hidebutton1"</span>, label <span class="op">=</span> <span class="st">"hide button1"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"showbutton1"</span>, label <span class="op">=</span> <span class="st">"show button1"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"button1"</span>, label <span class="op">=</span> <span class="st">"button1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"hidebutton1"</span>, label <span class="op">=</span> <span class="st">"hide button1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"showbutton1"</span>, label <span class="op">=</span> <span class="st">"show button1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"button1"</span>, label <span class="op">=</span> <span class="st">"button1"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"hideclassA"</span>, label <span class="op">=</span> <span class="st">"hide class A"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"showclassA"</span>, label <span class="op">=</span> <span class="st">"show class A"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"buttonA1"</span>, label <span class="op">=</span> <span class="st">"button A1"</span>, class <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"buttonA2"</span>, label <span class="op">=</span> <span class="st">"button A2"</span>, class <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"buttonA3"</span>, label <span class="op">=</span> <span class="st">"button A3"</span>, class <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"hideclassA"</span>, label <span class="op">=</span> <span class="st">"hide class A"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"showclassA"</span>, label <span class="op">=</span> <span class="st">"show class A"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"buttonA1"</span>, label <span class="op">=</span> <span class="st">"button A1"</span>, class <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"buttonA2"</span>, label <span class="op">=</span> <span class="st">"button A2"</span>, class <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"buttonA3"</span>, label <span class="op">=</span> <span class="st">"button A3"</span>, class <span class="op">=</span> <span class="st">"A"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"clickhide"</span>, label <span class="op">=</span> <span class="st">"click on 'hide button1' and 'hide class A'"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"clickshow"</span>, label <span class="op">=</span> <span class="st">"click on 'show button1' and 'show class A'"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"clickhide"</span>, label <span class="op">=</span> <span class="st">"click on 'hide button1' and 'hide class A'"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"clickshow"</span>, label <span class="op">=</span> <span class="st">"click on 'show button1' and 'show class A'"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"disableA"</span>, label <span class="op">=</span> <span class="st">"disable class A"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"reableA"</span>, label <span class="op">=</span> <span class="st">"reable class A"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"disableA"</span>, label <span class="op">=</span> <span class="st">"disable class A"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"reableA"</span>, label <span class="op">=</span> <span class="st">"reable class A"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"alertbutton"</span>, label <span class="op">=</span> <span class="st">"alert button"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"promptbutton"</span>, label <span class="op">=</span> <span class="st">"prompt button"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"confirmbutton"</span>, label <span class="op">=</span> <span class="st">"confirm button"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"alertbutton"</span>, label <span class="op">=</span> <span class="st">"alert button"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"promptbutton"</span>, label <span class="op">=</span> <span class="st">"prompt button"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/actionButton.html" class="external-link">actionButton</a></span><span class="op">(</span>inputId <span class="op">=</span> <span class="st">"confirmbutton"</span>, label <span class="op">=</span> <span class="st">"confirm button"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">server</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">input</span>, <span class="va">output</span>, <span class="va">session</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">hidebutton1</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">hidebutton1</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"hideid"</span>, <span class="st">"button1"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">showbutton1</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">showbutton1</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"showid"</span>, <span class="st">"button1"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">hideclassA</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">hideclassA</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"hideclass"</span>, <span class="st">"A"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">showclassA</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">showclassA</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"showclass"</span>, <span class="st">"A"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">clickhide</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">clickhide</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"clickon"</span>, <span class="st">"#hidebutton1"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"clickon"</span>, <span class="st">"#hideclassA"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">clickshow</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">clickshow</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"clickon"</span>, <span class="st">"#showbutton1"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"clickon"</span>, <span class="st">"#showclassA"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">disableA</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">disableA</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"disable"</span>, <span class="st">".A"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">reableA</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">reableA</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"reable"</span>, <span class="st">".A"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">alertbutton</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">alertbutton</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"alert"</span>, <span class="st">"ALERT!!"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">promptbutton</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">promptbutton</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"prompt"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>message <span class="op">=</span> <span class="st">"what's your name?"</span>, id <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">name</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">name</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"input$name"</span>, <span class="va">input</span><span class="op">$</span><span class="va">name</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">confirmbutton</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">confirmbutton</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu">golem</span><span class="fu">::</span><span class="fu">invoke_js</span><span class="op">(</span><span class="st">"confirm"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>message <span class="op">=</span> <span class="st">"Are you sure?"</span>, id <span class="op">=</span> <span class="st">"sure"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">sure</span>, <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/observeEvent.html" class="external-link">observeEvent</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">sure</span>, <span class="op">{</span></span></span>
 <span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"input$sure"</span>, <span class="va">input</span><span class="op">$</span><span class="va">sure</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span><span class="va">ui</span>, <span class="va">server</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

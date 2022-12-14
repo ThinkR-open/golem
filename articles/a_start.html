@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting Started with {golem} • golem</title>
+<title>a_start • golem</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Bootstrap --><link href="../cosmo.css" rel="stylesheet">
 <link href="../thinkr.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with {golem}">
+<script src="../pkgdown.js"></script><meta property="og:title" content="a_start">
 <meta property="og:description" content="golem">
 <meta name="twitter:card" content="summary">
 <!-- mathjax
@@ -51,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -68,25 +68,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/a_start.html">Getting Started with {golem}</a>
+      <a href="../articles/a_start.html">a_start</a>
     </li>
     <li>
-      <a href="../articles/b_dev.html">Day to Day Dev with {golem}</a>
+      <a href="../articles/b_dev.html">b_dev</a>
     </li>
     <li>
-      <a href="../articles/c_deploy.html">Deploying Apps with {golem}</a>
+      <a href="../articles/c_deploy.html">c_deploy</a>
     </li>
     <li>
-      <a href="../articles/d_js.html">Using {golem} js functions</a>
+      <a href="../articles/d_js.html">d_js</a>
     </li>
     <li>
-      <a href="../articles/e_config.html">Using golem config</a>
+      <a href="../articles/e_config.html">e_config</a>
     </li>
     <li>
-      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+      <a href="../articles/f_extending_golem.html">f_extending_golem</a>
     </li>
     <li>
-      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
+      <a href="../articles/z_golem_cheatsheet.html">e_golem_cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -122,10 +122,10 @@
       </header><script src="a_start_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Getting Started with {golem}</h1>
+      <h1 data-toc-skip>a_start</h1>
                         <h4 data-toc-skip class="author">Colin Fay</h4>
             
-            <h4 data-toc-skip class="date">2022-07-27</h4>
+            <h4 data-toc-skip class="date">2022-12-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/a_start.Rmd" class="external-link"><code>vignettes/a_start.Rmd</code></a></small>
       <div class="hidden name"><code>a_start.Rmd</code></div>
@@ -218,7 +218,8 @@ $(document).ready(function () {
 <span>  author_first_name <span class="op">=</span> <span class="st">"AUTHOR_FIRST"</span>, <span class="co"># Your First Name</span></span>
 <span>  author_last_name <span class="op">=</span> <span class="st">"AUTHOR_LAST"</span>, <span class="co"># Your Last Name</span></span>
 <span>  author_email <span class="op">=</span> <span class="st">"AUTHOR@MAIL.COM"</span>, <span class="co"># Your Email</span></span>
-<span>  repo_url <span class="op">=</span> <span class="cn">NULL</span> <span class="co"># The (optional) URL of the GitHub Repo</span></span>
+<span>  repo_url <span class="op">=</span> <span class="cn">NULL</span>, <span class="co"># The (optional) URL of the GitHub Repo</span></span>
+<span>  pkg_version <span class="op">=</span> <span class="st">"0.0.0.9000"</span> <span class="co"># The Version of the package containing the App</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>About <a href="https://r-pkgs.org/Metadata.html#sec-description" class="external-link">the DESCRIPTION file</a>.</p>
 </div>
@@ -248,7 +249,7 @@ $(document).ready(function () {
 <p>Create a template for tests:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/use_recommended.html">use_recommended_tests</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>About <a href="https://r-pkgs.org/testing-basics.html" class="external-link">tests in a package</a>.</p>
+<p>About <a href="https://r-pkgs.org/tests.html" class="external-link">tests in a package</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="use-recommended-packages">Use Recommended Packages<a class="anchor" aria-label="anchor" href="#use-recommended-packages"></a>
@@ -290,7 +291,7 @@ $(document).ready(function () {
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/run_dev.html">run_dev</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You’re now set! You’ve successfully initiated the project and can go to dev/02_dev.R.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rstudioapi/man/navigateToFile.html" class="external-link">navigateToFile</a></span><span class="op">(</span><span class="st">"dev/02_dev.R"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/rstudioapi/reference/navigateToFile.html" class="external-link">navigateToFile</a></span><span class="op">(</span><span class="st">"dev/02_dev.R"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>

@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deploying Apps with {golem} • golem</title>
+<title>c_deploy • golem</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Bootstrap --><link href="../cosmo.css" rel="stylesheet">
 <link href="../thinkr.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Deploying Apps with {golem}">
+<script src="../pkgdown.js"></script><meta property="og:title" content="c_deploy">
 <meta property="og:description" content="golem">
 <meta name="twitter:card" content="summary">
 <!-- mathjax
@@ -51,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -68,25 +68,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/a_start.html">Getting Started with {golem}</a>
+      <a href="../articles/a_start.html">a_start</a>
     </li>
     <li>
-      <a href="../articles/b_dev.html">Day to Day Dev with {golem}</a>
+      <a href="../articles/b_dev.html">b_dev</a>
     </li>
     <li>
-      <a href="../articles/c_deploy.html">Deploying Apps with {golem}</a>
+      <a href="../articles/c_deploy.html">c_deploy</a>
     </li>
     <li>
-      <a href="../articles/d_js.html">Using {golem} js functions</a>
+      <a href="../articles/d_js.html">d_js</a>
     </li>
     <li>
-      <a href="../articles/e_config.html">Using golem config</a>
+      <a href="../articles/e_config.html">e_config</a>
     </li>
     <li>
-      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+      <a href="../articles/f_extending_golem.html">f_extending_golem</a>
     </li>
     <li>
-      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
+      <a href="../articles/z_golem_cheatsheet.html">e_golem_cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -122,10 +122,10 @@
       </header><script src="c_deploy_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Deploying Apps with {golem}</h1>
+      <h1 data-toc-skip>c_deploy</h1>
                         <h4 data-toc-skip class="author">Colin Fay</h4>
             
-            <h4 data-toc-skip class="date">2022-07-27</h4>
+            <h4 data-toc-skip class="date">2022-12-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/c_deploy.Rmd" class="external-link"><code>vignettes/c_deploy.Rmd</code></a></small>
       <div class="hidden name"><code>c_deploy.Rmd</code></div>
@@ -143,14 +143,12 @@ $(document).ready(function () {
 </h2>
 <p>When launching the app, you might have noticed that the <code>dev/run_dev.R</code> function calls <code>run_app()</code>, which has the following structure:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span> <span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/with_golem_options.html">with_golem_options</a></span><span class="op">(</span></span>
-<span>    app <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
-<span>      ui <span class="op">=</span> <span class="va">app_ui</span>, </span>
+<span>    app <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
+<span>      ui <span class="op">=</span> <span class="va">app_ui</span>,</span>
 <span>      server <span class="op">=</span> <span class="va">app_server</span></span>
-<span>    <span class="op">)</span>, </span>
+<span>    <span class="op">)</span>,</span>
 <span>    golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
@@ -158,7 +156,7 @@ $(document).ready(function () {
 <p>But long story short, this combination of <code>with_golem_options</code> &amp; <code>golem_opts = list(...)</code> allows you to pass argument to the function to be used inside the application, from UI or from server side, which you can get with <code><a href="../reference/get_golem_options.html">get_golem_options()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">run_app</span><span class="op">(</span>this <span class="op">=</span> <span class="st">"that"</span><span class="op">)</span></span>
-<span><span class="co"># And in the app </span></span>
+<span><span class="co"># And in the app</span></span>
 <span><span class="va">this</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_golem_options.html">get_golem_options</a></span><span class="op">(</span><span class="st">"this"</span><span class="op">)</span></span></code></pre></div>
 <p>The idea is to provide more flexibility for deployment on each platform you want to run your app on.</p>
 </div>
@@ -200,12 +198,12 @@ $(document).ready(function () {
 <blockquote>
 <p>this functions will create a “deploy” folder containing :</p>
 </blockquote>
-<div class="sourceCode" id="cb5"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1"></a>deploy/</span>
-<span id="cb5-2"><a href="#cb5-2"></a>+-- Dockerfile</span>
-<span id="cb5-3"><a href="#cb5-3"></a>+-- Dockerfile_base</span>
-<span id="cb5-4"><a href="#cb5-4"></a>+-- yourgolem_0.0.0.9000.tar.gz</span>
-<span id="cb5-5"><a href="#cb5-5"></a>+-- README</span>
-<span id="cb5-6"><a href="#cb5-6"></a>\-- renv.lock.prod</span></code></pre></div>
+<pre><code>deploy/
++-- Dockerfile
++-- Dockerfile_base
++-- yourgolem_0.0.0.9000.tar.gz
++-- README
+\-- renv.lock.prod</code></pre>
 <p>then follow the README file</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If you want to deploy via a generic Dockerfile</span></span>
@@ -215,9 +213,20 @@ $(document).ready(function () {
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_with_renv_shinyproxy</a></span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"deploy"</span><span class="op">)</span></span></code></pre></div>
 <p>If you would like to use {renv} during developpement, you can init a renv.lock file with</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">attachment</span><span class="fu">::</span><span class="fu"><a href="https://thinkr-open.github.io/attachment/reference/create_renv_for_dev.html" class="external-link">create_renv_for_dev</a></span><span class="op">(</span>dev_pkg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"renv"</span>, <span class="st">"devtools"</span>, <span class="st">"roxygen2"</span>, </span>
-<span>  <span class="st">"usethis"</span>, <span class="st">"pkgload"</span>, <span class="st">"testthat"</span>, <span class="st">"remotes"</span>, <span class="st">"covr"</span>, <span class="st">"attachment"</span>, </span>
-<span>  <span class="st">"pak"</span>, <span class="st">"dockerfiler"</span>,<span class="st">"golem"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">attachment</span><span class="fu">::</span><span class="fu"><a href="https://thinkr-open.github.io/attachment/reference/create_renv_for_dev.html" class="external-link">create_renv_for_dev</a></span><span class="op">(</span>dev_pkg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"renv"</span>,</span>
+<span>  <span class="st">"devtools"</span>,</span>
+<span>  <span class="st">"roxygen2"</span>,</span>
+<span>  <span class="st">"usethis"</span>,</span>
+<span>  <span class="st">"pkgload"</span>,</span>
+<span>  <span class="st">"testthat"</span>,</span>
+<span>  <span class="st">"remotes"</span>,</span>
+<span>  <span class="st">"covr"</span>,</span>
+<span>  <span class="st">"attachment"</span>,</span>
+<span>  <span class="st">"pak"</span>,</span>
+<span>  <span class="st">"dockerfiler"</span>,</span>
+<span>  <span class="st">"golem"</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>an activate {renv} with</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/activate.html" class="external-link">activate</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -228,19 +237,19 @@ $(document).ready(function () {
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># If you want to deploy via a generic Dockerfile</span></span>
-<span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_with_renv</a></span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"deploy"</span>,lockfile <span class="op">=</span>  <span class="st">"renv.lock"</span><span class="op">)</span></span>
+<span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_with_renv</a></span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"deploy"</span>, lockfile <span class="op">=</span> <span class="st">"renv.lock"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># If you want to deploy to ShinyProxy</span></span>
-<span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_with_renv_shinyproxy</a></span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"deploy"</span>,lockfile <span class="op">=</span>  <span class="st">"renv.lock"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_with_renv_shinyproxy</a></span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"deploy"</span>, lockfile <span class="op">=</span> <span class="st">"renv.lock"</span><span class="op">)</span></span></code></pre></div>
 <blockquote>
 <p>this functions will create a “deploy” folder containing :</p>
 </blockquote>
-<div class="sourceCode" id="cb10"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1"></a>deploy/</span>
-<span id="cb10-2"><a href="#cb10-2"></a>+-- Dockerfile</span>
-<span id="cb10-3"><a href="#cb10-3"></a>+-- Dockerfile_base</span>
-<span id="cb10-4"><a href="#cb10-4"></a>+-- yourgolem_0.0.0.9000.tar.gz</span>
-<span id="cb10-5"><a href="#cb10-5"></a>+-- README</span>
-<span id="cb10-6"><a href="#cb10-6"></a>\-- renv.lock.prod</span></code></pre></div>
+<pre><code>deploy/
++-- Dockerfile
++-- Dockerfile_base
++-- yourgolem_0.0.0.9000.tar.gz
++-- README
+\-- renv.lock.prod</code></pre>
 <p>then follow the README file</p>
 </div>
 </div>

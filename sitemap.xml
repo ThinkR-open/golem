@@ -94,6 +94,9 @@
     <loc>/reference/fill_desc.html</loc>
   </url>
   <url>
+    <loc>/reference/get_current_config.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_golem_options.html</loc>
   </url>
   <url>
@@ -112,16 +115,25 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/install_dev_deps.html</loc>
+  </url>
+  <url>
     <loc>/reference/is_running.html</loc>
   </url>
   <url>
     <loc>/reference/made_dev.html</loc>
   </url>
   <url>
+    <loc>/reference/maintenance_page.html</loc>
+  </url>
+  <url>
     <loc>/reference/make_dev.html</loc>
   </url>
   <url>
     <loc>/reference/module_template.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pkg_tools.html</loc>
   </url>
   <url>
     <loc>/reference/prod.html</loc>

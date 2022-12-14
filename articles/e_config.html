@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Using golem config • golem</title>
+<title>e_config • golem</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Bootstrap --><link href="../cosmo.css" rel="stylesheet">
 <link href="../thinkr.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Using golem config">
+<script src="../pkgdown.js"></script><meta property="og:title" content="e_config">
 <meta property="og:description" content="golem">
 <meta name="twitter:card" content="summary">
 <!-- mathjax
@@ -51,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -68,25 +68,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/a_start.html">Getting Started with {golem}</a>
+      <a href="../articles/a_start.html">a_start</a>
     </li>
     <li>
-      <a href="../articles/b_dev.html">Day to Day Dev with {golem}</a>
+      <a href="../articles/b_dev.html">b_dev</a>
     </li>
     <li>
-      <a href="../articles/c_deploy.html">Deploying Apps with {golem}</a>
+      <a href="../articles/c_deploy.html">c_deploy</a>
     </li>
     <li>
-      <a href="../articles/d_js.html">Using {golem} js functions</a>
+      <a href="../articles/d_js.html">d_js</a>
     </li>
     <li>
-      <a href="../articles/e_config.html">Using golem config</a>
+      <a href="../articles/e_config.html">e_config</a>
     </li>
     <li>
-      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+      <a href="../articles/f_extending_golem.html">f_extending_golem</a>
     </li>
     <li>
-      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
+      <a href="../articles/z_golem_cheatsheet.html">e_golem_cheatsheet</a>
     </li>
   </ul>
 </li>
@@ -122,7 +122,7 @@
       </header><script src="e_config_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Using golem config</h1>
+      <h1 data-toc-skip>e_config</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/e_config.Rmd" class="external-link"><code>vignettes/e_config.Rmd</code></a></small>
@@ -149,10 +149,12 @@
   golem_name: golex
   golem_version: 0.0.0.9000
   app_prod: no
+
 production:
   app_prod: yes
+
 dev:
-  golem_wd: !expr here::here()</code></pre>
+  golem_wd: !expr golem::pkg_path()</code></pre>
 <ul>
 <li>default/golem_name, default/golem_version, default/app_prod are usable across the whole life of your golem app: while developing, and also when in production.</li>
 <li>production/app_prod might be used for adding elements that are to be used once the app is in production.</li>
@@ -163,41 +165,59 @@ dev:
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/golem_opts.html">set_golem_options</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── Setting {golem} options in `golem-config.yml` ───────────────────────────────</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `golem_wd` to here::here()</span></span>
-<span><span class="co">#&gt; You can change golem working directory with set_golem_wd('path/to/wd')</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `golem_name` to golex</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `golem_wd` to golem::pkg_path()</span></span>
+<span><span class="co">#&gt; You can change golem working directory with set_golem_wd('path/to/wd')</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `golem_version` to 0.0.0.9000</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `app_prod` to FALSE</span></span>
 <span><span class="co">#&gt; ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────</span></span></code></pre></div>
+<pre><code>default:
+  golem_name: golex
+  golem_version: 0.0.0.9000
+  app_prod: no
+production:
+  app_prod: yes
+dev:
+  golem_wd: !expr golem::pkg_path()</code></pre>
 <p>The functions reading the options in this config file are:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/golem_opts.html">get_golem_name</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "golex"</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/Rtmpe9ab9H/golex"</span></span>
+<span><span class="co">#&gt; [1] "/private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpNJMY3s/golex"</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">get_golem_version</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "0.0.0.9000"</span></span></code></pre></div>
 <p>You can set these with:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/golem_opts.html">set_golem_name</a></span><span class="op">(</span><span class="st">"this"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">set_golem_wd</a></span><span class="op">(</span><span class="st">"."</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">set_golem_version</a></span><span class="op">(</span><span class="st">"0.0.1"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>default:
+  golem_name: golex
+  golem_version: 0.0.0.9000
+  app_prod: no
+production:
+  app_prod: yes
+dev:
+  golem_wd: !expr golem::pkg_path()</code></pre>
 </div>
 <div class="section level2">
 <h2 id="using-golem-config">Using <code>golem-config</code><a class="anchor" aria-label="anchor" href="#using-golem-config"></a>
 </h2>
 <p>If you’re already familiar with the <a href="https://github.com/rstudio/config" class="external-link">config</a> package, you can use this file just as any config file.</p>
 <p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with an <code><a href="../reference/amend_golem_config.html">amend_golem_config()</a></code> function to add elements to it.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/amend_golem_config.html">amend_golem_config</a></span><span class="op">(</span></span>
 <span>  key <span class="op">=</span> <span class="st">"where"</span>,</span>
 <span>  value <span class="op">=</span> <span class="st">"indev"</span></span>
 <span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `where` to indev</span></span>
 <span><span class="fu"><a href="../reference/amend_golem_config.html">amend_golem_config</a></span><span class="op">(</span></span>
 <span>  key <span class="op">=</span> <span class="st">"where"</span>,</span>
 <span>  value <span class="op">=</span> <span class="st">"inprod"</span>,</span>
 <span>  config <span class="op">=</span> <span class="st">"production"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `where` to inprod</span></span></code></pre></div>
 <p>Will result in a <code>golem-config.yml</code> file as such:</p>
 <pre><code>default:
   golem_name: golex
@@ -208,14 +228,14 @@ production:
   app_prod: yes
   where: inprod
 dev:
-  golem_wd: !expr here::here()</code></pre>
+  golem_wd: !expr golem::pkg_path()</code></pre>
 </div>
 <div class="section level2">
 <h2 id="app_config-r">
 <code>app_config.R</code><a class="anchor" aria-label="anchor" href="#app_config-r"></a>
 </h2>
 <p>In <code>R/app_config.R</code>, you’ll find a <code>get_golem_config()</code> function that allows you to retrieve config from this config file:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pkgload</span><span class="fu">::</span><span class="fu"><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Loading <span style="color: #0000BB;">golex</span></span></span>
 <span><span class="fu">get_golem_config</span><span class="op">(</span></span>
@@ -228,7 +248,7 @@ dev:
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "inprod"</span></span></code></pre></div>
 <p>Or using the env var (default <a href="https://github.com/rstudio/config" class="external-link">config</a> behavior):</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"R_CONFIG_ACTIVE"</span> <span class="op">=</span> <span class="st">"production"</span><span class="op">)</span></span>
 <span><span class="fu">get_golem_config</span><span class="op">(</span><span class="st">"where"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "inprod"</span></span></code></pre></div>

@@ -34,7 +34,7 @@ launch."><meta name="twitter:card" content="summary"><!-- mathjax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -49,25 +49,25 @@ launch."><meta name="twitter:card" content="summary"><!-- mathjax
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/a_start.html">Getting Started with {golem}</a>
+      <a href="../articles/a_start.html">a_start</a>
     </li>
     <li>
-      <a href="../articles/b_dev.html">Day to Day Dev with {golem}</a>
+      <a href="../articles/b_dev.html">b_dev</a>
     </li>
     <li>
-      <a href="../articles/c_deploy.html">Deploying Apps with {golem}</a>
+      <a href="../articles/c_deploy.html">c_deploy</a>
     </li>
     <li>
-      <a href="../articles/d_js.html">Using {golem} js functions</a>
+      <a href="../articles/d_js.html">d_js</a>
     </li>
     <li>
-      <a href="../articles/e_config.html">Using golem config</a>
+      <a href="../articles/e_config.html">e_config</a>
     </li>
     <li>
-      <a href="../articles/f_extending_golem.html">Extending {golem}</a>
+      <a href="../articles/f_extending_golem.html">f_extending_golem</a>
     </li>
     <li>
-      <a href="../articles/z_golem_cheatsheet.html">{golem} cheatsheet</a>
+      <a href="../articles/z_golem_cheatsheet.html">e_golem_cheatsheet</a>
     </li>
   </ul></li>
 <li>
@@ -103,7 +103,12 @@ launch.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">with_golem_options</span><span class="op">(</span><span class="va">app</span>, <span class="va">golem_opts</span>, print <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">with_golem_options</span><span class="op">(</span></span>
+<span>  <span class="va">app</span>,</span>
+<span>  <span class="va">golem_opts</span>,</span>
+<span>  maintenance_page <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="va"><a href="maintenance_page.html">maintenance_page</a></span>,</span>
+<span>  print <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -113,13 +118,17 @@ launch.</p>
 
 
 <dt>golem_opts</dt>
-<dd><p>A list of Options to be added to the app</p></dd>
+<dd><p>A list of options to be added to the app</p></dd>
+
+
+<dt>maintenance_page</dt>
+<dd><p>an html_document or a shiny tag list. Default is golem template.</p></dd>
 
 
 <dt>print</dt>
 <dd><p>Whether or not to print the app. Default is to <code>FALSE</code>, which
-should be what you need 99.99% of the time In case you need to
-actively print the app object, you can set it to <code>TRUE</code>.</p></dd>
+should be what you need 99.99% of the time. In case you need to
+actively print() the app object, you can set it to <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div id="value">
