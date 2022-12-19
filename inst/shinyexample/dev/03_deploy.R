@@ -38,3 +38,23 @@ golem::add_dockerfile_with_renv()
 ## If you want to deploy to ShinyProxy
 golem::add_dockerfile_with_renv_shinyproxy()
 
+## ShinyApps.io Demo Deployment Snippet
+# If you want to deploy to ShinyApps.io without using the built in RStudio workflow
+rsconnect::deployApp(
+  appName = desc::desc_get_field("Package"),
+  appTitle = desc::desc_get_field("Package"),
+  appFiles = c(
+    # Add any additional files unique to your app here.
+    "R/",
+    "inst/",
+    "data/",
+    "NAMESPACE",
+    "DESCRIPTION",
+    "app.R",
+    ".Rprofile",
+    ".Renviron"
+  ),
+  appId = rsconnect::deployments(".")$appID,
+  lint = FALSE,
+  forceUpdate = TRUE
+)
