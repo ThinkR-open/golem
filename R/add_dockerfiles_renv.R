@@ -38,7 +38,7 @@ add_dockerfile_with_renv_ <- function(
   }
 
   file.copy(from = lockfile, to = output_dir)
-  socle <- dockerfiler::dock_from_renv(
+  socle <- dockerfiler_dock_from_renv(
     lockfile = lockfile,
     distro = distro,
     FROM = FROM,
