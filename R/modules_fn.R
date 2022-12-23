@@ -237,7 +237,6 @@ use_module_test <- function(
   pkg = get_golem_wd(),
   open = TRUE
 ) {
-
   # Remove the extension if any
   name <- file_path_sans_ext(name)
   # Remove the "mod_" if any

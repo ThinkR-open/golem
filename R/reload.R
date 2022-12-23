@@ -108,8 +108,8 @@ document_and_reload <- function(
 
   if (
     rlang::is_installed("rstudioapi") &&
-    rstudioapi::isAvailable() &&
-    rstudioapi::hasFun("documentSaveAll")
+      rstudioapi::isAvailable() &&
+      rstudioapi::hasFun("documentSaveAll")
   ) {
     rstudioapi::documentSaveAll()
   }
@@ -154,7 +154,7 @@ dialog_if_has <- function(
 ) {
   if (
     rlang::is_installed("rstudioapi") &&
-    rstudioapi::isAvailable() && rstudioapi::hasFun("showDialog")
+      rstudioapi::isAvailable() && rstudioapi::hasFun("showDialog")
   ) {
     rstudioapi::showDialog(title, message, url)
   }

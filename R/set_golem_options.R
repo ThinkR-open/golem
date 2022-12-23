@@ -43,7 +43,6 @@ set_golem_options <- function(
   talkative = TRUE,
   config_file = golem::get_current_config(golem_wd)
 ) {
-
   # TODO here we'll run the
   # golem_install_dev_pkg() function
 

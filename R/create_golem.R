@@ -237,7 +237,7 @@ create_golem <- function(
   if (isTRUE(open)) {
     if (
       rlang::is_installed("rstudioapi") &&
-      rstudioapi::isAvailable() && rstudioapi::hasFun("openProject")
+        rstudioapi::isAvailable() && rstudioapi::hasFun("openProject")
     ) {
       rstudioapi::openProject(path = path)
     } else {

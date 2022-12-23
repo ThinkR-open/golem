@@ -12,18 +12,17 @@ run_dev <- function(
   pkg = get_golem_wd(),
   save_all = TRUE
 ) {
-
-if (save_all){  
-  if (
-    rlang::is_installed("rstudioapi") &&
-    rstudioapi::isAvailable() &&
-    rstudioapi::hasFun("documentSaveAll")
-  ) {
-    rstudioapi::documentSaveAll()
+  if (save_all) {
+    if (
+      rlang::is_installed("rstudioapi") &&
+        rstudioapi::isAvailable() &&
+        rstudioapi::hasFun("documentSaveAll")
+    ) {
+      rstudioapi::documentSaveAll()
+    }
   }
-}  
-  
-  
+
+
   # We'll look for the run_dev script in the current dir
   try_dev <- file.path(
     pkg,

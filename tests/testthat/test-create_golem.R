@@ -2,7 +2,6 @@
 ### Helpers functions ----------------------------------------------------------
 
 is_properly_populated_golem <- function(path) {
-
   # All files excepts *.Rproj which changes based on the project name
   expected_files <- c(
     "DESCRIPTION",
@@ -62,7 +61,6 @@ dummy_dir <- tempfile(pattern = "dummy")
 dir.create(dummy_dir)
 
 withr::with_dir(dummy_dir, {
-
   ## Default
   test_that("golem is created and properly populated", {
     dummy_golem_path <- file.path(dummy_dir, "koko")

@@ -30,9 +30,4 @@ cli_cat_rule <- function(...) {
       ...
     )
   })
-
-
 }
-
-
-

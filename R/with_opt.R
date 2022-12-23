@@ -19,7 +19,6 @@ with_golem_options <- function(
   maintenance_page = golem::maintenance_page,
   print = FALSE
 ) {
-
   # Check if app is in maintenance
   if (Sys.getenv("GOLEM_MAINTENANCE_ACTIVE", "FALSE") == "TRUE") {
     app <- shiny::shinyApp(
@@ -79,10 +78,12 @@ with_golem_options <- function(
 #' if (interactive()) {
 #'   # 1. Pass parameters directly to `run_app`
 #'
-#'   run_app( title="My Golem App", 
-#'            content = "something" )
+#'   run_app(
+#'     title = "My Golem App",
+#'     content = "something"
+#'   )
 #'
-#'   # 2. Get the values 
+#'   # 2. Get the values
 #'   # 2.1 from the UI side
 #'
 #'   h1(get_golem_options("title"))
@@ -92,17 +93,17 @@ with_golem_options <- function(
 #'   output$param <- renderPrint({
 #'     paste("param content = ", get_golem_options("content"))
 #'   })
-#'   
+#'
 #'   output$param_full <- renderPrint({
-#'      get_golem_options() # list of all golem options as a list.
+#'     get_golem_options() # list of all golem options as a list.
 #'   })
-#'   
+#'
 #'   # 3. If needed, to set default value, edit `run_app` like this :
 #'
 #'   run_app <- function(
-#'              title = "this",
-#'              content = "that",
-#'              ...
+#'   title = "this",
+#'   content = "that",
+#'   ...
 #'   ) {
 #'     with_golem_options(
 #'       app = shinyApp(
@@ -110,14 +111,12 @@ with_golem_options <- function(
 #'         server = app_server
 #'       ),
 #'       golem_opts = list(
-#'       title = title,
-#'       content = content,
-#'       ...
+#'         title = title,
+#'         content = content,
+#'         ...
 #'       )
 #'     )
 #'   }
-#'    
-#'   
 #' }
 #'
 get_golem_options <- function(which = NULL) {

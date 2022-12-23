@@ -39,7 +39,7 @@ bundle_resources <- function(
     ) > 0
   ) {
     res[[
-    length(res) + 1
+      length(res) + 1
     ]] <- htmltools::htmlDependency(
       name,
       version,
@@ -84,7 +84,7 @@ bundle_resources <- function(
 
       for (i in css_nms) {
         res[[
-        length(res) + 1
+          length(res) + 1
         ]] <- tags$link(
           href = i,
           rel = "stylesheet"
@@ -95,7 +95,7 @@ bundle_resources <- function(
 
   if (with_sparkles) {
     res[[
-    length(res) + 1
+      length(res) + 1
     ]] <- htmlDependency(
       "sparkles",
       version = utils::packageVersion("golem"),
