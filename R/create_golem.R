@@ -31,6 +31,7 @@ replace_package_name <- function(
 }
 
 
+
 #' Create a package for a Shiny App using `{golem}`
 #'
 #' @param path Name of the folder to create the package in.
@@ -232,6 +233,8 @@ create_golem <- function(
       "To continue working on your app, start editing the 01_start.R file."
     )
   )
+
+  check_dev_deps_are_installed()
 
 
   if (isTRUE(open)) {

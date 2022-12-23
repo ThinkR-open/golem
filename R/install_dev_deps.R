@@ -60,29 +60,44 @@ install_dev_deps <- function(
   }
 
   for (
-    pak in unique(
-      c(
-        "attachment",
-        "cli",
-        "crayon",
-        "desc",
-        "devtools",
-        "dockerfiler",
-        "fs",
-        "here",
-        "pkgbuild",
-        "pkgload",
-        "processx",
-        "roxygen2",
-        "rsconnect",
-        "rstudioapi",
-        "testthat",
-        "usethis"
-      )
-    )
+    pak in dev_deps
   ) {
     if (!rlang::is_installed(pak)) {
       f(pak, ...)
     }
+  }
+}
+
+dev_deps <- unique(
+  c(
+    "attachment",
+    "cli",
+    "crayon",
+    "desc",
+    "devtools",
+    "dockerfiler",
+    "fs",
+    "here",
+    "pkgbuild",
+    "pkgload",
+    "processx",
+    "roxygen2",
+    "rsconnect",
+    "rstudioapi",
+    "testthat",
+    "usethis"
+  )
+)
+
+check_dev_deps_are_installed <- function() {
+  are_installed <- sapply(
+    dev_deps,
+    FUN = rlang::is_installed
+  )
+  if (!all(are_installed)) {
+    message(
+      "We noticed that some dev dependencies are not installed.",
+      "You can install them with `install_dev_deps()`."
+    )
   }
 }
