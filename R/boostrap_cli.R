@@ -12,7 +12,7 @@ cli_cat_bullet <- function(...) {
   check_cli_installed()
   do_if_unquiet({
     cli::cat_bullet(...)
-  ))
+  })
 }
 
 
