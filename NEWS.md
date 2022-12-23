@@ -23,6 +23,7 @@
 + Setting the Environment variable `GOLEM_MAINTENANCE_ACTIVE` to `TRUE` active the maintenance mode of your app
 + `golem::run_dev()` now save all open documents before sourcing the `dev/run_dev.R` file
 + When creating an app, you'll get a message if the dev deps are not all installed (#915)
++ 03_deploy now contains an example of sending the app to PositConnect or Shinyapps.io (#923)
 
 ## Bug fix
 
