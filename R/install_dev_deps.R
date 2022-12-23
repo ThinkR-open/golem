@@ -96,7 +96,7 @@ check_dev_deps_are_installed <- function() {
   )
   if (!all(are_installed)) {
     message(
-      "We noticed that some dev dependencies are not installed.",
+      "We noticed that some dev dependencies are not installed.\n",
       "You can install them with `install_dev_deps()`."
     )
   }
