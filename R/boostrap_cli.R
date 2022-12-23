@@ -10,7 +10,9 @@ check_cli_installed <- function(reason = "to have attractive command line interf
 
 cli_cat_bullet <- function(...) {
   check_cli_installed()
-  cli::cat_bullet(...)
+  do_if_unquiet({
+    cli::cat_bullet(...)
+  ))
 }
 
 

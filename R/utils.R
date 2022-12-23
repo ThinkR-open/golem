@@ -226,11 +226,9 @@ open_or_go_to <- function(
   open_file
 ) {
   if (
-    rstudioapi::isAvailable() &&
-      open_file &&
-      rstudioapi::hasFun("navigateToFile")
+    open_file
   ) {
-    rstudioapi::navigateToFile(where)
+    rstudioapi_navigateToFile(where)
   } else {
     cat_red_bullet(
       sprintf(
