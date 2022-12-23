@@ -39,7 +39,6 @@ add_dockerfile_with_renv_ <- function(
 
   file.copy(from = lockfile, to = output_dir)
   socle <- dockerfiler::dock_from_renv(
-
     lockfile = lockfile,
     distro = distro,
     FROM = FROM,
@@ -180,7 +179,7 @@ docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
 # then go to 127.0.0.1:%s",
     tolower(paste0(golem::get_golem_name(), "_base")),
-    tolower( paste0(golem::get_golem_name(), ":latest")),
+    tolower(paste0(golem::get_golem_name(), ":latest")),
     port,
     port,
     tolower(paste0(golem::get_golem_name(), ":latest")),
