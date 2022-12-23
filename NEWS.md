@@ -1,4 +1,4 @@
-> Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue. 
+> Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
 # 0.3.5.9000+ (dev version)
 
@@ -22,6 +22,7 @@
 + `fill_desc()` now allows to set the version (#877)
 + Setting the Environment variable `GOLEM_MAINTENANCE_ACTIVE` to `TRUE` active the maintenance mode of your app
 + `golem::run_dev()` now save all open documents before sourcing the `dev/run_dev.R` file
++ When creating an app, you'll get a message if the dev deps are not all installed (#915)
 
 ## Bug fix
 
@@ -78,7 +79,7 @@ Update in the tests for CRAN (skip not installed + examples).
 + `use_code_of_conduct()` in dev script now has the contact param (#812)
 
 + All `with_test` params are now TRUE in the dev script (#801)
-  
+
 + `test-golem-recommended` now has two new tests for `app_sys` and `get_golem_config` (#751)
 
 + `use_utils_ui()` `use_utils_server()` & now come with a `with_test` parameter that adds a test file for theses functions (#625 & #801)
@@ -88,7 +89,7 @@ Update in the tests for CRAN (skip not installed + examples).
 + Every `{rstudioapi}` calls is now conditionned by the availabily of this function (#776)
 
 + `use_external_*` functions no longer suggest to "Go to" (#713, @novica)
- 
+
 + `create_golem()` now comes with `with_git` parameter that can be used to initialize git repository while creating a project template
 
 + `use_recommended_tests()` now comes with `testServer` (#720).
@@ -103,7 +104,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 + run_dev now has `options(shiny.port = httpuv::randomPort())` to prevent the browser from caching the CSS & JS files (#675)
 
-+ You can now specify the path to R in `expect_running()`. 
++ You can now specify the path to R in `expect_running()`.
 
 ## Bug fix
 
@@ -119,7 +120,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 + Fixed issue with expect_running & path to R (#700, @waiteb5)
 
-+ `expect_running()` now find R.exe on windows. 
++ `expect_running()` now find R.exe on windows.
 
 + `use_recommended_tests()` no longer add `{processx}` to the `DESCRIPTION` (#710)
 
@@ -171,7 +172,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 + `run_dev()` performs a check on golem name.
 
-+ `sanity_check()` function has been added to check for any 'browser()' or commented  #TODO / #TOFIX / #BUG in the code (#1354 @Swechhya) 
++ `sanity_check()` function has been added to check for any 'browser()' or commented  #TODO / #TOFIX / #BUG in the code (#1354 @Swechhya)
 
 ## New features
 
@@ -213,7 +214,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 ## Breaking changes
 
-+ `add_dockerfile*` function now return the `{dockerfiler}` object instead of the path to it. It allows to modify the Dockerfile object programmatically. (#493) 
++ `add_dockerfile*` function now return the `{dockerfiler}` object instead of the path to it. It allows to modify the Dockerfile object programmatically. (#493)
 
 + The `get_golem_config` now first look for a `GOLEM_CONFIG_ACTIVE` before looking for `R_CONFIG_ACTIVE` (#563)
 
@@ -222,7 +223,7 @@ Update in the tests for CRAN (skip not installed + examples).
 + `add_` functions no longer append to file if it already exists (#393)
 
 + `config::get()` is no longer exported to prevent namespace conflicts with `base::get()`
- 
+
 + fixed issue with favicon when package is built (#387)
 
 + `use_external_*()` function don't add ext if already there (#405)
@@ -300,11 +301,11 @@ Update in the tests for CRAN (skip not installed + examples).
 
 + `devtools::test()` in 03_deploy.R is now `devtools::check()`
 
-+ modules bow have a placeholder for content 
++ modules bow have a placeholder for content
 
 + Dev scripts have been rewritten and rerordered a litte bit
 
-## Breaking changes 
+## Breaking changes
 
 + `invoke_js()` now takes a list of elements to send to JS (through `...`) instead of a vector (#155, @zwycl)
 
@@ -352,13 +353,13 @@ Update in the tests for CRAN (skip not installed + examples).
 
 # golem 0.1.0 - CRAN release candidate,  v2
 
-## New Functions 
+## New Functions
 
 + `get_golem_wd` allows  to print the current golem working directory, and `set_golem_wd` to change it.
 
-## Breaking changes 
+## Breaking changes
 
-+ In order to work, the functions creating files need a `golem.wd`. This working directory is set by `set_golem_options` or the first time you create a file. It default to `"."`, the current directory. 
++ In order to work, the functions creating files need a `golem.wd`. This working directory is set by `set_golem_options` or the first time you create a file. It default to `"."`, the current directory.
 
 + Changes in the name of the args in `set_golem_options`: `pkg_path` is now `golem_wd`, `pkg_name` is now `golem_name`, `pkg_version` is now `golem_version`
 
@@ -372,7 +373,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 ## Changes in the way run_app and deploy files are build
 
-+ There is now a unique framework for run_app, that allows to deploy anywhere and can accept arguments. These arguments can then be retrieved with `get_golem_options()`. 
++ There is now a unique framework for run_app, that allows to deploy anywhere and can accept arguments. These arguments can then be retrieved with `get_golem_options()`.
 
 > See https://rtask.thinkr.fr/blog/shinyapp-runapp-shinyappdir-difference/
 
@@ -385,7 +386,7 @@ Update in the tests for CRAN (skip not installed + examples).
 + There is now `add_shinyserver_file` & `add_shinyappsio_file`, #40
 + `add_ui_server_files()` creates an ui & server.R files.
 
-## Small functions updates 
+## Small functions updates
 
 + Functions that create file(s) now automatically create folder if it's not there. Can be prevented with `dir_create = FALSE`
 + Functions that create file(s) can now be prevented from opening with `open = FALSE`, #75
@@ -394,25 +395,25 @@ Update in the tests for CRAN (skip not installed + examples).
 
 # golem 0.0.1.6000+
 
-## Changes 
+## Changes
 
 * `create_golem()` now switch to the newly created project
 * `use_git()` is not listed in `dev/01_start.R`
 
-## Breaking changes 
+## Breaking changes
 
 * Renamed `add_rconnect_file()` to `add_rstudioconnect_file()`
 * Renamed `create_shiny_template()` to `create_golem()`
 * Renamed `js()` to `activate_js()`
 * Renamed `use_recommended_dep()` to `use_recommended_deps()`
 
-## New functions 
+## New functions
 
 * `invoke_js()` allows to call JS functions from the server side. #52
 
 # golem 0.0.1.5000
 
-## Changes 
+## Changes
 
 * The dev files are now split in three - start / dev / deploy
 
@@ -444,7 +445,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 * `use_utils_prod` is now included in golem so you don't have to explicitly include the functions.
 
-## Docs 
+## Docs
 
 * Golem now has four vignettes
 
