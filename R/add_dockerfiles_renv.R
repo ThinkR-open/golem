@@ -16,7 +16,7 @@ add_dockerfile_with_renv_ <- function(
    if (is.null(lockfile)) {
        rlang::check_installed(
         "attachment",
-     reason = "to build a Dockerfile with automatic renv.lock creation, use the `lockfile` parameter to pass your own `renv.lock` file."
+     reason = "to build a Dockerfile with automatic renv.lock creation. Use the `lockfile` parameter to pass your own `renv.lock` file."
       )
      
      }
