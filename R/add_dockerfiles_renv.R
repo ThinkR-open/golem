@@ -12,11 +12,21 @@ add_dockerfile_with_renv_ <- function(
   update_tar_gz = TRUE
   # build_golem_from_source = TRUE,
 ) {
+ 
+   if (is.null(lockfile)) {
+       rlang::check_installed(
+        "attachment",
+     reason = "to build a Dockerfile with automatic renv.lock creation. Use the `lockfile` parameter to pass your own `renv.lock` file."
+      )
+     
+     }
+  
+  
+  
   rlang::check_installed(
-    "renv",
+    "renv", 
     reason = "to build a Dockerfile."
   )
-
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on
   x <- suppressWarnings({
@@ -31,6 +41,7 @@ add_dockerfile_with_renv_ <- function(
   }
 
   if (is.null(lockfile)) {
+     
     lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
       output = file.path(output_dir, "renv.lock.prod")
