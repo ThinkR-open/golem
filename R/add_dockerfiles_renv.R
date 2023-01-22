@@ -134,7 +134,7 @@ add_dockerfile_with_renv_ <- function(
 #' @param distro One of "focal", "bionic", "xenial", "centos7", or "centos8".
 #' See available distributions at https://hub.docker.com/r/rstudio/r-base/.
 #' @param dockerfile_cmd What is the CMD to add to the Dockerfile. If NULL, the default,
-#' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');{appname}::run_app()\`
+#' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\`
 #' @inheritParams add_dockerfile
 #' @rdname dockerfiles
 #' @export
@@ -173,9 +173,10 @@ add_dockerfile_with_renv <- function(
   }
   if (is.null(dockerfile_cmd)) {
     dockerfile_cmd <- sprintf(
-      "R -e \"options('shiny.port'=%s,shiny.host='%s');%s::run_app()\"",
+      "R -e \"options('shiny.port'=%s,shiny.host='%s');library(%s);%s::run_app()\"",
       port,
       host,
+      golem::get_golem_name(),
       golem::get_golem_name()
     )
   }
@@ -240,7 +241,8 @@ add_dockerfile_with_renv_shinyproxy <- function(
     update_tar_gz = update_tar_gz,
     open = open,
     dockerfile_cmd = sprintf(
-      "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');%s::run_app()\"",
+      "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%s);%s::run_app()\"",
+      golem::get_golem_name(),
       golem::get_golem_name()
     )
   )
@@ -280,7 +282,8 @@ add_dockerfile_with_renv_heroku <- function(
     update_tar_gz = update_tar_gz,
     open = FALSE,
     dockerfile_cmd = sprintf(
-      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');%s::run_app()\"",
+      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%s);%s::run_app()\"",
+      golem::get_golem_name(),
       golem::get_golem_name()
     )
   )

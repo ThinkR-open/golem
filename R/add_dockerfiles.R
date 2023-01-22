@@ -165,9 +165,10 @@ add_dockerfile_ <- talk_once(
 
     dock$CMD(
       sprintf(
-        "R -e \"options('shiny.port'=%s,shiny.host='%s');%s::run_app()\"",
+        "R -e \"options('shiny.port'=%s,shiny.host='%s');library(%s);%s::run_app()\"",
         port,
         host,
+        read.dcf(path)[1],
         read.dcf(path)[1]
       )
     )
@@ -263,7 +264,8 @@ add_dockerfile_shinyproxy_ <- talk_once(
 
     dock$EXPOSE(3838)
     dock$CMD(sprintf(
-      " [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0');%s::run_app()\"]",
+      " [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%s);%s::run_app()\"]",
+      read.dcf(path)[1],
       read.dcf(path)[1]
     ))
     dock$write(output)
@@ -357,7 +359,8 @@ add_dockerfile_heroku_ <- talk_once(
 
     dock$CMD(
       sprintf(
-        "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');%s::run_app()\"",
+        "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%s);%s::run_app()\"",
+        read.dcf(path)[1],
         read.dcf(path)[1]
       )
     )
