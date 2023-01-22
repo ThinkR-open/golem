@@ -12,13 +12,14 @@ attachment_create_renv_for_prod <- function(
   path = ".",
   output = "renv.lock.prod",
   dev_pkg = "remotes",
+  check_if_suggests_is_installed = FALSE,
   ...
 ) {
   attachment::create_renv_for_prod(
     path = path,
     output = output,
     dev_pkg = dev_pkg,
-    check_if_suggests_is_installed = FALSE,
+    check_if_suggests_is_installed = check_if_suggests_is_installed,
     ...
   )
 }
