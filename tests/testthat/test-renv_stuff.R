@@ -8,17 +8,7 @@ test_that("add_dockerfiles_renv and add_dockerfile_with_renv_shinyproxy all outp
       add_dockerfile_with_renv_shinyproxy,
       add_dockerfile_with_renv_heroku
     )) {
-      deploy_folder <- file.path(
-        tempdir(),
-        make.names(
-          paste0(
-            "deploy",
-            round(
-              runif(1, min = 0, max = 99999)
-            )
-          )
-        )
-      )
+      deploy_folder <- create_deploy_folder()
 
       fun(output_dir = deploy_folder, open = FALSE)
 
@@ -31,4 +21,26 @@ test_that("add_dockerfiles_renv and add_dockerfile_with_renv_shinyproxy all outp
       unlink(deploy_folder, force = TRUE, recursive = TRUE)
     }
   })
+})
+test_that("suggested package ore not in renv prod", {
+  skip_if_not_installed("renv")
+  skip_if_not_installed("dockerfiler", "0.2.0")
+  skip_if_not_installed("attachment", "0.3.0.9001")
+  with_dir(pkg, {
+    desc_file <- file.path("DESCRIPTION")
+    desc_lines <- readLines(desc_file)
+    # desc_lines <- c(desc_lines,"Suggests: \n    idontexist")
+    desc_lines[desc_lines == "Suggests: "] <- "Suggests: \n    idontexist,"
+    writeLines(desc_lines,desc_file)
+    deploy_folder <- create_deploy_folder()
+
+          add_dockerfile_with_renv(output_dir = deploy_folder, open = FALSE)
+
+          base <- paste(readLines(file.path(deploy_folder,"renv.lock.prod")),collapse = " ")
+          expect_false(grepl(pattern = "idontexist",x = base))
+          expect_true(grepl(pattern = "shiny",x = base))
+
+          unlink(deploy_folder, force = TRUE, recursive = TRUE)
+    }
+  )
 })
