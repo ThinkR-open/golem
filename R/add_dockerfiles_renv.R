@@ -44,6 +44,7 @@ add_dockerfile_with_renv_ <- function(
      
     lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
+      require_suggests = FALSE,
       output = file.path(output_dir, "renv.lock.prod")
     )
   }
