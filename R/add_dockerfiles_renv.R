@@ -9,7 +9,8 @@ add_dockerfile_with_renv_ <- function(
   repos = c(CRAN = "https://cran.rstudio.com/"),
   expand = FALSE,
   extra_sysreqs = NULL,
-  update_tar_gz = TRUE
+  update_tar_gz = TRUE,
+  document = FALSE
   # build_golem_from_source = TRUE,
 ) {
 
@@ -44,7 +45,7 @@ add_dockerfile_with_renv_ <- function(
 
     lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
-      check_if_suggests_is_installed = FALSE,
+      check_if_suggests_is_installed = FALSE,  document = document,
       output = file.path(output_dir, "renv.lock.prod")
     )
   }
@@ -133,6 +134,7 @@ add_dockerfile_with_renv_ <- function(
 #' @param output_dir folder to export everything deployment related.
 #' @param distro One of "focal", "bionic", "xenial", "centos7", or "centos8".
 #' See available distributions at https://hub.docker.com/r/rstudio/r-base/.
+#' @param document boolean. If TRUE (by default), DESCRIPTION file is updated using [attachment::att_amend_desc()] before creating the renv.lock file
 #' @param dockerfile_cmd What is the CMD to add to the Dockerfile. If NULL, the default,
 #' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\`
 #' @inheritParams add_dockerfile
@@ -151,6 +153,7 @@ add_dockerfile_with_renv <- function(
   repos = c(CRAN = "https://cran.rstudio.com/"),
   expand = FALSE,
   open = TRUE,
+  document = TRUE,
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
   dockerfile_cmd = NULL
@@ -166,17 +169,17 @@ add_dockerfile_with_renv <- function(
     repos = repos,
     expand = expand,
     extra_sysreqs = extra_sysreqs,
-    update_tar_gz = update_tar_gz
+    update_tar_gz = update_tar_gz,
+    document = document
   )
   if (!is.null(port)) {
     base_dock$EXPOSE(port)
   }
   if (is.null(dockerfile_cmd)) {
     dockerfile_cmd <- sprintf(
-      "R -e \"options('shiny.port'=%s,shiny.host='%s');library(%s);%s::run_app()\"",
+      "R -e \"options('shiny.port'=%s,shiny.host='%s');library(%3$s);%3$s::run_app()\"",
       port,
       host,
-      golem::get_golem_name(),
       golem::get_golem_name()
     )
   }
@@ -223,6 +226,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
   expand = FALSE,
   extra_sysreqs = NULL,
   open = TRUE,
+  document = TRUE,
   update_tar_gz = TRUE
 ) {
   add_dockerfile_with_renv(
@@ -240,9 +244,9 @@ add_dockerfile_with_renv_shinyproxy <- function(
     extra_sysreqs = extra_sysreqs,
     update_tar_gz = update_tar_gz,
     open = open,
+    document = document,
     dockerfile_cmd = sprintf(
-      "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%s);%s::run_app()\"",
-      golem::get_golem_name(),
+      "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       golem::get_golem_name()
     )
   )
@@ -264,6 +268,7 @@ add_dockerfile_with_renv_heroku <- function(
   expand = FALSE,
   extra_sysreqs = NULL,
   open = TRUE,
+  document = TRUE,
   update_tar_gz = TRUE
 ) {
   add_dockerfile_with_renv(
@@ -281,9 +286,9 @@ add_dockerfile_with_renv_heroku <- function(
     extra_sysreqs = extra_sysreqs,
     update_tar_gz = update_tar_gz,
     open = FALSE,
+    document = document,
     dockerfile_cmd = sprintf(
-      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%s);%s::run_app()\"",
-      golem::get_golem_name(),
+      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       golem::get_golem_name()
     )
   )

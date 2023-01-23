@@ -25,7 +25,7 @@ test_that("add_dockerfiles_renv and add_dockerfile_with_renv_shinyproxy all outp
 test_that("suggested package ore not in renv prod", {
   skip_if_not_installed("renv")
   skip_if_not_installed("dockerfiler", "0.2.0")
-  skip_if_not_installed("attachment", "0.3.0.9001")
+  skip_if_not_installed("attachment", "0.3.1")
   with_dir(pkg, {
     desc_file <- file.path("DESCRIPTION")
     desc_lines <- readLines(desc_file)
