@@ -43,10 +43,36 @@ add_dockerfile_with_renv_ <- function(
 
   if (is.null(lockfile)) {
 
+
+    if ( isTRUE(document) ){
+
+      cli_cat_line("You set `document = TRUE` and you dont pass your own renv.lock file,")
+      cli_cat_line("that why {golem} will use `attachment::att_amend_desc()` to update your ")
+      cli_cat_line("DESCRIPTION file before creating the renv.lock file")
+      cli_cat_line("")
+      cli_cat_line("you can set `document = FALSE` to use your actual DESCRIPTION file,")
+      cli_cat_line("or pass you own renv.lock to use, using the `lockfile` parameter")
+      cli_cat_line("In any case be sure to have no Error or Warning at `devtools::check()`")
+
+
+      cli_cat_bullet(crayon_darkgrey("rsconnect::deployApp()\n"))
+      cat_red_bullet(
+        sprintf(
+          "Note that you'll need to upload the whole package to %s",
+          service
+        )
+      )
+
+    }
+
+
+
+
     lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
       check_if_suggests_is_installed = FALSE,  document = document,
-      output = file.path(output_dir, "renv.lock.prod")
+      output = file.path(output_dir, "renv.lock.prod"),
+      ...
     )
   }
 
