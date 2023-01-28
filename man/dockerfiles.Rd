@@ -72,7 +72,8 @@ add_dockerfile_with_renv(
   document = TRUE,
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
-  dockerfile_cmd = NULL
+  dockerfile_cmd = NULL,
+  ...
 )
 
 add_dockerfile_with_renv_shinyproxy(
@@ -88,7 +89,8 @@ add_dockerfile_with_renv_shinyproxy(
   extra_sysreqs = NULL,
   open = TRUE,
   document = TRUE,
-  update_tar_gz = TRUE
+  update_tar_gz = TRUE,
+  ...
 )
 
 add_dockerfile_with_renv_heroku(
@@ -104,7 +106,8 @@ add_dockerfile_with_renv_heroku(
   extra_sysreqs = NULL,
   open = TRUE,
   document = TRUE,
-  update_tar_gz = TRUE
+  update_tar_gz = TRUE,
+  ...
 )
 }
 \arguments{
@@ -161,6 +164,8 @@ See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
 
 \item{dockerfile_cmd}{What is the CMD to add to the Dockerfile. If NULL, the default,
 the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}');library(\{appname\});\{appname\}::run_app()\\}}
+
+\item{...}{Other arguments to pass to \code{\link[renv:snapshot]{renv::snapshot()}}}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.
