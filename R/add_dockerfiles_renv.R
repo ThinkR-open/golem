@@ -9,24 +9,21 @@ add_dockerfile_with_renv_ <- function(
   repos = c(CRAN = "https://cran.rstudio.com/"),
   expand = FALSE,
   extra_sysreqs = NULL,
-  update_tar_gz = TRUE
+  update_tar_gz = TRUE,
+  document = FALSE,
+  ...
   # build_golem_from_source = TRUE,
 ) {
- 
+
    if (is.null(lockfile)) {
        rlang::check_installed(
-        "attachment",
+        c("renv","attachment"),
      reason = "to build a Dockerfile with automatic renv.lock creation. Use the `lockfile` parameter to pass your own `renv.lock` file."
       )
-     
+
      }
-  
-  
-  
-  rlang::check_installed(
-    "renv", 
-    reason = "to build a Dockerfile."
-  )
+
+
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on
   x <- suppressWarnings({
@@ -41,10 +38,28 @@ add_dockerfile_with_renv_ <- function(
   }
 
   if (is.null(lockfile)) {
-     
+
+
+    if ( isTRUE(document) ){
+
+      cli_cat_line("You set `document = TRUE` and you did not pass your own renv.lock file,")
+      cli_cat_line("as a consequence {golem} will use `attachment::att_amend_desc()` to update your ")
+      cli_cat_line("DESCRIPTION file before creating the renv.lock file")
+      cli_cat_line("")
+      cli_cat_line("you can set `document = FALSE` to use your actual DESCRIPTION file,")
+      cli_cat_line("or pass you own renv.lock to use, using the `lockfile` parameter")
+      cli_cat_line("")
+      cli_cat_line("In any case be sure to have no Error or Warning at `devtools::check()`")
+    }
+
+
+
+
     lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
-      output = file.path(output_dir, "renv.lock.prod")
+      check_if_suggests_is_installed = FALSE,  document = document,
+      output = file.path(output_dir, "renv.lock.prod"),
+      ...
     )
   }
 
@@ -132,8 +147,10 @@ add_dockerfile_with_renv_ <- function(
 #' @param output_dir folder to export everything deployment related.
 #' @param distro One of "focal", "bionic", "xenial", "centos7", or "centos8".
 #' See available distributions at https://hub.docker.com/r/rstudio/r-base/.
+#' @param document boolean. If TRUE (by default), DESCRIPTION file is updated using [attachment::att_amend_desc()] before creating the renv.lock file
 #' @param dockerfile_cmd What is the CMD to add to the Dockerfile. If NULL, the default,
-#' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');{appname}::run_app()\`
+#' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\`
+#' @param ... Other arguments to pass to [renv::snapshot()]
 #' @inheritParams add_dockerfile
 #' @rdname dockerfiles
 #' @export
@@ -150,9 +167,11 @@ add_dockerfile_with_renv <- function(
   repos = c(CRAN = "https://cran.rstudio.com/"),
   expand = FALSE,
   open = TRUE,
+  document = TRUE,
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
-  dockerfile_cmd = NULL
+  dockerfile_cmd = NULL,
+  ...
 ) {
   base_dock <- add_dockerfile_with_renv_(
     source_folder = source_folder,
@@ -165,14 +184,16 @@ add_dockerfile_with_renv <- function(
     repos = repos,
     expand = expand,
     extra_sysreqs = extra_sysreqs,
-    update_tar_gz = update_tar_gz
+    update_tar_gz = update_tar_gz,
+    document = document,
+    ...
   )
   if (!is.null(port)) {
     base_dock$EXPOSE(port)
   }
   if (is.null(dockerfile_cmd)) {
     dockerfile_cmd <- sprintf(
-      "R -e \"options('shiny.port'=%s,shiny.host='%s');%s::run_app()\"",
+      "R -e \"options('shiny.port'=%s,shiny.host='%s');library(%3$s);%3$s::run_app()\"",
       port,
       host,
       golem::get_golem_name()
@@ -205,7 +226,7 @@ docker run -p %s:%s %s
   )
 }
 
-#' @inheritParams add_dockerfile
+#' @inheritParams add_dockerfile_with_renv
 #' @rdname dockerfiles
 #' @export
 #' @export
@@ -221,7 +242,9 @@ add_dockerfile_with_renv_shinyproxy <- function(
   expand = FALSE,
   extra_sysreqs = NULL,
   open = TRUE,
-  update_tar_gz = TRUE
+  document = TRUE,
+  update_tar_gz = TRUE,
+  ...
 ) {
   add_dockerfile_with_renv(
     source_folder = source_folder,
@@ -238,14 +261,16 @@ add_dockerfile_with_renv_shinyproxy <- function(
     extra_sysreqs = extra_sysreqs,
     update_tar_gz = update_tar_gz,
     open = open,
+    document = document,
     dockerfile_cmd = sprintf(
-      "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');%s::run_app()\"",
+      "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       golem::get_golem_name()
-    )
+    ),
+    ...
   )
 }
 
-#' @inheritParams add_dockerfile
+#' @inheritParams add_dockerfile_with_renv
 #' @rdname dockerfiles
 #' @export
 #' @export
@@ -261,7 +286,9 @@ add_dockerfile_with_renv_heroku <- function(
   expand = FALSE,
   extra_sysreqs = NULL,
   open = TRUE,
-  update_tar_gz = TRUE
+  document = TRUE,
+  update_tar_gz = TRUE,
+  ...
 ) {
   add_dockerfile_with_renv(
     source_folder = source_folder,
@@ -278,10 +305,12 @@ add_dockerfile_with_renv_heroku <- function(
     extra_sysreqs = extra_sysreqs,
     update_tar_gz = update_tar_gz,
     open = FALSE,
+    document = document,
     dockerfile_cmd = sprintf(
-      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');%s::run_app()\"",
+      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       golem::get_golem_name()
-    )
+    ),
+    ...
   )
 
   apps_h <- gsub(

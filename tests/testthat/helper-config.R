@@ -93,3 +93,18 @@ withr::with_dir(pkg, {
   )
   usethis::use_mit_license("Golem")
 })
+
+
+create_deploy_folder <- function(){
+file.path(
+    tempdir(),
+    make.names(
+      paste0(
+        "deploy",
+        round(
+          runif(1, min = 0, max = 99999)
+        )
+      )
+    )
+  )
+}
