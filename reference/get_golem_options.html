@@ -126,10 +126,12 @@ parameters passed to <code>run_app()</code>.</p>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>  <span class="co"># 1. Pass parameters directly to `run_app`</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="fu">run_app</span><span class="op">(</span> title<span class="op">=</span><span class="st">"My Golem App"</span>, </span></span>
-<span class="r-in"><span>           content <span class="op">=</span> <span class="st">"something"</span> <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">run_app</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"My Golem App"</span>,</span></span>
+<span class="r-in"><span>    content <span class="op">=</span> <span class="st">"something"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># 2. Get the values </span></span></span>
+<span class="r-in"><span>  <span class="co"># 2. Get the values</span></span></span>
 <span class="r-in"><span>  <span class="co"># 2.1 from the UI side</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu">h1</span><span class="op">(</span><span class="fu">get_golem_options</span><span class="op">(</span><span class="st">"title"</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -139,17 +141,17 @@ parameters passed to <code>run_app()</code>.</p>
 <span class="r-in"><span>  <span class="va">output</span><span class="op">$</span><span class="va">param</span> <span class="op">&lt;-</span> <span class="fu">renderPrint</span><span class="op">(</span><span class="op">{</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"param content = "</span>, <span class="fu">get_golem_options</span><span class="op">(</span><span class="st">"content"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  </span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">output</span><span class="op">$</span><span class="va">param_full</span> <span class="op">&lt;-</span> <span class="fu">renderPrint</span><span class="op">(</span><span class="op">{</span></span></span>
-<span class="r-in"><span>     <span class="fu">get_golem_options</span><span class="op">(</span><span class="op">)</span> <span class="co"># list of all golem options as a list.</span></span></span>
+<span class="r-in"><span>    <span class="fu">get_golem_options</span><span class="op">(</span><span class="op">)</span> <span class="co"># list of all golem options as a list.</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  </span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="co"># 3. If needed, to set default value, edit `run_app` like this :</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span></span>
-<span class="r-in"><span>             <span class="va">title</span> <span class="op">=</span> <span class="st">"this"</span>,</span></span>
-<span class="r-in"><span>             <span class="va">content</span> <span class="op">=</span> <span class="st">"that"</span>,</span></span>
-<span class="r-in"><span>             <span class="va">...</span></span></span>
+<span class="r-in"><span>  <span class="va">title</span> <span class="op">=</span> <span class="st">"this"</span>,</span></span>
+<span class="r-in"><span>  <span class="va">content</span> <span class="op">=</span> <span class="st">"that"</span>,</span></span>
+<span class="r-in"><span>  <span class="va">...</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="with_golem_options.html">with_golem_options</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>      app <span class="op">=</span> <span class="fu">shinyApp</span><span class="op">(</span></span></span>
@@ -157,14 +159,12 @@ parameters passed to <code>run_app()</code>.</p>
 <span class="r-in"><span>        server <span class="op">=</span> <span class="va">app_server</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span>,</span></span>
 <span class="r-in"><span>      golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      title <span class="op">=</span> <span class="va">title</span>,</span></span>
-<span class="r-in"><span>      content <span class="op">=</span> <span class="va">content</span>,</span></span>
-<span class="r-in"><span>      <span class="va">...</span></span></span>
+<span class="r-in"><span>        title <span class="op">=</span> <span class="va">title</span>,</span></span>
+<span class="r-in"><span>        content <span class="op">=</span> <span class="va">content</span>,</span></span>
+<span class="r-in"><span>        <span class="va">...</span></span></span>
 <span class="r-in"><span>      <span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
-<span class="r-in"><span>   </span></span>
-<span class="r-in"><span>  </span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

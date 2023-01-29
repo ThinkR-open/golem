@@ -167,9 +167,11 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>CRAN <span class="op">=</span> <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span>,</span>
 <span>  expand <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  document <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  extra_sysreqs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  dockerfile_cmd <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  dockerfile_cmd <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_dockerfile_with_renv_shinyproxy</span><span class="op">(</span></span>
@@ -184,7 +186,9 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  expand <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  extra_sysreqs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  document <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_dockerfile_with_renv_heroku</span><span class="op">(</span></span>
@@ -199,7 +203,9 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  expand <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  extra_sysreqs <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  document <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -288,9 +294,17 @@ default is current folder '.'</p></dd>
 See available distributions at https://hub.docker.com/r/rstudio/r-base/.</p></dd>
 
 
+<dt>document</dt>
+<dd><p>boolean. If TRUE (by default), DESCRIPTION file is updated using <code><a href="https://thinkr-open.github.io/attachment/reference/att_amend_desc.html" class="external-link">attachment::att_amend_desc()</a></code> before creating the renv.lock file</p></dd>
+
+
 <dt>dockerfile_cmd</dt>
 <dd><p>What is the CMD to add to the Dockerfile. If NULL, the default,
-the CMD will be <code>R -e "options('shiny.port'={port},shiny.host='{host}');{appname}::run_app()\</code></p></dd>
+the CMD will be <code>R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\</code></p></dd>
+
+
+<dt>...</dt>
+<dd><p>Other arguments to pass to <code><a href="https://rstudio.github.io/renv/reference/snapshot.html" class="external-link">renv::snapshot()</a></code></p></dd>
 
 </dl></div>
     <div id="value">
