@@ -82,6 +82,7 @@ dev_deps <- unique(
     "pkgload",
     "processx",
     "roxygen2",
+    "renv",
     "rsconnect",
     "rstudioapi",
     "testthat",
@@ -97,7 +98,7 @@ check_dev_deps_are_installed <- function() {
   if (!all(are_installed)) {
     message(
       "We noticed that some dev dependencies are not installed.\n",
-      "You can install them with `install_dev_deps()`."
+      "You can install them with `golem::install_dev_deps()`."
     )
   }
 }
