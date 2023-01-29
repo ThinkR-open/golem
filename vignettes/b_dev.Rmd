@@ -45,7 +45,7 @@ Note that the `{attachment}` package should be installed on your machine.
 attachment::att_amend_desc()
 ```
 
-About [package dependencies](https://r-pkgs.org/Metadata.html#sec-namespace).
+About [package dependencies](https://r-pkgs.org/dependencies-mindset-background.html).
 
 ### Add modules
 
