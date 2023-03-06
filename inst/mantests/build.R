@@ -13,6 +13,8 @@ if (dir.exists(temp_app)) {
   unlink(temp_app, TRUE, TRUE)
 }
 
+options("repos" = "https://packagemanager.posit.co/cran/__linux__/jammy/latest")
+
 install.packages(c("pak"))
 
 if (!rlang::is_installed("cli")) {
