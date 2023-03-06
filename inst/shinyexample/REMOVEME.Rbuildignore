@@ -4,3 +4,4 @@
 dev_history.R
 ^dev$
 $run_dev.*
+^.here$
