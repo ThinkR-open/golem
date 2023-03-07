@@ -373,6 +373,12 @@ golem::add_css_file("custom", template = crystalmountains::css_file, open = FALS
 
 cli::cat_rule("Testing and installing package")
 golem::document_and_reload()
+
+usethis::use_dev_package(
+  "golem",
+  remotes = "https://github.com/ThinkR-open/golem"
+)
+
 devtools::test()
 cat_ok()
 
