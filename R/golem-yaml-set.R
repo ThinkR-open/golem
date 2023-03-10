@@ -50,7 +50,7 @@ set_golem_name <- function(
   )
 
   # Changing in DESCRIPTION
-  desc <- desc::description$new(
+  desc <- desc_description(
     file = fs_path(
       path,
       "DESCRIPTION"
@@ -84,7 +84,7 @@ set_golem_version <- function(
     talkative = talkative
   )
 
-  desc <- desc::description$new(
+  desc <- desc_description(
     file = fs_path(
       path,
       "DESCRIPTION"

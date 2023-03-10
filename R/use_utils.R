@@ -10,9 +10,7 @@
 #' @export
 #' @rdname utils_files
 #'
-#' @importFrom cli cat_bullet
 #' @importFrom utils capture.output
-#' @importFrom usethis use_testthat
 #'
 #' @return Used for side-effects.
 use_utils_ui <- function(
@@ -30,7 +28,7 @@ use_utils_ui <- function(
 
     if (with_test) {
       if (!isTRUE(fs_dir_exists("tests"))) {
-        use_testthat()
+        usethis_use_testthat()
       }
       pth <- fs_path(
         pkg,
@@ -82,7 +80,7 @@ use_utils_server <- function(
 
     if (with_test) {
       if (!isTRUE(fs_dir_exists("tests"))) {
-        use_testthat()
+        usethis_use_testthat()
       }
       pth <- fs_path(
         pkg,
@@ -136,11 +134,6 @@ use_utils <- function(
   folder_name,
   pkg = get_golem_wd()
 ) {
-  rlang::check_installed(
-    "fs",
-    reason = "for file manipulation."
-  )
-
   old <- setwd(
     fs_path_abs(pkg)
   )

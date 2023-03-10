@@ -31,6 +31,7 @@ replace_package_name <- function(
 }
 
 
+
 #' Create a package for a Shiny App using `{golem}`
 #'
 #' @param path Name of the folder to create the package in.
@@ -54,10 +55,7 @@ replace_package_name <- function(
 #' For compatibility issue, this function turns `options(shiny.autoload.r)`
 #' to `FALSE`. See https://github.com/ThinkR-open/golem/issues/468 for more background.
 #'
-#' @importFrom cli cat_rule cat_line
 #' @importFrom utils getFromNamespace
-#' @importFrom rstudioapi isAvailable openProject hasFun
-#' @importFrom usethis use_latest_dependencies create_project
 #' @importFrom yaml write_yaml
 #'
 #' @export
@@ -80,8 +78,16 @@ create_golem <- function(
   )
 
   if (check_name) {
-    cat_rule("Checking package name")
-    getFromNamespace("check_package_name", "usethis")(package_name)
+    cli_cat_rule("Checking package name")
+    rlang::check_installed(
+      "usethis",
+      version = "1.6.0",
+      reason = "to check the package name."
+    )
+    getFromNamespace(
+      "check_package_name",
+      "usethis"
+    )(package_name)
     cat_green_tick("Valid package name")
   }
 
@@ -101,17 +107,19 @@ create_golem <- function(
       cat_red_bullet("Overwriting existing project.")
     }
   } else {
-    cat_rule("Creating dir")
-    usethis::create_project(
+    cli_cat_rule("Creating dir")
+    usethis_create_project(
       path = path_to_golem,
-      open = FALSE,
+      open = FALSE
     )
-    here::set_here(path_to_golem)
+    if (!file.exists(".here")) {
+      here::set_here(path_to_golem)
+    }
     cat_green_tick("Created package directory")
   }
 
 
-  cat_rule("Copying package skeleton")
+  cli_cat_rule("Copying package skeleton")
   from <- golem_sys("shinyexample")
 
   # Copy over whole directory
@@ -139,7 +147,7 @@ create_golem <- function(
 
   old <- setwd(path_to_golem)
 
-  cat_rule("Running project hook function")
+  cli_cat_rule("Running project hook function")
 
   # TODO fix
   # for some weird reason test() fails here when using golem::create_golem
@@ -173,7 +181,7 @@ create_golem <- function(
 
 
   if (isTRUE(with_git)) {
-    cat_rule("Initializing git repository")
+    cli_cat_rule("Initializing git repository")
     git_output <- system(
       command = paste("git init", path_to_golem),
       ignore.stdout = TRUE,
@@ -188,10 +196,15 @@ create_golem <- function(
 
 
   old <- setwd(path_to_golem)
-  use_latest_dependencies()
+
+  if (!requireNamespace("desc", quietly = TRUE)) {
+    check_desc_installed()
+  } # incase of {desc} not installed by {usethis}
+
+  usethis_use_latest_dependencies()
 
   # No .Rprofile for now
-  # cat_rule("Appending .Rprofile")
+  # cli_cat_rule("Appending .Rprofile")
   # write("# Sourcing user .Rprofile if it exists ", ".Rprofile", append = TRUE)
   # write("home_profile <- file.path(", ".Rprofile", append = TRUE)
   # write("  Sys.getenv(\"HOME\"), ", ".Rprofile", append = TRUE)
@@ -208,9 +221,9 @@ create_golem <- function(
 
   setwd(old)
 
-  cat_rule("Done")
+  cli_cat_rule("Done")
 
-  cat_line(
+  cli_cat_line(
     paste0(
       "A new golem named ",
       package_name,
@@ -221,9 +234,15 @@ create_golem <- function(
     )
   )
 
+  check_dev_deps_are_installed()
+
 
   if (isTRUE(open)) {
-    if (rstudioapi::isAvailable() & rstudioapi::hasFun("openProject")) {
+    if (
+      rlang::is_installed("rstudioapi") &&
+        rstudioapi::isAvailable() &&
+        rstudioapi::hasFun("openProject")
+    ) {
       rstudioapi::openProject(path = path)
     } else {
       setwd(path)

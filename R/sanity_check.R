@@ -8,7 +8,6 @@
 #' @rdname sanity_check
 #' @export
 #'
-#' @importFrom rstudioapi sourceMarkers hasFun isAvailable
 #'
 #' @return A DataFrame if any of the words has been found.
 sanity_check <- function(pkg = get_golem_wd()) {
@@ -41,8 +40,14 @@ sanity_check <- function(pkg = get_golem_wd()) {
   }
 
   if (length(source_markers) > 0) {
-    if (rstudioapi::isAvailable() & rstudioapi::hasFun("sourceMarkers")) {
-      rstudioapi::sourceMarkers("sanity_check", markers = source_markers)
+    if (
+      rlang::is_installed("rstudioapi") &&
+        rstudioapi::isAvailable() &&
+        rstudioapi::hasFun("sourceMarkers")) {
+      rstudioapi::sourceMarkers(
+        "sanity_check",
+        markers = source_markers
+      )
     }
     return(source_markers)
   } else {

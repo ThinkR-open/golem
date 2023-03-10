@@ -28,10 +28,11 @@
 #' if (interactive()) {
 #'   install_dev_deps()
 #' }
+#'
+#' @return Used for side-effects
 install_dev_deps <- function(
-  force_install = FALSE,
-  ...
-) {
+    force_install = FALSE,
+    ...) {
   if (!force_install) {
     if (!interactive()) {
       # In non interactive mode with force_install turned to FALSE,
@@ -60,28 +61,45 @@ install_dev_deps <- function(
   }
 
   for (
-    pak in unique(
-      c(
-        "usethis",
-        "pkgload",
-        "dockerfiler",
-        "devtools",
-        "roxygen2",
-        "attachment",
-        "rstudioapi",
-        "here",
-        "fs",
-        "desc",
-        "pkgbuild",
-        "processx",
-        "rsconnect",
-        "testthat",
-        "rstudioapi"
-      )
-    )
+    pak in dev_deps
   ) {
     if (!rlang::is_installed(pak)) {
       f(pak, ...)
     }
+  }
+}
+
+dev_deps <- unique(
+  c(
+    "attachment",
+    "cli",
+    "crayon",
+    "desc",
+    "devtools",
+    "dockerfiler",
+    "fs",
+    "here",
+    "pkgbuild",
+    "pkgload",
+    "processx",
+    "roxygen2",
+    "renv",
+    "rsconnect",
+    "rstudioapi",
+    "testthat",
+    "usethis"
+  )
+)
+
+check_dev_deps_are_installed <- function() {
+  are_installed <- sapply(
+    dev_deps,
+    FUN = rlang::is_installed
+  )
+  if (!all(are_installed)) {
+    message(
+      "We noticed that some dev dependencies are not installed.\n",
+      "You can install them with `golem::install_dev_deps()`."
+    )
   }
 }

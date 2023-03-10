@@ -26,7 +26,6 @@ make_dev <- function(fun) {
 #' @export
 #'
 #' @rdname prod
-#' @return A boolean.
 app_prod <- function() {
   getOption("golem.app.prod") %||% FALSE
 }

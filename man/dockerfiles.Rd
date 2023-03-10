@@ -69,9 +69,11 @@ add_dockerfile_with_renv(
   repos = c(CRAN = "https://cran.rstudio.com/"),
   expand = FALSE,
   open = TRUE,
+  document = TRUE,
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
-  dockerfile_cmd = NULL
+  dockerfile_cmd = NULL,
+  ...
 )
 
 add_dockerfile_with_renv_shinyproxy(
@@ -86,7 +88,9 @@ add_dockerfile_with_renv_shinyproxy(
   expand = FALSE,
   extra_sysreqs = NULL,
   open = TRUE,
-  update_tar_gz = TRUE
+  document = TRUE,
+  update_tar_gz = TRUE,
+  ...
 )
 
 add_dockerfile_with_renv_heroku(
@@ -101,7 +105,9 @@ add_dockerfile_with_renv_heroku(
   expand = FALSE,
   extra_sysreqs = NULL,
   open = TRUE,
-  update_tar_gz = TRUE
+  document = TRUE,
+  update_tar_gz = TRUE,
+  ...
 )
 }
 \arguments{
@@ -127,7 +133,8 @@ Default is 80.}
 \item{host}{The \code{options('shiny.host')} on which to run the App.
 Default is 0.0.0.0.}
 
-\item{sysreqs}{boolean. If TRUE, the Dockerfile will contain sysreq installation.}
+\item{sysreqs}{boolean. If TRUE, RUN statements to install packages
+system requirements will be included in the Dockerfile.}
 
 \item{repos}{character. The URL(s) of the repositories to use for \code{options("repos")}.}
 
@@ -153,15 +160,21 @@ default is current folder '.'}
 \item{distro}{One of "focal", "bionic", "xenial", "centos7", or "centos8".
 See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
 
+\item{document}{boolean. If TRUE (by default), DESCRIPTION file is updated using \code{\link[attachment:att_amend_desc]{attachment::att_amend_desc()}} before creating the renv.lock file}
+
 \item{dockerfile_cmd}{What is the CMD to add to the Dockerfile. If NULL, the default,
-the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}');\{appname\}::run_app()\\}}
+the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}');library(\{appname\});\{appname\}::run_app()\\}}
+
+\item{...}{Other arguments to pass to \code{\link[renv:snapshot]{renv::snapshot()}}}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.
 }
 \description{
-Build a container containing your Shiny App. \code{add_dockerfile()} and \code{add_dockerfile_with_renv()} and \code{add_dockerfile_with_renv()} creates
-a generic Dockerfile, while \code{add_dockerfile_shinyproxy()}, \code{add_dockerfile_with_renv_shinyproxy()} , \code{add_dockerfile_with_renv_shinyproxy()}  and
+Build a container containing your Shiny App. \code{add_dockerfile()} and
+\code{add_dockerfile_with_renv()} and \code{add_dockerfile_with_renv()} creates
+a generic Dockerfile, while \code{add_dockerfile_shinyproxy()},
+\code{add_dockerfile_with_renv_shinyproxy()} , \code{add_dockerfile_with_renv_shinyproxy()} and
 \code{add_dockerfile_heroku()} creates platform specific Dockerfile.
 }
 \examples{

@@ -1,8 +1,7 @@
 # Getting the DESCRIPTION file in a data.frame
 daf_desc <- function(
-  path = ".",
-  entry
-) {
+    path = ".",
+    entry) {
   as.character(
     unlist(
       unname(
@@ -27,6 +26,8 @@ daf_desc <- function(
 #'
 #' @export
 #' @rdname pkg_tools
+#'
+#' @return The value of the entry in the DESCRIPTION file
 pkg_name <- function(path = ".") {
   daf_desc(path, "Package")
 }

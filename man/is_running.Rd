@@ -9,8 +9,6 @@ is_running()
 \value{
 TRUE if the running app is a \code{{golem}} based app,
 FALSE otherwise.
-
-A boolean.
 }
 \description{
 Note that this will return \code{TRUE} only if the application

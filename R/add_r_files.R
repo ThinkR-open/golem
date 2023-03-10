@@ -68,7 +68,7 @@ add_r_files <- function(
   }
 
   if (with_test) {
-    usethis::use_test(
+    usethis_use_test(
       basename(
         file_path_sans_ext(
           where

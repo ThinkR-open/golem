@@ -94,7 +94,7 @@ amend_golem_config <- function(
   if (key == "golem_wd") {
     cat_if_talk(
       "You can change golem working directory with set_golem_wd('path/to/wd')",
-      fun = cat_line
+      fun = cli_cat_line
     )
   }
 

@@ -19,7 +19,6 @@
 #' @note This function will prefix the `name` argument with `mod_`.
 #'
 #' @export
-#' @importFrom cli cat_bullet
 #' @importFrom utils file.edit
 #'
 #' @seealso [module_template()]
@@ -238,7 +237,6 @@ use_module_test <- function(
   pkg = get_golem_wd(),
   open = TRUE
 ) {
-
   # Remove the extension if any
   name <- file_path_sans_ext(name)
   # Remove the "mod_" if any
@@ -255,9 +253,11 @@ use_module_test <- function(
     )
   }
 
-  # We need both testthat, usethis & fs
-  check_is_installed("testthat")
-  check_is_installed("fs")
+  # We need testthat
+  rlang::check_installed(
+    "testthat",
+    "to build the test structure."
+  )
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
@@ -266,7 +266,7 @@ use_module_test <- function(
   if (!fs_dir_exists(
     fs_path(pkg, "tests", "testthat")
   )) {
-    usethis::use_testthat()
+    usethis_use_testthat()
   }
 
   path <- fs_path(

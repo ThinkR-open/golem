@@ -13,6 +13,9 @@ to install them.}
 
 \item{...}{further arguments passed to the install function.}
 }
+\value{
+Used for side-effects
+}
 \description{
 This function will run rlang::check_installed() on:
 \itemize{
@@ -37,4 +40,5 @@ This function will run rlang::check_installed() on:
 if (interactive()) {
   install_dev_deps()
 }
+
 }

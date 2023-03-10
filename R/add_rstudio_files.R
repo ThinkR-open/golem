@@ -1,6 +1,4 @@
 #' @importFrom utils capture.output
-#' @importFrom cli cat_bullet
-#' @importFrom usethis use_build_ignore use_package
 add_rstudio_files <- function(
   pkg,
   open,
@@ -18,8 +16,6 @@ add_rstudio_files <- function(
     reason = "to deploy on RStudio products."
   )
 
-  rlang::check_installed("usethis")
-
   disable_autoload(
     pkg = pkg
   )
@@ -31,8 +27,8 @@ add_rstudio_files <- function(
       write(..., here, append = TRUE)
     }
 
-    use_build_ignore(basename(where))
-    use_build_ignore("rsconnect")
+    usethis_use_build_ignore(basename(where))
+    usethis_use_build_ignore("rsconnect")
     write_there("# Launch the ShinyApp (Do not remove this comment)")
     write_there("# To deploy, run: rsconnect::deployApp()")
     write_there("# Or use the blue button on top of this file")
@@ -47,11 +43,11 @@ add_rstudio_files <- function(
     )
 
     # We add {pkgload} as a dep because it's required to deploy on Connect & stuff
-    usethis::use_package("pkgload")
+    usethis_use_package("pkgload")
 
     cat_created(where)
-    cat_line("To deploy, run:")
-    cat_bullet(darkgrey("rsconnect::deployApp()\n"))
+    cli_cat_line("To deploy, run:")
+    cli_cat_bullet(crayon_darkgrey("rsconnect::deployApp()\n"))
     cat_red_bullet(
       sprintf(
         "Note that you'll need to upload the whole package to %s",
