@@ -15,6 +15,9 @@ pkg_path()
 \arguments{
 \item{path}{Path to use to read the DESCRIPTION}
 }
+\value{
+The value of the entry in the DESCRIPTION file
+}
 \description{
 These are functions to help you navigate
 inside your project while developing

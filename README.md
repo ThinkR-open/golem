@@ -19,7 +19,77 @@ shiny applications.
 
 ## About
 
-You’re reading the doc about version : `0.4.0`
+You’re reading the doc about version : 0.4.0
+
+This README has been compiled on the
+
+``` r
+Sys.time()
+#> [1] "2023-03-10 09:53:27 CET"
+```
+
+Here are the test & coverage results :
+
+``` r
+devtools::check(quiet = TRUE)
+#> ℹ Loading golem
+#> ── R CMD check results ──────────────────────────────────────── golem 0.4.0 ────
+#> Duration: 1m 23.6s
+#> 
+#> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+```
+
+``` r
+covr::package_coverage()
+#> golem Coverage: 69.16%
+#> R/addins.R: 0.00%
+#> R/bootstrap_rstudio_api.R: 0.00%
+#> R/enable_roxygenize.R: 0.00%
+#> R/get_sysreqs.R: 0.00%
+#> R/gobals.R: 0.00%
+#> R/run_dev.R: 0.00%
+#> R/sanity_check.R: 0.00%
+#> R/use_files.R: 0.00%
+#> R/with_opt.R: 22.58%
+#> R/config.R: 28.21%
+#> R/test_helpers.R: 30.26%
+#> R/js.R: 43.75%
+#> R/reload.R: 45.36%
+#> R/use_recommended.R: 54.55%
+#> R/bootstrap_desc.R: 55.56%
+#> R/install_dev_deps.R: 57.14%
+#> R/utils.R: 58.30%
+#> R/bootstrap_attachment.R: 61.54%
+#> R/add_dockerfiles.R: 74.19%
+#> R/bootstrap_usethis.R: 76.56%
+#> R/boostrap_fs.R: 77.78%
+#> R/modules_fn.R: 80.00%
+#> R/use_utils.R: 83.33%
+#> R/use_favicon.R: 85.56%
+#> R/desc.R: 86.25%
+#> R/add_resource_path.R: 88.89%
+#> R/create_golem.R: 89.47%
+#> R/make_dev.R: 90.00%
+#> R/add_r_files.R: 91.67%
+#> R/add_files.R: 92.31%
+#> R/add_rstudio_files.R: 93.10%
+#> R/golem-yaml-get.R: 93.18%
+#> R/bootstrap_dockerfiler.R: 93.33%
+#> R/add_dockerfiles_renv.R: 93.75%
+#> R/boostrap_cli.R: 100.00%
+#> R/boostrap_crayon.R: 100.00%
+#> R/bootstrap_pkgload.R: 100.00%
+#> R/bootstrap_roxygen2.R: 100.00%
+#> R/browser_button.R: 100.00%
+#> R/bundle_resources.R: 100.00%
+#> R/disable_autoload.R: 100.00%
+#> R/golem-yaml-set.R: 100.00%
+#> R/golem-yaml-utils.R: 100.00%
+#> R/is_running.R: 100.00%
+#> R/pkg_tools.R: 100.00%
+#> R/set_golem_options.R: 100.00%
+#> R/templates.R: 100.00%
+```
 
 ## Tool series
 
@@ -28,13 +98,14 @@ This package is part of a series of tools for Shiny, which includes:
 - `{golem}` - <https://github.com/ThinkR-open/golem>
 - `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
 - `{fakir}` - <https://github.com/ThinkR-open/fakir>
-- `{shinysnippets}` - <https://github.com/ThinkR-open/shinysnippets>
+- `{gemstones}` - <https://github.com/ThinkR-open/gemstones>
 
 ## Resources
 
 ### The Book :
 
 - <https://engineering-shiny.org/>
+
 - [paper version of the book “Engineering Production-Grade Shiny
   Apps”](https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022)
 
@@ -72,7 +143,7 @@ scratch*](https://towardsdatascience.com/production-grade-r-shiny-with-golem-pro
   Apps](https://youtu.be/tCAan6smrjs)
 - 🇫🇷 [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
 - rstudio::conf(2020) : [Production-grade Shiny Apps with
-  golem](https://www.rstudio.com/resources/rstudioconf-2020/production-grade-shiny-apps-with-golem/)
+  golem](https://posit.co/resources/videos/production-grade-shiny-apps-with-golem/)
 - 🇫🇷 Rencontres R 2021 : [Conception d’applications Shiny avec
   {golem}](https://www.youtube.com/watch?v=0f5Me1PFGDs)
 - 🇫🇷 [Déploiement d’une application {shiny} dans docker avec {renv} et

@@ -83,26 +83,25 @@ talk_once <- function(.f, msg = "") {
 #' }
 #' @return The `{dockerfiler}` object, invisibly.
 add_dockerfile <- function(
-  path = "DESCRIPTION",
-  output = "Dockerfile",
-  pkg = get_golem_wd(),
-  from = paste0(
-    "rocker/verse:",
-    R.Version()$major,
-    ".",
-    R.Version()$minor
-  ),
-  as = NULL,
-  port = 80,
-  host = "0.0.0.0",
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  update_tar_gz = TRUE,
-  build_golem_from_source = TRUE,
-  extra_sysreqs = NULL
-) {
+    path = "DESCRIPTION",
+    output = "Dockerfile",
+    pkg = get_golem_wd(),
+    from = paste0(
+      "rocker/verse:",
+      R.Version()$major,
+      ".",
+      R.Version()$minor
+    ),
+    as = NULL,
+    port = 80,
+    host = "0.0.0.0",
+    sysreqs = TRUE,
+    repos = c(CRAN = "https://cran.rstudio.com/"),
+    expand = FALSE,
+    open = TRUE,
+    update_tar_gz = TRUE,
+    build_golem_from_source = TRUE,
+    extra_sysreqs = NULL) {
   add_dockerfile_(
     path = path,
     output = output,
@@ -123,26 +122,25 @@ add_dockerfile <- function(
 
 add_dockerfile_ <- talk_once(
   function(
-  path = "DESCRIPTION",
-  output = "Dockerfile",
-  pkg = get_golem_wd(),
-  from = paste0(
-    "rocker/verse:",
-    R.Version()$major,
-    ".",
-    R.Version()$minor
-  ),
-  as = NULL,
-  port = 80,
-  host = "0.0.0.0",
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  update_tar_gz = TRUE,
-  build_golem_from_source = TRUE,
-  extra_sysreqs = NULL
-  ) {
+      path = "DESCRIPTION",
+      output = "Dockerfile",
+      pkg = get_golem_wd(),
+      from = paste0(
+        "rocker/verse:",
+        R.Version()$major,
+        ".",
+        R.Version()$minor
+      ),
+      as = NULL,
+      port = 80,
+      host = "0.0.0.0",
+      sysreqs = TRUE,
+      repos = c(CRAN = "https://cran.rstudio.com/"),
+      expand = FALSE,
+      open = TRUE,
+      update_tar_gz = TRUE,
+      build_golem_from_source = TRUE,
+      extra_sysreqs = NULL) {
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(
@@ -191,24 +189,23 @@ add_dockerfile_ <- talk_once(
 #' @export
 #' @rdname dockerfiles
 add_dockerfile_shinyproxy <- function(
-  path = "DESCRIPTION",
-  output = "Dockerfile",
-  pkg = get_golem_wd(),
-  from = paste0(
-    "rocker/verse:",
-    R.Version()$major,
-    ".",
-    R.Version()$minor
-  ),
-  as = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  update_tar_gz = TRUE,
-  build_golem_from_source = TRUE,
-  extra_sysreqs = NULL
-) {
+    path = "DESCRIPTION",
+    output = "Dockerfile",
+    pkg = get_golem_wd(),
+    from = paste0(
+      "rocker/verse:",
+      R.Version()$major,
+      ".",
+      R.Version()$minor
+    ),
+    as = NULL,
+    sysreqs = TRUE,
+    repos = c(CRAN = "https://cran.rstudio.com/"),
+    expand = FALSE,
+    open = TRUE,
+    update_tar_gz = TRUE,
+    build_golem_from_source = TRUE,
+    extra_sysreqs = NULL) {
   add_dockerfile_shinyproxy_(
     path = path,
     output = output,
@@ -227,24 +224,23 @@ add_dockerfile_shinyproxy <- function(
 
 add_dockerfile_shinyproxy_ <- talk_once(
   function(
-  path = "DESCRIPTION",
-  output = "Dockerfile",
-  pkg = get_golem_wd(),
-  from = paste0(
-    "rocker/verse:",
-    R.Version()$major,
-    ".",
-    R.Version()$minor
-  ),
-  as = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  update_tar_gz = TRUE,
-  build_golem_from_source = TRUE,
-  extra_sysreqs = NULL
-  ) {
+      path = "DESCRIPTION",
+      output = "Dockerfile",
+      pkg = get_golem_wd(),
+      from = paste0(
+        "rocker/verse:",
+        R.Version()$major,
+        ".",
+        R.Version()$minor
+      ),
+      as = NULL,
+      sysreqs = TRUE,
+      repos = c(CRAN = "https://cran.rstudio.com/"),
+      expand = FALSE,
+      open = TRUE,
+      update_tar_gz = TRUE,
+      build_golem_from_source = TRUE,
+      extra_sysreqs = NULL) {
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(output)
@@ -285,24 +281,23 @@ add_dockerfile_shinyproxy_ <- talk_once(
 #' @export
 #' @rdname dockerfiles
 add_dockerfile_heroku <- function(
-  path = "DESCRIPTION",
-  output = "Dockerfile",
-  pkg = get_golem_wd(),
-  from = paste0(
-    "rocker/verse:",
-    R.Version()$major,
-    ".",
-    R.Version()$minor
-  ),
-  as = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  update_tar_gz = TRUE,
-  build_golem_from_source = TRUE,
-  extra_sysreqs = NULL
-) {
+    path = "DESCRIPTION",
+    output = "Dockerfile",
+    pkg = get_golem_wd(),
+    from = paste0(
+      "rocker/verse:",
+      R.Version()$major,
+      ".",
+      R.Version()$minor
+    ),
+    as = NULL,
+    sysreqs = TRUE,
+    repos = c(CRAN = "https://cran.rstudio.com/"),
+    expand = FALSE,
+    open = TRUE,
+    update_tar_gz = TRUE,
+    build_golem_from_source = TRUE,
+    extra_sysreqs = NULL) {
   add_dockerfile_heroku_(
     path = path,
     output = output,
@@ -321,24 +316,23 @@ add_dockerfile_heroku <- function(
 
 add_dockerfile_heroku_ <- talk_once(
   function(
-  path = "DESCRIPTION",
-  output = "Dockerfile",
-  pkg = get_golem_wd(),
-  from = paste0(
-    "rocker/verse:",
-    R.Version()$major,
-    ".",
-    R.Version()$minor
-  ),
-  as = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  update_tar_gz = TRUE,
-  build_golem_from_source = TRUE,
-  extra_sysreqs = NULL
-  ) {
+      path = "DESCRIPTION",
+      output = "Dockerfile",
+      pkg = get_golem_wd(),
+      from = paste0(
+        "rocker/verse:",
+        R.Version()$major,
+        ".",
+        R.Version()$minor
+      ),
+      as = NULL,
+      sysreqs = TRUE,
+      repos = c(CRAN = "https://cran.rstudio.com/"),
+      expand = FALSE,
+      open = TRUE,
+      update_tar_gz = TRUE,
+      build_golem_from_source = TRUE,
+      extra_sysreqs = NULL) {
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(output)
@@ -409,10 +403,9 @@ golem::add_dockerfile_heroku() is not recommended anymore.\nPlease use golem::ad
 )
 
 alert_build <- function(
-  path,
-  output,
-  build_golem_from_source
-) {
+    path,
+    output,
+    build_golem_from_source) {
   cat_created(output, "Dockerfile")
   if (!build_golem_from_source) {
     cat_red_bullet(

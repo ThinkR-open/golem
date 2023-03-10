@@ -1,15 +1,24 @@
-## R CMD check results
+# R CMD check results
 
-0 errors | 0 warnings | 0 note
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
-* This is a submission that fixes the issue from the CRAN check page. 
+# Revdeps
+## Failed to check (7)
 
-=> The new version of testthat fails when unloaded during the tests. This new version of golem removes the test that unloads testthat. 
+|package         |version |error |warning |note |
+|:---------------|:-------|:-----|:-------|:----|
+|discoveR        |3.1.2   |1     |        |     |
+|loadeR          |1.1.3   |1     |        |     |
+|multiSight      |?       |      |        |     |
+|OlympicRshiny   |1.0.0   |1     |        |     |
+|shinyTempSignal |0.0.3   |1     |        |     |
+|spatialLIBD     |1.10.1  |1     |        |2    |
+|tripr           |1.4.0   |1     |        |     |
 
-## revdepcheck results
+## New problems (1)
 
-We checked 31 reverse dependencies (17 from CRAN + 14 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+|package              |version |error |warning |note |
+|:--------------------|:-------|:-----|:-------|:----|
+|MainExistingDatasets|1.0.1   |      |__+1__  |1    |
 
- * We saw 0 new problems
- * We failed to check 0 packages
-
+> This  has been addressed by a PR on the git repo: https://github.com/baptisteCD/MainExistingDatasets/pull/1

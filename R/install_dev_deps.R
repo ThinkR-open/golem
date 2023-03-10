@@ -28,10 +28,11 @@
 #' if (interactive()) {
 #'   install_dev_deps()
 #' }
+#'
+#' @return Used for side-effects
 install_dev_deps <- function(
-  force_install = FALSE,
-  ...
-) {
+    force_install = FALSE,
+    ...) {
   if (!force_install) {
     if (!interactive()) {
       # In non interactive mode with force_install turned to FALSE,

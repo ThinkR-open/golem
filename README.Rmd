@@ -7,7 +7,7 @@ output: github_document
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  eval = FALSE,
+  eval = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
@@ -27,8 +27,27 @@ knitr::opts_chunk$set(
 
 ## About
 
-You're reading the doc about version : ``r as.data.frame(read.dcf("DESCRIPTION"))$Version ``
+You're reading the doc about version : `r pkgload::pkg_version()`
 
+This README has been compiled on the
+
+```{r}
+Sys.time()
+```
+
+Here are the test & coverage results :
+
+```{r}
+devtools::check(quiet = TRUE)
+```
+
+```{r echo = FALSE}
+unloadNamespace("golem")
+```
+
+```{r}
+covr::package_coverage()
+```
 
 ## Tool series
 
@@ -37,13 +56,14 @@ This package is part of a series of tools for Shiny, which includes:
 -   `{golem}` - <https://github.com/ThinkR-open/golem>
 -   `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
 -   `{fakir}` - <https://github.com/ThinkR-open/fakir>
--   `{shinysnippets}` - <https://github.com/ThinkR-open/shinysnippets>
+-   `{gemstones}` - <https://github.com/ThinkR-open/gemstones>
 
 ## Resources
 
 ### The Book :
 
 -   <https://engineering-shiny.org/>
+
 -   [paper version of the book “Engineering Production-Grade Shiny Apps”](https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022)
 
 ### Blog posts :
@@ -69,7 +89,7 @@ This package is part of a series of tools for Shiny, which includes:
 -   [Hands-on demonstration of {golem}](https://www.youtube.com/watch?v=3-p9XLvoJV0)
 -   useR! 2019 : [A Framework for Building Robust & Production Ready Shiny Apps](https://youtu.be/tCAan6smrjs)
 -   `r  emo::flag("France")` [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
--   rstudio::conf(2020) : [Production-grade Shiny Apps with golem](https://www.rstudio.com/resources/rstudioconf-2020/production-grade-shiny-apps-with-golem/)
+-   rstudio::conf(2020) : [Production-grade Shiny Apps with golem](https://posit.co/resources/videos/production-grade-shiny-apps-with-golem/)
 -  `r  emo::flag("France")` Rencontres R 2021 : [ Conception d'applications Shiny avec {golem}](https://www.youtube.com/watch?v=0f5Me1PFGDs)
 - `r  emo::flag("France")` [ Déploiement d'une application {shiny} dans docker avec {renv} et {golem}](https://www.youtube.com/watch?v=diCG4t76k78)
 
