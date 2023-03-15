@@ -376,7 +376,7 @@ golem::document_and_reload()
 
 usethis::use_dev_package(
   "golem",
-  remotes = "https://github.com/ThinkR-open/golem"
+  remote = "https://github.com/ThinkR-open/golem"
 )
 
 devtools::test()
