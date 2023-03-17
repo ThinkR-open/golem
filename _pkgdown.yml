@@ -147,6 +147,7 @@ reference:
       - make_dev
       - with_golem_options
       - maintenance_page
+      - is_golem
 
   - title: internal
     contents:
