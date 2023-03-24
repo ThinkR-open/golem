@@ -10,6 +10,7 @@
 #' @param dir_create Creates the directory if it doesn't exist, default is `TRUE`.
 #' @param fct If specified, creates a `mod_fct` file.
 #' @param utils If specified, creates a `mod_utils` file.
+#' @param r6 If specified, creates a `mod_class` file.
 #' @param js,js_handler If specified, creates a module related JavaScript file.
 #' @param export Should the module be exported? Default is `FALSE`.
 #' @param module_template Function that serves as a module template.
@@ -31,6 +32,7 @@ add_module <- function(
   dir_create = TRUE,
   fct = NULL,
   utils = NULL,
+  r6 = NULL,
   js = NULL,
   js_handler = NULL,
   export = FALSE,
@@ -123,6 +125,10 @@ add_module <- function(
       pkg = pkg,
       open = open
     )
+  }
+
+  if (!is.null(r6)) {
+    add_r6(r6, module = name, open = open)
   }
 
   if (with_test) {
