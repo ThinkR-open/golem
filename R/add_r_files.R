@@ -182,11 +182,7 @@ append_roxygen_comment <- function(
     write_there("#' @noRd")
   }
   if (file_type == "function") {
-    write_there(paste(name, "<- function(arg1, arg2, ...) {"))
-    write_there("#  ... some computations ...")
-    write_there("#  ... final compuations ...")
-    write_there("")
-    write_there("  return(NULL)")
+    write_there(paste(name, "<- function(arg1, arg2) {"))
     write_there("}")
   }
 }
