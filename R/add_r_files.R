@@ -30,14 +30,18 @@ add_r_files <- function(
     # Remove the "mod_" if any
     module <- mod_remove(module)
     if (!is_existing_module(module)) {
-      stop(
-        sprintf(
-          "The module '%s' does not exist.\nYou can call `golem::add_module('%s')` to create it.",
-          module,
-          module
-        ),
-        call. = FALSE
-      )
+      # Check for esoteric 'mod_mod_' module names and if that fails throw error
+      if (!is_existing_module(paste0("mod_", module))) {
+        stop(
+          sprintf(
+            "The module '%s' does not exist.\nYou can call `golem::add_module('%s')` to create it.",
+            module,
+            module
+          ),
+          call. = FALSE
+        )
+      }
+      module <- paste0("mod_", module)
     }
     module <- paste0("mod_", module, "_")
   }

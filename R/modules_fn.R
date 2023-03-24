@@ -40,6 +40,7 @@ add_module <- function(
 ) {
   check_name_length(name)
   name <- file_path_sans_ext(name)
+  name <- check_name_syntax(name)
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
