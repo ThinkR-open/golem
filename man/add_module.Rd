@@ -11,6 +11,7 @@ add_module(
   dir_create = TRUE,
   fct = NULL,
   utils = NULL,
+  r6 = NULL,
   js = NULL,
   js_handler = NULL,
   export = FALSE,
@@ -31,6 +32,8 @@ add_module(
 \item{fct}{If specified, creates a \code{mod_fct} file.}
 
 \item{utils}{If specified, creates a \code{mod_utils} file.}
+
+\item{r6}{If specified, creates a \code{mod_class} file.}
 
 \item{js, js_handler}{If specified, creates a module related JavaScript file.}
 

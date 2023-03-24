@@ -139,6 +139,26 @@ add_utils <- function(
   )
 }
 
+#' @rdname file_creation
+#' @export
+add_r6 <- function(
+    name,
+    module = NULL,
+    pkg = get_golem_wd(),
+    open = TRUE,
+    dir_create = TRUE,
+    with_test = FALSE
+) {
+  add_r_files(
+    name,
+    module,
+    ext = "class",
+    pkg = pkg,
+    open = open,
+    dir_create = dir_create,
+    with_test = with_test
+  )
+}
 #' Append roxygen comments to `fct_` and `utils_` files
 #'
 #' This function add boilerplate roxygen comments
@@ -164,16 +184,21 @@ append_roxygen_comment <- function(
 
   if (ext == "utils") {
     file_type <- "utility"
-  } else {
+  } else if (ext == "fct") {
     file_type <- "function"
+  } else {
+    ext <- paste(ext, "generator")
+    file_type <- "R6"
   }
 
   write_there(sprintf("#' %s ", name))
   write_there("#'")
   write_there(sprintf("#' @description A %s function", ext))
   write_there("#'")
-  write_there(sprintf("#' @return The return value, if any, from executing the %s.", file_type))
-  write_there("#'")
+  if (!(file_type == "R6")) {
+    write_there(sprintf("#' @return The return value, if any, from executing the %s.", file_type))
+    write_there("#'")
+  }
   if (export) {
     write_there("#' @export")
   } else {
@@ -182,5 +207,12 @@ append_roxygen_comment <- function(
   if (file_type == "function") {
     write_there(paste(name, "<- function() {"))
     write_there("}")
+  }
+  if (file_type == "R6") {
+    write_there(paste0(name, " <- R6::R6Class("))
+    write_there(paste0("  classname = '",  name, "',"))
+    write_there("  public = list(")
+    write_there("  )")
+    write_there(")")
   }
 }
