@@ -168,11 +168,25 @@ append_roxygen_comment <- function(
   write_there("#'")
   write_there(sprintf("#' @description A %s function", ext))
   write_there("#'")
+  if (file_type == "function") {
+    write_there("#' @param arg1 first function argument")
+    write_there("#'")
+    write_there("#' @param arg2 second function argument")
+    write_there("#'")
+  }
   write_there(sprintf("#' @return The return value, if any, from executing the %s.", file_type))
   write_there("#'")
   if (export) {
     write_there("#' @export")
   } else {
     write_there("#' @noRd")
+  }
+  if (file_type == "function") {
+    write_there(paste(name, "<- function(arg1, arg2, ...) {"))
+    write_there("#  ... some computations ...")
+    write_there("#  ... final compuations ...")
+    write_there("")
+    write_there("  return(NULL)")
+    write_there("}")
   }
 }
