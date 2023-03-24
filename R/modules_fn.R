@@ -209,7 +209,7 @@ module_template <- function(
       write_there("#' @noRd ")
     }
     write_there(sprintf("mod_%s_server <- function(id){", name))
-    write_there("  moduleServer( id, function(input, output, session){")
+    write_there("  moduleServer(id, function(input, output, session){")
     write_there("    ns <- session$ns")
     write_there(ph_server)
     write_there("  })")
