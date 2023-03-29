@@ -526,13 +526,13 @@ add_sass_file <- function(
 #' @export
 #' @rdname add_files
 #' @importFrom tools file_ext
-add_any_file <- function(
+add_blank_file <- function(
   name,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create = TRUE,
-  template = golem::css_template,
+  template = golem::blank_template,
   ...
 ) {
   attempt::stop_if(
@@ -607,7 +607,7 @@ add_file <- function(
   dir = "inst/app/www",
   open = TRUE,
   dir_create = TRUE,
-  template = golem::css_template,
+  template = golem::blank_template,
   ...
 ) {
   attempt::stop_if(
@@ -650,7 +650,7 @@ add_file <- function(
       ...
     )
   } else {
-    add_any_file(
+    add_blank_file(
       name = name,
       pkg = pkg,
       dir = dir,

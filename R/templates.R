@@ -90,3 +90,16 @@ sass_template <- function(
 
   write_there(code)
 }
+
+#' @export
+#' @rdname template
+blank_template <- function(
+  path,
+  code = " "
+) {
+  write_there <- function(...) {
+    write(..., file = path, append = TRUE)
+  }
+
+  write_there(code)
+}
