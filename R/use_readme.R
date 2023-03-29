@@ -23,7 +23,8 @@ use_readme_rmd <- function(overwrite = FALSE) {
 get_rmd_pth <- function() {
   file.path(
     get_golem_wd(),
-    "README.Rmd")
+    "README.Rmd"
+  )
 }
 check_overwrite <- function(overwrite, tmp_pth) {
   if (isTRUE(overwrite)) {
@@ -95,10 +96,10 @@ unloadNamespace("PKG")
 covr::package_coverage()
 ```
 '
-tmp_file <- stringr::str_replace_all(
-  tmp_file,
-  "PKG",
-  pkg_name
-)
-return(tmp_file)
+  tmp_file <- stringr::str_replace_all(
+    tmp_file,
+    "PKG",
+    pkg_name
+  )
+  return(tmp_file)
 }
