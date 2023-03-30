@@ -1,5 +1,5 @@
 add_dockerfile_with_renv_ <- function(
-    source_folder = ".",
+    source_folder = get_golem_wd(),
     lockfile = NULL,
     output_dir = fs::path(tempdir(), "deploy"),
     distro = "focal",
@@ -110,7 +110,7 @@ add_dockerfile_with_renv_ <- function(
       )
     ) {
       out <- pkgbuild::build(
-        path = ".",
+        path = source_folder,
         dest_path = output_dir,
         vignettes = FALSE
       )
@@ -154,7 +154,7 @@ add_dockerfile_with_renv_ <- function(
 #' @rdname dockerfiles
 #' @export
 add_dockerfile_with_renv <- function(
-    source_folder = ".",
+    source_folder = get_golem_wd(),
     lockfile = NULL,
     output_dir = fs::path(tempdir(), "deploy"),
     distro = "focal",
@@ -229,7 +229,7 @@ docker run -p %s:%s %s
 #' @export
 #' @export
 add_dockerfile_with_renv_shinyproxy <- function(
-    source_folder = ".",
+    source_folder = get_golem_wd(),
     lockfile = NULL,
     output_dir = fs::path(tempdir(), "deploy"),
     distro = "focal",
@@ -272,7 +272,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
 #' @export
 #' @export
 add_dockerfile_with_renv_heroku <- function(
-    source_folder = ".",
+    source_folder = get_golem_wd(),
     lockfile = NULL,
     output_dir = fs::path(tempdir(), "deploy"),
     distro = "focal",
