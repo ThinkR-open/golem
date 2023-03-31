@@ -171,7 +171,7 @@ module_template <- function(
   }
   write_there("#'")
   write_there("#' @importFrom shiny NS tagList ")
-  write_there(sprintf("mod_%s_ui <- function(id){", name))
+  write_there(sprintf("mod_%s_ui <- function(id) {", name))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
   write_there(ph_ui)
@@ -188,7 +188,7 @@ module_template <- function(
     } else {
       write_there("#' @noRd ")
     }
-    write_there(sprintf("mod_%s_server <- function(input, output, session){", name))
+    write_there(sprintf("mod_%s_server <- function(input, output, session) {", name))
     write_there("  ns <- session$ns")
     write_there(ph_server)
     write_there("}")
@@ -208,8 +208,8 @@ module_template <- function(
     } else {
       write_there("#' @noRd ")
     }
-    write_there(sprintf("mod_%s_server <- function(id){", name))
-    write_there("  moduleServer( id, function(input, output, session){")
+    write_there(sprintf("mod_%s_server <- function(id) {", name))
+    write_there("  moduleServer(id, function(input, output, session) {")
     write_there("    ns <- session$ns")
     write_there(ph_server)
     write_there("  })")
