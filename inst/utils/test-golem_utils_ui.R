@@ -103,6 +103,19 @@ test_that("Test undisplay works", {
     as.character(b_undisplay),
     '<button id="go_filter" type="button" class="btn btn-default action-button" style="display: none;">go</button>'
   )
+
+  c <- shiny::tags$p(src = "plop", style = "some_style", "pouet")
+  expect_s3_class(c, "shiny.tag")
+  expect_equal(
+    as.character(c),
+    '<p src="plop" style="some_style">pouet</p>'
+  )
+  c_undisplay <- undisplay(c)
+  expect_s3_class(c_undisplay, "shiny.tag")
+  expect_equal(
+    as.character(c_undisplay),
+    '<p src="plop" style="display: none; some_style">pouet</p>'
+  )
 })
 
 test_that("Test display works", {
