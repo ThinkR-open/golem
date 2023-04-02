@@ -51,4 +51,15 @@ test_that("rv and rvtl work", {
   expect_true(
     inherits(rvtl, "function")
   )
+
+  rv_test_1 <- rv(a = "a", b = 2)
+  rv_test_2 <- reactiveValues(a = "a", b = 2)
+  shiny::reactiveConsole(TRUE)
+  expect_identical(rv_test_1$a, rv_test_2$a)
+  expect_identical(rv_test_1$b, rv_test_2$b)
+  expect_identical(
+    rvtl(rv_test_2),
+    shiny::reactiveValuesToList(rv_test_1)
+  )
+  shiny::reactiveConsole(FALSE)
 })
