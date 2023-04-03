@@ -27,54 +27,29 @@ use_external_js_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  if (missing(name)) {
-    name <- basename(url)
-  }
+  name <- get_new_name(name)
 
-  check_name_length_is_one(name)
+  new_file <- get_new_file(
+    name,
+    type = "js")
 
-  name <- file_path_sans_ext(name)
-  new_file <- sprintf("%s.js", name)
-
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
-
-  dir <- fs_path_abs(dir)
+  dir <- get_new_dir(dir)
+  if (isFALSE(dir)) return(invisible(FALSE))
 
   where <- fs_path(
     dir,
     new_file
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
+  check_file <- check_file_exists(where)
+  if (isFALSE(check_file)) return(invisible(FALSE))
 
-  if (file_ext(url) != "js") {
-    cat_red_bullet(
-      "File not added (URL must end with .js extension)"
-    )
-    return(invisible(FALSE))
-  }
+  check_url <- check_url_valid(
+    url,
+    type = "js")
+  if (isFALSE(check_url)) return(invisible(FALSE))
 
-  cat_start_download()
-
-  utils::download.file(url, where)
+  download_external(url, where)
 
   file_created_dance(
     where,
@@ -101,54 +76,60 @@ use_external_css_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  if (missing(name)) {
-    name <- basename(url)
-  }
+  name <- get_new_name(name)
+  # previously:
+  # check_name_length(name)
+  # name <- file_path_sans_ext(name)
+  # if (missing(name)) {
+  #   name <- basename(url)
+  # }
 
-  check_name_length_is_one(name)
+  new_file <- get_new_file(
+    name,
+    type = "css")
+  # previously
+  # new_file <- sprintf("%s.css", name)
 
-  name <- file_path_sans_ext(name)
-  new_file <- sprintf("%s.css", name)
-
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
-
-  dir <- fs_path_abs(dir)
+  dir <- get_new_dir(dir)
+  if (isFALSE(dir)) return(invisible(FALSE))
+  # previously
+  # dir_created <- create_if_needed(
+  #   dir,
+  #   type = "directory"
+  # )
+  # if (!dir_created) {
+  #   cat_dir_necessary()
+  #   return(invisible(FALSE))
+  # }
+  # dir <- fs_path_abs(dir)
 
   where <- fs_path(
     dir,
     new_file
   )
+  # no change to previous version
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
+  check_file <- check_file_exists(where)
+  if (isFALSE(check_file)) return(invisible(FALSE))
+  # previously
+  # if (fs_file_exists(where)) {
+  #   cat_exists(where)
+  #   return(invisible(FALSE))
+  # }
 
-  if (file_ext(url) != "css") {
-    cat_red_bullet(
-      "File not added (URL must end with .css extension)"
-    )
-    return(invisible(FALSE))
-  }
+  check_url <- check_url_valid(
+    url,
+    type = "css")
+  if (isFALSE(check_url)) return(invisible(FALSE))
+  # previously:
+  # if (file_ext(url) != "css") {
+  #   cat_red_bullet(
+  #     "File not added (URL must end with .css extension)"
+  #   )
+  #   return(invisible(FALSE))
+  # }
 
-  cat_start_download()
-
-  utils::download.file(url, where)
+  download_external(url, where)
 
   file_created_dance(
     where,
@@ -547,4 +528,63 @@ use_internal_file <- function(
   fs_file_copy(path, where)
 
   cat_copied(where)
+}
+get_new_name <- function(
+  name
+) {
+  if (missing(name)) {
+    name <- basename(url)
+  }
+  check_name_length(name)
+  file_path_sans_ext(name)
+}
+get_new_file <- function(
+  name,
+  type = c("js", "css", "html")
+) {
+  tmp <- paste0("%s.", type)
+  sprintf(tmp, name)
+}
+get_new_dir <- function(
+  dir
+) {
+  dir_created <- create_if_needed(
+    dir,
+    type = "directory"
+  )
+
+  if (!dir_created) {
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+
+  fs_path_abs(dir)
+}
+check_file_exists <- function(where) {
+  if (fs_file_exists(where)) {
+    cat_exists(where)
+    return(invisible(FALSE))
+  }
+}
+check_url <- function(
+  url,
+  type = c("js", "css")
+) {
+  if (file_ext(url) != type) {
+    msg <- paste0(
+      "File not added (URL must end with .",
+      type,
+      " extension)")
+    cat_red_bullet(
+      msg
+    )
+    return(invisible(FALSE))
+  }
+}
+download_external <- function(
+  url,
+  where
+) {
+  cat_start_download()
+  utils::download.file(url, where)
 }
