@@ -53,7 +53,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
       </span>
     </div>
 
@@ -132,22 +132,24 @@
 <div class="section level2">
 <h2 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
 </h2>
-<p>You’re reading the doc about version : 0.4.0</p>
+<p>You’re reading the doc about version : 0.4.3</p>
 <p>This README has been compiled on the</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2023-03-10 09:53:27 CET"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2023-04-04 10:54:56 CEST"</span></span></code></pre></div>
 <p>Here are the test &amp; coverage results :</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Loading golem</span></span>
-<span><span class="co">#&gt; ── R CMD check results ──────────────────────────────────────── golem 0.4.0 ────</span></span>
-<span><span class="co">#&gt; Duration: 1m 23.6s</span></span>
+<span><span class="co">#&gt; Warning: [is_golem.R:10] @example</span></span>
+<span><span class="co">#&gt; '/Users/colinfay/git/github/thinkr-open/golem/is_golem()' doesn't exist</span></span>
+<span><span class="co">#&gt; ── R CMD check results ──────────────────────────────────────── golem 0.4.3 ────</span></span>
+<span><span class="co">#&gt; Duration: 1m 9.1s</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">covr</span><span class="fu">::</span><span class="fu"><a href="http://covr.r-lib.org/reference/package_coverage.html" class="external-link">package_coverage</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; golem Coverage: 69.16%</span></span>
+<span><span class="co">#&gt; golem Coverage: 68.65%</span></span>
 <span><span class="co">#&gt; R/addins.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/bootstrap_rstudio_api.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/enable_roxygenize.R: 0.00%</span></span>
@@ -161,11 +163,12 @@
 <span><span class="co">#&gt; R/test_helpers.R: 30.26%</span></span>
 <span><span class="co">#&gt; R/js.R: 43.75%</span></span>
 <span><span class="co">#&gt; R/reload.R: 45.36%</span></span>
+<span><span class="co">#&gt; R/utils.R: 54.14%</span></span>
 <span><span class="co">#&gt; R/use_recommended.R: 54.55%</span></span>
 <span><span class="co">#&gt; R/bootstrap_desc.R: 55.56%</span></span>
 <span><span class="co">#&gt; R/install_dev_deps.R: 57.14%</span></span>
-<span><span class="co">#&gt; R/utils.R: 58.30%</span></span>
 <span><span class="co">#&gt; R/bootstrap_attachment.R: 61.54%</span></span>
+<span><span class="co">#&gt; R/bootstrap_dockerfiler.R: 63.33%</span></span>
 <span><span class="co">#&gt; R/add_dockerfiles.R: 74.19%</span></span>
 <span><span class="co">#&gt; R/bootstrap_usethis.R: 76.56%</span></span>
 <span><span class="co">#&gt; R/boostrap_fs.R: 77.78%</span></span>
@@ -176,11 +179,10 @@
 <span><span class="co">#&gt; R/add_resource_path.R: 88.89%</span></span>
 <span><span class="co">#&gt; R/create_golem.R: 89.47%</span></span>
 <span><span class="co">#&gt; R/make_dev.R: 90.00%</span></span>
-<span><span class="co">#&gt; R/add_r_files.R: 91.67%</span></span>
+<span><span class="co">#&gt; R/add_r_files.R: 91.95%</span></span>
 <span><span class="co">#&gt; R/add_files.R: 92.31%</span></span>
 <span><span class="co">#&gt; R/add_rstudio_files.R: 93.10%</span></span>
 <span><span class="co">#&gt; R/golem-yaml-get.R: 93.18%</span></span>
-<span><span class="co">#&gt; R/bootstrap_dockerfiler.R: 93.33%</span></span>
 <span><span class="co">#&gt; R/add_dockerfiles_renv.R: 93.75%</span></span>
 <span><span class="co">#&gt; R/boostrap_cli.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/boostrap_crayon.R: 100.00%</span></span>
@@ -191,6 +193,7 @@
 <span><span class="co">#&gt; R/disable_autoload.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/golem-yaml-set.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/golem-yaml-utils.R: 100.00%</span></span>
+<span><span class="co">#&gt; R/is_golem.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/is_running.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/pkg_tools.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/set_golem_options.R: 100.00%</span></span>
