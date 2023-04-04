@@ -19,13 +19,13 @@ shiny applications.
 
 ## About
 
-You’re reading the doc about version : 0.4.7
+You’re reading the doc about version : 0.4.8
 
 This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-04-04 21:03:49 CEST"
+#> [1] "2023-04-04 21:24:51 CEST"
 ```
 
 Here are the test & coverage results :
@@ -33,8 +33,8 @@ Here are the test & coverage results :
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> ── R CMD check results ──────────────────────────────────────── golem 0.4.7 ────
-#> Duration: 1m 16.9s
+#> ── R CMD check results ──────────────────────────────────────── golem 0.4.8 ────
+#> Duration: 1m 19.1s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```

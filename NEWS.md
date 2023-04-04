@@ -18,6 +18,7 @@
 
 + `01_start.R` now has a call to `usethis::use_git_remote()` (#1015, @ilyaZar)
 
++ Test for utilsui and server now has full code coverate (#1020, @ilyaZar)
 
 ## Bug fix
 
