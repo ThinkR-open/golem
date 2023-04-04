@@ -191,28 +191,33 @@ test_that("Test make_action_button works", {
   expect_error(
     button_2 <- make_action_button(
       unclass(tmp_tag),
-      inputId = "mylink_2")
+      inputId = "mylink_2"
+    )
   )
   expect_error(
     button_3 <- make_action_button(
       button,
-      inputId = "mylink_3")
+      inputId = "mylink_3"
+    )
   )
   expect_error(
     button_4 <- make_action_button(
       tmp_tag,
-      inputId = NULL)
+      inputId = NULL
+    )
   )
   tmp_tag_2 <- tmp_tag
   tmp_tag_2$attribs$id <- "id_already_present"
   expect_warning(
     button_5 <- make_action_button(
       tmp_tag_2,
-      inputId = "mylink_5")
+      inputId = "mylink_5"
+    )
   )
   tmp_tag_3 <- tmp_tag
   tmp_tag_3$attribs$class <- "class_already_present"
   button_6 <- make_action_button(
     tmp_tag_3,
-    inputId = "someID")
+    inputId = "someID"
+  )
 })
