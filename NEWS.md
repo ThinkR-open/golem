@@ -6,11 +6,15 @@
 
 * `is_golem()` tries to guess if the current folder is a `{golem}`-based app (#836)
 
-## Features
+## New features / user visible changes
 
 + `add_fct()` now adds the skeleton for a function (#1004, @ilyaZar)
 
-## New functions
+## Bug fix
+
++ Docker commands now take the `-it` flag so it can be killed with `^C` (#, @ivokwee)
+
+## Internal changes
 
 # 0.4.0
 
@@ -44,10 +48,7 @@
 
 ## Internal changes
 
-add_dockerfile_with_renv now works well with uppercase in package name
-
-add_dockerfile_with_renv now works well with uppercase in package name
-
++ `add_dockerfile_with_renv` now works well with uppercase in package name
 
 # golem 0.3.5
 

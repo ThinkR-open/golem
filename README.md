@@ -19,13 +19,13 @@ shiny applications.
 
 ## About
 
-You’re reading the doc about version : 0.4.0
+You’re reading the doc about version : 0.4.3
 
 This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-03-10 09:53:27 CET"
+#> [1] "2023-04-04 10:54:56 CEST"
 ```
 
 Here are the test & coverage results :
@@ -33,15 +33,17 @@ Here are the test & coverage results :
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> ── R CMD check results ──────────────────────────────────────── golem 0.4.0 ────
-#> Duration: 1m 23.6s
+#> Warning: [is_golem.R:10] @example
+#> '/Users/colinfay/git/github/thinkr-open/golem/is_golem()' doesn't exist
+#> ── R CMD check results ──────────────────────────────────────── golem 0.4.3 ────
+#> Duration: 1m 9.1s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 69.16%
+#> golem Coverage: 68.65%
 #> R/addins.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
@@ -55,11 +57,12 @@ covr::package_coverage()
 #> R/test_helpers.R: 30.26%
 #> R/js.R: 43.75%
 #> R/reload.R: 45.36%
+#> R/utils.R: 54.14%
 #> R/use_recommended.R: 54.55%
 #> R/bootstrap_desc.R: 55.56%
 #> R/install_dev_deps.R: 57.14%
-#> R/utils.R: 58.30%
 #> R/bootstrap_attachment.R: 61.54%
+#> R/bootstrap_dockerfiler.R: 63.33%
 #> R/add_dockerfiles.R: 74.19%
 #> R/bootstrap_usethis.R: 76.56%
 #> R/boostrap_fs.R: 77.78%
@@ -70,11 +73,10 @@ covr::package_coverage()
 #> R/add_resource_path.R: 88.89%
 #> R/create_golem.R: 89.47%
 #> R/make_dev.R: 90.00%
-#> R/add_r_files.R: 91.67%
+#> R/add_r_files.R: 91.95%
 #> R/add_files.R: 92.31%
 #> R/add_rstudio_files.R: 93.10%
 #> R/golem-yaml-get.R: 93.18%
-#> R/bootstrap_dockerfiler.R: 93.33%
 #> R/add_dockerfiles_renv.R: 93.75%
 #> R/boostrap_cli.R: 100.00%
 #> R/boostrap_crayon.R: 100.00%
@@ -85,6 +87,7 @@ covr::package_coverage()
 #> R/disable_autoload.R: 100.00%
 #> R/golem-yaml-set.R: 100.00%
 #> R/golem-yaml-utils.R: 100.00%
+#> R/is_golem.R: 100.00%
 #> R/is_running.R: 100.00%
 #> R/pkg_tools.R: 100.00%
 #> R/set_golem_options.R: 100.00%
