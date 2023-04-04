@@ -1,5 +1,23 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
+# 0.4.1 to 0.5.0
+
+## New functions
+
+* `is_golem()` tries to guess if the current folder is a `{golem}`-based app (#836)
+
+* `use_readme_rmd()` adds a {golem} specific READM.Rmd (@ilyaZar, #1011)
+
+## New features / user visible changes
+
++ `add_fct()` now adds the skeleton for a function (#1004, @ilyaZar)
+
+## Bug fix
+
++ Docker commands now take the `-it` flag so it can be killed with `^C` (#, @ivokwee)
+
+## Internal changes
+
 # 0.4.0
 
 ## New functions
@@ -32,10 +50,7 @@
 
 ## Internal changes
 
-add_dockerfile_with_renv now works well with uppercase in package name
-
-add_dockerfile_with_renv now works well with uppercase in package name
-
++ `add_dockerfile_with_renv` now works well with uppercase in package name
 
 # golem 0.3.5
 

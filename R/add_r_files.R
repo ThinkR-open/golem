@@ -175,4 +175,8 @@ append_roxygen_comment <- function(
   } else {
     write_there("#' @noRd")
   }
+  if (file_type == "function") {
+    write_there(paste(name, "<- function() {"))
+    write_there("}")
+  }
 }
