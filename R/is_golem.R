@@ -7,7 +7,7 @@
 #'
 #' @export
 #'
-#' @example
+#' @examples
 #' is_golem()
 is_golem <- function(path = getwd()) {
   files_from_shiny_example <- grep(
