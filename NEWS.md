@@ -16,6 +16,9 @@
 
 + Better comments to `fill_desc()` in `01_start.R`  (#1021, @ilyaZar)
 
++ `01_start.R` now has a call to `usethis::use_git_remote()` (#1015, @ilyaZar)
+
+
 ## Bug fix
 
 + Docker commands now take the `-it` flag so it can be killed with `^C` (#, @ivokwee)
