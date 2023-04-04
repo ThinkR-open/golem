@@ -206,7 +206,7 @@ add_dockerfile_with_renv <- function(
   out <- sprintf(
     "docker build -f Dockerfile_base --progress=plain -t %s .
 docker build -f Dockerfile --progress=plain -t %s .
-docker run -it -p %s:%s %s
+docker run -p %s:%s %s
 # then go to 127.0.0.1:%s",
     tolower(paste0(golem::get_golem_name(), "_base")),
     tolower(paste0(golem::get_golem_name(), ":latest")),
