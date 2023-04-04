@@ -1,5 +1,5 @@
 desc::desc_bump_version("patch")
-file.edit("NEWS.md")
+rstudioapi::navigateToFile("NEWS.md")
 devtools::build_readme()
 gert::git_add(c("DESCRIPTION", "NEWS.md", "README.md", "NEWS.md"))
 gert::git_commit("chore: version bump & news update")
