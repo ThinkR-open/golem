@@ -13,3 +13,6 @@ Defaults to the current working directory.}
 \description{
 Trying to guess if \code{path} is a golem-based app.
 }
+\examples{
+is_golem()
+}
