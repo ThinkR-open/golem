@@ -6,6 +6,8 @@
 
 * `is_golem()` tries to guess if the current folder is a `{golem}`-based app (#836)
 
+* `use_readme_rmd()` adds a {golem} specific READM.Rmd (@ilyaZar, #1011)
+
 ## New features / user visible changes
 
 + `add_fct()` now adds the skeleton for a function (#1004, @ilyaZar)

@@ -19,13 +19,13 @@ shiny applications.
 
 ## About
 
-You’re reading the doc about version : 0.4.3
+You’re reading the doc about version : 0.4.4
 
 This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-04-04 10:54:56 CEST"
+#> [1] "2023-04-04 12:09:15 CEST"
 ```
 
 Here are the test & coverage results :
@@ -33,17 +33,15 @@ Here are the test & coverage results :
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> Warning: [is_golem.R:10] @example
-#> '/Users/colinfay/git/github/thinkr-open/golem/is_golem()' doesn't exist
-#> ── R CMD check results ──────────────────────────────────────── golem 0.4.3 ────
-#> Duration: 1m 9.1s
+#> ── R CMD check results ──────────────────────────────────────── golem 0.4.4 ────
+#> Duration: 1m 18s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 68.65%
+#> golem Coverage: 69.04%
 #> R/addins.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
@@ -64,8 +62,8 @@ covr::package_coverage()
 #> R/bootstrap_attachment.R: 61.54%
 #> R/bootstrap_dockerfiler.R: 63.33%
 #> R/add_dockerfiles.R: 74.19%
-#> R/bootstrap_usethis.R: 76.56%
 #> R/boostrap_fs.R: 77.78%
+#> R/bootstrap_usethis.R: 78.57%
 #> R/modules_fn.R: 80.00%
 #> R/use_utils.R: 83.33%
 #> R/use_favicon.R: 85.56%
@@ -78,6 +76,7 @@ covr::package_coverage()
 #> R/add_rstudio_files.R: 93.10%
 #> R/golem-yaml-get.R: 93.18%
 #> R/add_dockerfiles_renv.R: 93.75%
+#> R/use_readme.R: 97.14%
 #> R/boostrap_cli.R: 100.00%
 #> R/boostrap_crayon.R: 100.00%
 #> R/bootstrap_pkgload.R: 100.00%
