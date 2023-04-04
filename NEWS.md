@@ -12,6 +12,8 @@
 
 + `add_fct()` now adds the skeleton for a function (#1004, @ilyaZar)
 
++ The module skeleton now stick to tidyverse style (#1019, @ni2scmn)
+
 ## Bug fix
 
 + Docker commands now take the `-it` flag so it can be killed with `^C` (#, @ivokwee)
