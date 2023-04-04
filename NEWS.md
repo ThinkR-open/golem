@@ -14,6 +14,8 @@
 
 + The module skeleton now stick to tidyverse style (#1019, @ni2scmn)
 
++ Better comments to `fill_desc()` in `01_start.R`  (#1021, @ilyaZar)
+
 ## Bug fix
 
 + Docker commands now take the `-it` flag so it can be killed with `^C` (#, @ivokwee)
