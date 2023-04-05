@@ -70,6 +70,12 @@ set_golem_name <- function(
     new_name = name
   )
 
+  # Changing in ./vignettes/ if dir present
+  set_golem_name_vignettes(
+    old_name = old_name,
+    new_name = name
+  )
+
   invisible(name)
 }
 
@@ -88,6 +94,35 @@ set_golem_name_tests <- function(
     old_testthat_r <- readLines(pth_testthat_r)
     new_testthat_r <- gsub(old_name, new_name, old_testthat_r)
     writeLines(new_testthat_r, pth_testthat_r)
+  }
+
+  return(invisible(old_name))
+}
+
+set_golem_name_vignettes <- function(
+  old_name,
+  new_name
+) {
+  pth_dir_vignettes <- file.path(
+    get_golem_wd(),
+    "vignettes")
+
+  check_dir_vignettes <- fs_dir_exists(pth_dir_vignettes)
+
+  if (check_dir_vignettes) {
+    pth_vignette_old <- file.path(
+      pth_dir_vignettes,
+      paste0(old_name, ".Rmd")
+    )
+    old_vignette_r <- readLines(pth_vignette_old)
+    new_vignette_r <- gsub(old_name, new_name, old_vignette_r)
+
+    pth_vignette_new <- file.path(
+      pth_dir_vignettes,
+      paste0(new_name, ".Rmd")
+    )
+    writeLines(new_vignette_r, pth_vignette_new)
+    file.remove(pth_vignette_old)
   }
 
   return(invisible(old_name))
