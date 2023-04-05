@@ -241,24 +241,25 @@ use_external_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
+  name <- get_new_name(name)
+  # previously
+  # check_name_length(name)
+  # if (missing(name)) {
+  #   name <- basename(url)
+  # }
 
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
-
-  dir <- fs_path_abs(dir)
+  dir <- get_new_dir(dir)
+  if (isFALSE(dir)) return(invisible(FALSE))
+  # previously:
+  # dir_created <- create_if_needed(
+  #   dir,
+  #   type = "directory"
+  # )
+  # if (!dir_created) {
+  #   cat_dir_necessary()
+  #   return(invisible(FALSE))
+  # }
+  # dir <- fs_path_abs(dir)
 
   where <- fs_path(
     dir,
