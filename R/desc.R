@@ -3,10 +3,8 @@
 #' @param pkg_name The name of the package
 #' @param pkg_title The title of the package
 #' @param pkg_description Description of the package
-#' @param author_first_name First Name of the author
-#' @param author_last_name Last Name of the author
-#' @param author_email Email of the author
-#' @param author_orcid ORCID of the author
+#' @param authors a character string (or vector) of class person
+#'    (see [person()] for details)
 #' @param repo_url URL (if needed)
 #' @param pkg_version The version of the package. Default is 0.0.0.9000
 #' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
@@ -19,47 +17,27 @@ fill_desc <- function(
   pkg_name,
   pkg_title,
   pkg_description,
-  author_first_name,
-  author_last_name,
-  author_email,
-  author_orcid = NULL,
+  authors = c(person("Angelo",
+                     "Canty",
+                     role = "aut",
+                     comment = "S original, <http://statwww.epfl.ch/davison/BMA/library.html>"),
+                     person(c("Brian", "D."),
+                     "Ripley",
+                     role = c("aut", "trl", "cre"),
+                     comment = "R port",
+                     email = "ripley@stats.ox.ac.uk")),
   repo_url = NULL,
   pkg_version = "0.0.0.9000",
   pkg = get_golem_wd()
 ) {
+  stopifnot(`'authors' must be of class 'person'` = inherits(authors, "person"))
   path <- fs_path_abs(pkg)
 
   desc <- desc_description(
     file = fs_path(path, "DESCRIPTION")
   )
+  desc$set_authors(authors)
 
-  if (!is.null(author_orcid) & !is.character(author_orcid)) {
-    stop("ORCID ID must be provided as a character object")
-  }
-
-
-  if (is.null(author_orcid)) {
-    desc$set(
-      "Authors@R",
-      sprintf(
-        "person('%s', '%s', email = '%s', role = c('cre', 'aut'))",
-        author_first_name,
-        author_last_name,
-        author_email
-      )
-    )
-  } else {
-    desc$set(
-      "Authors@R",
-      sprintf(
-        "person('%s', '%s', email = '%s', role = c('cre', 'aut'), comment = c(ORCID = '%s'))",
-        author_first_name,
-        author_last_name,
-        author_email,
-        author_orcid
-      )
-    )
-  }
   desc$del(
     keys = "Maintainer"
   )
