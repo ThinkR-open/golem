@@ -8,6 +8,7 @@
 #' @param url String representation of URL for the file to be downloaded
 #' @param path String representation of the local path for the file to be implemented (use_file only)
 #' @param dir Path to the dir where the file while be created.
+#' @param overwrite logical; if \code{TRUE}, then external file is overwritten
 #'
 #' @note See `?htmltools::htmlTemplate` and `https://shiny.rstudio.com/articles/templates.html`
 #'     for more information about `htmlTemplate`.
@@ -22,8 +23,9 @@ use_external_js_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
-    ) {
+  dir_create = TRUE,
+  overwrite = FALSE
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -41,7 +43,7 @@ use_external_js_file <- function(
     new_file
   )
 
-  check_file <- check_file_exists(where)
+  check_file <- check_file_exists(where, overwrite)
   if (isFALSE(check_file)) return(invisible(FALSE))
 
   check_url <- check_url_valid(
@@ -71,8 +73,9 @@ use_external_css_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
-    ) {
+  dir_create = TRUE,
+  overwrite = FALSE
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -109,7 +112,7 @@ use_external_css_file <- function(
   )
   # no change to previous version
 
-  check_file <- check_file_exists(where)
+  check_file <- check_file_exists(where, overwrite)
   if (isFALSE(check_file)) return(invisible(FALSE))
   # previously
   # if (fs_file_exists(where)) {
@@ -151,52 +154,66 @@ use_external_html_template <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
-    ) {
+  dir_create = TRUE,
+  overwrite = FALSE
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  new_file <- sprintf(
-    "%s.html",
-    file_path_sans_ext(name)
-  )
+  name <- get_new_name(name)
+  # previously:
+  # check_name_length(name)
+  # name <- file_path_sans_ext(name)
+  # if (missing(name)) {
+  #   name <- basename(url)
+  # }
 
-  check_name_length_is_one(name)
+  new_file <- get_new_file(
+    name,
+    type = "css")
+  # previously
+  # new_file <- sprintf("%s.css", name)
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
-
-  dir <- fs_path_abs(dir)
-
+  dir <- get_new_dir(dir)
+  if (isFALSE(dir)) return(invisible(FALSE))
+  # previously
+  # dir_created <- create_if_needed(
+  #   dir,
+  #   type = "directory"
+  # )
+  # if (!dir_created) {
+  #   cat_dir_necessary()
+  #   return(invisible(FALSE))
+  # }
+  # dir <- fs_path_abs(dir)
   where <- fs_path(
     dir,
     new_file
   )
+  # no change to previous version
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
+  check_file <- check_file_exists(where, overwrite)
+  if (isFALSE(check_file)) return(invisible(FALSE))
+  # previously
+  # if (fs_file_exists(where)) {
+  #   cat_exists(where)
+  #   return(invisible(FALSE))
+  # }
 
-  cat_start_download()
+  # MAYBE? -> add possible url-check for html-type files
+  # check_url <- check_url_valid(
+  #   url,
+  #   type = "html")
+  # if (isFALSE(check_url)) return(invisible(FALSE))
 
-  utils::download.file(url, where)
+  download_external(url, where)
+  # previously
+  # cat_start_download()
+  # utils::download.file(url, where)
 
-  cat_downloaded(where)
+  # remove:
+  # cat_downloaded(where)
+  # and add to catfun inside file_created_dance() see below
 
   file_created_dance(
     where,
@@ -205,7 +222,8 @@ use_external_html_template <- function(
     dir,
     name,
     open,
-    open_or_go_to = FALSE
+    open_or_go_to = FALSE,
+    catfun = cat_downloaded
   )
 }
 
@@ -217,14 +235,9 @@ use_external_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
-    ) {
-  if (missing(name)) {
-    name <- basename(url)
-  }
-
-  check_name_length_is_one(name)
-
+  dir_create = TRUE,
+  overwrite = FALSE
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -252,12 +265,14 @@ use_external_file <- function(
     name
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
-
-  cat_start_download()
+  check_file <- check_file_exists(where, overwrite)
+  if (isFALSE(check_file)) return(invisible(FALSE))
+  # previously
+  # if (fs_file_exists(where)) {
+  #   cat_exists(where)
+  #   return(invisible(FALSE))
+  # }
+  # cat_start_download()
 
   utils::download.file(url, where)
 
@@ -535,7 +550,7 @@ get_new_name <- function(
   if (missing(name)) {
     name <- basename(url)
   }
-  check_name_length(name)
+  check_name_length_is_one(name)
   file_path_sans_ext(name)
 }
 get_new_file <- function(
@@ -548,27 +563,35 @@ get_new_file <- function(
 get_new_dir <- function(
   dir
 ) {
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  dir_created <- tryCatch(
+    create_if_needed(
+      dir,
+      type = "directory"
+    ),
+    error = function(e) {
+      out <- FALSE
+      names(out) <- e[[1]]
+      return(out)
+    }
   )
 
-  if (!dir_created) {
+  if (isFALSE(dir_created)) {
     cat_dir_necessary()
     return(invisible(FALSE))
   }
 
-  fs_path_abs(dir)
+  dir <- fs_path_abs(dir)
 }
-check_file_exists <- function(where) {
-  if (fs_file_exists(where)) {
+check_file_exists <- function(where, overwrite) {
+  if (fs_file_exists(where) && isFALSE(overwrite)) {
     cat_exists(where)
     return(invisible(FALSE))
   }
+  # otherwise: func returns NULL silently which is on purpose!
 }
-check_url <- function(
+check_url_valid <- function(
   url,
-  type = c("js", "css")
+  type = c("js", "css", "html")
 ) {
   if (file_ext(url) != type) {
     msg <- paste0(
