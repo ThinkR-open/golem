@@ -33,6 +33,7 @@ set_golem_name <- function(
   pkg = golem::pkg_path(),
   talkative = TRUE
 ) {
+  old_name <- golem::pkg_name()
   path <- fs_path_abs(pkg)
 
   # Changing in YAML
@@ -63,7 +64,33 @@ set_golem_name <- function(
     file = "DESCRIPTION"
   )
 
+  # Changing in ./tests/ if dir present
+  set_golem_name_tests(
+    old_name = old_name,
+    new_name = name
+  )
+
   invisible(name)
+}
+
+set_golem_name_tests <- function(
+  old_name,
+  new_name
+) {
+  pth_dir_tests <- file.path(
+    get_golem_wd(),
+    "tests")
+
+  check_dir_tests <- fs_dir_exists(pth_dir_tests)
+
+  if (check_dir_tests) {
+    pth_testthat_r <- file.path(pth_dir_tests, "testthat.R")
+    old_testthat_r <- readLines(pth_testthat_r)
+    new_testthat_r <- gsub(old_name, new_name, old_testthat_r)
+    writeLines(new_testthat_r, pth_testthat_r)
+  }
+
+  return(invisible(old_name))
 }
 
 #' @export
