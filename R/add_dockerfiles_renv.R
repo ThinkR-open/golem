@@ -141,15 +141,15 @@ add_dockerfile_with_renv_ <- function(
 }
 
 #' @param source_folder path to the Package/golem source folder to deploy.
-#' default is current folder '.'
-#' @param lockfile path to the renv.lock file to use. default is `NULL`
+#' default is retrieved via [get_golem_wd()].
+#' @param lockfile path to the renv.lock file to use. default is `NULL`.
 #' @param output_dir folder to export everything deployment related.
 #' @param distro One of "focal", "bionic", "xenial", "centos7", or "centos8".
 #' See available distributions at https://hub.docker.com/r/rstudio/r-base/.
 #' @param document boolean. If TRUE (by default), DESCRIPTION file is updated using [attachment::att_amend_desc()] before creating the renv.lock file
 #' @param dockerfile_cmd What is the CMD to add to the Dockerfile. If NULL, the default,
-#' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\`
-#' @param ... Other arguments to pass to [renv::snapshot()]
+#' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\`.
+#' @param ... Other arguments to pass to [renv::snapshot()].
 #' @inheritParams add_dockerfile
 #' @rdname dockerfiles
 #' @export
