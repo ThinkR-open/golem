@@ -390,7 +390,7 @@ remotes::install_local(targz, force = TRUE, upgrade = FALSE)
 
 cat_ok()
 
-golem::add_rstudioconnect_file()
+golem::add_positconnect_file()
 
 golem::add_dockerfile_with_renv(
   repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest",

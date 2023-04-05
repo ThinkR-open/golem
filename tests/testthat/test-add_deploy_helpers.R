@@ -94,7 +94,7 @@ test_that("add_dockerfiles repos variation", {
 test_that("add_rstudio_files", {
   with_dir(pkg, {
     for (fun in list(
-      add_rstudioconnect_file,
+      add_positconnect_file,
       add_shinyappsio_file,
       add_shinyserver_file
     )) {
