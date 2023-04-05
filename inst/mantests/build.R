@@ -183,9 +183,11 @@ golem::fill_desc(
   pkg_name = "golemmetrics", # The Name of the package containing the App
   pkg_title = "A App with Metrics about 'Golem'", # The Title of the package containing the App
   pkg_description = "Read metrics about {golem}.", # The Description of the package containing the App
-  author_first_name = "Colin", # Your First Name
-  author_last_name = "Fay", # Your Last Name
-  author_email = "colin@thinkr.fr", # Your Email
+  authors = person(
+    given = "Colin", # Your First Name
+    family = "Fay", # Your Last Name
+    role = c("cre", "aut"),
+    email = "colin@thinkr.fr"),
   repo_url = NULL, # The URL of the GitHub Repo (optional)
   pkg_version = "0.0.0.9000" # The Version of the package containing the App
 )
