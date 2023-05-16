@@ -20,6 +20,8 @@
 
 + Test for utilsui and server now has full code coverate (#1020, @ilyaZar)
 
++ When setting a new name, golem now browses tests & vignettes (#805, @ilyaZar)
+
 ## Bug fix
 
 + Docker commands now take the `-it` flag so it can be killed with `^C` (#, @ivokwee)
