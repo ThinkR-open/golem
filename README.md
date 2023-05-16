@@ -19,13 +19,13 @@ shiny applications.
 
 ## About
 
-You’re reading the doc about version : 0.4.8
+You’re reading the doc about version : 0.4.9
 
 This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-04-04 21:24:51 CEST"
+#> [1] "2023-05-16 16:10:34 CEST"
 ```
 
 Here are the test & coverage results :
@@ -33,15 +33,15 @@ Here are the test & coverage results :
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> ── R CMD check results ──────────────────────────────────────── golem 0.4.8 ────
-#> Duration: 1m 19.1s
+#> ── R CMD check results ──────────────────────────────────────── golem 0.4.9 ────
+#> Duration: 1m 8.9s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 69.04%
+#> golem Coverage: 69.13%
 #> R/addins.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
@@ -55,8 +55,8 @@ covr::package_coverage()
 #> R/test_helpers.R: 30.26%
 #> R/js.R: 43.75%
 #> R/reload.R: 45.36%
-#> R/utils.R: 54.14%
 #> R/use_recommended.R: 54.55%
+#> R/utils.R: 55.31%
 #> R/bootstrap_desc.R: 55.56%
 #> R/install_dev_deps.R: 57.14%
 #> R/bootstrap_attachment.R: 61.54%
@@ -64,20 +64,19 @@ covr::package_coverage()
 #> R/add_dockerfiles.R: 74.19%
 #> R/boostrap_fs.R: 77.78%
 #> R/bootstrap_usethis.R: 78.57%
-#> R/modules_fn.R: 80.00%
+#> R/modules_fn.R: 79.00%
 #> R/use_utils.R: 83.33%
 #> R/use_favicon.R: 85.56%
 #> R/desc.R: 86.25%
+#> R/boostrap_cli.R: 88.00%
 #> R/add_resource_path.R: 88.89%
 #> R/create_golem.R: 89.47%
 #> R/make_dev.R: 90.00%
-#> R/add_r_files.R: 91.95%
+#> R/add_r_files.R: 91.01%
 #> R/add_files.R: 92.31%
 #> R/add_rstudio_files.R: 93.10%
 #> R/golem-yaml-get.R: 93.18%
 #> R/add_dockerfiles_renv.R: 93.75%
-#> R/use_readme.R: 97.14%
-#> R/boostrap_cli.R: 100.00%
 #> R/boostrap_crayon.R: 100.00%
 #> R/bootstrap_pkgload.R: 100.00%
 #> R/bootstrap_roxygen2.R: 100.00%
@@ -91,6 +90,7 @@ covr::package_coverage()
 #> R/pkg_tools.R: 100.00%
 #> R/set_golem_options.R: 100.00%
 #> R/templates.R: 100.00%
+#> R/use_readme.R: 100.00%
 ```
 
 ## Tool series

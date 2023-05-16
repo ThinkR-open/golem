@@ -24,6 +24,8 @@
 
 + Docker commands now take the `-it` flag so it can be killed with `^C` (#, @ivokwee)
 
++ add_module() now behaves correctly when trying to use `mod_mod_XXX` (#997, @ilyaZar)
+
 ## Internal changes
 
 # 0.4.0
