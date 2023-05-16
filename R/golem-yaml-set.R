@@ -80,10 +80,10 @@ set_golem_name <- function(
   )
 
   cli_cli_alert_info(
-    "The name of your app has been changed to {name}.",
+    sprintf("The name of your app has been changed to %s", name)
   )
   cli_cli_alert_info(
-    "Please note that the old name {old_name} might still be in some places, for example in the ./docs folder."
+    sprintf("Please note that the old name %s might still be in some places, for example in the ./docs folder.", old_name)
   )
   cli_cli_alert_info(
     "You might need to change it manually there.",

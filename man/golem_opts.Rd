@@ -34,7 +34,8 @@ set_golem_wd(
 set_golem_name(
   name = golem::pkg_name(),
   pkg = golem::pkg_path(),
-  talkative = TRUE
+  talkative = TRUE,
+  old_name = golem::pkg_name()
 )
 
 set_golem_version(
