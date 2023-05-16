@@ -33,7 +33,7 @@ set_golem_name <- function(
   pkg = golem::pkg_path(),
   talkative = TRUE,
   old_name = golem::pkg_name()
-    ) {
+) {
   path <- fs_path_abs(pkg)
 
   # Changing in YAML

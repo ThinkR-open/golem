@@ -70,6 +70,8 @@ the value of the \code{R_CONFIG_ACTIVE} environment variable
 
 \item{name}{The name of the app}
 
+\item{old_name}{The old name of the app, used when changing the name}
+
 \item{version}{The version of the app}
 
 \item{golem_name}{Name of the current golem.}
