@@ -4,7 +4,7 @@ set_golem_wd <- function(
   golem_wd = golem::pkg_path(),
   pkg = golem::pkg_path(),
   talkative = TRUE
-) {
+    ) {
   if (
     golem_wd == "golem::pkg_path()" |
       normalizePath(golem_wd) == normalizePath(golem::pkg_path())
@@ -31,9 +31,9 @@ set_golem_wd <- function(
 set_golem_name <- function(
   name = golem::pkg_name(),
   pkg = golem::pkg_path(),
-  talkative = TRUE
-) {
-  old_name <- golem::pkg_name()
+  talkative = TRUE,
+  old_name = golem::pkg_name()
+    ) {
   path <- fs_path_abs(pkg)
 
   # Changing in YAML
@@ -44,6 +44,7 @@ set_golem_name <- function(
     pkg = pkg,
     talkative = talkative
   )
+
   # Changing in app-config.R
   change_app_config_name(
     name = name,
@@ -67,13 +68,25 @@ set_golem_name <- function(
   # Changing in ./tests/ if dir present
   set_golem_name_tests(
     old_name = old_name,
-    new_name = name
+    new_name = name,
+    path = path
   )
 
   # Changing in ./vignettes/ if dir present
   set_golem_name_vignettes(
     old_name = old_name,
-    new_name = name
+    new_name = name,
+    path = path
+  )
+
+  cli_cli_alert_info(
+    "The name of your app has been changed to {name}.",
+  )
+  cli_cli_alert_info(
+    "Please note that the old name {old_name} might still be in some places, for example in the ./docs folder."
+  )
+  cli_cli_alert_info(
+    "You might need to change it manually there.",
   )
 
   invisible(name)
@@ -81,11 +94,13 @@ set_golem_name <- function(
 
 set_golem_name_tests <- function(
   old_name,
-  new_name
-) {
+  new_name,
+  path
+    ) {
   pth_dir_tests <- file.path(
-    get_golem_wd(),
-    "tests")
+    path,
+    "tests"
+  )
 
   check_dir_tests <- fs_dir_exists(pth_dir_tests)
 
@@ -101,11 +116,13 @@ set_golem_name_tests <- function(
 
 set_golem_name_vignettes <- function(
   old_name,
-  new_name
-) {
+  new_name,
+  path
+    ) {
   pth_dir_vignettes <- file.path(
-    get_golem_wd(),
-    "vignettes")
+    path,
+    "vignettes"
+  )
 
   check_dir_vignettes <- fs_dir_exists(pth_dir_vignettes)
 
@@ -134,7 +151,7 @@ set_golem_version <- function(
   version = golem::pkg_version(),
   pkg = golem::pkg_path(),
   talkative = TRUE
-) {
+    ) {
   path <- fs_path_abs(pkg)
 
   # Changing in YAML
