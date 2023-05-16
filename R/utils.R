@@ -513,26 +513,12 @@ do_if_unquiet <- function(expr) {
 # of add_module() does not start with 'mod_' as
 # this is prepended by add_module() per default.
 check_name_syntax <- function(name) {
-  check_mod <- grepl("^mod_", name)
-  name_proposed <- gsub("^mod_", "", name)
-  if (isTRUE(check_mod)) {
-    msg <- paste0(
-      "Argument 'name' starts with 'mod_' but {golem} prepends 'mod_' to your",
-      " module name automatically.\nDo you want to name your module: "
+  if (isTRUE(grepl("^mod_", name))) {
+    cli_cli_alert_info(
+      "You set a 'name' that starts with 'mod_'."
     )
-    cat(msg)
-    ask <- menu(paste0("'mod_", c(name_proposed, name), "'?"))
-    if (ask == 1) {
-      return(name_proposed)
-    } else if (ask == 2) {
-      # optional
-      # message("Keeping name: '", name, "' as module name.")
-      return(name)
-    } else {
-      warning("Could not check name syntax properly ...")
-      return(invisible(name))
-    }
-  } else {
-    return(name)
+    cli_cli_alert_info(
+      "This is not necessary as golem will prepend 'mod_' to your module name automatically."
+    )
   }
 }

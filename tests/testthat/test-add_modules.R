@@ -49,5 +49,20 @@ test_that("add_module", {
     remove_file("R/mod_test2.R")
     remove_file("R/mod_test2_fct_ftest.R")
     remove_file("R/mod_test2_utils_utest.R")
+
+    # Checking that the mod_ prefix is removed and added
+    add_module(
+      "mod_mod_mod_test2.R",
+      open = FALSE,
+      pkg = pkg,
+      fct = "ftest",
+      utils = "utest"
+    )
+    expect_true(file.exists("R/mod_test2.R"))
+    expect_true(file.exists("R/mod_test2_fct_ftest.R"))
+    expect_true(file.exists("R/mod_test2_utils_utest.R"))
+    remove_file("R/mod_test2.R")
+    remove_file("R/mod_test2_fct_ftest.R")
+    remove_file("R/mod_test2_utils_utest.R")
   })
 })
