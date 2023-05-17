@@ -1,13 +1,16 @@
 Package: shinyexample
 Title: newtitle
 Version: 0.0.0.9000
-Authors@R: person('firstname', 'lastname', email = 'name@test.com', role = c('cre', 'aut'))
+Authors@R: c(
+    person("Colin", "Fay", , "contact@colinfay.me", role = c("cre", "aut"),
+           comment = c(ORCID = "0000-0001-7343-1846"))
+    )
 Description: Newdescription.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Imports: 
-    shiny, 
+Imports:
+    shiny,
     golem
 RoxygenNote: 6.1.0
 URL: http://repo_url.com

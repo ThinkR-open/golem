@@ -1,4 +1,3 @@
-
 test_that("desc works", {
   testthat::skip_if_not_installed("desc")
   with_dir(pkg, {
@@ -46,10 +45,36 @@ test_that("desc works", {
     tmp_test_desc <- eval(parse(text = desc[[5]]))
     expect_identical(
       tmp_test_add_desc,
-      tmp_test_desc)
+      tmp_test_desc
+    )
 
     expect_true(
       stringr::str_detect(output, "DESCRIPTION file modified")
+    )
+
+    # test retrocompatibility
+    withr::with_options(
+      c("golem.quiet" = FALSE),
+      {
+        expect_warning(
+          fill_desc(
+            pkg_name = fakename,
+            pkg_title = "newtitle",
+            pkg_description = "Newdescription.",
+            author_first_name = "firstname",
+            author_last_name = "lastname",
+            author_email = "test@test.com"
+          )
+        )
+        expect_equal(
+          as.character(desc::desc_get("Title")),
+          "newtitle"
+        )
+        expect_equal(
+          as.character(desc::desc_get_authors()),
+          "firstname lastname <test@test.com>"
+        )
+      }
     )
   })
 })
