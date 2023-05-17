@@ -17,20 +17,63 @@ fill_desc <- function(
   pkg_name,
   pkg_title,
   pkg_description,
-  authors = c(person("Angelo",
-                     "Canty",
-                     role = "aut",
-                     comment = "S original, <http://statwww.epfl.ch/davison/BMA/library.html>"),
-                     person(c("Brian", "D."),
-                     "Ripley",
-                     role = c("aut", "trl", "cre"),
-                     comment = "R port",
-                     email = "ripley@stats.ox.ac.uk")),
+  authors = person(
+    given = NULL,
+    family = NULL,
+    email = NULL,
+    role = NULL,
+    comment = NULL
+  ),
   repo_url = NULL,
   pkg_version = "0.0.0.9000",
-  pkg = get_golem_wd()
+  pkg = get_golem_wd(),
+  author_first_name = NULL,
+  author_last_name = NULL,
+  author_email = NULL,
+  author_orcid = NULL
 ) {
+
   stopifnot(`'authors' must be of class 'person'` = inherits(authors, "person"))
+
+  # Handling retrocompatibility
+
+  # Case 1 : old author params are not null
+  any_author_params_is_not_null <- all(
+    vapply(
+      list(
+        author_first_name,
+        author_last_name,
+        author_email,
+        author_orcid
+      ), is.null, logical(1)
+    )
+  )
+
+  if (!any_author_params_is_not_null) {
+    warning("The `author_first_name`, `author_last_name`, `author_email` and `author_orcid` parameters will be deprecated from fill_desc() in the next version of {golem}. \nPlease use the `authors` parameter instead.\nSee ?person for more details on how to use it.")
+    # Case 1.1 : old author params are null and authors is empty
+    if (length(authors) == 0) {
+      # We use the old author params to fill the DESCRIPTION file
+      cli_cli_alert_info(
+        "the `authors` argument is empty, using `author_first_name`, `author_last_name`, `author_email` and `author_orcid` to fill the DESCRIPTION file."
+      )
+      authors <- person(
+        given = author_first_name,
+        family = author_last_name,
+        email = author_email,
+        role = NULL,
+        comment = c(ORCID = author_orcid)
+      )
+    } else {
+      # Case 1.2, old author params are null and authors is not empty
+      # We keep the authors as is
+      cli_cli_alert_info(
+        "the `authors` argument is not empty, using it to fill the DESCRIPTION file, the old author params are ignored."
+      )
+    }
+  }
+  # the else here is the case 2 : old author params are null and authors is set, we keep the authors as is
+
   path <- fs_path_abs(pkg)
 
   desc <- desc_description(
