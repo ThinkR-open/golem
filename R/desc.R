@@ -8,9 +8,16 @@
 #' @param repo_url URL (if needed)
 #' @param pkg_version The version of the package. Default is 0.0.0.9000
 #' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
-#'
+#' @param author_first_name to be deprecated: use character for first name via
+#'    \code{authors = person(given = "authors_first_name")} instead
+#' @param author_last_name  to be deprecated: use character for last name via
+#'    \code{authors = person(given = "authors_last_name")} instead
+#' @param author_email  to be deprecated: use character for first name via
+#'    \code{authors = person(email = "author_email")} instead
+#' @param author_orcid  to be deprecated
 #'
 #' @export
+#' @importFrom utils person
 #'
 #' @return The {desc} object, invisibly.
 fill_desc <- function(
