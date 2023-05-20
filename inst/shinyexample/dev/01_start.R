@@ -29,10 +29,14 @@ golem::fill_desc(
     role = c("aut", "cre")
   ),
   repo_url = NULL, # The URL of the GitHub repo (optional),
-  pkg_version = "0.0.0.9000" # The version of the package containing the app
+  pkg_version = "0.0.0.9000", # The version of the package containing the app
+  set_options = FALSE # do not automatically run set_golem_options() but will
+  # change to TRUE in the future, see below
 )
 
 ## Set {golem} options ----
+## Is highly recommended to run and will be set as the default via
+## fill_desc(..., set_options = TRUE) in future versions of {golem}
 golem::set_golem_options()
 
 ## Install the required dev dependencies ----
