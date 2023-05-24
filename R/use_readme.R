@@ -32,7 +32,7 @@ use_readme_rmd <- function(
     readme_path
   )
 
-  usethis_use_readme_rmd()
+  usethis_use_readme_rmd(open = open)
 
   readme_tmpl <- generate_readme_tmpl(
     pkg_name = pkg_name
@@ -50,7 +50,7 @@ use_readme_rmd <- function(
 check_overwrite <- function(overwrite, tmp_pth) {
   # If the user wants to overwrite, we remove the file
   # Otherwise, error if the file already exists
-  if (file.exists(tmp_pth)){
+  if (file.exists(tmp_pth)) {
     if (isTRUE(overwrite)) {
       unlink(tmp_pth, TRUE, TRUE)
     } else {
