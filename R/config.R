@@ -55,7 +55,41 @@ guess_where_config <- function(
       fs_path_abs(ret_path)
     )
   }
+
+  ret_path <- try_user_config_location(pth = golem::pkg_path())
+  if (fs_file_exists(ret_path)) {
+    return(fs_path_abs(ret_path))
+  }
+
   return(NULL)
+}
+
+try_user_config_location <- function(pth) {
+  # I. try to retrieve from possible user-change in app_config.R
+  user_location_default <- file.path(pth, "R/app_config.R")
+  if (isFALSE(fs_file_exists(user_location_default))) return(NULL)
+
+  # II. if successfull, read file and find line where new config is located
+  tmp_guess_text <- readLines(user_location_default)
+  tmp_guess_line <- which(grepl("app_sys\\(", tmp_guess_text))
+  if (identical(integer(0), tmp_guess_line)) return(NULL)
+
+  # III. if successfull, identify the char that gives new config-path
+  tmp_config_expr <- regexpr("\\(.*\\)$", tmp_guess_text[tmp_guess_line])
+  tmp_config_char <- regmatches(
+    tmp_guess_text[tmp_guess_line],
+    tmp_config_expr
+  )
+
+  # IV. clean that char from artefacts of regexpr()
+  out_config_char <- substr(
+    substring(tmp_config_char, 3),
+    start = 1,
+    stop = nchar(substring(tmp_config_char, 3)) - 2
+  )
+
+  # V. return full path to new config file including pkg-path and 'inst'
+  return(file.path(pth, "inst", out_config_char))
 }
 
 #' Get the path to the current config File
