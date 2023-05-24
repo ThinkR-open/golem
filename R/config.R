@@ -48,7 +48,7 @@ guess_where_config <- function(
   })
 
   if (
-    !is_try_error(ret_path) &
+    !is_try_error(ret_path) &&
       fs_file_exists(ret_path)
   ) {
     return(
