@@ -25,7 +25,14 @@ guess_where_config <- function(
   if (fs_file_exists(ret_path)) {
     return(fs_path_abs(ret_path))
   }
-
+# # Trying with "golem.config.path" option
+  # custom_path <- getOption("golem.config.path")
+  # if (
+  #   !is.null(custom_path) &&
+  #   file.exists(custom_path)
+  #     ) {
+  #   return(path_abs(custom_path))
+  # }
   # Maybe for some reason we are in inst/
   ret_path <- "golem-config.yml"
   if (fs_file_exists(ret_path)) {
