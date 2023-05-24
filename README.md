@@ -19,13 +19,13 @@ shiny applications.
 
 ## About
 
-You’re reading the doc about version : 0.4.10
+You’re reading the doc about version : 0.4.11
 
 This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-05-16 17:15:55 CEST"
+#> [1] "2023-05-24 21:48:17 CEST"
 ```
 
 Here are the test & coverage results :
@@ -33,20 +33,21 @@ Here are the test & coverage results :
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> ── R CMD check results ─────────────────────────────────────── golem 0.4.10 ────
-#> Duration: 1m 8.3s
+#> Writing 'fill_desc.Rd'
+#> ── R CMD check results ─────────────────────────────────────── golem 0.4.11 ────
+#> Duration: 2m 16.3s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 69.29%
+#> golem Coverage: 69.40%
 #> R/addins.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
 #> R/get_sysreqs.R: 0.00%
-#> R/gobals.R: 0.00%
+#> R/globals.R: 0.00%
 #> R/run_dev.R: 0.00%
 #> R/sanity_check.R: 0.00%
 #> R/use_files.R: 0.00%
@@ -65,11 +66,10 @@ covr::package_coverage()
 #> R/boostrap_fs.R: 77.78%
 #> R/bootstrap_usethis.R: 78.57%
 #> R/modules_fn.R: 79.00%
+#> R/golem-yaml-set.R: 83.02%
 #> R/use_utils.R: 83.33%
 #> R/use_favicon.R: 85.56%
-#> R/desc.R: 86.25%
 #> R/add_resource_path.R: 88.89%
-#> R/golem-yaml-set.R: 88.89%
 #> R/create_golem.R: 89.47%
 #> R/make_dev.R: 90.00%
 #> R/add_r_files.R: 91.01%
@@ -77,6 +77,7 @@ covr::package_coverage()
 #> R/add_rstudio_files.R: 93.10%
 #> R/golem-yaml-get.R: 93.18%
 #> R/add_dockerfiles_renv.R: 93.75%
+#> R/desc.R: 96.51%
 #> R/use_readme.R: 97.14%
 #> R/boostrap_cli.R: 100.00%
 #> R/boostrap_crayon.R: 100.00%
