@@ -53,7 +53,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -125,31 +125,30 @@
   <div class="contents col-md-9">
 
 
-<!-- badges: end --><div class="section level1">
+<!-- badges: end -->
+<div class="section level1">
 <div class="page-header"><h1 id="golem-">{golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#golem-"></a>
 </h1></div>
 <p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> is an opinionated framework for building production-grade shiny applications.</p>
 <div class="section level2">
 <h2 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
 </h2>
-<p>You’re reading the doc about version : 0.4.3</p>
+<p>You’re reading the doc about version : 0.4.0</p>
 <p>This README has been compiled on the</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2023-04-04 10:54:56 CEST"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2023-03-10 09:53:27 CET"</span></span></code></pre></div>
 <p>Here are the test &amp; coverage results :</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Loading golem</span></span>
-<span><span class="co">#&gt; Warning: [is_golem.R:10] @example</span></span>
-<span><span class="co">#&gt; '/Users/colinfay/git/github/thinkr-open/golem/is_golem()' doesn't exist</span></span>
-<span><span class="co">#&gt; ── R CMD check results ──────────────────────────────────────── golem 0.4.3 ────</span></span>
-<span><span class="co">#&gt; Duration: 1m 9.1s</span></span>
+<span><span class="co">#&gt; ── R CMD check results ──────────────────────────────────────── golem 0.4.0 ────</span></span>
+<span><span class="co">#&gt; Duration: 1m 23.6s</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">covr</span><span class="fu">::</span><span class="fu"><a href="http://covr.r-lib.org/reference/package_coverage.html" class="external-link">package_coverage</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; golem Coverage: 68.65%</span></span>
+<span><span class="co">#&gt; golem Coverage: 69.16%</span></span>
 <span><span class="co">#&gt; R/addins.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/bootstrap_rstudio_api.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/enable_roxygenize.R: 0.00%</span></span>
@@ -163,12 +162,11 @@
 <span><span class="co">#&gt; R/test_helpers.R: 30.26%</span></span>
 <span><span class="co">#&gt; R/js.R: 43.75%</span></span>
 <span><span class="co">#&gt; R/reload.R: 45.36%</span></span>
-<span><span class="co">#&gt; R/utils.R: 54.14%</span></span>
 <span><span class="co">#&gt; R/use_recommended.R: 54.55%</span></span>
 <span><span class="co">#&gt; R/bootstrap_desc.R: 55.56%</span></span>
 <span><span class="co">#&gt; R/install_dev_deps.R: 57.14%</span></span>
+<span><span class="co">#&gt; R/utils.R: 58.30%</span></span>
 <span><span class="co">#&gt; R/bootstrap_attachment.R: 61.54%</span></span>
-<span><span class="co">#&gt; R/bootstrap_dockerfiler.R: 63.33%</span></span>
 <span><span class="co">#&gt; R/add_dockerfiles.R: 74.19%</span></span>
 <span><span class="co">#&gt; R/bootstrap_usethis.R: 76.56%</span></span>
 <span><span class="co">#&gt; R/boostrap_fs.R: 77.78%</span></span>
@@ -179,10 +177,11 @@
 <span><span class="co">#&gt; R/add_resource_path.R: 88.89%</span></span>
 <span><span class="co">#&gt; R/create_golem.R: 89.47%</span></span>
 <span><span class="co">#&gt; R/make_dev.R: 90.00%</span></span>
-<span><span class="co">#&gt; R/add_r_files.R: 91.95%</span></span>
+<span><span class="co">#&gt; R/add_r_files.R: 91.67%</span></span>
 <span><span class="co">#&gt; R/add_files.R: 92.31%</span></span>
 <span><span class="co">#&gt; R/add_rstudio_files.R: 93.10%</span></span>
 <span><span class="co">#&gt; R/golem-yaml-get.R: 93.18%</span></span>
+<span><span class="co">#&gt; R/bootstrap_dockerfiler.R: 93.33%</span></span>
 <span><span class="co">#&gt; R/add_dockerfiles_renv.R: 93.75%</span></span>
 <span><span class="co">#&gt; R/boostrap_cli.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/boostrap_crayon.R: 100.00%</span></span>
@@ -193,7 +192,6 @@
 <span><span class="co">#&gt; R/disable_autoload.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/golem-yaml-set.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/golem-yaml-utils.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/is_golem.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/is_running.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/pkg_tools.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/set_golem_options.R: 100.00%</span></span>
@@ -211,7 +209,7 @@
 <a href="https://github.com/Thinkr-open/shinipsum" class="external-link">shinipsum</a> - <a href="https://github.com/ThinkR-open/shinipsum" class="external-link uri">https://github.com/ThinkR-open/shinipsum</a>
 </li>
 <li>
-<code>{fakir}</code> - <a href="https://github.com/ThinkR-open/fakir" class="external-link uri">https://github.com/ThinkR-open/fakir</a>
+<a href="https://github.com/Thinkr-open/fakir" class="external-link">fakir</a> - <a href="https://github.com/ThinkR-open/fakir" class="external-link uri">https://github.com/ThinkR-open/fakir</a>
 </li>
 <li>
 <code>{gemstones}</code> - <a href="https://github.com/ThinkR-open/gemstones" class="external-link uri">https://github.com/ThinkR-open/gemstones</a>
@@ -276,7 +274,9 @@
 <div class="section level3">
 <h3 id="cheatsheet">Cheatsheet<a class="anchor" aria-label="anchor" href="#cheatsheet"></a>
 </h3>
-<ul><li><a href="https://thinkr.fr/golem_cheatsheet_v0.1.pdf" class="external-link">{golem} cheatsheet</a></li></ul>
+<ul>
+<li><a href="https://thinkr.fr/golem_cheatsheet_v0.1.pdf" class="external-link">{golem} cheatsheet</a></li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="examples-apps">Examples apps<a class="anchor" aria-label="anchor" href="#examples-apps"></a>
@@ -298,10 +298,14 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<ul><li>You can install the stable version from CRAN with:</li></ul>
+<ul>
+<li>You can install the stable version from CRAN with:</li>
+</ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"golem"</span><span class="op">)</span></span></code></pre></div>
-<ul><li>You can install the development version from <a href="https://github.com/Thinkr-open/golem" class="external-link">GitHub</a> with:</li></ul>
+<ul>
+<li>You can install the development version from <a href="https://github.com/Thinkr-open/golem" class="external-link">GitHub</a> with:</li>
+</ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Thinkr-open/golem"</span><span class="op">)</span></span></code></pre></div>
@@ -362,6 +366,7 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=golem" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/ThinkR-open/golem/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/ThinkR-open/golem/issues" class="external-link">Report a bug</a></li>
 </ul>

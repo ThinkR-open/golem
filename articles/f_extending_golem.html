@@ -51,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -119,7 +119,7 @@
 
       
 
-      </header><script src="f_extending_golem_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>f_extending_golem</h1>
@@ -139,11 +139,17 @@
 <div class="section level3">
 <h3 id="what-it-is">What it is<a class="anchor" aria-label="anchor" href="#what-it-is"></a>
 </h3>
-<p>The <code><a href="../reference/create_golem.html">create_golem()</a></code> function comes with a <code>project_hook</code> parameter, a function run just after the <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> project creation. It can be used to modify the project structure automatically just after its creation.</p>
-<p>This allows you to define custom behavior when creating <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> based app, that can be used for:</p>
+<p>The <code><a href="../reference/create_golem.html">create_golem()</a></code> function comes with a
+<code>project_hook</code> parameter, a function run just after the
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> project creation. It can be used to modify the
+project structure automatically just after its creation.</p>
+<p>This allows you to define custom behavior when creating
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> based app, that can be used for:</p>
 <ul>
-<li><p>Adding a different front-end template in <code>R/app_ui.R</code></p></li>
-<li><p>Changing configuration options in <code>inst/golem-config.yml</code></p></li>
+<li><p>Adding a different front-end template in
+<code>R/app_ui.R</code></p></li>
+<li><p>Changing configuration options in
+<code>inst/golem-config.yml</code></p></li>
 <li><p>Copying external files in <code>inst/app/www</code></p></li>
 <li><p>Removing any file from the default template</p></li>
 <li><p>etc.</p></li>
@@ -152,40 +158,54 @@
 <div class="section level3">
 <h3 id="how-it-works">How it works<a class="anchor" aria-label="anchor" href="#how-it-works"></a>
 </h3>
-<p>The function is called <strong>after</strong> the default project has been created, and is executed <strong>in the directory of the created package</strong>. Here is a rough step by step of what happens when a project is created with <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>:</p>
+<p>The function is called <strong>after</strong> the default project has
+been created, and is executed <strong>in the directory of the created
+package</strong>. Here is a rough step by step of what happens when a
+project is created with <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>:</p>
 <ol style="list-style-type: decimal">
 <li>The package name is generated</li>
 <li>The directory that will receive the package is created</li>
 <li>Default <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> template is copied and pasted</li>
-<li>R moves to the directory of the newly created project, and runs the <code>project_hook</code> function</li>
-<li>R moves back to the previous directory, and removes comments if needed</li>
+<li>R moves to the directory of the newly created project, and runs the
+<code>project_hook</code> function</li>
+<li>R moves back to the previous directory, and removes comments if
+needed</li>
 <li>Project is open</li>
 </ol>
 </div>
 <div class="section level3">
 <h3 id="defining-your-own-project_hook">Defining your own <code>project_hook</code><a class="anchor" aria-label="anchor" href="#defining-your-own-project_hook"></a>
 </h3>
-<p>The best way to extend <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> project hook functionality is by defining this <code>project_hook</code> function in an external package. This will allow this function to be used inside the <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> creation RStudio project creation widget:</p>
+<p>The best way to extend <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> project hook
+functionality is by defining this <code>project_hook</code> function in
+an external package. This will allow this function to be used inside the
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> creation RStudio project creation widget:</p>
 <p><img src="rstudioprojecthook.png"></p>
 <blockquote>
-<p>Note that inside this widget, the function should be explicitely namespaced (pkg::fun)</p>
+<p>Note that inside this widget, the function should be explicitely
+namespaced (pkg::fun)</p>
 </blockquote>
-<p>The <code>project_hook</code> function takes three mandatory parameters, which are passed from <code>create_golem</code>:</p>
+<p>The <code>project_hook</code> function takes three mandatory
+parameters, which are passed from <code>create_golem</code>:</p>
 <ul>
 <li>
 <code>path</code>: the full path of the directory</li>
 <li>
 <code>package_name</code>: the name of the package</li>
 <li>
-<code>...</code> : further arguments that can be passed via <code>create_golem</code>
+<code>...</code> : further arguments that can be passed via
+<code>create_golem</code>
 </li>
 </ul>
-<p>These parameters might not be used inside your own hook, but <strong>they need to be set in the hook function skeleton</strong>, for compatibility reasons.</p>
+<p>These parameters might not be used inside your own hook, but
+<strong>they need to be set in the hook function skeleton</strong>, for
+compatibility reasons.</p>
 </div>
 <div class="section level3">
 <h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h3>
-<p>Here is an example of a function that can be used to remove the <code>dev/</code> folder:</p>
+<p>Here is an example of a function that can be used to remove the
+<code>dev/</code> folder:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">no_dev</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span>, <span class="va">package_name</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/delete.html" class="external-link">dir_delete</a></span><span class="op">(</span><span class="st">"dev"</span><span class="op">)</span></span>
@@ -218,39 +238,53 @@
 <div class="section level3">
 <h3 id="what-it-is-1">What it is<a class="anchor" aria-label="anchor" href="#what-it-is-1"></a>
 </h3>
-<p>Module templates are a way to define your own content for creating the module script in <code>R/</code>. It allows to extend <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> module template functionality by creating your own content inside the module file.</p>
+<p>Module templates are a way to define your own content for creating
+the module script in <code>R/</code>. It allows to extend
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> module template functionality by creating your own
+content inside the module file.</p>
 </div>
 <div class="section level3">
 <h3 id="how-it-works-1">How it works<a class="anchor" aria-label="anchor" href="#how-it-works-1"></a>
 </h3>
-<p>The function is called after the file(s) creation. Here is a step by step of what happens when the <code>add_module</code> function is called:</p>
+<p>The function is called after the file(s) creation. Here is a step by
+step of what happens when the <code>add_module</code> function is
+called:</p>
 <ol style="list-style-type: decimal">
-<li>Name is created, and so is the <code>R/</code> directory if needed.</li>
+<li>Name is created, and so is the <code>R/</code> directory if
+needed.</li>
 <li>The fct_ and utils_ files are created if necessary</li>
 <li>The path to the module is generated</li>
 <li>If the file already exists, it opens the file</li>
-<li>If the file doesn’t exist, R creates it and the <code>module_template</code> function is called</li>
+<li>If the file doesn’t exist, R creates it and the
+<code>module_template</code> function is called</li>
 <li>File is generated, and potentially open</li>
 </ol>
-<p>(Note that the <code>module_template</code> function is not called if the file already exists).</p>
+<p>(Note that the <code>module_template</code> function is not called if
+the file already exists).</p>
 </div>
 <div class="section level3">
 <h3 id="defining-your-own-module_template">Defining your own <code>module_template</code><a class="anchor" aria-label="anchor" href="#defining-your-own-module_template"></a>
 </h3>
-<p>You can then define your own function inside your <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> based application, but chances are you will be defining them into your own package.</p>
-<p>Module template functions will receive, by default, the following parameters from <code>add_modules()</code>.</p>
+<p>You can then define your own function inside your
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> based application, but chances are you will be
+defining them into your own package.</p>
+<p>Module template functions will receive, by default, the following
+parameters from <code>add_modules()</code>.</p>
 <ul>
 <li>
 <code>name</code>: the name of the module</li>
 <li>
 <code>path</code>: the path to the file in R/</li>
 <li>
-<code>export</code>: a TRUE/FALSE set by the <code>export</code> param of <code><a href="../reference/add_module.html">add_module()</a></code>
+<code>export</code>: a TRUE/FALSE set by the <code>export</code>
+param of <code><a href="../reference/add_module.html">add_module()</a></code>
 </li>
 <li>
 <code>...</code> further arguments</li>
 </ul>
-<p>These parameters might not be used inside your own function, but <strong>they need to be set in the function skeleton</strong>, for compatibility reasons.</p>
+<p>These parameters might not be used inside your own function, but
+<strong>they need to be set in the function skeleton</strong>, for
+compatibility reasons.</p>
 </div>
 <div class="section level3">
 <h3 id="example-1">Example<a class="anchor" aria-label="anchor" href="#example-1"></a>
@@ -276,33 +310,45 @@
 <div class="section level3">
 <h3 id="what-it-is-2">What it is<a class="anchor" aria-label="anchor" href="#what-it-is-2"></a>
 </h3>
-<p>JavaScript, CSS and Sass template allow to use your own functions to add code when creating JavaScript files, JavaScript handlers and CSS or Sass files. These templates work inside <code><a href="../reference/add_files.html">add_js_file()</a></code>, <code><a href="../reference/add_files.html">add_js_handler()</a></code>, <code><a href="../reference/add_files.html">add_css_file()</a></code> and <code><a href="../reference/add_files.html">add_sass_file()</a></code>.</p>
+<p>JavaScript, CSS and Sass template allow to use your own functions to
+add code when creating JavaScript files, JavaScript handlers and CSS or
+Sass files. These templates work inside <code><a href="../reference/add_files.html">add_js_file()</a></code>,
+<code><a href="../reference/add_files.html">add_js_handler()</a></code>, <code><a href="../reference/add_files.html">add_css_file()</a></code> and
+<code><a href="../reference/add_files.html">add_sass_file()</a></code>.</p>
 </div>
 <div class="section level3">
 <h3 id="how-it-works-2">How it works<a class="anchor" aria-label="anchor" href="#how-it-works-2"></a>
 </h3>
-<p>The function is called after the file creation. Here is a step by step of what happens when these functions are called:</p>
+<p>The function is called after the file creation. Here is a step by
+step of what happens when these functions are called:</p>
 <ol style="list-style-type: decimal">
 <li>Name is created</li>
 <li>The path is generated</li>
 <li>If the file already exists, it opens the file</li>
-<li>If the file doesn’t exist, R creates it and the <code>template</code> function is called</li>
+<li>If the file doesn’t exist, R creates it and the
+<code>template</code> function is called</li>
 <li>File is generated, and potentially open</li>
 </ol>
-<p>(Note that the <code>template</code> function is not called if the file already exists).</p>
+<p>(Note that the <code>template</code> function is not called if the
+file already exists).</p>
 </div>
 <div class="section level3">
 <h3 id="defining-your-own-template">Defining your own <code>template</code><a class="anchor" aria-label="anchor" href="#defining-your-own-template"></a>
 </h3>
-<p>You can then define your own function inside your <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> based application, but chances are you will be defining them into your own package.</p>
-<p>File template functions will receive, by default, the following parameters from the <code>add_*()</code> function.</p>
+<p>You can then define your own function inside your
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> based application, but chances are you will be
+defining them into your own package.</p>
+<p>File template functions will receive, by default, the following
+parameters from the <code>add_*()</code> function.</p>
 <ul>
 <li>
 <code>path</code>: the path to the file</li>
 <li>
 <code>...</code> further arguments</li>
 </ul>
-<p>These parameters might not be used inside your own function, but <strong>they need to be set in the function skeleton</strong>, for compatibility reasons.</p>
+<p>These parameters might not be used inside your own function, but
+<strong>they need to be set in the function skeleton</strong>, for
+compatibility reasons.</p>
 </div>
 <div class="section level3">
 <h3 id="example-2">Example<a class="anchor" aria-label="anchor" href="#example-2"></a>
@@ -328,14 +374,22 @@
 <div class="section level3">
 <h3 id="what-it-is-3">What it is<a class="anchor" aria-label="anchor" href="#what-it-is-3"></a>
 </h3>
-<p>From time to time, you need your application to be unavailble: database update, API changes, etc. In order to keep your app running but make it unavailable, you can use a <strong>maintenance mode</strong>. When this maintenance mode is turned on, your application will be paused and a specific page will be displayed to your users.</p>
-<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with a default maintenance page, and you can replace it with you own page.</p>
+<p>From time to time, you need your application to be unavailble:
+database update, API changes, etc. In order to keep your app running but
+make it unavailable, you can use a <strong>maintenance mode</strong>.
+When this maintenance mode is turned on, your application will be paused
+and a specific page will be displayed to your users.</p>
+<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with a default maintenance page, and you
+can replace it with you own page.</p>
 </div>
 <div class="section level3">
 <h3 id="how-to-set-the-maintenance-mode">How to set the maintenance mode<a class="anchor" aria-label="anchor" href="#how-to-set-the-maintenance-mode"></a>
 </h3>
-<p>The maintenance mode will be turned on whenever the R process detects that the <code>GOLEM_MAINTENANCE_ACTIVE</code> environment variable is set to TRUE.</p>
-<p>To visualize the maintenance page locally, you can run the following:</p>
+<p>The maintenance mode will be turned on whenever the R process detects
+that the <code>GOLEM_MAINTENANCE_ACTIVE</code> environment variable is
+set to TRUE.</p>
+<p>To visualize the maintenance page locally, you can run the
+following:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_envvar.html" class="external-link">with_envvar</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GOLEM_MAINTENANCE_ACTIVE"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
@@ -347,15 +401,19 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"GOLEM_MAINTENANCE_ACTIVE"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/run_dev.html">run_dev</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>If you’re deploying on Posit Connect, you can set this variable in the setup panel.</p>
+<p>If you’re deploying on Posit Connect, you can set this variable in
+the setup panel.</p>
 <p>If in command line, you can also do</p>
 <pre><code>export GOLEM_MAINTENANCE_ACTIVE=TRUE &amp;&amp; Rscript -e "mygolem::run_app()"</code></pre>
 </div>
 <div class="section level3">
 <h3 id="the-maintenance-page">The maintenance page<a class="anchor" aria-label="anchor" href="#the-maintenance-page"></a>
 </h3>
-<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with a default maintenance page, but you can override it and use your own custom page.</p>
-<p>In order to use your own page, you need to pass either an <code>html_document</code> or a <code>tagList</code> to the <code>with_golem_options</code> function in <code>run_app.R</code>:</p>
+<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with a default maintenance page, but you
+can override it and use your own custom page.</p>
+<p>In order to use your own page, you need to pass either an
+<code>html_document</code> or a <code>tagList</code> to the
+<code>with_golem_options</code> function in <code>run_app.R</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span></span>
 <span>    <span class="va">onStart</span> <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -364,7 +422,7 @@
 <span>    <span class="va">uiPattern</span> <span class="op">=</span> <span class="st">"/"</span>,</span>
 <span>    <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/with_golem_options.html">with_golem_options</a></span><span class="op">(</span></span>
-<span>    app <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
+<span>    app <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
 <span>      ui <span class="op">=</span> <span class="va">app_ui</span>,</span>
 <span>      server <span class="op">=</span> <span class="va">app_server</span>,</span>
 <span>      onStart <span class="op">=</span> <span class="va">onStart</span>,</span>
@@ -374,7 +432,7 @@
 <span>    <span class="op">)</span>,</span>
 <span>    golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span>,</span>
 <span>    maintenance_page <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/tagList.html" class="external-link">tagList</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html" class="external-link">fluidRow</a></span><span class="op">(</span></span>
 <span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">h1</a></span><span class="op">(</span><span class="st">"Under maintenance"</span><span class="op">)</span>,</span>
 <span>        <span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">span</a></span><span class="op">(</span><span class="st">"Coming soon..."</span><span class="op">)</span></span>
 <span>      <span class="op">)</span></span>
@@ -390,7 +448,7 @@
 <span>    <span class="va">uiPattern</span> <span class="op">=</span> <span class="st">"/"</span>,</span>
 <span>    <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/with_golem_options.html">with_golem_options</a></span><span class="op">(</span></span>
-<span>    app <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
+<span>    app <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
 <span>      ui <span class="op">=</span> <span class="va">app_ui</span>,</span>
 <span>      server <span class="op">=</span> <span class="va">app_server</span>,</span>
 <span>      onStart <span class="op">=</span> <span class="va">onStart</span>,</span>

@@ -51,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -119,7 +119,7 @@
 
       
 
-      </header><script src="e_config_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>e_config</h1>
@@ -137,9 +137,15 @@
 <div class="section level2">
 <h2 id="about-instgolem-config-yml">About <code>inst/golem-config.yml</code><a class="anchor" aria-label="anchor" href="#about-instgolem-config-yml"></a>
 </h2>
-<p>When you start a new <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> application, you’ll find a file called <code>golem-config.yml</code> in the <code>inst/</code> folder.</p>
-<p>By default, this file contains the name of your app, its version, and the default working directory (which is the root of your package).</p>
-<p>This config file is based on the <a href="https://github.com/rstudio/config" class="external-link"><code>{config}</code></a> format, which allows you to create configuration files for different application contexts. Please refer to this package documentation for more information.</p>
+<p>When you start a new <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> application, you’ll find a
+file called <code>golem-config.yml</code> in the <code>inst/</code>
+folder.</p>
+<p>By default, this file contains the name of your app, its version, and
+the default working directory (which is the root of your package).</p>
+<p>This config file is based on the <a href="https://github.com/rstudio/config" class="external-link"><code>{config}</code></a>
+format, which allows you to create configuration files for different
+application contexts. Please refer to this package documentation for
+more information.</p>
 </div>
 <div class="section level2">
 <h2 id="setting-golem-config">Setting <code>golem-config</code><a class="anchor" aria-label="anchor" href="#setting-golem-config"></a>
@@ -156,11 +162,20 @@ production:
 dev:
   golem_wd: !expr golem::pkg_path()</code></pre>
 <ul>
-<li>default/golem_name, default/golem_version, default/app_prod are usable across the whole life of your golem app: while developing, and also when in production.</li>
-<li>production/app_prod might be used for adding elements that are to be used once the app is in production.</li>
-<li>dev/golem_wd is in a <code>dev</code> config because the only moment you might reliably use this config is while developing your app. Use the <code>app_sys()</code> function if you want to rely on the package path once the app is deployed.</li>
+<li>default/golem_name, default/golem_version, default/app_prod are
+usable across the whole life of your golem app: while developing, and
+also when in production.</li>
+<li>production/app_prod might be used for adding elements that are to be
+used once the app is in production.</li>
+<li>dev/golem_wd is in a <code>dev</code> config because the only moment
+you might reliably use this config is while developing your app. Use the
+<code>app_sys()</code> function if you want to rely on the package path
+once the app is deployed.</li>
 </ul>
-<p>The good news is that if you don’t want/need to use <a href="https://github.com/rstudio/config" class="external-link">config</a>, you can safely ignore this file, <strong>just leave it where it is: it is used internally by the <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> functions</strong>.</p>
+<p>The good news is that if you don’t want/need to use
+<a href="https://github.com/rstudio/config" class="external-link">config</a>, you can safely ignore this file, <strong>just
+leave it where it is: it is used internally by the <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>
+functions</strong>.</p>
 <p>These options are globally set with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/golem_opts.html">set_golem_options</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -184,7 +199,7 @@ dev:
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/golem_opts.html">get_golem_name</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "golex"</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpBFUmuy/golex"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmpbAY1B4/golex"</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">get_golem_version</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "0.0.0.9000"</span></span></code></pre></div>
 <p>You can set these with:</p>
@@ -204,8 +219,10 @@ dev:
 <div class="section level2">
 <h2 id="using-golem-config">Using <code>golem-config</code><a class="anchor" aria-label="anchor" href="#using-golem-config"></a>
 </h2>
-<p>If you’re already familiar with the <a href="https://github.com/rstudio/config" class="external-link">config</a> package, you can use this file just as any config file.</p>
-<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with an <code><a href="../reference/amend_golem_config.html">amend_golem_config()</a></code> function to add elements to it.</p>
+<p>If you’re already familiar with the <a href="https://github.com/rstudio/config" class="external-link">config</a> package,
+you can use this file just as any config file.</p>
+<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with an <code><a href="../reference/amend_golem_config.html">amend_golem_config()</a></code>
+function to add elements to it.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/amend_golem_config.html">amend_golem_config</a></span><span class="op">(</span></span>
 <span>  key <span class="op">=</span> <span class="st">"where"</span>,</span>
@@ -234,7 +251,9 @@ dev:
 <h2 id="app_config-r">
 <code>app_config.R</code><a class="anchor" aria-label="anchor" href="#app_config-r"></a>
 </h2>
-<p>In <code>R/app_config.R</code>, you’ll find a <code>get_golem_config()</code> function that allows you to retrieve config from this config file:</p>
+<p>In <code>R/app_config.R</code>, you’ll find a
+<code>get_golem_config()</code> function that allows you to retrieve
+config from this config file:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pkgload</span><span class="fu">::</span><span class="fu"><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Loading <span style="color: #0000BB;">golex</span></span></span>
@@ -259,17 +278,29 @@ dev:
 </h2>
 <p>There is two ways to configure golem apps:</p>
 <ul>
-<li>The <code>golem_opts</code> in the <code>run_app()</code> function</li>
+<li>The <code>golem_opts</code> in the <code>run_app()</code>
+function</li>
 <li>The <code>golem-config.yml</code> file</li>
 </ul>
-<p>The big difference between these two is that the golem options from <code>run_app()</code> are meant to be configured during runtime: you’ll be doing <code>run_app(val = "this")</code>, whereas the <code>golem-config</code> is meant to be used in the back-end, and will not be linked to the parameters passed to <code>run_app()</code> (even if this is technically possible, this is not the main objective),.</p>
-<p>It’s also linked to the <code>R_CONFIG_ACTIVE</code> environment variable, just as any <a href="https://github.com/rstudio/config" class="external-link">config</a> file.</p>
-<p>The idea is also that the <code>golem-config.yml</code> file is shareable across <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> projects (<code>golem_opts</code> are application specific), and will be tracked by version control systems.</p>
+<p>The big difference between these two is that the golem options from
+<code>run_app()</code> are meant to be configured during runtime: you’ll
+be doing <code>run_app(val = "this")</code>, whereas the
+<code>golem-config</code> is meant to be used in the back-end, and will
+not be linked to the parameters passed to <code>run_app()</code> (even
+if this is technically possible, this is not the main objective),.</p>
+<p>It’s also linked to the <code>R_CONFIG_ACTIVE</code> environment
+variable, just as any <a href="https://github.com/rstudio/config" class="external-link">config</a> file.</p>
+<p>The idea is also that the <code>golem-config.yml</code> file is
+shareable across <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> projects (<code>golem_opts</code>
+are application specific), and will be tracked by version control
+systems.</p>
 </div>
 <div class="section level2">
 <h2 id="note-for-golem-0-2-0-users">Note for <code>{golem}</code> &lt; 0.2.0 users<a class="anchor" aria-label="anchor" href="#note-for-golem-0-2-0-users"></a>
 </h2>
-<p>If you’ve built an app with <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> before the version 0.2.0, this config file doesn’t exist: you’ll be prompted to create it if you update a newer version of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>.</p>
+<p>If you’ve built an app with <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> before the version
+0.2.0, this config file doesn’t exist: you’ll be prompted to create it
+if you update a newer version of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>.</p>
 </div>
   </div>
 

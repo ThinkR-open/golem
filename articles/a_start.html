@@ -51,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -119,13 +119,13 @@
 
       
 
-      </header><script src="a_start_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>a_start</h1>
                         <h4 data-toc-skip class="author">Colin Fay</h4>
             
-            <h4 data-toc-skip class="date">2023-04-04</h4>
+            <h4 data-toc-skip class="date">2023-05-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/a_start.Rmd" class="external-link"><code>vignettes/a_start.Rmd</code></a></small>
       <div class="hidden name"><code>a_start.Rmd</code></div>
@@ -142,11 +142,13 @@ $(document).ready(function () {
 <h2 id="installing-golem">Installing {golem}<a class="anchor" aria-label="anchor" href="#installing-golem"></a>
 </h2>
 <ul>
-<li>You can install the stable version of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> from CRAN:</li>
+<li>You can install the stable version of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> from
+CRAN:</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"golem"</span><span class="op">)</span></span></code></pre></div>
-<p>The development version of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> can be installed from GitHub using the <a href="https://remotes.r-lib.org" class="external-link">remotes</a> package:</p>
+<p>The development version of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> can be installed from
+GitHub using the <a href="https://remotes.r-lib.org" class="external-link">remotes</a> package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Thinkr-open/golem"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -155,20 +157,31 @@ $(document).ready(function () {
 </h2>
 <p>Note before using <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>:</p>
 <ul>
-<li><p>A <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> app is contained inside a package, so knowing how to build a package is highly recommended. On the plus side, everything you know about package development can be reused in <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>.</p></li>
-<li><p>A <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> app works better if you are working with <code>shiny modules</code>, so knowing how modules work is recommended, but not mandatory.</p></li>
+<li><p>A <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> app is contained inside a package, so
+knowing how to build a package is highly recommended. On the plus side,
+everything you know about package development can be reused in
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>.</p></li>
+<li><p>A <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> app works better if you are working with
+<code>shiny modules</code>, so knowing how modules work is recommended,
+but not mandatory.</p></li>
 </ul>
-<p>In the rest of the Vignettes, we’ll assume you’re working in RStudio.</p>
+<p>In the rest of the Vignettes, we’ll assume you’re working in
+RStudio.</p>
 <div class="section level3">
 <h3 id="create-a-package">Create a package<a class="anchor" aria-label="anchor" href="#create-a-package"></a>
 </h3>
-<p>Once the package is installed, you can got to File &gt; New Project… in RStudio, and choose “Package for Shiny App Using golem” input.</p>
+<p>Once the package is installed, you can got to File &gt; New Project…
+in RStudio, and choose “Package for Shiny App Using golem” input.</p>
 <p><img src="golemtemplate.png" width="80%" style="display: block; margin: auto;"></p>
 <p>If you want to do it through command line, you can use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/create_golem.html">create_golem</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"path/to/package"</span><span class="op">)</span></span></code></pre></div>
-<p>This command allows you to create “illegally-named” package (for example, <code>1234</code>) by passing the <code>check_name</code> argument to <code>FALSE</code>. Note that this is not recommended and <strong>should only be done if you know what you are doing</strong>.</p>
-<p>Once you’ve got that, a new RStudio project will be launched. Here is the structure of this project:</p>
+<p>This command allows you to create “illegally-named” package (for
+example, <code>1234</code>) by passing the <code>check_name</code>
+argument to <code>FALSE</code>. Note that this is not recommended and
+<strong>should only be done if you know what you are doing</strong>.</p>
+<p>Once you’ve got that, a new RStudio project will be launched. Here is
+the structure of this project:</p>
 <pre><code><span><span class="co">#&gt; ├── DESCRIPTION </span></span>
 <span><span class="co">#&gt; ├── NAMESPACE </span></span>
 <span><span class="co">#&gt; ├── <span style="color: #0000BB; font-weight: bold;">R</span> </span></span>
@@ -188,15 +201,29 @@ $(document).ready(function () {
 <span><span class="co">#&gt; │   └── golem-config.yml </span></span>
 <span><span class="co">#&gt; └── <span style="color: #0000BB; font-weight: bold;">man</span> </span></span>
 <span><span class="co">#&gt;     └── run_app.Rd</span></span></code></pre>
-<p>If you’re already familiar with R packages, most of these files will seem very familiar to you. That’s because a <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> app IS a package.</p>
+<p>If you’re already familiar with R packages, most of these files will
+seem very familiar to you. That’s because a <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> app IS
+a package.</p>
 <ul>
-<li><p><code>DESCRIPTION</code> &amp; <code>NAMESPACE</code>: Package meta-data.</p></li>
-<li><p><code>R/app_config.R</code>: Used to read inside <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> config file located at <code>inst/golem-config.yml</code>.</p></li>
-<li><p><code>R/app_server.R</code>, <code>R/app_ui.R</code>: Top level UI and server elements.</p></li>
-<li><p><code>R/run_app.R</code>: a function to configure and launch the application.</p></li>
-<li><p><code>dev/</code>: Scripts that will be used along the process of developing your app. You don’t need to fill all the script before starting: use them as a notebook for keeping track of what you’re doing all along the project life.</p></li>
-<li><p><code>inst/app/www</code>: Where you will add external dependencies in <code>www</code> (images, css, etc), notably added with the <code>golem</code> functions used to create external resources.</p></li>
-<li><p><code>man</code>: Package documentation, to be generated by R &amp; <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen2</a>.</p></li>
+<li><p><code>DESCRIPTION</code> &amp; <code>NAMESPACE</code>: Package
+meta-data.</p></li>
+<li><p><code>R/app_config.R</code>: Used to read inside
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> config file located at
+<code>inst/golem-config.yml</code>.</p></li>
+<li><p><code>R/app_server.R</code>, <code>R/app_ui.R</code>: Top level
+UI and server elements.</p></li>
+<li><p><code>R/run_app.R</code>: a function to configure and launch the
+application.</p></li>
+<li><p><code>dev/</code>: Scripts that will be used along the process of
+developing your app. You don’t need to fill all the script before
+starting: use them as a notebook for keeping track of what you’re doing
+all along the project life.</p></li>
+<li><p><code>inst/app/www</code>: Where you will add external
+dependencies in <code>www</code> (images, css, etc), notably added with
+the <code>golem</code> functions used to create external
+resources.</p></li>
+<li><p><code>man</code>: Package documentation, to be generated by R
+&amp; <a href="https://roxygen2.r-lib.org/" class="external-link">roxygen2</a>.</p></li>
 </ul>
 </div>
 </div>
@@ -204,12 +231,18 @@ $(document).ready(function () {
 <h2 id="dev01_start-r">
 <code>dev/01_start.R</code><a class="anchor" aria-label="anchor" href="#dev01_start-r"></a>
 </h2>
-<p>Once you’ve created your project, the first file that opens is <code>dev/01_start.R</code>. This file contains a series of commands that you’ll have to run once, at the beginning of the project.</p>
-<p>Note that you don’t have to fill everything, event thought it’s strongly recommended.</p>
+<p>Once you’ve created your project, the first file that opens is
+<code>dev/01_start.R</code>. This file contains a series of commands
+that you’ll have to run once, at the beginning of the project.</p>
+<p>Note that you don’t have to fill everything, event thought it’s
+strongly recommended.</p>
 <div class="section level3">
 <h3 id="fill-the-description">Fill the DESCRIPTION<a class="anchor" aria-label="anchor" href="#fill-the-description"></a>
 </h3>
-<p>First, fill the DESCRIPTION by adding information about the package that will contain your app. The first function, <code><a href="../reference/fill_desc.html">fill_desc()</a></code>, can be used to fill your <code>DESCRIPTION</code> file.</p>
+<p>First, fill the DESCRIPTION by adding information about the package
+that will contain your app. The first function,
+<code><a href="../reference/fill_desc.html">fill_desc()</a></code>, can be used to fill your
+<code>DESCRIPTION</code> file.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/fill_desc.html">fill_desc</a></span><span class="op">(</span></span>
 <span>  pkg_name <span class="op">=</span> <span class="st">"shinyexample"</span>, <span class="co"># The Name of the package containing the App</span></span>
@@ -221,19 +254,23 @@ $(document).ready(function () {
 <span>  repo_url <span class="op">=</span> <span class="cn">NULL</span>, <span class="co"># The (optional) URL of the GitHub Repo</span></span>
 <span>  pkg_version <span class="op">=</span> <span class="st">"0.0.0.9000"</span> <span class="co"># The Version of the package containing the App</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>About <a href="https://r-pkgs.org/description.html" class="external-link">the DESCRIPTION file</a>.</p>
+<p>About <a href="https://r-pkgs.org/description.html" class="external-link">the DESCRIPTION
+file</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="add-golem-options">Add <code>{golem}</code> options<a class="anchor" aria-label="anchor" href="#add-golem-options"></a>
 </h3>
-<p>Please DO run this line of code, as it sets a series of global options inside <code>golem-config.yml</code> that will be reused inside <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>.</p>
+<p>Please DO run this line of code, as it sets a series of global
+options inside <code>golem-config.yml</code> that will be reused inside
+<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/golem_opts.html">set_golem_options</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="set-common-files">Set common Files<a class="anchor" aria-label="anchor" href="#set-common-files"></a>
 </h3>
-<p>If you want to use the MIT license, README, code of conduct, lifecycle badge, a news file, etc.</p>
+<p>If you want to use the MIT license, README, code of conduct,
+lifecycle badge, a news file, etc.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## See ?usethis for more information</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/licenses.html" class="external-link">use_mit_license</a></span><span class="op">(</span><span class="st">"Golem User"</span><span class="op">)</span> <span class="co"># You can set another license here</span></span>
@@ -241,7 +278,8 @@ $(document).ready(function () {
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_code_of_conduct.html" class="external-link">use_code_of_conduct</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/badges.html" class="external-link">use_lifecycle_badge</a></span><span class="op">(</span><span class="st">"Experimental"</span><span class="op">)</span></span>
 <span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_news_md.html" class="external-link">use_news_md</a></span><span class="op">(</span>open <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>See <a href="https://usethis.r-lib.org/" class="external-link"><code>{usethis}</code></a> for more info about these functions.</p>
+<p>See <a href="https://usethis.r-lib.org/" class="external-link"><code>{usethis}</code></a>
+for more info about these functions.</p>
 </div>
 <div class="section level3">
 <h3 id="init-tests">Init Tests<a class="anchor" aria-label="anchor" href="#init-tests"></a>
@@ -249,12 +287,14 @@ $(document).ready(function () {
 <p>Create a template for tests:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/use_recommended.html">use_recommended_tests</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>About <a href="https://r-pkgs.org/testing-basics.html" class="external-link">tests in a package</a>.</p>
+<p>About <a href="https://r-pkgs.org/testing-basics.html" class="external-link">tests in a
+package</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="use-recommended-packages">Use Recommended Packages<a class="anchor" aria-label="anchor" href="#use-recommended-packages"></a>
 </h3>
-<p>This will add “shiny”, “DT”, “attempt”, “glue”, “htmltools”, and “golem” as a dependency to your package.</p>
+<p>This will add “shiny”, “DT”, “attempt”, “glue”, “htmltools”, and
+“golem” as a dependency to your package.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/use_recommended.html">use_recommended_deps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -269,14 +309,18 @@ $(document).ready(function () {
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/favicon.html">remove_favicon</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co"># Add a new one</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/favicon.html">use_favicon</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"path/to/favicon"</span><span class="op">)</span></span></code></pre></div>
-<p>Note that you can add an url, and the favicon will be downloaded to the <code>inst/app/www</code> folder.</p>
+<p>Note that you can add an url, and the favicon will be downloaded to
+the <code>inst/app/www</code> folder.</p>
 <blockquote>
-<p><strong>Note</strong>: If you are deploying your app with <a href="https://www.shinyproxy.io/" class="external-link">ShinyProxy</a>, your favicon should have the <code>.png</code> extension, otherwise it is not going to work.</p>
+<p><strong>Note</strong>: If you are deploying your app with <a href="https://www.shinyproxy.io/" class="external-link">ShinyProxy</a>, your favicon should
+have the <code>.png</code> extension, otherwise it is not going to
+work.</p>
 </blockquote>
 <ul>
 <li>Utils</li>
 </ul>
-<p>These two functions add a file with various functions that can be used along the process of building your app.</p>
+<p>These two functions add a file with various functions that can be
+used along the process of building your app.</p>
 <p>See each file in details for a description of the functions.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/utils_files.html">use_utils_ui</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -289,7 +333,8 @@ $(document).ready(function () {
 <p>To run the app, launch :</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/run_dev.html">run_dev</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>You’re now set! You’ve successfully initiated the project and can go to dev/02_dev.R.</p>
+<p>You’re now set! You’ve successfully initiated the project and can go
+to dev/02_dev.R.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/rstudioapi/reference/navigateToFile.html" class="external-link">navigateToFile</a></span><span class="op">(</span><span class="st">"dev/02_dev.R"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">

@@ -51,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -119,13 +119,13 @@
 
       
 
-      </header><script src="c_deploy_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>c_deploy</h1>
                         <h4 data-toc-skip class="author">Colin Fay</h4>
             
-            <h4 data-toc-skip class="date">2023-04-04</h4>
+            <h4 data-toc-skip class="date">2023-05-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/c_deploy.Rmd" class="external-link"><code>vignettes/c_deploy.Rmd</code></a></small>
       <div class="hidden name"><code>c_deploy.Rmd</code></div>
@@ -141,29 +141,38 @@ $(document).ready(function () {
 </script><div class="section level2">
 <h2 id="about-the-run_app-function">About the <code>run_app()</code> function<a class="anchor" aria-label="anchor" href="#about-the-run_app-function"></a>
 </h2>
-<p>When launching the app, you might have noticed that the <code>dev/run_dev.R</code> function calls <code>run_app()</code>, which has the following structure:</p>
+<p>When launching the app, you might have noticed that the
+<code>dev/run_dev.R</code> function calls <code>run_app()</code>, which
+has the following structure:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">run_app</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/with_golem_options.html">with_golem_options</a></span><span class="op">(</span></span>
-<span>    app <span class="op">=</span> <span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
+<span>    app <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/shinyApp.html" class="external-link">shinyApp</a></span><span class="op">(</span></span>
 <span>      ui <span class="op">=</span> <span class="va">app_ui</span>,</span>
 <span>      server <span class="op">=</span> <span class="va">app_server</span></span>
 <span>    <span class="op">)</span>,</span>
 <span>    golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>This function might looks a little bit weird, but there’s a long story behind it, and you can read more about it <a href="https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/" class="external-link">there</a>.</p>
-<p>But long story short, this combination of <code>with_golem_options</code> &amp; <code>golem_opts = list(...)</code> allows you to pass argument to the function to be used inside the application, from UI or from server side, which you can get with <code><a href="../reference/get_golem_options.html">get_golem_options()</a></code>.</p>
+<p>This function might looks a little bit weird, but there’s a long
+story behind it, and you can read more about it <a href="https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/" class="external-link">there</a>.</p>
+<p>But long story short, this combination of
+<code>with_golem_options</code> &amp;
+<code>golem_opts = list(...)</code> allows you to pass argument to the
+function to be used inside the application, from UI or from server side,
+which you can get with <code><a href="../reference/get_golem_options.html">get_golem_options()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">run_app</span><span class="op">(</span>this <span class="op">=</span> <span class="st">"that"</span><span class="op">)</span></span>
 <span><span class="co"># And in the app</span></span>
 <span><span class="va">this</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_golem_options.html">get_golem_options</a></span><span class="op">(</span><span class="st">"this"</span><span class="op">)</span></span></code></pre></div>
-<p>The idea is to provide more flexibility for deployment on each platform you want to run your app on.</p>
+<p>The idea is to provide more flexibility for deployment on each
+platform you want to run your app on.</p>
 </div>
 <div class="section level2">
 <h2 id="deploying-apps-with-golem">Deploying Apps with <code>{golem}</code><a class="anchor" aria-label="anchor" href="#deploying-apps-with-golem"></a>
 </h2>
-<p>The <code>dev/03_deploy.R</code> file contains function for deploying on various platforms.</p>
+<p>The <code>dev/03_deploy.R</code> file contains function for deploying
+on various platforms.</p>
 <div class="section level3">
 <h3 id="rstudio-products">RStudio Products<a class="anchor" aria-label="anchor" href="#rstudio-products"></a>
 </h3>
@@ -211,7 +220,8 @@ $(document).ready(function () {
 <span></span>
 <span><span class="co"># If you want to deploy to ShinyProxy</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_with_renv_shinyproxy</a></span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"deploy"</span><span class="op">)</span></span></code></pre></div>
-<p>If you would like to use {renv} during developpement, you can init a renv.lock file with</p>
+<p>If you would like to use {renv} during developpement, you can init a
+renv.lock file with</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">attachment</span><span class="fu">::</span><span class="fu"><a href="https://thinkr-open.github.io/attachment/reference/create_renv_for_dev.html" class="external-link">create_renv_for_dev</a></span><span class="op">(</span>dev_pkg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"renv"</span>,</span>

@@ -51,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -119,13 +119,13 @@
 
       
 
-      </header><script src="d_js_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>d_js</h1>
                         <h4 data-toc-skip class="author">Colin Fay</h4>
             
-            <h4 data-toc-skip class="date">2023-04-04</h4>
+            <h4 data-toc-skip class="date">2023-05-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/d_js.Rmd" class="external-link"><code>vignettes/d_js.Rmd</code></a></small>
       <div class="hidden name"><code>d_js.Rmd</code></div>
@@ -141,30 +141,43 @@ $(document).ready(function () {
 </script><div class="section level2">
 <h2 id="using-golem-js-functions">Using <code>{golem}</code> js functions<a class="anchor" aria-label="anchor" href="#using-golem-js-functions"></a>
 </h2>
-<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with a series of JavaScript functions that you can call from the server. These functions are added by default with <code><a href="../reference/bundle_resources.html">bundle_resources()</a></code> .</p>
-<p>Then they are called with <code>golem::invoke_js("fonction", "ui_element")</code>.</p>
-<p>This <code>ui_element</code> define the UI element to interact with. It can be a full jQuery selector, an id or a class. Note that you can add several elements and iterate other them.</p>
-<p><code>invoke_js</code> can be used with any function defined in a <a href="https://shiny.rstudio.com/articles/communicating-with-js.html#from-r-to-javascript" class="external-link">JavaScript Custom Handler</a>, that you can build with <code><a href="../reference/add_files.html">golem::add_js_handler()</a></code>.</p>
+<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with a series of JavaScript functions that
+you can call from the server. These functions are added by default with
+<code><a href="../reference/bundle_resources.html">bundle_resources()</a></code> .</p>
+<p>Then they are called with
+<code>golem::invoke_js("fonction", "ui_element")</code>.</p>
+<p>This <code>ui_element</code> define the UI element to interact with.
+It can be a full jQuery selector, an id or a class. Note that you can
+add several elements and iterate other them.</p>
+<p><code>invoke_js</code> can be used with any function defined in a <a href="https://shiny.rstudio.com/articles/communicating-with-js.html#from-r-to-javascript" class="external-link">JavaScript
+Custom Handler</a>, that you can build with
+<code><a href="../reference/add_files.html">golem::add_js_handler()</a></code>.</p>
 <div class="section level3">
 <h3 id="goleminvoke_js">
 <code>golem::invoke_js()</code><a class="anchor" aria-label="anchor" href="#goleminvoke_js"></a>
 </h3>
 <ul>
 <li>
-<code>showid</code> &amp; <code>hideid</code>, <code>showclass</code> &amp; <code>hideclass</code> show and hide elements through their id or class.</li>
+<code>showid</code> &amp; <code>hideid</code>,
+<code>showclass</code> &amp; <code>hideclass</code> show and hide
+elements through their id or class.</li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/golem_js.html">invoke_js</a></span><span class="op">(</span><span class="st">"showid"</span>, <span class="fu">ns</span><span class="op">(</span><span class="st">"plot"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>
-<code>showhref</code> &amp; <code>hidehref</code> hide and show a link by trying to match the <code>href</code> content.</li>
+<code>showhref</code> &amp; <code>hidehref</code> hide and show a
+link by trying to match the <code>href</code> content.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/golem_js.html">invoke_js</a></span><span class="op">(</span><span class="st">"showhref"</span>, <span class="st">"panel2"</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li><p><code>clickon</code> click on the element. You have to use the full jQuery selector.</p></li>
-<li><p><code>show</code> &amp; <code>hide</code> show and hide elements, using the full jQuery selector.</p></li>
-<li><p><code>disable</code> &amp; <code>reable</code> able and disable specific element, using the full jQuery selector.</p></li>
+<li><p><code>clickon</code> click on the element. You have to use the
+full jQuery selector.</p></li>
+<li><p><code>show</code> &amp; <code>hide</code> show and hide elements,
+using the full jQuery selector.</p></li>
+<li><p><code>disable</code> &amp; <code>reable</code> able and disable
+specific element, using the full jQuery selector.</p></li>
 </ul>
 <p>See <code>?golem::activate_js()</code> for the full list.</p>
 </div>
@@ -172,16 +185,22 @@ $(document).ready(function () {
 <h3 id="a-quick-intro-to-jquery-selectors">A quick intro to jQuery selectors<a class="anchor" aria-label="anchor" href="#a-quick-intro-to-jquery-selectors"></a>
 </h3>
 <ul>
-<li><p><code>#plop</code>: the element with the id <code>plop</code></p></li>
-<li><p><code>.pouet</code>: elements of class <code>pouet</code></p></li>
-<li><p><code>"button:contains('this')"</code>: buttons with a text containing <code>'this'</code></p></li>
+<li><p><code>#plop</code>: the element with the id
+<code>plop</code></p></li>
+<li><p><code>.pouet</code>: elements of class
+<code>pouet</code></p></li>
+<li><p><code>"button:contains('this')"</code>: buttons with a text
+containing <code>'this'</code></p></li>
 </ul>
 <p>Note that in html, tags contains attributes. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">&lt;a</span><span class="ot"> href</span> <span class="ot">=</span> <span class="st">"https://thinkr.fr"</span><span class="ot"> data-value</span> <span class="ot">=</span> <span class="st">"panel2"</span><span class="kw">&gt;</span>ThinkR<span class="kw">&lt;/a&gt;</span></span></code></pre></div>
-<p>contains <code>href</code> &amp; <code>data-value</code>. You can refer to these attributes with <code>[]</code> after the tag name.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span> <span class="ot">=</span> <span class="st">"https://thinkr.fr"</span> <span class="er">data-value</span> <span class="ot">=</span> <span class="st">"panel2"</span><span class="kw">&gt;</span>ThinkR<span class="kw">&lt;/a&gt;</span></span></code></pre></div>
+<p>contains <code>href</code> &amp; <code>data-value</code>. You can
+refer to these attributes with <code>[]</code> after the tag name.</p>
 <ul>
-<li><p><code>a[href = "https://thinkr.fr"]</code>: link with <code>href</code> being <code>https://thinkr.fr</code></p></li>
-<li><p><code>a[data-value="panel2"]</code>: link with <code>data-value</code> being <code>"panel2"</code></p></li>
+<li><p><code>a[href = "https://thinkr.fr"]</code>: link with
+<code>href</code> being <code>https://thinkr.fr</code></p></li>
+<li><p><code>a[data-value="panel2"]</code>: link with
+<code>data-value</code> being <code>"panel2"</code></p></li>
 </ul>
 </div>
 </div>
