@@ -26,7 +26,7 @@ golem::fill_desc(
     given = "AUTHOR_FIRST", # Your First Name
     family = "AUTHOR_LAST", # Your Last Name
     email = "AUTHOR@MAIL.COM", # Your email
-    role = c("aut", "cre")
+    role = c("aut", "cre") # Your role (here author/creator)
   ),
   repo_url = NULL, # The URL of the GitHub repo (optional),
   pkg_version = "0.0.0.9000", # The version of the package containing the app

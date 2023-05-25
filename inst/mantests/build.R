@@ -225,7 +225,6 @@ cat_ok()
 
 cli::cat_rule("set_golem_options")
 
-golem::set_golem_options()
 expect_equal(
   golem::get_golem_wd(),
   golem::pkg_path()

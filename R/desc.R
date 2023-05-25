@@ -15,11 +15,9 @@
 #' @param author_email  to be deprecated: use character for first name via
 #'    \code{authors = person(email = "author_email")} instead
 #' @param author_orcid  to be deprecated
-#' @param set_options logical; if \code{TRUE} then [set_golem_options()] is run
-#'    which will be the default behaviour in the next version. Current default
-#'    is \code{FALSE} though; so run [set_golem_options()] manually when
-#'    necessary.
-#'
+#' @param set_options logical; if \code{TRUE} then [set_golem_options()] is run,
+#'    which is the default; if \code{FALSE} then running [set_golem_options()]
+#'    manually at some point is strongly recommended
 #'
 #' @export
 #' @importFrom utils person
@@ -43,7 +41,7 @@ fill_desc <- function(
   author_last_name = NULL,
   author_email = NULL,
   author_orcid = NULL,
-  set_options = FALSE
+  set_options = TRUE
 ) {
 
   stopifnot(`'authors' must be of class 'person'` = inherits(authors, "person"))
