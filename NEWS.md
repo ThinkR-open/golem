@@ -30,6 +30,8 @@
 
 ## Internal changes
 
++ All functions that requires to get a path now rely on get_golem_wd() (#1016, @ilyaZar)
+
 # 0.4.0
 
 ## New functions

@@ -19,13 +19,13 @@ shiny applications.
 
 ## About
 
-You’re reading the doc about version : 0.4.11
+You’re reading the doc about version : 0.4.12
 
 This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-05-24 21:48:17 CEST"
+#> [1] "2023-05-26 12:18:27 CEST"
 ```
 
 Here are the test & coverage results :
@@ -33,16 +33,15 @@ Here are the test & coverage results :
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> Writing 'fill_desc.Rd'
-#> ── R CMD check results ─────────────────────────────────────── golem 0.4.11 ────
-#> Duration: 2m 16.3s
+#> ── R CMD check results ─────────────────────────────────────── golem 0.4.12 ────
+#> Duration: 1m 32.1s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 69.40%
+#> golem Coverage: 69.41%
 #> R/addins.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
@@ -77,7 +76,7 @@ covr::package_coverage()
 #> R/add_rstudio_files.R: 93.10%
 #> R/golem-yaml-get.R: 93.18%
 #> R/add_dockerfiles_renv.R: 93.75%
-#> R/desc.R: 96.51%
+#> R/desc.R: 96.55%
 #> R/use_readme.R: 97.14%
 #> R/boostrap_cli.R: 100.00%
 #> R/boostrap_crayon.R: 100.00%
