@@ -6,9 +6,9 @@
 \alias{pkg_path}
 \title{Package tools}
 \usage{
-pkg_name(path = ".")
+pkg_name(path = get_golem_wd())
 
-pkg_version(path = ".")
+pkg_version(path = get_golem_wd())
 
 pkg_path()
 }

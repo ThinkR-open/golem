@@ -8,13 +8,16 @@ fill_desc(
   pkg_name,
   pkg_title,
   pkg_description,
-  author_first_name,
-  author_last_name,
-  author_email,
-  author_orcid = NULL,
+  authors = person(given = NULL, family = NULL, email = NULL, role = NULL, comment =
+    NULL),
   repo_url = NULL,
   pkg_version = "0.0.0.9000",
-  pkg = get_golem_wd()
+  pkg = get_golem_wd(),
+  author_first_name = NULL,
+  author_last_name = NULL,
+  author_email = NULL,
+  author_orcid = NULL,
+  set_options = TRUE
 )
 }
 \arguments{
@@ -24,19 +27,29 @@ fill_desc(
 
 \item{pkg_description}{Description of the package}
 
-\item{author_first_name}{First Name of the author}
-
-\item{author_last_name}{Last Name of the author}
-
-\item{author_email}{Email of the author}
-
-\item{author_orcid}{ORCID of the author}
+\item{authors}{a character string (or vector) of class person
+(see \code{\link[=person]{person()}} for details)}
 
 \item{repo_url}{URL (if needed)}
 
 \item{pkg_version}{The version of the package. Default is 0.0.0.9000}
 
 \item{pkg}{Path to look for the DESCRIPTION. Default is \code{get_golem_wd()}.}
+
+\item{author_first_name}{to be deprecated: use character for first name via
+\code{authors = person(given = "authors_first_name")} instead}
+
+\item{author_last_name}{to be deprecated: use character for last name via
+\code{authors = person(given = "authors_last_name")} instead}
+
+\item{author_email}{to be deprecated: use character for first name via
+\code{authors = person(email = "author_email")} instead}
+
+\item{author_orcid}{to be deprecated}
+
+\item{set_options}{logical; if \code{TRUE} then \code{\link[=set_golem_options]{set_golem_options()}} is run,
+which is the default; if \code{FALSE} then running \code{\link[=set_golem_options]{set_golem_options()}}
+manually at some point is strongly recommended}
 }
 \value{
 The {desc} object, invisibly.
