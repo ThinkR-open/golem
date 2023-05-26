@@ -1,6 +1,6 @@
 # Getting the DESCRIPTION file in a data.frame
 daf_desc <- function(
-  path = get_golem_wd(),
+  pkg = get_golem_wd(),
   entry
 ) {
   as.character(
@@ -9,7 +9,7 @@ daf_desc <- function(
         as.data.frame(
           read.dcf(
             normalizePath(
-              fs_path(path, "DESCRIPTION")
+              fs_path(pkg, "DESCRIPTION")
             )
           )
         )[entry]
@@ -23,19 +23,19 @@ daf_desc <- function(
 #' These are functions to help you navigate
 #' inside your project while developing
 #'
-#' @param path Path to use to read the DESCRIPTION
+#' @param pkg Path to use to read the DESCRIPTION
 #'
 #' @export
 #' @rdname pkg_tools
 #'
 #' @return The value of the entry in the DESCRIPTION file
-pkg_name <- function(path = get_golem_wd()) {
-  daf_desc(path, "Package")
+pkg_name <- function(pkg = get_golem_wd()) {
+  daf_desc(pkg, "Package")
 }
 #' @export
 #' @rdname pkg_tools
-pkg_version <- function(path = get_golem_wd()) {
-  daf_desc(path, "Version")
+pkg_version <- function(pkg = get_golem_wd()) {
+  daf_desc(pkg, "Version")
 }
 #' @export
 #' @rdname pkg_tools
