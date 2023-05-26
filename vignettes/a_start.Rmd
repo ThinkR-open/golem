@@ -53,7 +53,7 @@ Once the package is installed, you can got to _File > New Project..._ in RStudio
 knitr::include_graphics("golemtemplate.png")
 ```
 
-If you want to do it inside `R` use:
+If you want to do it directly via the command line, use:
 
 ```{r}
 golem::create_golem(path = "path/to/package")
