@@ -4,14 +4,14 @@
 \alias{is_golem}
 \title{Is the directory a golem-based app?}
 \usage{
-is_golem(path = getwd())
+is_golem(pkg = getwd())
 }
 \arguments{
-\item{path}{Path to the directory to check.
+\item{pkg}{Path to the directory to check.
 Defaults to the current working directory.}
 }
 \description{
-Trying to guess if \code{path} is a golem-based app.
+Trying to guess if \code{pkg} is a golem-based app.
 }
 \examples{
 is_golem()

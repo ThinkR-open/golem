@@ -6,14 +6,14 @@
 \alias{pkg_path}
 \title{Package tools}
 \usage{
-pkg_name(path = get_golem_wd())
+pkg_name(pkg = get_golem_wd())
 
-pkg_version(path = get_golem_wd())
+pkg_version(pkg = get_golem_wd())
 
 pkg_path()
 }
 \arguments{
-\item{path}{Path to use to read the DESCRIPTION}
+\item{pkg}{Path to use to read the DESCRIPTION}
 }
 \value{
 The value of the entry in the DESCRIPTION file
