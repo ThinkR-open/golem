@@ -34,7 +34,7 @@ set_golem_name <- function(
   talkative = TRUE,
   old_name = golem::pkg_name()
 ) {
-  path <- fs_path_abs(pkg)
+  pkg <- fs_path_abs(pkg)
 
   # Changing in YAML
   amend_golem_config(
@@ -48,13 +48,13 @@ set_golem_name <- function(
   # Changing in app-config.R
   change_app_config_name(
     name = name,
-    path = path
+    pkg = pkg 
   )
 
   # Changing in DESCRIPTION
   desc <- desc_description(
     file = fs_path(
-      path,
+      pkg,
       "DESCRIPTION"
     )
   )
@@ -69,14 +69,14 @@ set_golem_name <- function(
   set_golem_name_tests(
     old_name = old_name,
     new_name = name,
-    path = path
+    pkg = pkg
   )
 
   # Changing in ./vignettes/ if dir present
   set_golem_name_vignettes(
     old_name = old_name,
     new_name = name,
-    path = path
+    pkg = pkg
   )
 
   if (old_name != name){
@@ -94,10 +94,10 @@ set_golem_name <- function(
 set_golem_name_tests <- function(
   old_name,
   new_name,
-  path
+  pkg
     ) {
   pth_dir_tests <- file.path(
-    path,
+    pkg,
     "tests"
   )
 
@@ -116,10 +116,10 @@ set_golem_name_tests <- function(
 set_golem_name_vignettes <- function(
   old_name,
   new_name,
-  path
+  pkg
     ) {
   pth_dir_vignettes <- file.path(
-    path,
+    pkg,
     "vignettes"
   )
 
@@ -151,7 +151,7 @@ set_golem_version <- function(
   pkg = golem::pkg_path(),
   talkative = TRUE
     ) {
-  path <- fs_path_abs(pkg)
+  pkg <- fs_path_abs(pkg)
 
   # Changing in YAML
   amend_golem_config(
@@ -164,7 +164,7 @@ set_golem_version <- function(
 
   desc <- desc_description(
     file = fs_path(
-      path,
+      pkg,
       "DESCRIPTION"
     )
   )
