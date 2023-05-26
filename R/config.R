@@ -60,7 +60,7 @@ guess_where_config <- function(
 #' @param path Path to start looking for the config
 #'
 #' @export
-get_current_config <- function(path = get_golem_wd()) {
+get_current_config <- function(path = getwd()) {
   # We check whether we can guess where the config file is
   path_conf <- guess_where_config(path)
 
