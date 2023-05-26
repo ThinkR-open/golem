@@ -281,9 +281,9 @@ ask_golem_creation_upon_config <- function(pth) {
 # set the {golem} name
 change_app_config_name <- function(
   name,
-  path = get_golem_wd()
+  pkg = get_golem_wd()
 ) {
-  pth <- fs_path(path, "R", "app_config.R")
+  pth <- fs_path(pkg, "R", "app_config.R")
   app_config <- readLines(pth)
 
   where_system.file <- grep("system.file", app_config)
