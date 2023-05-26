@@ -1,4 +1,5 @@
-test_that("generate_readme_tmpl works", {  res <- generate_readme_tmpl("my_pkg")
+test_that("generate_readme_tmpl works", {
+  res <- generate_readme_tmpl("my_pkg")
   expect_true(
     grepl("my_pkg", paste(res, collapse = " "))
   )
@@ -25,16 +26,18 @@ test_that("check_overwrite works", {
 })
 
 test_that("use_readme_rmd works", {
-  expect_true(
-    use_readme_rmd(
-      open = FALSE,
-      overwrite = TRUE,
-      pkg = getwd(),
-      pkg_name = "rand_name"
-    )
-  )
-  expect_true(
-    file.exists("README.Rmd")
-  )
-  devtools:::build_readme()
+  withr::with_dir(pkg, {
+      expect_true(
+        use_readme_rmd(
+          open = FALSE,
+          overwrite = TRUE,
+          pkg = getwd(),
+          pkg_name = "rand_name"
+        )
+      )
+      expect_true(
+        file.exists("README.Rmd")
+      )
+      devtools:::build_readme()
+  })
 })
