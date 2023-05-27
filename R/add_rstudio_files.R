@@ -7,7 +7,7 @@ add_rstudio_files <- function(
     "Shiny Server",
     "ShinyApps.io"
   )
-) {
+    ) {
   service <- match.arg(service)
   where <- fs_path(pkg, "app.R")
 
@@ -55,6 +55,8 @@ add_rstudio_files <- function(
       )
     )
 
+    add_rscignore_file(pkg = pkg, open = open)
+
     open_or_go_to(where, open)
   } else {
     file_already_there_dance(
@@ -64,6 +66,49 @@ add_rstudio_files <- function(
   }
 }
 
+add_rscignore_file <- function(pkg, open, min_rsc = "0.8.25") {
+  check_min_rsc <- rlang::is_installed("rsconnect", version = min_rsc)
+  if (isFALSE(check_min_rsc)) {
+    cat_red_bullet(
+      sprintf(
+        "Not creating '.rscignore'. Required 'rsconnect' version >= %s!",
+        min_rsc
+      )
+    )
+    return(invisible(pkg))
+  }
+
+  where <- fs_path(pkg, ".rscignore")
+  if (isTRUE(fs_file_exists(where))) {
+    file_already_there_dance(
+      where = where,
+      open_file = open
+    )
+    return(invisible(pkg))
+  }
+  list_exclusion_defaults <- c(
+    ".here",
+    "CODE_OF_CONDUCT.md",
+    "LICENSE",
+    "LICENCE",
+    "LICENSE.md",
+    "LICENCE.md",
+    "NEWS",
+    "NEWS.md",
+    "README.md",
+    "README.Rmd",
+    "README.HTML",
+    "dev",
+    "man",
+    "vignettes",
+    "tests"
+  )
+  writeLines(text = list_exclusion_defaults, con = where)
+  usethis_use_build_ignore(".rscignore")
+
+  cat_created(where)
+  return(invisible(pkg))
+}
 #' Add an app.R at the root of your package to deploy on RStudio Connect
 #'
 #' @note
@@ -93,7 +138,7 @@ add_rstudio_files <- function(
 add_positconnect_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
-) {
+    ) {
   add_rstudio_files(
     pkg = pkg,
     open = open,
@@ -120,7 +165,7 @@ add_rstudioconnect_file <- function(
 add_shinyappsio_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
-) {
+    ) {
   add_rstudio_files(
     pkg = pkg,
     open = open,
@@ -133,7 +178,7 @@ add_shinyappsio_file <- function(
 add_shinyserver_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
-) {
+    ) {
   add_rstudio_files(
     pkg = pkg,
     open = open,
