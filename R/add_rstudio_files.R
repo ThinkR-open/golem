@@ -59,17 +59,22 @@ add_rstudio_files <- function(
 
     open_or_go_to(where, open)
   } else {
-    file_already_there_dance(
+    cat_green_tick("The 'app.R'-file already exists.")
+    open_or_go_to(
       where = where,
       open_file = open
     )
   }
 }
 
-#' Add `.rscignore`-file for golem project
+#' Add an `app.R` at the root of your package to deploy on RStudio Connect
 #'
-#' Adds a `.rscignore` to the top level (default, see `pkg`) of the `{golem}`
-#' project. A list of default files excluded:
+#' Additionally, adds a `.rscignore` at the root of the `{golem}` project if the
+#' `rsconnect` package version is `>= 0.8.25`.
+#'
+#' @note
+#' In previous versions, this function was called add_rconnect_file.
+#' @section List of excluded files in `.rscignore`:
 #'    * .here
 #'    * CODE_OF_CONDUCT.md
 #'    * LICENSE\{.md\}
@@ -81,58 +86,6 @@ add_rstudio_files <- function(
 #'    * tests
 #'    * vignettes
 #'
-#' @inheritParams add_module
-#'
-#' @return pure side-effect function for file creation; returns `pkg` invisibly
-#' @export
-add_rscignore_file <- function(pkg = get_golem_wd(), open = TRUE) {
-  min_rsc <- "0.8.25"
-  check_min_rsc <- rlang::is_installed("rsconnect", version = min_rsc)
-  if (isFALSE(check_min_rsc)) {
-    cat_red_bullet(
-      sprintf(
-        "Not creating '.rscignore'. Required 'rsconnect' version >= %s!",
-        min_rsc
-      )
-    )
-    return(invisible(pkg))
-  }
-
-  where <- fs_path(pkg, ".rscignore")
-  if (isTRUE(fs_file_exists(where))) {
-    file_already_there_dance(
-      where = where,
-      open_file = open
-    )
-    return(invisible(pkg))
-  }
-  list_exclusion_defaults <- c(
-    ".here",
-    "CODE_OF_CONDUCT.md",
-    "LICENSE",
-    "LICENCE",
-    "LICENSE.md",
-    "LICENCE.md",
-    "NEWS",
-    "NEWS.md",
-    "README.md",
-    "README.Rmd",
-    "README.HTML",
-    "dev",
-    "man",
-    "vignettes",
-    "tests"
-  )
-  writeLines(text = list_exclusion_defaults, con = where)
-  usethis_use_build_ignore(".rscignore")
-
-  cat_created(where)
-  return(invisible(pkg))
-}
-#' Add an app.R at the root of your package to deploy on RStudio Connect
-#'
-#' @note
-#' In previous versions, this function was called add_rconnect_file.
 #'
 #' @inheritParams add_module
 #' @aliases add_rconnect_file add_rstudioconnect_file
@@ -140,7 +93,8 @@ add_rscignore_file <- function(pkg = get_golem_wd(), open = TRUE) {
 #'
 #' @rdname rstudio_deploy
 #'
-#' @return The path to the file, invisibly.
+#' @return Side-effect functions for file creation returning the path to the
+#'    file, invisibly.
 #'
 #' @examples
 #' # Add a file for Connect
@@ -190,4 +144,52 @@ add_shinyserver_file <- function(
     open = open,
     service = "Shiny Server"
   )
+}
+#' @inheritParams add_module
+#' @rdname rstudio_deploy
+#' @export
+add_rscignore_file <- function(pkg = get_golem_wd(), open = TRUE) {
+  min_rsc <- "0.8.25"
+  check_min_rsc <- rlang::is_installed("rsconnect", version = min_rsc)
+  if (isFALSE(check_min_rsc)) {
+    cat_red_bullet(
+      sprintf(
+        "Not creating '.rscignore'. Required 'rsconnect' version >= %s!",
+        min_rsc
+      )
+    )
+    return(invisible(pkg))
+  }
+
+  where <- fs_path(pkg, ".rscignore")
+  if (isTRUE(fs_file_exists(where))) {
+    cat_green_tick("The '.rscignore'-file already exists.")
+    open_or_go_to(
+      where = where,
+      open_file = open
+    )
+    return(invisible(pkg))
+  }
+  list_exclusion_defaults <- c(
+    ".here",
+    "CODE_OF_CONDUCT.md",
+    "LICENSE",
+    "LICENCE",
+    "LICENSE.md",
+    "LICENCE.md",
+    "NEWS",
+    "NEWS.md",
+    "README.md",
+    "README.Rmd",
+    "README.HTML",
+    "dev",
+    "man",
+    "vignettes",
+    "tests"
+  )
+  writeLines(text = list_exclusion_defaults, con = where)
+  usethis_use_build_ignore(".rscignore")
+
+  cat_created(where)
+  return(invisible(pkg))
 }
