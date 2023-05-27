@@ -66,7 +66,27 @@ add_rstudio_files <- function(
   }
 }
 
-add_rscignore_file <- function(pkg, open, min_rsc = "0.8.25") {
+#' Add `.rscignore`-file for golem project
+#'
+#' Adds a `.rscignore` to the top level (default, see `pkg`) of the `{golem}`
+#' project. A list of default files excluded:
+#'    * .here
+#'    * CODE_OF_CONDUCT.md
+#'    * LICENSE\{.md\}
+#'    * LICENCE\{.md\}
+#'    * NEWS\{.md\}
+#'    * README\{.md,.Rmd,.HTML\}
+#'    * dev
+#'    * man
+#'    * tests
+#'    * vignettes
+#'
+#' @inheritParams add_module
+#'
+#' @return pure side-effect function for file creation; returns `pkg` invisibly
+#' @export
+add_rscignore_file <- function(pkg = get_golem_wd(), open = TRUE) {
+  min_rsc <- "0.8.25"
   check_min_rsc <- rlang::is_installed("rsconnect", version = min_rsc)
   if (isFALSE(check_min_rsc)) {
     cat_red_bullet(
