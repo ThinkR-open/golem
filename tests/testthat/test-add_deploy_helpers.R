@@ -123,3 +123,31 @@ test_that("add_rstudio_files", {
     }
   })
 })
+
+test_that("add_rscignore_file", {
+  with_dir(pkg, {
+    burn_after_reading(
+        ".rscignore",
+        {
+          withr::with_options(
+            c("golem.quiet" = FALSE),
+            {
+              output <- testthat::capture_output(
+                add_rscignore_file(
+                  pkg = pkg,
+                  open = FALSE
+                )
+              )
+            }
+          )
+          expect_exists(".rscignore")
+          test <- stringr::str_detect(
+            output,
+            "ile created at .*/.rscignore"
+          )
+          expect_true(test)
+        }
+    )
+   }
+  )
+})
