@@ -118,7 +118,7 @@ test_that("add_rstudio_files", {
           expect_exists("app.R")
           test <- stringr::str_detect(
             output,
-            "ile created at .*/app.R"
+            "File created at .*/app.R"
           )
           expect_true(test)
         }
@@ -146,7 +146,7 @@ test_that("add_rscignore_file", {
           expect_exists(".rscignore")
           test <- stringr::str_detect(
             output,
-            "ile created at .*/.rscignore"
+            "File created at .*/.rscignore"
           )
           expect_true(test)
         }
