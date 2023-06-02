@@ -31,12 +31,10 @@ run_dev <- function(
 
   # Stop if it doesn't exists
   if (file.exists(try_dev)) {
-    run_dev_lines <- readLines(
-      "dev/run_dev.R"
-    )
+    run_dev_lines <- readLines(try_dev)
   } else {
     stop(
-      "Unable to locate dev file"
+      "Unable to locate the run_dev-file passed via the 'file' argument."
     )
   }
 
