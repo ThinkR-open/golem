@@ -1,12 +1,25 @@
-#' Run run_dev.R
+#' Run the `run_dev.R` file
 #'
-#' @param file File path to `run_dev.R`. Defaults to `R/run_dev.R`.
-#' @param save_all boolean. If TRUE, save all open file before sourcing `file`
+#' The default `file="dev/run_dev.R"` launches your `{golem}` app with a bunch
+#' of useful options. The file content can be customized and `file`-name and
+#' path changed as long as the argument combination of `file` and `pkg` are
+#' supplied correctly: the `file`-path is a relative path to a `{golem}`-package
+#' root `pkg`. An error is thrown if `pkg/file` cannot be found.
+#'
+#' The function `run_dev()` is typically used to launch a shiny app by sourcing
+#' the content of an appropriate `run_dev`-file. Carefully read the content of
+#' `dev/run_dev.R` when creating your custom `run_dev`-file. It has already
+#' many useful settings including a switch between production/development,
+#' reloading the package in a clean `R` environment before running the app etc.
+#'
+#' @param file String with (relative) file path to a `run_dev.R`-file
+#' @param save_all Boolean; if `TRUE` saves all open files before sourcing
+#'     `file`
 #' @inheritParams add_module
 #'
 #' @export
 #'
-#' @return Used for side-effect
+#' @return pure side-effect function; returns invisibly
 run_dev <- function(
   file = "dev/run_dev.R",
   pkg = get_golem_wd(),
@@ -43,4 +56,5 @@ run_dev <- function(
       text = run_dev_lines
     )
   )
+  return(invisible(file))
 }
