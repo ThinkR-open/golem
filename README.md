@@ -25,7 +25,7 @@ This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-03-10 09:53:27 CET"
+#> [1] "2023-06-05 15:49:03 CEST"
 ```
 
 Here are the test & coverage results :
@@ -34,14 +34,14 @@ Here are the test & coverage results :
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
 #> ── R CMD check results ──────────────────────────────────────── golem 0.4.0 ────
-#> Duration: 1m 23.6s
+#> Duration: 1m 20.5s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 69.16%
+#> golem Coverage: 68.42%
 #> R/addins.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
@@ -55,11 +55,12 @@ covr::package_coverage()
 #> R/test_helpers.R: 30.26%
 #> R/js.R: 43.75%
 #> R/reload.R: 45.36%
+#> R/utils.R: 54.14%
 #> R/use_recommended.R: 54.55%
 #> R/bootstrap_desc.R: 55.56%
 #> R/install_dev_deps.R: 57.14%
-#> R/utils.R: 58.30%
 #> R/bootstrap_attachment.R: 61.54%
+#> R/bootstrap_dockerfiler.R: 63.33%
 #> R/add_dockerfiles.R: 74.19%
 #> R/bootstrap_usethis.R: 76.56%
 #> R/boostrap_fs.R: 77.78%
@@ -74,7 +75,6 @@ covr::package_coverage()
 #> R/add_files.R: 92.31%
 #> R/add_rstudio_files.R: 93.10%
 #> R/golem-yaml-get.R: 93.18%
-#> R/bootstrap_dockerfiler.R: 93.33%
 #> R/add_dockerfiles_renv.R: 93.75%
 #> R/boostrap_cli.R: 100.00%
 #> R/boostrap_crayon.R: 100.00%

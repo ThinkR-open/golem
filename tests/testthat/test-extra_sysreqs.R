@@ -1,6 +1,7 @@
 skip_if_not_installed("dockerfiler", minimum_version = "0.2.0")
 
 test_that("test extra sysreqs", {
+  skip_on_cran()
   skip_if_not_installed("renv")
   skip_if_not_installed("dockerfiler", "0.2.0")
   skip_if_not_installed("attachment", "0.2.5")
