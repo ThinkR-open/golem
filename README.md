@@ -35,7 +35,7 @@ devtools::check(quiet = TRUE)
 #> ℹ Loading golem
 #> ── R CMD check results ─────────────────────────────────────── golem 0.4.12 ────
 #> Duration: 1m 32.1s
-#> 
+#>
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
@@ -55,6 +55,7 @@ covr::package_coverage()
 #> R/test_helpers.R: 30.26%
 #> R/js.R: 43.75%
 #> R/reload.R: 45.36%
+#> R/utils.R: 54.14%
 #> R/use_recommended.R: 54.55%
 #> R/utils.R: 55.31%
 #> R/bootstrap_desc.R: 55.56%
