@@ -25,29 +25,52 @@ knitr::opts_chunk$set(
 
 `{golem}` is an opinionated framework for building production-grade shiny applications.
 
-## About
+## Installation
 
-You're reading the doc about version : `r pkgload::pkg_version()`
+-   You can install the stable version from CRAN with:
 
-This README has been compiled on the
-
-```{r}
-Sys.time()
+``` r
+install.packages("golem")
 ```
 
-Here are the test & coverage results :
+-   You can install the development version from [GitHub](https://github.com/Thinkr-open/golem) with:
 
-```{r}
-devtools::check(quiet = TRUE)
+``` r
+# install.packages("remotes")
+remotes::install_github("Thinkr-open/golem")
 ```
 
-```{r echo = FALSE}
-unloadNamespace("golem")
+## Launch the project
+
+Create a new package with the project template:
+
+```{r, echo=FALSE, out.width="80%", eval=TRUE}
+knitr::include_graphics("https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png")
 ```
 
-```{r}
-covr::package_coverage()
-```
+## Step by step guide
+
+See full documentation in the `{pkgdown}` website:
+
+[CRAN] <https://thinkr-open.github.io/golem/>
+
+[dev] <https://thinkr-open.github.io/golem/dev/>
+
+After project creation, you'll land on `dev/01_start.R`. There are also `dev/02_dev.R` and `dev/03_deploy.R`
+
+These files are used to keep a track of all the steps you'll be following while building your app.
+
+### Step 1 : Getting Started
+
+Read [the Getting Started](https://thinkr-open.github.io/golem/articles/a_start.html) Vignette for a detailed walkthrough.
+
+### Step 2 : Day to Day Dev
+
+Read [Day to Day Dev](https://thinkr-open.github.io/golem/articles/b_dev.html) Vignette for a detailed walkthrough.
+
+### Step 3: deploy
+
+Read [Deploying Apps with {golem}](https://thinkr-open.github.io/golem/articles/c_deploy.html) Vignette for a detailed walkthrough.
 
 ## Tool series
 
@@ -77,52 +100,29 @@ You can also find apps at:
 - <https://connect.thinkr.fr/connect/>
 - <https://github.com/ColinFay/golemexamples>
 
-## Installation
+## About
 
--   You can install the stable version from CRAN with:
+You're reading the doc about version: `r pkgload::pkg_version()`
 
-``` r
-install.packages("golem")
+This `README` has been compiled on the
+
+```{r}
+Sys.time()
 ```
 
--   You can install the development version from [GitHub](https://github.com/Thinkr-open/golem) with:
+Here are the test & coverage results:
 
-``` r
-# install.packages("remotes")
-remotes::install_github("Thinkr-open/golem")
+```{r}
+devtools::check(quiet = TRUE)
 ```
 
-## Launch the project
-
-Create a new package with the project template:
-
-```{r, echo=FALSE, out.width="80%", eval=TRUE}
-knitr::include_graphics("https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png")
+```{r echo = FALSE}
+unloadNamespace("golem")
 ```
 
-## Step by step guide
-
-See full documentation in the {pkgdown} website:
-
-[CRAN] <https://thinkr-open.github.io/golem/>
-
-[dev] <https://thinkr-open.github.io/golem/dev/>
-
-After project creation, you'll land on `dev/01_start.R`. There are also `dev/02_dev.R` and `dev/03_deploy.R`
-
-These files are used to keep a track of all the steps you'll be following while building your app.
-
-### Step 1 : Getting Started
-
-Read [the Getting Started](https://thinkr-open.github.io/golem/articles/a_start.html) Vignette for a detailed walkthrough.
-
-### Step 2 : Day to Day Dev
-
-Read [Day to Day Dev](https://thinkr-open.github.io/golem/articles/b_dev.html) Vignette for a detailed walkthrough.
-
-### Step 3: deploy
-
-Read [Deploying Apps with {golem}](https://thinkr-open.github.io/golem/articles/c_deploy.html) Vignette for a detailed walkthrough.
+```{r}
+covr::package_coverage()
+```
 
 ## CoC
 
