@@ -18,7 +18,7 @@
 #' @return The path to the file, invisibly.
 use_external_js_file <- function(
   url,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
@@ -85,7 +85,7 @@ use_external_js_file <- function(
 #' @rdname use_files
 use_external_css_file <- function(
   url,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
@@ -211,18 +211,18 @@ use_external_html_template <- function(
 #' @rdname use_files
 use_external_file <- function(
   url,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
 ) {
-  check_name_length(name)
 
   if (missing(name)) {
     name <- basename(url)
   }
 
+  check_name_length(name)
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
@@ -260,19 +260,20 @@ use_external_file <- function(
 #' @rdname use_files
 use_internal_js_file <- function(
   path,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
 ) {
-  check_name_length(name)
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
   if (missing(name)) {
     name <- basename(path)
   }
+
+  check_name_length(name)
 
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.js", name)
@@ -325,13 +326,12 @@ use_internal_js_file <- function(
 #' @rdname use_files
 use_internal_css_file <- function(
   path,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
 ) {
-  check_name_length(name)
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
@@ -339,6 +339,8 @@ use_internal_css_file <- function(
   if (missing(name)) {
     name <- basename(path)
   }
+
+  check_name_length(name)
 
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.css", name)
@@ -449,7 +451,7 @@ use_internal_html_template <- function(
 #' @rdname use_files
 use_internal_file <- function(
   path,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
