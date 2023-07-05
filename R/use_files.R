@@ -23,7 +23,7 @@ use_external_js_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-) {
+    ) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -36,12 +36,19 @@ use_external_js_file <- function(
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.js", name)
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  dir_created <- tryCatch(
+    create_if_needed(
+      dir,
+      type = "directory"
+    ),
+    error = function(e) {
+      out <- FALSE
+      names(out) <- e[[1]]
+      return(out)
+    }
   )
 
-  if (!dir_created) {
+  if (isFALSE(dir_created)) {
     cat_dir_necessary()
     return(invisible(FALSE))
   }
@@ -90,7 +97,7 @@ use_external_css_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-) {
+    ) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -103,12 +110,19 @@ use_external_css_file <- function(
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.css", name)
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  dir_created <- tryCatch(
+    create_if_needed(
+      dir,
+      type = "directory"
+    ),
+    error = function(e) {
+      out <- FALSE
+      names(out) <- e[[1]]
+      return(out)
+    }
   )
 
-  if (!dir_created) {
+  if (isFALSE(dir_created)) {
     cat_dir_necessary()
     return(invisible(FALSE))
   }
@@ -157,7 +171,7 @@ use_external_html_template <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-) {
+    ) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -168,12 +182,19 @@ use_external_html_template <- function(
 
   check_name_length(name)
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  dir_created <- tryCatch(
+    create_if_needed(
+      dir,
+      type = "directory"
+    ),
+    error = function(e) {
+      out <- FALSE
+      names(out) <- e[[1]]
+      return(out)
+    }
   )
 
-  if (!dir_created) {
+  if (isFALSE(dir_created)) {
     cat_dir_necessary()
     return(invisible(FALSE))
   }
@@ -216,8 +237,7 @@ use_external_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-) {
-
+    ) {
   if (missing(name)) {
     name <- basename(url)
   }
@@ -227,12 +247,19 @@ use_external_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  dir_created <- tryCatch(
+    create_if_needed(
+      dir,
+      type = "directory"
+    ),
+    error = function(e) {
+      out <- FALSE
+      names(out) <- e[[1]]
+      return(out)
+    }
   )
 
-  if (!dir_created) {
+  if (isFALSE(dir_created)) {
     cat_dir_necessary()
     return(invisible(FALSE))
   }
@@ -265,7 +292,7 @@ use_internal_js_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-) {
+    ) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -278,12 +305,19 @@ use_internal_js_file <- function(
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.js", name)
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  dir_created <- tryCatch(
+    create_if_needed(
+      dir,
+      type = "directory"
+    ),
+    error = function(e) {
+      out <- FALSE
+      names(out) <- e[[1]]
+      return(out)
+    }
   )
 
-  if (!dir_created) {
+  if (isFALSE(dir_created)) {
     cat_dir_necessary()
     return(invisible(FALSE))
   }
@@ -331,8 +365,7 @@ use_internal_css_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-) {
-
+    ) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -345,12 +378,19 @@ use_internal_css_file <- function(
   name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.css", name)
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  dir_created <- tryCatch(
+    create_if_needed(
+      dir,
+      type = "directory"
+    ),
+    error = function(e) {
+      out <- FALSE
+      names(out) <- e[[1]]
+      return(out)
+    }
   )
 
-  if (!dir_created) {
+  if (isFALSE(dir_created)) {
     cat_dir_necessary()
     return(invisible(FALSE))
   }
@@ -398,7 +438,7 @@ use_internal_html_template <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-) {
+    ) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -409,12 +449,19 @@ use_internal_html_template <- function(
     file_path_sans_ext(name)
   )
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  dir_created <- tryCatch(
+    create_if_needed(
+      dir,
+      type = "directory"
+    ),
+    error = function(e) {
+      out <- FALSE
+      names(out) <- e[[1]]
+      return(out)
+    }
   )
 
-  if (!dir_created) {
+  if (isFALSE(dir_created)) {
     cat_dir_necessary()
     return(invisible(FALSE))
   }
@@ -456,7 +503,7 @@ use_internal_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-) {
+    ) {
   if (missing(name)) {
     name <- basename(path)
   }
@@ -466,12 +513,19 @@ use_internal_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  dir_created <- tryCatch(
+    create_if_needed(
+      dir,
+      type = "directory"
+    ),
+    error = function(e) {
+      out <- FALSE
+      names(out) <- e[[1]]
+      return(out)
+    }
   )
 
-  if (!dir_created) {
+  if (isFALSE(dir_created)) {
     cat_dir_necessary()
     return(invisible(FALSE))
   }
