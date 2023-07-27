@@ -16,11 +16,14 @@ add_dockerfile_with_renv_ <- function(
     ) {
   if (is.null(lockfile)) {
     rlang::check_installed(
-      c("renv", "attachment"),
+      c("renv", "attachment","dockerfiler"),
       reason = "to build a Dockerfile with automatic renv.lock creation. Use the `lockfile` parameter to pass your own `renv.lock` file."
     )
   }
-
+  rlang::check_installed(
+    c("dockerfiler"),
+    reason = "to build a Dockerfile file."
+  )
 
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on
