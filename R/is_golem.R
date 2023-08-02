@@ -1,15 +1,15 @@
 #' Is the directory a golem-based app?
 #'
-#' Trying to guess if `path` is a golem-based app.
+#' Trying to guess if `pkg` is a golem-based app.
 #'
-#' @param path Path to the directory to check.
+#' @param pkg Path to the directory to check.
 #' Defaults to the current working directory.
 #'
 #' @export
 #'
 #' @examples
 #' is_golem()
-is_golem <- function(path = getwd()) {
+is_golem <- function(pkg = getwd()) {
   files_from_shiny_example <- grep(
     "^(?!REMOVEME).*",
     list.files(
@@ -28,6 +28,6 @@ is_golem <- function(path = getwd()) {
   )
 
   all(
-    files_from_shiny_example %in% list.files(path, recursive = TRUE)
+    files_from_shiny_example %in% list.files(pkg, recursive = TRUE)
   )
 }
