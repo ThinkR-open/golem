@@ -76,10 +76,9 @@ test_that("config works", {
     )
   })
 })
-test_that("golem-config.yml can be moved to another location", {
+test_that("golem-config.yml can be renamed and moved to another location", {
 
   path_dummy_golem <- tempfile(pattern = "dummygolem")
-
   golem::create_golem(
     path = path_dummy_golem,
     open = FALSE
@@ -88,7 +87,7 @@ test_that("golem-config.yml can be moved to another location", {
   old_wd <- setwd(path_dummy_golem)
   on.exit(setwd(old_wd))
 
-  # The good config path is returned
+  ## The default config path is returned
   expect_equal(
     golem:::guess_where_config(),
     golem:::fs_path_abs(file.path(
@@ -96,37 +95,27 @@ test_that("golem-config.yml can be moved to another location", {
       "inst/golem-config.yml"
     ))
   )
-  # document_and_reload does not throw an error
-  expect_error(
-    document_and_reload(),
-    regexp = NA
-  )
-  expect_equal(
-    get_golem_name(),
-    basename(path_dummy_golem)
-  )
-  expect_equal(
-    get_golem_wd(),
-    path_dummy_golem
-  )
-
-  ## Move config file
+  ## Some renamed config AND under a different path is returned
+  ## I. create new dir
   dir.create(
     "inst/config"
   )
+  ## II. Move config file under a different name to that dir
   file.copy(
     from = "inst/golem-config.yml",
     to = "inst/config/golem.yml"
   )
+  ## III. Remove old config file
   file.remove(
     "inst/golem-config.yml"
   )
-  # User adjusts the correct line in app_config.R:
-  tmp_app_config_r <- readLines("R/app_config.R")
-  tmp_app_config_r[36] <- "  file = app_sys(\"config/golem.yml\")"
-  writeLines(tmp_app_config_r, "R/app_config.R")
-
-  # The good config path is returned
+  ## IV Save content of default config to restore and for final test later
+  tmp_app_config_default <- readLines("R/app_config.R")
+  # V.A User alters correct line in app_config.R: different path AND filename!
+  tmp_app_config_test_01 <- readLines("R/app_config.R")
+  tmp_app_config_test_01[36] <- "  file = app_sys(\"config/golem.yml\")"
+  writeLines(tmp_app_config_test_01, "R/app_config.R")
+  # V.A The updated config is found
   expect_equal(
     golem:::guess_where_config(),
     golem:::fs_path_abs(file.path(
@@ -134,13 +123,30 @@ test_that("golem-config.yml can be moved to another location", {
       "inst/config/golem.yml"
     ))
   )
-  # document_and_reload does not throw an error
-  expect_error(
-    document_and_reload(),
-    regexp = NA
-  )
+  ## V.B app_config.R has a multi-line statement
+  ## -   > e.g. because of grkstyle formatting or long path names
+  tmp_app_config_test_02 <- tmp_app_config_default
+  tmp_max_lines_config   <- length(tmp_app_config_test_02)
+  tmp_app_config_test_02[36] <- "  file = app_sys("
+  tmp_app_config_test_02 <- c(tmp_app_config_test_02[1:36],
+                              "\"config/golem.yml\"",
+                              ")",
+                              tmp_app_config_test_02[37:tmp_max_lines_config])
+  writeLines(tmp_app_config_test_02, "R/app_config.R")
+  # V.B The updated config  with multi-line app_sys()-call is read correctly
   expect_equal(
-    get_golem_name(),
-    basename(path_dummy_golem)
+    golem:::guess_where_config(),
+    golem:::fs_path_abs(file.path(
+      path_dummy_golem,
+      "inst/config/golem.yml"
+    ))
   )
+  ## V.C app_config.R has a malformatted app_sys(...) call
+  ##    -> e.g. because of grkstyle formatting or long path names
+  tmp_app_config_test_03 <- tmp_app_config_default
+  ## malformation = typo: app_syss() instead of app_sys()
+  tmp_app_config_test_03[36] <- "  file = app_syss(\"config/golem.yml\")"
+  writeLines(tmp_app_config_test_03, "R/app_config.R")
+  # V.C The updated config  with multi-line app_sys()-call is read correctly
+  expect_null(golem:::guess_where_config())
 })

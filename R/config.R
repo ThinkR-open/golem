@@ -49,13 +49,13 @@ guess_where_config <- function(
     )
   }
   ret_path <- try_user_config_location(pth = golem::pkg_path())
+  if (is.null(ret_path)) return(NULL)
   if (fs_file_exists(ret_path)) {
     return(fs_path_abs(ret_path))
   }
 
   return(NULL)
 }
-
 try_user_config_location <- function(pth) {
   # I. try to retrieve from possible user change in app_config.R
   user_location_default <- file.path(pth, "R/app_config.R")
@@ -64,28 +64,59 @@ try_user_config_location <- function(pth) {
   }
 
   # II. if successful, read file and find line where new config is located
-  tmp_guess_text <- readLines(user_location_default)
-  tmp_guess_line <- which(grepl("app_sys\\(", tmp_guess_text))
-  if (identical(integer(0), tmp_guess_line)) {
-    return(NULL)
-  }
+  tmp_guess_text <- readLines("R/app_config.R")
+  tmp_guess_lines <- guess_lines_to_config_file(tmp_guess_text)
+  ## -> early return if malformation i.e. no lines found that match app_sys(...)
+  if (is.null(tmp_guess_lines)) return(NULL)
 
-  # III. if successfull, identify the string that gives new config-path
-  tmp_config_expr <- regexpr("\\(.*\\)$", tmp_guess_text[tmp_guess_line])
-  tmp_config_char <- regmatches(
-    tmp_guess_text[tmp_guess_line],
-    tmp_config_expr
-  )
+  # III. Collapse character-text found into a single char from which to retrieve
+  #      path! This is important if the path is a (complicated) multi-line path.
+  tmp_guess_subtext <- paste0(tmp_guess_text[tmp_guess_lines], collapse = "")
 
-  # IV. clean that string from artefacts of regexpr()
-  out_config_char <- substr(
-    substring(tmp_config_char, 3),
-    start = 1,
-    stop = nchar(substring(tmp_config_char, 3)) - 2
+  # IV. Identify quoted string that gives new config-path
+  tmp_config_expr <- regexpr("\\((.|\n)*\\)$", tmp_guess_subtext)
+  tmp_config_char <- regmatches(tmp_guess_subtext, tmp_config_expr)
+
+  # V. Manually remove quotes/character-artefacts to form a proper path
+  out_config_char <- regmatches(
+    tmp_config_char,
+    regexpr('\\".*\\"', tmp_config_char)
   )
+  out_config_char <- substring(out_config_char, 2, nchar(out_config_char) - 1)
 
   # V. return full path to new config file including pkg-path and 'inst'
   return(file.path(pth, "inst", out_config_char))
+}
+guess_lines_to_config_file <- function(guess_text) {
+  # I. Check if the path is a one-liner i.e. try to match `app_sys(...)` string
+  tmp_guess_lines <- which(grepl("app_sys\\((.|\n)*\\)$", guess_text))
+  if (identical(integer(0), tmp_guess_lines)) {
+    # II. If that is not the case, identify lines that contain the path info
+    tmp_guess_multi_liner <- which(grepl("app_sys\\(", guess_text))
+    if (identical(integer(0), tmp_guess_multi_liner)) {
+      # Early return NULL if file does not contain the `app_sys()` command;
+      # alternatively, there could be an error thrown here if `app_sys()` must
+      # be present inside any `R/app_config.R`; think about this later
+      return(NULL)
+    }
+    tmp_guess_lines <- tmp_guess_multi_liner
+    tmp_check_lines <- seq(
+      from = tmp_guess_lines + 1,
+      to = length(guess_text)
+    )
+    # Fine the closing brace `)` of app_sys(...) - identified code portion must
+    # contain information on the path.
+    tmp_end_line <- NULL
+    for (i in tmp_check_lines) {
+      if (grepl(".*\\)", guess_text[i])) {
+        tmp_end_line <- i
+        break
+      }
+    }
+    # Return value is a sequence of line numbers where to elicit the config-path
+    tmp_guess_lines <- seq(from = tmp_guess_lines, to = tmp_end_line)
+  }
+  return(tmp_guess_lines)
 }
 #' Get the path to the current config File
 #'
