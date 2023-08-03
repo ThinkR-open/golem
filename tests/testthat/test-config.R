@@ -193,7 +193,7 @@ test_that("golem-config.yml can be retrieved for some exotic corner cases", {
     ))
   )
 
-  # Test exotic case IV.B - for some reason wd is set to subdir "inst/"
+  # Test exotic case IV.B - non-sense arguments inside guess_where_config() work
   # Change dir to golem-pkg toplevel
   setwd(path_dummy_golem)
   # The default config path is returned though arguments are non-sense

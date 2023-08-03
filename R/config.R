@@ -152,13 +152,50 @@ guess_lines_to_config_file <- function(guess_text) {
   }
   return(tmp_guess_lines)
 }
-#' Get the path to the current config File
+#' Return path to the `{golem}` config-file
 #'
-#' This function tries to guess where the golem-config file is located.
-#' If it can't find it, this function asks the
-#' user if they want to set the golem skeleton.
+#' This function tries to find the path to the `{golem}` config-file currently
+#' used. If the config-file is not found, the user is asked if they want to set parts
+#' of the `{golem}` skeleton. This includes default versions of "R/app_config"
+#' and "inst/golem-config.yml" (assuming that the user tries to convert the
+#' directory to a `{golem}` based shiny App).
 #'
-#' @param path Path to start looking for the config
+#' In most cases this function simply returns the path to the default
+#' golem-config file located under "inst/golem-config.yml". That config comes
+#' in `yml`-format, see the [Engineering Production-Grade Shiny Apps](https://engineering-shiny.org/golem.html?q=config#golem-config)
+#' for further details on its format and how to set options therein.
+#'
+#' Advanced app developers may benefit from having an additional user
+#' config-file. This is achieved by copying the file to the new location and
+#' setting a new path pointing to this file. The path is altered inside the
+#' `app_sys()`-call of the file "R/app_config.R" to point to the (relative to
+#' `inst/`) location of the user-config i.e. change
+#'
+#' ```
+#' # Modify this if your config file is somewhere else
+#' file = app_sys("golem-config.yml")
+#' ```
+#'
+#' to
+#' ```
+#' # Modify this if your config file is somewhere else
+#' file = app_sys("configs/user-golem-config.yml")
+#' ```
+#'
+#' __NOTE__
+#' + the path to the config is changed relative to __*inst/*__ from
+#' __*inst/golem-config.yml*__ to __*inst/configs/user-golem-config.yml*__
+#' + if both, the default config __*and*__ user config files exists (and the
+#' path is set correctly for the latter), an error is thrown due to ambiguity:
+#' in this case simply rename/delete the default config or change the entry in
+#' "R/app_config.R" back to `app_sys("golem-config.yml")` to point to the
+#' default location
+#'
+#'
+#' @param path character string giving the path to start looking for the config;
+#'    the usual value is the `{golem}`-package top-level directory but a user
+#'    supplied config is now supported (see __Details__ for how to use this
+#'    feature).
 #'
 #' @export
 get_current_config <- function(path = getwd()) {
