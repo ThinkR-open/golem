@@ -25,6 +25,7 @@ guess_where_config <- function(
   CONFIG_DFLT_MISSNG <- !CONFIG_DFLT_EXISTS
   CONFIG_USER_EXISTS <- !is.null(ret_pth_usr) && (!identical(ret_pth_usr, ret_pth_def))
   CONFIG_USER_MISSNG <- !CONFIG_USER_EXISTS
+
   # Case I.
   # The default config exists AND "R/app_config.R" does not provide any
   # information about a possible user config (this one should be correct in 99%
@@ -33,6 +34,7 @@ guess_where_config <- function(
   if (CONFIG_DFLT_EXISTS && CONFIG_USER_MISSNG) {
     return(fs_path_abs(ret_pth_def))
   }
+
   # Case II.
   # The default config does not exists AND "R/app_config.R" provides information
   # about a possible user config (this one should be correct if the user changed
@@ -43,6 +45,7 @@ guess_where_config <- function(
   if (CONFIG_DFLT_MISSNG && CONFIG_USER_EXISTS) {
     return(fs_path_abs(ret_pth_usr))
   }
+
   # Case III.
   # The default config does exists AND "R/app_config.R" provides information
   # about a possible user config which is found! (this occurs if the user
@@ -171,17 +174,10 @@ get_current_config <- function(path = getwd()) {
   }
 
   if (!fs_file_exists(path_conf)) {
-    if (interactive()) {
-      ask <- yesno(
-        sprintf(
-          "The %s file doesn't exist.\nIt's possible that you might not be in a {golem} based project.\n Do you want to create the {golem} files?",
-          basename(path_conf)
-        )
-      )
+    if (rlang::is_interactive()) {
+      ask <- ask_golem_creation_upon_config(path_conf)
       # Return early if the user doesn't allow
-      if (!ask) {
-        return(NULL)
-      }
+      if (!ask) return(NULL)
 
       fs_file_copy(
         path = golem_sys("shinyexample/inst/golem-config.yml"),
@@ -221,6 +217,13 @@ get_current_config <- function(path = getwd()) {
   )
 }
 
+ask_golem_creation_upon_config <- function(pth) {
+  msg <- paste0(
+    "The %s file doesn't exist.",
+    "\nIt's possible that you might not be in a {golem} based project.\n",
+    "Do you want to create the {golem} files?")
+  yesno(sprintf(msg, basename(pth)))
+}
 # This function changes the name of the
 # package in app_config when you need to
 # set the {golem} name
