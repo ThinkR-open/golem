@@ -79,7 +79,7 @@ test_that("config works", {
 test_that("golem-config.yml can be renamed and moved to another location", {
 
   path_dummy_golem <- tempfile(pattern = "dummygolem")
-  golem::create_golem(
+  create_golem(
     path = path_dummy_golem,
     open = FALSE
   )
@@ -89,8 +89,8 @@ test_that("golem-config.yml can be renamed and moved to another location", {
 
   ## The default config path is returned
   expect_equal(
-    golem:::guess_where_config(),
-    golem:::fs_path_abs(file.path(
+    guess_where_config(),
+    fs_path_abs(file.path(
       path_dummy_golem,
       "inst/golem-config.yml"
     ))
@@ -105,25 +105,27 @@ test_that("golem-config.yml can be renamed and moved to another location", {
     from = "inst/golem-config.yml",
     to = "inst/config/golem.yml"
   )
-  ## III. Remove old config file
-  file.remove(
-    "inst/golem-config.yml"
-  )
-  ## IV Save content of default config to restore and for final test later
+  ## III Save content of default config to restore and for final test later
   tmp_app_config_default <- readLines("R/app_config.R")
-  # V.A User alters correct line in app_config.R: different path AND filename!
+  # IV.A User alters correct line in app_config.R: different path AND filename!
   tmp_app_config_test_01 <- readLines("R/app_config.R")
   tmp_app_config_test_01[36] <- "  file = app_sys(\"config/golem.yml\")"
   writeLines(tmp_app_config_test_01, "R/app_config.R")
-  # V.A The updated config is found
+  # Keeping two configs (user and default) is forbidden i.e. we expect an error
+  expect_error(guess_where_config())
+  ## Remove old config file
+  file.remove(
+    "inst/golem-config.yml"
+  )
+  # IV.A The updated config is found
   expect_equal(
-    golem:::guess_where_config(),
-    golem:::fs_path_abs(file.path(
+    guess_where_config(),
+    fs_path_abs(file.path(
       path_dummy_golem,
       "inst/config/golem.yml"
     ))
   )
-  ## V.B app_config.R has a multi-line statement
+  ## IV.B app_config.R has a multi-line statement
   ## -   > e.g. because of grkstyle formatting or long path names
   tmp_app_config_test_02 <- tmp_app_config_default
   tmp_max_lines_config   <- length(tmp_app_config_test_02)
@@ -133,20 +135,34 @@ test_that("golem-config.yml can be renamed and moved to another location", {
                               ")",
                               tmp_app_config_test_02[37:tmp_max_lines_config])
   writeLines(tmp_app_config_test_02, "R/app_config.R")
-  # V.B The updated config  with multi-line app_sys()-call is read correctly
+  # IV.B The updated config  with multi-line app_sys()-call is read correctly
   expect_equal(
-    golem:::guess_where_config(),
-    golem:::fs_path_abs(file.path(
+    guess_where_config(),
+    fs_path_abs(file.path(
       path_dummy_golem,
       "inst/config/golem.yml"
     ))
   )
-  ## V.C app_config.R has a malformatted app_sys(...) call
+  ## IV.C app_config.R has a malformatted app_sys(...) call
   ##    -> e.g. because of grkstyle formatting or long path names
   tmp_app_config_test_03 <- tmp_app_config_default
   ## malformation = typo: app_syss() instead of app_sys()
   tmp_app_config_test_03[36] <- "  file = app_syss(\"config/golem.yml\")"
   writeLines(tmp_app_config_test_03, "R/app_config.R")
-  # V.C The updated config  with multi-line app_sys()-call is read correctly
-  expect_null(golem:::guess_where_config())
+  # IV.C The updated config  with multi-line app_sys()-call is read correctly
+  expect_null(guess_where_config())
+  # V. And finally if default config-file is missing AND no valid app_config.R
+  # V.A test that default sub-function returns path
+  tmp_app_config_test_03[36] <- "  file = app_sys(\"config/golem.yml\")"
+  writeLines(tmp_app_config_test_03, "R/app_config.R")
+  expect_equal(
+    try_user_config_location(pkg_path()),
+    fs_path_abs(file.path(
+      path_dummy_golem,
+      "inst/config/golem.yml"
+    ))
+  )
+  # V.B test that default sub-function fails to return path and gives NULL
+  file.remove("R/app_config.R")
+  expect_null(try_user_config_location(pkg_path()))
 })
