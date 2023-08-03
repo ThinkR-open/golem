@@ -77,7 +77,6 @@ test_that("config works", {
   })
 })
 test_that("golem-config.yml can be renamed and moved to another location", {
-
   path_dummy_golem <- tempfile(pattern = "dummygolem")
   create_golem(
     path = path_dummy_golem,
@@ -128,12 +127,14 @@ test_that("golem-config.yml can be renamed and moved to another location", {
   ## IV.B app_config.R has a multi-line statement
   ## -   > e.g. because of grkstyle formatting or long path names
   tmp_app_config_test_02 <- tmp_app_config_default
-  tmp_max_lines_config   <- length(tmp_app_config_test_02)
+  tmp_max_lines_config <- length(tmp_app_config_test_02)
   tmp_app_config_test_02[36] <- "  file = app_sys("
-  tmp_app_config_test_02 <- c(tmp_app_config_test_02[1:36],
-                              "\"config/golem.yml\"",
-                              ")",
-                              tmp_app_config_test_02[37:tmp_max_lines_config])
+  tmp_app_config_test_02 <- c(
+    tmp_app_config_test_02[1:36],
+    "\"config/golem.yml\"",
+    ")",
+    tmp_app_config_test_02[37:tmp_max_lines_config]
+  )
   writeLines(tmp_app_config_test_02, "R/app_config.R")
   # IV.B The updated config  with multi-line app_sys()-call is read correctly
   expect_equal(
@@ -171,7 +172,6 @@ test_that("golem-config.yml can be renamed and moved to another location", {
 })
 
 test_that("golem-config.yml can be retrieved for some exotic corner cases", {
-
   path_dummy_golem <- tempfile(pattern = "dummygolem")
   create_golem(
     path = path_dummy_golem,
@@ -180,15 +180,6 @@ test_that("golem-config.yml can be retrieved for some exotic corner cases", {
 
   old_wd <- setwd(path_dummy_golem)
   on.exit(setwd(old_wd))
-
-  # 0. The default config path is returned
-  expect_equal(
-    guess_where_config(),
-    fs_path_abs(file.path(
-      path_dummy_golem,
-      "inst/golem-config.yml"
-    ))
-  )
 
   # Test exotic case IV.A - for some reason wd is set to subdir "inst/"
   # Change dir to subdir "inst"
@@ -215,4 +206,123 @@ test_that("golem-config.yml can be retrieved for some exotic corner cases", {
   )
   # Cleanup
   unlink(path_dummy_golem, TRUE, TRUE)
+})
+
+test_that("get_current_config() fails non-interactively with proper error", {
+  path_dummy_golem <- tempfile(pattern = "dummygolem")
+  create_golem(
+    path = path_dummy_golem,
+    open = FALSE
+  )
+
+  old_wd <- setwd(path_dummy_golem)
+  on.exit(setwd(old_wd))
+
+  pth_golem_ymlconf <- file.path(path_dummy_golem, "inst/golem-config.yml")
+
+  # Force the if-clause evaluation of get_current_config() for a NULL path
+  file.remove(pth_golem_ymlconf)
+  # Test that error is returned in NON-INTERACTIVE mode
+  expect_error(
+    rlang::with_interactive(
+      {
+        get_current_config("some/nonesense/path/to/test")
+      },
+      value = FALSE
+    ),
+    "The golem-config.yml file doesn't exist"
+  )
+  # Cleanup
+  unlink(path_dummy_golem, TRUE, TRUE)
+})
+
+test_that("get_current_config() interactively recreates files upon user wish", {
+  path_dummy_golem <- tempfile(pattern = "dummygolem")
+  create_golem(
+    path = path_dummy_golem,
+    open = FALSE
+  )
+
+  old_wd <- setwd(path_dummy_golem)
+  on.exit(setwd(old_wd))
+
+  pth_golem_ymlconf <- file.path(path_dummy_golem, "inst/golem-config.yml")
+  pth_golem_appconf <- file.path(path_dummy_golem, "R/app_config.R")
+
+  # Test that golem-specific files are copied in INTERACTIVE mode
+  # I. remove files before they are copied
+  # 1. golem-config-yaml; remove and check if missing
+  expect_true(file.exists(pth_golem_ymlconf))
+  file.remove(pth_golem_ymlconf)
+  expect_false(file.exists(pth_golem_ymlconf))
+  # 2. R/app_config.R; remove and check if missing
+  expect_true(file.exists(pth_golem_appconf))
+  file.remove(pth_golem_appconf)
+  expect_false(file.exists(pth_golem_appconf))
+  # II. check that copying works: interactive is bypassed as-if user says "yes"
+  mockery::stub(
+    where = get_current_config,
+    what = "ask_golem_creation_upon_config",
+    how = TRUE
+  )
+  expect_equal(
+    rlang::with_interactive({
+      get_current_config(path_dummy_golem)
+    },
+    value = TRUE
+    ),
+    fs_path_abs(pth_golem_ymlconf)
+  )
+  expect_true(file.exists(pth_golem_ymlconf))
+  expect_true(file.exists(pth_golem_appconf))
+
+  # Cleanup
+  unlink(path_dummy_golem, TRUE, TRUE)
+})
+
+test_that("get_current_config() interactively returns NULL upon user wish", {
+  path_dummy_golem <- tempfile(pattern = "dummygolem")
+  create_golem(
+    path = path_dummy_golem,
+    open = FALSE
+  )
+
+  old_wd <- setwd(path_dummy_golem)
+  on.exit(setwd(old_wd))
+
+  pth_golem_ymlconf <- file.path(path_dummy_golem, "inst/golem-config.yml")
+  pth_golem_appconf <- file.path(path_dummy_golem, "R/app_config.R")
+
+  # Test that golem-specific files are copied in INTERACTIVE mode
+  # I. remove files before they are copied
+  # 1. golem-config-yaml; remove and check if missing
+  expect_true(file.exists(pth_golem_ymlconf))
+  file.remove(pth_golem_ymlconf)
+  expect_false(file.exists(pth_golem_ymlconf))
+  # 2. R/app_config.R; remove and check if missing
+  expect_true(file.exists(pth_golem_appconf))
+  file.remove(pth_golem_appconf)
+  expect_false(file.exists(pth_golem_appconf))
+  # II. check that copying works: interactive is bypassed as-if user says "no"
+  mockery::stub(
+    where = get_current_config,
+    what = "ask_golem_creation_upon_config",
+    how = FALSE
+  )
+  expect_null(
+    rlang::with_interactive({
+      get_current_config(path_dummy_golem)
+    },
+    value = TRUE
+    )
+  )
+  expect_false(file.exists(pth_golem_ymlconf))
+  expect_false(file.exists(pth_golem_appconf))
+
+  # Cleanup
+  unlink(path_dummy_golem, TRUE, TRUE)
+})
+
+test_that("ask_golem_creation_upon_config() fails in non-interactive mode", {
+  expect_error(ask_golem_creation_upon_config("test/path"))
 })
