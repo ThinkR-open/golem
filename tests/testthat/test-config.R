@@ -165,4 +165,54 @@ test_that("golem-config.yml can be renamed and moved to another location", {
   # V.B test that default sub-function fails to return path and gives NULL
   file.remove("R/app_config.R")
   expect_null(try_user_config_location(pkg_path()))
+
+  # Cleanup
+  unlink(path_dummy_golem, TRUE, TRUE)
+})
+
+test_that("golem-config.yml can be retrieved for some exotic corner cases", {
+
+  path_dummy_golem <- tempfile(pattern = "dummygolem")
+  create_golem(
+    path = path_dummy_golem,
+    open = FALSE
+  )
+
+  old_wd <- setwd(path_dummy_golem)
+  on.exit(setwd(old_wd))
+
+  # 0. The default config path is returned
+  expect_equal(
+    guess_where_config(),
+    fs_path_abs(file.path(
+      path_dummy_golem,
+      "inst/golem-config.yml"
+    ))
+  )
+
+  # Test exotic case IV.A - for some reason wd is set to subdir "inst/"
+  # Change dir to subdir "inst"
+  setwd(file.path(getwd(), "inst"))
+  # Test that the default config path is returned
+  expect_equal(
+    guess_where_config(),
+    fs_path_abs(file.path(
+      path_dummy_golem,
+      "inst/golem-config.yml"
+    ))
+  )
+
+  # Test exotic case IV.B - for some reason wd is set to subdir "inst/"
+  # Change dir to golem-pkg toplevel
+  setwd(path_dummy_golem)
+  # The default config path is returned though arguments are non-sense
+  expect_equal(
+    guess_where_config("hi", "there"),
+    fs_path_abs(file.path(
+      path_dummy_golem,
+      "inst/golem-config.yml"
+    ))
+  )
+  # Cleanup
+  unlink(path_dummy_golem, TRUE, TRUE)
 })
