@@ -68,7 +68,10 @@ guess_where_config <- function(
   if (fs_file_exists(ret_pth)) {
     return(fs_path_abs(ret_pth))
   }
-  # IV.B Trying with pkg_path
+  # IV.B Try with pkg_path() and default filename in case function arguments
+  # 'path' and 'file' are not working (though it's unusual to set values for
+  # this arguments to something different from the defaults we still want to
+  # cover this case)
   ret_pth <- attempt({
     fs_path(
       golem::pkg_path(),
@@ -78,9 +81,7 @@ guess_where_config <- function(
   if (!is_try_error(ret_pth) && fs_file_exists(ret_pth)) {
     return(fs_path_abs(ret_pth))
   }
-  if (fs_file_exists(ret_pth)) {
-    return(fs_path_abs(ret_pth))
-  }
+
   # If all cases fail return NULL
   return(NULL)
 }
