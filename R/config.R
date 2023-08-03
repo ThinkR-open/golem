@@ -85,7 +85,7 @@ try_user_config_location <- function(pth) {
   out_config_char <- substring(out_config_char, 2, nchar(out_config_char) - 1)
 
   # V. return full path to new config file including pkg-path and 'inst'
-  return(file.path(pth, "inst", out_config_char))
+  return(fs_path(pth, "inst", out_config_char))
 }
 guess_lines_to_config_file <- function(guess_text) {
   # I. Check if the path is a one-liner i.e. try to match `app_sys(...)` string
@@ -104,7 +104,7 @@ guess_lines_to_config_file <- function(guess_text) {
       from = tmp_guess_lines + 1,
       to = length(guess_text)
     )
-    # Fine the closing brace `)` of app_sys(...) - identified code portion must
+    # Find the closing brace `)` of app_sys(...) - identified code portion must
     # contain information on the path.
     tmp_end_line <- NULL
     for (i in tmp_check_lines) {
