@@ -26,8 +26,7 @@ create_if_needed <- function(
   } else if (type == "directory") {
     dont_exist <- Negate(fs_dir_exists)(path)
   }
-  # If it doesn't exist, ask if we are allowed
-  # to create it
+  # If it doesn't exist, ask if we are allowed to create it
   if (dont_exist) {
     if (rlang::is_interactive()) {
       ask <- ask_golem_creation_file(path, type)
@@ -52,9 +51,7 @@ create_if_needed <- function(
       )
     }
   }
-
-  # TRUE means that file exists (either
-  # created or already there)
+  # TRUE means that file exists (either created or already there)
   return(TRUE)
 }
 ask_golem_creation_file <- function(path, type) {
@@ -65,18 +62,6 @@ ask_golem_creation_file <- function(path, type) {
       type
     )
   )
-}
-
-check_file_exist <- function(file) {
-  res <- TRUE
-  if (fs_file_exists(file)) {
-    if (interactive()) {
-      res <- yesno("This file already exists, override?")
-    } else {
-      res <- TRUE
-    }
-  }
-  return(res)
 }
 
 # internal

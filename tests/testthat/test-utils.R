@@ -181,3 +181,9 @@ test_that("file creation utils work interactively with user mimick 'yes'", {
   # Cleanup
   unlink(path_dummy_golem, TRUE, TRUE, TRUE)
 })
+
+test_that("ask_golem_creation_file() fails in non-interactive mode", {
+  # Shallow testing to improve code-coverage
+  expect_error(ask_golem_creation_file("test/path", "some_type"))
+  }
+)
