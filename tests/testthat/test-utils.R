@@ -56,3 +56,33 @@ test_that("is_existing_module() fails outside an R package", {
   # Cleanup
   unlink(path_dummy_golem, TRUE, TRUE, TRUE)
 })
+
+test_that("file creation utils fail non-interactively", {
+  path_dummy_golem <- tempfile(pattern = "dummygolem")
+  create_golem(
+    path = path_dummy_golem,
+    open = FALSE
+  )
+
+  withr::with_dir(path_dummy_golem, {
+    tmp_test_file_path <- file.path(getwd(), "R", "tmp_file.R")
+    expect_false(file.exists(tmp_test_file_path))
+    expect_error(
+      rlang::with_interactive(
+        {
+          create_if_needed(
+            tmp_test_file_path,
+            type = "file",
+            content = "some text"
+          )
+        },
+        value = FALSE
+      ),
+      paste0("The tmp_file.R file doesn't exist.")
+    )
+    expect_false(file.exists(tmp_test_file_path))
+  })
+
+  # Cleanup
+  unlink(path_dummy_golem, TRUE, TRUE, TRUE)
+})
