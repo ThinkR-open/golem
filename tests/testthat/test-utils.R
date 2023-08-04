@@ -182,8 +182,35 @@ test_that("file creation utils work interactively with user mimick 'yes'", {
   unlink(path_dummy_golem, TRUE, TRUE, TRUE)
 })
 
-test_that("ask_golem_creation_file() fails in non-interactive mode", {
-  # Shallow testing to improve code-coverage
-  expect_error(ask_golem_creation_file("test/path", "some_type"))
+test_that(
+  "ask_golem_creation_file() fails in non-interactive mode",
+  {
+    # Shallow testing to improve code-coverage
+    expect_error(ask_golem_creation_file("test/path", "some_type"))
   }
 )
+
+test_that("simple cat-messaging functions keep output style when printing", {
+  # This is achieved by snapping their output. If {cli} changes output style we
+  # will notice it via a different snapshot here. and can adjust accordingly.
+  withr::with_options(
+    list(golem.quiet = FALSE),
+    expect_snapshot_output(cat_info("Rebuild Berlin from scratch."))
+  )
+  expect_snapshot_output(cat_exists("build/city/Berlin"))
+  expect_snapshot_output(cat_dir_necessary())
+  withr::with_options(
+    list(golem.quiet = FALSE),
+    expect_snapshot_output(cat_start_download())
+  )
+  withr::with_options(
+    list(golem.quiet = FALSE),
+    expect_snapshot_output(cat_start_copy())
+  )
+  expect_snapshot_output(cat_downloaded("a place with no wifi."))
+  expect_snapshot_output(cat_copied("inside a black hole."))
+  withr::with_options(
+    list(golem.quiet = FALSE),
+    after_creation_message_html_template(name = "NAME-OF-HTML-FILE")
+  )
+})
