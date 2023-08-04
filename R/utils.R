@@ -29,7 +29,7 @@ create_if_needed <- function(
   # If it doesn't exist, ask if we are allowed
   # to create it
   if (dont_exist) {
-    if (interactive()) {
+    if (rlang::is_interactive()) {
       ask <- yesno(
         sprintf(
           "The %s %s doesn't exist, create?",
@@ -464,14 +464,20 @@ add_sass_code <- function(where, dir, name) {
   }
 }
 
-#' Check if a module already exists
+#' Check if a module (`R`-file) already exists
 #'
-#' Assumes it is called at the root of a golem project.
+#' Should be called at the root of a `{golem}` project; but an error is thrown
+#' only if one is not inside an R package (as the checks of `golem:::is_golem()`
+#' are rather strict, specifically only the presence of a "R/" directory is
+#' checked for the moment).
 #'
-#' @param module A character string. The name of a potentially existing module
-#' @return Boolean. Does the module exist or not ?
+#' @param module a character string giving the name of a potentially existing
+#'    module `R`-file
+#' @return boolean; `TRUE` if the module (`R`-file) exists and `FALSE` else
 #' @noRd
 is_existing_module <- function(module) {
+  stopifnot(`Cannot be called when not inside a R-package` = dir.exists("R"))
+  # stopifnot(`Cannot be called when not inside a golem-project` = is.golem())
   existing_module_files <- list.files("R/", pattern = "^mod_")
   existing_module_names <- sub(
     "^mod_([[:alnum:]_]+)\\.R$",
