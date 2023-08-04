@@ -86,3 +86,37 @@ test_that("file creation utils fail non-interactively", {
   # Cleanup
   unlink(path_dummy_golem, TRUE, TRUE, TRUE)
 })
+
+test_that("file creation utils work interactively with user mimick 'no'", {
+  path_dummy_golem <- tempfile(pattern = "dummygolem")
+  create_golem(
+    path = path_dummy_golem,
+    open = FALSE
+  )
+
+  withr::with_dir(path_dummy_golem, {
+    tmp_test_file_path <- file.path(getwd(), "R", "tmp_file.R")
+    expect_false(file.exists(tmp_test_file_path))
+    mockery::stub(
+      where = create_if_needed,
+      what = "ask_golem_creation_file",
+      how = FALSE
+    )
+    expect_false(
+      rlang::with_interactive(
+        {
+          create_if_needed(
+            tmp_test_file_path,
+            type = "file",
+            content = "some text"
+          )
+        },
+        value = TRUE
+      )
+    )
+    expect_false(file.exists(tmp_test_file_path))
+  })
+
+  # Cleanup
+  unlink(path_dummy_golem, TRUE, TRUE, TRUE)
+})

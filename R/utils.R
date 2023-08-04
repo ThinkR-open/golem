@@ -2,7 +2,7 @@ golem_sys <- function(
   ...,
   lib.loc = NULL,
   mustWork = FALSE
-) {
+    ) {
   system.file(
     ...,
     package = "golem",
@@ -17,7 +17,7 @@ create_if_needed <- function(
   path,
   type = c("file", "directory"),
   content = NULL
-) {
+    ) {
   type <- match.arg(type)
 
   # Check if file or dir already exist
@@ -30,24 +30,17 @@ create_if_needed <- function(
   # to create it
   if (dont_exist) {
     if (rlang::is_interactive()) {
-      ask <- yesno(
-        sprintf(
-          "The %s %s doesn't exist, create?",
-          basename(path),
-          type
-        )
-      )
+      ask <- ask_golem_creation_file(path, type)
       # Return early if the user doesn't allow
       if (!ask) {
         return(FALSE)
-      } else {
-        # Create the file
-        if (type == "file") {
-          fs_file_create(path)
-          write(content, path, append = TRUE)
-        } else if (type == "directory") {
-          fs_dir_create(path, recurse = TRUE)
-        }
+      }
+      # Create the file
+      if (type == "file") {
+        fs_file_create(path)
+        write(content, path, append = TRUE)
+      } else if (type == "directory") {
+        fs_dir_create(path, recurse = TRUE)
       }
     } else {
       stop(
@@ -63,6 +56,15 @@ create_if_needed <- function(
   # TRUE means that file exists (either
   # created or already there)
   return(TRUE)
+}
+ask_golem_creation_file <- function(path, type) {
+  yesno(
+    sprintf(
+      "The %s %s doesn't exist, create?",
+      basename(path),
+      type
+    )
+  )
 }
 
 check_file_exist <- function(file) {
@@ -82,7 +84,7 @@ replace_word <- function(
   file,
   pattern,
   replace
-) {
+    ) {
   suppressWarnings(tx <- readLines(file))
   tx2 <- gsub(
     pattern = pattern,
@@ -170,7 +172,7 @@ cat_start_download <- function() {
 cat_downloaded <- function(
   where,
   file = "File"
-) {
+    ) {
   cat_green_tick(
     sprintf(
       "%s downloaded at %s",
@@ -190,7 +192,7 @@ cat_start_copy <- function() {
 cat_copied <- function(
   where,
   file = "File"
-) {
+    ) {
   cat_green_tick(
     sprintf(
       "%s copied to %s",
@@ -203,7 +205,7 @@ cat_copied <- function(
 cat_created <- function(
   where,
   file = "File"
-) {
+    ) {
   cat_green_tick(
     sprintf(
       "%s created at %s",
@@ -224,7 +226,7 @@ cat_automatically_linked <- function() {
 open_or_go_to <- function(
   where,
   open_file
-) {
+    ) {
   if (
     open_file
   ) {
@@ -250,7 +252,7 @@ after_creation_message_js <- function(
   pkg,
   dir,
   name
-) {
+    ) {
   if (
     desc_exist(pkg)
   ) {
@@ -273,7 +275,7 @@ after_creation_message_css <- function(
   pkg,
   dir,
   name
-) {
+    ) {
   if (
     desc_exist(pkg)
   ) {
@@ -296,7 +298,7 @@ after_creation_message_sass <- function(
   pkg,
   dir,
   name
-) {
+    ) {
   if (
     desc_exist(pkg)
   ) {
@@ -316,7 +318,7 @@ after_creation_message_html_template <- function(
   pkg,
   dir,
   name
-) {
+    ) {
   do_if_unquiet({
     cli_cat_line("")
     cli_cat_line("To use this html file as a template, add the following code in your UI:")
@@ -337,7 +339,7 @@ file_created_dance <- function(
   open_file,
   open_or_go_to = TRUE,
   catfun = cat_created
-) {
+    ) {
   catfun(where)
 
   fun(pkg, dir, name)
@@ -355,7 +357,7 @@ file_created_dance <- function(
 file_already_there_dance <- function(
   where,
   open_file
-) {
+    ) {
   cat_green_tick("File already exists.")
   open_or_go_to(
     where = where,
@@ -394,9 +396,9 @@ yesno <- function(...) {
 
 # Checking that a package is installed
 check_is_installed <- function(
-    pak,
-    ...
-) {
+  pak,
+  ...
+    ) {
   if (
     !requireNamespace(pak, ..., quietly = TRUE)
   ) {
@@ -412,9 +414,9 @@ check_is_installed <- function(
 }
 
 required_version <- function(
-    pak,
-    version
-) {
+  pak,
+  version
+    ) {
   if (
     utils::packageVersion(pak) < version
   ) {
