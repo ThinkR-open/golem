@@ -120,3 +120,64 @@ test_that("file creation utils work interactively with user mimick 'no'", {
   # Cleanup
   unlink(path_dummy_golem, TRUE, TRUE, TRUE)
 })
+
+test_that("file creation utils work interactively with user mimick 'yes'", {
+  path_dummy_golem <- tempfile(pattern = "dummygolem")
+  create_golem(
+    path = path_dummy_golem,
+    open = FALSE
+  )
+
+  withr::with_dir(path_dummy_golem, {
+    # 0. Define paths for tmp-file and tmp-dir to check existence for
+    tmp_test_file_path <- file.path(getwd(), "R", "tmp_file.R")
+    tmp_test_dir_path <- file.path(getwd(), "R", "tmp_dir")
+    # I. Expect that they do not exist
+    expect_false(file.exists(tmp_test_file_path))
+    expect_false(dir.exists(tmp_test_dir_path))
+    # II. replace user interaction from ask_golem_creation_file with TRUE
+    mockery::stub(
+      where = create_if_needed,
+      what = "ask_golem_creation_file",
+      how = TRUE
+    )
+    # III. test that file creation works AS-IF the user says "yes"/TRUE
+    # III.A function must pass with return value TRUE
+    expect_true(
+      rlang::with_interactive(
+        {
+          create_if_needed(
+            tmp_test_file_path,
+            type = "file",
+            content = "some text"
+          )
+        },
+        value = TRUE
+      )
+    )
+    # III.B a file should be created
+    expect_true(file.exists(tmp_test_file_path))
+    # III.C file content should match
+    check_content <- readLines(tmp_test_file_path)
+    expect_identical(check_content, "some text")
+    # IV. test that dir creation works AS-IF the user says "yes"/TRUE
+    # IV.A function must pass with return value TRUE
+    expect_true(
+      rlang::with_interactive(
+        {
+          create_if_needed(
+            tmp_test_dir_path,
+            type = "directory",
+            content = NULL
+          )
+        },
+        value = TRUE
+      )
+    )
+    # IV.B a dir should be created
+    expect_true(dir.exists(tmp_test_dir_path))
+  })
+
+  # Cleanup
+  unlink(path_dummy_golem, TRUE, TRUE, TRUE)
+})
