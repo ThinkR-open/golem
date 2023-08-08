@@ -39,7 +39,7 @@ add_module <- function(
   ...
     ) {
   # Let's start with the checks for the validity of the name
-  check_name_length(name)
+  check_name_length_is_one(name)
   check_name_syntax(name)
 
   # We now check that:

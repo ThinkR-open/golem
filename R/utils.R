@@ -477,7 +477,7 @@ is_existing_module <- function(module) {
 # This function is used for checking
 # that  the name argument of the function
 # creating files is not of length() > 1
-check_name_length <- function(name) {
+check_name_length_is_one <- function(name) {
   stop_if(
     name,
     ~ length(.x) > 1,
