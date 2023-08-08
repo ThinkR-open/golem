@@ -19,7 +19,7 @@ shiny applications.
 
 ## About
 
-You’re reading the doc about version : 0.4.0
+You’re reading the doc about version : 0.4.12
 
 This README has been compiled on the
 
@@ -33,9 +33,9 @@ Here are the test & coverage results :
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> ── R CMD check results ──────────────────────────────────────── golem 0.4.0 ────
-#> Duration: 1m 51.1s
-#> 
+#> ── R CMD check results ─────────────────────────────────────── golem 0.4.12 ────
+#> Duration: 1m 32.1s
+#>
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
@@ -46,7 +46,7 @@ covr::package_coverage()
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
 #> R/get_sysreqs.R: 0.00%
-#> R/gobals.R: 0.00%
+#> R/globals.R: 0.00%
 #> R/run_dev.R: 0.00%
 #> R/sanity_check.R: 0.00%
 #> R/use_files.R: 0.00%
@@ -61,7 +61,6 @@ covr::package_coverage()
 #> R/bootstrap_dockerfiler.R: 63.33%
 #> R/bootstrap_desc.R: 66.67%
 #> R/add_dockerfiles.R: 74.19%
-#> R/bootstrap_usethis.R: 76.56%
 #> R/boostrap_fs.R: 77.78%
 #> R/use_recommended.R: 78.79%
 #> R/modules_fn.R: 80.00%
@@ -70,7 +69,7 @@ covr::package_coverage()
 #> R/add_resource_path.R: 88.89%
 #> R/create_golem.R: 89.47%
 #> R/make_dev.R: 90.00%
-#> R/add_r_files.R: 91.67%
+#> R/add_r_files.R: 91.01%
 #> R/add_files.R: 92.31%
 #> R/add_rstudio_files.R: 93.10%
 #> R/golem-yaml-get.R: 93.18%
@@ -83,8 +82,8 @@ covr::package_coverage()
 #> R/browser_button.R: 100.00%
 #> R/bundle_resources.R: 100.00%
 #> R/disable_autoload.R: 100.00%
-#> R/golem-yaml-set.R: 100.00%
 #> R/golem-yaml-utils.R: 100.00%
+#> R/is_golem.R: 100.00%
 #> R/is_running.R: 100.00%
 #> R/pkg_tools.R: 100.00%
 #> R/set_golem_options.R: 100.00%

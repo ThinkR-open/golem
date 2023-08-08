@@ -34,7 +34,8 @@ set_golem_wd(
 set_golem_name(
   name = golem::pkg_name(),
   pkg = golem::pkg_path(),
-  talkative = TRUE
+  talkative = TRUE,
+  old_name = golem::pkg_name()
 )
 
 set_golem_version(
@@ -68,6 +69,8 @@ the value of the \code{R_CONFIG_ACTIVE} environment variable
 \item{talkative}{Should the messages be printed to the console?}
 
 \item{name}{The name of the app}
+
+\item{old_name}{The old name of the app, used when changing the name}
 
 \item{version}{The version of the app}
 

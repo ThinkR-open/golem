@@ -52,7 +52,7 @@ reference:
   - title: Add an app.R
     desc: Add an app.R at the root of your package to deploy on RStudio Connect
     contents:
-      - add_rstudioconnect_file
+      - add_positconnect_file
       - add_shinyappsio_file
       - add_shinyserver_file
 
@@ -147,6 +147,7 @@ reference:
       - make_dev
       - with_golem_options
       - maintenance_page
+      - is_golem
 
   - title: internal
     contents:

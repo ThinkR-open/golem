@@ -103,6 +103,19 @@ test_that("Test undisplay works", {
     as.character(b_undisplay),
     '<button id="go_filter" type="button" class="btn btn-default action-button" style="display: none;">go</button>'
   )
+
+  c <- shiny::tags$p(src = "plop", style = "some_style", "pouet")
+  expect_s3_class(c, "shiny.tag")
+  expect_equal(
+    as.character(c),
+    '<p src="plop" style="some_style">pouet</p>'
+  )
+  c_undisplay <- undisplay(c)
+  expect_s3_class(c_undisplay, "shiny.tag")
+  expect_equal(
+    as.character(c_undisplay),
+    '<p src="plop" style="display: none; some_style">pouet</p>'
+  )
 })
 
 test_that("Test display works", {
@@ -165,13 +178,46 @@ test_that("Test columns wrappers works", {
 })
 
 test_that("Test make_action_button works", {
+  tmp_tag <- a(href = "#", "My super link", style = "color: lightblue;")
   button <- make_action_button(
-    a(href = "#", "My super link", style = "color: lightblue;"),
+    tmp_tag,
     inputId = "mylink"
   )
   expect_s3_class(button, "shiny.tag")
   expect_equal(
     as.character(button),
     '<a href="#" style="color: lightblue;" id="mylink" class="action-button">My super link</a>'
+  )
+  expect_error(
+    button_2 <- make_action_button(
+      unclass(tmp_tag),
+      inputId = "mylink_2"
+    )
+  )
+  expect_error(
+    button_3 <- make_action_button(
+      button,
+      inputId = "mylink_3"
+    )
+  )
+  expect_error(
+    button_4 <- make_action_button(
+      tmp_tag,
+      inputId = NULL
+    )
+  )
+  tmp_tag_2 <- tmp_tag
+  tmp_tag_2$attribs$id <- "id_already_present"
+  expect_warning(
+    button_5 <- make_action_button(
+      tmp_tag_2,
+      inputId = "mylink_5"
+    )
+  )
+  tmp_tag_3 <- tmp_tag
+  tmp_tag_3$attribs$class <- "class_already_present"
+  button_6 <- make_action_button(
+    tmp_tag_3,
+    inputId = "someID"
   )
 })

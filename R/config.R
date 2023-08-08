@@ -61,7 +61,7 @@ guess_where_config <- function(
 #'
 #' @export
 get_current_config <- function(path = getwd()) {
-  # We check wether we can guess where the config file is
+  # We check whether we can guess where the config file is
   path_conf <- guess_where_config(path)
 
   # We default to inst/ if this doesn't exist

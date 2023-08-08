@@ -1,5 +1,5 @@
 add_dockerfile_with_renv_ <- function(
-    source_folder = ".",
+    source_folder = get_golem_wd(),
     lockfile = NULL,
     output_dir = fs::path(tempdir(), "deploy"),
     distro = "focal",
@@ -13,28 +13,28 @@ add_dockerfile_with_renv_ <- function(
     document = FALSE,
     ...
     # build_golem_from_source = TRUE,
-    ) {
+) {
+  check_dockerfiler_installed()
   if (is.null(lockfile)) {
     rlang::check_installed(
       c("renv", "attachment"),
       reason = "to build a Dockerfile with automatic renv.lock creation. Use the `lockfile` parameter to pass your own `renv.lock` file."
     )
   }
-
-
+  
   # Small hack to prevent warning from rlang::lang() in tests
   # This should be managed in {attempt} later on
   x <- suppressWarnings({
     rlang::lang(print)
   })
-
+  
   dir.create(output_dir)
-
+  
   # add output_dir in Rbuildignore if the output is inside the golem
   if (normalizePath(dirname(output_dir)) == normalizePath(source_folder)) {
     usethis_use_build_ignore(output_dir)
   }
-
+  
   if (is.null(lockfile)) {
     if (isTRUE(document)) {
       cli_cat_line("You set `document = TRUE` and you did not pass your own renv.lock file,")
@@ -46,10 +46,10 @@ add_dockerfile_with_renv_ <- function(
       cli_cat_line("")
       cli_cat_line("In any case be sure to have no Error or Warning at `devtools::check()`")
     }
-
-
-
-
+    
+    
+    
+    
     lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
       check_if_suggests_is_installed = FALSE, document = document,
@@ -57,7 +57,7 @@ add_dockerfile_with_renv_ <- function(
       ...
     )
   }
-
+  
   # fs_file_copy(
   #   path = lockfile,
   #   new_path = output_dir,
@@ -74,16 +74,16 @@ add_dockerfile_with_renv_ <- function(
     expand = expand,
     extra_sysreqs = extra_sysreqs
   )
-
+  
   socle$write(as = file.path(output_dir, "Dockerfile_base"))
-
-
+  
+  
   my_dock <- dockerfiler_Dockerfile()$new(FROM = tolower(tolower(paste0(golem::get_golem_name(), "_base"))))
-
+  
   my_dock$COPY("renv.lock.prod", "renv.lock")
-
+  
   my_dock$RUN("R -e 'renv::restore()'")
-
+  
   if (update_tar_gz) {
     old_version <- list.files(path = output_dir, pattern = paste0(golem::get_golem_name(), "_*.*.tar.gz"), full.names = TRUE)
     # file.remove(old_version)
@@ -100,7 +100,7 @@ add_dockerfile_with_renv_ <- function(
         )
       )
     }
-
+    
     if (
       isTRUE(
         requireNamespace(
@@ -110,7 +110,7 @@ add_dockerfile_with_renv_ <- function(
       )
     ) {
       out <- pkgbuild::build(
-        path = ".",
+        path = source_folder,
         dest_path = output_dir,
         vignettes = FALSE
       )
@@ -128,7 +128,7 @@ add_dockerfile_with_renv_ <- function(
       stop("please install {pkgbuild}")
     }
   }
-
+  
   # we use an already built tar.gz file
   my_dock$COPY(
     from =
@@ -141,20 +141,20 @@ add_dockerfile_with_renv_ <- function(
 }
 
 #' @param source_folder path to the Package/golem source folder to deploy.
-#' default is current folder '.'
-#' @param lockfile path to the renv.lock file to use. default is `NULL`
+#' default is retrieved via [get_golem_wd()].
+#' @param lockfile path to the renv.lock file to use. default is `NULL`.
 #' @param output_dir folder to export everything deployment related.
 #' @param distro One of "focal", "bionic", "xenial", "centos7", or "centos8".
 #' See available distributions at https://hub.docker.com/r/rstudio/r-base/.
 #' @param document boolean. If TRUE (by default), DESCRIPTION file is updated using [attachment::att_amend_desc()] before creating the renv.lock file
 #' @param dockerfile_cmd What is the CMD to add to the Dockerfile. If NULL, the default,
-#' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\`
-#' @param ... Other arguments to pass to [renv::snapshot()]
+#' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\`.
+#' @param ... Other arguments to pass to [renv::snapshot()].
 #' @inheritParams add_dockerfile
 #' @rdname dockerfiles
 #' @export
 add_dockerfile_with_renv <- function(
-    source_folder = ".",
+    source_folder = get_golem_wd(),
     lockfile = NULL,
     output_dir = fs::path(tempdir(), "deploy"),
     distro = "focal",
@@ -202,7 +202,7 @@ add_dockerfile_with_renv <- function(
   )
   base_dock
   base_dock$write(as = file.path(output_dir, "Dockerfile"))
-
+  
   out <- sprintf(
     "docker build -f Dockerfile_base --progress=plain -t %s .
 docker build -f Dockerfile --progress=plain -t %s .
@@ -215,9 +215,9 @@ docker run -p %s:%s %s
     tolower(paste0(golem::get_golem_name(), ":latest")),
     port
   )
-
+  
   cat(out, file = file.path(output_dir, "README"))
-
+  
   open_or_go_to(
     where = file.path(output_dir, "README"),
     open_file = open
@@ -229,7 +229,7 @@ docker run -p %s:%s %s
 #' @export
 #' @export
 add_dockerfile_with_renv_shinyproxy <- function(
-    source_folder = ".",
+    source_folder = get_golem_wd(),
     lockfile = NULL,
     output_dir = fs::path(tempdir(), "deploy"),
     distro = "focal",
@@ -272,7 +272,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
 #' @export
 #' @export
 add_dockerfile_with_renv_heroku <- function(
-    source_folder = ".",
+    source_folder = get_golem_wd(),
     lockfile = NULL,
     output_dir = fs::path(tempdir(), "deploy"),
     distro = "focal",
@@ -308,7 +308,7 @@ add_dockerfile_with_renv_heroku <- function(
     ),
     ...
   )
-
+  
   apps_h <- gsub(
     "\\.",
     "-",
@@ -318,34 +318,34 @@ add_dockerfile_with_renv_heroku <- function(
       golem::get_golem_version()
     )
   )
-
+  
   readme_output <- fs_path(
     output_dir,
     "README"
   )
-
+  
   write_there <- function(...) {
     write(..., file = readme_output, append = TRUE)
   }
-
+  
   write_there("From your command line, run:\n")
-
+  
   write_there(
     sprintf(
       "docker build -f Dockerfile_base --progress=plain -t %s .",
       paste0(golem::get_golem_name(), "_base")
     )
   )
-
+  
   write_there(
     sprintf(
       "docker build -f Dockerfile --progress=plain -t %s .\n",
       paste0(golem::get_golem_name(), ":latest")
     )
   )
-
+  
   write_there("Then, to push on heroku:\n")
-
+  
   write_there("heroku container:login")
   write_there(
     sprintf("heroku create %s", apps_h)
@@ -360,11 +360,11 @@ add_dockerfile_with_renv_heroku <- function(
     sprintf("heroku open --app %s\n", apps_h)
   )
   write_there("> Be sure to have the heroku CLI installed.")
-
+  
   write_there(
     sprintf("> You can replace %s with another app name.", apps_h)
   )
-
+  
   # The open is deported here just to be sure
   # That we open the README once it has been populated
   open_or_go_to(

@@ -508,3 +508,17 @@ do_if_unquiet <- function(expr) {
     force(expr)
   }
 }
+
+# This functions checks that the 'name' argument
+# of add_module() does not start with 'mod_' as
+# this is prepended by add_module() per default.
+check_name_syntax <- function(name) {
+  if (isTRUE(grepl("^mod_", name))) {
+    cli_cli_alert_info(
+      "You set a 'name' that starts with 'mod_'."
+    )
+    cli_cli_alert_info(
+      "This is not necessary as golem will prepend 'mod_' to your module name automatically."
+    )
+  }
+}

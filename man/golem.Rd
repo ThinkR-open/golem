@@ -32,6 +32,7 @@ Other contributors:
   \item David Granjon \email{dgranjon@ymail.com} [contributor]
   \item Arthur Bréant \email{arthur@thinkr.fr} [contributor]
   \item Antoine Languillaume \email{antoine@thinkr.fr} [contributor]
+  \item Ilya Zarubin \email{zarubin@wiso.uni-koeln.de} [contributor]
   \item ThinkR [copyright holder]
 }
 

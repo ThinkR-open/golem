@@ -37,13 +37,24 @@ add_module <- function(
   module_template = golem::module_template,
   with_test = FALSE,
   ...
-) {
+    ) {
+  # Let's start with the checks for the validity of the name
   check_name_length(name)
-  name <- file_path_sans_ext(name)
+  check_name_syntax(name)
 
+  # We now check that:
+  # - The file name has no "mod_" prefix
+  # - The file name has no extension
+  name <- mod_remove(
+    file_path_sans_ext(name)
+  )
+
+  # Performing the creation inside the pkg root
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
+  # The module creation only works if the R folder
+  # is there
   dir_created <- create_if_needed(
     fs_path(pkg, "R"),
     type = "directory"
@@ -54,17 +65,23 @@ add_module <- function(
     return(invisible(FALSE))
   }
 
+  # Now we build the correct module file name
   where <- fs_path(
     "R",
     paste0("mod_", name, ".R")
   )
 
+  # If the file doesn't exist, we create it
   if (!fs_file_exists(where)) {
     fs_file_create(where)
 
-    module_template(name = name, path = where, export = export, ...)
+    module_template(
+      name = name,
+      path = where,
+      export = export,
+      ...
+    )
 
-    # write_there(" ")
     cat_created(where)
     open_or_go_to(where, open)
   } else {
@@ -74,20 +91,38 @@ add_module <- function(
     )
   }
 
+  # Creating all the files that come with the module
   if (!is.null(fct)) {
-    add_fct(fct, module = name, open = open)
+    add_fct(
+      fct,
+      module = name,
+      open = open
+    )
   }
 
   if (!is.null(utils)) {
-    add_utils(utils, module = name, open = open)
+    add_utils(
+      utils,
+      module =
+        name,
+      open = open
+    )
   }
 
   if (!is.null(js)) {
-    add_js_file(js, pkg = pkg, open = open)
+    add_js_file(
+      js,
+      pkg = pkg,
+      open = open
+    )
   }
 
   if (!is.null(js_handler)) {
-    add_js_handler(js_handler, pkg = pkg, open = open)
+    add_js_handler(
+      js_handler,
+      pkg = pkg,
+      open = open
+    )
   }
 
   if (with_test) {
@@ -152,7 +187,7 @@ module_template <- function(
   ph_ui = " ",
   ph_server = " ",
   ...
-) {
+    ) {
   write_there <- function(...) {
     write(..., file = path, append = TRUE)
   }
@@ -171,7 +206,7 @@ module_template <- function(
   }
   write_there("#'")
   write_there("#' @importFrom shiny NS tagList ")
-  write_there(sprintf("mod_%s_ui <- function(id){", name))
+  write_there(sprintf("mod_%s_ui <- function(id) {", name))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
   write_there(ph_ui)
@@ -188,7 +223,7 @@ module_template <- function(
     } else {
       write_there("#' @noRd ")
     }
-    write_there(sprintf("mod_%s_server <- function(input, output, session){", name))
+    write_there(sprintf("mod_%s_server <- function(input, output, session) {", name))
     write_there("  ns <- session$ns")
     write_there(ph_server)
     write_there("}")
@@ -209,7 +244,7 @@ module_template <- function(
       write_there("#' @noRd ")
     }
     write_there(sprintf("mod_%s_server <- function(id){", name))
-    write_there("  moduleServer( id, function(input, output, session){")
+    write_there("  moduleServer(id, function(input, output, session){")
     write_there("    ns <- session$ns")
     write_there(ph_server)
     write_there("  })")
@@ -236,7 +271,7 @@ use_module_test <- function(
   name,
   pkg = get_golem_wd(),
   open = TRUE
-) {
+    ) {
   # Remove the extension if any
   name <- file_path_sans_ext(name)
   # Remove the "mod_" if any
@@ -338,9 +373,14 @@ use_module_test <- function(
 }
 
 mod_remove <- function(string) {
-  gsub(
-    "^mod_",
-    "",
-    string
-  )
+  while (
+    grepl("^mod_", string)
+  ) {
+    string <- gsub(
+      "^mod_",
+      "",
+      string
+    )
+  }
+  string
 }

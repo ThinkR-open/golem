@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.4.0
+Version: 0.4.12
 Authors@R: c(
     person("Colin", "Fay", , "contact@colinfay.me", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0001-7343-1846")),
@@ -14,6 +14,7 @@ Authors@R: c(
     person("David", "Granjon", , "dgranjon@ymail.com", role = "ctb"),
     person("Arthur", "Bréant", , "arthur@thinkr.fr", role = "ctb"),
     person("Antoine", "Languillaume", , "antoine@thinkr.fr", role = "ctb"),
+    person("Ilya", "Zarubin", , "zarubin@wiso.uni-koeln.de", role = "ctb"),
     person("ThinkR", role = "cph")
   )
 Description: An opinionated framework for building a production-ready
