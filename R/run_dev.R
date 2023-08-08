@@ -1,4 +1,4 @@
-#' Run the `run_dev.R` file
+#' Run the `dev/run_dev.R` file
 #'
 #' The default `file="dev/run_dev.R"` launches your `{golem}` app with a bunch
 #' of useful options. The file content can be customized and `file`-name and

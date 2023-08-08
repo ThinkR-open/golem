@@ -2,20 +2,32 @@
 % Please edit documentation in R/run_dev.R
 \name{run_dev}
 \alias{run_dev}
-\title{Run run_dev.R}
+\title{Run the \code{run_dev.R} file}
 \usage{
 run_dev(file = "dev/run_dev.R", pkg = get_golem_wd(), save_all = TRUE)
 }
 \arguments{
-\item{file}{File path to \code{run_dev.R}. Defaults to \code{R/run_dev.R}.}
+\item{file}{String with (relative) file path to a \code{run_dev.R}-file}
 
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
-\item{save_all}{boolean. If TRUE, save all open file before sourcing \code{file}}
+\item{save_all}{Boolean; if \code{TRUE} saves all open files before sourcing
+\code{file}}
 }
 \value{
-Used for side-effect
+pure side-effect function; returns invisibly
 }
 \description{
-Run run_dev.R
+The default \code{file="dev/run_dev.R"} launches your \code{{golem}} app with a bunch
+of useful options. The file content can be customized and \code{file}-name and
+path changed as long as the argument combination of \code{file} and \code{pkg} are
+supplied correctly: the \code{file}-path is a relative path to a \code{{golem}}-package
+root \code{pkg}. An error is thrown if \code{pkg/file} cannot be found.
+}
+\details{
+The function \code{run_dev()} is typically used to launch a shiny app by sourcing
+the content of an appropriate \code{run_dev}-file. Carefully read the content of
+\code{dev/run_dev.R} when creating your custom \code{run_dev}-file. It has already
+many useful settings including a switch between production/development,
+reloading the package in a clean \code{R} environment before running the app etc.
 }

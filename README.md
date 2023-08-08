@@ -112,7 +112,7 @@ This `README` has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-08-08 18:26:15 UTC"
+#> [1] "2023-08-08 19:05:09 UTC"
 ```
 
 Here are the test & coverage results:
@@ -120,20 +120,20 @@ Here are the test & coverage results:
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
+#> Writing 'run_dev.Rd'
 #> ── R CMD check results ─────────────────────────────────────── golem 0.4.12 ────
-#> Duration: 2m 36.2s
+#> Duration: 2m 35.9s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 84.32%
+#> golem Coverage: 84.93%
 #> R/addins.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
 #> R/get_sysreqs.R: 0.00%
-#> R/run_dev.R: 0.00%
 #> R/sanity_check.R: 0.00%
 #> R/test_helpers.R: 30.26%
 #> R/js.R: 43.75%
@@ -157,6 +157,7 @@ covr::package_coverage()
 #> R/add_files.R: 92.31%
 #> R/golem-yaml-get.R: 93.18%
 #> R/add_dockerfiles_renv.R: 93.78%
+#> R/run_dev.R: 95.00%
 #> R/desc.R: 96.67%
 #> R/use_favicon.R: 96.67%
 #> R/use_readme.R: 97.14%
