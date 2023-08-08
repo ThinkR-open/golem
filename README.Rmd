@@ -37,8 +37,15 @@ install.packages("golem")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("Thinkr-open/golem")
+remotes::install_github("Thinkr-open/golem") # very close to CRAN version
+# remotes::install_github("Thinkr-open/golem@dev") # if you like to play
 ```
+
+## Resources
+
+The `{golem}` package is part of the [`{golemverse}`](https://golemverse.org/), a series of tools for Shiny.
+A list of various `{golem}` related resources (tutorials, video, blog post,...) can be found [here](https://golemverse.org/resources/).
+
 
 ## Launch the project
 
@@ -77,17 +84,10 @@ Read [Deploying Apps with {golem}](https://thinkr-open.github.io/golem/articles/
 
 This package is part of a series of tools for Shiny, which includes:
 
-
-
 -   `{golem}` - <https://github.com/ThinkR-open/golem>
 -   `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
 -   `{fakir}` - <https://github.com/ThinkR-open/fakir>
 -   `{gemstones}` - <https://github.com/ThinkR-open/gemstones>
-
-## Resources
-
-The `{golem}` package is part of the [`{golemverse}`](https://golemverse.org/).
-A list of various `{golem}` related resources can be found [here](https://golemverse.org/resources/).
 
 ## Examples apps
 
