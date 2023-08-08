@@ -30,7 +30,9 @@
 
 ## Internal changes
 
++ `guess_where_config()` now find the user config-yaml by reading its new location from user changes in "R/app_config.R" (#887, @ilyaZar)
 + All functions that requires to get a path now rely on get_golem_wd() (#1016, @ilyaZar)
+
 
 # 0.4.1
 
