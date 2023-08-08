@@ -25,7 +25,7 @@ This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-05-26 12:18:27 CEST"
+#> [1] "2023-08-07 13:23:40 UTC"
 ```
 
 Here are the test & coverage results :
@@ -41,7 +41,7 @@ devtools::check(quiet = TRUE)
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 69.41%
+#> golem Coverage: 69.09%
 #> R/addins.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
@@ -56,19 +56,16 @@ covr::package_coverage()
 #> R/js.R: 43.75%
 #> R/reload.R: 45.36%
 #> R/utils.R: 54.14%
-#> R/use_recommended.R: 54.55%
-#> R/utils.R: 55.31%
-#> R/bootstrap_desc.R: 55.56%
 #> R/install_dev_deps.R: 57.14%
 #> R/bootstrap_attachment.R: 61.54%
 #> R/bootstrap_dockerfiler.R: 63.33%
+#> R/bootstrap_desc.R: 66.67%
 #> R/add_dockerfiles.R: 74.19%
 #> R/boostrap_fs.R: 77.78%
-#> R/bootstrap_usethis.R: 78.57%
-#> R/modules_fn.R: 79.00%
-#> R/golem-yaml-set.R: 83.02%
+#> R/use_recommended.R: 78.79%
+#> R/modules_fn.R: 80.00%
 #> R/use_utils.R: 83.33%
-#> R/use_favicon.R: 85.56%
+#> R/desc.R: 86.25%
 #> R/add_resource_path.R: 88.89%
 #> R/create_golem.R: 89.47%
 #> R/make_dev.R: 90.00%
@@ -77,8 +74,7 @@ covr::package_coverage()
 #> R/add_rstudio_files.R: 93.10%
 #> R/golem-yaml-get.R: 93.18%
 #> R/add_dockerfiles_renv.R: 93.75%
-#> R/desc.R: 96.55%
-#> R/use_readme.R: 97.14%
+#> R/use_favicon.R: 96.67%
 #> R/boostrap_cli.R: 100.00%
 #> R/boostrap_crayon.R: 100.00%
 #> R/bootstrap_pkgload.R: 100.00%
@@ -151,6 +147,9 @@ scratch*](https://towardsdatascience.com/production-grade-r-shiny-with-golem-pro
   {golem}](https://www.youtube.com/watch?v=0f5Me1PFGDs)
 - 🇫🇷 [Déploiement d’une application {shiny} dans docker avec {renv} et
   {golem}](https://www.youtube.com/watch?v=diCG4t76k78)
+- 🇫🇷 Rencontres R 2023 : [{golem} et {fusen}, construire des apps Shiny
+  robustes et faciles à
+  maintenir](https://www.youtube.com/watch?v=cYKsYBFIpX0)
 
 ### Cheatsheet
 
