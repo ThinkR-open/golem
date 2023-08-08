@@ -4,6 +4,8 @@ test_that("add_dockerfiles_renv and add_dockerfile_with_renv_shinyproxy all outp
   skip_if_not_installed("dockerfiler", "0.2.0")
   skip_if_not_installed("attachment", "0.2.5")
 
+  options(  renv.config.snapshot.inference = FALSE)
+  options(  renv.config.snapshot.validate = FALSE)
   with_dir(pkg, {
     for (fun in list(
       add_dockerfile_with_renv,
@@ -38,6 +40,9 @@ test_that("suggested package are not in renv prod", {
   skip_if_not_installed("renv")
   skip_if_not_installed("dockerfiler", "0.2.0")
   skip_if_not_installed("attachment", "0.3.1")
+  
+  options(  renv.config.snapshot.inference = FALSE)
+  options(  renv.config.snapshot.validate = FALSE)
   with_dir(
     pkg,
     {
