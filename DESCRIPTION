@@ -55,6 +55,7 @@ Suggests:
     testthat,
     tools,
     withr,
+    mockery,
     attachment (>= 0.2.5),
     renv,
     usethis (>= 1.6.0),
