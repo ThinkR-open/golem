@@ -112,7 +112,7 @@ This `README` has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-08-08 14:20:03 UTC"
+#> [1] "2023-08-08 18:26:15 UTC"
 ```
 
 Here are the test & coverage results:
@@ -121,21 +121,20 @@ Here are the test & coverage results:
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
 #> ── R CMD check results ─────────────────────────────────────── golem 0.4.12 ────
-#> Duration: 2m 36.7s
+#> Duration: 2m 36.2s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 75.69%
+#> golem Coverage: 84.32%
 #> R/addins.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
 #> R/get_sysreqs.R: 0.00%
 #> R/run_dev.R: 0.00%
 #> R/sanity_check.R: 0.00%
-#> R/use_files.R: 0.00%
 #> R/test_helpers.R: 30.26%
 #> R/js.R: 43.75%
 #> R/reload.R: 45.36%
@@ -149,7 +148,7 @@ covr::package_coverage()
 #> R/modules_fn.R: 79.00%
 #> R/golem-yaml-set.R: 83.02%
 #> R/use_utils.R: 83.33%
-#> R/utils.R: 85.13%
+#> R/utils.R: 85.50%
 #> R/add_rstudio_files.R: 88.52%
 #> R/add_resource_path.R: 88.89%
 #> R/create_golem.R: 89.47%
@@ -177,6 +176,7 @@ covr::package_coverage()
 #> R/pkg_tools.R: 100.00%
 #> R/set_golem_options.R: 100.00%
 #> R/templates.R: 100.00%
+#> R/use_files.R: 100.00%
 #> R/with_opt.R: 100.00%
 ```
 

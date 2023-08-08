@@ -10,7 +10,7 @@ test_that("use_external_XXX_files() function family works properly", {
       # I. test the external ".txt" file download
       # I.A standard case
       use_external_file(
-        url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_plainfile.txt"
+        url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_plainfile.txt"
       )
       test_file_download <- readLines(
         "inst/app/www/testfile_template_plainfile.txt"
@@ -22,14 +22,14 @@ test_that("use_external_XXX_files() function family works properly", {
       # I.B corner case: file already exists
       expect_false(
         use_external_file(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_plainfile.txt",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_plainfile.txt",
           name = "testfile_template_plainfile.txt"
         )
       )
       # I.C corner case: dir already exists
       expect_false(
         use_external_file(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_plainfile.txt",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_plainfile.txt",
           name = "testfile_template_plainfile3.txt",
           dir = "inst/app/www2"
         )
@@ -38,7 +38,7 @@ test_that("use_external_XXX_files() function family works properly", {
       # II. test the external ".html" file download
       # II.A standard case
       use_external_html_template(
-        url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_html.html",
+        url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_html.html",
         name = "testfile_template_html.html"
       )
       test_file_download <- readLines(
@@ -62,14 +62,14 @@ test_that("use_external_XXX_files() function family works properly", {
       # II.B corner case: file already exists
       expect_false(
         use_external_html_template(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_html.html",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_html.html",
           name = "testfile_template_html.html"
         )
       )
       # II.C corner case: dir already exists
       expect_false(
         use_external_html_template(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_html.html",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_html.html",
           name = "testfile_template_html2.html",
           dir = "inst/app/www2"
         )
@@ -78,7 +78,7 @@ test_that("use_external_XXX_files() function family works properly", {
       # III. test the external ".js" file download
       # III.A standard case
       use_external_js_file(
-        url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_js.js"
+        url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_js.js"
       )
       test_file_download <- readLines(
         "inst/app/www/testfile_template_js.js"
@@ -93,14 +93,14 @@ test_that("use_external_XXX_files() function family works properly", {
       # III.B corner case: file already exists
       expect_false(
         use_external_js_file(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_js.js",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_js.js",
           name = "testfile_template_js.js"
         )
       )
       # III.C corner case: dir already exists
       expect_false(
         use_external_js_file(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_js.js",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_js.js",
           name = "testfile_template_js2.js",
           dir = "inst/app/www2"
         )
@@ -108,7 +108,7 @@ test_that("use_external_XXX_files() function family works properly", {
       # III.D corner case: URL does not have extension ".js"
       expect_false(
         use_external_js_file(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_js",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_js",
           name = "testfile_template_js3.js"
         )
       )
@@ -116,7 +116,7 @@ test_that("use_external_XXX_files() function family works properly", {
       # IV. test the external ".css" file download
       # IV.A standard case
       use_external_css_file(
-        url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_css.css"
+        url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_css.css"
       )
       test_file_download <- readLines(
         "inst/app/www/testfile_template_css.css"
@@ -142,14 +142,14 @@ test_that("use_external_XXX_files() function family works properly", {
       # IV.B corner case: file already exists
       expect_false(
         use_external_css_file(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_css.css",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_css.css",
           name = "testfile_template_css.css"
         )
       )
       # IV.C corner case: dir already exists
       expect_false(
         use_external_css_file(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_css.css",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_css.css",
           name = "testfile_template_css2.css",
           dir = "inst/app/www2"
         )
@@ -157,7 +157,7 @@ test_that("use_external_XXX_files() function family works properly", {
       # IV.D corner case: URL does not have extension ".css"
       expect_false(
         use_external_css_file(
-          url = "https://raw.githubusercontent.com/ilyaZar/golem/fix-1058/inst/utils/testfile_template_css",
+          url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_css",
           name = "testfile_template_css3.css"
         )
       )
