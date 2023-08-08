@@ -25,94 +25,6 @@ knitr::opts_chunk$set(
 
 `{golem}` is an opinionated framework for building production-grade shiny applications.
 
-## About
-
-You're reading the doc about version : `r pkgload::pkg_version()`
-
-This README has been compiled on the
-
-```{r}
-Sys.time()
-```
-
-Here are the test & coverage results :
-
-```{r}
-devtools::check(quiet = TRUE)
-```
-
-```{r echo = FALSE}
-unloadNamespace("golem")
-```
-
-```{r}
-covr::package_coverage()
-```
-
-## Tool series
-
-This package is part of a series of tools for Shiny, which includes:
-
--   `{golem}` - <https://github.com/ThinkR-open/golem>
--   `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
--   `{fakir}` - <https://github.com/ThinkR-open/fakir>
--   `{gemstones}` - <https://github.com/ThinkR-open/gemstones>
-
-## Resources
-
-### The Book :
-
--   <https://engineering-shiny.org/>
-
--   [paper version of the book “Engineering Production-Grade Shiny Apps”](https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022)
-
-### Blog posts :
-
-*Building Big Shiny Apps*
-
--   Part 1: <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/>
--   Part 2: <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/>
-
-[*Make a Fitness App from scratch*](https://towardsdatascience.com/production-grade-r-shiny-with-golem-prototyping-51b03f37c2a9)
-
-### Slide decks
-
--   useR! 2019 : [A Framework for Building Robust & Production Ready Shiny Apps](https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf)
--   ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with {golem}](https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem)
--   rstudio::conf(2020) : [Production-grade Shiny Apps with golem](https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem)
--   barcelonar (2019-12-03) : [Engineering Production-Grade Shiny Apps with
-{golem}](https://www.barcelonar.org/presentations/BarcelonaR_Building_Production_Grade_Shiny_Apps_with_golem.pdf)
-
-### Video
-
--   [{golem} and Effective Shiny Development Methods](https://www.youtube.com/watch?v=OU1-CkSVdTI)
--   [Hands-on demonstration of {golem}](https://www.youtube.com/watch?v=3-p9XLvoJV0)
--   useR! 2019 : [A Framework for Building Robust & Production Ready Shiny Apps](https://youtu.be/tCAan6smrjs)
--   `r  emo::flag("France")` [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
--   rstudio::conf(2020) : [Production-grade Shiny Apps with golem](https://posit.co/resources/videos/production-grade-shiny-apps-with-golem/)
--  `r  emo::flag("France")` Rencontres R 2021 : [ Conception d'applications Shiny avec {golem}](https://www.youtube.com/watch?v=0f5Me1PFGDs)
-- `r  emo::flag("France")` [ Déploiement d'une application {shiny} dans docker avec {renv} et {golem}](https://www.youtube.com/watch?v=diCG4t76k78)
-- `r  emo::flag("France")` Rencontres R 2023 : [ {golem} et {fusen}, construire des apps Shiny robustes et faciles à maintenir](https://www.youtube.com/watch?v=cYKsYBFIpX0)
-
-
-### Cheatsheet
-
--   [{golem} cheatsheet](https://thinkr.fr/golem_cheatsheet_v0.1.pdf)
-
-### Examples apps
-
-These are examples from the community. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of `{golem}` or `{shiny}`.
-
-- <https://github.com/seanhardison1/vcrshiny>
-- <https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC>
-- <https://github.com/marton-balazs-kovacs/tenzing>
-- <https://github.com/shahreyar-abeer/cranstars>
-
-You can also find apps at:
-
-- <https://connect.thinkr.fr/connect/>
-- <https://github.com/ColinFay/golemexamples>
-
 ## Installation
 
 -   You can install the stable version from CRAN with:
@@ -125,8 +37,15 @@ install.packages("golem")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("Thinkr-open/golem")
+remotes::install_github("Thinkr-open/golem") # very close to CRAN version
+# remotes::install_github("Thinkr-open/golem@dev") # if you like to play
 ```
+
+## Resources
+
+The `{golem}` package is part of the [`{golemverse}`](https://golemverse.org/), a series of tools for Shiny.
+A list of various `{golem}` related resources (tutorials, video, blog post,...) can be found [here](https://golemverse.org/resources/).
+
 
 ## Launch the project
 
@@ -138,7 +57,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/ThinkR-open/golem/mas
 
 ## Step by step guide
 
-See full documentation in the {pkgdown} website:
+See full documentation in the `{pkgdown}` website:
 
 [CRAN] <https://thinkr-open.github.io/golem/>
 
@@ -159,6 +78,54 @@ Read [Day to Day Dev](https://thinkr-open.github.io/golem/articles/b_dev.html) V
 ### Step 3: deploy
 
 Read [Deploying Apps with {golem}](https://thinkr-open.github.io/golem/articles/c_deploy.html) Vignette for a detailed walkthrough.
+
+
+## Tool series
+
+This package is part of a series of tools for Shiny, which includes:
+
+-   `{golem}` - <https://github.com/ThinkR-open/golem>
+-   `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
+-   `{fakir}` - <https://github.com/ThinkR-open/fakir>
+-   `{gemstones}` - <https://github.com/ThinkR-open/gemstones>
+
+## Examples apps
+
+These are examples from the community. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of `{golem}` or `{shiny}`.
+
+- <https://github.com/seanhardison1/vcrshiny>
+- <https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC>
+- <https://github.com/marton-balazs-kovacs/tenzing>
+- <https://github.com/shahreyar-abeer/cranstars>
+
+You can also find apps at:
+
+- <https://connect.thinkr.fr/connect/>
+- <https://github.com/ColinFay/golemexamples>
+
+## About
+
+You're reading the doc about version: `r pkgload::pkg_version()`
+
+This `README` has been compiled on the
+
+```{r}
+Sys.time()
+```
+
+Here are the test & coverage results:
+
+```{r}
+devtools::check(quiet = TRUE)
+```
+
+```{r echo = FALSE}
+unloadNamespace("golem")
+```
+
+```{r}
+covr::package_coverage()
+```
 
 ## CoC
 
