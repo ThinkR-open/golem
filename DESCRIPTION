@@ -14,6 +14,7 @@ Authors@R: c(
     person("David", "Granjon", , "dgranjon@ymail.com", role = "ctb"),
     person("Arthur", "Bréant", , "arthur@thinkr.fr", role = "ctb"),
     person("Antoine", "Languillaume", , "antoine@thinkr.fr", role = "ctb"),
+    person("Ilya", "Zarubin", , "zarubin@wiso.uni-koeln.de", role = "ctb"),
     person("ThinkR", role = "cph")
   )
 Description: An opinionated framework for building a production-ready
@@ -34,32 +35,35 @@ Imports:
     utils,
     yaml
 Suggests:
-    covr,
+    attachment (>= 0.2.5),
     cli (>= 2.0.0),
+    covr,
     crayon,
+    desc,
     devtools,
     dockerfiler (>= 0.2.0),
+    fs,
     knitr,
-    pkgload,
+    mockery,
     pkgbuild,
     pkgdown,
+    pkgload,
     processx,
     purrr,
     rcmdcheck,
-    roxygen2,
+    remotes,
+    renv,
     rmarkdown,
+    roxygen2,
     rsconnect,
+    rstudioapi,
+    sass,
     spelling,
     stringr,
     testthat,
     tools,
-    withr,
-    attachment (>= 0.2.5),
-    renv,
     usethis (>= 1.6.0),
-    fs,
-    rstudioapi,
-    desc
+    withr
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3

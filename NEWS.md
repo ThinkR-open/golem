@@ -1,6 +1,6 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
-# 0.4.1 to 0.5.0
+# 0.4.2 to 0.5.0
 
 ## New functions
 
@@ -30,7 +30,13 @@
 
 ## Internal changes
 
++ `guess_where_config()` now find the user config-yaml by reading its new location from user changes in "R/app_config.R" (#887, @ilyaZar)
 + All functions that requires to get a path now rely on get_golem_wd() (#1016, @ilyaZar)
+
+
+# 0.4.1
+
+This is an intermediate release after CRAN feedback.
 
 # 0.4.0
 
@@ -84,7 +90,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 - `add_dockerfile`, `add_dockerfile_shinyproxy()` and `add_dockerfile_heroku()` now recommend to switch to their `_with_renv_` counterpart
 
-# golem 0.3.2 (CRAN VERSION)
+# golem 0.3.2
 
 ### Soft deprecated
 
@@ -160,7 +166,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 - `{testthat}` and `{rlang}` are no longer hard dependencies (#742)
 
-# golem 0.3.1 (CRAN Version)
+# golem 0.3.1
 
 ## New functions
 

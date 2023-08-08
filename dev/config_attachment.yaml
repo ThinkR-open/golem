@@ -1,0 +1,76 @@
+path.n: NAMESPACE
+path.d: DESCRIPTION
+dir.r: R
+dir.v: vignettes
+dir.t: tests
+extra.suggests:
+  - pkgdown
+  - purrr
+  - rcmdcheck
+  - covr
+  - remotes
+  - sass
+  - cli
+  - crayon
+  - devtools
+  - dockerfiler
+  - knitr
+  - pkgload
+  - pkgbuild
+  - pkgdown
+  - processx
+  - purrr
+  - rcmdcheck
+  - roxygen2
+  - rmarkdown
+  - rsconnect
+  - spelling
+  - stringr
+  - testthat
+  - tools
+  - withr
+  - mockery
+  - attachment
+  - renv
+  - usethis
+  - fs
+  - rstudioapi
+  - desc
+pkg_ignore:
+  - s
+  - pkg
+  - i
+  - covr
+  - remotes
+  - sass
+  - cli
+  - crayon
+  - devtools
+  - dockerfiler
+  - knitr
+  - pkgload
+  - pkgbuild
+  - pkgdown
+  - processx
+  - purrr
+  - rcmdcheck
+  - roxygen2
+  - rmarkdown
+  - rsconnect
+  - spelling
+  - stringr
+  - testthat
+  - tools
+  - withr
+  - mockery
+  - attachment
+  - renv
+  - usethis
+  - fs
+  - rstudioapi
+  - desc
+document: yes
+normalize: yes
+inside_rmd: no
+must.exist: yes
+check_if_suggests_is_installed: yes

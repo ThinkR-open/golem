@@ -58,7 +58,7 @@ The `dev/03_deploy.R` file contains function for deploying on various platforms.
 ### RStudio Products
 
 ```{r}
-golem::add_rstudioconnect_file()
+golem::add_positconnect_file()
 golem::add_shinyappsio_file()
 golem::add_shinyserver_file()
 ```

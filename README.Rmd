@@ -72,9 +72,12 @@ Read [Day to Day Dev](https://thinkr-open.github.io/golem/articles/b_dev.html) V
 
 Read [Deploying Apps with {golem}](https://thinkr-open.github.io/golem/articles/c_deploy.html) Vignette for a detailed walkthrough.
 
+
 ## Tool series
 
 This package is part of a series of tools for Shiny, which includes:
+
+
 
 -   `{golem}` - <https://github.com/ThinkR-open/golem>
 -   `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>

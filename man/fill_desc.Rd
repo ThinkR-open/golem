@@ -2,7 +2,7 @@
 % Please edit documentation in R/desc.R
 \name{fill_desc}
 \alias{fill_desc}
-\title{Fill your description}
+\title{Fill your \code{DESCRIPTION} file}
 \usage{
 fill_desc(
   pkg_name,
@@ -47,13 +47,15 @@ fill_desc(
 
 \item{author_orcid}{to be deprecated}
 
-\item{set_options}{logical; if \code{TRUE} then \code{\link[=set_golem_options]{set_golem_options()}} is run,
-which is the default; if \code{FALSE} then running \code{\link[=set_golem_options]{set_golem_options()}}
-manually at some point is strongly recommended}
+\item{set_options}{logical; the default \code{TRUE} sets all recommended
+options but this can be suppressed with \code{FALSE}. For details on the
+exact behaviour see the help \code{\link[=set_golem_options]{set_golem_options()}}.}
 }
 \value{
-The {desc} object, invisibly.
+The \code{{desc}} object, invisibly.
 }
 \description{
-Fill your description
+Generates a standard \code{DESCRIPTION} file as used in R packages. Also sets
+a series of global options inside \code{golem-config.yml} that will be reused
+inside \code{{golem}} (see \code{set_options} and \code{\link[=set_golem_options]{set_golem_options()}} for details).
 }

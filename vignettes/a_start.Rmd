@@ -116,7 +116,7 @@ golem::fill_desc(
     given = "AUTHOR_FIRST", # Your First Name
     family = "AUTHOR_LAST", # Your Last Name
     email = "AUTHOR@MAIL.COM", # Your email
-    role = c("aut", "cre") # Your role (here author/creator)
+    role = c("aut", "cre"), # Your role (here author/creator)
     set_options = TRUE # Set the global golem options
     ),
   repo_url = NULL, # The URL of the GitHub repo (optional),
