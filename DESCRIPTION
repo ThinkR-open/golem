@@ -43,6 +43,7 @@ Suggests:
     devtools,
     dockerfiler (>= 0.2.0),
     fs,
+    httpuv,
     knitr,
     mockery,
     pkgbuild,

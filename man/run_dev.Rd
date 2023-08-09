@@ -2,9 +2,14 @@
 % Please edit documentation in R/run_dev.R
 \name{run_dev}
 \alias{run_dev}
-\title{Run the \code{run_dev.R} file}
+\title{Run the \code{dev/run_dev.R} file}
 \usage{
-run_dev(file = "dev/run_dev.R", pkg = get_golem_wd(), save_all = TRUE)
+run_dev(
+  file = "dev/run_dev.R",
+  pkg = get_golem_wd(),
+  save_all = TRUE,
+  install_required_packages = TRUE
+)
 }
 \arguments{
 \item{file}{String with (relative) file path to a \code{run_dev.R}-file}
@@ -13,6 +18,9 @@ run_dev(file = "dev/run_dev.R", pkg = get_golem_wd(), save_all = TRUE)
 
 \item{save_all}{Boolean; if \code{TRUE} saves all open files before sourcing
 \code{file}}
+
+\item{install_required_packages}{Boolean; if \code{TRUE} install the packages
+used in \code{run_dev.R}-file}
 }
 \value{
 pure side-effect function; returns invisibly

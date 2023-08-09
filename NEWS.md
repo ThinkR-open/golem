@@ -40,6 +40,8 @@
 
 + `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)
 
++ `run_dev()` now install needed dependencies to source dev/run_dev.R if needed (#942, @ilyaZar, @vincentGuyader)
+
 + `use_readme_rmd()` does not pop up when argument `open=FALSE` is set (#1044, @ilyaZar)
 
 + Docker commands now take the `-it` flag so it can be killed with `^C` (#1002, @ivokwee)
