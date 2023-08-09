@@ -89,10 +89,7 @@ test_that("golem-config.yml can be renamed and moved to another location", {
   ## The default config path is returned
   expect_equal(
     guess_where_config(),
-    fs_path_abs(file.path(
-      path_dummy_golem,
-      "inst/golem-config.yml"
-    ))
+    get_pth_to_golem_subdir(path_dummy_golem, "inst/golem-config.yml")
   )
   ## Some renamed config AND under a different path is returned
   ## I. create new dir
@@ -119,10 +116,7 @@ test_that("golem-config.yml can be renamed and moved to another location", {
   # IV.A The updated config is found
   expect_equal(
     guess_where_config(),
-    fs_path_abs(file.path(
-      path_dummy_golem,
-      "inst/config/golem.yml"
-    ))
+    get_pth_to_golem_subdir(path_dummy_golem, "inst/config/golem.yml")
   )
   ## IV.B app_config.R has a multi-line statement
   ## -   > e.g. because of grkstyle formatting or long path names
@@ -139,10 +133,7 @@ test_that("golem-config.yml can be renamed and moved to another location", {
   # IV.B The updated config  with multi-line app_sys()-call is read correctly
   expect_equal(
     guess_where_config(),
-    fs_path_abs(file.path(
-      path_dummy_golem,
-      "inst/config/golem.yml"
-    ))
+    get_pth_to_golem_subdir(path_dummy_golem, "inst/config/golem.yml")
   )
   ## IV.C app_config.R has a malformatted app_sys(...) call
   ##    -> e.g. because of grkstyle formatting or long path names
@@ -158,10 +149,7 @@ test_that("golem-config.yml can be renamed and moved to another location", {
   writeLines(tmp_app_config_test_03, "R/app_config.R")
   expect_equal(
     try_user_config_location(pkg_path()),
-    fs_path_abs(file.path(
-      path_dummy_golem,
-      "inst/config/golem.yml"
-    ))
+    get_pth_to_golem_subdir(path_dummy_golem, "inst/config/golem.yml")
   )
   # V.B test that default sub-function fails to return path and gives NULL
   file.remove("R/app_config.R")
@@ -187,10 +175,7 @@ test_that("golem-config.yml can be retrieved for some exotic corner cases", {
   # Test that the default config path is returned
   expect_equal(
     guess_where_config(),
-    fs_path_abs(file.path(
-      path_dummy_golem,
-      "inst/golem-config.yml"
-    ))
+    get_pth_to_golem_subdir(path_dummy_golem, "inst/golem-config.yml")
   )
 
   # Test exotic case IV.B - non-sense arguments inside guess_where_config() work
@@ -199,10 +184,7 @@ test_that("golem-config.yml can be retrieved for some exotic corner cases", {
   # The default config path is returned though arguments are non-sense
   expect_equal(
     guess_where_config("hi", "there"),
-    fs_path_abs(file.path(
-      path_dummy_golem,
-      "inst/golem-config.yml"
-    ))
+    get_pth_to_golem_subdir(path_dummy_golem, "inst/golem-config.yml")
   )
   # Cleanup
   unlink(path_dummy_golem, TRUE, TRUE)
