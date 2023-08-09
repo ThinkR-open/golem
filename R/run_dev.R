@@ -51,6 +51,9 @@ run_dev <- function(
     )
   }
 
+  check_sass_used <- isTRUE(any(grepl("sass::", run_dev_lines)))
+  if (check_sass_used) install_single_dev_dep("sass")
+
   eval(
     parse(
       text = run_dev_lines
