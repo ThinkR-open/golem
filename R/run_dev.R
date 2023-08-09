@@ -13,6 +13,8 @@
 #' reloading the package in a clean `R` environment before running the app etc.
 #'
 #' @param file String with (relative) file path to a `run_dev.R`-file
+#' @param install_required_packages Boolean; if `TRUE` install the packages 
+#'     used in `run_dev.R`-file
 #' @param save_all Boolean; if `TRUE` saves all open files before sourcing
 #'     `file`
 #' @inheritParams add_module
@@ -23,7 +25,8 @@
 run_dev <- function(
   file = "dev/run_dev.R",
   pkg = get_golem_wd(),
-  save_all = TRUE
+  save_all = TRUE,
+  install_required_packages = TRUE
 ) {
   if (save_all) {
     if (
@@ -51,6 +54,12 @@ run_dev <- function(
     )
   }
 
+  if (install_required_packages) {
+    install_dev_deps("attachment", force_install = install_required_packages)
+    to_install <- attachment::att_from_rscript(path = try_dev)
+    install_dev_deps(dev_deps = to_install, force_install = install_required_packages)
+  }
+  
   eval(
     parse(
       text = run_dev_lines
