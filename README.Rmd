@@ -17,7 +17,23 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html) [![R-CMD-check](https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg)](https://github.com/ThinkR-open/golem/actions) [![Coverage status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](https://codecov.io/github/ThinkR-open/golem?branch=master) [![CRAN status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
+```{r echo = FALSE}
+name_branch <- system("git symbolic-ref --short HEAD", intern = TRUE)
+link_to_branch_svg <- paste0(
+  "https://codecov.io/gh/ThinkR-open/golem/branch/",
+  name_branch,
+  "/graph/badge.svg")
+link_to_branch_html <- paste0(
+  "https://app.codecov.io/github/ThinkR-open/golem/tree/",
+  name_branch)
+```
+
+```{r, echo = FALSE, results = "asis"}
+cat('[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)')
+cat('[![R-CMD-check](https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg)](https://github.com/ThinkR-open/golem/actions)')
+cat(paste0("\n[![Coverage status](", link_to_branch_svg, ")](", link_to_branch_html, ")"))
+cat('[![CRAN status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)')
+```
 
  <!-- badges: end -->
 
