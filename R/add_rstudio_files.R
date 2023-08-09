@@ -73,7 +73,7 @@ add_rstudio_files <- function(
 #' `rsconnect` package version is `>= 0.8.25`.
 #'
 #' @note
-#' In previous versions, this function was called add_rconnect_file.
+#' In previous versions, this function was called add_rconnect_file and add_rstudioconnect_file.
 #' @section List of excluded files in `.rscignore`:
 #'    * .here
 #'    * CODE_OF_CONDUCT.md
@@ -88,7 +88,7 @@ add_rstudio_files <- function(
 #'
 #'
 #' @inheritParams add_module
-#' @aliases add_rconnect_file add_rstudioconnect_file
+#' @aliases add_rconnect_file add_rstudioconnect_file add_positconnect_file
 #' @export
 #'
 #' @rdname rstudio_deploy
@@ -99,7 +99,7 @@ add_rstudio_files <- function(
 #' @examples
 #' # Add a file for Connect
 #' if (interactive()) {
-#'   add_rstudioconnect_file()
+#'   add_positconnect_file()
 #' }
 #' # Add a file for Shiny Server
 #' if (interactive()) {
@@ -109,7 +109,7 @@ add_rstudio_files <- function(
 #' if (interactive()) {
 #'   add_shinyappsio_file()
 #' }
-add_rstudioconnect_file <- function(
+add_positconnect_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
     ) {
@@ -118,6 +118,16 @@ add_rstudioconnect_file <- function(
     open = open,
     service = "RStudio Connect"
   )
+}
+
+#' @rdname rstudio_deploy
+#' @note `add_rstudioconnect_file` is now deprecated; replace by [add_positconnect_file()].
+#' @export
+add_rstudioconnect_file <- function(pkg = get_golem_wd(),
+                                    open = TRUE){
+  .Deprecated("add_positconnect_file")
+  add_positconnect_file(pkg = get_golem_wd(),
+                         open = TRUE)
 }
 
 #' @rdname rstudio_deploy

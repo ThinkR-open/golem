@@ -44,7 +44,7 @@ add_js_file <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   name <- file_path_sans_ext(name)
 
@@ -112,7 +112,7 @@ add_js_handler <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   name <- file_path_sans_ext(name)
 
@@ -177,7 +177,7 @@ add_js_input_binding <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   attempt::stop_if(
     length(events$name) == 0,
@@ -319,7 +319,7 @@ add_js_output_binding <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   raw_name <- name
 
@@ -403,7 +403,7 @@ add_css_file <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   name <- file_path_sans_ext(name)
 
@@ -465,7 +465,7 @@ add_sass_file <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   name <- file_path_sans_ext(name)
 
@@ -532,7 +532,7 @@ add_html_template <- function(
 ) {
   name <- file_path_sans_ext(name)
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
@@ -601,7 +601,7 @@ add_partial_html_template <- function(
   dir_create = TRUE
 ) {
   name <- file_path_sans_ext(name)
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))

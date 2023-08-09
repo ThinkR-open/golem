@@ -1,4 +1,8 @@
-#' Fill your description
+#' Fill your `DESCRIPTION` file
+#'
+#' Generates a standard `DESCRIPTION` file as used in R packages. Also sets
+#' a series of global options inside `golem-config.yml` that will be reused
+#' inside `{golem}` (see `set_options` and [set_golem_options()] for details).
 #'
 #' @param pkg_name The name of the package
 #' @param pkg_title The title of the package
@@ -9,20 +13,20 @@
 #' @param pkg_version The version of the package. Default is 0.0.0.9000
 #' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
 #' @param author_first_name to be deprecated: use character for first name via
-#'    \code{authors = person(given = "authors_first_name")} instead
+#'    `authors = person(given = "authors_first_name")` instead
 #' @param author_last_name  to be deprecated: use character for last name via
-#'    \code{authors = person(given = "authors_last_name")} instead
-#' @param author_email  to be deprecated: use character for first name via
-#'    \code{authors = person(email = "author_email")} instead
-#' @param author_orcid  to be deprecated
-#' @param set_options logical; if \code{TRUE} then [set_golem_options()] is run,
-#'    which is the default; if \code{FALSE} then running [set_golem_options()]
-#'    manually at some point is strongly recommended
+#'    `authors = person(given = "authors_last_name")` instead
+#' @param author_email to be deprecated: use character for first name via
+#'    `authors = person(email = "author_email")` instead
+#' @param author_orcid to be deprecated
+#' @param set_options logical; the default `TRUE` sets all recommended
+#'    options but this can be suppressed with `FALSE`. For details on the
+#'    exact behaviour see the help [set_golem_options()].
 #'
 #' @export
 #' @importFrom utils person
 #'
-#' @return The {desc} object, invisibly.
+#' @return The `{desc}` object, invisibly.
 fill_desc <- function(
   pkg_name,
   pkg_title,
@@ -43,7 +47,7 @@ fill_desc <- function(
   author_orcid = NULL,
   set_options = TRUE
 ) {
-
+  stopifnot(`'set_options' must be logical` = is.logical(set_options))
   stopifnot(`'authors' must be of class 'person'` = inherits(authors, "person"))
 
   # Handling retrocompatibility
@@ -56,7 +60,9 @@ fill_desc <- function(
         author_last_name,
         author_email,
         author_orcid
-      ), is.null, logical(1)
+      ),
+      is.null,
+      logical(1)
     )
   )
 

@@ -10,7 +10,7 @@ expect_add_file <- function(
   # Be sure to remove all files in case there are
   remove_files("inst/app/www", ext)
 
-  # Checking that check_name_length is throwing an error
+  # Checking that check_name_length_is_one is throwing an error
   expect_error(
     fun(c("a", "b")),
   )

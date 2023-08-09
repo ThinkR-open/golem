@@ -12,7 +12,7 @@
 ########################################
 
 ## Fill the DESCRIPTION ----
-## Add meta data about your application
+## Add meta data about your application and set some default {golem} options
 ##
 ## /!\ Note: if you want to change the name of your app during development,
 ## either re-run this function, call golem::set_golem_name(), or don't forget
@@ -32,11 +32,6 @@ golem::fill_desc(
   pkg_version = "0.0.0.9000", # The version of the package containing the app
   set_options = TRUE # Set the global golem options
 )
-
-## Set {golem} options ----
-## Is highly recommended to run and will be set as the default via
-## fill_desc(..., set_options = TRUE) in future versions of {golem}
-golem::set_golem_options()
 
 ## Install the required dev dependencies ----
 golem::install_dev_deps()

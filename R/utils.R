@@ -2,7 +2,7 @@ golem_sys <- function(
   ...,
   lib.loc = NULL,
   mustWork = FALSE
-) {
+    ) {
   system.file(
     ...,
     package = "golem",
@@ -17,7 +17,7 @@ create_if_needed <- function(
   path,
   type = c("file", "directory"),
   content = NULL
-) {
+    ) {
   type <- match.arg(type)
 
   # Check if file or dir already exist
@@ -26,28 +26,20 @@ create_if_needed <- function(
   } else if (type == "directory") {
     dont_exist <- Negate(fs_dir_exists)(path)
   }
-  # If it doesn't exist, ask if we are allowed
-  # to create it
+  # If it doesn't exist, ask if we are allowed to create it
   if (dont_exist) {
-    if (interactive()) {
-      ask <- yesno(
-        sprintf(
-          "The %s %s doesn't exist, create?",
-          basename(path),
-          type
-        )
-      )
+    if (rlang::is_interactive()) {
+      ask <- ask_golem_creation_file(path, type)
       # Return early if the user doesn't allow
       if (!ask) {
         return(FALSE)
-      } else {
-        # Create the file
-        if (type == "file") {
-          fs_file_create(path)
-          write(content, path, append = TRUE)
-        } else if (type == "directory") {
-          fs_dir_create(path, recurse = TRUE)
-        }
+      }
+      # Create the file
+      if (type == "file") {
+        fs_file_create(path)
+        write(content, path, append = TRUE)
+      } else if (type == "directory") {
+        fs_dir_create(path, recurse = TRUE)
       }
     } else {
       stop(
@@ -59,22 +51,17 @@ create_if_needed <- function(
       )
     }
   }
-
-  # TRUE means that file exists (either
-  # created or already there)
+  # TRUE means that file exists (either created or already there)
   return(TRUE)
 }
-
-check_file_exist <- function(file) {
-  res <- TRUE
-  if (fs_file_exists(file)) {
-    if (interactive()) {
-      res <- yesno("This file already exists, override?")
-    } else {
-      res <- TRUE
-    }
-  }
-  return(res)
+ask_golem_creation_file <- function(path, type) {
+  yesno(
+    sprintf(
+      "The %s %s doesn't exist, create?",
+      basename(path),
+      type
+    )
+  )
 }
 
 # internal
@@ -82,7 +69,7 @@ replace_word <- function(
   file,
   pattern,
   replace
-) {
+    ) {
   suppressWarnings(tx <- readLines(file))
   tx2 <- gsub(
     pattern = pattern,
@@ -170,7 +157,7 @@ cat_start_download <- function() {
 cat_downloaded <- function(
   where,
   file = "File"
-) {
+    ) {
   cat_green_tick(
     sprintf(
       "%s downloaded at %s",
@@ -190,7 +177,7 @@ cat_start_copy <- function() {
 cat_copied <- function(
   where,
   file = "File"
-) {
+    ) {
   cat_green_tick(
     sprintf(
       "%s copied to %s",
@@ -203,7 +190,7 @@ cat_copied <- function(
 cat_created <- function(
   where,
   file = "File"
-) {
+    ) {
   cat_green_tick(
     sprintf(
       "%s created at %s",
@@ -224,7 +211,7 @@ cat_automatically_linked <- function() {
 open_or_go_to <- function(
   where,
   open_file
-) {
+    ) {
   if (
     open_file
   ) {
@@ -250,7 +237,7 @@ after_creation_message_js <- function(
   pkg,
   dir,
   name
-) {
+    ) {
   if (
     desc_exist(pkg)
   ) {
@@ -273,7 +260,7 @@ after_creation_message_css <- function(
   pkg,
   dir,
   name
-) {
+    ) {
   if (
     desc_exist(pkg)
   ) {
@@ -296,7 +283,7 @@ after_creation_message_sass <- function(
   pkg,
   dir,
   name
-) {
+    ) {
   if (
     desc_exist(pkg)
   ) {
@@ -316,7 +303,7 @@ after_creation_message_html_template <- function(
   pkg,
   dir,
   name
-) {
+    ) {
   do_if_unquiet({
     cli_cat_line("")
     cli_cat_line("To use this html file as a template, add the following code in your UI:")
@@ -337,7 +324,7 @@ file_created_dance <- function(
   open_file,
   open_or_go_to = TRUE,
   catfun = cat_created
-) {
+    ) {
   catfun(where)
 
   fun(pkg, dir, name)
@@ -355,7 +342,7 @@ file_created_dance <- function(
 file_already_there_dance <- function(
   where,
   open_file
-) {
+    ) {
   cat_green_tick("File already exists.")
   open_or_go_to(
     where = where,
@@ -394,9 +381,9 @@ yesno <- function(...) {
 
 # Checking that a package is installed
 check_is_installed <- function(
-    pak,
-    ...
-) {
+  pak,
+  ...
+    ) {
   if (
     !requireNamespace(pak, ..., quietly = TRUE)
   ) {
@@ -412,9 +399,9 @@ check_is_installed <- function(
 }
 
 required_version <- function(
-    pak,
-    version
-) {
+  pak,
+  version
+    ) {
   if (
     utils::packageVersion(pak) < version
   ) {
@@ -464,14 +451,20 @@ add_sass_code <- function(where, dir, name) {
   }
 }
 
-#' Check if a module already exists
+#' Check if a module (`R`-file) already exists
 #'
-#' Assumes it is called at the root of a golem project.
+#' Should be called at the root of a `{golem}` project; but an error is thrown
+#' only if one is not inside an R package (as the checks of `golem:::is_golem()`
+#' are rather strict, specifically only the presence of a "R/" directory is
+#' checked for the moment).
 #'
-#' @param module A character string. The name of a potentially existing module
-#' @return Boolean. Does the module exist or not ?
+#' @param module a character string giving the name of a potentially existing
+#'    module `R`-file
+#' @return boolean; `TRUE` if the module (`R`-file) exists and `FALSE` else
 #' @noRd
 is_existing_module <- function(module) {
+  stopifnot(`Cannot be called when not inside a R-package` = dir.exists("R"))
+  # stopifnot(`Cannot be called when not inside a golem-project` = is.golem())
   existing_module_files <- list.files("R/", pattern = "^mod_")
   existing_module_names <- sub(
     "^mod_([[:alnum:]_]+)\\.R$",
@@ -484,7 +477,7 @@ is_existing_module <- function(module) {
 # This function is used for checking
 # that  the name argument of the function
 # creating files is not of length() > 1
-check_name_length <- function(name) {
+check_name_length_is_one <- function(name) {
   stop_if(
     name,
     ~ length(.x) > 1,

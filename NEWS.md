@@ -1,6 +1,6 @@
 > Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
-# 0.4.1 to 0.5.0
+# 0.4.2 to 0.5.0
 
 ## New functions
 
@@ -8,7 +8,21 @@
 
 * `use_readme_rmd()` adds a {golem} specific README.Rmd (@ilyaZar, #1011)
 
+* rename `add_rstudioconnect_file()` to `add_positconnect_file()` (@ilyaZar, #1017)
+
 ## New features / user visible changes
+
++ allow for user supplied `run_dev`-files (#886, @ilyaZar)
+
++ `README` is re-styled and links to various external resources of the `golemverse` (#1064, @ilyaZar)
+
++ `a_start`-vignette has updated documentation (#1046, @ilyaZar)
+
++ `fill_desc()` automatically calls `set_options()`; see `dev/01_start.R` as well (#1040, @ilyaZar)
+
++ `fill_desc()` now uses a `person` vector (#1027, @jmeyer2482, @ColinFay and @ilyaZar)
+
++ `use_{internal,external}_XXX_file()` function family has improved error handling for non-interactive usage (#1062, @ilyaZar)
 
 + `add_fct()` now adds the skeleton for a function (#1004, @ilyaZar)
 
@@ -18,19 +32,30 @@
 
 + `01_start.R` now has a call to `usethis::use_git_remote()` (#1015, @ilyaZar)
 
-+ Test for utilsui and server now has full code coverate (#1020, @ilyaZar)
++ Tests for `R/golem_utils_server.R` and `R/golem_utils_ui.R` now have full code coverage (#1020, @ilyaZar)
 
-+ When setting a new name, golem now browses tests & vignettes (#805, @ilyaZar)
++ When setting a new name, `{golem}` now browses tests & vignettes (#805, @ilyaZar)
 
 ## Bug fix
 
-+ Docker commands now take the `-it` flag so it can be killed with `^C` (#, @ivokwee)
++ `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)
 
-+ add_module() now behaves correctly when trying to use `mod_mod_XXX` (#997, @ilyaZar)
++ `use_readme_rmd()` does not pop up when argument `open=FALSE` is set (#1044, @ilyaZar)
+
++ Docker commands now take the `-it` flag so it can be killed with `^C` (#1002, @ivokwee)
+
++ `add_module()` now behaves correctly when trying to use `mod_mod_XXX` (#997, @ilyaZar)
 
 ## Internal changes
 
-+ All functions that requires to get a path now rely on get_golem_wd() (#1016, @ilyaZar)
++ Add tests for (under/un)-tested files and functions and improve code coverage of `{golem}` (#1043, #1050, #1059, #1066, #1075, @ilyaZar)
++ `guess_where_config()` now finds the user config-yaml by reading its new location from user changes in "R/app_config.R" (#887, @ilyaZar)
++ All functions that require to get a path now rely on `get_golem_wd()` (#1016, @ilyaZar)
+
+
+# 0.4.1
+
+This is an intermediate release after CRAN feedback.
 
 # 0.4.0
 
@@ -84,7 +109,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 - `add_dockerfile`, `add_dockerfile_shinyproxy()` and `add_dockerfile_heroku()` now recommend to switch to their `_with_renv_` counterpart
 
-# golem 0.3.2 (CRAN VERSION)
+# golem 0.3.2
 
 ### Soft deprecated
 
@@ -160,7 +185,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 - `{testthat}` and `{rlang}` are no longer hard dependencies (#742)
 
-# golem 0.3.1 (CRAN Version)
+# golem 0.3.1
 
 ## New functions
 

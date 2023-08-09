@@ -17,160 +17,6 @@ status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/
 `{golem}` is an opinionated framework for building production-grade
 shiny applications.
 
-## About
-
-You’re reading the doc about version : 0.4.12
-
-This README has been compiled on the
-
-``` r
-Sys.time()
-#> [1] "2023-05-26 12:18:27 CEST"
-```
-
-Here are the test & coverage results :
-
-``` r
-devtools::check(quiet = TRUE)
-#> ℹ Loading golem
-#> ── R CMD check results ─────────────────────────────────────── golem 0.4.12 ────
-#> Duration: 1m 32.1s
-#> 
-#> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
-```
-
-``` r
-covr::package_coverage()
-#> golem Coverage: 69.41%
-#> R/addins.R: 0.00%
-#> R/bootstrap_rstudio_api.R: 0.00%
-#> R/enable_roxygenize.R: 0.00%
-#> R/get_sysreqs.R: 0.00%
-#> R/globals.R: 0.00%
-#> R/run_dev.R: 0.00%
-#> R/sanity_check.R: 0.00%
-#> R/use_files.R: 0.00%
-#> R/with_opt.R: 22.58%
-#> R/config.R: 28.21%
-#> R/test_helpers.R: 30.26%
-#> R/js.R: 43.75%
-#> R/reload.R: 45.36%
-#> R/use_recommended.R: 54.55%
-#> R/utils.R: 55.31%
-#> R/bootstrap_desc.R: 55.56%
-#> R/install_dev_deps.R: 57.14%
-#> R/bootstrap_attachment.R: 61.54%
-#> R/bootstrap_dockerfiler.R: 63.33%
-#> R/add_dockerfiles.R: 74.19%
-#> R/boostrap_fs.R: 77.78%
-#> R/bootstrap_usethis.R: 78.57%
-#> R/modules_fn.R: 79.00%
-#> R/golem-yaml-set.R: 83.02%
-#> R/use_utils.R: 83.33%
-#> R/use_favicon.R: 85.56%
-#> R/add_resource_path.R: 88.89%
-#> R/create_golem.R: 89.47%
-#> R/make_dev.R: 90.00%
-#> R/add_r_files.R: 91.01%
-#> R/add_files.R: 92.31%
-#> R/add_rstudio_files.R: 93.10%
-#> R/golem-yaml-get.R: 93.18%
-#> R/add_dockerfiles_renv.R: 93.75%
-#> R/desc.R: 96.55%
-#> R/use_readme.R: 97.14%
-#> R/boostrap_cli.R: 100.00%
-#> R/boostrap_crayon.R: 100.00%
-#> R/bootstrap_pkgload.R: 100.00%
-#> R/bootstrap_roxygen2.R: 100.00%
-#> R/browser_button.R: 100.00%
-#> R/bundle_resources.R: 100.00%
-#> R/disable_autoload.R: 100.00%
-#> R/golem-yaml-utils.R: 100.00%
-#> R/is_golem.R: 100.00%
-#> R/is_running.R: 100.00%
-#> R/pkg_tools.R: 100.00%
-#> R/set_golem_options.R: 100.00%
-#> R/templates.R: 100.00%
-```
-
-## Tool series
-
-This package is part of a series of tools for Shiny, which includes:
-
-- `{golem}` - <https://github.com/ThinkR-open/golem>
-- `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
-- `{fakir}` - <https://github.com/ThinkR-open/fakir>
-- `{gemstones}` - <https://github.com/ThinkR-open/gemstones>
-
-## Resources
-
-### The Book :
-
-- <https://engineering-shiny.org/>
-
-- [paper version of the book “Engineering Production-Grade Shiny
-  Apps”](https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022)
-
-### Blog posts :
-
-*Building Big Shiny Apps*
-
-- Part 1:
-  <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/>
-- Part 2:
-  <https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/>
-
-[*Make a Fitness App from
-scratch*](https://towardsdatascience.com/production-grade-r-shiny-with-golem-prototyping-51b03f37c2a9)
-
-### Slide decks
-
-- useR! 2019 : [A Framework for Building Robust & Production Ready Shiny
-  Apps](https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf)
-- ThinkR x RStudio Roadshow,Paris : [Production-grade Shiny Apps with
-  {golem}](https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem)
-- rstudio::conf(2020) : [Production-grade Shiny Apps with
-  golem](https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem)
-- barcelonar (2019-12-03) : [Engineering Production-Grade Shiny Apps
-  with
-  {golem}](https://www.barcelonar.org/presentations/BarcelonaR_Building_Production_Grade_Shiny_Apps_with_golem.pdf)
-
-### Video
-
-- [{golem} and Effective Shiny Development
-  Methods](https://www.youtube.com/watch?v=OU1-CkSVdTI)
-- [Hands-on demonstration of
-  {golem}](https://www.youtube.com/watch?v=3-p9XLvoJV0)
-- useR! 2019 : [A Framework for Building Robust & Production Ready Shiny
-  Apps](https://youtu.be/tCAan6smrjs)
-- 🇫🇷 [Introduction to {golem}](https://youtu.be/6qI4NzxlAFU)
-- rstudio::conf(2020) : [Production-grade Shiny Apps with
-  golem](https://posit.co/resources/videos/production-grade-shiny-apps-with-golem/)
-- 🇫🇷 Rencontres R 2021 : [Conception d’applications Shiny avec
-  {golem}](https://www.youtube.com/watch?v=0f5Me1PFGDs)
-- 🇫🇷 [Déploiement d’une application {shiny} dans docker avec {renv} et
-  {golem}](https://www.youtube.com/watch?v=diCG4t76k78)
-
-### Cheatsheet
-
-- [{golem} cheatsheet](https://thinkr.fr/golem_cheatsheet_v0.1.pdf)
-
-### Examples apps
-
-These are examples from the community. Please note that they may not
-necessarily be written in a canonical fashion and may have been written
-with different versions of `{golem}` or `{shiny}`.
-
-- <https://github.com/seanhardison1/vcrshiny>
-- <https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC>
-- <https://github.com/marton-balazs-kovacs/tenzing>
-- <https://github.com/shahreyar-abeer/cranstars>
-
-You can also find apps at:
-
-- <https://connect.thinkr.fr/connect/>
-- <https://github.com/ColinFay/golemexamples>
-
 ## Installation
 
 - You can install the stable version from CRAN with:
@@ -184,8 +30,16 @@ install.packages("golem")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("Thinkr-open/golem")
+remotes::install_github("Thinkr-open/golem") # very close to CRAN version
+# remotes::install_github("Thinkr-open/golem@dev") # if you like to play
 ```
+
+## Resources
+
+The `{golem}` package is part of the
+[`{golemverse}`](https://golemverse.org/), a series of tools for Shiny.
+A list of various `{golem}` related resources (tutorials, video, blog
+post,…) can be found [here](https://golemverse.org/resources/).
 
 ## Launch the project
 
@@ -195,7 +49,7 @@ Create a new package with the project template:
 
 ## Step by step guide
 
-See full documentation in the {pkgdown} website:
+See full documentation in the `{pkgdown}` website:
 
 \[CRAN\] <https://thinkr-open.github.io/golem/>
 
@@ -224,6 +78,108 @@ for a detailed walkthrough.
 Read [Deploying Apps with
 {golem}](https://thinkr-open.github.io/golem/articles/c_deploy.html)
 Vignette for a detailed walkthrough.
+
+## Tool series
+
+This package is part of a series of tools for Shiny, which includes:
+
+- `{golem}` - <https://github.com/ThinkR-open/golem>
+- `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
+- `{fakir}` - <https://github.com/ThinkR-open/fakir>
+- `{gemstones}` - <https://github.com/ThinkR-open/gemstones>
+
+## Examples apps
+
+These are examples from the community. Please note that they may not
+necessarily be written in a canonical fashion and may have been written
+with different versions of `{golem}` or `{shiny}`.
+
+- <https://github.com/seanhardison1/vcrshiny>
+- <https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC>
+- <https://github.com/marton-balazs-kovacs/tenzing>
+- <https://github.com/shahreyar-abeer/cranstars>
+
+You can also find apps at:
+
+- <https://connect.thinkr.fr/connect/>
+- <https://github.com/ColinFay/golemexamples>
+
+## About
+
+You’re reading the doc about version: 0.4.12
+
+This `README` has been compiled on the
+
+``` r
+Sys.time()
+#> [1] "2023-08-08 19:05:09 UTC"
+```
+
+Here are the test & coverage results:
+
+``` r
+devtools::check(quiet = TRUE)
+#> ℹ Loading golem
+#> Writing 'run_dev.Rd'
+#> ── R CMD check results ─────────────────────────────────────── golem 0.4.12 ────
+#> Duration: 2m 35.9s
+#> 
+#> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+```
+
+``` r
+covr::package_coverage()
+#> golem Coverage: 84.93%
+#> R/addins.R: 0.00%
+#> R/bootstrap_rstudio_api.R: 0.00%
+#> R/enable_roxygenize.R: 0.00%
+#> R/get_sysreqs.R: 0.00%
+#> R/sanity_check.R: 0.00%
+#> R/test_helpers.R: 30.26%
+#> R/js.R: 43.75%
+#> R/reload.R: 45.36%
+#> R/install_dev_deps.R: 57.14%
+#> R/bootstrap_attachment.R: 61.54%
+#> R/bootstrap_dockerfiler.R: 63.33%
+#> R/bootstrap_desc.R: 66.67%
+#> R/add_dockerfiles.R: 74.19%
+#> R/bootstrap_usethis.R: 78.57%
+#> R/use_recommended.R: 78.79%
+#> R/modules_fn.R: 79.00%
+#> R/golem-yaml-set.R: 83.02%
+#> R/use_utils.R: 83.33%
+#> R/utils.R: 85.50%
+#> R/add_rstudio_files.R: 88.52%
+#> R/add_resource_path.R: 88.89%
+#> R/create_golem.R: 89.47%
+#> R/make_dev.R: 90.00%
+#> R/add_r_files.R: 91.01%
+#> R/add_files.R: 92.31%
+#> R/golem-yaml-get.R: 93.18%
+#> R/add_dockerfiles_renv.R: 93.78%
+#> R/run_dev.R: 95.00%
+#> R/desc.R: 96.67%
+#> R/use_favicon.R: 96.67%
+#> R/use_readme.R: 97.14%
+#> R/boostrap_cli.R: 100.00%
+#> R/boostrap_crayon.R: 100.00%
+#> R/boostrap_fs.R: 100.00%
+#> R/bootstrap_pkgload.R: 100.00%
+#> R/bootstrap_roxygen2.R: 100.00%
+#> R/browser_button.R: 100.00%
+#> R/bundle_resources.R: 100.00%
+#> R/config.R: 100.00%
+#> R/disable_autoload.R: 100.00%
+#> R/globals.R: 100.00%
+#> R/golem-yaml-utils.R: 100.00%
+#> R/is_golem.R: 100.00%
+#> R/is_running.R: 100.00%
+#> R/pkg_tools.R: 100.00%
+#> R/set_golem_options.R: 100.00%
+#> R/templates.R: 100.00%
+#> R/use_files.R: 100.00%
+#> R/with_opt.R: 100.00%
+```
 
 ## CoC
 

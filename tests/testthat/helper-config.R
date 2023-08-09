@@ -108,3 +108,23 @@ file.path(
     )
   )
 }
+
+# If a path, say 'path_to_golem', is passed to create a golem i.e.
+# golem::create_golem(path = path_to_golem), the actual true path has a
+# pre-pendeded "/private".
+# One needs to correctly retrieve this path inside tests (e.g. "test-config.R"),
+# when the variable 'path_to_golem' will not give the correct path on MAC-OS.
+# Thus, the following function returns the correct path for all platforms
+# including MAC-OS.
+get_pth_to_golem_subdir <- function(pth_golem_root, name_golem_subdir) {
+  CHECK_OSX <- identical(Sys.info()["sysname"], c(sysname = "Darwin"))
+  fs_path_abs(
+    paste0(
+      ifelse(CHECK_OSX, "/private", ""),
+      file.path(
+        pth_golem_root,
+        name_golem_subdir
+      )
+    )
+  )
+}

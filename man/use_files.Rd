@@ -13,7 +13,7 @@
 \usage{
 use_external_js_file(
   url,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
@@ -22,7 +22,7 @@ use_external_js_file(
 
 use_external_css_file(
   url,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
@@ -40,7 +40,7 @@ use_external_html_template(
 
 use_external_file(
   url,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
@@ -49,7 +49,7 @@ use_external_file(
 
 use_internal_js_file(
   path,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
@@ -58,7 +58,7 @@ use_internal_js_file(
 
 use_internal_css_file(
   path,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
@@ -76,7 +76,7 @@ use_internal_html_template(
 
 use_internal_file(
   path,
-  name,
+  name = NULL,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,

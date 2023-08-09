@@ -9,7 +9,7 @@ add_r_files <- function(
 ) {
   name <- file_path_sans_ext(name)
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
