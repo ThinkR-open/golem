@@ -21,7 +21,7 @@ Description: An opinionated framework for building a production-ready
     'Shiny' application. This package contains a series of tools for
     building a robust 'Shiny' application from start to finish.
 License: MIT + file LICENSE
-URL: https://github.com/ThinkR-open/golem
+URL: https://thinkr-open.github.io/golem/, https://github.com/ThinkR-open/golem
 BugReports: https://github.com/ThinkR-open/golem/issues
 Depends:
     R (>= 3.0)
