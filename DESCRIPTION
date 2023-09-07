@@ -35,7 +35,7 @@ Imports:
     utils,
     yaml
 Suggests:
-    attachment (>= 0.2.5),
+    attachment (>= 0.3.2),
     cli (>= 2.0.0),
     covr,
     crayon,
