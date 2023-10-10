@@ -2,11 +2,17 @@ expect_add_file <- function(
   fun,
   ext,
   pak,
-  fp
+  fp,
+  name
 ) {
   fun_nms <- deparse(substitute(fun))
+  if (missing(name)){
+    name <- rand_name()
+  }
+  if (fun_nms == "add_empty_file") {
+    name <- paste0(name, ".", ext)
+  }
 
-  name <- rand_name()
   # Be sure to remove all files in case there are
   remove_files("inst/app/www", ext)
 
@@ -23,11 +29,12 @@ expect_add_file <- function(
   if (fun_nms == "add_js_output_binding") {
     name <- sprintf("output-%s", name)
   }
+
   # Test that the file exists
   expect_exists(
     file.path(
       "inst/app/www",
-      paste0(name, ".", ext)
+      paste0(file_path_sans_ext(name), ".", ext)
     )
   )
   # Check that the file exsts
@@ -40,7 +47,10 @@ expect_add_file <- function(
   expect_equal(l_ff, length(readLines(ff)))
 
   # Try another file in another dir
-  bis <- paste0(name, rand_name())
+  bis <- paste0(file_path_sans_ext(name), rand_name())
+  if (fun_nms == "add_empty_file") {
+    bis <- paste0(bis, ".", ext)
+  }
   fun(bis, pkg = pak, open = FALSE, dir = normalizePath(fp))
   expect_exists(normalizePath(fp))
   ff <- list.files(
@@ -126,30 +136,13 @@ test_that("add_files", {
       pak = pkg,
       fp = fp
     )
-    expect_add_file_without_ext(
-      add_file,
-      name = "random.R",
+    expect_add_file(
+      add_empty_file,
+      ext = "txt",
       pak = pkg,
       fp = fp
     )
-    expect_add_file_without_ext(
-      add_file,
-      name = "random",
-      pak = pkg,
-      fp = fp
-    )
-    expect_add_file_without_ext(
-      add_any_file,
-      name = "random",
-      pak = pkg,
-      fp = fp
-    )
-    expect_add_file_without_ext(
-      add_any_file,
-      name = "random.json",
-      pak = pkg,
-      fp = fp
-    )
+
   })
 })
 
