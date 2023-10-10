@@ -524,13 +524,13 @@ add_sass_file <- function(
 #' @export
 #' @rdname add_files
 #' @importFrom tools file_ext
-add_any_file <- function(
+add_empty_file <- function(
   name,
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create = TRUE,
-  template = golem::css_template,
+  template = golem::empty_template,
   ...
 ) {
   attempt::stop_if(
@@ -538,9 +538,22 @@ add_any_file <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   extension <- file_ext(name)
+
+  if (extension == "js"){
+    warning("We've noticed you are trying to create a .js file. \nYou may want to use `add_js_file()` in future calls.")
+  }
+  if (extension == "css"){
+    warning("We've noticed you are trying to create a .css file. \nYou may want to use `add_css_file()` in future calls.")
+  }
+  if (extension == "sass"){
+    warning("We've noticed you are trying to create a .sass file. \nYou may want to use `add_sass_file()` in future calls.")
+  }
+  if (extension == "html"){
+    warning("We've noticed you are trying to create a .html file. \nYou may want to use `add_html_template()` in future calls.")
+  }
 
   name <- file_path_sans_ext(name)
 
@@ -583,7 +596,7 @@ add_any_file <- function(
     template(path = where, ...)
     file_created_dance(
       where,
-      after_creation_message,
+      after_creation_message_generic,
       pkg,
       dir,
       name,
@@ -593,70 +606,6 @@ add_any_file <- function(
     file_already_there_dance(
       where = where,
       open_file = open
-    )
-  }
-}
-
-#' @export
-#' @rdname add_files
-#' @importFrom tools file_ext
-add_file <- function(
-  name,
-  pkg = get_golem_wd(),
-  dir = "inst/app/www",
-  open = TRUE,
-  dir_create = TRUE,
-  template = golem::css_template,
-  ...
-) {
-  attempt::stop_if(
-    missing(name),
-    msg = "`name` is required"
-  )
-
-  check_name_length(name)
-
-  extension <- file_ext(name)
-
-  if (extension == "css") {
-    add_css_file(
-      name = name,
-      pkg = pkg,
-      dir = dir,
-      open = open,
-      dir_create = dir_create,
-      template = template,
-      ...
-    )
-  } else if (extension == "js") {
-    add_js_file(
-      name = name,
-      pkg = pkg,
-      dir = dir,
-      open = open,
-      dir_create = dir_create,
-      template = template,
-      ...
-    )
-  } else if (extension == "sass") {
-    add_sass_file(
-      name = name,
-      pkg = pkg,
-      dir = dir,
-      open = open,
-      dir_create = dir_create,
-      template = template,
-      ...
-    )
-  } else {
-    add_any_file(
-      name = name,
-      pkg = pkg,
-      dir = dir,
-      open = open,
-      dir_create = dir_create,
-      template = template,
-      ...
     )
   }
 }

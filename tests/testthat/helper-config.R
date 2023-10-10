@@ -22,8 +22,10 @@ remove_files <- function(path, pattern = NULL) {
     recursive = TRUE
   )
   if (length(fls) > 0) {
-    res <- lapply(fls, function(x) {
-      if (file.exists(x)) unlink(x, force = TRUE)
+    try({
+      res <- lapply(fls, function(x) {
+        if (file.exists(x)) unlink(x, force = TRUE)
+      })
     })
   }
 }

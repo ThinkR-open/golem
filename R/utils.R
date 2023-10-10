@@ -233,6 +233,21 @@ desc_exist <- function(pkg) {
   )
 }
 
+after_creation_message_generic <- function(
+  pkg,
+  dir,
+  name
+){
+  do_if_unquiet({
+    cli_cat_bullet(
+      sprintf(
+        "File %s created",
+        name
+      )
+    )
+  })
+}
+
 after_creation_message_js <- function(
   pkg,
   dir,
