@@ -306,5 +306,6 @@ test_that("get_current_config() interactively returns NULL upon user wish", {
 })
 
 test_that("ask_golem_creation_upon_config() fails in non-interactive mode", {
+  skip_if(interactive())
   expect_error(ask_golem_creation_upon_config("test/path"))
 })
