@@ -185,6 +185,7 @@ test_that("file creation utils work interactively with user mimick 'yes'", {
 test_that(
   "ask_golem_creation_file() fails in non-interactive mode",
   {
+    skip_if(interactive())
     # Shallow testing to improve code-coverage
     expect_error(ask_golem_creation_file("test/path", "some_type"))
   }
