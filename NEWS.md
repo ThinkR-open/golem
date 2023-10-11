@@ -6,11 +6,13 @@
 
 * `is_golem()` tries to guess if the current folder is a `{golem}`-based app (#836)
 
-* `use_readme_rmd()` adds a {golem} specific README.Rmd (@ilyaZar, #1011)
+* `use_readme_rmd()` adds a `{golem}` specific `README.Rmd` (@ilyaZar, #1011)
 
 * rename `add_rstudioconnect_file()` to `add_positconnect_file()` (@ilyaZar, #1017)
 
 ## New features / user visible changes
+
++ sourcing `dev/01_start.R` leaves the file in a clean state with all files added to the initial commit (#1094, @ilyaZar)
 
 + allow for user supplied `run_dev`-files (#886, @ilyaZar)
 
@@ -40,7 +42,7 @@
 
 + `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)
 
-+ `run_dev()` now install needed dependencies to source dev/run_dev.R if needed (#942, @ilyaZar, @vincentGuyader)
++ `run_dev()` now install needed dependencies to source `dev/run_dev.R` if needed (#942, @ilyaZar, @vincentGuyader)
 
 + `use_readme_rmd()` does not pop up when argument `open=FALSE` is set (#1044, @ilyaZar)
 
@@ -74,18 +76,18 @@ This is an intermediate release after CRAN feedback.
 - Functions that print to the console are now quiet if `options("golem.quiet" = TRUE)`, #793
 - Small documentation update in dockerfile related functions (#939)
 - `fill_desc()` now allows to set the version (#877)
-- Setting the Environment variable `GOLEM_MAINTENANCE_ACTIVE` to `TRUE` active the maintenance mode of your app
+- Setting the Environment variable `GOLEM_MAINTENANCE_ACTIVE` to `TRUE` activates the maintenance mode of your app
 - `golem::run_dev()` now save all open documents before sourcing the `dev/run_dev.R` file
 - When creating an app, you'll get a message if the dev deps are not all installed (#915)
-- 03_deploy now contains an example of sending the app to PositConnect or Shinyapps.io (#923)
+- `03_deploy` now contains an example of sending the app to PositConnect or Shinyapps.io (#923)
 
 ## Bug fix
 
-- The message after htmlTemplate creation now suggests to add in the UI, not only in app_ui.R (#861)
+- The message after htmlTemplate creation now suggests to add in the UI, not only in `app_ui.R` (#861)
 - The Deprecation message for `use_recommended_deps` no longer suggest to user `use_recommended_deps` (#900)
-- The setting of the config file has been unified so that we are sure to keep the !expr in `golem_set_wd()`, and the codebase has been simplified for this (#709).
-- The functions adding files can no longer take a `name` argument that has length() > 1. This used to cause some bugs (#781)
-- The typo in `install.packages()` in 02_dev.R has been corrected (@asiripanich)
+- The setting of the config file has been unified so that we are sure to keep the `!expr` in `golem_set_wd()`, and the codebase has been simplified for this (#709).
+- The functions adding files can no longer take a `name` argument that has `length() > 1`. This used to cause some bugs (#781)
+- The typo in `install.packages()` in `02_dev.R` has been corrected (@asiripanich)
 - `add_dockerfile_with_renv()` now works well with uppercase in package name
 - improve `get_golem_options()` documentation
 
