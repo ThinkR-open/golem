@@ -9,6 +9,8 @@ test_that(
     with_dir(
       path_dummy_golem,
       {
+      skip_if_not(exists("run_app"))
+
         # 1. Test the maintenance feature directly
         html <- maintenance_page()
         expect_true(inherits(html, c("html_document", "shiny.tag.list", "list")))
@@ -49,6 +51,7 @@ test_that(
     with_dir(
       path_dummy_golem,
       {
+        skip_if_not(exists("run_app"))
         # I. Test disabling the 'print'-flag on Posit for SHINY_PORT set
         # I.A save output with "print = FALSE" as the testing value
         app_print_false <- run_app()

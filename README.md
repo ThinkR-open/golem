@@ -106,13 +106,13 @@ You can also find apps at:
 
 ## About
 
-You’re reading the doc about version: 0.4.12
+You’re reading the doc about version: 0.4.13
 
 This `README` has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-08-08 19:05:09 UTC"
+#> [1] "2023-10-11 09:31:41 CEST"
 ```
 
 Here are the test & coverage results:
@@ -120,47 +120,48 @@ Here are the test & coverage results:
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> Writing 'run_dev.Rd'
-#> ── R CMD check results ─────────────────────────────────────── golem 0.4.12 ────
-#> Duration: 2m 35.9s
+#> ── R CMD check results ─────────────────────────────────────── golem 0.4.13 ────
+#> Duration: 1m 10.3s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 84.93%
+#> golem Coverage: 73.75%
+#> R/add_dockerfiles_renv.R: 0.00%
+#> R/add_dockerfiles.R: 0.00%
 #> R/addins.R: 0.00%
+#> R/bootstrap_attachment.R: 0.00%
+#> R/bootstrap_dockerfiler.R: 0.00%
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/enable_roxygenize.R: 0.00%
 #> R/get_sysreqs.R: 0.00%
+#> R/globals.R: 0.00%
 #> R/sanity_check.R: 0.00%
+#> R/with_opt.R: 9.68%
 #> R/test_helpers.R: 30.26%
+#> R/use_readme.R: 34.29%
 #> R/js.R: 43.75%
 #> R/reload.R: 45.36%
-#> R/install_dev_deps.R: 57.14%
-#> R/bootstrap_attachment.R: 61.54%
-#> R/bootstrap_dockerfiler.R: 63.33%
-#> R/bootstrap_desc.R: 66.67%
-#> R/add_dockerfiles.R: 74.19%
-#> R/bootstrap_usethis.R: 78.57%
-#> R/use_recommended.R: 78.79%
+#> R/use_recommended.R: 54.55%
+#> R/bootstrap_desc.R: 55.56%
+#> R/install_dev_deps.R: 60.87%
+#> R/bootstrap_usethis.R: 70.00%
 #> R/modules_fn.R: 79.00%
+#> R/utils.R: 79.78%
 #> R/golem-yaml-set.R: 83.02%
 #> R/use_utils.R: 83.33%
-#> R/utils.R: 85.50%
+#> R/use_favicon.R: 85.56%
 #> R/add_rstudio_files.R: 88.52%
 #> R/add_resource_path.R: 88.89%
 #> R/create_golem.R: 89.47%
 #> R/make_dev.R: 90.00%
 #> R/add_r_files.R: 91.01%
-#> R/add_files.R: 92.31%
+#> R/add_files.R: 91.96%
 #> R/golem-yaml-get.R: 93.18%
-#> R/add_dockerfiles_renv.R: 93.78%
-#> R/run_dev.R: 95.00%
+#> R/run_dev.R: 95.65%
 #> R/desc.R: 96.67%
-#> R/use_favicon.R: 96.67%
-#> R/use_readme.R: 97.14%
 #> R/boostrap_cli.R: 100.00%
 #> R/boostrap_crayon.R: 100.00%
 #> R/boostrap_fs.R: 100.00%
@@ -170,7 +171,6 @@ covr::package_coverage()
 #> R/bundle_resources.R: 100.00%
 #> R/config.R: 100.00%
 #> R/disable_autoload.R: 100.00%
-#> R/globals.R: 100.00%
 #> R/golem-yaml-utils.R: 100.00%
 #> R/is_golem.R: 100.00%
 #> R/is_running.R: 100.00%
@@ -178,7 +178,6 @@ covr::package_coverage()
 #> R/set_golem_options.R: 100.00%
 #> R/templates.R: 100.00%
 #> R/use_files.R: 100.00%
-#> R/with_opt.R: 100.00%
 ```
 
 ## CoC
