@@ -52,6 +52,8 @@
 
 + `add_module()` now behaves correctly when trying to use `mod_mod_XXX` (#997, @ilyaZar)
 
++ `{attachment}` now has a minimum version requirement (#1104, @ilyaZar)
+
 ## Internal changes
 
 + Add tests for (under/un)-tested files and functions and improve code coverage of `{golem}` (#1043, #1050, #1059, #1066, #1075, @ilyaZar)
