@@ -54,6 +54,8 @@
 
 + `{attachment}` now has a minimum version requirement (#1104, @ilyaZar)
 
++ `{pkgload}` now has a minimum version requirement (#1106)
+
 ## Internal changes
 
 + Add tests for (under/un)-tested files and functions and improve code coverage of `{golem}` (#1043, #1050, #1059, #1066, #1075, @ilyaZar)

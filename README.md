@@ -106,13 +106,13 @@ You can also find apps at:
 
 ## About
 
-You’re reading the doc about version: 0.4.15
+You’re reading the doc about version: 0.4.16
 
 This `README` has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-10-11 10:44:49 CEST"
+#> [1] "2023-10-11 10:56:39 CEST"
 ```
 
 Here are the test & coverage results:
@@ -120,15 +120,15 @@ Here are the test & coverage results:
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> ── R CMD check results ─────────────────────────────────────── golem 0.4.15 ────
-#> Duration: 1m 9.5s
+#> ── R CMD check results ─────────────────────────────────────── golem 0.4.16 ────
+#> Duration: 1m 12.7s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 73.75%
+#> golem Coverage: 73.76%
 #> R/add_dockerfiles_renv.R: 0.00%
 #> R/add_dockerfiles.R: 0.00%
 #> R/addins.R: 0.00%
