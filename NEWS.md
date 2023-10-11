@@ -38,6 +38,8 @@
 
 + When setting a new name, `{golem}` now browses tests & vignettes (#805, @ilyaZar)
 
++ Adding `writeManifest()` to `deploy.R` (#1063, @ilyaZar)
+
 ## Bug fix
 
 + `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)
