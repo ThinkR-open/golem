@@ -106,13 +106,13 @@ You can also find apps at:
 
 ## About
 
-You’re reading the doc about version: 0.4.13
+You’re reading the doc about version: 0.4.14
 
 This `README` has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-10-11 09:31:41 CEST"
+#> [1] "2023-10-11 10:39:26 CEST"
 ```
 
 Here are the test & coverage results:
@@ -120,8 +120,8 @@ Here are the test & coverage results:
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> ── R CMD check results ─────────────────────────────────────── golem 0.4.13 ────
-#> Duration: 1m 10.3s
+#> ── R CMD check results ─────────────────────────────────────── golem 0.4.14 ────
+#> Duration: 1m 8.9s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
