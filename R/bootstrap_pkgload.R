@@ -3,7 +3,8 @@
 check_pkgload_installed <- function() {
   rlang::check_installed(
     "pkgload",
-    reason = "to load the package."
+    reason = "to load the package.",
+    version = "1.3.0"
   )
 }
 

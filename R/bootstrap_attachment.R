@@ -3,7 +3,7 @@
 check_attachment_installed <- function() {
   rlang::check_installed(
     "attachment",
-    version = "0.3.1",
+    version = "0.3.2",
     reason = "to build a Dockerfile."
   )
 }
