@@ -10,6 +10,8 @@
 
 * rename `add_rstudioconnect_file()` to `add_positconnect_file()` (@ilyaZar, #1017)
 
+* `add_empty_file` creates an empty file in the www directory (#837)
+
 ## New features / user visible changes
 
 + allow for user supplied `run_dev`-files (#886, @ilyaZar)
