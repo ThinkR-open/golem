@@ -47,14 +47,6 @@ usethis::use_code_of_conduct(contact = "Golem User")
 usethis::use_lifecycle_badge("Experimental")
 usethis::use_news_md(open = FALSE)
 
-## Use git ----
-usethis::use_git()
-## Sets the remote associated with 'name' to 'url'
-usethis::use_git_remote(
-  name = "origin",
-  url = "https://github.com/<OWNER>/<REPO>.git"
-)
-
 ## Init Testing Infrastructure ----
 ## Create a template for tests
 golem::use_recommended_tests()
@@ -67,6 +59,14 @@ golem::use_favicon() # path = "path/to/ico". Can be an online file.
 ## Add helper functions ----
 golem::use_utils_ui(with_test = TRUE)
 golem::use_utils_server(with_test = TRUE)
+
+## Use git ----
+usethis::use_git()
+## Sets the remote associated with 'name' to 'url'
+usethis::use_git_remote(
+  name = "origin",
+  url = "https://github.com/<OWNER>/<REPO>.git"
+)
 
 # You're now set! ----
 
