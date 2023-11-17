@@ -211,8 +211,7 @@ append_roxygen_comment <- function(
   if (file_type == "R6") {
     write_there(paste0(name, " <- R6::R6Class("))
     write_there(paste0("  classname = '",  name, "',"))
-    write_there("  public = list(")
-    write_there("  )")
+    write_there("  public = list()")
     write_there(")")
   }
 }
