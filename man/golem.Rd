@@ -11,6 +11,7 @@ Read more about building big shiny apps at \url{https://engineering-shiny.org/}.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://thinkr-open.github.io/golem/}
   \item \url{https://github.com/ThinkR-open/golem}
   \item Report bugs at \url{https://github.com/ThinkR-open/golem/issues}
 }

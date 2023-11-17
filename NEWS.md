@@ -42,6 +42,8 @@
 
 + Adding `writeManifest()` to `deploy.R` (#1063, @ilyaZar)
 
++ `use_git()` is now at the bottom of 01_dev.R ((#1094, @ilyaZar))
+
 ## Bug fix
 
 + `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)
