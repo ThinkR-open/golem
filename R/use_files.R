@@ -88,50 +88,26 @@ use_external_css_file <- function(
   on.exit(setwd(old))
 
   name <- get_new_name(name)
-  # previously:
-  # check_name_length(name)
-  # name <- file_path_sans_ext(name)
-  # if (missing(name)) {
-  #   name <- basename(url)
-  # }
 
   new_file <- get_new_file(
     name,
     type = "css"
   )
-  # previously
-  # new_file <- sprintf("%s.css", name)
 
   dir <- get_new_dir(dir)
   if (isFALSE(dir)) {
     return(invisible(FALSE))
   }
-  # previously
-  # dir_created <- create_if_needed(
-  #   dir,
-  #   type = "directory"
-  # )
-  # if (!dir_created) {
-  #   cat_dir_necessary()
-  #   return(invisible(FALSE))
-  # }
-  # dir <- fs_path_abs(dir)
 
   where <- fs_path(
     dir,
     new_file
   )
-  # no change to previous version
 
   check_file <- check_file_exists(where, overwrite)
   if (isFALSE(check_file)) {
     return(invisible(FALSE))
   }
-  # previously
-  # if (fs_file_exists(where)) {
-  #   cat_exists(where)
-  #   return(invisible(FALSE))
-  # }
 
   check_url <- check_url_valid(
     url,
@@ -140,13 +116,6 @@ use_external_css_file <- function(
   if (isFALSE(check_url)) {
     return(invisible(FALSE))
   }
-  # previously:
-  # if (file_ext(url) != "css") {
-  #   cat_red_bullet(
-  #     "File not added (URL must end with .css extension)"
-  #   )
-  #   return(invisible(FALSE))
-  # }
 
   download_external(url, where)
 
@@ -177,64 +146,28 @@ use_external_html_template <- function(
   on.exit(setwd(old))
 
   name <- get_new_name(name)
-  # previously:
-  # check_name_length(name)
-  # name <- file_path_sans_ext(name)
-  # if (missing(name)) {
-  #   name <- basename(url)
-  # }
 
   new_file <- get_new_file(
     name,
     type = "css"
   )
-  # previously
-  # new_file <- sprintf("%s.css", name)
 
   dir <- get_new_dir(dir)
   if (isFALSE(dir)) {
     return(invisible(FALSE))
   }
-  # previously
-  # dir_created <- create_if_needed(
-  #   dir,
-  #   type = "directory"
-  # )
-  # if (!dir_created) {
-  #   cat_dir_necessary()
-  #   return(invisible(FALSE))
-  # }
-  # dir <- fs_path_abs(dir)
+
   where <- fs_path(
     dir,
     new_file
   )
-  # no change to previous version
 
   check_file <- check_file_exists(where, overwrite)
   if (isFALSE(check_file)) {
     return(invisible(FALSE))
   }
-  # previously
-  # if (fs_file_exists(where)) {
-  #   cat_exists(where)
-  #   return(invisible(FALSE))
-  # }
-
-  # MAYBE? -> add possible url-check for html-type files
-  # check_url <- check_url_valid(
-  #   url,
-  #   type = "html")
-  # if (isFALSE(check_url)) return(invisible(FALSE))
 
   download_external(url, where)
-  # previously
-  # cat_start_download()
-  # utils::download.file(url, where)
-
-  # remove:
-  # cat_downloaded(where)
-  # and add to catfun inside file_created_dance() see below
 
   file_created_dance(
     where,
@@ -263,26 +196,11 @@ use_external_file <- function(
   on.exit(setwd(old))
 
   name <- get_new_name(name)
-  # previously
-  # check_name_length(name)
-  # if (missing(name)) {
-  #   name <- basename(url)
-  # }
 
   dir <- get_new_dir(dir)
   if (isFALSE(dir)) {
     return(invisible(FALSE))
   }
-  # previously:
-  # dir_created <- create_if_needed(
-  #   dir,
-  #   type = "directory"
-  # )
-  # if (!dir_created) {
-  #   cat_dir_necessary()
-  #   return(invisible(FALSE))
-  # }
-  # dir <- fs_path_abs(dir)
 
   where <- fs_path(
     dir,
@@ -293,12 +211,6 @@ use_external_file <- function(
   if (isFALSE(check_file)) {
     return(invisible(FALSE))
   }
-  # previously
-  # if (fs_file_exists(where)) {
-  #   cat_exists(where)
-  #   return(invisible(FALSE))
-  # }
-  # cat_start_download()
 
   utils::download.file(url, where)
 
