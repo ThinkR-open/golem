@@ -33,10 +33,13 @@ use_external_js_file <- function(
 
   new_file <- get_new_file(
     name,
-    type = "js")
+    type = "js"
+  )
 
   dir <- get_new_dir(dir)
-  if (isFALSE(dir)) return(invisible(FALSE))
+  if (isFALSE(dir)) {
+    return(invisible(FALSE))
+  }
 
   where <- fs_path(
     dir,
@@ -44,12 +47,17 @@ use_external_js_file <- function(
   )
 
   check_file <- check_file_exists(where, overwrite)
-  if (isFALSE(check_file)) return(invisible(FALSE))
+  if (isFALSE(check_file)) {
+    return(invisible(FALSE))
+  }
 
   check_url <- check_url_valid(
     url,
-    type = "js")
-  if (isFALSE(check_url)) return(invisible(FALSE))
+    type = "js"
+  )
+  if (isFALSE(check_url)) {
+    return(invisible(FALSE))
+  }
 
   download_external(url, where)
 
@@ -89,12 +97,15 @@ use_external_css_file <- function(
 
   new_file <- get_new_file(
     name,
-    type = "css")
+    type = "css"
+  )
   # previously
   # new_file <- sprintf("%s.css", name)
 
   dir <- get_new_dir(dir)
-  if (isFALSE(dir)) return(invisible(FALSE))
+  if (isFALSE(dir)) {
+    return(invisible(FALSE))
+  }
   # previously
   # dir_created <- create_if_needed(
   #   dir,
@@ -113,7 +124,9 @@ use_external_css_file <- function(
   # no change to previous version
 
   check_file <- check_file_exists(where, overwrite)
-  if (isFALSE(check_file)) return(invisible(FALSE))
+  if (isFALSE(check_file)) {
+    return(invisible(FALSE))
+  }
   # previously
   # if (fs_file_exists(where)) {
   #   cat_exists(where)
@@ -122,8 +135,11 @@ use_external_css_file <- function(
 
   check_url <- check_url_valid(
     url,
-    type = "css")
-  if (isFALSE(check_url)) return(invisible(FALSE))
+    type = "css"
+  )
+  if (isFALSE(check_url)) {
+    return(invisible(FALSE))
+  }
   # previously:
   # if (file_ext(url) != "css") {
   #   cat_red_bullet(
@@ -170,12 +186,15 @@ use_external_html_template <- function(
 
   new_file <- get_new_file(
     name,
-    type = "css")
+    type = "css"
+  )
   # previously
   # new_file <- sprintf("%s.css", name)
 
   dir <- get_new_dir(dir)
-  if (isFALSE(dir)) return(invisible(FALSE))
+  if (isFALSE(dir)) {
+    return(invisible(FALSE))
+  }
   # previously
   # dir_created <- create_if_needed(
   #   dir,
@@ -193,7 +212,9 @@ use_external_html_template <- function(
   # no change to previous version
 
   check_file <- check_file_exists(where, overwrite)
-  if (isFALSE(check_file)) return(invisible(FALSE))
+  if (isFALSE(check_file)) {
+    return(invisible(FALSE))
+  }
   # previously
   # if (fs_file_exists(where)) {
   #   cat_exists(where)
@@ -249,7 +270,9 @@ use_external_file <- function(
   # }
 
   dir <- get_new_dir(dir)
-  if (isFALSE(dir)) return(invisible(FALSE))
+  if (isFALSE(dir)) {
+    return(invisible(FALSE))
+  }
   # previously:
   # dir_created <- create_if_needed(
   #   dir,
@@ -267,7 +290,9 @@ use_external_file <- function(
   )
 
   check_file <- check_file_exists(where, overwrite)
-  if (isFALSE(check_file)) return(invisible(FALSE))
+  if (isFALSE(check_file)) {
+    return(invisible(FALSE))
+  }
   # previously
   # if (fs_file_exists(where)) {
   #   cat_exists(where)
@@ -289,7 +314,7 @@ use_internal_js_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -362,7 +387,7 @@ use_internal_css_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -435,7 +460,7 @@ use_internal_html_template <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -500,7 +525,7 @@ use_internal_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   if (missing(name)) {
     name <- basename(path)
   }
@@ -546,8 +571,7 @@ use_internal_file <- function(
   cat_copied(where)
 }
 get_new_name <- function(
-  name
-) {
+  name) {
   if (missing(name)) {
     name <- basename(url)
   }
@@ -562,8 +586,7 @@ get_new_file <- function(
   sprintf(tmp, name)
 }
 get_new_dir <- function(
-  dir
-) {
+  dir) {
   dir_created <- tryCatch(
     create_if_needed(
       dir,
@@ -598,7 +621,8 @@ check_url_valid <- function(
     msg <- paste0(
       "File not added (URL must end with .",
       type,
-      " extension)")
+      " extension)"
+    )
     cat_red_bullet(
       msg
     )
