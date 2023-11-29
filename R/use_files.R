@@ -29,7 +29,7 @@ use_external_js_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- get_new_name(name)
+  name <- get_new_name(name, url)
 
   new_file <- get_new_file(
     name,
@@ -87,7 +87,7 @@ use_external_css_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- get_new_name(name)
+  name <- get_new_name(name, url)
 
   new_file <- get_new_file(
     name,
@@ -145,11 +145,11 @@ use_external_html_template <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- get_new_name(name)
+  name <- get_new_name(name, url)
 
   new_file <- get_new_file(
     name,
-    type = "css"
+    type = "html"
   )
 
   dir <- get_new_dir(dir)
@@ -195,7 +195,7 @@ use_external_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- get_new_name(name)
+  name <- get_new_name(name, url)
 
   dir <- get_new_dir(dir)
   if (isFALSE(dir)) {
@@ -483,8 +483,9 @@ use_internal_file <- function(
   cat_copied(where)
 }
 get_new_name <- function(
-  name) {
-  if (missing(name)) {
+  name,
+  url) {
+  if (missing(name) || is.null(name)) {
     name <- basename(url)
   }
   check_name_length_is_one(name)
