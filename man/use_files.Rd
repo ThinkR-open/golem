@@ -17,7 +17,8 @@ use_external_js_file(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create = TRUE,
+  overwrite = FALSE
 )
 
 use_external_css_file(
@@ -26,7 +27,8 @@ use_external_css_file(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create = TRUE,
+  overwrite = FALSE
 )
 
 use_external_html_template(
@@ -35,7 +37,8 @@ use_external_html_template(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create = TRUE,
+  overwrite = FALSE
 )
 
 use_external_file(
@@ -44,7 +47,8 @@ use_external_file(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create = TRUE,
+  overwrite = FALSE
 )
 
 use_internal_js_file(
@@ -95,6 +99,8 @@ use_internal_file(
 \item{open}{Should the created file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+
+\item{overwrite}{logical; if \code{TRUE}, then external file is overwritten}
 
 \item{path}{String representation of the local path for the file to be implemented (use_file only)}
 }
