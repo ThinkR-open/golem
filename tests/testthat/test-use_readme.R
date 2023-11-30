@@ -23,6 +23,12 @@ test_that("check_overwrite works", {
     check_overwrite(FALSE, golem_sys("utils/empty_readme.Rmd")),
     "README.Rmd already exists. Set `overwrite = TRUE` to overwrite."
   )
+  # Check if file exists
+  expect_true(file.exists(golem_sys("utils/empty_readme.Rmd")))
+  # Remove file via check_overwrite setting overwrite=TRUE
+  check_overwrite(TRUE, golem_sys("utils/empty_readme.Rmd"))
+  # Check that file is indeed removed
+  expect_false(file.exists(golem_sys("utils/empty_readme.Rmd")))
 })
 
 test_that("use_readme_rmd works", {
