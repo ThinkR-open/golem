@@ -66,7 +66,7 @@ create_golem <- function(
   check_name = TRUE,
   open = TRUE,
   overwrite = FALSE,
-  package_name = basename(path),
+  package_name = basename(normalizePath(path, mustWork = FALSE)),
   without_comments = FALSE,
   project_hook = golem::project_hook,
   with_git = FALSE,
