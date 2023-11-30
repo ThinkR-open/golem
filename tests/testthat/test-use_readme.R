@@ -33,7 +33,6 @@ test_that("check_overwrite works", {
 
 test_that("use_readme_rmd works", {
   withr::with_dir(pkg, {
-    skip_if_not(interactive())
       expect_true(
         use_readme_rmd(
           open = FALSE,
@@ -45,6 +44,5 @@ test_that("use_readme_rmd works", {
       expect_true(
         file.exists("README.Rmd")
       )
-      devtools:::build_readme()
   })
 })
