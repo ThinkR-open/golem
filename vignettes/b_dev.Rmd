@@ -155,8 +155,6 @@ About [package Vignette](https://r-pkgs.org/vignettes.html).
 ### Code coverage
 
 ```{r}
-usethis::use_travis()
-usethis::use_appveyor()
 usethis::use_coverage()
 ```
 
