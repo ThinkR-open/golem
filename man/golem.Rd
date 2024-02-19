@@ -2,8 +2,8 @@
 % Please edit documentation in R/golem-package.R
 \docType{package}
 \name{golem}
-\alias{golem}
 \alias{golem-package}
+\alias{golem}
 \title{A package for building Shiny App}
 \description{
 Read more about building big shiny apps at \url{https://engineering-shiny.org/}.
