@@ -4,7 +4,7 @@
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)[![R-CMD-check](https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg)](https://github.com/ThinkR-open/golem/actions)
 [![Coverage
-status](https://codecov.io/gh/ThinkR-open/golem/branch/test-for-gh/graph/badge.svg)](https://app.codecov.io/github/ThinkR-open/golem/tree/test-for-gh)[![CRAN
+status](https://codecov.io/gh/ThinkR-open/golem/branch/dev/graph/badge.svg)](https://app.codecov.io/github/ThinkR-open/golem/tree/dev)[![CRAN
 status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
 
 <!-- badges: end -->
@@ -108,14 +108,14 @@ You’re reading the doc about version: 0.4.20
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-02-28 16:25:55 UTC"
+    #> [1] "2024-02-28 16:38:00 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
     #> ── R CMD check results ─────────────────────────────────────── golem 0.4.20 ────
-    #> Duration: 1m 11.1s
+    #> Duration: 1m 9.1s
     #> 
     #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
@@ -147,7 +147,7 @@ Here are the test & coverage results:
     #> R/make_dev.R: 90.00%
     #> R/add_files.R: 91.96%
     #> R/golem-yaml-get.R: 93.18%
-    #> R/add_dockerfiles_renv.R: 93.78%
+    #> R/add_dockerfiles_renv.R: 93.81%
     #> R/run_dev.R: 95.65%
     #> R/desc.R: 96.67%
     #> R/use_favicon.R: 96.67%
