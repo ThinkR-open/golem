@@ -18,14 +18,16 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 
 ```{r echo = FALSE}
-name_branch <- system("git symbolic-ref --short HEAD", intern = TRUE)
+name_branch <- gert::git_branch()
 link_to_branch_svg <- paste0(
   "https://codecov.io/gh/ThinkR-open/golem/branch/",
   name_branch,
-  "/graph/badge.svg")
+  "/graph/badge.svg"
+ )
 link_to_branch_html <- paste0(
   "https://app.codecov.io/github/ThinkR-open/golem/tree/",
-  name_branch)
+  name_branch
+ )
 ```
 
 ```{r, echo = FALSE, results = "asis"}
