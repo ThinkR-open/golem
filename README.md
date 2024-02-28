@@ -106,13 +106,13 @@ You can also find apps at:
 
 ## About
 
-You’re reading the doc about version: 0.4.17
+You’re reading the doc about version: 0.4.20
 
 This `README` has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-10-13 08:33:05 CEST"
+#> [1] "2024-02-28 15:40:51 CET"
 ```
 
 Here are the test & coverage results:
@@ -120,16 +120,15 @@ Here are the test & coverage results:
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> Writing 'golem.Rd'
-#> ── R CMD check results ─────────────────────────────────────── golem 0.4.17 ────
-#> Duration: 10m 17.3s
+#> ── R CMD check results ─────────────────────────────────────── golem 0.4.20 ────
+#> Duration: 1m 11.6s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> golem Coverage: 73.76%
+#> golem Coverage: 74.87%
 #> R/add_dockerfiles_renv.R: 0.00%
 #> R/add_dockerfiles.R: 0.00%
 #> R/addins.R: 0.00%
@@ -149,7 +148,8 @@ covr::package_coverage()
 #> R/bootstrap_desc.R: 55.56%
 #> R/install_dev_deps.R: 60.87%
 #> R/bootstrap_usethis.R: 70.00%
-#> R/modules_fn.R: 79.00%
+#> R/add_r_files.R: 78.50%
+#> R/modules_fn.R: 78.71%
 #> R/utils.R: 79.78%
 #> R/golem-yaml-set.R: 83.02%
 #> R/use_utils.R: 83.33%
@@ -158,7 +158,6 @@ covr::package_coverage()
 #> R/add_resource_path.R: 88.89%
 #> R/create_golem.R: 89.47%
 #> R/make_dev.R: 90.00%
-#> R/add_r_files.R: 91.01%
 #> R/add_files.R: 91.96%
 #> R/golem-yaml-get.R: 93.18%
 #> R/run_dev.R: 95.65%
@@ -172,6 +171,7 @@ covr::package_coverage()
 #> R/bundle_resources.R: 100.00%
 #> R/config.R: 100.00%
 #> R/disable_autoload.R: 100.00%
+#> R/golem_welcome_page.R: 100.00%
 #> R/golem-yaml-utils.R: 100.00%
 #> R/is_golem.R: 100.00%
 #> R/is_running.R: 100.00%
