@@ -4,7 +4,7 @@
 # Controls when the action will run: for now dev and master
 on:
   push:
-    branches: [main, master, dev]
+    branches: [main, master, dev,test-for-gh]
 
 name: render-rmarkdown
 
