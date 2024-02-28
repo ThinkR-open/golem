@@ -133,7 +133,7 @@ Sys.time()
 
 Here are the test & coverage results:
 
-```{r}
+```{r error = TRUE}
 devtools::check(quiet = TRUE)
 ```
 
@@ -141,7 +141,7 @@ devtools::check(quiet = TRUE)
 unloadNamespace("golem")
 ```
 
-```{r}
+```{r error = TRUE}
 covr::package_coverage()
 ```
 
