@@ -24,7 +24,7 @@ jobs:
 
     # install linux packages
       - name: install linux packages
-        run: apt-get install -y libgit2-dev
+        run: sudo apt-get install -y libgit2-dev
     # install CRAN packages used inside README.Rmd
       - name: install required packages
         run: Rscript -e 'install.packages(c("rmarkdown", "covr", "gert",  "knitr", "devtools"))'
