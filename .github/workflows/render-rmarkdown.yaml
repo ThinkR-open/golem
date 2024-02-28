@@ -27,7 +27,7 @@ jobs:
         run: sudo apt-get install -y libgit2-dev
     # install CRAN packages used inside README.Rmd
       - name: install required packages
-        run: Rscript -e 'install.packages("remotes");remotes::install_cran(c("rmarkdown", "covr", "gert",  "knitr", "devtools"), repos = "https://packagemanager.posit.co/cran/__linux__/jammy/latest")'
+        run: Rscript -e 'install.packages("remotes");remotes::install_cran(c("rmarkdown", "covr", "gert",  "knitr", "devtools"), repos = "https://packagemanager.posit.co/cran/__linux__/jammy/latest");remotes::install_deps(repos = "https://packagemanager.posit.co/cran/__linux__/jammy/latest")'
     # Render READEME.md using rmarkdown
       - name: render README
         run: Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'
