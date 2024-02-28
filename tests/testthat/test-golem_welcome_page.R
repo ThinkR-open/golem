@@ -9,7 +9,6 @@ test_that("golem_welcome_page works", {
   links_to_detect <- c(
     "https://golemverse.org/",
     "https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png",
-    "https://thinkr-open.github.io/golem/",
     "https://engineering-shiny.org/"
   )
 
