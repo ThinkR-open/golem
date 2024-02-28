@@ -19,16 +19,20 @@ test_that("generate_readme_tmpl works", {
 
 
 test_that("check_overwrite works", {
+  this_file_will_be_removed <- tempfile(fileext = ".Rmd")
+  write("hello world", this_file_will_be_removed)
+
   expect_error(
-    check_overwrite(FALSE, golem_sys("utils/empty_readme.Rmd")),
+    check_overwrite(FALSE, this_file_will_be_removed),
     "README.Rmd already exists. Set `overwrite = TRUE` to overwrite."
   )
-  # Check if file exists
+  # Check if file still exists
   expect_true(file.exists(golem_sys("utils/empty_readme.Rmd")))
+
   # Remove file via check_overwrite setting overwrite=TRUE
-  check_overwrite(TRUE, golem_sys("utils/empty_readme.Rmd"))
+  check_overwrite(TRUE, this_file_will_be_removed)
   # Check that file is indeed removed
-  expect_false(file.exists(golem_sys("utils/empty_readme.Rmd")))
+  expect_false(file.exists(this_file_will_be_removed))
 })
 
 test_that("use_readme_rmd works", {
