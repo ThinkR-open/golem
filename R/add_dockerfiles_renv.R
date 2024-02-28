@@ -1,19 +1,19 @@
 add_dockerfile_with_renv_ <- function(
-    source_folder = get_golem_wd(),
-    lockfile = NULL,
-    output_dir = fs::path(tempdir(), "deploy"),
-    distro = "focal",
-    FROM = "rocker/verse",
-    AS = NULL,
-    sysreqs = TRUE,
-    repos = c(CRAN = "https://cran.rstudio.com/"),
-    expand = FALSE,
-    extra_sysreqs = NULL,
-    update_tar_gz = TRUE,
-    document = FALSE,
-    ...
-    # build_golem_from_source = TRUE,
-) {
+  source_folder = get_golem_wd(),
+  lockfile = NULL,
+  output_dir = fs::path(tempdir(), "deploy"),
+  distro = "focal",
+  FROM = "rocker/verse",
+  AS = NULL,
+  sysreqs = TRUE,
+  repos = c(CRAN = "https://cran.rstudio.com/"),
+  expand = FALSE,
+  extra_sysreqs = NULL,
+  update_tar_gz = TRUE,
+  document = FALSE,
+  ...
+  # build_golem_from_source = TRUE,
+    ) {
   check_dockerfiler_installed()
   if (is.null(lockfile)) {
     rlang::check_installed(
@@ -52,7 +52,8 @@ add_dockerfile_with_renv_ <- function(
 
     lockfile <- attachment_create_renv_for_prod(
       path = source_folder,
-      check_if_suggests_is_installed = FALSE, document = document,
+      check_if_suggests_is_installed = FALSE,
+      document = document,
       output = file.path(output_dir, "renv.lock.prod"),
       ...
     )
@@ -154,23 +155,24 @@ add_dockerfile_with_renv_ <- function(
 #' @rdname dockerfiles
 #' @export
 add_dockerfile_with_renv <- function(
-    source_folder = get_golem_wd(),
-    lockfile = NULL,
-    output_dir = fs::path(tempdir(), "deploy"),
-    distro = "focal",
-    from = "rocker/verse",
-    as = NULL,
-    sysreqs = TRUE,
-    port = 80,
-    host = "0.0.0.0",
-    repos = c(CRAN = "https://cran.rstudio.com/"),
-    expand = FALSE,
-    open = TRUE,
-    document = TRUE,
-    extra_sysreqs = NULL,
-    update_tar_gz = TRUE,
-    dockerfile_cmd = NULL,
-    ...) {
+  source_folder = get_golem_wd(),
+  lockfile = NULL,
+  output_dir = fs::path(tempdir(), "deploy"),
+  distro = "focal",
+  from = "rocker/verse",
+  as = NULL,
+  sysreqs = TRUE,
+  port = 80,
+  host = "0.0.0.0",
+  repos = c(CRAN = "https://cran.rstudio.com/"),
+  expand = FALSE,
+  open = TRUE,
+  document = TRUE,
+  extra_sysreqs = NULL,
+  update_tar_gz = TRUE,
+  dockerfile_cmd = NULL,
+  ...
+    ) {
   base_dock <- add_dockerfile_with_renv_(
     source_folder = source_folder,
     lockfile = lockfile,
@@ -229,20 +231,21 @@ docker run -p %s:%s %s
 #' @export
 #' @export
 add_dockerfile_with_renv_shinyproxy <- function(
-    source_folder = get_golem_wd(),
-    lockfile = NULL,
-    output_dir = fs::path(tempdir(), "deploy"),
-    distro = "focal",
-    from = "rocker/verse",
-    as = NULL,
-    sysreqs = TRUE,
-    repos = c(CRAN = "https://cran.rstudio.com/"),
-    expand = FALSE,
-    extra_sysreqs = NULL,
-    open = TRUE,
-    document = TRUE,
-    update_tar_gz = TRUE,
-    ...) {
+  source_folder = get_golem_wd(),
+  lockfile = NULL,
+  output_dir = fs::path(tempdir(), "deploy"),
+  distro = "focal",
+  from = "rocker/verse",
+  as = NULL,
+  sysreqs = TRUE,
+  repos = c(CRAN = "https://cran.rstudio.com/"),
+  expand = FALSE,
+  extra_sysreqs = NULL,
+  open = TRUE,
+  document = TRUE,
+  update_tar_gz = TRUE,
+  ...
+    ) {
   add_dockerfile_with_renv(
     source_folder = source_folder,
     lockfile = lockfile,
@@ -272,20 +275,21 @@ add_dockerfile_with_renv_shinyproxy <- function(
 #' @export
 #' @export
 add_dockerfile_with_renv_heroku <- function(
-    source_folder = get_golem_wd(),
-    lockfile = NULL,
-    output_dir = fs::path(tempdir(), "deploy"),
-    distro = "focal",
-    from = "rocker/verse",
-    as = NULL,
-    sysreqs = TRUE,
-    repos = c(CRAN = "https://cran.rstudio.com/"),
-    expand = FALSE,
-    extra_sysreqs = NULL,
-    open = TRUE,
-    document = TRUE,
-    update_tar_gz = TRUE,
-    ...) {
+  source_folder = get_golem_wd(),
+  lockfile = NULL,
+  output_dir = fs::path(tempdir(), "deploy"),
+  distro = "focal",
+  from = "rocker/verse",
+  as = NULL,
+  sysreqs = TRUE,
+  repos = c(CRAN = "https://cran.rstudio.com/"),
+  expand = FALSE,
+  extra_sysreqs = NULL,
+  open = TRUE,
+  document = TRUE,
+  update_tar_gz = TRUE,
+  ...
+    ) {
   add_dockerfile_with_renv(
     source_folder = source_folder,
     lockfile = lockfile,
