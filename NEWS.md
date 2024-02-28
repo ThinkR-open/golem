@@ -14,6 +14,8 @@
 
 + `add_r6()` adds an empty R6 file (@ilyaZar, #1009)
 
++ `golem::welcome_page()` now display a page on default scaffold app (#1126)
+
 ## New features / user visible changes
 
 + sourcing `dev/01_start.R` leaves the file in a clean state with all files added to the initial commit (#1094, @ilyaZar)
