@@ -103,19 +103,19 @@ You can also find apps at:
 
 ## About
 
-You’re reading the doc about version: 0.4.20
+You’re reading the doc about version: 0.4.21
 
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-02-28 16:38:00 UTC"
+    #> [1] "2024-02-29 20:23:58 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
-    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.20 ────
-    #> Duration: 1m 9.1s
+    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.21 ────
+    #> Duration: 1m 9.9s
     #> 
     #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
