@@ -9,8 +9,8 @@ test_that(
     with_dir(
       path_dummy_golem,
       {
-      skip_if_not(exists("run_app"))
-
+        # 0. Make dummy golem work as pkg temporarily i.e. run_app() is known
+        devtools::load_all()
         # 1. Test the maintenance feature directly
         html <- maintenance_page()
         expect_true(inherits(html, c("html_document", "shiny.tag.list", "list")))
@@ -51,7 +51,8 @@ test_that(
     with_dir(
       path_dummy_golem,
       {
-        skip_if_not(exists("run_app"))
+        # 0. Make dummy golem work as pkg temporarily i.e. run_app() is known
+        devtools::load_all()
         # I. Test disabling the 'print'-flag on Posit for SHINY_PORT set
         # I.A save output with "print = FALSE" as the testing value
         app_print_false <- run_app()
@@ -158,7 +159,7 @@ test_that(
         )
         # II. reset global variable and check that this reset is successful
         assignInNamespace(".globals", tmp_globals_backup, ns = "shiny")
-        expect_null(getShinyOption("golem_options"))
+        expect_null(shiny::getShinyOption("golem_options"))
         expect_null(get_golem_options())
       }
     )
