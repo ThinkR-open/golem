@@ -29,7 +29,7 @@ jobs:
         run: sudo apt-get install -y libgit2-dev
     # install CRAN packages used inside README.Rmd
       - name: install required packages
-        run: Rscript -e 'install.packages("remotes");remotes::install_cran(c("rmarkdown", "covr", "gert",  "knitr", "devtools"), repos = "https://packagemanager.posit.co/cran/__linux__/jammy/latest")'
+        run: Rscript -e 'install.packages("remotes");remotes::install_cran(c("rmarkdown", "covr", "gert",  "knitr", "devtools", "desc"), repos = "https://packagemanager.posit.co/cran/__linux__/jammy/latest")'
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -37,12 +37,15 @@ jobs:
           needs: check
 
     # Render READEME.md using rmarkdown
+      - name: Bump dev version
+        if: github.ref == 'refs/heads/dev'
+        run: Rscript -e 'desc::desc_bump_version("dev")'
       - name: render README
         run: Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'
-      - name: Render Rmarkdown files and Commit Results
+      - name: Commit Results
         run: |
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git add README.md
+          git add README.md DESCRIPTION
           git commit -m "Re-build README.md" || echo "No changes to commit"
           git push origin || echo "No changes to commit"
