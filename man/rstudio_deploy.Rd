@@ -6,7 +6,8 @@
 \alias{add_rstudioconnect_file}
 \alias{add_shinyappsio_file}
 \alias{add_shinyserver_file}
-\title{Add an app.R at the root of your package to deploy on RStudio Connect}
+\alias{add_rscignore_file}
+\title{Add an \code{app.R} at the root of your package to deploy on RStudio Connect}
 \usage{
 add_positconnect_file(pkg = get_golem_wd(), open = TRUE)
 
@@ -15,6 +16,8 @@ add_rstudioconnect_file(pkg = get_golem_wd(), open = TRUE)
 add_shinyappsio_file(pkg = get_golem_wd(), open = TRUE)
 
 add_shinyserver_file(pkg = get_golem_wd(), open = TRUE)
+
+add_rscignore_file(pkg = get_golem_wd(), open = TRUE)
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
@@ -22,16 +25,34 @@ add_shinyserver_file(pkg = get_golem_wd(), open = TRUE)
 \item{open}{Should the created file be opened?}
 }
 \value{
-The path to the file, invisibly.
+Side-effect functions for file creation returning the path to the
+file, invisibly.
 }
 \description{
-Add an app.R at the root of your package to deploy on RStudio Connect
+Additionally, adds a \code{.rscignore} at the root of the \code{{golem}} project if the
+\code{rsconnect} package version is \verb{>= 0.8.25}.
 }
 \note{
 In previous versions, this function was called add_rconnect_file and add_rstudioconnect_file.
 
 \code{add_rstudioconnect_file} is now deprecated; replace by \code{\link[=add_positconnect_file]{add_positconnect_file()}}.
 }
+\section{List of excluded files in \code{.rscignore}}{
+
+\itemize{
+\item .here
+\item CODE_OF_CONDUCT.md
+\item LICENSE\{.md\}
+\item LICENCE\{.md\}
+\item NEWS\{.md\}
+\item README\{.md,.Rmd,.HTML\}
+\item dev
+\item man
+\item tests
+\item vignettes
+}
+}
+
 \examples{
 # Add a file for Connect
 if (interactive()) {
