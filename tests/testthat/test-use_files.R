@@ -13,7 +13,7 @@ test_that("use_external_XXX_files() function family works properly", {
         url = "https://raw.githubusercontent.com/ThinkR-open/golem/dev/inst/utils/testfile_template_plainfile.txt"
       )
       test_file_download <- readLines(
-        "inst/app/www/testfile_template_plainfile.txt"
+        "inst/app/www/testfile_template_plainfile"
       )
       expect_identical(
         test_file_download,
