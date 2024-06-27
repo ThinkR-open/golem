@@ -103,24 +103,42 @@ You can also find apps at:
 
 ## About
 
-You’re reading the doc about version: 0.4.22
+You’re reading the doc about version: 0.4.23
 
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-02-29 20:34:57 UTC"
+    #> [1] "2024-06-27 07:30:32 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
-    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.22 ────
-    #> Duration: 1m 10.1s
+    #> Writing 'rstudio_deploy.Rd'
+    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.23 ────
+    #> Duration: 1m 21.4s
     #> 
-    #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+    #> ❯ checking Rd files ... NOTE
+    #>   checkRd: (-1) create_golem.Rd:30: Lost braces; missing escapes or markup?
+    #>       30 | \item{package_name}{Package name to use. By default, {golem} uses
+    #>          |                                                      ^
+    #>   checkRd: (-1) get_sysreqs.Rd:23: Lost braces; missing escapes or markup?
+    #>       23 | {dockerfiler}.
+    #>          | ^
+    #>   checkRd: (-1) golem_opts.Rd:83: Lost braces; missing escapes or markup?
+    #>       83 | \item{config_file}{path to the {golem} config file}
+    #>          |                                ^
+    #>   checkRd: (-1) install_dev_deps.Rd:5: Lost braces; missing escapes or markup?
+    #>        5 | \title{Install {golem} dev dependencies}
+    #>          |                ^
+    #>   checkRd: (-1) project_hook.Rd:13: Lost braces; missing escapes or markup?
+    #>       13 | \item{package_name}{Package name to use. By default, {golem} uses
+    #>          |                                                      ^
+    #> 
+    #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 
     covr::package_coverage()
-    #> golem Coverage: 85.38%
+    #> golem Coverage: 85.32%
     #> R/addins.R: 0.00%
     #> R/bootstrap_rstudio_api.R: 0.00%
     #> R/enable_roxygenize.R: 0.00%
@@ -141,7 +159,7 @@ Here are the test & coverage results:
     #> R/golem-yaml-set.R: 83.02%
     #> R/use_utils.R: 83.33%
     #> R/utils.R: 83.75%
-    #> R/add_rstudio_files.R: 88.52%
+    #> R/add_rstudio_files.R: 85.29%
     #> R/add_resource_path.R: 88.89%
     #> R/create_golem.R: 89.47%
     #> R/make_dev.R: 90.00%
