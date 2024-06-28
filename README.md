@@ -103,20 +103,20 @@ You can also find apps at:
 
 ## About
 
-You’re reading the doc about version: 0.4.23
+You’re reading the doc about version: 0.4.24
 
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-06-27 07:30:32 UTC"
+    #> [1] "2024-06-28 14:22:50 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
     #> Writing 'rstudio_deploy.Rd'
-    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.23 ────
-    #> Duration: 1m 21.4s
+    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.24 ────
+    #> Duration: 1m 17.8s
     #> 
     #> ❯ checking Rd files ... NOTE
     #>   checkRd: (-1) create_golem.Rd:30: Lost braces; missing escapes or markup?
