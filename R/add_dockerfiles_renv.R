@@ -81,7 +81,7 @@ add_dockerfile_with_renv_ <- function(
 
   my_dock <- dockerfiler_Dockerfile()$new(FROM = tolower(tolower(paste0(golem::get_golem_name(), "_base"))))
 
-  my_dock$COPY(lockfile, "renv.lock")
+  my_dock$COPY(basename(lockfile), "renv.lock")
 
   my_dock$RUN("R -e 'renv::restore()'")
 
