@@ -50,6 +50,8 @@
 
 + `use_git()` is now at the bottom of 01_dev.R ((#1094, @ilyaZar))
 
++ `golem::add_dockerfile_with_renv_*()` set "rstudio" as default USER in Dockerfile to avoid launching app as root
+
 ## Bug fix
 
 + `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)

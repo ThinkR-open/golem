@@ -33,7 +33,7 @@ Additionally, adds a \code{.rscignore} at the root of the \code{{golem}} project
 \code{rsconnect} package version is \verb{>= 0.8.25}.
 }
 \note{
-In previous versions, this function was called add_rconnect_file and add_rstudioconnect_file.
+In previous versions, this function was called add_rconnect_file.
 
 \code{add_rstudioconnect_file} is now deprecated; replace by \code{\link[=add_positconnect_file]{add_positconnect_file()}}.
 }

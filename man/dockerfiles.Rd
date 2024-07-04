@@ -73,6 +73,7 @@ add_dockerfile_with_renv(
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
   dockerfile_cmd = NULL,
+  user = "rstudio",
   ...
 )
 
@@ -90,6 +91,7 @@ add_dockerfile_with_renv_shinyproxy(
   open = TRUE,
   document = TRUE,
   update_tar_gz = TRUE,
+  user = "rstudio",
   ...
 )
 
@@ -106,6 +108,7 @@ add_dockerfile_with_renv_heroku(
   extra_sysreqs = NULL,
   open = TRUE,
   document = TRUE,
+  user = "rstudio",
   update_tar_gz = TRUE,
   ...
 )
@@ -164,6 +167,8 @@ See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
 
 \item{dockerfile_cmd}{What is the CMD to add to the Dockerfile. If NULL, the default,
 the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}');library(\{appname\});\{appname\}::run_app()\\}.}
+
+\item{user}{Name of the user to specify in the Dockerfile with the USER instruction. Default is \code{rstudio}, if set to \code{NULL} no the user from the FROM image is used.}
 
 \item{...}{Other arguments to pass to \code{\link[renv:snapshot]{renv::snapshot()}}.}
 }
