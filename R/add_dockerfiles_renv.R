@@ -83,7 +83,7 @@ add_dockerfile_with_renv_ <- function(
 
   my_dock$COPY(basename(lockfile), "renv.lock")
 
-  my_dock$RUN("R -e 'renv::restore()'")
+  my_dock$RUN("R -e 'options(renv.config.pak.enabled = FALSE);renv::restore()'")
 
   if (update_tar_gz) {
     old_version <- list.files(path = output_dir, pattern = paste0(golem::get_golem_name(), "_*.*.tar.gz"), full.names = TRUE)
@@ -150,6 +150,7 @@ add_dockerfile_with_renv_ <- function(
 #' @param document boolean. If TRUE (by default), DESCRIPTION file is updated using [attachment::att_amend_desc()] before creating the renv.lock file
 #' @param dockerfile_cmd What is the CMD to add to the Dockerfile. If NULL, the default,
 #' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\`.
+#' @param user Name of the user to specify in the Dockerfile with the USER instruction. Default is `rstudio`, if set to `NULL` no the user from the FROM image is used.
 #' @param ... Other arguments to pass to [renv::snapshot()].
 #' @inheritParams add_dockerfile
 #' @rdname dockerfiles
@@ -171,6 +172,7 @@ add_dockerfile_with_renv <- function(
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
   dockerfile_cmd = NULL,
+  user = "rstudio",
   ...
     ) {
   base_dock <- add_dockerfile_with_renv_(
@@ -190,6 +192,9 @@ add_dockerfile_with_renv <- function(
   )
   if (!is.null(port)) {
     base_dock$EXPOSE(port)
+  }
+  if (!is.null(user)) {
+    base_dock$USER(user)
   }
   if (is.null(dockerfile_cmd)) {
     dockerfile_cmd <- sprintf(
@@ -244,6 +249,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
   open = TRUE,
   document = TRUE,
   update_tar_gz = TRUE,
+  user = "rstudio",
   ...
     ) {
   add_dockerfile_with_renv(
@@ -262,6 +268,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
     update_tar_gz = update_tar_gz,
     open = open,
     document = document,
+    user = user,
     dockerfile_cmd = sprintf(
       "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       golem::get_golem_name()
@@ -287,6 +294,7 @@ add_dockerfile_with_renv_heroku <- function(
   extra_sysreqs = NULL,
   open = TRUE,
   document = TRUE,
+  user = "rstudio",
   update_tar_gz = TRUE,
   ...
     ) {
@@ -306,6 +314,7 @@ add_dockerfile_with_renv_heroku <- function(
     update_tar_gz = update_tar_gz,
     open = FALSE,
     document = document,
+    user = user,
     dockerfile_cmd = sprintf(
       "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       golem::get_golem_name()
