@@ -103,20 +103,21 @@ You can also find apps at:
 
 ## About
 
-You’re reading the doc about version: 0.4.24
+You’re reading the doc about version: 0.4.25
 
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-06-28 14:22:50 UTC"
+    #> [1] "2024-07-04 07:50:43 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
-    #> ℹ Loading golem
-    #> Writing 'rstudio_deploy.Rd'
-    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.24 ────
-    #> Duration: 1m 17.8s
+    #> ══ Documenting ═════════════════════════════════════════════════════════════════
+    #> ℹ Installed roxygen2 version (7.3.2) doesn't match required (7.3.1)
+    #> ✖ `check()` will not re-document this package
+    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.25 ────
+    #> Duration: 1m 21.6s
     #> 
     #> ❯ checking Rd files ... NOTE
     #>   checkRd: (-1) create_golem.Rd:30: Lost braces; missing escapes or markup?
@@ -138,7 +139,7 @@ Here are the test & coverage results:
     #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 
     covr::package_coverage()
-    #> golem Coverage: 85.32%
+    #> golem Coverage: 85.34%
     #> R/addins.R: 0.00%
     #> R/bootstrap_rstudio_api.R: 0.00%
     #> R/enable_roxygenize.R: 0.00%
@@ -163,9 +164,9 @@ Here are the test & coverage results:
     #> R/add_resource_path.R: 88.89%
     #> R/create_golem.R: 89.47%
     #> R/make_dev.R: 90.00%
-    #> R/add_files.R: 91.96%
+    #> R/add_files.R: 91.98%
     #> R/golem-yaml-get.R: 93.18%
-    #> R/add_dockerfiles_renv.R: 93.81%
+    #> R/add_dockerfiles_renv.R: 93.91%
     #> R/run_dev.R: 95.65%
     #> R/desc.R: 96.67%
     #> R/use_favicon.R: 96.67%
