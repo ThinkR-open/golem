@@ -147,5 +147,32 @@ create_dummy_golem <- function() {
     ),
     recursive = TRUE
   )
+  dir.create(
+    file.path(
+      path_to_golem,
+      "dev"
+    ),
+    recursive = TRUE
+  )
+  dir.create(
+    file.path(
+      path_to_golem,
+      "inst/app/www/"
+    ),
+    recursive = TRUE
+  )
+  file.create(
+    file.path(
+      path_to_golem,
+      "inst/app/www/favicon.ico"
+    )
+  )
+  dir.create(
+    file.path(
+      path_to_golem,
+      "man"
+    ),
+    recursive = TRUE
+  )
   return(path_to_golem)
 }
