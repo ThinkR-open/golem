@@ -2,19 +2,7 @@ test_that("use_utils_ui works", {
   on.exit(
     unlink(pkg, TRUE, TRUE)
   )
-  pkg <- file.path(
-    tempdir(),
-    "dummygolem"
-  )
-
-
-  dir.create(
-    file.path(
-      pkg,
-      "R"
-    ),
-    recursive = TRUE
-  )
+  pkg <- create_dummy_golem()
   withr::with_options(
     c(
       "usethis.quiet" = TRUE
@@ -36,12 +24,6 @@ test_that("use_utils_ui works", {
       "R/golem_utils_ui.R"
     )
   )
-  withr::with_dir(pkg, {
-    dir.create(
-      "tests/testthat/",
-      recursive = TRUE
-    )
-  })
   withr::with_options(
     c(
       "usethis.quiet" = TRUE
@@ -121,17 +103,7 @@ test_that("use_utils_ui works", {
   on.exit(
     unlink(pkg, TRUE, TRUE)
   )
-  pkg <- file.path(
-    tempdir(),
-    "dummygolem"
-  )
-  dir.create(
-    file.path(
-      pkg,
-      "R"
-    ),
-    recursive = TRUE
-  )
+  pkg <- create_dummy_golem()
   withr::with_options(
     c(
       "usethis.quiet" = TRUE
@@ -152,12 +124,6 @@ test_that("use_utils_ui works", {
       "R/golem_utils_server.R"
     )
   )
-  withr::with_dir(pkg, {
-    dir.create(
-      "tests/testthat/",
-      recursive = TRUE
-    )
-  })
   withr::with_options(
     c(
       "usethis.quiet" = TRUE

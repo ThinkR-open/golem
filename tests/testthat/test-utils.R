@@ -272,21 +272,21 @@ test_that(
 )
 
 test_that("is_existing_module() properly detects modules if they are present", {
-  path_dummy_golem <- tempfile(pattern = "dummygolem")
-  dir.create(
-    file.path(path_dummy_golem, "R"),
-    recursive = TRUE
-  )
+  dummy_golem <- create_dummy_golem()
   dummy_module_files <- c(
     "mod_main.R",
     "mod_left_pane.R",
     "mod_pouet_pouet.R"
   )
   file.create(
-    file.path(path_dummy_golem, "R", dummy_module_files)
+    file.path(
+      dummy_golem,
+      "R",
+      dummy_module_files
+    )
   )
 
-  withr::with_dir(path_dummy_golem, {
+  withr::with_dir(dummy_golem, {
     expect_false(is_existing_module("foo"))
     expect_true(is_existing_module("left_pane"))
     expect_true(is_existing_module("main"))
@@ -295,19 +295,17 @@ test_that("is_existing_module() properly detects modules if they are present", {
   })
 
   # Cleanup
-  unlink(path_dummy_golem, TRUE, TRUE, TRUE)
+  unlink(dummy_golem, TRUE, TRUE, TRUE)
 })
 
 test_that("is_existing_module() fails outside an R package", {
-  path_dummy_golem <- tempfile(pattern = "dummygolem")
-  dir.create(
-    path_dummy_golem
-  )
-  withr::with_dir(path_dummy_golem, {
+  dummy_golem <- create_dummy_golem()
+  withr::with_dir(dummy_golem, {
+    unlink("R", TRUE, TRUE)
     dir.create("RR/")
     file.create(
       file.path(
-        path_dummy_golem,
+        dummy_golem,
         "RR",
         "left_pane"
       )
@@ -319,7 +317,12 @@ test_that("is_existing_module() fails outside an R package", {
   })
 
   # Cleanup
-  unlink(path_dummy_golem, TRUE, TRUE, TRUE)
+  unlink(
+    dummy_golem,
+    TRUE,
+    TRUE,
+    TRUE
+  )
 })
 
 test_that(

@@ -40,7 +40,6 @@ where_am_i_testing_from <- function() {
 }
 
 perform_inside_a_new_golem <- function(fun) {
-
   im_testing_from <- where_am_i_testing_from()
 
   a_callr_session <- callr::r_session$new()
@@ -48,8 +47,8 @@ perform_inside_a_new_golem <- function(fun) {
   if (im_testing_from %in% c(
     "covr::package_coverage",
     "rcmdcheck::rcmdcheck"
-  )){
-    load_function <- function(){
+  )) {
+    load_function <- function() {
       library(Sys.getenv("TESTTHAT_PKG"), character.only = TRUE)
     }
   } else {
@@ -89,4 +88,64 @@ perform_inside_a_new_golem <- function(fun) {
   a_callr_session$finalize()
 
   return(res)
+}
+
+
+### Funs
+remove_file <- function(path) {
+  if (file.exists(path)) unlink(path, force = TRUE)
+}
+
+expect_exists <- function(fls) {
+  act <- list(
+    val = fls,
+    lab = fls
+  )
+
+  act$val <- file.exists(fls)
+  expect(
+    isTRUE(act$val),
+    sprintf("File %s doesn't exist.", fls)
+  )
+
+  invisible(act$val)
+}
+
+create_dummy_golem <- function() {
+  # we're using this fun to do a
+  # minimal reprex of a golem
+  # without having to go through the
+  # create_golem() function
+  path_to_golem <- file.path(
+    tempdir(),
+    "dummygolem"
+  )
+  dir.create(
+    path_to_golem,
+    recursive = TRUE
+  )
+  file.copy(
+    golem_sys(
+      "shinyexample/DESCRIPTION"
+    ),
+    file.path(
+      path_to_golem,
+      "DESCRIPTION"
+    )
+  )
+  dir.create(
+    file.path(
+      path_to_golem,
+      "R"
+    ),
+    recursive = TRUE
+  )
+  dir.create(
+    file.path(
+      path_to_golem,
+      "tests/testthat"
+    ),
+    recursive = TRUE
+  )
+  return(path_to_golem)
 }

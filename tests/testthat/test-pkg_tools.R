@@ -1,20 +1,7 @@
 test_that(
   "daf_desc & pkg works",
   {
-    dummy_golem <- file.path(
-      tempdir(),
-      "dummy_golem"
-    )
-    dir.create(dummy_golem)
-    file.copy(
-      golem_sys(
-        "shinyexample/DESCRIPTION"
-      ),
-      file.path(
-        dummy_golem,
-        "DESCRIPTION"
-      )
-    )
+    dummy_golem <- create_dummy_golem()
     expect_equal(
       daf_desc(
         dummy_golem,

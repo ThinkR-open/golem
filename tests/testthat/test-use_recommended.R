@@ -19,24 +19,7 @@ test_that("use_recommended_deps works", {
 test_that(
   "use_recommended_tests works",
   {
-    dummy_golem <- file.path(
-      tempdir(),
-      "dummygolem"
-    )
-    dir.create(
-      file.path(
-        dummy_golem,
-        "R"
-      ),
-      recursive = TRUE
-    )
-    dir.create(
-      file.path(
-        dummy_golem,
-        "tests/testthat"
-      ),
-      recursive = TRUE
-    )
+    dummy_golem <- create_dummy_golem()
     withr::with_options(
       c("usethis.quiet" = TRUE),
       {
