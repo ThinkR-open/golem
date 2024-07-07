@@ -141,8 +141,10 @@ test_that(
       fls,
       append = TRUE
     )
+    # Checking that we don't remove
+    # roxygen tags
     write(
-      "# Zach Miller",
+      "#' Zach Miller",
       fls,
       append = TRUE
     )
@@ -150,7 +152,7 @@ test_that(
     expect_true(
       length(
         readLines(fls)
-      ) == 2
+      ) == 3
     )
   }
 )
