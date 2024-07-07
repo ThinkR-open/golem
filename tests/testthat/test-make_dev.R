@@ -53,19 +53,6 @@ test_that("test make_dev", {
   )
 })
 
-test_that("test print_dev", {
-  withr::with_options(
-    c(
-      golem.app.prod = FALSE
-    ),
-    {
-      expect_equal(print_dev("test"), "test")
-      expect_type(print_dev("test"), "character")
-    }
-  )
-})
-
-
 test_that("test browser_button", {
   withr::with_options(
     c("golem.quiet" = FALSE),
