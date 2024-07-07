@@ -1,5 +1,5 @@
 test_that("test app_dev", {
-  with_options(
+  withr::with_options(
     c(
       golem.app.prod = TRUE
     ),
@@ -8,7 +8,7 @@ test_that("test app_dev", {
       expect_true(app_prod())
     }
   )
-  with_options(
+  withr::with_options(
     c(
       golem.app.prod = FALSE
     ),
@@ -20,19 +20,26 @@ test_that("test app_dev", {
 })
 
 test_that("test print_dev", {
-  with_options(
+  withr::with_options(
     c(
       golem.app.prod = FALSE
     ),
     {
-      expect_equal(print_dev("test"), "test")
-      expect_type(print_dev("test"), "character")
+      res <- capture.output({
+        print_dev("test")
+      })
+      expect_true(
+        grepl(
+          "test",
+          res
+        )
+      )
     }
   )
 })
 
 test_that("test make_dev", {
-  with_options(
+  withr::with_options(
     c(
       golem.app.prod = FALSE
     ),
@@ -47,7 +54,7 @@ test_that("test make_dev", {
 })
 
 test_that("test print_dev", {
-  with_options(
+  withr::with_options(
     c(
       golem.app.prod = FALSE
     ),
