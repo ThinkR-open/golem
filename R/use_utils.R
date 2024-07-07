@@ -44,7 +44,7 @@ use_utils_ui <- function(
           open_file = FALSE
         )
       } else {
-        use_utils_test_ui()
+        use_utils_test_ui(pkg = pkg)
       }
     }
   }
@@ -96,7 +96,9 @@ use_utils_server <- function(
           open_file = FALSE
         )
       } else {
-        use_utils_test_server()
+        use_utils_test_server(
+          pkg = pkg
+        )
       }
     }
   }
@@ -120,8 +122,12 @@ use_utils_test_ <- function(
 
 #' @export
 #' @rdname utils_files
-use_utils_test_ui <- function(pkg = get_golem_wd()) {
-  use_utils_test_(pkg, "ui")
+use_utils_test_ui <- function(
+  pkg = get_golem_wd()) {
+  use_utils_test_(
+    pkg,
+    "ui"
+  )
 }
 #' @export
 #' @rdname utils_files
@@ -139,21 +145,21 @@ use_utils <- function(
   )
   on.exit(setwd(old))
 
-  where <- fs_path(
+  destination <- fs_path(
     fs_path_abs(pkg),
     folder_name,
     file_name
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
+  if (fs_file_exists(destination)) {
+    cat_exists(destination)
     return(FALSE)
   } else {
     fs_file_copy(
       path = golem_sys("utils", file_name),
-      new_path = where
+      new_path = destination
     )
-    cat_created(where)
+    cat_created(destination)
     return(TRUE)
   }
 }

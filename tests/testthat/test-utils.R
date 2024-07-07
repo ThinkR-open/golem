@@ -25,6 +25,21 @@ test_that(
         }
       )
     )
+    expect_false(
+      testthat::with_mocked_bindings(
+        rlang_is_interactive = function() {
+          return(TRUE)
+        },
+        ask_golem_creation_file = function(path, type) {
+          return(FALSE)
+        },
+        code = {
+          create_if_needed(
+            tempfile()
+          )
+        }
+      )
+    )
     expect_true(
       testthat::with_mocked_bindings(
         rlang_is_interactive = function() {
@@ -66,7 +81,8 @@ test_that(
 )
 
 test_that(
-  "ask_golem_creation_file works",{
+  "ask_golem_creation_file works",
+  {
     expect_true(
       testthat::with_mocked_bindings(
         yesno = identity,
@@ -74,7 +90,8 @@ test_that(
           grepl(
             "The Kilian Jornet doesn't exist, create?",
             ask_golem_creation_file(
-              "Kilian", "Jornet"
+              "Kilian",
+              "Jornet"
             )
           )
         }
@@ -84,7 +101,8 @@ test_that(
 )
 
 test_that(
-  "replace_word works", {
+  "replace_word works",
+  {
     fls <- tempfile()
     write(
       "Zach Jornet",
@@ -151,9 +169,10 @@ test_that("open_or_go_to works", {
     )
   )
   res <- testthat::with_mocked_bindings(
-    rstudioapi_navigateToFile = function(...){
+    rstudioapi_navigateToFile = function(...) {
       return("Scott Jurek")
-    },{
+    },
+    {
       open_or_go_to(
         "UTMB",
         TRUE
@@ -184,7 +203,8 @@ test_that(
 )
 
 test_that(
-  "if_not_null works", {
+  "if_not_null works",
+  {
     expect_null(
       if_not_null(
         NULL,
@@ -202,7 +222,8 @@ test_that(
 )
 
 test_that(
-  "set_name works", {
+  "set_name works",
+  {
     expect_named(
       set_name(1:2, c("a", "b")),
       c("a", "b")
@@ -211,10 +232,11 @@ test_that(
 )
 
 test_that(
-  "file_path_sans_ext works", {
+  "file_path_sans_ext works",
+  {
     expect_equal(
       file_path_sans_ext(
-       "scott.jpg"
+        "scott.jpg"
       ),
       "scott"
     )
@@ -234,10 +256,11 @@ test_that(
 )
 
 test_that(
-  "yesno works", {
+  "yesno works",
+  {
     expect_true(
       testthat::with_mocked_bindings(
-        utils_menu = function(...){
+        utils_menu = function(...) {
           return(1)
         },
         yesno()
@@ -298,7 +321,8 @@ test_that("is_existing_module() fails outside an R package", {
 })
 
 test_that(
-  "check_name_length_is_one works", {
+  "check_name_length_is_one works",
+  {
     expect_error(
       check_name_length_is_one(
         names(iris)
@@ -313,7 +337,8 @@ test_that(
 )
 
 test_that(
-  "do_if_unquiet works", {
+  "do_if_unquiet works",
+  {
     expect_null({
       withr::with_options(
         c("golem.quiet" = TRUE),
@@ -334,21 +359,25 @@ test_that(
         }
       )
     })
-    expect_equal({
-      withr::with_options(
-        c("usethis.quiet" = FALSE),
-        {
-          do_if_unquiet(
-            1 + 1
-          )
-        }
-      )
-    }, 2)
+    expect_equal(
+      {
+        withr::with_options(
+          c("usethis.quiet" = FALSE),
+          {
+            do_if_unquiet(
+              1 + 1
+            )
+          }
+        )
+      },
+      2
+    )
   }
 )
 
 test_that(
-  "check_name_syntax throws an info", {
+  "check_name_syntax throws an info",
+  {
     res <- testthat::capture_messages({
       check_name_syntax("mod_jornet")
     })
@@ -363,4 +392,3 @@ test_that(
     )
   }
 )
-
