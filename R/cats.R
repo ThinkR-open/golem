@@ -30,24 +30,28 @@ cat_info <- function(...) {
 
 
 cat_exists <- function(where) {
-  cat_red_bullet(
-    sprintf(
-      "[Skipped] %s already exists.",
-      basename(where)
+  do_if_unquiet({
+    cat_red_bullet(
+      sprintf(
+        "[Skipped] %s already exists.",
+        basename(where)
+      )
     )
-  )
-  cat_info(
-    sprintf(
-      "If you want replace it, remove the %s file first.",
-      basename(where)
+    cat_info(
+      sprintf(
+        "If you want replace it, remove the %s file first.",
+        basename(where)
+      )
     )
-  )
+  })
 }
 
 cat_dir_necessary <- function() {
-  cat_red_bullet(
-    "File not added (needs a valid directory)"
-  )
+  do_if_unquiet({
+    cat_red_bullet(
+      "File not added (needs a valid directory)"
+    )
+  })
 }
 
 cat_start_download <- function() {
@@ -61,13 +65,15 @@ cat_downloaded <- function(
   where,
   file = "File"
 ) {
-  cat_green_tick(
-    sprintf(
-      "%s downloaded at %s",
-      file,
-      where
+  do_if_unquiet({
+    cat_green_tick(
+      sprintf(
+        "%s downloaded at %s",
+        file,
+        where
+      )
     )
-  )
+  })
 }
 
 cat_start_copy <- function() {
@@ -81,32 +87,38 @@ cat_copied <- function(
   where,
   file = "File"
 ) {
-  cat_green_tick(
-    sprintf(
-      "%s copied to %s",
-      file,
-      where
+  do_if_unquiet({
+    cat_green_tick(
+      sprintf(
+        "%s copied to %s",
+        file,
+        where
+      )
     )
-  )
+  })
 }
 
 cat_created <- function(
   where,
   file = "File"
 ) {
-  cat_green_tick(
-    sprintf(
-      "%s created at %s",
-      file,
-      where
+  do_if_unquiet({
+    cat_green_tick(
+      sprintf(
+        "%s created at %s",
+        file,
+        where
+      )
     )
-  )
+  })
 }
 
 # File made dance
 
 cat_automatically_linked <- function() {
-  cat_green_tick(
-    "File automatically linked in `golem_add_external_resources()`."
-  )
+  do_if_unquiet({
+    cat_green_tick(
+      "File automatically linked in `golem_add_external_resources()`."
+    )
+  })
 }
