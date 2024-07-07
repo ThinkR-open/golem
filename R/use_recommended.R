@@ -21,7 +21,8 @@ use_recommended_deps <- function(
   recommended = c("shiny", "DT", "attempt", "glue", "htmltools", "golem")
 ) {
   .Deprecated(
-    msg = "use_recommended_deps() is soft deprecated and will be removed in future versions of {golem}."
+    old = "use_recommended_deps",
+    msg = "use_recommended_deps() is currently soft deprecated and will be removed in future versions of {golem}."
   )
 
   old <- setwd(fs_path_abs(pkg))
@@ -60,14 +61,17 @@ use_recommended_tests <- function(
   }
 
   stop_if(
-    fs_path(old, "tests", "testthat", "test-golem-recommended.R"),
+    fs_path(pkg, "tests", "testthat", "test-golem-recommended.R"),
     fs_file_exists,
     "test-golem-recommended.R already exists. \nPlease remove it first if you need to reinsert it."
   )
 
   fs_file_copy(
-    golem_sys("utils", "test-golem-recommended.R"),
-    fs_path(old, "tests", "testthat"),
+    golem_sys(
+      "utils",
+      "test-golem-recommended.R")
+     ,
+    fs_path(pkg, "tests", "testthat"),
     overwrite = TRUE
   )
 
