@@ -1,11 +1,47 @@
-skip_if_not_installed("pkgload")
-
-test_that("pkgtools works", {
-  withr::with_dir(pkg, {
-    expect_equal(pkgload::pkg_name(), fakename)
-    expect_equal(as.character(pkgload::pkg_version()), "0.0.0.9000")
-    # F-word windows path
-    skip_on_os("windows")
-    expect_equal(pkgload::pkg_path(), pkg)
-  })
-})
+test_that(
+  "daf_desc & pkg works",
+  {
+    dummy_golem <- file.path(
+      tempdir(),
+      "dummy_golem"
+    )
+    dir.create(dummy_golem)
+    file.copy(
+      golem_sys(
+        "shinyexample/DESCRIPTION"
+      ),
+      file.path(
+        dummy_golem,
+        "DESCRIPTION"
+      )
+    )
+    expect_equal(
+      daf_desc(
+        dummy_golem,
+        "Package"
+      ),
+      "shinyexample"
+    )
+    expect_equal(
+      pkg_name(
+        dummy_golem
+      ),
+      "shinyexample"
+    )
+    expect_equal(
+      pkg_version(
+        dummy_golem
+      ),
+      "0.0.0.9000"
+    )
+    expect_equal(
+      pkg_path(),
+      getwd()
+    )
+    unlink(
+      dummy_golem,
+      TRUE,
+      TRUE
+    )
+  }
+)
