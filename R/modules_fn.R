@@ -39,7 +39,7 @@ add_module <- function(
   module_template = golem::module_template,
   with_test = FALSE,
   ...
-    ) {
+) {
   # Let's start with the checks for the validity of the name
   check_name_length_is_one(name)
   check_name_syntax(name)
@@ -193,7 +193,7 @@ module_template <- function(
   ph_ui = " ",
   ph_server = " ",
   ...
-    ) {
+) {
   write_there <- function(...) {
     write(..., file = path, append = TRUE)
   }
@@ -277,13 +277,13 @@ use_module_test <- function(
   name,
   pkg = get_golem_wd(),
   open = TRUE
-    ) {
+) {
   # Remove the extension if any
   name <- file_path_sans_ext(name)
   # Remove the "mod_" if any
   name <- mod_remove(name)
 
-  if (!is_existing_module(name)) {
+  if (!is_existing_module(name, pkg = pkg)) {
     stop(
       sprintf(
         "The module '%s' does not exist.\nYou can call `golem::add_module('%s')` to create it.",
