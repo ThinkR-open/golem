@@ -521,6 +521,37 @@ add_sass_file <- function(
   }
 }
 
+add_sass_code <- function(where, dir, name) {
+  if (fs_file_exists(where)) {
+    if (fs_file_exists("dev/run_dev.R")) {
+      lines <- readLines("dev/run_dev.R")
+      new_lines <- append(
+        x = lines,
+        values = c(
+          "# Sass code compilation",
+          sprintf(
+            'sass::sass(input = sass::sass_file("%s/%s.sass"), output = "%s/%s.css", cache = NULL)',
+            dir,
+            name,
+            dir,
+            name
+          ),
+          ""
+        ),
+        after = 0
+      )
+      writeLines(
+        text = new_lines,
+        con = "dev/run_dev.R"
+      )
+
+      cat_green_tick(
+        "Code added in run_dev.R to compile your Sass file to CSS file."
+      )
+    }
+  }
+}
+
 #' @export
 #' @rdname add_files
 #' @importFrom tools file_ext
@@ -542,16 +573,16 @@ add_empty_file <- function(
 
   extension <- file_ext(name)
 
-  if (extension == "js"){
+  if (extension == "js") {
     warning("We've noticed you are trying to create a .js file. \nYou may want to use `add_js_file()` in future calls.")
   }
-  if (extension == "css"){
+  if (extension == "css") {
     warning("We've noticed you are trying to create a .css file. \nYou may want to use `add_css_file()` in future calls.")
   }
-  if (extension == "sass"){
+  if (extension == "sass") {
     warning("We've noticed you are trying to create a .sass file. \nYou may want to use `add_sass_file()` in future calls.")
   }
-  if (extension == "html"){
+  if (extension == "html") {
     warning("We've noticed you are trying to create a .html file. \nYou may want to use `add_html_template()` in future calls.")
   }
 
