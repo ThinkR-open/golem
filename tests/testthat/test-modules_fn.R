@@ -1,31 +1,31 @@
-
 test_that("use_module_test", {
-  with_dir(pkg, {
-    add_module("mod1", open = FALSE, pkg = pkg)
-    add_module("mod2", open = FALSE, pkg = pkg)
+  res <- perform_inside_a_new_golem(function() {
+    add_module("mod1", open = FALSE, pkg = ".")
+    add_module("mod2", open = FALSE, pkg = ".")
 
     # Proper module name
-    use_module_test("mod1", pkg = pkg, open = FALSE)
-    expect_true(file.exists("tests/testthat/test-mod_mod1.R"))
+    use_module_test("mod1", pkg = ".", open = FALSE)
+    # Module file passed instead of name
+    use_module_test("mod_mod2.R", pkg = ".", open = FALSE)
 
     # Non existing module
-    expect_error(
-      use_module_test("phatom", pkg = pkg, open = FALSE),
+    testthat::expect_error(
+      use_module_test("phatom", pkg = ".", open = FALSE),
       regex = "The module 'phatom' does not exist"
     )
-
-    # Module file passed instead of name
-    use_module_test("mod_mod2.R", pkg = pkg, open = FALSE)
-    expect_true(file.exists("tests/testthat/test-mod_mod2.R"))
-
-    lapply(
-      list.files(pattern = "(^|^test-)mod_mod\\d.R$", recursive = TRUE),
-      remove_file
+    return(
+      c(
+        file.exists("tests/testthat/test-mod_mod1.R"),
+        file.exists("tests/testthat/test-mod_mod2.R")
+      )
     )
   })
+  expect_true(
+    all(res)
+  )
 })
 
-test_that("module_fn work", {
+test_that("mod_remove work", {
   expect_equal(
     mod_remove("mod_a"),
     "a"
