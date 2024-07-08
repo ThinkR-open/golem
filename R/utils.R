@@ -12,7 +12,7 @@ golem_sys <- function(
 }
 
 # For testing purpose
-rlang_is_interactive <- function(){
+rlang_is_interactive <- function() {
   rlang::is_interactive()
 }
 
@@ -161,7 +161,7 @@ file_ext <- function(x) {
 
 #' @importFrom utils menu
 # for testing purposes
-utils_menu <- function(...){
+utils_menu <- function(...) {
   utils::menu(...)
 }
 yesno <- function(...) {
@@ -180,10 +180,21 @@ yesno <- function(...) {
 #'    module `R`-file
 #' @return boolean; `TRUE` if the module (`R`-file) exists and `FALSE` else
 #' @noRd
-is_existing_module <- function(module) {
-  stopifnot(`Cannot be called when not inside a R-package` = dir.exists("R"))
+is_existing_module <- function(
+  module,
+  pkg = "."
+) {
+  stopifnot(`Cannot be called when not inside a R-package` = dir.exists(
+    file.path(pkg, "R")
+  ))
   # stopifnot(`Cannot be called when not inside a golem-project` = is.golem())
-  existing_module_files <- list.files("R/", pattern = "^mod_")
+  existing_module_files <- list.files(
+    file.path(
+      pkg,
+      "R/"
+    ),
+    pattern = "^mod_"
+  )
   existing_module_names <- sub(
     "^mod_([[:alnum:]_]+)\\.R$",
     "\\1",
