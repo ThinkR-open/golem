@@ -167,6 +167,15 @@ create_dummy_golem <- function() {
       "inst/app/www/favicon.ico"
     )
   )
+  file.copy(
+    golem_sys(
+      "shinyexample/inst/golem-config.yml"
+    ),
+    file.path(
+      path_to_golem,
+      "inst/golem-config.yml"
+    )
+  )
   dir.create(
     file.path(
       path_to_golem,
