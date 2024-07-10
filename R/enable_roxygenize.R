@@ -3,11 +3,13 @@
 #' @param path to to Rproj file
 #' @noRd
 #'
-enable_roxygenize <- function(path = list.files(
+enable_roxygenize <- function(
+  path = list.files(
     path = ".",
     pattern = "Rproj$",
     full.names = TRUE
-  )[1]) {
+  )[1]
+) {
   cli_cat_bullet(
     sprintf("Reading %s content ", basename(path)),
     bullet = "info",
