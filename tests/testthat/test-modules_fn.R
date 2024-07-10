@@ -1,27 +1,77 @@
-test_that("use_module_test", {
-  res <- perform_inside_a_new_golem(function() {
-    add_module("mod1", open = FALSE, pkg = ".")
-    add_module("mod2", open = FALSE, pkg = ".")
-
-    # Proper module name
-    use_module_test("mod1", pkg = ".", open = FALSE)
-    # Module file passed instead of name
-    use_module_test("mod_mod2.R", pkg = ".", open = FALSE)
-
-    # Non existing module
-    testthat::expect_error(
-      use_module_test("phatom", pkg = ".", open = FALSE),
-      regex = "The module 'phatom' does not exist"
+test_that(
+  "add_module works",
+  {
+    dummy_golem <- create_dummy_golem()
+    withr::with_options(
+      c("usethis.quiet" = TRUE),
+      {
+        add_module(
+          "mod1",
+          open = FALSE,
+          pkg = dummy_golem,
+          with_test = TRUE
+        )
+      }
     )
-    return(
-      c(
-        file.exists("tests/testthat/test-mod_mod1.R"),
-        file.exists("tests/testthat/test-mod_mod2.R")
+    expect_exists(
+      file.path(
+        dummy_golem,
+        "R",
+        "mod_mod1.R"
       )
     )
+    expect_exists(
+      file.path(
+        dummy_golem,
+        "tests",
+        "testthat",
+        "test-mod_mod1.R"
+      )
+    )
+    unlink(
+      dummy_golem,
+      TRUE,
+      TRUE
+    )
+  }
+)
+
+test_that("use_module_test", {
+  dummy_golem <- create_dummy_golem()
+  on.exit({
+    unlink(dummy_golem, TRUE, TRUE)
   })
-  expect_true(
-    all(res)
+  withr::with_options(
+    c("usethis.quiet" = TRUE),
+    {
+      add_module(
+        "mod1",
+        open = FALSE,
+        pkg = dummy_golem,
+        with_test = FALSE
+      )
+      use_module_test(
+        "mod1",
+        pkg = dummy_golem,
+        open = FALSE
+      )
+      expect_exists(
+        file.path(
+          dummy_golem,
+          "tests",
+          "testthat",
+          "test-mod_mod1.R"
+        )
+      )
+      expect_error(
+        use_module_test(
+          "phatom",
+          pkg = dummy_golem,
+          open = FALSE
+        ),
+        regex = "The module 'phatom' does not exist"
+      )
+    }
   )
 })
 
