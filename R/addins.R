@@ -61,36 +61,64 @@ go_to <- function(
 
 #' @rdname addins
 #' @aliases addins
-go_to_start <- function() {
-  go_to("dev/01_start.R")
+go_to_start <- function(
+  wd = golem::get_golem_wd()) {
+  go_to(
+    "dev/01_start.R",
+    wd = wd
+  )
 }
 #' @rdname addins
 #' @aliases addins
-go_to_dev <- function() {
-  go_to("dev/02_dev.R")
+go_to_dev <- function(
+  wd = golem::get_golem_wd()) {
+  go_to(
+    "dev/02_dev.R",
+    wd = wd
+  )
 }
 #' @rdname addins
 #' @aliases addins
-go_to_deploy <- function() {
-  go_to("dev/03_deploy.R")
+go_to_deploy <- function(
+  wd = golem::get_golem_wd()) {
+  go_to(
+    "dev/03_deploy.R",
+    wd = wd
+  )
 }
 #' @rdname addins
 #' @aliases addins
-go_to_run_dev <- function() {
-  go_to("dev/run_dev.R")
+go_to_run_dev <- function(
+  wd = golem::get_golem_wd()) {
+  go_to(
+    "dev/run_dev.R",
+    wd = wd
+  )
 }
 #' @rdname addins
 #' @aliases addins
-go_to_app_ui <- function() {
-  go_to("R/app_ui.R")
+go_to_app_ui <- function(
+  wd = golem::get_golem_wd()) {
+  go_to(
+    "R/app_ui.R",
+    wd = wd
+  )
 }
 #' @rdname addins
 #' @aliases addins
-go_to_app_server <- function() {
-  go_to("R/app_server.R")
+go_to_app_server <- function(
+  wd = golem::get_golem_wd()) {
+  go_to(
+    "R/app_server.R",
+    wd = wd
+  )
 }
 #' @rdname addins
 #' @aliases addins
-go_to_run_app <- function() {
-  go_to("R/run_app.R")
+go_to_run_app <- function(
+  wd = golem::get_golem_wd()) {
+  go_to(
+    "R/run_app.R",
+    wd = wd
+  )
 }
