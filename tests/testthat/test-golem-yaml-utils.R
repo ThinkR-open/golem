@@ -31,7 +31,7 @@ test_that(
     # Check that expressions are tagged correctly
     expect_equal(
       attr(
-        result$golem_wd,
+        result$dev$golem_wd,
         "tag"
       ),
       "!expr"
