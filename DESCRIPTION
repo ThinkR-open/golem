@@ -61,7 +61,7 @@ Suggests:
     sass,
     spelling,
     stringr,
-    testthat,
+    testthat (>= 3.0.0),
     tools,
     usethis (>= 1.6.0),
     withr
