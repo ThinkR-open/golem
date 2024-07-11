@@ -77,7 +77,8 @@ add_r_files <- function(
         file_path_sans_ext(
           where
         )
-      )
+      ),
+      open = open
     )
   }
 
