@@ -74,7 +74,7 @@ perform_inside_a_new_golem <- function(fun) {
       )
     )
     if (!dir.exists(pkg_reload)) {
-      CACABOUDIN(
+      create_golem(
         pkg_reload,
         open = FALSE
       )
@@ -147,12 +147,61 @@ create_dummy_golem <- function() {
     ),
     recursive = TRUE
   )
+  file.create(
+    file.path(
+      path_to_golem,
+      "tests/testthat/testthat.R"
+    )
+  )
+  write(
+    "library(shinyexample)",
+    file.path(
+      path_to_golem,
+      "tests/testthat/testthat.R"
+    )
+  )
   dir.create(
     file.path(
       path_to_golem,
       "dev"
     ),
     recursive = TRUE
+  )
+  file.copy(
+    golem_sys(
+      "shinyexample/dev/01_start.R"
+    ),
+    file.path(
+      path_to_golem,
+      "dev/01_start.R"
+    )
+  )
+  file.copy(
+    golem_sys(
+      "shinyexample/dev/02_dev.R"
+    ),
+    file.path(
+      path_to_golem,
+      "dev/02_dev.R"
+    )
+  )
+  file.copy(
+    golem_sys(
+      "shinyexample/dev/03_deploy.R"
+    ),
+    file.path(
+      path_to_golem,
+      "dev/03_deploy.R"
+    )
+  )
+  file.copy(
+    golem_sys(
+      "shinyexample/dev/run_dev.R"
+    ),
+    file.path(
+      path_to_golem,
+      "dev/run_dev.R"
+    )
   )
   dir.create(
     file.path(
@@ -174,6 +223,42 @@ create_dummy_golem <- function() {
     file.path(
       path_to_golem,
       "inst/golem-config.yml"
+    )
+  )
+  file.copy(
+    golem_sys(
+      "shinyexample/R/app_config.R"
+    ),
+    file.path(
+      path_to_golem,
+      "R/app_config.R"
+    )
+  )
+  file.copy(
+    golem_sys(
+      "shinyexample/R/app_ui.R"
+    ),
+    file.path(
+      path_to_golem,
+      "R/app_ui.R"
+    )
+  )
+  file.copy(
+    golem_sys(
+      "shinyexample/R/app_server.R"
+    ),
+    file.path(
+      path_to_golem,
+      "R/app_server.R"
+    )
+  )
+  file.copy(
+    golem_sys(
+      "shinyexample/R/run_app.R"
+    ),
+    file.path(
+      path_to_golem,
+      "R/run_app.R"
     )
   )
   dir.create(
