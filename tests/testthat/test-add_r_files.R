@@ -3,36 +3,53 @@ test_that("add_fct and add_utils", {
   withr::with_options(
     c("usethis.quiet" = TRUE),
     {
-      add_fct(
-        "ui",
-        pkg = dummy_golem,
-        open = FALSE,
-        with_test = TRUE
-      )
-      add_utils(
-        "ui",
-        pkg = dummy_golem,
-        open = FALSE,
-        with_test = TRUE
-      )
+      testthat::with_mocked_bindings(
+        # This is just to bypass usethis_use_test
+        # setting here()
+        usethis_use_test = function(name, ...) {
+          file.create(
+            file.path(
+              dummy_golem,
+              sprintf(
+                "tests/testthat/test-%s.R",
+                name
+              )
+            )
+          )
+        },
+        code = {
+          add_fct(
+            "ui",
+            pkg = dummy_golem,
+            open = FALSE,
+            with_test = TRUE
+          )
+          add_utils(
+            "ui",
+            pkg = dummy_golem,
+            open = FALSE,
+            with_test = TRUE
+          )
 
-      add_module(
-        "rand",
-        pkg = dummy_golem,
-        open = FALSE,
-        with_test = TRUE
-      )
-      add_fct(
-        "ui",
-        "rand",
-        pkg = dummy_golem,
-        open = FALSE
-      )
-      add_utils(
-        "ui",
-        "rand",
-        pkg = dummy_golem,
-        open = FALSE
+          add_module(
+            "rand",
+            pkg = dummy_golem,
+            open = FALSE,
+            with_test = TRUE
+          )
+          add_fct(
+            "ui",
+            "rand",
+            pkg = dummy_golem,
+            open = FALSE
+          )
+          add_utils(
+            "ui",
+            "rand",
+            pkg = dummy_golem,
+            open = FALSE
+          )
+        }
       )
     }
   )
