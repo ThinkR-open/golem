@@ -104,11 +104,15 @@ add_positconnect_file <- function(
 #' @rdname rstudio_deploy
 #' @note `add_rstudioconnect_file` is now deprecated; replace by [add_positconnect_file()].
 #' @export
-add_rstudioconnect_file <- function(pkg = get_golem_wd(),
-                                    open = TRUE){
+add_rstudioconnect_file <- function(
+  pkg = get_golem_wd(),
+  open = TRUE
+) {
   .Deprecated("add_positconnect_file")
-  add_positconnect_file(pkg = get_golem_wd(),
-                         open = TRUE)
+  add_positconnect_file(
+    pkg = get_golem_wd(),
+    open = TRUE
+  )
 }
 
 #' @rdname rstudio_deploy
