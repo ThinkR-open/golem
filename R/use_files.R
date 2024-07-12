@@ -1,3 +1,7 @@
+# For mocking in test
+utils_download_file <- function(...){
+  utils::download.file(...)
+}
 #' Use Files
 #'
 #' These functions download files from external sources and put them inside the `inst/app/www` directory.
@@ -74,7 +78,7 @@ use_external_js_file <- function(
 
   cat_start_download()
 
-  utils::download.file(url, where)
+  utils_download_file(url, where)
 
   file_created_dance(
     where,
