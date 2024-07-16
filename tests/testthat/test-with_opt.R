@@ -9,7 +9,7 @@ test_that(
     with_dir(
       path_dummy_golem,
       {
-      skip_if_not(exists("run_app"))
+        skip_if_not(exists("run_app"))
 
         # 1. Test the maintenance feature directly
         html <- maintenance_page()

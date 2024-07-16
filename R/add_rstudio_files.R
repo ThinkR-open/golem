@@ -7,7 +7,7 @@ add_rstudio_files <- function(
     "Shiny Server",
     "ShinyApps.io"
   )
-    ) {
+) {
   service <- match.arg(service)
   where <- fs_path(pkg, "app.R")
 
@@ -112,7 +112,7 @@ add_rstudio_files <- function(
 add_positconnect_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
-    ) {
+) {
   add_rstudio_files(
     pkg = pkg,
     open = open,
@@ -123,11 +123,15 @@ add_positconnect_file <- function(
 #' @rdname rstudio_deploy
 #' @note `add_rstudioconnect_file` is now deprecated; replace by [add_positconnect_file()].
 #' @export
-add_rstudioconnect_file <- function(pkg = get_golem_wd(),
-                                    open = TRUE){
+add_rstudioconnect_file <- function(
+  pkg = get_golem_wd(),
+  open = TRUE
+) {
   .Deprecated("add_positconnect_file")
-  add_positconnect_file(pkg = get_golem_wd(),
-                         open = TRUE)
+  add_positconnect_file(
+    pkg = get_golem_wd(),
+    open = TRUE
+  )
 }
 
 #' @rdname rstudio_deploy
@@ -135,7 +139,7 @@ add_rstudioconnect_file <- function(pkg = get_golem_wd(),
 add_shinyappsio_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
-    ) {
+) {
   add_rstudio_files(
     pkg = pkg,
     open = open,
@@ -148,7 +152,7 @@ add_shinyappsio_file <- function(
 add_shinyserver_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
-    ) {
+) {
   add_rstudio_files(
     pkg = pkg,
     open = open,

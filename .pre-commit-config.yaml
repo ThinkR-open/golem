@@ -1,0 +1,17 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-yaml
+        exclude: ^inst/shinyexample/inst/golem-config.yml$
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: grkstyle
+        name: grkstyle
+        entry: Rscript -e "grkstyle::grk_style_pkg()"
+        language: system
+        files: \.R$
+        types: [file]

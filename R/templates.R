@@ -96,7 +96,7 @@ sass_template <- function(
 empty_template <- function(
   path,
   code = " "
-    ) {
+) {
   write_there <- function(...) {
     write(..., file = path, append = TRUE)
   }

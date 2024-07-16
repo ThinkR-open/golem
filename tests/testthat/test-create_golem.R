@@ -1,4 +1,3 @@
-
 ### Helpers functions ----------------------------------------------------------
 
 is_properly_populated_golem <- function(path) {

@@ -37,16 +37,16 @@ test_that("check_overwrite works", {
 
 test_that("use_readme_rmd works", {
   withr::with_dir(pkg, {
-      expect_true(
-        use_readme_rmd(
-          open = FALSE,
-          overwrite = TRUE,
-          pkg = getwd(),
-          pkg_name = "rand_name"
-        )
+    expect_true(
+      use_readme_rmd(
+        open = FALSE,
+        overwrite = TRUE,
+        pkg = getwd(),
+        pkg_name = "rand_name"
       )
-      expect_true(
-        file.exists("README.Rmd")
-      )
+    )
+    expect_true(
+      file.exists("README.Rmd")
+    )
   })
 })

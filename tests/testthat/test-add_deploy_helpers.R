@@ -94,7 +94,6 @@ test_that("add_dockerfiles repos variation", {
 
 
 test_that("add_rstudio_files", {
-
   with_dir(pkg, {
     for (fun in list(
       add_positconnect_file,
@@ -128,8 +127,10 @@ test_that("add_rstudio_files", {
 })
 
 test_that("add_rscignore_file", {
-  with_dir(pkg, {
-    burn_after_reading(
+  with_dir(
+    pkg,
+    {
+      burn_after_reading(
         ".rscignore",
         {
           withr::with_options(
@@ -150,7 +151,7 @@ test_that("add_rscignore_file", {
           )
           expect_true(test)
         }
-    )
-   }
+      )
+    }
   )
 })

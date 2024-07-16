@@ -250,11 +250,12 @@ In order to use your own page, you need to pass either an `html_document` or a `
 
 ```{r}
 run_app <- function(
-    onStart = NULL,
-    options = list(),
-    enableBookmarking = NULL,
-    uiPattern = "/",
-    ...) {
+  onStart = NULL,
+  options = list(),
+  enableBookmarking = NULL,
+  uiPattern = "/",
+  ...
+) {
   with_golem_options(
     app = shinyApp(
       ui = app_ui,
@@ -279,11 +280,12 @@ or:
 
 ```{r}
 run_app <- function(
-    onStart = NULL,
-    options = list(),
-    enableBookmarking = NULL,
-    uiPattern = "/",
-    ...) {
+  onStart = NULL,
+  options = list(),
+  enableBookmarking = NULL,
+  uiPattern = "/",
+  ...
+) {
   with_golem_options(
     app = shinyApp(
       ui = app_ui,

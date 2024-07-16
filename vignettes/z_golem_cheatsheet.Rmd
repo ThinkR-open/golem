@@ -21,7 +21,3 @@ knitr::opts_chunk$set(
 knitr::include_graphics("golem_cheatsheet_V0.1.jpg")
 ```
 </a>
-
-
-
-

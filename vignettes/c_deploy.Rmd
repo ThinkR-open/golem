@@ -60,7 +60,7 @@ to run your app on.
 
 ## Deploying Apps with `{golem}`
 
-The `dev/03_deploy.R` file contains functions for deployment on various platforms. 
+The `dev/03_deploy.R` file contains functions for deployment on various platforms.
 
 ### Posit Products
 
@@ -76,7 +76,7 @@ a `manifest.json` file is required which can be added (or updated) via:
 rsconnect::writeManifest()
 ```
 
-### Docker 
+### Docker
 
 #### Without using `{renv}`
 
@@ -94,7 +94,7 @@ golem::add_dockerfile_heroku()
 #### Using `{renv}` - CASE 1 : you didn't use renv during development process
 
 
-> this functions will create a "deploy" folder containing : 
+> this functions will create a "deploy" folder containing :
 
 ```
 deploy/
@@ -115,7 +115,7 @@ golem::add_dockerfile_with_renv(output_dir = "deploy")
 golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy")
 ```
 
-If you would like to use `{renv}` during development, you can init a 
+If you would like to use `{renv}` during development, you can init a
 `renv.lock` file with
 
 ```{r}
@@ -152,7 +152,7 @@ golem::add_dockerfile_with_renv(output_dir = "deploy", lockfile = "renv.lock")
 golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy", lockfile = "renv.lock")
 ```
 
-> this functions will create a "deploy" folder containing : 
+> this functions will create a "deploy" folder containing :
 
 ```
 deploy/

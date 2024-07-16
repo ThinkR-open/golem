@@ -179,5 +179,3 @@ log_dev(10)
 options("golem.app.prod" = TRUE)
 log_dev(10)
 ```
-
-

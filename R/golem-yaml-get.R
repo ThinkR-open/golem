@@ -1,4 +1,3 @@
-
 #' @importFrom config get
 get_golem_things <- function(
   value,

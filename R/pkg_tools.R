@@ -1,7 +1,8 @@
 # Getting the DESCRIPTION file in a data.frame
 daf_desc <- function(
-    path = get_golem_wd(),
-    entry) {
+  path = get_golem_wd(),
+  entry
+) {
   as.character(
     unlist(
       unname(

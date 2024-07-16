@@ -110,4 +110,3 @@ Reads the information from \code{golem-config.yml}
 \item \code{get_golem_version()}
 }
 }
-

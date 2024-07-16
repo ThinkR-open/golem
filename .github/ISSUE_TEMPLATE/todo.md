@@ -7,9 +7,9 @@ assignees: ''
 
 ---
 
-## User - Validation 
+## User - Validation
 
-+ [ ] First thing to do to validate this as an external user 
++ [ ] First thing to do to validate this as an external user
 + [ ] Second thing to do to validate this as an external user
 
 ## Dev - Tech
@@ -30,5 +30,5 @@ _A paragraph that details what this functionality does and how it will be implem
 01h00.
 
 + [ ] Add the estimate as a comment with `/estimate`
-+ [ ] When I close this issue, `devtools::check()` is 0 0 0 
++ [ ] When I close this issue, `devtools::check()` is 0 0 0
 + [ ] When I close the issue, I've written the time spent solving this issue, using `/spent`
