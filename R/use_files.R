@@ -23,7 +23,7 @@ use_external_js_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -97,7 +97,7 @@ use_external_css_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -171,7 +171,7 @@ use_external_html_template <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -237,7 +237,7 @@ use_external_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   if (missing(name)) {
     name <- basename(url)
   }
@@ -292,7 +292,7 @@ use_internal_js_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -365,7 +365,7 @@ use_internal_css_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -438,7 +438,7 @@ use_internal_html_template <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
@@ -503,7 +503,7 @@ use_internal_file <- function(
   dir = "inst/app/www",
   open = FALSE,
   dir_create = TRUE
-    ) {
+) {
   if (missing(name)) {
     name <- basename(path)
   }

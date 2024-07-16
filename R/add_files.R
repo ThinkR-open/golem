@@ -542,16 +542,16 @@ add_empty_file <- function(
 
   extension <- file_ext(name)
 
-  if (extension == "js"){
+  if (extension == "js") {
     warning("We've noticed you are trying to create a .js file. \nYou may want to use `add_js_file()` in future calls.")
   }
-  if (extension == "css"){
+  if (extension == "css") {
     warning("We've noticed you are trying to create a .css file. \nYou may want to use `add_css_file()` in future calls.")
   }
-  if (extension == "sass"){
+  if (extension == "sass") {
     warning("We've noticed you are trying to create a .sass file. \nYou may want to use `add_sass_file()` in future calls.")
   }
-  if (extension == "html"){
+  if (extension == "html") {
     warning("We've noticed you are trying to create a .html file. \nYou may want to use `add_html_template()` in future calls.")
   }
 

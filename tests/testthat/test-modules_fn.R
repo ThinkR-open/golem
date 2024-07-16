@@ -1,4 +1,3 @@
-
 test_that("use_module_test", {
   with_dir(pkg, {
     add_module("mod1", open = FALSE, pkg = pkg)

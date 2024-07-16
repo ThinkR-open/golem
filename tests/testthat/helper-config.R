@@ -97,8 +97,8 @@ withr::with_dir(pkg, {
 })
 
 
-create_deploy_folder <- function(){
-file.path(
+create_deploy_folder <- function() {
+  file.path(
     tempdir(),
     make.names(
       paste0(

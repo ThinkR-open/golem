@@ -6,7 +6,7 @@ expect_add_file <- function(
   name
 ) {
   fun_nms <- deparse(substitute(fun))
-  if (missing(name)){
+  if (missing(name)) {
     name <- rand_name()
   }
   if (fun_nms == "add_empty_file") {
@@ -142,7 +142,6 @@ test_that("add_files", {
       pak = pkg,
       fp = fp
     )
-
   })
 })
 

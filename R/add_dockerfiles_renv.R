@@ -13,7 +13,7 @@ add_dockerfile_with_renv_ <- function(
   document = FALSE,
   ...
   # build_golem_from_source = TRUE,
-    ) {
+) {
   check_dockerfiler_installed()
   if (is.null(lockfile)) {
     rlang::check_installed(
@@ -174,7 +174,7 @@ add_dockerfile_with_renv <- function(
   dockerfile_cmd = NULL,
   user = "rstudio",
   ...
-    ) {
+) {
   base_dock <- add_dockerfile_with_renv_(
     source_folder = source_folder,
     lockfile = lockfile,
@@ -251,7 +251,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
   update_tar_gz = TRUE,
   user = "rstudio",
   ...
-    ) {
+) {
   add_dockerfile_with_renv(
     source_folder = source_folder,
     lockfile = lockfile,
@@ -297,7 +297,7 @@ add_dockerfile_with_renv_heroku <- function(
   user = "rstudio",
   update_tar_gz = TRUE,
   ...
-    ) {
+) {
   add_dockerfile_with_renv(
     source_folder = source_folder,
     lockfile = lockfile,

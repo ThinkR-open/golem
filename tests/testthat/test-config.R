@@ -248,10 +248,11 @@ test_that("get_current_config() interactively recreates files upon user wish", {
     how = TRUE
   )
   expect_equal(
-    rlang::with_interactive({
-      get_current_config(path_dummy_golem)
-    },
-    value = TRUE
+    rlang::with_interactive(
+      {
+        get_current_config(path_dummy_golem)
+      },
+      value = TRUE
     ),
     fs_path_abs(pth_golem_ymlconf)
   )
@@ -292,10 +293,11 @@ test_that("get_current_config() interactively returns NULL upon user wish", {
     how = FALSE
   )
   expect_null(
-    rlang::with_interactive({
-      get_current_config(path_dummy_golem)
-    },
-    value = TRUE
+    rlang::with_interactive(
+      {
+        get_current_config(path_dummy_golem)
+      },
+      value = TRUE
     )
   )
   expect_false(file.exists(pth_golem_ymlconf))

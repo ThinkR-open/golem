@@ -1,4 +1,3 @@
-
 # All the fns here check that {usethis} is installed
 # before doing anything.
 check_usethis_installed <- function(reason = "for project and file manipulation.") {
@@ -116,8 +115,7 @@ usethis_use_spell_check <- function(
 }
 
 usethis_use_readme_rmd <- function(
-  open = rlang::is_interactive()
-) {
+  open = rlang::is_interactive()) {
   check_usethis_installed(
     reason = "to create a readme."
   )

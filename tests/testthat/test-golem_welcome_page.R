@@ -1,5 +1,4 @@
 test_that("golem_welcome_page works", {
-
   html <- golem_welcome_page()
 
   expect_true(inherits(html, "shiny.tag.list"))
