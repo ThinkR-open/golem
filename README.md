@@ -118,7 +118,7 @@ Here are the test & coverage results:
     #> ✖ `check()` will not re-document this package
     #> ── R CMD check results ─────────────────────────────────────── golem 0.4.25 ────
     #> Duration: 1m 21.6s
-    #> 
+    #>
     #> ❯ checking Rd files ... NOTE
     #>   checkRd: (-1) create_golem.Rd:30: Lost braces; missing escapes or markup?
     #>       30 | \item{package_name}{Package name to use. By default, {golem} uses
@@ -135,7 +135,7 @@ Here are the test & coverage results:
     #>   checkRd: (-1) project_hook.Rd:13: Lost braces; missing escapes or markup?
     #>       13 | \item{package_name}{Package name to use. By default, {golem} uses
     #>          |                                                      ^
-    #> 
+    #>
     #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
 
     covr::package_coverage()

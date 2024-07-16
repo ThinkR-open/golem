@@ -46,7 +46,7 @@ golem::invoke_js("showid", ns("plot"))
 golem::invoke_js("showhref", "panel2")
 ```
 
-+ `clickon` click on the element. You have to use the full jQuery selector. 
++ `clickon` click on the element. You have to use the full jQuery selector.
 
 + `show` & `hide` show and hide elements, using the full jQuery selector.
 

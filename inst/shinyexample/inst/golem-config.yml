@@ -8,4 +8,3 @@ production:
 
 dev:
   golem_wd: !expr golem::pkg_path()
-

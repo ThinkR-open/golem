@@ -1,14 +1,14 @@
 Package: shinyexample
 Title: An Amazing Shiny App
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person(given = "firstname",
            family = "lastname",
            role = c("aut", "cre"),
            email = "your@email.com")
 Description: What the package does (one paragraph).
 License: What license is it under?
-Imports: 
+Imports:
     config,
     golem,
     shiny
