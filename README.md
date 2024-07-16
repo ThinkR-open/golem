@@ -1,10 +1,11 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)[![R-CMD-check](https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg)](https://github.com/ThinkR-open/golem/actions)
 [![Coverage
-status](https://codecov.io/gh/ThinkR-open/golem/branch/dev/graph/badge.svg)](https://app.codecov.io/github/ThinkR-open/golem/tree/dev)[![CRAN
+status](https://codecov.io/gh/ThinkR-open/golem/branch/use-pre-commit/graph/badge.svg)](https://app.codecov.io/github/ThinkR-open/golem/tree/use-pre-commit)[![CRAN
 status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
 
 <!-- badges: end -->
@@ -18,18 +19,18 @@ shiny applications.
 
 -   You can install the stable version from CRAN with:
 
-<!-- -->
-
-    install.packages("golem")
+``` r
+install.packages("golem")
+```
 
 -   You can install the development version from
     [GitHub](https://github.com/Thinkr-open/golem) with:
 
-<!-- -->
-
-    # install.packages("remotes")
-    remotes::install_github("Thinkr-open/golem") # very close to CRAN version
-    # remotes::install_github("Thinkr-open/golem@dev") # if you like to play
+``` r
+# install.packages("remotes")
+remotes::install_github("Thinkr-open/golem") # very close to CRAN version
+# remotes::install_github("Thinkr-open/golem@dev") # if you like to play
+```
 
 ## Resources
 
@@ -107,89 +108,86 @@ You’re reading the doc about version: 0.4.25
 
 This `README` has been compiled on the
 
-    Sys.time()
-    #> [1] "2024-07-04 07:50:43 UTC"
+``` r
+Sys.time()
+#> [1] "2024-07-16 11:56:50 CEST"
+```
 
 Here are the test & coverage results:
 
-    devtools::check(quiet = TRUE)
-    #> ══ Documenting ═════════════════════════════════════════════════════════════════
-    #> ℹ Installed roxygen2 version (7.3.2) doesn't match required (7.3.1)
-    #> ✖ `check()` will not re-document this package
-    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.25 ────
-    #> Duration: 1m 21.6s
-    #>
-    #> ❯ checking Rd files ... NOTE
-    #>   checkRd: (-1) create_golem.Rd:30: Lost braces; missing escapes or markup?
-    #>       30 | \item{package_name}{Package name to use. By default, {golem} uses
-    #>          |                                                      ^
-    #>   checkRd: (-1) get_sysreqs.Rd:23: Lost braces; missing escapes or markup?
-    #>       23 | {dockerfiler}.
-    #>          | ^
-    #>   checkRd: (-1) golem_opts.Rd:83: Lost braces; missing escapes or markup?
-    #>       83 | \item{config_file}{path to the {golem} config file}
-    #>          |                                ^
-    #>   checkRd: (-1) install_dev_deps.Rd:5: Lost braces; missing escapes or markup?
-    #>        5 | \title{Install {golem} dev dependencies}
-    #>          |                ^
-    #>   checkRd: (-1) project_hook.Rd:13: Lost braces; missing escapes or markup?
-    #>       13 | \item{package_name}{Package name to use. By default, {golem} uses
-    #>          |                                                      ^
-    #>
-    #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
+``` r
+devtools::check(quiet = TRUE)
+#> ℹ Loading golem
+#> Writing 'golem_opts.Rd'
+#> ── R CMD check results ─────────────────────────────────────── golem 0.4.25 ────
+#> Duration: 1m 10.8s
+#>
+#> ❯ checking package dependencies ... NOTE
+#>   Package suggested but not available for checking: ‘spelling’
+#>
+#> ❯ checking for hidden files and directories ... NOTE
+#>   Found the following hidden files and directories:
+#>     .pre-commit-config.yaml
+#>   These were most likely included in error. See section ‘Package
+#>   structure’ in the ‘Writing R Extensions’ manual.
+#>
+#> 0 errors ✔ | 0 warnings ✔ | 2 notes ✖
+```
 
-    covr::package_coverage()
-    #> golem Coverage: 85.34%
-    #> R/addins.R: 0.00%
-    #> R/bootstrap_rstudio_api.R: 0.00%
-    #> R/enable_roxygenize.R: 0.00%
-    #> R/get_sysreqs.R: 0.00%
-    #> R/sanity_check.R: 0.00%
-    #> R/test_helpers.R: 30.26%
-    #> R/js.R: 43.75%
-    #> R/reload.R: 45.36%
-    #> R/install_dev_deps.R: 60.87%
-    #> R/bootstrap_attachment.R: 61.54%
-    #> R/bootstrap_dockerfiler.R: 63.33%
-    #> R/bootstrap_desc.R: 66.67%
-    #> R/add_dockerfiles.R: 74.19%
-    #> R/add_r_files.R: 78.50%
-    #> R/bootstrap_usethis.R: 78.57%
-    #> R/modules_fn.R: 78.71%
-    #> R/use_recommended.R: 78.79%
-    #> R/golem-yaml-set.R: 83.02%
-    #> R/use_utils.R: 83.33%
-    #> R/utils.R: 83.75%
-    #> R/add_rstudio_files.R: 85.29%
-    #> R/add_resource_path.R: 88.89%
-    #> R/create_golem.R: 89.47%
-    #> R/make_dev.R: 90.00%
-    #> R/add_files.R: 91.98%
-    #> R/golem-yaml-get.R: 93.18%
-    #> R/add_dockerfiles_renv.R: 93.91%
-    #> R/run_dev.R: 95.65%
-    #> R/desc.R: 96.67%
-    #> R/use_favicon.R: 96.67%
-    #> R/boostrap_cli.R: 100.00%
-    #> R/boostrap_crayon.R: 100.00%
-    #> R/boostrap_fs.R: 100.00%
-    #> R/bootstrap_pkgload.R: 100.00%
-    #> R/bootstrap_roxygen2.R: 100.00%
-    #> R/browser_button.R: 100.00%
-    #> R/bundle_resources.R: 100.00%
-    #> R/config.R: 100.00%
-    #> R/disable_autoload.R: 100.00%
-    #> R/globals.R: 100.00%
-    #> R/golem_welcome_page.R: 100.00%
-    #> R/golem-yaml-utils.R: 100.00%
-    #> R/is_golem.R: 100.00%
-    #> R/is_running.R: 100.00%
-    #> R/pkg_tools.R: 100.00%
-    #> R/set_golem_options.R: 100.00%
-    #> R/templates.R: 100.00%
-    #> R/use_files.R: 100.00%
-    #> R/use_readme.R: 100.00%
-    #> R/with_opt.R: 100.00%
+``` r
+covr::package_coverage()
+#> golem Coverage: 75.61%
+#> R/add_dockerfiles_renv.R: 0.00%
+#> R/add_dockerfiles.R: 0.00%
+#> R/addins.R: 0.00%
+#> R/bootstrap_attachment.R: 0.00%
+#> R/bootstrap_dockerfiler.R: 0.00%
+#> R/bootstrap_rstudio_api.R: 0.00%
+#> R/enable_roxygenize.R: 0.00%
+#> R/get_sysreqs.R: 0.00%
+#> R/globals.R: 0.00%
+#> R/sanity_check.R: 0.00%
+#> R/with_opt.R: 9.68%
+#> R/test_helpers.R: 30.26%
+#> R/js.R: 43.75%
+#> R/reload.R: 45.36%
+#> R/use_recommended.R: 54.55%
+#> R/bootstrap_desc.R: 55.56%
+#> R/install_dev_deps.R: 60.87%
+#> R/add_r_files.R: 78.50%
+#> R/bootstrap_usethis.R: 78.57%
+#> R/modules_fn.R: 78.71%
+#> R/utils.R: 79.78%
+#> R/golem-yaml-set.R: 83.02%
+#> R/use_utils.R: 83.33%
+#> R/add_rstudio_files.R: 83.65%
+#> R/use_favicon.R: 85.56%
+#> R/add_resource_path.R: 88.89%
+#> R/create_golem.R: 89.47%
+#> R/make_dev.R: 90.00%
+#> R/add_files.R: 91.96%
+#> R/golem-yaml-get.R: 93.18%
+#> R/run_dev.R: 95.65%
+#> R/desc.R: 96.67%
+#> R/boostrap_cli.R: 100.00%
+#> R/boostrap_crayon.R: 100.00%
+#> R/boostrap_fs.R: 100.00%
+#> R/bootstrap_pkgload.R: 100.00%
+#> R/bootstrap_roxygen2.R: 100.00%
+#> R/browser_button.R: 100.00%
+#> R/bundle_resources.R: 100.00%
+#> R/config.R: 100.00%
+#> R/disable_autoload.R: 100.00%
+#> R/golem_welcome_page.R: 100.00%
+#> R/golem-yaml-utils.R: 100.00%
+#> R/is_golem.R: 100.00%
+#> R/is_running.R: 100.00%
+#> R/pkg_tools.R: 100.00%
+#> R/set_golem_options.R: 100.00%
+#> R/templates.R: 100.00%
+#> R/use_files.R: 100.00%
+#> R/use_readme.R: 100.00%
+```
 
 ## CoC
 
@@ -199,12 +197,23 @@ By participating in this project you agree to abide by its terms.
 
 ## Note for the contributors
 
-Please style the files according to `grkstyle::grk_style_transformer()`
+This package uses precommit hooks. Please install them with:
 
-    # If you work in RStudio
-    options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
+    pip install pre-commit
 
-    # If you work in VSCode
-    options(languageserver.formatting_style = function(options) {
-      grkstyle::grk_style_transformer()
-    })
+{golem} has a `.pre-commit-config.yaml` file that defines the hooks. To
+install them, run:
+
+    pre-commit install
+
+One of the hook is a `lintr`, which will check the code style of the
+package. It uses the package `{grkstyle}`. You can install it with:
+
+``` r
+install.packages("grkstyle")
+```
+
+For every commit, the hooks will be run. If one of them fails, the
+commit will be rejected. You can run the hooks manually with:
+
+    pre-commit run --all-files

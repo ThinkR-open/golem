@@ -152,14 +152,26 @@ Please note that this project is released with a [Contributor Code of Conduct](h
 
 ## Note for the contributors
 
-Please style the files according to `grkstyle::grk_style_transformer()`
+This package uses precommit hooks. Please install them with:
 
-```{r eval = FALSE}
-# If you work in RStudio
-options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
+```
+pip install pre-commit
+```
 
-# If you work in VSCode
-options(languageserver.formatting_style = function(options) {
-  grkstyle::grk_style_transformer()
-})
+{golem} has a `.pre-commit-config.yaml` file that defines the hooks. To install them, run:
+
+```
+pre-commit install
+```
+
+One of the hook is a `lintr`, which will check the code style of the package. It uses the package `{grkstyle}`. You can install it with:
+
+```{r, eval = FALSE}
+install.packages("grkstyle")
+```
+
+For every commit, the hooks will be run. If one of them fails, the commit will be rejected. You can run the hooks manually with:
+
+```
+pre-commit run --all-files
 ```
