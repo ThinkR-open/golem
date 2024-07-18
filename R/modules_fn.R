@@ -26,20 +26,19 @@
 #'
 #' @return The path to the file, invisibly.
 add_module <- function(
-  name,
-  pkg = get_golem_wd(),
-  open = TRUE,
-  dir_create = TRUE,
-  fct = NULL,
-  utils = NULL,
-  r6 = NULL,
-  js = NULL,
-  js_handler = NULL,
-  export = FALSE,
-  module_template = golem::module_template,
-  with_test = FALSE,
-  ...
-    ) {
+    name,
+    pkg = get_golem_wd(),
+    open = TRUE,
+    dir_create = TRUE,
+    fct = NULL,
+    utils = NULL,
+    r6 = NULL,
+    js = NULL,
+    js_handler = NULL,
+    export = FALSE,
+    module_template = golem::module_template,
+    with_test = FALSE,
+    ...) {
   # Let's start with the checks for the validity of the name
   check_name_length_is_one(name)
   check_name_syntax(name)
@@ -187,13 +186,12 @@ add_module <- function(
 #' @export
 #' @seealso [add_module()]
 module_template <- function(
-  name,
-  path,
-  export,
-  ph_ui = " ",
-  ph_server = " ",
-  ...
-    ) {
+    name,
+    path,
+    export,
+    ph_ui = " ",
+    ph_server = " ",
+    ...) {
   write_there <- function(...) {
     write(..., file = path, append = TRUE)
   }
@@ -204,6 +202,7 @@ module_template <- function(
   write_there("#'")
   write_there("#' @param id,input,output,session Internal parameters for {shiny}.")
   write_there("#'")
+  write_there("#' @shinyModule A Golem module.")
   if (export) {
     write_there(sprintf("#' @rdname mod_%s", name))
     write_there("#' @export ")
@@ -274,10 +273,9 @@ module_template <- function(
 #' @return Used for side effect. Returns the path invisibly.
 #' @export
 use_module_test <- function(
-  name,
-  pkg = get_golem_wd(),
-  open = TRUE
-    ) {
+    name,
+    pkg = get_golem_wd(),
+    open = TRUE) {
   # Remove the extension if any
   name <- file_path_sans_ext(name)
   # Remove the "mod_" if any
