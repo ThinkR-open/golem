@@ -203,6 +203,7 @@ module_template <- function(
   write_there("#' @param id,input,output,session Internal parameters for {shiny}.")
   write_there("#'")
   write_there("#' @shinyModule A Golem module.")
+  write_there("#'")
   if (export) {
     write_there(sprintf("#' @rdname mod_%s", name))
     write_there("#' @export ")
