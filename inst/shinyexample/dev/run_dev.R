@@ -8,6 +8,9 @@ options(shiny.port = httpuv::randomPort())
 golem::detach_all_attached()
 # rm(list=ls(all.names = TRUE))
 
+# Check for missing namespaces
+check_namespace_sanity(disable = FALSE)
+
 # Document and reload your package
 golem::document_and_reload()
 
