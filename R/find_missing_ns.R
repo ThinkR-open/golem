@@ -125,7 +125,7 @@ check_namespace_sanity <- function(
     purrr::compact()
 
   if (length(shinymodule_blocks) == 0) {
-    cli::cli_alert_info("ok")
+    cli::cli_alert_info("No shiny module found")
     return(invisible(FALSE))
   }
 
@@ -158,6 +158,11 @@ check_namespace_sanity <- function(
     )
 
   missing_ns_detected <- nrow(data)
+
+  if (missing_ns_detected == 0) {
+    cli::cli_alert_success("NS check passed")
+    return(invisible(TRUE))
+  }
 
   cli::cli_text(
     "It seems that ",
