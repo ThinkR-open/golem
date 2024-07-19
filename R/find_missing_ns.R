@@ -72,6 +72,15 @@ check_namespace_in_file <- function(
     )
 }
 
+#' check namespace sanity
+#' Will check if the namespace (NS) are correctly set in the shiny modules
+#'
+#' @param pkg The package path
+#' @param extend_input_output_funmodule Extend the input, output or function module to check
+#' @param disable Disable the check
+#'
+#' @return Logical. TRUE if the namespace are correctly set, FALSE otherwise
+#'
 #' @export
 check_namespace_sanity <- function(
   pkg = golem::get_golem_wd(),
