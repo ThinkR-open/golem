@@ -244,3 +244,131 @@ test_that("Check check_namespace_in_file", {
     ignore_attr = TRUE
   )
 })
+
+dummy_dir_check_ns <- tempfile(pattern = "dummy")
+dir.create(dummy_dir_check_ns)
+
+withr::with_dir(dummy_dir_check_ns, {
+  test_that("golem is created and properly populated", {
+    dummy_golem_path <- file.path(dummy_dir_check_ns, "checkns")
+    create_golem(dummy_golem_path, open = FALSE)
+
+    expect_message(
+      checkns <- check_namespace_sanity(
+        pkg = dummy_golem_path
+      ),
+      "No shiny module found"
+    )
+
+    expect_false(checkns)
+
+    file.create(
+      file.path(dummy_golem_path, "R", "mod_test_module.R")
+    )
+
+    writeLines(
+      c(
+        "#' first UI Function",
+        "#'",
+        "#' @description A shiny Module.",
+        "#'",
+        "#' @param id,input,output,session Internal parameters for {shiny}.",
+        "#'",
+        "#' @shinyModule A Golem module.",
+        "#'",
+        "#' @importFrom shiny NS tagList",
+        "mod_test_module_ui <- function(id) {",
+        "  ns <- NS(id)",
+        "  tagList(",
+        "    selectInput(",
+        "      inputId = ns('selectinput'),",
+        "      label = 'Select input',",
+        "      choices = c(LETTERS[1:10])",
+        "    ),",
+        "    actionButton(",
+        "      inputId = ns('actionbutton'),",
+        "      label = 'Action button'",
+        "    )",
+        "  )",
+        "}",
+        "",
+        "#' first Server Functions",
+        "#'",
+        "mod_test_module_server <- function(id) {",
+        "  moduleServer(id, function(input, output, session) {",
+        "    ns <- session$ns",
+        "",
+        "    observeEvent(input$actionbutton, {",
+        "      message(input$actionbutton)",
+        "      message(input$selectinput)",
+        "    })",
+        "  })",
+        "}"
+      ),
+      con = file.path(dummy_golem_path, "R", "mod_test_module.R")
+    )
+
+    devtools::document(pkg = dummy_golem_path)
+
+    expect_message(
+      checkns <- check_namespace_sanity(
+        pkg = dummy_golem_path
+      ),
+      "NS check passed"
+    )
+
+    expect_true(checkns)
+
+    writeLines(
+      c(
+        "#' first UI Function",
+        "#'",
+        "#' @description A shiny Module.",
+        "#'",
+        "#' @param id,input,output,session Internal parameters for {shiny}.",
+        "#'",
+        "#' @shinyModule A Golem module.",
+        "#'",
+        "#' @importFrom shiny NS tagList",
+        "mod_test_module_ui <- function(id) {",
+        "  ns <- NS(id)",
+        "  tagList(",
+        "    selectInput(",
+        "      inputId = 'selectinput',",
+        "      label = 'Select input',",
+        "      choices = c(LETTERS[1:10])",
+        "    ),",
+        "    actionButton(",
+        "      inputId = ns('actionbutton'),",
+        "      label = 'Action button'",
+        "    )",
+        "  )",
+        "}",
+        "",
+        "#' first Server Functions",
+        "#'",
+        "mod_test_module_server <- function(id) {",
+        "  moduleServer(id, function(input, output, session) {",
+        "    ns <- session$ns",
+        "",
+        "    observeEvent(input$actionbutton, {",
+        "      message(input$actionbutton)",
+        "      message(input$selectinput)",
+        "    })",
+        "  })",
+        "}"
+      ),
+      con = file.path(dummy_golem_path, "R", "mod_test_module.R")
+    )
+
+    expect_message(
+      checkns <- check_namespace_sanity(
+        pkg = dummy_golem_path,
+        ask_yesno = FALSE
+      ),
+      "It seems that..."
+    )
+
+    expect_true(checkns)
+  })
+})
