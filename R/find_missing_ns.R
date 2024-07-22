@@ -75,9 +75,10 @@ check_namespace_in_file <- function(
 #' check namespace sanity
 #' Will check if the namespace (NS) are correctly set in the shiny modules
 #'
-#' @param pkg The package path
-#' @param extend_input_output_funmodule Extend the input, output or function module to check
-#' @param disable Disable the check
+#' @param pkg Character. The package path
+#' @param extend_input_output_funmodule Character. Extend the input, output or function module to check
+#' @param ask_yesno Logical. Ask the user to launch the app. Default is TRUE
+#' @param disable Logical. Disable the check. Default is FALSE
 #'
 #' @importFrom roxygen2 parse_package block_get_tag
 #'
@@ -87,6 +88,7 @@ check_namespace_in_file <- function(
 check_namespace_sanity <- function(
   pkg = golem::get_golem_wd(),
   extend_input_output_funmodule = NA_character_,
+  ask_yesno = TRUE,
   disable = FALSE
 ) {
   if (disable) {
@@ -108,7 +110,7 @@ check_namespace_sanity <- function(
   }
 
   blocks <- roxygen2::parse_package(
-    path = ".",
+    path = base_path,
     env = NULL
   )
 
@@ -176,10 +178,13 @@ check_namespace_sanity <- function(
 
   purrr::walk(data$message, cli::cli_alert_danger)
 
-  launch_app <- yesno("Is it fixed? Do you want to launch the app?")
 
-  if (isFALSE(launch_app)) {
-    stop_quietly()
+  if (isTRUE(ask_yesno)) {
+    launch_app <- yesno("Is it fixed? Do you want to launch the app?")
+
+    if (isFALSE(launch_app)) {
+      stop_quietly()
+    }
   }
 
   return(invisible(TRUE))
