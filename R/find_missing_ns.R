@@ -79,6 +79,8 @@ check_namespace_in_file <- function(
 #' @param extend_input_output_funmodule Extend the input, output or function module to check
 #' @param disable Disable the check
 #'
+#' @importFrom roxygen2 parse_package block_get_tag
+#'
 #' @return Logical. TRUE if the namespace are correctly set, FALSE otherwise
 #'
 #' @export
@@ -91,14 +93,13 @@ check_namespace_sanity <- function(
     return(invisible(FALSE))
   }
 
+  check_desc_installed()
+  check_cli_installed()
+
   base_path <- normalizePath(
     path = pkg,
     mustWork = TRUE
   )
-
-  if (!requireNamespace("desc", quietly = TRUE)) {
-    check_desc_installed()
-  }
 
   encoding <- desc::desc_get("Encoding", file = base_path)[[1]]
 
@@ -175,11 +176,11 @@ check_namespace_sanity <- function(
 
   purrr::walk(data$message, cli::cli_alert_danger)
 
-  launch_app <- yesno::yesno("Is it fixed? Do you want to launch the app?")
+  launch_app <- yesno("Is it fixed? Do you want to launch the app?")
 
   if (isFALSE(launch_app)) {
     stop_quietly()
   }
 
-  return(TRUE)
+  return(invisible(TRUE))
 }
