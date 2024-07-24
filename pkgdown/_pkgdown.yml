@@ -26,9 +26,34 @@ navbar:
   bg: info
   type: light
   structure:
-    left: [reference, articles, resources, news]
+    left: [reference, tuto, topics, contribute, resources]
     right: [github, golemverse]
   components:
+    tuto:
+      text: Tutorials
+      menu:
+        - text: Create your first Golem application
+          href: articles/tuto/first-golem-app.html
+        - text: Add your first module and communication
+          href: ~
+    topics:
+      text: Advanced topics
+      menu:
+        - text: -------
+        - text: UI
+        - text: Use a maintenance page
+          href: ~
+        - text: Use bslib
+          href: ~
+        - text: -------
+        - text: Backend
+        - text: Add routing
+          href: ~
+        - text: TODO
+          href: ~
+    contribute:
+      text: Contribute
+      href: ~
     golemverse:
       icon: fas fa-toolbox
       href: https://golemverse.org/

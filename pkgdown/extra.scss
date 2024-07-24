@@ -20,3 +20,47 @@
   padding: 1.5px 2px;
   border-radius: 4px;
 }
+
+/* ---- Callouts ---- */
+.callout {
+  position: relative;
+  border: 1px solid var(--bs-primary);
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  border-radius: var(--bs-border-radius);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  background: #7176b817;
+
+  p {
+    margin: auto;
+  }
+}
+
+@mixin callout($content, $color) {
+  &::before {
+    content: $content;
+    font-weight: bold;
+    font-size: 1.25rem;
+    font-style: italic;
+    font-family: serif;
+    border-radius: 50%;
+    color: var(--bs-body-bg);
+    background-color: $color;
+    width: 3rem;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.callout.callout-note {
+  @include callout("i", var(--bs-primary));
+}
+
+.callout.callout-danger {
+  @include callout("!", var(--bs-warning));
+}
