@@ -1,0 +1,22 @@
+.navbar-dark input[type="search"] {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+.navbar-light .navbar-nav .active > .nav-link {
+  color: var(--bs-body-bg);
+  background: var(--bs-info);
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: var(--bs-body-bg);
+  background: var(--bs-info);
+}
+
+.text-muted {
+  color: var(--bs-body-bg) !important;
+  background-color: #7176b83d;
+  padding: 1.5px 2px;
+  border-radius: 4px;
+}
