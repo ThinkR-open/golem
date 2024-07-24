@@ -1,0 +1,43 @@
+---
+title: "Resources"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Resources}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `golem` package is part of the [`{golemverse}`](https://golemverse.org/), a series of tools for Shiny.
+A list of various `golem` related resources (tutorials, video, blog post,...) can be found [here](https://golemverse.org/resources/).
+
+# Examples apps
+
+You can find apps made by [ThinkR](https://thinkr.fr/) using `golem` here:
+
+- <https://connect.thinkr.fr/connect/>
+- <https://github.com/ColinFay/golemexamples>
+
+These are examples **from the community**. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of `golem` or [`Shiny`](https://shiny.posit.co/).
+
+- <https://github.com/seanhardison1/vcrshiny>
+- <https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC>
+- <https://github.com/marton-balazs-kovacs/tenzing>
+- <https://github.com/shahreyar-abeer/cranstars>
+
+Do you have a `golem` app you'd like to share? Please open a PR to add it to this list!
+
+# Book
+
+Read the book [Engineering Production-Grade Shiny Apps](https://engineering-shiny.org/).
+
+# Cheatsheet
+
+The high-resolution `golem` cheatsheet is available to download here: <https://thinkr.fr/golem_cheatsheet_V0.1.pdf>
+
+<a href="https://thinkr.fr/golem_cheatsheet_V0.1.pdf">
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("golem_cheatsheet_V0.1.jpg")
+```
+</a>
+
+
