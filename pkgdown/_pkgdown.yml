@@ -5,6 +5,7 @@ template:
   theme: github-dark
   bslib:
     pkgdown-nav-height: 100px
+    primary: "#7176b8"
     info: "#f15521"
     bg: "#fafafa"
     fg: "#38424f"
@@ -25,18 +26,21 @@ navbar:
   bg: info
   type: light
   structure:
-    left: [reference, articles, golemverse]
-    right: [news, github]
+    left: [reference, articles, resources, news]
+    right: [github, golemverse]
   components:
     golemverse:
-      text: Explore the Golemverse
+      icon: fas fa-toolbox
       href: https://golemverse.org/
       aria-label: Golemverse
+    resources:
+      text: Resources
+      href: articles/resources.html
 
 footer:
   structure:
     left: thinkr
     right: [golemverse]
   components:
-    thinkr: <a href="https://thinkr.fr/" target="_blank">© ThinkR - A French company of R experts</i></a>
-    golemverse: <a href="https://golemverse.org/" target="_blank">Explore the Golemverse</i></a>
+    thinkr: <a href="https://thinkr.fr/" target="_blank">© ThinkR - A French company of R experts</a>
+    golemverse: <a href="https://golemverse.org/" target="_blank">Explore the Golemverse</a>
