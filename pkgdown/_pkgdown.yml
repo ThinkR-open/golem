@@ -26,14 +26,14 @@ navbar:
   bg: info
   type: light
   structure:
-    left: [reference, tuto, topics, contribute, resources]
+    left: [reference, tutos, topics, contribute, resources]
     right: [github, golemverse]
   components:
-    tuto:
+    tutos:
       text: Tutorials
       menu:
         - text: Create your first Golem application
-          href: articles/tuto/first-golem-app.html
+          href: articles/tutos/first-golem-app.html
         - text: Add your first module and communication
           href: ~
     topics:
