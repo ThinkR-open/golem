@@ -1,0 +1,10 @@
+---
+title: "Add routing with brochure"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Add routing with brochure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# TODO: add content

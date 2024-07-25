@@ -84,10 +84,18 @@ Enjoy your new app!
 
 ## Discover {golem}
 
-Golem documentation is available at
-<https://thinkr-open.github.io/golem/>.
+### Your very first time with {golem}
 
-<!-- TODO: add more links -->
+You can find find a full tutorial on how to create your first `golem`
+app [here](x).
+
+A lot of resources are available to help you get started with `golem`
+[here](x).
+
+### Contribute
+
+You love `golem` and want to contribute? Check out our documentation on
+how to contribute [here](x).
 
 ## Code of Conduct
 

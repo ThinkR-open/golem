@@ -2,7 +2,7 @@
 title: "Contribute to Golem"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Contribute}
+  %\VignetteIndexEntry{Contribute to Golem}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -44,13 +44,11 @@ navbar:
         - text: Use a maintenance page
           href: articles/topics/maintenance_page.html
         - text: Use bslib
-          href: ~
+          href: articles/topics/use_bslib.html
         - text: -------
         - text: Backend
-        - text: Add routing
-          href: ~
-        - text: TODO
-          href: ~
+        - text: Add routing with brochure
+          href: articles/topics/add_routing.html
     contribute:
       text: Contribute
       href: articles/contribute.html

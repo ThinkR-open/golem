@@ -1,0 +1,10 @@
+---
+title: "Use bslib with Golem"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Use bslib with Golem}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# TODO: add content
