@@ -29,6 +29,9 @@ navbar:
     left: [reference, articles, resources, news]
     right: [github, golemverse]
   components:
+    contribute:
+      text: Contribute
+      href: articles/contribute.html
     golemverse:
       icon: fas fa-toolbox
       href: https://golemverse.org/
