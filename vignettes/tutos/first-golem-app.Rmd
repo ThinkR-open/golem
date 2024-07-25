@@ -40,7 +40,7 @@ In case you are using RStudio, you can use the `golem` RStudio addin to create a
 
 Go to `File` > `New Project` > `New Directory` > Search for `Package for Shiny App using golem`:
 
-```{r, echo=FALSE, out.width="80%", eval=TRUE}
+```{r, echo=FALSE, fig.align="center", out.width="60%"}
 knitr::include_graphics("golemtemplate.png")
 ```
 
@@ -52,7 +52,7 @@ golem::create_golem(path = "path/to/package/mygolemapp")
 
 ::: {.callout .callout-danger}
 ::: {.callout-body}
-By passing the `check_name` argument to `FALSE`, this command allows you to create "illegally-named" package (for example, `1234`). 
+By passing the `check_name` argument to `FALSE`, this command allows you to create "illegally-named" package (for example, `1234`).  
 
 Note that this is not recommended and __should only be done if you know what you are doing__.
 :::

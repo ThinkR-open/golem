@@ -42,7 +42,7 @@ navbar:
         - text: -------
         - text: UI
         - text: Use a maintenance page
-          href: ~
+          href: articles/topics/maintenance_page.html
         - text: Use bslib
           href: ~
         - text: -------
