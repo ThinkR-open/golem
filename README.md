@@ -82,9 +82,9 @@ golem::run_dev()
 
 Enjoy your new app!
 
-## Discover {golem}
+## Play with golem
 
-### Your very first time with {golem}
+### Your very first time with golem
 
 You can find find a full tutorial on how to create your first `golem`
 app [here](x).

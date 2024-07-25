@@ -34,8 +34,10 @@ navbar:
       menu:
         - text: Create your first Golem application
           href: articles/tutos/first-golem-app.html
-        - text: Add your first module and communication
-          href: ~
+        - text: Add your first module
+          href: articles/tutos/golem_with_modules.html
+        - text: Communication between modules
+          href: articles/tutos/communication_with_modules.html
     topics:
       text: Advanced topics
       menu:
