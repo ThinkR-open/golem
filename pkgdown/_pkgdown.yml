@@ -53,7 +53,7 @@ navbar:
           href: ~
     contribute:
       text: Contribute
-      href: ~
+      href: articles/contribute.html
     golemverse:
       icon: fas fa-toolbox
       href: https://golemverse.org/
