@@ -23,19 +23,18 @@
 
 /* ---- Callouts ---- */
 .callout {
-  position: relative;
   border: 1px solid var(--bs-primary);
   padding: 1rem 2rem;
   margin: 1rem 0;
   border-radius: var(--bs-border-radius);
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 3rem;
   background: #7176b817;
 
   p {
-    margin: auto;
+    margin: 10px 0;
   }
 }
 
@@ -49,7 +48,7 @@
     border-radius: 50%;
     color: var(--bs-body-bg);
     background-color: $color;
-    width: 3rem;
+    width: 2rem;
     height: 2rem;
     display: inline-flex;
     align-items: center;
