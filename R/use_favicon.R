@@ -21,7 +21,10 @@ use_favicon <- function(
   method = "curl"
 ) {
   if (missing(path)) {
-    path <- golem_sys("shinyexample/inst/app/www", "favicon.ico")
+    path <- golem_sys(
+      "shinyexample/inst/app/www",
+      "favicon.ico"
+    )
   }
 
   ext <- file_ext(path)
