@@ -5,8 +5,8 @@ is_ns <- function(text) {
 
 #' @noRd
 is_shiny_input_output_funmodule <- function(
-  text,
-  extend_input_output_funmodule = NA_character_) {
+    text,
+    extend_input_output_funmodule = NA_character_) {
   stopifnot(is.character(extend_input_output_funmodule))
 
   input_output_knew <- c("Input|Output|actionButton|radioButtons")
@@ -62,8 +62,8 @@ fix_ns_in_data <- function(data) {
 #' @noRd
 #' @importFrom utils getParseData
 check_namespace_in_file <- function(
-  path,
-  extend_input_output_funmodule = NA_character_) {
+    path,
+    extend_input_output_funmodule = NA_character_) {
   getParseData(
     parse(
       file = path,
@@ -115,9 +115,9 @@ check_namespace_in_file <- function(
 #'
 #' @export
 check_namespace_sanity <- function(
-  pkg = golem::get_golem_wd(),
-  extend_input_output_funmodule = NA_character_,
-  auto_fix = TRUE) {
+    pkg = golem::get_golem_wd(),
+    extend_input_output_funmodule = NA_character_,
+    auto_fix = TRUE) {
   check_desc_installed()
   check_cli_installed()
 
@@ -195,7 +195,9 @@ check_namespace_sanity <- function(
 
 
   if (isTRUE(auto_fix)) {
+    cli::cli_process_start("`auto_fix` is TRUE so we will fix the missing namespace")
     fix_ns_in_data(data = data)
+    cli::cli_process_done()
   } else {
     return(invisible(FALSE))
   }
