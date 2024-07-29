@@ -8,15 +8,15 @@ Will check if the namespace (NS) are correctly set in the shiny modules}
 check_namespace_sanity(
   pkg = golem::get_golem_wd(),
   extend_input_output_funmodule = NA_character_,
-  disable = FALSE
+  auto_fix = TRUE
 )
 }
 \arguments{
-\item{pkg}{The package path}
+\item{pkg}{Character. The package path}
 
-\item{extend_input_output_funmodule}{Extend the input, output or function module to check}
+\item{extend_input_output_funmodule}{Character. Extend the input, output or function module to check}
 
-\item{disable}{Disable the check}
+\item{auto_fix}{Logical. Fix the missing namespace automatically. Default is TRUE}
 }
 \value{
 Logical. TRUE if the namespace are correctly set, FALSE otherwise

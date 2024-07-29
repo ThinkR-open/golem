@@ -1,15 +1,12 @@
 #' @noRd
-stop_quietly <- function() {
-  opt <- options(show.error.messages = FALSE)
-  on.exit(options(opt))
-  stop()
+is_ns <- function(text) {
+  text == "ns"
 }
 
 #' @noRd
 is_shiny_input_output_funmodule <- function(
-  text,
-  extend_input_output_funmodule = NA_character_
-) {
+    text,
+    extend_input_output_funmodule = NA_character_) {
   stopifnot(is.character(extend_input_output_funmodule))
 
   input_output_knew <- c("Input|Output|actionButton|radioButtons")
@@ -40,11 +37,34 @@ is_shiny_input_output_funmodule <- function(
 }
 
 #' @noRd
+fix_ns_in_data <- function(data) {
+  for (i in 1:nrow(data)) {
+    line_index <- data$next_line1[i]
+    col_start <- data$next_col1[i]
+    col_end <- data$next_col2[i]
+    file <- data$path[i]
+
+    file_content <- readLines(file)
+
+    line_to_modify <- file_content[line_index]
+    modified_line <- paste0(
+      substr(line_to_modify, 1, col_start - 1),
+      "ns(",
+      substr(line_to_modify, col_start, col_end),
+      ")",
+      substr(line_to_modify, col_end + 1, nchar(line_to_modify))
+    )
+    file_content[line_index] <- modified_line
+  }
+
+  writeLines(file_content, file)
+}
+
+#' @noRd
 #' @importFrom utils getParseData
 check_namespace_in_file <- function(
-  path,
-  extend_input_output_funmodule = NA_character_
-) {
+    path,
+    extend_input_output_funmodule = NA_character_) {
   getParseData(
     parse(
       file = path,
@@ -55,17 +75,28 @@ check_namespace_in_file <- function(
       path = path
     ) |>
     dplyr::filter(
-      token == "SYMBOL_FUNCTION_CALL"
+      token %in% c(
+        "SYMBOL_FUNCTION_CALL",
+        "STR_CONST"
+      )
     ) |>
     dplyr::mutate(
       is_input_output_funmodule = is_shiny_input_output_funmodule(
         text = text,
         extend_input_output_funmodule = extend_input_output_funmodule
-      )
-    ) |>
-    dplyr::mutate(
-      is_followed_by = dplyr::lead(text),
-      is_followed_by_ns = is_followed_by == "ns"
+      ),
+      dplyr::across(
+        dplyr::starts_with("line"),
+        ~ dplyr::lead(.x),
+        .names = "next_{.col}"
+      ),
+      dplyr::across(
+        dplyr::starts_with("col"),
+        ~ dplyr::lead(.x),
+        .names = "next_{.col}"
+      ),
+      next_text = dplyr::lead(text),
+      is_followed_by_ns = is_ns(next_text)
     ) |>
     dplyr::filter(
       is_input_output_funmodule
@@ -77,8 +108,7 @@ check_namespace_in_file <- function(
 #'
 #' @param pkg Character. The package path
 #' @param extend_input_output_funmodule Character. Extend the input, output or function module to check
-#' @param ask_yesno Logical. Ask the user to launch the app. Default is TRUE
-#' @param disable Logical. Disable the check. Default is FALSE
+#' @param auto_fix Logical. Fix the missing namespace automatically. Default is TRUE
 #'
 #' @importFrom roxygen2 parse_package block_get_tag
 #'
@@ -86,15 +116,9 @@ check_namespace_in_file <- function(
 #'
 #' @export
 check_namespace_sanity <- function(
-  pkg = golem::get_golem_wd(),
-  extend_input_output_funmodule = NA_character_,
-  ask_yesno = TRUE,
-  disable = FALSE
-) {
-  if (disable) {
-    return(invisible(FALSE))
-  }
-
+    pkg = golem::get_golem_wd(),
+    extend_input_output_funmodule = NA_character_,
+    auto_fix = TRUE) {
   check_desc_installed()
   check_cli_installed()
 
@@ -148,14 +172,6 @@ check_namespace_sanity <- function(
     dplyr::filter(
       !is_followed_by_ns
     ) |>
-    dplyr::select(
-      path,
-      text,
-      line1,
-      col1,
-      is_followed_by,
-      is_followed_by_ns
-    ) |>
     dplyr::mutate(
       message = sprintf("... see line %d in {.file %s:%d:%d}.", line1, path, line1, col1)
     )
@@ -174,17 +190,15 @@ check_namespace_sanity <- function(
     )
   )
 
-  cli::cli_alert_info("Fix {?this/these} {missing_ns_detected} missing namespace{?s} before to continue...")
+  cli::cli_alert_info("We recommand to fix {?this/these} {missing_ns_detected} missing namespace{?s} before to continue...")
 
   purrr::walk(data$message, cli::cli_alert_danger)
 
 
-  if (isTRUE(ask_yesno)) {
-    launch_app <- yesno("Is it fixed? Do you want to launch the app?")
-
-    if (isFALSE(launch_app)) {
-      stop_quietly()
-    }
+  if (isTRUE(auto_fix)) {
+    fix_ns_in_data(data = data)
+  } else {
+    return(invisible(FALSE))
   }
 
   return(invisible(TRUE))

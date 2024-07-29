@@ -40,7 +40,6 @@ test_that("check is_shiny_input_output_funmodule works", {
   )
 })
 
-
 test_that("Check check_namespace_in_file", {
   path <- tempfile(fileext = ".R")
 
@@ -88,11 +87,24 @@ test_that("Check check_namespace_in_file", {
           "SYMBOL_FUNCTION_CALL"
         ),
         terminal = c(TRUE, TRUE),
-        text = c("selectInput", "actionButton"),
+        text = c(
+          "selectInput",
+          "actionButton"
+        ),
         path = rep(path, 2),
-        is_input_output_funmodule = c(TRUE, TRUE), # 2 TRUE
-        is_followed_by = c("c", "observeEvent"),
-        is_followed_by_ns = c(FALSE, FALSE) # 2 FALSE
+        is_input_output_funmodule = c(TRUE, TRUE),
+        next_line1 = c(
+          5L,
+          10L
+        ),
+        next_line2 = c(5L, 10L),
+        next_col1 = c(17L, 17L),
+        next_col2 = 29:30,
+        next_text = c(
+          "'selectinput'",
+          "'actionbutton'"
+        ),
+        is_followed_by_ns = c(FALSE, FALSE)
       ),
       row.names = c(NA, -2L),
       class = "data.frame"
@@ -150,7 +162,11 @@ test_that("Check check_namespace_in_file", {
         ),
         path = rep(path, 2),
         is_input_output_funmodule = c(TRUE, TRUE),
-        is_followed_by = c("ns", "ns"),
+        next_line1 = c(5L, 10L),
+        next_line2 = c(5L, 10L),
+        next_col1 = c(17L, 17L),
+        next_col2 = c(18L, 18L),
+        next_text = c("ns", "ns"),
         is_followed_by_ns = c(TRUE, TRUE)
       ),
       row.names = c(NA, -2L),
@@ -170,7 +186,7 @@ test_that("Check check_namespace_in_file", {
       "      choices = c(LETTERS[1:10])",
       "    ),",
       "    mod_test_2_module_ui(",
-      "      id = ns('actionbutton'),", # NS present
+      "      id = ns('actionbutton')", # NS present
       "    )",
       "  )",
       "}",
@@ -202,7 +218,11 @@ test_that("Check check_namespace_in_file", {
         text = "mod_test_2_module_ui",
         path = path,
         is_input_output_funmodule = TRUE,
-        is_followed_by = "ns",
+        next_line1 = 10L,
+        next_line2 = 10L,
+        next_col1 = 12L,
+        next_col2 = 13L,
+        next_text = "ns",
         is_followed_by_ns = TRUE
       ),
       row.names = c(NA, -1L),
@@ -235,8 +255,14 @@ test_that("Check check_namespace_in_file", {
         ),
         path = rep(path, 2),
         is_input_output_funmodule = c(TRUE, TRUE),
-        is_followed_by = c("c", "ns"),
-        is_followed_by_ns = c(FALSE, TRUE)
+        next_line1 = c(5L, 10L),
+        next_line2 = c(5L, 10L),
+        next_col1 = c(17L, 12L),
+        next_col2 = c(29L, 13L),
+        next_text = c(
+          "'selectinput'",
+          "ns"
+        ), is_followed_by_ns = c(FALSE, TRUE)
       ),
       row.names = c(NA, -2L),
       class = "data.frame"
@@ -364,11 +390,18 @@ withr::with_dir(dummy_dir_check_ns, {
     expect_message(
       checkns <- check_namespace_sanity(
         pkg = dummy_golem_path,
-        ask_yesno = FALSE
+        auto_fix = TRUE
       ),
       "It seems that..."
     )
 
     expect_true(checkns)
+
+    expect_message(
+      checkns <- check_namespace_sanity(
+        pkg = dummy_golem_path
+      ),
+      "NS check passed"
+    )
   })
 })

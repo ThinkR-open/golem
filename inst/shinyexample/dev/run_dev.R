@@ -9,7 +9,7 @@ golem::detach_all_attached()
 # rm(list=ls(all.names = TRUE))
 
 # Check for missing namespaces
-golem::check_namespace_sanity(disable = FALSE)
+golem::check_namespace_sanity(auto_fix = TRUE)
 
 # Document and reload your package
 golem::document_and_reload()
