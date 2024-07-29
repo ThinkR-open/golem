@@ -271,6 +271,70 @@ test_that("Check check_namespace_in_file", {
   )
 })
 
+test_that("Check fix_ns_in_data works", {
+  path <- tempfile(fileext = ".R")
+
+  writeLines(
+    c(
+      "mod_test_module_ui <- function(id) {",
+      "  ns <- NS(id)",
+      "  tagList(",
+      "    selectInput(",
+      "      inputId = 'selectinput',", # Missing NS
+      "      label = 'Select input',",
+      "      choices = c(LETTERS[1:10])",
+      "    ),",
+      "    actionButton(",
+      "      inputId = 'actionbutton',", # Missing NS
+      "      label = 'Action button'",
+      "    )",
+      "  )",
+      "}",
+      "",
+      "mod_test_module_server <- function(id) {",
+      "  observeEvent(input$actionbutton, {",
+      "    message(input$actionbutton)",
+      "    message(input$selectinput)",
+      "  })",
+      "}"
+    ),
+    con = path
+  )
+
+  data <- check_namespace_in_file(
+    path = path
+  )
+
+  fix_ns_in_data(data)
+
+  expect_equal(
+    readLines(path),
+    c(
+      "mod_test_module_ui <- function(id) {",
+      "  ns <- NS(id)",
+      "  tagList(",
+      "    selectInput(",
+      "      inputId = ns('selectinput'),", # NS present
+      "      label = 'Select input',",
+      "      choices = c(LETTERS[1:10])",
+      "    ),",
+      "    actionButton(",
+      "      inputId = ns('actionbutton'),", # NS present
+      "      label = 'Action button'",
+      "    )",
+      "  )",
+      "}",
+      "",
+      "mod_test_module_server <- function(id) {",
+      "  observeEvent(input$actionbutton, {",
+      "    message(input$actionbutton)",
+      "    message(input$selectinput)",
+      "  })",
+      "}"
+    )
+  )
+})
+
 dummy_dir_check_ns <- tempfile(pattern = "dummy")
 dir.create(dummy_dir_check_ns)
 
@@ -402,6 +466,48 @@ withr::with_dir(dummy_dir_check_ns, {
         pkg = dummy_golem_path
       ),
       "NS check passed"
+    )
+
+    expect_equal(
+      readLines(file.path(dummy_golem_path, "R", "mod_test_module.R")),
+      c(
+        "#' first UI Function",
+        "#'",
+        "#' @description A shiny Module.",
+        "#'",
+        "#' @param id,input,output,session Internal parameters for {shiny}.",
+        "#'",
+        "#' @shinyModule A Golem module.",
+        "#'",
+        "#' @importFrom shiny NS tagList",
+        "mod_test_module_ui <- function(id) {",
+        "  ns <- NS(id)",
+        "  tagList(",
+        "    selectInput(",
+        "      inputId = ns('selectinput'),",
+        "      label = 'Select input',",
+        "      choices = c(LETTERS[1:10])",
+        "    ),",
+        "    actionButton(",
+        "      inputId = ns('actionbutton'),",
+        "      label = 'Action button'",
+        "    )",
+        "  )",
+        "}",
+        "",
+        "#' first Server Functions",
+        "#'",
+        "mod_test_module_server <- function(id) {",
+        "  moduleServer(id, function(input, output, session) {",
+        "    ns <- session$ns",
+        "",
+        "    observeEvent(input$actionbutton, {",
+        "      message(input$actionbutton)",
+        "      message(input$selectinput)",
+        "    })",
+        "  })",
+        "}"
+      )
     )
   })
 })
