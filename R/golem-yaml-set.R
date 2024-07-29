@@ -45,7 +45,7 @@ set_golem_name <- function(
     talkative = talkative
   )
 
-  # Changing in app-config.R
+  # Changing in app_config.R
   change_app_config_name(
     name = name,
     path = path
@@ -62,7 +62,10 @@ set_golem_name <- function(
     Package = name
   )
   desc$write(
-    file = "DESCRIPTION"
+    file = fs_path(
+      path,
+      "DESCRIPTION"
+    )
   )
 
   # Changing in ./tests/ if dir present

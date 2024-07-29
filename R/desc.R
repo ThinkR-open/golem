@@ -115,7 +115,10 @@ fill_desc <- function(
     name = pkg_name,
     path = pkg
   )
-  set_golem_name(pkg_name)
+  set_golem_name(
+    pkg_name,
+    pkg = path
+  )
 
   desc$set(
     Title = pkg_title
