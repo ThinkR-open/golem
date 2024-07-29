@@ -96,7 +96,9 @@ try_user_config_location <- function(pth) {
   }
 
   # II. if successful, read file and find line where new config is located
-  tmp_guess_text <- readLines("R/app_config.R")
+  tmp_guess_text <- readLines(
+    user_location_default
+  )
   tmp_guess_lines <- guess_lines_to_config_file(tmp_guess_text)
   ## -> early return if malformation i.e. no lines found that match app_sys(...)
   if (is.null(tmp_guess_lines)) {
