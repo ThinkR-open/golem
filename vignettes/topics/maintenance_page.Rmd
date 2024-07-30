@@ -53,7 +53,7 @@ If you are deploying your application with a command line, you can set the envir
 export GOLEM_MAINTENANCE_ACTIVE=TRUE && Rscript -e "mygolem::run_app()"
 ```
 
-## The maintenance page
+## Customize the maintenance page
 
 `Golem` comes with a default maintenance page, but you can override it and **use your own custom page**.
 
