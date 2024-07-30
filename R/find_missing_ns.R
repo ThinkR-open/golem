@@ -1,0 +1,206 @@
+#' @noRd
+is_ns <- function(text) {
+  text == "ns"
+}
+
+#' @noRd
+is_shiny_input_output_funmodule <- function(
+    text,
+    extend_input_output_funmodule = NA_character_) {
+  stopifnot(is.character(extend_input_output_funmodule))
+
+  input_output_knew <- c("Input|Output|actionButton|radioButtons")
+  ui_funmodule_pattern <- c("mod_\\w+_ui")
+
+  patterns <- paste(
+    input_output_knew,
+    ui_funmodule_pattern,
+    sep = "|"
+  )
+
+  if (
+    !is.null(extend_input_output_funmodule) ||
+      !is.na(extend_input_output_funmodule) ||
+      extend_input_output_funmodule == ""
+  ) {
+    patterns <- paste(
+      patterns,
+      extend_input_output_funmodule,
+      sep = "|"
+    )
+  }
+
+  grepl(
+    pattern = patterns,
+    x = text
+  )
+}
+
+#' @noRd
+fix_ns_in_data <- function(data) {
+  for (i in 1:nrow(data)) {
+    line_index <- data$next_line1[i]
+    col_start <- data$next_col1[i]
+    col_end <- data$next_col2[i]
+    file <- data$path[i]
+
+    file_content <- readLines(file)
+
+    line_to_modify <- file_content[line_index]
+    modified_line <- paste0(
+      substr(line_to_modify, 1, col_start - 1),
+      "ns(",
+      substr(line_to_modify, col_start, col_end),
+      ")",
+      substr(line_to_modify, col_end + 1, nchar(line_to_modify))
+    )
+    file_content[line_index] <- modified_line
+    writeLines(file_content, file)
+  }
+}
+
+#' @noRd
+#' @importFrom utils getParseData
+check_namespace_in_file <- function(
+    path,
+    extend_input_output_funmodule = NA_character_) {
+  getParseData(
+    parse(
+      file = path,
+      keep.source = TRUE
+    )
+  ) |>
+    dplyr::mutate(
+      path = path
+    ) |>
+    dplyr::filter(
+      token %in% c(
+        "SYMBOL_FUNCTION_CALL",
+        "STR_CONST"
+      )
+    ) |>
+    dplyr::mutate(
+      is_input_output_funmodule = is_shiny_input_output_funmodule(
+        text = text,
+        extend_input_output_funmodule = extend_input_output_funmodule
+      ),
+      dplyr::across(
+        dplyr::starts_with("line"),
+        ~ dplyr::lead(.x),
+        .names = "next_{.col}"
+      ),
+      dplyr::across(
+        dplyr::starts_with("col"),
+        ~ dplyr::lead(.x),
+        .names = "next_{.col}"
+      ),
+      next_text = dplyr::lead(text),
+      is_followed_by_ns = is_ns(next_text)
+    ) |>
+    dplyr::filter(
+      is_input_output_funmodule
+    )
+}
+
+#' check namespace sanity
+#' Will check if the namespace (NS) are correctly set in the shiny modules
+#'
+#' @param pkg Character. The package path
+#' @param extend_input_output_funmodule Character. Extend the input, output or function module to check
+#' @param auto_fix Logical. Fix the missing namespace automatically. Default is TRUE
+#'
+#' @importFrom roxygen2 parse_package block_get_tag
+#'
+#' @return Logical. TRUE if the namespace are correctly set, FALSE otherwise
+#'
+#' @export
+check_namespace_sanity <- function(
+    pkg = golem::get_golem_wd(),
+    extend_input_output_funmodule = NA_character_,
+    auto_fix = TRUE) {
+  check_desc_installed()
+  check_cli_installed()
+
+  base_path <- normalizePath(
+    path = pkg,
+    mustWork = TRUE
+  )
+
+  encoding <- desc::desc_get("Encoding", file = base_path)[[1]]
+
+  if (!identical(encoding, "UTF-8")) {
+    warning("roxygen2 requires Encoding: UTF-8", call. = FALSE)
+  }
+
+  blocks <- roxygen2::parse_package(
+    path = base_path,
+    env = NULL
+  )
+
+  shinymodule_blocks <- blocks |>
+    purrr::map(
+      .f = \(x) {
+        return <- roxygen2::block_get_tag(x, tag = "shinyModule")
+        if (is.null(return)) {
+          NULL
+        } else {
+          return
+        }
+      }
+    ) |>
+    purrr::compact()
+
+  if (length(shinymodule_blocks) == 0) {
+    cli::cli_alert_info("No shiny module found")
+    return(invisible(FALSE))
+  }
+
+  shinymodule_links <- shinymodule_blocks |>
+    purrr::map_chr(
+      .f = ~ .x[["file"]]
+    ) |>
+    unique()
+
+  data <- shinymodule_links |>
+    purrr::map_df(
+      .f = ~ check_namespace_in_file(
+        path = .x,
+        extend_input_output_funmodule = extend_input_output_funmodule
+      )
+    ) |>
+    dplyr::filter(
+      !is_followed_by_ns
+    ) |>
+    dplyr::mutate(
+      message = sprintf("... see line %d in {.file %s:%d:%d}.", line1, path, line1, col1)
+    )
+
+  missing_ns_detected <- nrow(data)
+
+  if (missing_ns_detected == 0) {
+    cli::cli_alert_success("NS check passed")
+    return(invisible(TRUE))
+  }
+
+  cli::cli_text(
+    "It seems that ",
+    cli::bg_br_yellow(
+      "{missing_ns_detected} namespace{?s} (NS) {?is/are} missing..."
+    )
+  )
+
+  cli::cli_alert_info("We recommand to fix {?this/these} {missing_ns_detected} missing namespace{?s} before to continue...")
+
+  purrr::walk(data$message, cli::cli_alert_danger)
+
+
+  if (isTRUE(auto_fix)) {
+    cli::cli_process_start("`auto_fix` is TRUE so we will fix the missing namespace")
+    fix_ns_in_data(data = data)
+    cli::cli_process_done()
+  } else {
+    return(invisible(FALSE))
+  }
+
+  return(invisible(TRUE))
+}
