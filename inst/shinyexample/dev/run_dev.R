@@ -8,6 +8,9 @@ options(shiny.port = httpuv::randomPort())
 golem::detach_all_attached()
 # rm(list=ls(all.names = TRUE))
 
+# Check for invalid URLs
+golem::check_url_validity()
+
 # Check for missing namespaces
 golem::check_namespace_sanity(auto_fix = TRUE)
 
