@@ -43,10 +43,10 @@ navbar:
       menu:
         - text: -------
         - text: UI
+        - text: Customize your app with {bslib}
+          href: articles/topics/use_bslib.html
         - text: Use a maintenance page
           href: articles/topics/maintenance_page.html
-        - text: Use bslib
-          href: articles/topics/use_bslib.html
         - text: -------
         - text: Backend
         - text: Add routing with brochure
