@@ -30,7 +30,7 @@ navbar:
     right: [github, golemverse]
   components:
     tutos:
-      text: Tutorials
+      text: Getting started
       menu:
         - text: Create your first Golem application
           href: articles/tutos/first-golem-app.html
@@ -39,7 +39,7 @@ navbar:
         - text: Communication between modules
           href: articles/tutos/communication_with_modules.html
     topics:
-      text: Advanced topics
+      text: Advanced
       menu:
         - text: -------
         - text: UI
