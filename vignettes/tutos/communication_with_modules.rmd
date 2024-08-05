@@ -1,0 +1,10 @@
+---
+title: "Communication with modules"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Communication with modules}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# TODO: add content

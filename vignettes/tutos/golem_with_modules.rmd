@@ -1,0 +1,10 @@
+---
+title: "Golem modules"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Golem modules}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# TODO: add content
