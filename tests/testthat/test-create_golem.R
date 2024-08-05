@@ -1,68 +1,32 @@
 test_that("create_golem works", {
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-     testthat::with_mocked_bindings(
-      here_set_here = function(...) {
-        return(TRUE)
-      },
-      usethis_proj_set = function(...) {
-        return(NULL)
-      },{
-        unlink(
-          file.path(
-            tempdir(),
-            "testcreategolem"
-          ),
-          TRUE,
-          TRUE
-        )
-        created <- create_golem(
-          path = file.path(
-            tempdir(),
-            "testcreategolem"
-          ),
-          open = FALSE
-        )
-      }
-     )
-    }
-
+  res <- perform_inside_a_new_golem(function() {
+    return(getwd())
+  })
+  expect_exists(
+    res
   )
   expect_exists(
     file.path(
-      tempdir(),
-      "testcreategolem"
-    )
-  )
-  expect_exists(
-    file.path(
-      tempdir(),
-      "testcreategolem",
+      res,
       "DESCRIPTION"
     )
   )
   expect_exists(
     file.path(
-      tempdir(),
-      "testcreategolem",
+      res,
       "R"
     )
   )
 
   expect_exists(
     file.path(
-      tempdir(),
-      "testcreategolem",
+      res,
       "inst"
     )
   )
-   unlink(
-     file.path(
-       tempdir(),
-       "testcreategolem"
-     ),
-     TRUE,
-     TRUE
-   )
+  unlink(
+    res,
+    TRUE,
+    TRUE
+  )
 })
