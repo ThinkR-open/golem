@@ -1,80 +1,93 @@
 test_that("desc works", {
   testthat::skip_if_not_installed("desc")
-  with_dir(pkg, {
-    withr::with_options(
-      c("golem.quiet" = FALSE),
-      {
-        output <- capture_output(
-          fill_desc(
-            pkg_name = fakename,
-            pkg_title = "newtitle",
-            pkg_description = "Newdescription.",
-            authors = person(
-              given = "firstname",
-              family = "lastname",
-              email = "name@test.com"
-            ),
-            repo_url = "http://repo_url.com",
-            pkg_version = "0.0.0.9000"
+  dummy_golem <- create_dummy_golem()
+  withr::with_options(
+    c("usethis.quiet" = TRUE),
+    {
+      withr::with_dir(
+        dummy_golem,
+        {
+          testthat::with_mocked_bindings(
+            usethis_proj_set = function(pkg) {
+              return(TRUE)
+            },
+            {
+              fill_desc(
+                pkg_name = "fakename",
+                pkg_title = "newtitle",
+                pkg_description = "Newdescription.",
+                authors = person(
+                  given = "firstname",
+                  family = "lastname",
+                  email = "name@test.com"
+                ),
+                repo_url = "http://repo_url.com",
+                pkg_version = "0.0.0.9010",
+                pkg = dummy_golem
+              )
+            }
           )
-        )
-      }
-    )
-    add_desc <- c(
-      fakename,
-      "newtitle",
-      "Newdescription.",
-      "person('firstname', 'lastname', , 'name@test.com')",
-      "http://repo_url.com",
-      "0.0.0.9000"
-    )
-    desc <- readLines("DESCRIPTION")
-
-    expect_true(
-      all(
-        as.logical(lapply(
-          add_desc[-4],
-          function(x) {
-            any(grepl(x, desc))
-          }
-        ))
+        }
       )
-    )
-    # add additional test, as authors = person(...) requires parsing test
-    tmp_test_add_desc <- eval(parse(text = add_desc[4]))
-    tmp_test_desc <- eval(parse(text = desc[[5]]))
-    expect_identical(
-      tmp_test_add_desc,
-      tmp_test_desc
-    )
+    }
+  )
+  expect_equal(
+    as.character(
+      desc::desc_get(
+        "Package",
+        fs::path(dummy_golem, "DESCRIPTION")
+      )
+    ),
+    "fakename"
+  )
+  expect_equal(
+    as.character(
+      desc::desc_get(
+        "Title",
+        fs::path(dummy_golem, "DESCRIPTION")
+      )
+    ),
+    "newtitle"
+  )
 
-    expect_true(
-      stringr::str_detect(output, "DESCRIPTION file modified")
-    )
+  expect_equal(
+    as.character(
+      desc::desc_get_authors(
+        fs::path(dummy_golem, "DESCRIPTION")
+      )
+    ),
+    "firstname lastname <name@test.com>"
+  )
+  expect_equal(
+    as.character(
+      desc::desc_get(
+        "URL",
+        fs::path(dummy_golem, "DESCRIPTION")
+      )
+    ),
+    "http://repo_url.com"
+  )
+  expect_equal(
+    as.character(
+      desc::desc_get(
+        "Description",
+        fs::path(dummy_golem, "DESCRIPTION")
+      )
+    ),
+    "Newdescription."
+  )
 
-    # test retrocompatibility
-    withr::with_options(
-      c("golem.quiet" = FALSE),
-      {
-        expect_warning(
-          fill_desc(
-            pkg_name = fakename,
-            pkg_title = "newtitle",
-            pkg_description = "Newdescription.",
-            author_first_name = "firstname",
-            author_last_name = "lastname",
-            author_email = "test@test.com"
-          )
-        )
-        expect_equal(
-          as.character(desc::desc_get("Title")),
-          "newtitle"
-        )
-        expect_equal(
-          as.character(desc::desc_get_authors()),
-          "firstname lastname <test@test.com>"
-        )
-      }
-    )
-  })
+  expect_equal(
+    as.character(
+      desc::desc_get_version(
+        fs::path(dummy_golem, "DESCRIPTION")
+      )
+    ),
+    "0.0.0.9010"
+  )
+  unlink(
+    dummy_golem,
+    TRUE,
+    TRUE
+  )
 })
