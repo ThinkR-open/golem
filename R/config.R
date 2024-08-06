@@ -11,7 +11,7 @@
 guess_where_config <- function(
   path = golem::pkg_path(),
   file = "inst/golem-config.yml"
-    ) {
+) {
   # We'll try to guess where the path to the golem-config file is. Since the
   # user can now supply a user-defined golem-config there may be several cases
   # to consider:
@@ -61,7 +61,8 @@ guess_where_config <- function(
       "- file read from an app_sys()-call in 'R/app_config.R'\n",
       "=> Resolve via either of the two options:\n",
       "1. KEEP USER-FILE: rename/delete default 'inst/golem-config.yml'\n",
-      "2. KEEP DEFAULT: change 'app_sys(...)' to 'app_sys('golem-config.yml')'.")
+      "2. KEEP DEFAULT: change 'app_sys(...)' to 'app_sys('golem-config.yml')'."
+    )
     stop(msg_err)
   }
 
@@ -90,8 +91,14 @@ guess_where_config <- function(
 }
 try_user_config_location <- function(pth) {
   # I. try to retrieve from possible user change in app_config.R
-  user_location_default <- file.path(pth, "R/app_config.R")
-  if (isFALSE(fs_file_exists(user_location_default))) {
+  user_location_default <- file.path(
+    pth,
+    "R/app_config.R"
+  )
+  if (
+    isFALSE(
+      fs_file_exists(user_location_default)
+    )) {
     return(NULL)
   }
 
@@ -216,7 +223,9 @@ get_current_config <- function(path = getwd()) {
     if (rlang::is_interactive()) {
       ask <- ask_golem_creation_upon_config(path_conf)
       # Return early if the user doesn't allow
-      if (!ask) return(NULL)
+      if (!ask) {
+        return(NULL)
+      }
 
       fs_file_copy(
         path = golem_sys("shinyexample/inst/golem-config.yml"),
@@ -260,7 +269,8 @@ ask_golem_creation_upon_config <- function(pth) {
   msg <- paste0(
     "The %s file doesn't exist.",
     "\nIt's possible that you might not be in a {golem} based project.\n",
-    "Do you want to create the {golem} files?")
+    "Do you want to create the {golem} files?"
+  )
   yesno(sprintf(msg, basename(pth)))
 }
 # This function changes the name of the
@@ -269,7 +279,7 @@ ask_golem_creation_upon_config <- function(pth) {
 change_app_config_name <- function(
   name,
   path = get_golem_wd()
-    ) {
+) {
   pth <- fs_path(path, "R", "app_config.R")
   app_config <- readLines(pth)
 
