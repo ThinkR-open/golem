@@ -69,6 +69,7 @@ set_golem_options <- function(
   # we use the explicit path
 
   set_golem_wd(
+    golem_wd = golem_wd,
     pkg = golem_wd,
     talkative = talkative
   )
