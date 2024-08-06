@@ -103,7 +103,7 @@ set_golem_name_tests <- function(
   old_name,
   new_name,
   path
-    ) {
+) {
   pth_dir_tests <- file.path(
     path,
     "tests"
@@ -125,7 +125,7 @@ set_golem_name_vignettes <- function(
   old_name,
   new_name,
   path
-    ) {
+) {
   pth_dir_vignettes <- file.path(
     path,
     "vignettes"
@@ -185,31 +185,3 @@ set_golem_version <- function(
 
   invisible(version)
 }
-
-
-#' Set things in golem config
-#'
-#' @param key,value entries in the yaml
-#' @param path path to the config file
-#' @param talkative Should things be printed?
-#' @param config config context to write to
-#'
-#' @noRd
-#'
-# set_golem_things <- function(
-# 	key,
-# 	value,
-# 	config_file,
-# 	talkative = TRUE,
-# 	config = "default"
-# ) {
-# 	amend_golem_config(
-# 		key = key,
-# 		value = value,
-# 		config = config,
-# 		pkg = config_file,
-# 		talkative = talkative
-# 	)
-
-# 	invisible(path)
-# }
