@@ -74,7 +74,7 @@ perform_inside_a_new_golem <- function(fun) {
       )
     )
     if (!dir.exists(pkg_reload)) {
-      create_golem(
+      golem::create_golem(
         pkg_reload,
         open = FALSE
       )
@@ -120,6 +120,9 @@ create_dummy_golem <- function() {
     tempdir(),
     "dummygolem"
   )
+  if (dir.exists(path_to_golem)) {
+    unlink(path_to_golem, recursive = TRUE, force = TRUE)
+  }
   dir.create(
     path_to_golem,
     recursive = TRUE
@@ -150,14 +153,25 @@ create_dummy_golem <- function() {
   file.create(
     file.path(
       path_to_golem,
-      "tests/testthat/testthat.R"
+      "tests/testthat.R"
     )
   )
   write(
-    "library(shinyexample)",
+    "# This file is part of the standard setup for testthat.
+# It is recommended that you do not modify it.
+#
+# Where should you do additional test configuration?
+# Learn more about the roles of various files in:
+# * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
+# * https://testthat.r-lib.org/articles/special-files.html
+
+library(testthat)
+library(shinyexample)
+
+test_check(\"shinyexample\")",
     file.path(
       path_to_golem,
-      "tests/testthat/testthat.R"
+      "tests/testthat.R"
     )
   )
   dir.create(
@@ -267,6 +281,25 @@ create_dummy_golem <- function() {
       "man"
     ),
     recursive = TRUE
+  )
+  dir.create(
+    file.path(
+      path_to_golem,
+      "vignettes"
+    )
+  )
+  file.create(
+    file.path(
+      path_to_golem,
+      "vignettes/shinyexample.Rmd"
+    )
+  )
+  write(
+    "library(shinyexample)",
+    file.path(
+      path_to_golem,
+      "vignettes/shinyexample.Rmd"
+    )
   )
   return(path_to_golem)
 }
