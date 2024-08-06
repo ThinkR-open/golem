@@ -21,8 +21,8 @@ test_that(
           path = dummy_golem
         )
         set_golem_name_vignettes(
-          "shinyexample",
           "testpkg",
+          "pif",
           path = dummy_golem
         )
         set_golem_version(
@@ -57,11 +57,11 @@ test_that(
     )
     expect_true(
       grepl(
-        "testpkg",
+        "pif",
         paste0(readLines(
           file.path(
             dummy_golem,
-            "vignettes/testpkg.Rmd"
+            "vignettes/pif.Rmd"
           )
         ), collapse = "")
       )
