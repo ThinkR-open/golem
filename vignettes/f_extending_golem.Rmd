@@ -202,7 +202,7 @@ golem::add_css_file(name = "custom", template = my_tmpl)
 
 ### What it is
 
-From time to time, you need your application to be unavailble: database update, API changes, etc.
+From time to time, you need your application to be unavailable: database update, API changes, etc.
 In order to keep your app running but make it unavailable, you can use a __maintenance mode__.
 When this maintenance mode is turned on, your application will be paused and a specific page will be displayed to your users.
 

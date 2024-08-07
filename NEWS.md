@@ -379,7 +379,7 @@ Update in the tests for CRAN (skip not installed + examples).
 
 - modules bow have a placeholder for content
 
-- Dev scripts have been rewritten and rerordered a litte bit
+- Dev scripts have been rewritten and reordered a little bit
 
 ## Breaking changes
 
