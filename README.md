@@ -103,92 +103,77 @@ You can also find apps at:
 
 ## About
 
-You’re reading the doc about version: 0.4.25
+You’re reading the doc about version: 0.4.26
 
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-07-04 07:50:43 UTC"
+    #> [1] "2024-08-07 14:06:07 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
-    #> ══ Documenting ═════════════════════════════════════════════════════════════════
-    #> ℹ Installed roxygen2 version (7.3.2) doesn't match required (7.3.1)
-    #> ✖ `check()` will not re-document this package
-    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.25 ────
-    #> Duration: 1m 21.6s
+    #> ℹ Loading golem
+    #> ── R CMD check results ─────────────────────────────────────── golem 0.4.26 ────
+    #> Duration: 55.4s
     #> 
-    #> ❯ checking Rd files ... NOTE
-    #>   checkRd: (-1) create_golem.Rd:30: Lost braces; missing escapes or markup?
-    #>       30 | \item{package_name}{Package name to use. By default, {golem} uses
-    #>          |                                                      ^
-    #>   checkRd: (-1) get_sysreqs.Rd:23: Lost braces; missing escapes or markup?
-    #>       23 | {dockerfiler}.
-    #>          | ^
-    #>   checkRd: (-1) golem_opts.Rd:83: Lost braces; missing escapes or markup?
-    #>       83 | \item{config_file}{path to the {golem} config file}
-    #>          |                                ^
-    #>   checkRd: (-1) install_dev_deps.Rd:5: Lost braces; missing escapes or markup?
-    #>        5 | \title{Install {golem} dev dependencies}
-    #>          |                ^
-    #>   checkRd: (-1) project_hook.Rd:13: Lost braces; missing escapes or markup?
-    #>       13 | \item{package_name}{Package name to use. By default, {golem} uses
-    #>          |                                                      ^
-    #> 
-    #> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
+    #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
     covr::package_coverage()
-    #> golem Coverage: 85.34%
-    #> R/addins.R: 0.00%
+    #> golem Coverage: 79.94%
+    #> R/boostrap_base.R: 0.00%
+    #> R/bootstrap_attachment.R: 0.00%
+    #> R/bootstrap_pkgload.R: 0.00%
+    #> R/bootstrap_roxygen2.R: 0.00%
     #> R/bootstrap_rstudio_api.R: 0.00%
-    #> R/enable_roxygenize.R: 0.00%
-    #> R/get_sysreqs.R: 0.00%
-    #> R/sanity_check.R: 0.00%
+    #> R/bootstrap_dockerfiler.R: 23.33%
     #> R/test_helpers.R: 30.26%
-    #> R/js.R: 43.75%
-    #> R/reload.R: 45.36%
+    #> R/config.R: 37.69%
+    #> R/bootstrap_usethis.R: 38.57%
+    #> R/bootstrap_desc.R: 55.56%
+    #> R/after_creation_msg.R: 59.72%
     #> R/install_dev_deps.R: 60.87%
-    #> R/bootstrap_attachment.R: 61.54%
-    #> R/bootstrap_dockerfiler.R: 63.33%
-    #> R/bootstrap_desc.R: 66.67%
-    #> R/add_dockerfiles.R: 74.19%
-    #> R/add_r_files.R: 78.50%
-    #> R/bootstrap_usethis.R: 78.57%
-    #> R/modules_fn.R: 78.71%
-    #> R/use_recommended.R: 78.79%
-    #> R/golem-yaml-set.R: 83.02%
-    #> R/use_utils.R: 83.33%
-    #> R/utils.R: 83.75%
-    #> R/add_rstudio_files.R: 85.29%
-    #> R/add_resource_path.R: 88.89%
-    #> R/create_golem.R: 89.47%
+    #> R/create_golem.R: 63.76%
+    #> R/addins.R: 66.67%
+    #> R/modules_fn.R: 73.76%
+    #> R/add_files.R: 77.06%
+    #> R/add_rstudio_files.R: 77.88%
+    #> R/add_r_files.R: 78.70%
+    #> R/use_files.R: 80.40%
+    #> R/desc.R: 83.87%
+    #> R/reload.R: 84.69%
+    #> R/disable_autoload.R: 85.00%
+    #> R/add_dockerfiles.R: 87.10%
+    #> R/sanity_check.R: 87.18%
     #> R/make_dev.R: 90.00%
-    #> R/add_files.R: 91.98%
+    #> R/use_favicon.R: 90.32%
+    #> R/add_dockerfiles_renv.R: 91.95%
     #> R/golem-yaml-get.R: 93.18%
-    #> R/add_dockerfiles_renv.R: 93.91%
+    #> R/js.R: 93.75%
+    #> R/use_recommended.R: 94.59%
     #> R/run_dev.R: 95.65%
-    #> R/desc.R: 96.67%
-    #> R/use_favicon.R: 96.67%
+    #> R/utils.R: 99.19%
+    #> R/add_resource_path.R: 100.00%
     #> R/boostrap_cli.R: 100.00%
     #> R/boostrap_crayon.R: 100.00%
     #> R/boostrap_fs.R: 100.00%
-    #> R/bootstrap_pkgload.R: 100.00%
-    #> R/bootstrap_roxygen2.R: 100.00%
     #> R/browser_button.R: 100.00%
     #> R/bundle_resources.R: 100.00%
-    #> R/config.R: 100.00%
-    #> R/disable_autoload.R: 100.00%
+    #> R/cats.R: 100.00%
+    #> R/enable_roxygenize.R: 100.00%
+    #> R/get_sysreqs.R: 100.00%
     #> R/globals.R: 100.00%
     #> R/golem_welcome_page.R: 100.00%
+    #> R/golem-yaml-set.R: 100.00%
     #> R/golem-yaml-utils.R: 100.00%
     #> R/is_golem.R: 100.00%
     #> R/is_running.R: 100.00%
+    #> R/maintenance_page.R: 100.00%
     #> R/pkg_tools.R: 100.00%
     #> R/set_golem_options.R: 100.00%
     #> R/templates.R: 100.00%
-    #> R/use_files.R: 100.00%
     #> R/use_readme.R: 100.00%
+    #> R/use_utils.R: 100.00%
     #> R/with_opt.R: 100.00%
 
 ## CoC
