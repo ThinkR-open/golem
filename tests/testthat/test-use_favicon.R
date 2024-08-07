@@ -1,95 +1,95 @@
 test_that("use_favicon works", {
   dummy_golem <- create_dummy_golem()
-  withr::with_dir(
-    dummy_golem,
-    {
-      withr::with_options(
-        c("usethis.quiet" = TRUE),
-        {
-          use_favicon(pkg = dummy_golem)
-          expect_true(
-            file.exists("inst/app/www/favicon.ico")
-          )
-
-          lapply(
-            c(
-              "test.jpeg",
-              "test.bmp",
-              "test.gif",
-              "test.tiff"
-            ),
-            function(.x) {
-              expect_error(
-                use_favicon(path = .x)
-              )
-            }
-          )
-          remove_favicon()
-          expect_false(
-            file.exists("inst/app/www/favicon.ico")
-          )
-        }
+  testthat::with_mocked_bindings(
+    curl_get_headers = function(...) {
+      res <- list()
+      attr(res, "status") <- 200
+      res
+    },
+    utils_download_file = function(path, destfile, method) {
+      file.copy(
+        golem_sys(
+          "shinyexample/inst/app/www/favicon.ico"
+        ),
+        destfile
       )
-    }
-  )
-  unlink(
-    dummy_golem,
-    recursive = TRUE,
-    force = TRUE
-  )
-})
-
-test_that("test use_favicon online", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_dir(dummy_golem, {
-    withr::with_options(
-      c("usethis.quiet" = TRUE),
+    },
+    withr::with_dir(
+      dummy_golem,
       {
-        remove_favicon()
-        expect_false(
-          file.exists(
-            "inst/app/www/favicon.ico"
-          )
+        withr::with_options(
+          c("usethis.quiet" = TRUE),
+          {
+            use_favicon(pkg = dummy_golem)
+            expect_true(
+              file.exists("inst/app/www/favicon.ico")
+            )
+
+            lapply(
+              c(
+                "test.jpeg",
+                "test.bmp",
+                "test.gif",
+                "test.tiff"
+              ),
+              function(.x) {
+                expect_error(
+                  use_favicon(path = .x)
+                )
+              }
+            )
+            remove_favicon()
+            expect_false(
+              file.exists("inst/app/www/favicon.ico")
+            )
+            use_favicon(
+              path = "https://fr.wikipedia.org//static/favicon/wikipedia.ico"
+            )
+            expect_true(
+              file.exists("inst/app/www/favicon.ico")
+            )
+          }
         )
       }
     )
+  )
 
-
-    use_favicon(
-      path = "https://fr.wikipedia.org//static/favicon/wikipedia.ico"
-    )
-    expect_true(
-      file.exists("inst/app/www/favicon.ico")
-    )
-  })
   unlink(
     dummy_golem,
     recursive = TRUE,
     force = TRUE
   )
 })
-test_that("test use_favicon online fail", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_dir(dummy_golem, {
-    remove_favicon()
-    expect_false(
-      file.exists("inst/app/www/favicon.ico")
-    )
-    if (getRversion() >= "3.5") {
-      expect_error(use_favicon(path = "https://fr.wikipedia.org//static/favicon/dontexist.ico"))
+
+test_that("use_favicon fails on 404", {
+  testthat::with_mocked_bindings(
+    curl_get_headers = function(...) {
+      res <- list()
+      attr(res, "status") <- 404
+      res
+    },
+    {
+      expect_error(
+        use_favicon(pkg = "dummy")
+      )
     }
-    expect_false(
-      file.exists("inst/app/www/favicon.ico")
-    )
-  })
-  unlink(
-    dummy_golem,
-    recursive = TRUE,
-    force = TRUE
   )
 })
 
-test_that("test favicon", {
+test_that("use_favicon fails on error", {
+  testthat::with_mocked_bindings(
+    curl_get_headers = function(...) {
+      stop("error")
+    },
+    {
+      expect_error(
+        use_favicon(pkg = "dummy")
+      )
+    }
+  )
+})
+
+test_that("test favicon class", {
   expect_s3_class(
     favicon("jean", "jean"),
     "shiny.tag"

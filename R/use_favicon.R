@@ -1,3 +1,5 @@
+
+
 #' Add a favicon to your shinyapp
 #'
 #' @param path Path to your favicon file (.ico or .png)
@@ -35,13 +37,12 @@ use_favicon <- function(
     "favicon must have .ico or .png extension"
   )
 
-
   local <- fs_file_exists(path)
 
   if (!local) {
     if (getRversion() >= "3.5") {
       try_online <- attempt::attempt(
-        curlGetHeaders(path),
+        curl_get_headers(path),
         silent = TRUE
       )
       attempt::stop_if(
@@ -62,7 +63,7 @@ use_favicon <- function(
       pattern = "favicon"
     )
 
-    utils::download.file(
+    utils_download_file(
       path,
       destfile,
       method = method
@@ -162,3 +163,5 @@ favicon <- function(
     )
   )
 }
+
+
