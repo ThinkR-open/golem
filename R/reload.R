@@ -154,7 +154,8 @@ dialog_if_has <- function(
 ) {
   if (
     rlang::is_installed("rstudioapi") &&
-      rstudioapi::isAvailable() && rstudioapi::hasFun("showDialog")
+      rstudioapi::isAvailable() &&
+      rstudioapi::hasFun("showDialog")
   ) {
     rstudioapi::showDialog(title, message, url)
   }
