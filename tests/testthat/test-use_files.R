@@ -1,5 +1,5 @@
 test_that(
-  "use_external_js_file works",
+  "use_external_*_file works",
   {
     dummy_golem <- create_dummy_golem()
     testthat::with_mocked_bindings(
@@ -10,19 +10,67 @@ test_that(
         withr::with_options(
           c("usethis.quiet" = TRUE),
           {
-            expect_false(
-              use_external_js_file(
-                url = "this.css",
-                pkg = dummy_golem
-              )
+            funs_and_ext <- list(
+              js = use_external_js_file,
+              css = use_external_css_file,
+              html = use_external_html_template,
+              txt = use_external_file
             )
-            use_external_js_file_output <- use_external_js_file(
-              url = "this.js",
-              pkg = dummy_golem,
-              open = TRUE
+            mapply(
+              function(fun, ext) {
+                path_to_file <- fun(
+                  url = paste0("this.", ext),
+                  pkg = dummy_golem
+                )
+                expect_exists(
+                  path_to_file
+                )
+              },
+              funs_and_ext,
+              names(funs_and_ext)
             )
-            expect_exists(
-              use_external_js_file_output
+          }
+        )
+      }
+    )
+    unlink(
+      dummy_golem,
+      TRUE,
+      TRUE
+    )
+  }
+)
+
+test_that(
+  "use_internal_*_file works",
+  {
+    dummy_golem <- create_dummy_golem()
+    testthat::with_mocked_bindings(
+      fs_file_copy = function(url, where) {
+        file.create(where)
+      },
+      {
+        withr::with_options(
+          c("usethis.quiet" = TRUE),
+          {
+            funs_and_ext <- list(
+              js = use_internal_js_file,
+              css = use_internal_css_file,
+              html = use_internal_html_template,
+              txt = use_internal_file
+            )
+            mapply(
+              function(fun, ext) {
+                path_to_file <- fun(
+                  path = paste0("this.", ext),
+                  pkg = dummy_golem
+                )
+                expect_exists(
+                  path_to_file
+                )
+              },
+              funs_and_ext,
+              names(funs_and_ext)
             )
           }
         )
