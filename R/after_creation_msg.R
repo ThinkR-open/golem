@@ -95,6 +95,27 @@ after_creation_message_html_template <- function(
   })
 }
 
+after_creation_message_any_file <- function(
+  pkg,
+  dir,
+  name
+) {
+  do_if_unquiet({
+    cli_cat_line("")
+    cli_cat_line(
+      sprintf(
+        "File downloaded at %s",
+        fs_path_abs(
+          fs_path(
+            dir,
+            name
+          )
+        )
+      )
+    )
+  })
+}
+
 file_created_dance <- function(
   where,
   fun,

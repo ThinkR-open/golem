@@ -1,6 +1,6 @@
 # For mocking in test
 utils_download_file <- function(...){
-  utils::download.file(...)
+  utils_download_file(...)
 }
 #' Use Files
 #'
@@ -152,7 +152,7 @@ use_external_css_file <- function(
 
   cat_start_download()
 
-  utils::download.file(url, where)
+  utils_download_file(url, where)
 
   file_created_dance(
     where,
@@ -217,7 +217,7 @@ use_external_html_template <- function(
 
   cat_start_download()
 
-  utils::download.file(url, where)
+  utils_download_file(url, where)
 
   cat_downloaded(where)
 
@@ -282,9 +282,19 @@ use_external_file <- function(
 
   cat_start_download()
 
-  utils::download.file(url, where)
+  utils_download_file(url, where)
 
   cat_downloaded(where)
+
+  file_created_dance(
+    where,
+    after_creation_message_any_file,
+    pkg,
+    dir,
+    name,
+    open,
+    open_or_go_to = FALSE
+  )
 }
 
 #' @export
@@ -551,4 +561,14 @@ use_internal_file <- function(
   fs_file_copy(path, where)
 
   cat_copied(where)
+
+  file_created_dance(
+    where,
+    after_creation_message_any_file,
+    pkg,
+    dir,
+    name,
+    open,
+    open_or_go_to = FALSE
+  )
 }
