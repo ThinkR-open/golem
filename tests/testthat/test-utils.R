@@ -11,6 +11,16 @@ test_that(
 )
 
 test_that(
+  "rlang_is_interactive() works",
+  {
+    expect_equal(
+      rlang_is_interactive(),
+      rlang::is_interactive()
+    )
+  }
+)
+
+test_that(
   "create_if_needed creates a file if required",
   {
     expect_error(

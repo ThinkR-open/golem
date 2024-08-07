@@ -499,7 +499,7 @@ use_internal_html_template <- function(
     return(invisible(FALSE))
   }
 
-  if (file_ext(url) != "html") {
+  if (file_ext(path) != "html") {
     cat_red_bullet(
       "File not added (URL must end with .html extension)"
     )
