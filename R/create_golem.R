@@ -197,30 +197,15 @@ create_golem <- function(
     }
   }
 
+  # lets not use latest deps for now
 
-  old <- setwd(path_to_golem)
+  # old <- setwd(path_to_golem)
 
-  if (!requireNamespace("desc", quietly = TRUE)) {
-    check_desc_installed()
-  } # incase of {desc} not installed by {usethis}
+  # if (!requireNamespace("desc", quietly = TRUE)) {
+  #   check_desc_installed()
+  # } # incase of {desc} not installed by {usethis}
 
-  usethis_use_latest_dependencies()
-
-  # No .Rprofile for now
-  # cli_cat_rule("Appending .Rprofile")
-  # write("# Sourcing user .Rprofile if it exists ", ".Rprofile", append = TRUE)
-  # write("home_profile <- file.path(", ".Rprofile", append = TRUE)
-  # write("  Sys.getenv(\"HOME\"), ", ".Rprofile", append = TRUE)
-  # write("  \".Rprofile\"", ".Rprofile", append = TRUE)
-  # write(")", ".Rprofile", append = TRUE)
-  # write("if (file.exists(home_profile)){", ".Rprofile", append = TRUE)
-  # write("  source(home_profile)", ".Rprofile", append = TRUE)
-  # write("}", ".Rprofile", append = TRUE)
-  # write("rm(home_profile)", ".Rprofile", append = TRUE)
-  #
-  # write("# Setting shiny.autoload.r to FALSE ", ".Rprofile", append = TRUE)
-  # write("options(shiny.autoload.r = FALSE)", ".Rprofile", append = TRUE)
-  # cat_green_tick("Appended")
+  # usethis_use_latest_dependencies()
 
   setwd(old)
 
