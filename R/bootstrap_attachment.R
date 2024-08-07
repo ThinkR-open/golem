@@ -16,6 +16,7 @@ attachment_create_renv_for_prod <- function(
   document = FALSE,
   ...
 ) {
+  check_attachment_installed()
   attachment::create_renv_for_prod(
     path = path,
     output = output,
