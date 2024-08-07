@@ -61,6 +61,14 @@ test_that(
             )
             mapply(
               function(fun, ext) {
+                if (ext != "txt"){
+                  expect_false(
+                    fun(
+                      path = "this.nop",
+                      pkg = dummy_golem
+                    )
+                  )
+                }
                 path_to_file <- fun(
                   path = paste0("this.", ext),
                   pkg = dummy_golem
