@@ -1,5 +1,4 @@
 test_that("is_golem works", {
-  dummy_golem <- create_dummy_golem()
   to_create <- grep(
     "^(?!REMOVEME).*",
     list.files(
@@ -9,22 +8,16 @@ test_that("is_golem works", {
     perl = TRUE,
     value = TRUE
   )
-  withr::with_dir(
-    dummy_golem,
-    {
-      for (file in to_create) {
-        file.create(
-          file
-        )
-      }
-    }
-  )
-  expect_true(
-    is_golem(
-      dummy_golem
+  run_quietly_in_a_dummy_golem({
+     for (file in to_create) {
+       file.create(
+         file
+       )
+     }
+    expect_true(
+      is_golem(".")
     )
-  )
-  unlink(dummy_golem, TRUE, TRUE)
+  })
   expect_false(
     is_golem(tempdir())
   )

@@ -55,10 +55,7 @@ test_that(
         rlang_is_interactive = function() {
           return(TRUE)
         },
-        ask_golem_creation_file = function(
-  path,
-  type
-        ) {
+        ask_golem_creation_file = function(path,type) {
           return(TRUE)
         },
         code = {
@@ -73,10 +70,7 @@ test_that(
         rlang_is_interactive = function() {
           return(TRUE)
         },
-        ask_golem_creation_file = function(
-  path,
-  type
-        ) {
+        ask_golem_creation_file = function(path,type) {
           return(TRUE)
         },
         code = {

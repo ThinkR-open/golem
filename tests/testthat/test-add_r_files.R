@@ -1,120 +1,97 @@
 test_that("add_fct and add_utils", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      testthat::with_mocked_bindings(
-        # This is just to bypass usethis_use_test
-        # setting here()
-        usethis_use_test = function(name, ...) {
-          file.create(
-            file.path(
-              dummy_golem,
-              sprintf(
-                "tests/testthat/test-%s.R",
-                name
-              )
-            )
+  testthat::with_mocked_bindings(
+    # This is just to bypass usethis_use_test
+    # setting here()
+    usethis_use_test = function(name, ...) {
+      file.create(
+        file.path(
+          sprintf(
+            "tests/testthat/test-%s.R",
+            name
           )
-        },
-        code = {
-          add_fct(
-            "ui",
-            pkg = dummy_golem,
-            open = FALSE,
-            with_test = TRUE
-          )
-          add_utils(
-            "ui",
-            pkg = dummy_golem,
-            open = FALSE,
-            with_test = TRUE
-          )
-
-          add_module(
-            "rand",
-            pkg = dummy_golem,
-            open = FALSE,
-            with_test = TRUE
-          )
-          add_fct(
-            "ui",
-            "rand",
-            pkg = dummy_golem,
-            open = FALSE
-          )
-          add_utils(
-            "ui",
-            "rand",
-            pkg = dummy_golem,
-            open = FALSE
-          )
-        }
+        )
       )
+    },
+    {
+      run_quietly_in_a_dummy_golem({
+        add_fct(
+          "ui",
+          open = FALSE,
+          with_test = TRUE
+        )
+        add_utils(
+          "ui",
+          open = FALSE,
+          with_test = TRUE
+        )
+
+        add_module(
+          "rand",
+          open = FALSE,
+          with_test = TRUE
+        )
+        add_fct(
+          "ui",
+          "rand",
+          open = FALSE
+        )
+        add_utils(
+          "ui",
+          "rand",
+          open = FALSE
+        )
+        expect_exists(
+          file.path(
+            "R",
+            "fct_ui.R"
+          )
+        )
+        expect_exists(
+          file.path(
+            "R",
+            "utils_ui.R"
+          )
+        )
+        expect_exists(
+          file.path(
+            "tests/testthat/test-utils_ui.R"
+          )
+        )
+        expect_exists(
+          file.path(
+            "tests/testthat/test-fct_ui.R"
+          )
+        )
+
+        expect_error(
+          add_fct(c("a", "b")),
+        )
+        expect_error(
+          add_utils(c("a", "b")),
+        )
+
+        expect_error(
+          add_module(c("a", "b")),
+        )
+
+        # If module not yet created an error is thrown
+        expect_error(
+          add_fct(
+            "ui",
+            module = "notyetcreated",
+            open = FALSE
+          ),
+          regexp = "The module 'notyetcreated' does not exist."
+        )
+        expect_error(
+          add_utils(
+            "ui",
+            module = "notyetcreated",
+            open = FALSE
+          ),
+          regexp = "The module 'notyetcreated' does not exist."
+        )
+      })
     }
-  )
-
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "R",
-      "fct_ui.R"
-    )
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "R",
-      "utils_ui.R"
-    )
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "tests/testthat/test-utils_ui.R"
-    )
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "tests/testthat/test-fct_ui.R"
-    )
-  )
-
-  expect_error(
-    add_fct(c("a", "b")),
-  )
-  expect_error(
-    add_utils(c("a", "b")),
-  )
-
-  expect_error(
-    add_module(c("a", "b")),
-  )
-
-  # If module not yet created an error is thrown
-  expect_error(
-    add_fct(
-      "ui",
-      module = "notyetcreated",
-      pkg = dummy_golem,
-      open = FALSE
-    ),
-    regexp = "The module 'notyetcreated' does not exist."
-  )
-  expect_error(
-    add_utils(
-      "ui",
-      module = "notyetcreated",
-      pkg = dummy_golem,
-      open = FALSE
-    ),
-    regexp = "The module 'notyetcreated' does not exist."
-  )
-
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
   )
 })

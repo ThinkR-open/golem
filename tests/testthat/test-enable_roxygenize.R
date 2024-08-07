@@ -5,7 +5,9 @@ create_temp_rproj <- function() {
 }
 
 
-test_that("enable_roxygenize function updates the .Rproj file correctly", {
+test_that(
+  "enable_roxygenize function updates the .Rproj file correctly"
+, {
   # Create a temporary .Rproj file
   temp_rproj <- create_temp_rproj()
 

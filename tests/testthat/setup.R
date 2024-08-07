@@ -303,3 +303,27 @@ test_check(\"shinyexample\")",
   )
   return(path_to_golem)
 }
+
+run_quietly_in_a_dummy_golem <- function(expr) {
+
+  on.exit(
+    {
+      unlink(
+        dummy_golem,
+        TRUE,
+        TRUE
+      )
+    },
+    add = TRUE
+  )
+  dummy_golem <- create_dummy_golem()
+  withr::with_options(
+    c("usethis.quiet" = TRUE),
+    {
+      withr::with_dir(
+        dummy_golem,
+        expr
+      )
+    }
+  )
+}

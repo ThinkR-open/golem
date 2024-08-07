@@ -50,44 +50,42 @@ test_that(
 
 test_that(
   "amend_golem_config works", {
-    dummy_golem <- create_dummy_golem()
-    amend_golem_config(
-      "this",
-      "that",
-      config = "default",
-      pkg = dummy_golem,
-      talkative = FALSE
-    )
-    expect_equal(
-      read_yaml(
-        eval.expr = FALSE,
-        file.path(
-          dummy_golem,
-          "inst",
-          "golem-config.yml"
-        )
-      )$default$this,
-      "that"
-    )
-    amend_golem_config(
-      "this",
-      "that",
-      config = "pif",
-      pkg = dummy_golem,
-      talkative = FALSE
-    )
+    run_quietly_in_a_dummy_golem({
+      amend_golem_config(
+        "this",
+        "that",
+        config = "default",
+        pkg = ".",
+        talkative = FALSE
+      )
+      expect_equal(
+        read_yaml(
+          eval.expr = FALSE,
+          file.path(
+            "inst",
+            "golem-config.yml"
+          )
+        )$default$this,
+        "that"
+      )
+      amend_golem_config(
+        "this",
+        "that",
+        config = "pif",
+        pkg = ".",
+        talkative = FALSE
+      )
 
-    expect_equal(
-      read_yaml(
-        eval.expr = FALSE,
-        file.path(
-          dummy_golem,
-          "inst",
-          "golem-config.yml"
-        )
-      )$pif$this,
-      "that"
-    )
-    unlink(dummy_golem, recursive = TRUE, force = TRUE)
+      expect_equal(
+        read_yaml(
+          eval.expr = FALSE,
+          file.path(
+            "inst",
+            "golem-config.yml"
+          )
+        )$pif$this,
+        "that"
+      )
+    })
   }
 )

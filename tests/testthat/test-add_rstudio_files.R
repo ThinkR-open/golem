@@ -4,45 +4,24 @@ test_that("add_rstudio_files", {
     add_shinyappsio_file,
     add_shinyserver_file
   )) {
-    dummy_golem <- create_dummy_golem()
-    withr::with_options(
-      c("usethis.quiet" = TRUE),
-      {
-        withr::with_dir(
-          dummy_golem,
-          {
-            fun(
-              pkg = dummy_golem,
-              open = FALSE
-            )
-          }
-        )
-      }
-    )
-    expect_exists(
-      file.path(
-        dummy_golem,
+    run_quietly_in_a_dummy_golem({
+      fun(
+        open = FALSE
+      )
+      expect_exists(
         "app.R"
       )
-    )
-    expect_true(
-      grepl(
-        "run_app",
-        paste(
-          readLines(
-            file.path(
-              dummy_golem,
+      expect_true(
+        grepl(
+          "run_app",
+          paste(
+            readLines(
               "app.R"
-            )
-          ),
-          collapse = " "
+            ),
+            collapse = " "
+          )
         )
       )
-    )
-    unlink(
-      dummy_golem,
-      TRUE,
-      TRUE
-    )
+    })
   }
 })

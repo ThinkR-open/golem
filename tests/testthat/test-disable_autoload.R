@@ -1,24 +1,11 @@
 test_that("disable_autoload works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE), {
-      disable_autoload(
-        dummy_golem
-      )
-    }
-  )
-  expect_true(
-    file.exists(
+  run_quietly_in_a_dummy_golem({
+    disable_autoload()
+    expect_exists(
       file.path(
-        dummy_golem,
         "R",
         "_disable_autoload.R"
       )
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
+  })
 })

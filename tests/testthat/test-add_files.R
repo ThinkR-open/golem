@@ -1,230 +1,104 @@
-test_that("add_js_file works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE), {
-      add_js_file(
-        "testjsfile",
-        pkg = dummy_golem,
-        open = FALSE
-      )
-    }
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "inst/app/www",
-      "testjsfile.js"
+test_that("add_file works", {
+  run_quietly_in_a_dummy_golem({
+    add_js_file(
+      "add_js_file",
+      open = FALSE
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
-})
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        "add_js_file.js"
+      )
+    )
+    add_js_handler(
+      "add_js_handler",
+      open = FALSE
+    )
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        "add_js_handler.js"
+      )
+    )
 
-test_that("add_js_handler works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      add_js_handler(
-        "testjsfile",
-        pkg = dummy_golem,
-        open = FALSE
-      )
-    }
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "inst/app/www",
-      "testjsfile.js"
+    add_js_input_binding(
+      "add_js_input_binding",
+      open = FALSE
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
-})
 
-test_that("add_js_input_binding works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      add_js_input_binding(
-        "testjsfile",
-        pkg = dummy_golem,
-        open = FALSE
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        "input-add_js_input_binding.js"
       )
-    }
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "inst/app/www",
-      "input-testjsfile.js"
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
-})
 
-test_that("add_js_output_binding works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      add_js_output_binding(
-        "testjsfile",
-        pkg = dummy_golem,
-        open = FALSE
-      )
-    }
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "inst/app/www",
-      "output-testjsfile.js"
+    add_js_output_binding(
+      "add_js_output_binding",
+      open = FALSE
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
-})
 
-test_that("add_css_file works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      add_css_file(
-        "testcss",
-        pkg = dummy_golem,
-        open = FALSE
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        "output-add_js_output_binding.js"
       )
-    }
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "inst/app/www",
-      "testcss.css"
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
-})
+    add_css_file(
+      "add_css_file",
+      open = FALSE
+    )
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        "add_css_file.css"
+      )
+    )
 
-test_that("add_sass_file works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      add_sass_file(
-        "test",
-        pkg = dummy_golem,
-        open = FALSE
-      )
-    }
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "inst/app/www",
-      "test.sass"
+    add_sass_file(
+      "add_sass_file",
+      open = FALSE
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
-})
 
-test_that("empty file works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      add_empty_file(
-        "test",
-        pkg = dummy_golem,
-        open = FALSE
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        "add_sass_file.sass"
       )
-    }
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "inst/app/www",
-      "test"
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
-})
 
-test_that("add_html_template works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      add_html_template(
-        pkg = dummy_golem,
-        open = FALSE
-      )
-    }
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "inst/app/www",
-      "template.html"
+    add_empty_file(
+      "add_empty_file",
+      open = FALSE
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
-})
 
-test_that("add_partial_html_template works", {
-  dummy_golem <- create_dummy_golem()
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      add_partial_html_template(
-        pkg = dummy_golem,
-        open = FALSE
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        "add_empty_file"
       )
-    }
-  )
-  expect_exists(
-    file.path(
-      dummy_golem,
-      "inst/app/www",
-      "partial_template.html"
     )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
+
+     add_html_template(
+       open = FALSE
+     )
+
+     expect_exists(
+       file.path(
+         "inst/app/www",
+         "template.html"
+       )
+     )
+
+     add_partial_html_template(
+       open = FALSE
+     )
+
+     expect_exists(
+       file.path(
+         "inst/app/www",
+         "partial_template.html"
+       )
+     )
+  })
 })

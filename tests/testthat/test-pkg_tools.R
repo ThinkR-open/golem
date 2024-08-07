@@ -1,34 +1,30 @@
 test_that(
   "daf_desc & pkg works",
   {
-    dummy_golem <- create_dummy_golem()
-    expect_equal(
-      daf_desc(
-        dummy_golem,
-        "Package"
-      ),
-      "shinyexample"
-    )
-    expect_equal(
-      pkg_name(
-        dummy_golem
-      ),
-      "shinyexample"
-    )
-    expect_equal(
-      pkg_version(
-        dummy_golem
-      ),
-      "0.0.0.9000"
-    )
-    expect_equal(
-      pkg_path(),
-      getwd()
-    )
-    unlink(
-      dummy_golem,
-      TRUE,
-      TRUE
-    )
+    run_quietly_in_a_dummy_golem({
+      expect_equal(
+        daf_desc(
+          ".",
+          "Package"
+        ),
+        "shinyexample"
+      )
+      expect_equal(
+        pkg_name(
+          "."
+        ),
+        "shinyexample"
+      )
+      expect_equal(
+        pkg_version(
+          "."
+        ),
+        "0.0.0.9000"
+      )
+      expect_equal(
+        pkg_path(),
+        getwd()
+      )
+    })
   }
 )

@@ -26,15 +26,17 @@ is_properly_populated_golem <- function(path) {
 
 test_that("create_golem works", {
   testthat::with_mocked_bindings(
-    usethis_create_project = function(path, open){
+    usethis_create_project = function(path, open) {
       dir.create(path, recursive = TRUE)
     },
-    here_set_here = function(path){
+    here_set_here = function(path) {
       return(TRUE)
-    },{
+    },
+    {
       dir <- tempfile(pattern = "golemcreategolem")
       withr::with_options(
-        c("usethis.quiet" = TRUE),{
+        c("usethis.quiet" = TRUE),
+        {
           dir <- create_golem(
             dir,
             open = FALSE,
@@ -42,9 +44,11 @@ test_that("create_golem works", {
           )
         }
       )
-      expect_true(is_properly_populated_golem(
-        dir
-      ))
+      expect_true(
+        is_properly_populated_golem(
+          dir
+        )
+      )
     }
   )
   unlink(
