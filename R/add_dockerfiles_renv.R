@@ -111,7 +111,7 @@ add_dockerfile_with_renv_ <- function(
 
   my_dock$COPY(basename(lockfile), "renv.lock")
 
-  my_dock$RUN("R -e 'options(renv.config.pak.enabled = FALSE);renv::restore()'")
+  my_dock$RUN("R -e 'options(renv.config.pak.enabled = FALSE);options(renv.config.pak.enabled = FALSE);renv::restore()'")
 
   if (update_tar_gz) {
     old_version <- list.files(
