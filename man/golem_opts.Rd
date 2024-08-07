@@ -80,7 +80,7 @@ the value of the \code{R_CONFIG_ACTIVE} environment variable
 
 \item{app_prod}{Is the \code{{golem}} in prod mode?}
 
-\item{config_file}{path to the {golem} config file}
+\item{config_file}{path to the \code{{golem}} config file}
 }
 \value{
 Used for side-effects for the setters, and values from the

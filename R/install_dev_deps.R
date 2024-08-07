@@ -1,4 +1,4 @@
-#' Install {golem} dev dependencies
+#' Install `{golem}` dev dependencies
 #'
 #' This function will run rlang::check_installed() on:
 #' + {usethis}
@@ -65,8 +65,8 @@ install_dev_deps <- function(
   if (missing(dev_deps)){
     dev_deps <- getFromNamespace("dev_deps", "golem")
   }
-  
-  
+
+
   for (
     pak in dev_deps
   ) {

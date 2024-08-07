@@ -43,10 +43,10 @@ here_set_here <- function(...){
 #'     correct according to CRAN requirements.
 #' @param open Boolean. Open the created project?
 #' @param overwrite Boolean. Should the already existing project be overwritten ?
-#' @param package_name Package name to use. By default, {golem} uses
+#' @param package_name Package name to use. By default, `{golem}` uses
 #'     `basename(path)`. If `path == '.'` & `package_name` is
 #'     not explicitly set, then `basename(getwd())` will be used.
-#' @param without_comments Boolean. Start project without golem comments
+#' @param without_comments Boolean. Start project without `{golem}` comments
 #' @param project_hook A function executed as a hook after project
 #'     creation. Can be used to change the default `{golem}` structure.
 #'     to override the files and content. This function is executed just

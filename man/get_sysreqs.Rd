@@ -20,5 +20,5 @@ A vector of system requirements.
 This function retrieves information about the
 system requirements using the \url{https://sysreqs.r-hub.io}
 API. This function is now deprecated, and was moved to
-{dockerfiler}.
+\code{{dockerfiler}}.
 }

@@ -4,6 +4,8 @@
 #'  The series of `go_to_*()` addins help you go to
 #'  common files used in developing a `{golem}` application.
 #'
+#' @param wd The working directory of the `{golem}` application.
+#'
 #' @importFrom attempt stop_if_not
 #'
 #' @aliases addins
@@ -62,7 +64,8 @@ go_to <- function(
 #' @rdname addins
 #' @aliases addins
 go_to_start <- function(
-  wd = golem::get_golem_wd()) {
+  wd = golem::get_golem_wd()
+) {
   go_to(
     "dev/01_start.R",
     wd = wd
@@ -71,7 +74,8 @@ go_to_start <- function(
 #' @rdname addins
 #' @aliases addins
 go_to_dev <- function(
-  wd = golem::get_golem_wd()) {
+  wd = golem::get_golem_wd()
+) {
   go_to(
     "dev/02_dev.R",
     wd = wd
@@ -80,7 +84,8 @@ go_to_dev <- function(
 #' @rdname addins
 #' @aliases addins
 go_to_deploy <- function(
-  wd = golem::get_golem_wd()) {
+  wd = golem::get_golem_wd()
+) {
   go_to(
     "dev/03_deploy.R",
     wd = wd
@@ -89,7 +94,8 @@ go_to_deploy <- function(
 #' @rdname addins
 #' @aliases addins
 go_to_run_dev <- function(
-  wd = golem::get_golem_wd()) {
+  wd = golem::get_golem_wd()
+) {
   go_to(
     "dev/run_dev.R",
     wd = wd
@@ -98,7 +104,8 @@ go_to_run_dev <- function(
 #' @rdname addins
 #' @aliases addins
 go_to_app_ui <- function(
-  wd = golem::get_golem_wd()) {
+  wd = golem::get_golem_wd()
+) {
   go_to(
     "R/app_ui.R",
     wd = wd
@@ -107,7 +114,8 @@ go_to_app_ui <- function(
 #' @rdname addins
 #' @aliases addins
 go_to_app_server <- function(
-  wd = golem::get_golem_wd()) {
+  wd = golem::get_golem_wd()
+) {
   go_to(
     "R/app_server.R",
     wd = wd
@@ -116,7 +124,8 @@ go_to_app_server <- function(
 #' @rdname addins
 #' @aliases addins
 go_to_run_app <- function(
-  wd = golem::get_golem_wd()) {
+  wd = golem::get_golem_wd()
+) {
   go_to(
     "R/run_app.R",
     wd = wd

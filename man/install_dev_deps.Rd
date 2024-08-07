@@ -2,7 +2,7 @@
 % Please edit documentation in R/install_dev_deps.R
 \name{install_dev_deps}
 \alias{install_dev_deps}
-\title{Install {golem} dev dependencies}
+\title{Install \code{{golem}} dev dependencies}
 \usage{
 install_dev_deps(dev_deps, force_install = FALSE, ...)
 }
