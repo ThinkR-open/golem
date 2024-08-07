@@ -9,25 +9,40 @@ test_that(
         c("html_document", "shiny.tag.list", "list")
       )
     )
-    # 2. Test in real life
-    res <- perform_inside_a_new_golem(function() {
-      pkgload::load_all(".")
-      Sys.setenv("GOLEM_MAINTENANCE_ACTIVE" = FALSE)
-      app_options_no_maintenance <- run_app()
-      Sys.setenv("GOLEM_MAINTENANCE_ACTIVE" = TRUE)
-      app_options_maintenance <- run_app()
-      return(
-        list(
-          app_options_no_maintenance = app_options_no_maintenance,
-          app_options_maintenance = app_options_maintenance
+    withr::with_envvar(
+      c("GOLEM_MAINTENANCE_ACTIVE" = TRUE),
+      {
+        app_options_maintenance <- with_golem_options(
+          app = shiny::shinyApp(
+            ui = list(),
+            server = function(input, output, session) {
+              shiny::htmlOutput("test")
+            }
+          ),
+          golem_opts = list()
         )
-      )
-    })
+      }
+    )
+    withr::with_envvar(
+      c("GOLEM_MAINTENANCE_ACTIVE" = FALSE),
+      {
+        app_options_no_maintenance <- with_golem_options(
+          app = shiny::shinyApp(
+            ui = list(),
+            server = function(input, output, session) {
+              shiny::htmlOutput("test")
+            }
+          ),
+          golem_opts = list()
+        )
+      }
+    )
+
     expect_false(
       isTRUE(
         all.equal(
-          res$app_options_maintenance,
-          res$app_options_no_maintenance
+          app_options_maintenance,
+          app_options_no_maintenance
         )
       )
     )
