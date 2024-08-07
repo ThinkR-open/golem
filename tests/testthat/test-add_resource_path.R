@@ -12,7 +12,13 @@ test_that("add_resource_path", {
     warn_empty = TRUE
   )
   expect_equal(
-    res$directoryPath,
-    golem_sys("utils")
+    normalizePath(
+      res$directoryPath,
+      winslash = "/"
+    ),
+    normalizePath(
+      golem_sys("utils"),
+      winslash = "/"
+    )
   )
 })
