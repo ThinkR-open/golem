@@ -215,6 +215,13 @@ use_external_html_template <- function(
     return(invisible(FALSE))
   }
 
+  if (file_ext(url) != "html") {
+    cat_red_bullet(
+      "File not added (URL must end with .html extension)"
+    )
+    return(invisible(FALSE))
+  }
+
   cat_start_download()
 
   utils_download_file(url, where)
@@ -489,6 +496,13 @@ use_internal_html_template <- function(
 
   if (fs_file_exists(where)) {
     cat_exists(where)
+    return(invisible(FALSE))
+  }
+
+  if (file_ext(url) != "html") {
+    cat_red_bullet(
+      "File not added (URL must end with .html extension)"
+    )
     return(invisible(FALSE))
   }
 
