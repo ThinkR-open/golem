@@ -42,6 +42,7 @@ reference:
       - use_external_css_file
       - use_utils_ui
       - use_utils_server
+      - use_readme_rmd
 
   - title: Add fct_ and utils_ files
     desc: Add fct_ and utils_ files
@@ -148,6 +149,7 @@ reference:
       - with_golem_options
       - maintenance_page
       - is_golem
+      - golem_welcome_page
 
   - title: internal
     contents:
