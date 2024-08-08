@@ -46,5 +46,52 @@ test_that(
         }
       )
     })
+    # Testing adding testthat if not there
+    run_quietly_in_a_dummy_golem({
+      testthat::with_mocked_bindings(
+        usethis_use_testthat = function() {
+          dir.create("tests")
+          dir.create("tests/testthat")
+          file.create(
+            "tests/testthat.R"
+          )
+        },
+        {
+          unlink("tests", TRUE, TRUE)
+          use_recommended_tests(
+            pkg = ".",
+            spellcheck = FALSE
+          )
+
+          expect_exists(
+            file.path(
+              "tests",
+              "testthat",
+              "test-golem-recommended.R"
+            )
+          )
+        }
+      )
+    })
+        # Testing adding testthat if processx
+        # is not available
+        run_quietly_in_a_dummy_golem({
+          testthat::with_mocked_bindings(
+            usethis_use_testthat = function() {
+              dir.create("tests")
+              dir.create("tests/testthat")
+              file.create(
+                "tests/testthat.R"
+              )
+            },
+            {
+
+              use_recommended_tests(
+                pkg = ".",
+                spellcheck = FALSE
+              )
+            }
+          )
+        })
   }
 )
