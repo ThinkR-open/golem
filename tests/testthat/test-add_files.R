@@ -192,3 +192,24 @@ test_that("add_file works", {
     )
   })
 })
+
+test_that(
+  "add_empty_file throws a warning if using an extension that is already handled by another function",
+  {
+    run_quietly_in_a_dummy_golem({
+      for (file in c(
+        "add_js_file.js",
+        "add_css_file.css",
+        "add_sass_file.sass",
+        "template.html"
+      )) {
+        expect_warning(
+          add_empty_file(
+            file,
+            open = FALSE
+          )
+        )
+      }
+    })
+  }
+)
