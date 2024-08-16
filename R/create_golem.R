@@ -30,6 +30,36 @@ replace_package_name <- function(
   }
 }
 
+copy_golem_skeleton_and_replace_name <- function(
+  path_to_golem,
+  package_name
+){
+    cli_cat_rule("Copying package skeleton")
+    from <- golem_sys("shinyexample")
+
+    # Copy over whole directory
+    fs_dir_copy(
+      path = from,
+      new_path = path_to_golem,
+      overwrite = TRUE
+    )
+
+    # Listing copied files ***from source directory***
+    copied_files <- list.files(
+      path = from,
+      full.names = FALSE,
+      all.files = TRUE,
+      recursive = TRUE
+    )
+
+    replace_package_name(
+      copied_files,
+      package_name,
+      path_to_golem
+    )
+    cat_green_tick("Copied app skeleton")
+}
+
 # For mocking in tests
 here_set_here <- function(...){
   here::set_here(...)
@@ -121,32 +151,10 @@ create_golem <- function(
     cat_green_tick("Created package directory")
   }
 
-
-  cli_cat_rule("Copying package skeleton")
-  from <- golem_sys("shinyexample")
-
-  # Copy over whole directory
-  fs_dir_copy(
-    path = from,
-    new_path = path_to_golem,
-    overwrite = TRUE
+  copy_golem_skeleton_and_replace_name(
+    path_to_golem,
+    package_name
   )
-
-  # Listing copied files ***from source directory***
-  copied_files <- list.files(
-    path = from,
-    full.names = FALSE,
-    all.files = TRUE,
-    recursive = TRUE
-  )
-
-  replace_package_name(
-    copied_files,
-    package_name,
-    path_to_golem
-  )
-
-  cat_green_tick("Copied app skeleton")
 
   old <- setwd(path_to_golem)
 

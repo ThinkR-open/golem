@@ -74,7 +74,7 @@ perform_inside_a_new_golem <- function(fun) {
       )
     )
     if (!dir.exists(pkg_reload)) {
-      golem::create_golem(
+      create_golem(
         pkg_reload,
         open = FALSE
       )

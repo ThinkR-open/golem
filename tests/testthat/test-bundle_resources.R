@@ -1,11 +1,11 @@
 test_that("multiplication works", {
   run_quietly_in_a_dummy_golem({
-    golem::add_css_file(
+    add_css_file(
       pkg = ".",
       "bundle",
       open = FALSE
     )
-    golem::add_js_file(
+    add_js_file(
       pkg = ".",
       "bundle",
       open = FALSE
