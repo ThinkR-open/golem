@@ -77,14 +77,14 @@ You’re reading the doc about version: 0.5.0
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-08-16 09:12:32 UTC"
+    #> [1] "2024-08-16 11:30:46 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
     #> ── R CMD check results ──────────────────────────────────────── golem 0.5.0 ────
-    #> Duration: 3.4s
+    #> Duration: 3.3s
     #> 
     #> ❯ checking whether package ‘golem’ can be installed ... ERROR
     #>   See below...
@@ -96,22 +96,23 @@ Here are the test & coverage results:
     #> ** R
     #> ** inst
     #> ** byte-compile and prepare package for lazy loading
-    #> Error in loadNamespace(x) : there is no package called ‘testthat’
+    #> Error in loadNamespace(x) : there is no package called ‘processx’
     #> Error: unable to load R code in package ‘golem’
     #> Execution halted
     #> ERROR: lazy loading failed for package ‘golem’
-    #> * removing ‘/tmp/RtmpjbqmN5/file1eda49c97355/golem.Rcheck/golem’
+    #> * removing ‘/tmp/RtmpLR7D9B/file1eab92487b3/golem.Rcheck/golem’
     #> 
     #> 1 error ✖ | 0 warnings ✔ | 0 notes ✔
     #> Error: R CMD check found ERRORs
 
     Sys.setenv("NOT_CRAN" = TRUE);covr::package_coverage()
-    #> golem Coverage: 85.43%
+    #> golem Coverage: 85.27%
     #> R/boostrap_base.R: 0.00%
     #> R/bootstrap_attachment.R: 0.00%
     #> R/bootstrap_pkgload.R: 0.00%
     #> R/bootstrap_roxygen2.R: 0.00%
     #> R/bootstrap_rstudio_api.R: 0.00%
+    #> R/bootstrap_testthat.R: 0.00%
     #> R/bootstrap_dockerfiler.R: 23.33%
     #> R/bootstrap_usethis.R: 38.57%
     #> R/bootstrap_desc.R: 55.56%
