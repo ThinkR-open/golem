@@ -170,7 +170,7 @@ expect_running <- function(
 
   if (go_for_pkgload) {
     # Using pkgload because we can
-    shinyproc <- processx_process(
+    shinyproc <- processx::process$new(
       command = r_,
       c(
         "-e",
@@ -179,7 +179,7 @@ expect_running <- function(
     )
   } else {
     # Using the temps libPaths because we can
-    shinyproc <- processx_process(
+    shinyproc <- processx::process$new(
       echo_cmd = TRUE,
       command = r_,
       c(
@@ -197,4 +197,3 @@ expect_running <- function(
 }
 
 
-processx_process <- processx::process$new
