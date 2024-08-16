@@ -1,4 +1,4 @@
-> Notes: the # between parenthesis referes to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
+> Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
 # 0.5.0
 
