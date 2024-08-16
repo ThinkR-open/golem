@@ -7,7 +7,7 @@
 golem_welcome_page()
 }
 \value{
-A welcome page for your {golem} app
+A welcome page for your \code{{golem}} app
 }
 \description{
 Welcome Page
