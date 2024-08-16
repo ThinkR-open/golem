@@ -10,6 +10,9 @@ is_golem(path = getwd())
 \item{path}{Path to the directory to check.
 Defaults to the current working directory.}
 }
+\value{
+A boolean, \code{TRUE} if the directory is a golem-based app, \code{FALSE} else.
+}
 \description{
 Trying to guess if \code{path} is a golem-based app.
 }

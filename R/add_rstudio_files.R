@@ -74,6 +74,7 @@ add_rstudio_files <- function(
 #'
 #' @note
 #' In previous versions, this function was called add_rconnect_file.
+#'
 #' @section List of excluded files in `.rscignore`:
 #'    * .here
 #'    * CODE_OF_CONDUCT.md

@@ -12,6 +12,9 @@ the usual value is the \code{{golem}}-package top-level directory but a user
 supplied config is now supported (see \strong{Details} for how to use this
 feature).}
 }
+\value{
+character string giving the path to the \code{{golem}} config-file
+}
 \description{
 This function tries to find the path to the \code{{golem}} config-file currently
 used. If the config-file is not found, the user is asked if they want to set parts

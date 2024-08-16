@@ -5,6 +5,8 @@
 #' @param path Path to the directory to check.
 #' Defaults to the current working directory.
 #'
+#' @return A boolean, `TRUE` if the directory is a golem-based app, `FALSE` else.
+#'
 #' @export
 #'
 #' @examples

@@ -6,6 +6,9 @@
 \usage{
 golem_welcome_page()
 }
+\value{
+A welcome page for your {golem} app
+}
 \description{
 Welcome Page
 }

@@ -3,6 +3,8 @@
 #' @importFrom shiny tagList tags
 #'
 #' @export
+#'
+#' @return A welcome page for your {golem} app
 golem_welcome_page <- function() {
   tagList(
     tags$head(

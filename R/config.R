@@ -207,6 +207,7 @@ guess_lines_to_config_file <- function(guess_text) {
 #'    feature).
 #'
 #' @export
+#' @return character string giving the path to the `{golem}` config-file
 get_current_config <- function(path = getwd()) {
   # We check whether we can guess where the config file is
   path_conf <- guess_where_config(path)
