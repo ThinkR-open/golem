@@ -11,6 +11,9 @@ status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/
 
 # {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
+> You’re reading the doc about version: 0.5.0. Note that `{golem}`
+> follows the [semantic versioning](https://semver.org/) scheme.
+
 Production-grade `{shiny}` applications, from creation to deployment.
 
 `{golem}` is an opinionated framework that sets the standard for
@@ -72,41 +75,22 @@ with blogposts, and links to other packages of the `golemverse`.
 
 ## Dev part
 
-You’re reading the doc about version: 0.5.0
-
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-08-16 11:30:46 UTC"
+    #> [1] "2024-08-16 12:38:26 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
     #> ── R CMD check results ──────────────────────────────────────── golem 0.5.0 ────
-    #> Duration: 3.3s
+    #> Duration: 44.9s
     #> 
-    #> ❯ checking whether package ‘golem’ can be installed ... ERROR
-    #>   See below...
-    #> 
-    #> ── Install failure ─────────────────────────────────────────────────────────────
-    #> 
-    #> * installing *source* package ‘golem’ ...
-    #> ** using staged installation
-    #> ** R
-    #> ** inst
-    #> ** byte-compile and prepare package for lazy loading
-    #> Error in loadNamespace(x) : there is no package called ‘processx’
-    #> Error: unable to load R code in package ‘golem’
-    #> Execution halted
-    #> ERROR: lazy loading failed for package ‘golem’
-    #> * removing ‘/tmp/RtmpLR7D9B/file1eab92487b3/golem.Rcheck/golem’
-    #> 
-    #> 1 error ✖ | 0 warnings ✔ | 0 notes ✔
-    #> Error: R CMD check found ERRORs
+    #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
     Sys.setenv("NOT_CRAN" = TRUE);covr::package_coverage()
-    #> golem Coverage: 85.27%
+    #> golem Coverage: 84.85%
     #> R/boostrap_base.R: 0.00%
     #> R/bootstrap_attachment.R: 0.00%
     #> R/bootstrap_pkgload.R: 0.00%
@@ -114,18 +98,18 @@ Here are the test & coverage results:
     #> R/bootstrap_rstudio_api.R: 0.00%
     #> R/bootstrap_testthat.R: 0.00%
     #> R/bootstrap_dockerfiler.R: 23.33%
-    #> R/bootstrap_usethis.R: 38.57%
+    #> R/bootstrap_usethis.R: 28.57%
+    #> R/test_helpers.R: 47.37%
     #> R/bootstrap_desc.R: 55.56%
-    #> R/create_golem.R: 64.71%
     #> R/addins.R: 66.67%
     #> R/modules_fn.R: 75.74%
     #> R/after_creation_msg.R: 76.39%
+    #> R/create_golem.R: 77.12%
     #> R/add_rstudio_files.R: 77.88%
     #> R/install_dev_deps.R: 78.26%
     #> R/add_r_files.R: 78.70%
     #> R/config.R: 79.23%
     #> R/use_files.R: 80.40%
-    #> R/test_helpers.R: 81.58%
     #> R/reload.R: 84.69%
     #> R/disable_autoload.R: 85.00%
     #> R/add_dockerfiles.R: 87.10%
@@ -139,6 +123,7 @@ Here are the test & coverage results:
     #> R/run_dev.R: 95.65%
     #> R/desc.R: 96.77%
     #> R/use_recommended.R: 97.37%
+    #> R/use_utils.R: 97.40%
     #> R/utils.R: 99.19%
     #> R/add_resource_path.R: 100.00%
     #> R/boostrap_cli.R: 100.00%
@@ -160,7 +145,6 @@ Here are the test & coverage results:
     #> R/set_golem_options.R: 100.00%
     #> R/templates.R: 100.00%
     #> R/use_readme.R: 100.00%
-    #> R/use_utils.R: 100.00%
     #> R/with_opt.R: 100.00%
 
 ## CoC
