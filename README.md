@@ -78,14 +78,14 @@ with blogposts, and links to other packages of the `golemverse`.
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-08-16 12:38:26 UTC"
+    #> [1] "2024-08-16 13:44:07 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
     #> ── R CMD check results ──────────────────────────────────────── golem 0.5.0 ────
-    #> Duration: 44.9s
+    #> Duration: 44s
     #> 
     #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
