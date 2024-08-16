@@ -13,8 +13,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="e_config">
-<meta property="og:description" content="golem">
-<meta name="twitter:card" content="summary">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 --><!--[if lt IE 9]>
@@ -37,7 +35,7 @@
 -->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -51,7 +49,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -63,7 +61,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -106,7 +104,7 @@
         <li>
   <a href="https://github.com/ThinkR-open/golem/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -117,7 +115,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
@@ -125,7 +123,7 @@
       <h1 data-toc-skip>e_config</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/e_config.Rmd" class="external-link"><code>vignettes/e_config.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/e_config.Rmd" class="external-link"><code>vignettes/e_config.Rmd</code></a></small>
       <div class="hidden name"><code>e_config.Rmd</code></div>
 
     </div>
@@ -133,11 +131,11 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="about-instgolem-config-yml">About <code>inst/golem-config.yml</code><a class="anchor" aria-label="anchor" href="#about-instgolem-config-yml"></a>
 </h2>
-<p>When you start a new <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> application, you’ll find a
+<p>When you start a new <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> application, you’ll find a
 file called <code>golem-config.yml</code> in the <code>inst/</code>
 folder.</p>
 <p>By default, this file contains the name of your app, its version, and
@@ -173,8 +171,8 @@ you might reliably use this config is while developing your app. Use the
 once the app is deployed.</li>
 </ul>
 <p>The good news is that if you don’t want/need to use
-<a href="https://github.com/rstudio/config" class="external-link">config</a>, you can safely ignore this file, <strong>just
-leave it where it is: it is used internally by the <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>
+<a href="https://rstudio.github.io/config/" class="external-link">config</a>, you can safely ignore this file, <strong>just
+leave it where it is: it is used internally by the <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a>
 functions</strong>.</p>
 <p>These options are globally set with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -185,7 +183,8 @@ functions</strong>.</p>
 <span><span class="co">#&gt; You can change golem working directory with set_golem_wd('path/to/wd')</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `golem_version` to 0.0.0.9000</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `app_prod` to FALSE</span></span>
-<span><span class="co">#&gt; ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────</span></span></code></pre></div>
+<span><span class="co">#&gt; ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">"/tmp/RtmpAOpIlq/golex"</span>.</span></span></code></pre></div>
 <pre><code>default:
   golem_name: golex
   golem_version: 0.0.0.9000
@@ -199,7 +198,7 @@ dev:
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/golem_opts.html">get_golem_name</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "golex"</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/tmp/RtmpbAY1B4/golex"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmpAOpIlq/golex"</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">get_golem_version</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "0.0.0.9000"</span></span></code></pre></div>
 <p>You can set these with:</p>
@@ -219,9 +218,9 @@ dev:
 <div class="section level2">
 <h2 id="using-golem-config">Using <code>golem-config</code><a class="anchor" aria-label="anchor" href="#using-golem-config"></a>
 </h2>
-<p>If you’re already familiar with the <a href="https://github.com/rstudio/config" class="external-link">config</a> package,
+<p>If you’re already familiar with the <a href="https://rstudio.github.io/config/" class="external-link">config</a> package,
 you can use this file just as any config file.</p>
-<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with an <code><a href="../reference/amend_golem_config.html">amend_golem_config()</a></code>
+<p><a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> comes with an <code><a href="../reference/amend_golem_config.html">amend_golem_config()</a></code>
 function to add elements to it.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/amend_golem_config.html">amend_golem_config</a></span><span class="op">(</span></span>
@@ -266,7 +265,7 @@ config from this config file:</p>
 <span>  config <span class="op">=</span> <span class="st">"production"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "inprod"</span></span></code></pre></div>
-<p>Or using the env var (default <a href="https://github.com/rstudio/config" class="external-link">config</a> behavior):</p>
+<p>Or using the env var (default <a href="https://rstudio.github.io/config/" class="external-link">config</a> behavior):</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"R_CONFIG_ACTIVE"</span> <span class="op">=</span> <span class="st">"production"</span><span class="op">)</span></span>
 <span><span class="fu">get_golem_config</span><span class="op">(</span><span class="st">"where"</span><span class="op">)</span></span>
@@ -289,26 +288,24 @@ be doing <code>run_app(val = "this")</code>, whereas the
 not be linked to the parameters passed to <code>run_app()</code> (even
 if this is technically possible, this is not the main objective),.</p>
 <p>It’s also linked to the <code>R_CONFIG_ACTIVE</code> environment
-variable, just as any <a href="https://github.com/rstudio/config" class="external-link">config</a> file.</p>
+variable, just as any <a href="https://rstudio.github.io/config/" class="external-link">config</a> file.</p>
 <p>The idea is also that the <code>golem-config.yml</code> file is
-shareable across <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> projects (<code>golem_opts</code>
+shareable across <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> projects (<code>golem_opts</code>
 are application specific), and will be tracked by version control
 systems.</p>
 </div>
 <div class="section level2">
 <h2 id="note-for-golem-0-2-0-users">Note for <code>{golem}</code> &lt; 0.2.0 users<a class="anchor" aria-label="anchor" href="#note-for-golem-0-2-0-users"></a>
 </h2>
-<p>If you’ve built an app with <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> before the version
+<p>If you’ve built an app with <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> before the version
 0.2.0, this config file doesn’t exist: you’ll be prompted to create it
-if you update a newer version of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a>.</p>
+if you update a newer version of <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a>.</p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
+      </div>
 
 </div>
 
@@ -316,7 +313,7 @@ if you update a newer version of <a href="https://github.com/ThinkR-open/golem" 
 
       <footer><div class="thinkr">
   <p></p>
-<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
 <div class="author">
@@ -329,10 +326,10 @@ if you update a newer version of <a href="https://github.com/ThinkR-open/golem" 
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>

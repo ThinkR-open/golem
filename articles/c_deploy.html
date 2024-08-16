@@ -13,8 +13,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="c_deploy">
-<meta property="og:description" content="golem">
-<meta name="twitter:card" content="summary">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 --><!--[if lt IE 9]>
@@ -37,7 +35,7 @@
 -->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -51,7 +49,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -63,7 +61,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -106,7 +104,7 @@
         <li>
   <a href="https://github.com/ThinkR-open/golem/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -117,7 +115,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
@@ -125,9 +123,9 @@
       <h1 data-toc-skip>c_deploy</h1>
                         <h4 data-toc-skip class="author">Colin Fay</h4>
             
-            <h4 data-toc-skip class="date">2023-05-24</h4>
+            <h4 data-toc-skip class="date">2024-08-16</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/c_deploy.Rmd" class="external-link"><code>vignettes/c_deploy.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/c_deploy.Rmd" class="external-link"><code>vignettes/c_deploy.Rmd</code></a></small>
       <div class="hidden name"><code>c_deploy.Rmd</code></div>
 
     </div>
@@ -154,11 +152,11 @@ has the following structure:</p>
 <span>    golem_opts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>This function might looks a little bit weird, but there’s a long
-story behind it, and you can read more about it <a href="https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/" class="external-link">there</a>.</p>
+<p>This function might look a little bit weird, but there’s a long story
+behind it, and you can read more about it <a href="https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/" class="external-link">there</a>.</p>
 <p>But long story short, this combination of
 <code>with_golem_options</code> &amp;
-<code>golem_opts = list(...)</code> allows you to pass argument to the
+<code>golem_opts = list(...)</code> allows you to pass arguments to the
 function to be used inside the application, from UI or from server side,
 which you can get with <code><a href="../reference/get_golem_options.html">get_golem_options()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -171,23 +169,28 @@ platform you want to run your app on.</p>
 <div class="section level2">
 <h2 id="deploying-apps-with-golem">Deploying Apps with <code>{golem}</code><a class="anchor" aria-label="anchor" href="#deploying-apps-with-golem"></a>
 </h2>
-<p>The <code>dev/03_deploy.R</code> file contains function for deploying
-on various platforms.</p>
+<p>The <code>dev/03_deploy.R</code> file contains functions for
+deployment on various platforms.</p>
 <div class="section level3">
-<h3 id="rstudio-products">RStudio Products<a class="anchor" aria-label="anchor" href="#rstudio-products"></a>
+<h3 id="posit-products">Posit Products<a class="anchor" aria-label="anchor" href="#posit-products"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/rstudio_deploy.html">add_rstudioconnect_file</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/rstudio_deploy.html">add_positconnect_file</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/rstudio_deploy.html">add_shinyappsio_file</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/rstudio_deploy.html">add_shinyserver_file</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>For Git backed deployment on Posit (for <a href="https://docs.posit.co/connect/user/git-backed/#linking-git-to-posit-connect" class="external-link">details</a>
+a <code>manifest.json</code> file is required which can be added (or
+updated) via:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">rsconnect</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/rsconnect/reference/writeManifest.html" class="external-link">writeManifest</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="docker">Docker<a class="anchor" aria-label="anchor" href="#docker"></a>
 </h3>
 <div class="section level4">
-<h4 id="without-using-renv">without using {renv}<a class="anchor" aria-label="anchor" href="#without-using-renv"></a>
+<h4 id="without-using-renv">Without using <code>{renv}</code><a class="anchor" aria-label="anchor" href="#without-using-renv"></a>
 </h4>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If you want to deploy via a generic Dockerfile</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -198,11 +201,8 @@ on various platforms.</p>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_heroku</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="using-renv">using {renv}<a class="anchor" aria-label="anchor" href="#using-renv"></a>
-</h4>
-</div>
-<div class="section level4">
-<h4 id="case-1-you-didnt-use-renv-during-developpment-process">CASE 1 : you didn’t use renv during developpment process<a class="anchor" aria-label="anchor" href="#case-1-you-didnt-use-renv-during-developpment-process"></a>
+<h4 id="using-renv---case-1-you-didnt-use-renv-during-development-process">Using <code>{renv}</code> - CASE 1 : you didn’t use renv during
+development process<a class="anchor" aria-label="anchor" href="#using-renv---case-1-you-didnt-use-renv-during-development-process"></a>
 </h4>
 <blockquote>
 <p>this functions will create a “deploy” folder containing :</p>
@@ -213,16 +213,16 @@ on various platforms.</p>
 +-- yourgolem_0.0.0.9000.tar.gz
 +-- README
 \-- renv.lock.prod</code></pre>
-<p>then follow the README file</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>then follow the <code>README</code> file.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If you want to deploy via a generic Dockerfile</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_with_renv</a></span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"deploy"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># If you want to deploy to ShinyProxy</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_with_renv_shinyproxy</a></span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"deploy"</span><span class="op">)</span></span></code></pre></div>
-<p>If you would like to use {renv} during developpement, you can init a
-renv.lock file with</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p>If you would like to use <a href="https://rstudio.github.io/renv/" class="external-link">renv</a> during development, you
+can init a <code>renv.lock</code> file with</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">attachment</span><span class="fu">::</span><span class="fu"><a href="https://thinkr-open.github.io/attachment/reference/create_renv_for_dev.html" class="external-link">create_renv_for_dev</a></span><span class="op">(</span>dev_pkg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"renv"</span>,</span>
 <span>  <span class="st">"devtools"</span>,</span>
@@ -237,16 +237,16 @@ renv.lock file with</p>
 <span>  <span class="st">"dockerfiler"</span>,</span>
 <span>  <span class="st">"golem"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>an activate {renv} with</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>and activate <a href="https://rstudio.github.io/renv/" class="external-link">renv</a> with</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/activate.html" class="external-link">activate</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="case-2-you-already-have-a-renv-lock-file-for-your-project">CASE 2 : you already have a renv.lock file for your project<a class="anchor" aria-label="anchor" href="#case-2-you-already-have-a-renv-lock-file-for-your-project"></a>
+<h4 id="using-renv---case-2-you-already-have-a-renv-lock-file-for-your-project">Using <code>{renv}</code> - CASE 2: you already have a
+<code>renv.lock</code> file for your project<a class="anchor" aria-label="anchor" href="#using-renv---case-2-you-already-have-a-renv-lock-file-for-your-project"></a>
 </h4>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="co"># If you want to deploy via a generic Dockerfile</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># If you want to deploy via a generic Dockerfile</span></span>
 <span><span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="../reference/dockerfiles.html">add_dockerfile_with_renv</a></span><span class="op">(</span>output_dir <span class="op">=</span> <span class="st">"deploy"</span>, lockfile <span class="op">=</span> <span class="st">"renv.lock"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># If you want to deploy to ShinyProxy</span></span>
@@ -260,7 +260,7 @@ renv.lock file with</p>
 +-- yourgolem_0.0.0.9000.tar.gz
 +-- README
 \-- renv.lock.prod</code></pre>
-<p>then follow the README file</p>
+<p>then follow the <code>README</code> file.</p>
 </div>
 </div>
 </div>
@@ -268,9 +268,7 @@ renv.lock file with</p>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
+      </div>
 
 </div>
 
@@ -278,7 +276,7 @@ renv.lock file with</p>
 
       <footer><div class="thinkr">
   <p></p>
-<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
 <div class="author">
@@ -291,10 +289,10 @@ renv.lock file with</p>
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>

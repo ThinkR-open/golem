@@ -13,9 +13,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A Framework for Robust Shiny Applications">
-<meta property="og:description" content="An opinionated framework for building a production-ready
-    Shiny application. This package contains a series of tools for
-    building a robust Shiny application from start to finish.">
+<meta property="og:description" content="An opinionated framework for building a production-ready Shiny application. This package contains a series of tools for building a robust Shiny application from start to finish.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -39,7 +37,7 @@
 -->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -53,7 +51,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -65,7 +63,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -108,7 +106,7 @@
         <li>
   <a href="https://github.com/ThinkR-open/golem/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -119,7 +117,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="contents col-md-9">
@@ -129,216 +127,122 @@
 <div class="section level1">
 <div class="page-header"><h1 id="golem-">{golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#golem-"></a>
 </h1></div>
-<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> is an opinionated framework for building production-grade shiny applications.</p>
-<div class="section level2">
-<h2 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
-</h2>
-<p>You’re reading the doc about version : 0.4.0</p>
-<p>This README has been compiled on the</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2023-03-10 09:53:27 CET"</span></span></code></pre></div>
-<p>Here are the test &amp; coverage results :</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ℹ Loading golem</span></span>
-<span><span class="co">#&gt; ── R CMD check results ──────────────────────────────────────── golem 0.4.0 ────</span></span>
-<span><span class="co">#&gt; Duration: 1m 23.6s</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">covr</span><span class="fu">::</span><span class="fu"><a href="http://covr.r-lib.org/reference/package_coverage.html" class="external-link">package_coverage</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; golem Coverage: 69.16%</span></span>
-<span><span class="co">#&gt; R/addins.R: 0.00%</span></span>
-<span><span class="co">#&gt; R/bootstrap_rstudio_api.R: 0.00%</span></span>
-<span><span class="co">#&gt; R/enable_roxygenize.R: 0.00%</span></span>
-<span><span class="co">#&gt; R/get_sysreqs.R: 0.00%</span></span>
-<span><span class="co">#&gt; R/gobals.R: 0.00%</span></span>
-<span><span class="co">#&gt; R/run_dev.R: 0.00%</span></span>
-<span><span class="co">#&gt; R/sanity_check.R: 0.00%</span></span>
-<span><span class="co">#&gt; R/use_files.R: 0.00%</span></span>
-<span><span class="co">#&gt; R/with_opt.R: 22.58%</span></span>
-<span><span class="co">#&gt; R/config.R: 28.21%</span></span>
-<span><span class="co">#&gt; R/test_helpers.R: 30.26%</span></span>
-<span><span class="co">#&gt; R/js.R: 43.75%</span></span>
-<span><span class="co">#&gt; R/reload.R: 45.36%</span></span>
-<span><span class="co">#&gt; R/use_recommended.R: 54.55%</span></span>
-<span><span class="co">#&gt; R/bootstrap_desc.R: 55.56%</span></span>
-<span><span class="co">#&gt; R/install_dev_deps.R: 57.14%</span></span>
-<span><span class="co">#&gt; R/utils.R: 58.30%</span></span>
-<span><span class="co">#&gt; R/bootstrap_attachment.R: 61.54%</span></span>
-<span><span class="co">#&gt; R/add_dockerfiles.R: 74.19%</span></span>
-<span><span class="co">#&gt; R/bootstrap_usethis.R: 76.56%</span></span>
-<span><span class="co">#&gt; R/boostrap_fs.R: 77.78%</span></span>
-<span><span class="co">#&gt; R/modules_fn.R: 80.00%</span></span>
-<span><span class="co">#&gt; R/use_utils.R: 83.33%</span></span>
-<span><span class="co">#&gt; R/use_favicon.R: 85.56%</span></span>
-<span><span class="co">#&gt; R/desc.R: 86.25%</span></span>
-<span><span class="co">#&gt; R/add_resource_path.R: 88.89%</span></span>
-<span><span class="co">#&gt; R/create_golem.R: 89.47%</span></span>
-<span><span class="co">#&gt; R/make_dev.R: 90.00%</span></span>
-<span><span class="co">#&gt; R/add_r_files.R: 91.67%</span></span>
-<span><span class="co">#&gt; R/add_files.R: 92.31%</span></span>
-<span><span class="co">#&gt; R/add_rstudio_files.R: 93.10%</span></span>
-<span><span class="co">#&gt; R/golem-yaml-get.R: 93.18%</span></span>
-<span><span class="co">#&gt; R/bootstrap_dockerfiler.R: 93.33%</span></span>
-<span><span class="co">#&gt; R/add_dockerfiles_renv.R: 93.75%</span></span>
-<span><span class="co">#&gt; R/boostrap_cli.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/boostrap_crayon.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/bootstrap_pkgload.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/bootstrap_roxygen2.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/browser_button.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/bundle_resources.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/disable_autoload.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/golem-yaml-set.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/golem-yaml-utils.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/is_running.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/pkg_tools.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/set_golem_options.R: 100.00%</span></span>
-<span><span class="co">#&gt; R/templates.R: 100.00%</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="tool-series">Tool series<a class="anchor" aria-label="anchor" href="#tool-series"></a>
-</h2>
-<p>This package is part of a series of tools for Shiny, which includes:</p>
-<ul>
-<li>
-<a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> - <a href="https://github.com/ThinkR-open/golem" class="external-link uri">https://github.com/ThinkR-open/golem</a>
-</li>
-<li>
-<a href="https://github.com/Thinkr-open/shinipsum" class="external-link">shinipsum</a> - <a href="https://github.com/ThinkR-open/shinipsum" class="external-link uri">https://github.com/ThinkR-open/shinipsum</a>
-</li>
-<li>
-<a href="https://github.com/Thinkr-open/fakir" class="external-link">fakir</a> - <a href="https://github.com/ThinkR-open/fakir" class="external-link uri">https://github.com/ThinkR-open/fakir</a>
-</li>
-<li>
-<code>{gemstones}</code> - <a href="https://github.com/ThinkR-open/gemstones" class="external-link uri">https://github.com/ThinkR-open/gemstones</a>
-</li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>
-</h2>
-<div class="section level3">
-<h3 id="the-book-">The Book :<a class="anchor" aria-label="anchor" href="#the-book-"></a>
-</h3>
-<ul>
-<li><p><a href="https://engineering-shiny.org/" class="external-link uri">https://engineering-shiny.org/</a></p></li>
-<li><p><a href="https://www.routledge.com/Engineering-Production-Grade-Shiny-Apps/Fay-Rochette-Guyader-Girard/p/book/9780367466022" class="external-link">paper version of the book “Engineering Production-Grade Shiny Apps”</a></p></li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="blog-posts-">Blog posts :<a class="anchor" aria-label="anchor" href="#blog-posts-"></a>
-</h3>
-<p><em>Building Big Shiny Apps</em></p>
-<ul>
-<li>Part 1: <a href="https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/" class="external-link uri">https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-1/</a>
-</li>
-<li>Part 2: <a href="https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/" class="external-link uri">https://rtask.thinkr.fr/building-big-shiny-apps-a-workflow-2/</a>
-</li>
-</ul>
-<p><a href="https://towardsdatascience.com/production-grade-r-shiny-with-golem-prototyping-51b03f37c2a9" class="external-link"><em>Make a Fitness App from scratch</em></a></p>
-</div>
-<div class="section level3">
-<h3 id="slide-decks">Slide decks<a class="anchor" aria-label="anchor" href="#slide-decks"></a>
-</h3>
-<ul>
-<li>useR! 2019 : <a href="https://github.com/VincentGuyader/user2019/raw/master/golem_Vincent_Guyader_USER!2019.pdf" class="external-link">A Framework for Building Robust &amp; Production Ready Shiny Apps</a>
-</li>
-<li>ThinkR x RStudio Roadshow,Paris : <a href="https://speakerdeck.com/colinfay/production-grade-shiny-apps-with-golem" class="external-link">Production-grade Shiny Apps with {golem}</a>
-</li>
-<li>rstudio::conf(2020) : <a href="https://speakerdeck.com/colinfay/rstudio-conf-2020-production-grade-shiny-apps-with-golem" class="external-link">Production-grade Shiny Apps with golem</a>
-</li>
-<li>barcelonar (2019-12-03) : <a href="https://www.barcelonar.org/presentations/BarcelonaR_Building_Production_Grade_Shiny_Apps_with_golem.pdf" class="external-link">Engineering Production-Grade Shiny Apps with {golem}</a>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="video">Video<a class="anchor" aria-label="anchor" href="#video"></a>
-</h3>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=OU1-CkSVdTI" class="external-link">{golem} and Effective Shiny Development Methods</a></li>
-<li><a href="https://www.youtube.com/watch?v=3-p9XLvoJV0" class="external-link">Hands-on demonstration of {golem}</a></li>
-<li>useR! 2019 : <a href="https://youtu.be/tCAan6smrjs" class="external-link">A Framework for Building Robust &amp; Production Ready Shiny Apps</a>
-</li>
-<li>🇫🇷 <a href="https://youtu.be/6qI4NzxlAFU" class="external-link">Introduction to {golem}</a>
-</li>
-<li>rstudio::conf(2020) : <a href="https://posit.co/resources/videos/production-grade-shiny-apps-with-golem/" class="external-link">Production-grade Shiny Apps with golem</a>
-</li>
-<li>🇫🇷 Rencontres R 2021 : <a href="https://www.youtube.com/watch?v=0f5Me1PFGDs" class="external-link">Conception d’applications Shiny avec {golem}</a>
-</li>
-<li>🇫🇷 <a href="https://www.youtube.com/watch?v=diCG4t76k78" class="external-link">Déploiement d’une application {shiny} dans docker avec {renv} et {golem}</a>
-</li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="cheatsheet">Cheatsheet<a class="anchor" aria-label="anchor" href="#cheatsheet"></a>
-</h3>
-<ul>
-<li><a href="https://thinkr.fr/golem_cheatsheet_v0.1.pdf" class="external-link">{golem} cheatsheet</a></li>
-</ul>
-</div>
-<div class="section level3">
-<h3 id="examples-apps">Examples apps<a class="anchor" aria-label="anchor" href="#examples-apps"></a>
-</h3>
-<p>These are examples from the community. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of <a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> or <a href="https://shiny.rstudio.com/" class="external-link">shiny</a>.</p>
-<ul>
-<li><a href="https://github.com/seanhardison1/vcrshiny" class="external-link uri">https://github.com/seanhardison1/vcrshiny</a></li>
-<li><a href="https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC" class="external-link uri">https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC</a></li>
-<li><a href="https://github.com/marton-balazs-kovacs/tenzing" class="external-link uri">https://github.com/marton-balazs-kovacs/tenzing</a></li>
-<li><a href="https://github.com/shahreyar-abeer/cranstars" class="external-link uri">https://github.com/shahreyar-abeer/cranstars</a></li>
-</ul>
-<p>You can also find apps at:</p>
-<ul>
-<li><a href="https://connect.thinkr.fr/connect/" class="external-link uri">https://connect.thinkr.fr/connect/</a></li>
-<li><a href="https://github.com/ColinFay/golemexamples" class="external-link uri">https://github.com/ColinFay/golemexamples</a></li>
-</ul>
-</div>
-</div>
+<blockquote>
+<p>You’re reading the doc about version: 0.5.0. Note that <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> follows the <a href="https://semver.org/" class="external-link">semantic versioning</a> scheme.</p>
+</blockquote>
+<p>Production-grade <a href="https://shiny.posit.co/" class="external-link">shiny</a> applications, from creation to deployment.</p>
+<p><a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> is an opinionated framework that sets the standard for building production-grade <a href="https://shiny.posit.co/" class="external-link">shiny</a> applications. It provides a structured environment that enforces best practices, fosters maintainability, and ensures your applications are reliable, and ready for deployment in real-world environments.</p>
+<p>With <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a>, developers can focus on creating high-quality, robust <a href="https://shiny.posit.co/" class="external-link">shiny</a> apps with confidence, knowing that the framework guides them through every step of the development process.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <ul>
 <li>You can install the stable version from CRAN with:</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"golem"</span><span class="op">)</span></span></code></pre></div>
+<!-- --><div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"golem"</span>)</span></code></pre></div>
 <ul>
 <li>You can install the development version from <a href="https://github.com/Thinkr-open/golem" class="external-link">GitHub</a> with:</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Thinkr-open/golem"</span><span class="op">)</span></span></code></pre></div>
+<!-- --><div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># install.packages("remotes")</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"Thinkr-open/golem"</span>) <span class="co"># Stable development version</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># remotes::install_github("Thinkr-open/golem@dev") # Bleeding edge development version</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="launch-the-project">Launch the project<a class="anchor" aria-label="anchor" href="#launch-the-project"></a>
+<h2 id="get-started">Get Started<a class="anchor" aria-label="anchor" href="#get-started"></a>
 </h2>
-<p>Create a new package with the project template:</p>
+<p>Create a new app with the project template from RStudio:</p>
 <p><img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png" width="80%" style="display: block; margin: auto;"></p>
+<p>Or use the <code><a href="reference/create_golem.html">golem::create_golem()</a></code> function:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>golem<span class="sc">::</span><span class="fu">create_golem</span>(<span class="st">"myapp"</span>)</span></code></pre></div>
+<p>See your app in action by running <code><a href="reference/run_dev.html">golem::run_dev()</a></code> function.</p>
+<p>Then, follow the scripts at:</p>
+<ul>
+<li>
+<code>dev/01_start.R</code> to configure your project at launch</li>
+<li>
+<code>dev/02_dev.R</code> for day to day development</li>
+<li>
+<code>dev/03_deploy.R</code> to build the deployment enabler for your app</li>
+</ul>
 </div>
 <div class="section level2">
-<h2 id="step-by-step-guide">Step by step guide<a class="anchor" aria-label="anchor" href="#step-by-step-guide"></a>
+<h2 id="resources">Resources<a class="anchor" aria-label="anchor" href="#resources"></a>
 </h2>
-<p>See full documentation in the {pkgdown} website:</p>
-<p>[CRAN] <a href="https://thinkr-open.github.io/golem/" class="external-link uri">https://thinkr-open.github.io/golem/</a></p>
-<p>[dev] <a href="https://thinkr-open.github.io/golem/dev/" class="external-link uri">https://thinkr-open.github.io/golem/dev/</a></p>
-<p>After project creation, you’ll land on <code>dev/01_start.R</code>. There are also <code>dev/02_dev.R</code> and <code>dev/03_deploy.R</code></p>
-<p>These files are used to keep a track of all the steps you’ll be following while building your app.</p>
-<div class="section level3">
-<h3 id="step-1--getting-started">Step 1 : Getting Started<a class="anchor" aria-label="anchor" href="#step-1--getting-started"></a>
-</h3>
-<p>Read <a href="https://thinkr-open.github.io/golem/articles/a_start.html" class="external-link">the Getting Started</a> Vignette for a detailed walkthrough.</p>
+<p>The <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> package is part of the <a href="https://golemverse.org/" class="external-link"><code>{golemverse}</code></a>, a series of tools for building production <a href="https://shiny.posit.co/" class="external-link">shiny</a> apps.</p>
+<p>A list of various <a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> related resources (tutorials, video, blog post,…) can be found <a href="https://golemverse.org/resources/" class="external-link">here</a>, along with blogposts, and links to other packages of the <code>golemverse</code>.</p>
+<hr>
 </div>
-<div class="section level3">
-<h3 id="step-2--day-to-day-dev">Step 2 : Day to Day Dev<a class="anchor" aria-label="anchor" href="#step-2--day-to-day-dev"></a>
-</h3>
-<p>Read <a href="https://thinkr-open.github.io/golem/articles/b_dev.html" class="external-link">Day to Day Dev</a> Vignette for a detailed walkthrough.</p>
-</div>
-<div class="section level3">
-<h3 id="step-3-deploy">Step 3: deploy<a class="anchor" aria-label="anchor" href="#step-3-deploy"></a>
-</h3>
-<p>Read <a href="https://thinkr-open.github.io/golem/articles/c_deploy.html" class="external-link">Deploying Apps with {golem}</a> Vignette for a detailed walkthrough.</p>
-</div>
+<div class="section level2">
+<h2 id="dev-part">Dev part<a class="anchor" aria-label="anchor" href="#dev-part"></a>
+</h2>
+<p>This <code>README</code> has been compiled on the</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">Sys.time</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt; [1] "2024-08-16 12:38:26 UTC"</span></span></code></pre></div>
+<p>Here are the test &amp; coverage results:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">check</span>(<span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co">#&gt; ℹ Loading golem</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co">#&gt; ── R CMD check results ──────────────────────────────────────── golem 0.5.0 ────</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; Duration: 44.9s</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="st">"NOT_CRAN"</span> <span class="ot">=</span> <span class="cn">TRUE</span>);covr<span class="sc">::</span><span class="fu">package_coverage</span>()</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; golem Coverage: 84.85%</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt; R/boostrap_base.R: 0.00%</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; R/bootstrap_attachment.R: 0.00%</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; R/bootstrap_pkgload.R: 0.00%</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; R/bootstrap_roxygen2.R: 0.00%</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; R/bootstrap_rstudio_api.R: 0.00%</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; R/bootstrap_testthat.R: 0.00%</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; R/bootstrap_dockerfiler.R: 23.33%</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; R/bootstrap_usethis.R: 28.57%</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co">#&gt; R/test_helpers.R: 47.37%</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; R/bootstrap_desc.R: 55.56%</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co">#&gt; R/addins.R: 66.67%</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co">#&gt; R/modules_fn.R: 75.74%</span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co">#&gt; R/after_creation_msg.R: 76.39%</span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="co">#&gt; R/create_golem.R: 77.12%</span></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co">#&gt; R/add_rstudio_files.R: 77.88%</span></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="co">#&gt; R/install_dev_deps.R: 78.26%</span></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a><span class="co">#&gt; R/add_r_files.R: 78.70%</span></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a><span class="co">#&gt; R/config.R: 79.23%</span></span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a><span class="co">#&gt; R/use_files.R: 80.40%</span></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="co">#&gt; R/reload.R: 84.69%</span></span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="co">#&gt; R/disable_autoload.R: 85.00%</span></span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="co">#&gt; R/add_dockerfiles.R: 87.10%</span></span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a><span class="co">#&gt; R/sanity_check.R: 87.18%</span></span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a><span class="co">#&gt; R/make_dev.R: 90.00%</span></span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a><span class="co">#&gt; R/use_favicon.R: 90.32%</span></span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="co">#&gt; R/add_dockerfiles_renv.R: 91.95%</span></span>
+<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a><span class="co">#&gt; R/add_files.R: 93.14%</span></span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="co">#&gt; R/golem-yaml-get.R: 93.18%</span></span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a><span class="co">#&gt; R/js.R: 93.75%</span></span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a><span class="co">#&gt; R/run_dev.R: 95.65%</span></span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a><span class="co">#&gt; R/desc.R: 96.77%</span></span>
+<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="co">#&gt; R/use_recommended.R: 97.37%</span></span>
+<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a><span class="co">#&gt; R/use_utils.R: 97.40%</span></span>
+<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a><span class="co">#&gt; R/utils.R: 99.19%</span></span>
+<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a><span class="co">#&gt; R/add_resource_path.R: 100.00%</span></span>
+<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="co">#&gt; R/boostrap_cli.R: 100.00%</span></span>
+<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a><span class="co">#&gt; R/boostrap_crayon.R: 100.00%</span></span>
+<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a><span class="co">#&gt; R/boostrap_fs.R: 100.00%</span></span>
+<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a><span class="co">#&gt; R/browser_button.R: 100.00%</span></span>
+<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a><span class="co">#&gt; R/bundle_resources.R: 100.00%</span></span>
+<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a><span class="co">#&gt; R/cats.R: 100.00%</span></span>
+<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a><span class="co">#&gt; R/enable_roxygenize.R: 100.00%</span></span>
+<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a><span class="co">#&gt; R/get_sysreqs.R: 100.00%</span></span>
+<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a><span class="co">#&gt; R/globals.R: 100.00%</span></span>
+<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a><span class="co">#&gt; R/golem_welcome_page.R: 100.00%</span></span>
+<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a><span class="co">#&gt; R/golem-yaml-set.R: 100.00%</span></span>
+<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a><span class="co">#&gt; R/golem-yaml-utils.R: 100.00%</span></span>
+<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a><span class="co">#&gt; R/is_golem.R: 100.00%</span></span>
+<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a><span class="co">#&gt; R/is_running.R: 100.00%</span></span>
+<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a><span class="co">#&gt; R/maintenance_page.R: 100.00%</span></span>
+<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a><span class="co">#&gt; R/pkg_tools.R: 100.00%</span></span>
+<span id="cb5-61"><a href="#cb5-61" tabindex="-1"></a><span class="co">#&gt; R/set_golem_options.R: 100.00%</span></span>
+<span id="cb5-62"><a href="#cb5-62" tabindex="-1"></a><span class="co">#&gt; R/templates.R: 100.00%</span></span>
+<span id="cb5-63"><a href="#cb5-63" tabindex="-1"></a><span class="co">#&gt; R/use_readme.R: 100.00%</span></span>
+<span id="cb5-64"><a href="#cb5-64" tabindex="-1"></a><span class="co">#&gt; R/with_opt.R: 100.00%</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="coc">CoC<a class="anchor" aria-label="anchor" href="#coc"></a>
@@ -349,14 +253,13 @@
 <h2 id="note-for-the-contributors">Note for the contributors<a class="anchor" aria-label="anchor" href="#note-for-the-contributors"></a>
 </h2>
 <p>Please style the files according to <code>grkstyle::grk_style_transformer()</code></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># If you work in RStudio</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>styler.addins_style_transformer <span class="op">=</span> <span class="st">"grkstyle::grk_style_transformer()"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># If you work in VSCode</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>languageserver.formatting_style <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">options</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">grkstyle</span><span class="fu">::</span><span class="fu">grk_style_transformer</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># If you work in RStudio</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">styler.addins_style_transformer =</span> <span class="st">"grkstyle::grk_style_transformer()"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># If you work in VSCode</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="fu">options</span>(<span class="at">languageserver.formatting_style =</span> <span class="cf">function</span>(options) {</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  grkstyle<span class="sc">::</span><span class="fu">grk_style_transformer</span>()</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>})</span></code></pre></div>
 </div>
 </div>
 
@@ -414,7 +317,7 @@
 
       <footer><div class="thinkr">
   <p></p>
-<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
 <div class="author">
@@ -427,10 +330,10 @@
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>

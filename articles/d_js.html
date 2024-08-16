@@ -13,8 +13,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="d_js">
-<meta property="og:description" content="golem">
-<meta name="twitter:card" content="summary">
 <!-- mathjax
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 --><!--[if lt IE 9]>
@@ -37,7 +35,7 @@
 -->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -51,7 +49,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">golem</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -63,7 +61,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -106,7 +104,7 @@
         <li>
   <a href="https://github.com/ThinkR-open/golem/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -117,7 +115,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
@@ -125,9 +123,9 @@
       <h1 data-toc-skip>d_js</h1>
                         <h4 data-toc-skip class="author">Colin Fay</h4>
             
-            <h4 data-toc-skip class="date">2023-05-24</h4>
+            <h4 data-toc-skip class="date">2024-08-16</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/HEAD/vignettes/d_js.Rmd" class="external-link"><code>vignettes/d_js.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ThinkR-open/golem/blob/master/vignettes/d_js.Rmd" class="external-link"><code>vignettes/d_js.Rmd</code></a></small>
       <div class="hidden name"><code>d_js.Rmd</code></div>
 
     </div>
@@ -141,7 +139,7 @@ $(document).ready(function () {
 </script><div class="section level2">
 <h2 id="using-golem-js-functions">Using <code>{golem}</code> js functions<a class="anchor" aria-label="anchor" href="#using-golem-js-functions"></a>
 </h2>
-<p><a href="https://github.com/ThinkR-open/golem" class="external-link">golem</a> comes with a series of JavaScript functions that
+<p><a href="https://thinkr-open.github.io/golem/" class="external-link">golem</a> comes with a series of JavaScript functions that
 you can call from the server. These functions are added by default with
 <code><a href="../reference/bundle_resources.html">bundle_resources()</a></code> .</p>
 <p>Then they are called with
@@ -193,7 +191,7 @@ specific element, using the full jQuery selector.</p></li>
 containing <code>'this'</code></p></li>
 </ul>
 <p>Note that in html, tags contains attributes. For example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span> <span class="ot">=</span> <span class="st">"https://thinkr.fr"</span> <span class="er">data-value</span> <span class="ot">=</span> <span class="st">"panel2"</span><span class="kw">&gt;</span>ThinkR<span class="kw">&lt;/a&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href </span><span class="op">=</span> <span class="st">"https://thinkr.fr"</span><span class="ot"> data-value </span><span class="op">=</span> <span class="st">"panel2"</span><span class="dt">&gt;</span>ThinkR<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>contains <code>href</code> &amp; <code>data-value</code>. You can
 refer to these attributes with <code>[]</code> after the tag name.</p>
 <ul>
@@ -208,9 +206,7 @@ refer to these attributes with <code>[]</code> after the tag name.</p>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
+      </div>
 
 </div>
 
@@ -218,7 +214,7 @@ refer to these attributes with <code>[]</code> after the tag name.</p>
 
       <footer><div class="thinkr">
   <p></p>
-<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Developed by Colin Fay, Vincent Guyader, Sébastien Rochette, Cervan Girard.</p>,<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
 <div class="author">
@@ -231,10 +227,10 @@ refer to these attributes with <code>[]</code> after the tag name.</p>
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>
