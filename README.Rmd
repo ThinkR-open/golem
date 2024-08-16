@@ -41,7 +41,11 @@ cat('[![CRAN status](https://www.r-pkg.org/badges/version/golem)](https://cran.r
 
 # {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
-`{golem}` is an opinionated framework for building production-grade shiny applications.
+Production-grade `{shiny}` applications, from creation to deployment.
+
+`{golem}` is an opinionated framework that sets the standard for building production-grade `{shiny}` applications. It provides a structured environment that enforces best practices, fosters maintainability, and ensures your applications are reliable, and ready for deployment in real-world environments.
+
+With `{golem}`, developers can focus on creating high-quality, robust `{shiny}` apps with confidence, knowing that the framework guides them through every step of the development process.
 
 ## Installation
 
@@ -55,73 +59,41 @@ install.packages("golem")
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("Thinkr-open/golem") # very close to CRAN version
-# remotes::install_github("Thinkr-open/golem@dev") # if you like to play
+remotes::install_github("Thinkr-open/golem") # Stable development version
+# remotes::install_github("Thinkr-open/golem@dev") # Bleeding edge development version
 ```
 
-## Resources
+## Get Started
 
-The `{golem}` package is part of the [`{golemverse}`](https://golemverse.org/), a series of tools for Shiny.
-A list of various `{golem}` related resources (tutorials, video, blog post,...) can be found [here](https://golemverse.org/resources/).
-
-
-## Launch the project
-
-Create a new package with the project template:
+Create a new app with the project template from RStudio:
 
 ```{r, echo=FALSE, out.width="80%", eval=TRUE}
 knitr::include_graphics("https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png")
 ```
 
-## Step by step guide
+Or use the `golem::create_golem()` function:
 
-See full documentation in the `{pkgdown}` website:
+``` r
+golem::create_golem("myapp")
+```
 
-[CRAN] <https://thinkr-open.github.io/golem/>
+See your app in action by running `golem::run_dev()` function.
 
-[dev] <https://thinkr-open.github.io/golem/dev/>
+Then, follow the scripts at:
 
-After project creation, you'll land on `dev/01_start.R`. There are also `dev/02_dev.R` and `dev/03_deploy.R`
+- `dev/01_start.R` to configure your project at launch
+- `dev/02_dev.R` for day to day development
+- `dev/03_deploy.R` to build the deployment enabler for your app
 
-These files are used to keep a track of all the steps you'll be following while building your app.
+## Resources
 
-### Step 1 : Getting Started
+The `{golem}` package is part of the [`{golemverse}`](https://golemverse.org/), a series of tools for building production `{shiny}` apps.
 
-Read [the Getting Started](https://thinkr-open.github.io/golem/articles/a_start.html) Vignette for a detailed walkthrough.
+A list of various `{golem}` related resources (tutorials, video, blog post,...) can be found [here](https://golemverse.org/resources/), along with blogposts, and links to other packages of the `golemverse`.
 
-### Step 2 : Day to Day Dev
+---
 
-Read [Day to Day Dev](https://thinkr-open.github.io/golem/articles/b_dev.html) Vignette for a detailed walkthrough.
-
-### Step 3: deploy
-
-Read [Deploying Apps with {golem}](https://thinkr-open.github.io/golem/articles/c_deploy.html) Vignette for a detailed walkthrough.
-
-
-## Tool series
-
-This package is part of a series of tools for Shiny, which includes:
-
--   `{golem}` - <https://github.com/ThinkR-open/golem>
--   `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
--   `{fakir}` - <https://github.com/ThinkR-open/fakir>
--   `{gemstones}` - <https://github.com/ThinkR-open/gemstones>
-
-## Examples apps
-
-These are examples from the community. Please note that they may not necessarily be written in a canonical fashion and may have been written with different versions of `{golem}` or `{shiny}`.
-
-- <https://github.com/seanhardison1/vcrshiny>
-- <https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC>
-- <https://github.com/marton-balazs-kovacs/tenzing>
-- <https://github.com/shahreyar-abeer/cranstars>
-
-You can also find apps at:
-
-- <https://connect.thinkr.fr/connect/>
-- <https://github.com/ColinFay/golemexamples>
-
-## About
+## Dev part
 
 You're reading the doc about version: `r pkgload::pkg_version()`
 
@@ -142,7 +114,7 @@ unloadNamespace("golem")
 ```
 
 ```{r error = TRUE}
-covr::package_coverage()
+Sys.setenv("NOT_CRAN" = TRUE);covr::package_coverage()
 ```
 
 ## CoC
