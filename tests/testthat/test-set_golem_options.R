@@ -12,7 +12,7 @@ test_that("set_golem_options works", {
           golem_wd = ".",
           app_prod = FALSE,
           talkative = FALSE,
-          config_file = golem::get_current_config(".")
+          config_file = get_current_config(".")
         )
         expect_equal(
           get_golem_name(

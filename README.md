@@ -11,8 +11,17 @@ status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/
 
 # {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
-`{golem}` is an opinionated framework for building production-grade
-shiny applications.
+Production-grade `{shiny}` applications, from creation to deployment.
+
+`{golem}` is an opinionated framework that sets the standard for
+building production-grade `{shiny}` applications. It provides a
+structured environment that enforces best practices, fosters
+maintainability, and ensures your applications are reliable, and ready
+for deployment in real-world environments.
+
+With `{golem}`, developers can focus on creating high-quality, robust
+`{shiny}` apps with confidence, knowing that the framework guides them
+through every step of the development process.
 
 ## Installation
 
@@ -28,99 +37,138 @@ shiny applications.
 <!-- -->
 
     # install.packages("remotes")
-    remotes::install_github("Thinkr-open/golem") # very close to CRAN version
-    # remotes::install_github("Thinkr-open/golem@dev") # if you like to play
+    remotes::install_github("Thinkr-open/golem") # Stable development version
+    # remotes::install_github("Thinkr-open/golem@dev") # Bleeding edge development version
+
+## Get Started
+
+Create a new app with the project template from RStudio:
+
+<img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png" width="80%" style="display: block; margin: auto;" />
+
+Or use the `golem::create_golem()` function:
+
+    golem::create_golem("myapp")
+
+See your app in action by running `golem::run_dev()` function.
+
+Then, follow the scripts at:
+
+-   `dev/01_start.R` to configure your project at launch
+-   `dev/02_dev.R` for day to day development
+-   `dev/03_deploy.R` to build the deployment enabler for your app
 
 ## Resources
 
 The `{golem}` package is part of the
-[`{golemverse}`](https://golemverse.org/), a series of tools for Shiny.
+[`{golemverse}`](https://golemverse.org/), a series of tools for
+building production `{shiny}` apps.
+
 A list of various `{golem}` related resources (tutorials, video, blog
-post,…) can be found [here](https://golemverse.org/resources/).
+post,…) can be found [here](https://golemverse.org/resources/), along
+with blogposts, and links to other packages of the `golemverse`.
 
-## Launch the project
+------------------------------------------------------------------------
 
-Create a new package with the project template:
+## Dev part
 
-<img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png" width="80%" style="display: block; margin: auto;" />
-
-## Step by step guide
-
-See full documentation in the `{pkgdown}` website:
-
-\[CRAN\] <https://thinkr-open.github.io/golem/>
-
-\[dev\] <https://thinkr-open.github.io/golem/dev/>
-
-After project creation, you’ll land on `dev/01_start.R`. There are also
-`dev/02_dev.R` and `dev/03_deploy.R`
-
-These files are used to keep a track of all the steps you’ll be
-following while building your app.
-
-### Step 1 : Getting Started
-
-Read [the Getting
-Started](https://thinkr-open.github.io/golem/articles/a_start.html)
-Vignette for a detailed walkthrough.
-
-### Step 2 : Day to Day Dev
-
-Read [Day to Day
-Dev](https://thinkr-open.github.io/golem/articles/b_dev.html) Vignette
-for a detailed walkthrough.
-
-### Step 3: deploy
-
-Read [Deploying Apps with
-{golem}](https://thinkr-open.github.io/golem/articles/c_deploy.html)
-Vignette for a detailed walkthrough.
-
-## Tool series
-
-This package is part of a series of tools for Shiny, which includes:
-
--   `{golem}` - <https://github.com/ThinkR-open/golem>
--   `{shinipsum}` - <https://github.com/ThinkR-open/shinipsum>
--   `{fakir}` - <https://github.com/ThinkR-open/fakir>
--   `{gemstones}` - <https://github.com/ThinkR-open/gemstones>
-
-## Examples apps
-
-These are examples from the community. Please note that they may not
-necessarily be written in a canonical fashion and may have been written
-with different versions of `{golem}` or `{shiny}`.
-
--   <https://github.com/seanhardison1/vcrshiny>
--   <https://github.com/Nottingham-and-Nottinghamshire-ICS/healthcareSPC>
--   <https://github.com/marton-balazs-kovacs/tenzing>
--   <https://github.com/shahreyar-abeer/cranstars>
-
-You can also find apps at:
-
--   <https://connect.thinkr.fr/connect/>
--   <https://github.com/ColinFay/golemexamples>
-
-## About
-
-You’re reading the doc about version: 0.5.2
+You’re reading the doc about version: 0.5.3
 
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-08-08 05:22:21 UTC"
+    #> [1] "2024-08-16 09:03:08 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
-    #> ── R CMD check results ──────────────────────────────────────── golem 0.5.2 ────
-    #> Duration: 47.2s
+    #> ── R CMD check results ──────────────────────────────────────── golem 0.5.3 ────
+    #> Duration: 44s
     #> 
-    #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
+    #> ❯ checking tests ...
+    #>   See below...
+    #> 
+    #> ── Test failures ───────────────────────────────────────────────── testthat ────
+    #> 
+    #> > # This file is part of the standard setup for testthat.
+    #> > # It is recommended that you do not modify it.
+    #> > #
+    #> > # Where should you do additional test configuration?
+    #> > # Learn more about the roles of various files in:
+    #> > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
+    #> > # * https://testthat.r-lib.org/articles/special-files.html
+    #> > 
+    #> > library(testthat)
+    #> > library(golem)
+    #> > 
+    #> > test_check("golem")
+    #> Starting 2 test processes
+    #> [ FAIL 2 | WARN 0 | SKIP 0 | PASS 235 ]
+    #> 
+    #> ══ Failed tests ════════════════════════════════════════════════════════════════
+    #> ── Error ('test-use_utils.R:32:7'): use_utils_ui works ─────────────────────────
+    #> <usethis_error/rlang_error/error/condition>
+    #> Error in `proj_set(".")`: x Path '/tmp/RtmpQVYPK3/file200f24bd2a38/golem.Rcheck/tests/testthat/' does not appear to be inside a project or package.
+    #> i Read more in the help for `usethis::proj_get()`.
+    #> Backtrace:
+    #>      ▆
+    #>   1. ├─withr::with_options(...) at test-use_utils.R:27:3
+    #>   2. │ └─base::force(code)
+    #>   3. └─golem::use_utils_ui(pkg = pkg, with_test = TRUE) at test-use_utils.R:32:7
+    #>   4.   └─golem:::usethis_use_testthat()
+    #>   5.     └─usethis::use_testthat(edition, parallel)
+    #>   6.       └─usethis:::use_testthat_impl(edition, parallel = parallel)
+    #>   7.         └─usethis::use_directory(path("tests", "testthat"))
+    #>   8.           ├─usethis:::create_directory(proj_path(path))
+    #>   9.           │ └─fs::dir_exists(path)
+    #>  10.           │   └─fs::is_dir(path)
+    #>  11.           │     └─fs::file_info(path, follow = follow)
+    #>  12.           │       └─fs::path_expand(path)
+    #>  13.           └─usethis::proj_path(path)
+    #>  14.             ├─fs::path_norm(path(proj_get(), ..., ext = ext))
+    #>  15.             ├─fs::path(proj_get(), ..., ext = ext)
+    #>  16.             └─usethis::proj_get()
+    #>  17.               └─usethis::proj_set(".")
+    #>  18.                 └─usethis:::ui_abort(...)
+    #>  19.                   └─cli::cli_abort(...)
+    #>  20.                     └─rlang::abort(...)
+    #> ── Error ('test-use_utils.R:132:7'): use_utils_ui works ────────────────────────
+    #> <usethis_error/rlang_error/error/condition>
+    #> Error in `proj_set(".")`: x Path '/tmp/RtmpQVYPK3/file200f24bd2a38/golem.Rcheck/tests/testthat/' does not appear to be inside a project or package.
+    #> i Read more in the help for `usethis::proj_get()`.
+    #> Backtrace:
+    #>      ▆
+    #>   1. ├─withr::with_options(...) at test-use_utils.R:127:3
+    #>   2. │ └─base::force(code)
+    #>   3. └─golem::use_utils_server(pkg = pkg, with_test = TRUE) at test-use_utils.R:132:7
+    #>   4.   └─golem:::usethis_use_testthat()
+    #>   5.     └─usethis::use_testthat(edition, parallel)
+    #>   6.       └─usethis:::use_testthat_impl(edition, parallel = parallel)
+    #>   7.         └─usethis::use_directory(path("tests", "testthat"))
+    #>   8.           ├─usethis:::create_directory(proj_path(path))
+    #>   9.           │ └─fs::dir_exists(path)
+    #>  10.           │   └─fs::is_dir(path)
+    #>  11.           │     └─fs::file_info(path, follow = follow)
+    #>  12.           │       └─fs::path_expand(path)
+    #>  13.           └─usethis::proj_path(path)
+    #>  14.             ├─fs::path_norm(path(proj_get(), ..., ext = ext))
+    #>  15.             ├─fs::path(proj_get(), ..., ext = ext)
+    #>  16.             └─usethis::proj_get()
+    #>  17.               └─usethis::proj_set(".")
+    #>  18.                 └─usethis:::ui_abort(...)
+    #>  19.                   └─cli::cli_abort(...)
+    #>  20.                     └─rlang::abort(...)
+    #> 
+    #> [ FAIL 2 | WARN 0 | SKIP 0 | PASS 235 ]
+    #> Error: Test failures
+    #> Execution halted
+    #> 
+    #> 1 error ✖ | 0 warnings ✔ | 0 notes ✔
+    #> Error: R CMD check found ERRORs
 
-    covr::package_coverage()
-    #> golem Coverage: 79.94%
+    Sys.setenv("NOT_CRAN" = TRUE);covr::package_coverage()
+    #> golem Coverage: 79.96%
     #> R/boostrap_base.R: 0.00%
     #> R/bootstrap_attachment.R: 0.00%
     #> R/bootstrap_pkgload.R: 0.00%
@@ -133,7 +181,7 @@ Here are the test & coverage results:
     #> R/bootstrap_desc.R: 55.56%
     #> R/after_creation_msg.R: 59.72%
     #> R/install_dev_deps.R: 60.87%
-    #> R/create_golem.R: 63.76%
+    #> R/create_golem.R: 64.71%
     #> R/addins.R: 66.67%
     #> R/modules_fn.R: 73.76%
     #> R/add_files.R: 77.06%
