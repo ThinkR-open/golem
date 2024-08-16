@@ -39,9 +39,6 @@ expect_shinytaglist <- function(object) {
   invisible(act$val)
 }
 
-
-testthat_expect_snapshot <- testthat::expect_snapshot
-
 #' @export
 #' @rdname testhelpers
 #' @param ui output of an UI function
