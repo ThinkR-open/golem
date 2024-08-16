@@ -10,14 +10,25 @@
 #'
 #'
 #' @return A DataFrame if any of the words has been found.
-sanity_check <- function(pkg = get_golem_wd()) {
+sanity_check <- function(
+  pkg = get_golem_wd()
+) {
   all_R_files <- list.files(
     path = pkg,
     pattern = "\\.R$",
-    recursive = TRUE
+    recursive = TRUE,
+    full.names = TRUE
   )
 
-  to_find <- c("browser()", "#TODO", "#TOFIX", "#BUG", "# TODO", "# TOFIX", "# BUG")
+  to_find <- c(
+    "browser()",
+    "#TODO",
+    "#TOFIX",
+    "#BUG",
+    "# TODO",
+    "# TOFIX",
+    "# BUG"
+  )
 
   source_markers <- data.frame()
 
@@ -38,7 +49,6 @@ sanity_check <- function(pkg = get_golem_wd()) {
       }
     }
   }
-
   if (length(source_markers) > 0) {
     if (
       rlang::is_installed("rstudioapi") &&

@@ -1,7 +1,8 @@
 # Getting the DESCRIPTION file in a data.frame
 daf_desc <- function(
-    path = ".",
-    entry) {
+  path = get_golem_wd(),
+  entry
+) {
   as.character(
     unlist(
       unname(
@@ -28,12 +29,12 @@ daf_desc <- function(
 #' @rdname pkg_tools
 #'
 #' @return The value of the entry in the DESCRIPTION file
-pkg_name <- function(path = ".") {
+pkg_name <- function(path = get_golem_wd()) {
   daf_desc(path, "Package")
 }
 #' @export
 #' @rdname pkg_tools
-pkg_version <- function(path = ".") {
+pkg_version <- function(path = get_golem_wd()) {
   daf_desc(path, "Version")
 }
 #' @export

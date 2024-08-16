@@ -2,8 +2,8 @@
 % Please edit documentation in R/golem-package.R
 \docType{package}
 \name{golem}
-\alias{golem}
 \alias{golem-package}
+\alias{golem}
 \title{A package for building Shiny App}
 \description{
 Read more about building big shiny apps at \url{https://engineering-shiny.org/}.
@@ -11,6 +11,7 @@ Read more about building big shiny apps at \url{https://engineering-shiny.org/}.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://thinkr-open.github.io/golem/}
   \item \url{https://github.com/ThinkR-open/golem}
   \item Report bugs at \url{https://github.com/ThinkR-open/golem/issues}
 }
@@ -32,6 +33,7 @@ Other contributors:
   \item David Granjon \email{dgranjon@ymail.com} [contributor]
   \item Arthur Bréant \email{arthur@thinkr.fr} [contributor]
   \item Antoine Languillaume \email{antoine@thinkr.fr} [contributor]
+  \item Ilya Zarubin \email{zarubin@wiso.uni-koeln.de} [contributor]
   \item ThinkR [copyright holder]
 }
 

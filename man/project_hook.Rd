@@ -10,7 +10,7 @@ project_hook(path, package_name, ...)
 \item{path}{Name of the folder to create the package in.
 This will also be used as the package name.}
 
-\item{package_name}{Package name to use. By default, {golem} uses
+\item{package_name}{Package name to use. By default, \code{{golem}} uses
 \code{basename(path)}. If \code{path == '.'} & \code{package_name} is
 not explicitly set, then \code{basename(getwd())} will be used.}
 

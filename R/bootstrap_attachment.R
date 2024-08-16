@@ -3,7 +3,7 @@
 check_attachment_installed <- function() {
   rlang::check_installed(
     "attachment",
-    version = "0.3.1",
+    version = "0.3.2",
     reason = "to build a Dockerfile."
   )
 }
@@ -16,6 +16,7 @@ attachment_create_renv_for_prod <- function(
   document = FALSE,
   ...
 ) {
+  check_attachment_installed()
   attachment::create_renv_for_prod(
     path = path,
     output = output,

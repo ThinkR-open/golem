@@ -1,78 +1,125 @@
-test_that("config works", {
-  with_dir(pkg, {
-    # We'll try to be sure that
-    # golem_wd: !expr golem::pkg_path()
-    # is kept along the way
-    expect_equal(
-      tail(readLines("inst/golem-config.yml"), 1),
-      "  golem_wd: !expr golem::pkg_path()"
+test_that("config finding works", {
+  run_quietly_in_a_dummy_golem({
+    config <- guess_where_config(
+      path = "."
     )
-    expect_equal(
-      get_golem_name(),
-      fakename
+    expect_exists(
+      config
     )
-    expect_equal(
-      get_golem_version(),
-      "0.0.0.9000"
+    config <- try_user_config_location(
+      pth = "."
     )
-    expect_equal(
-      normalizePath(get_golem_wd(), mustWork = FALSE),
-      normalizePath(pkg, mustWork = FALSE)
+    expect_exists(
+      config
     )
-    amend_golem_config(
-      key = "where",
-      value = "indev"
+    expect_null(
+      try_user_config_location(tempdir())
     )
-    amend_golem_config(
-      key = "where",
-      value = "inprod",
-      config = "production"
+
+    config <- get_current_config(
+      path = "."
     )
-    expect_equal(
-      tail(readLines("inst/golem-config.yml"), 1),
-      "  golem_wd: !expr golem::pkg_path()"
+
+    expect_exists(
+      config
     )
-    expect_equal(
-      config::get("where", file = "inst/golem-config.yml"),
-      "indev"
+
+    unlink(
+      "R/app_config.R",
+      force = TRUE
     )
-    expect_equal(
-      config::get("where", config = "production", file = "inst/golem-config.yml"),
-      "inprod"
+    unlink(
+      "inst/golem-config.yml",
+      force = TRUE
     )
-    where_conf <- withr::with_envvar(
-      c("R_CONFIG_ACTIVE" = "production"),
+    testthat::with_mocked_bindings(
+      guess_where_config = function(...) {
+        return(NULL)
+      },
+      rlang_is_interactive = function(...) {
+        return(FALSE)
+      },
       {
-        config::get("where", file = "inst/golem-config.yml")
+        expect_error(
+          get_current_config()
+        )
+        expect_false(
+          file.exists("R/app_config.R")
+        )
+        expect_false(
+          file.exists("inst/golem-config.yml")
+        )
       }
     )
-    expect_equal(
-      where_conf,
-      "inprod"
+    testthat::with_mocked_bindings(
+      guess_where_config = function(...) {
+        return(NULL)
+      },
+      fs_file_exists = function(...) {
+        return(FALSE)
+      },
+      rlang_is_interactive = function(...) {
+        return(TRUE)
+      },
+      ask_golem_creation_upon_config = function(...) {
+        return(TRUE)
+      },
+      {
+        config <- get_current_config()
+        expect_exists(
+          config
+        )
+      }
     )
-    set_golem_name("plop")
-    expect_equal(
-      get_golem_name(),
-      "plop"
-    )
-    set_golem_name(fakename)
-    set_golem_version("0.0.0.9001")
-    expect_equal(
-      get_golem_version(),
-      "0.0.0.9001"
-    )
-    set_golem_version("0.0.0.9000")
+  })
 
-    set_golem_wd(normalizePath("inst"))
-    expect_equal(
-      normalizePath(get_golem_wd()),
-      normalizePath("inst")
+
+  testthat::with_mocked_bindings(
+    fs_file_exists = function(...) {
+      return(FALSE)
+    },
+    rlang_is_interactive = function(...) {
+      return(TRUE)
+    },
+    ask_golem_creation_upon_config = function(...) {
+      return(FALSE)
+    },
+    {
+      config <- get_current_config()
+
+      expect_null(
+        config
+      )
+    }
+  )
+})
+
+test_that("ask_golem_creation_upon_config works",{
+  testthat::with_mocked_bindings(
+    yesno = paste,{
+      expect_snapshot(
+        ask_golem_creation_upon_config(
+          "/home/golem"
+        )
+      )
+    }
+  )
+})
+
+test_that("change_app_config_name works", {
+  run_quietly_in_a_dummy_golem({
+    change_app_config_name(
+      "new_name",
+      "."
     )
-    set_golem_wd(pkg)
-    # Be sure that after setting the stuff the wd is still here::here()
-    expect_equal(
-      tail(readLines("inst/golem-config.yml"), 1),
-      "  golem_wd: !expr golem::pkg_path()"
+    expect_true(
+      grepl(
+        "new_name",
+        paste(
+          readLines("R/app_config.R"),
+          collapse = " "
+        )
+      )
     )
   })
 })

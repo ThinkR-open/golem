@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: c(
     person("Colin", "Fay", , "contact@colinfay.me", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0001-7343-1846")),
@@ -14,13 +14,14 @@ Authors@R: c(
     person("David", "Granjon", , "dgranjon@ymail.com", role = "ctb"),
     person("Arthur", "Bréant", , "arthur@thinkr.fr", role = "ctb"),
     person("Antoine", "Languillaume", , "antoine@thinkr.fr", role = "ctb"),
+    person("Ilya", "Zarubin", , "zarubin@wiso.uni-koeln.de", role = "ctb"),
     person("ThinkR", role = "cph")
   )
 Description: An opinionated framework for building a production-ready
     'Shiny' application. This package contains a series of tools for
     building a robust 'Shiny' application from start to finish.
 License: MIT + file LICENSE
-URL: https://github.com/ThinkR-open/golem
+URL: https://thinkr-open.github.io/golem/, https://github.com/ThinkR-open/golem
 BugReports: https://github.com/ThinkR-open/golem/issues
 Depends:
     R (>= 3.0)
@@ -34,36 +35,42 @@ Imports:
     utils,
     yaml
 Suggests:
-    covr,
+    attachment (>= 0.3.2),
+    callr,
     cli (>= 2.0.0),
+    covr,
     crayon,
+    desc,
     devtools,
     dockerfiler (>= 0.2.0),
+    fs,
+    httpuv,
     knitr,
-    pkgload,
+    mockery,
     pkgbuild,
     pkgdown,
+    pkgload (>= 1.3.0),
     processx,
     purrr,
     rcmdcheck,
-    roxygen2,
+    remotes,
+    renv,
     rmarkdown,
+    roxygen2,
     rsconnect,
+    rstudioapi,
+    sass,
     spelling,
     stringr,
-    testthat,
+    testthat (>= 3.0.0),
     tools,
-    withr,
-    attachment (>= 0.2.5),
-    renv,
     usethis (>= 1.6.0),
-    fs,
-    rstudioapi,
-    desc
+    withr
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3
+Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2

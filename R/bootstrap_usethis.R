@@ -114,3 +114,14 @@ usethis_use_spell_check <- function(
     error
   )
 }
+
+usethis_use_readme_rmd <- function(
+  open = rlang::is_interactive()
+) {
+  check_usethis_installed(
+    reason = "to create a readme."
+  )
+  usethis::use_readme_rmd(
+    open = open
+  )
+}

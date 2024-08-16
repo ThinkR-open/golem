@@ -1,31 +1,100 @@
+test_that(
+  "add_module works",
+  {
+    run_quietly_in_a_dummy_golem({
+      add_module(
+        "mod1",
+        open = FALSE,
+        pkg = ".",
+        with_test = TRUE
+      )
+      expect_exists(
+        file.path(
+          "R",
+          "mod_mod1.R"
+        )
+      )
+      expect_exists(
+        file.path(
+          "tests",
+          "testthat",
+          "test-mod_mod1.R"
+        )
+      )
+    })
+  }
+)
 
 test_that("use_module_test", {
-  with_dir(pkg, {
-    add_module("mod1", open = FALSE, pkg = pkg)
-    add_module("mod2", open = FALSE, pkg = pkg)
-
-    # Proper module name
-    use_module_test("mod1", pkg = pkg, open = FALSE)
-    expect_true(file.exists("tests/testthat/test-mod_mod1.R"))
-
-    # Non existing module
-    expect_error(
-      use_module_test("phatom", pkg = pkg, open = FALSE),
-      regex = "The module 'phatom' does not exist"
+  run_quietly_in_a_dummy_golem({
+    add_module(
+      "mod1",
+      open = FALSE,
+      pkg = ".",
+      with_test = FALSE
     )
-
-    # Module file passed instead of name
-    use_module_test("mod_mod2.R", pkg = pkg, open = FALSE)
-    expect_true(file.exists("tests/testthat/test-mod_mod2.R"))
-
-    lapply(
-      list.files(pattern = "(^|^test-)mod_mod\\d.R$", recursive = TRUE),
-      remove_file
+    use_module_test(
+      "mod1",
+      pkg = ".",
+      open = FALSE
+    )
+    expect_exists(
+      file.path(
+        "tests",
+        "testthat",
+        "test-mod_mod1.R"
+      )
+    )
+    expect_error(
+      use_module_test(
+        "phatom",
+        pkg = ".",
+        open = FALSE
+      ),
+      regex = "The module 'phatom' does not exist"
     )
   })
 })
 
-test_that("module_fn work", {
+test_that(
+  "module_template works",
+  {
+    module_template(
+      "mod1",
+      path <- tempfile(),
+      export = TRUE,
+      open = FALSE
+    )
+    on.exit({
+      unlink(
+        path,
+        recursive = TRUE,
+        force = TRUE
+      )
+    })
+    mod_read <- paste(
+      readLines(
+        path
+      ),
+      collapse = " "
+    )
+    expect_true(
+      grepl(
+        "mod_mod1",
+        mod_read
+      )
+    )
+    expect_true(
+      grepl(
+        "@export",
+        mod_read
+      )
+    )
+  }
+)
+
+
+test_that("mod_remove work", {
   expect_equal(
     mod_remove("mod_a"),
     "a"

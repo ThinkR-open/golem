@@ -1,12 +1,18 @@
-test_that("bundle_resources works", {
-  withr::with_dir(pkg, {
-    remove_file("inst/app/www/bundle.css")
-    remove_file("inst/app/www/bundle.js")
-    golem::add_css_file("bundle", open = FALSE)
-    golem::add_js_file("bundle", open = FALSE)
+test_that("multiplication works", {
+  run_quietly_in_a_dummy_golem({
+    add_css_file(
+      pkg = ".",
+      "bundle",
+      open = FALSE
+    )
+    add_js_file(
+      pkg = ".",
+      "bundle",
+      open = FALSE
+    )
     res <- bundle_resources(
       path = "inst/app/www",
-      app_title = fakename,
+      app_title = "fakename",
       with_sparkles = TRUE
     )
     expect_equal(

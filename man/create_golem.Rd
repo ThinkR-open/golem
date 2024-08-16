@@ -9,7 +9,7 @@ create_golem(
   check_name = TRUE,
   open = TRUE,
   overwrite = FALSE,
-  package_name = basename(path),
+  package_name = basename(normalizePath(path, mustWork = FALSE)),
   without_comments = FALSE,
   project_hook = golem::project_hook,
   with_git = FALSE,
@@ -27,11 +27,11 @@ correct according to CRAN requirements.}
 
 \item{overwrite}{Boolean. Should the already existing project be overwritten ?}
 
-\item{package_name}{Package name to use. By default, {golem} uses
+\item{package_name}{Package name to use. By default, \code{{golem}} uses
 \code{basename(path)}. If \code{path == '.'} & \code{package_name} is
 not explicitly set, then \code{basename(getwd())} will be used.}
 
-\item{without_comments}{Boolean. Start project without golem comments}
+\item{without_comments}{Boolean. Start project without \code{{golem}} comments}
 
 \item{project_hook}{A function executed as a hook after project
 creation. Can be used to change the default \code{{golem}} structure.

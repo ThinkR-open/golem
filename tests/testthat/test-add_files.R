@@ -1,198 +1,215 @@
-expect_add_file <- function(
+test_already_there_dance <- function(
   fun,
-  ext,
-  pak,
-  fp
+  filename,
+  template
 ) {
-  fun_nms <- deparse(substitute(fun))
-
-  name <- rand_name()
-  # Be sure to remove all files in case there are
-  remove_files("inst/app/www", ext)
-
-  # Checking that check_name_length is throwing an error
-  expect_error(
-    fun(c("a", "b")),
+  testthat::with_mocked_bindings(
+    file_already_there_dance = function(...) {
+      return(TRUE)
+    },
+    {
+      expect_true(
+        fun(
+          filename,
+          open = FALSE
+        )
+      )
+    }
   )
+}
 
-  # Launch the function
-  fun(name, pkg = pak, open = FALSE)
-  if (fun_nms == "add_js_input_binding") {
-    name <- sprintf("input-%s", name)
-  }
-  if (fun_nms == "add_js_output_binding") {
-    name <- sprintf("output-%s", name)
-  }
-  # Test that the file exists
-  expect_exists(
-    file.path(
-      "inst/app/www",
-      paste0(name, ".", ext)
-    )
+test_add_file <- function(
+  fun,
+  file_with_extension,
+  template = function(path, code = "oh no") {
+    write(code, file = path, append = TRUE)
+  },
+  with_template = TRUE,
+  output_suffix = ""
+) {
+  file_sans_extension <- tools::file_path_sans_ext(
+    file_with_extension
   )
-  # Check that the file exsts
-  ff <- list.files("inst/app/www/", pattern = name, full.names = TRUE)
-  expect_equal(tools::file_ext(ff), ext)
-
-  # Check content is not over-added
-  l_ff <- length(readLines(ff))
-  fun(name, pkg = pak, open = FALSE)
-  expect_equal(l_ff, length(readLines(ff)))
-
-  # Try another file in another dir
-  bis <- paste0(name, rand_name())
-  fun(bis, pkg = pak, open = FALSE, dir = normalizePath(fp))
-  expect_exists(normalizePath(fp))
-  ff <- list.files(
-    normalizePath(fp),
-    pattern = bis,
-    full.names = TRUE
-  )
-  expect_equal(tools::file_ext(ff), ext)
-
-  # Check that the extension is removed
-  name <- rand_name()
-  ter <- paste0(name, ".", ext)
+  expect_error(fun())
   fun(
-    ter,
-    pkg = pkg,
+    file_sans_extension,
     open = FALSE
   )
   expect_exists(
-    file.path("inst/app/www")
+    file.path(
+      "inst/app/www",
+      sprintf(
+        "%s%s",
+        output_suffix,
+        file_with_extension
+      )
+    )
   )
-  ff <- list.files(
-    "inst/app/www/",
-    pattern = ter,
-    full.names = TRUE
+  test_already_there_dance(
+    fun,
+    file_sans_extension
   )
-  expect_equal(tools::file_ext(ff), ext)
-
-  # Check content is not over-added
-  l_ff <- length(readLines(ff))
-  fun(name, pkg = pak, open = FALSE)
-  expect_equal(l_ff, length(readLines(ff)))
-
-  remove_files("inst/app/www", ext)
+  if (with_template) {
+    fun(
+      sprintf(
+        "tpl_%s",
+        file_sans_extension
+      ),
+      open = FALSE,
+      template = template
+    )
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        sprintf(
+          "tpl_%s",
+          file_with_extension
+        )
+      )
+    )
+    all_lines <- paste0(
+      readLines(
+        file.path(
+          "inst/app/www",
+          sprintf(
+            "tpl_%s",
+            file_with_extension
+          )
+        )
+      ),
+      collapse = " "
+    )
+    expect_true(
+      grepl(
+        "oh no",
+        all_lines
+      )
+    )
+  }
 }
 
-test_that("add_files", {
-  with_dir(pkg, {
-    expect_add_file(
-      add_css_file,
-      ext = "css",
-      pak = pkg,
-      fp = fp
-    )
-    expect_add_file(
-      add_sass_file,
-      ext = "sass",
-      pak = pkg,
-      fp = fp
-    )
-    expect_add_file(
+test_that("add_file works", {
+  run_quietly_in_a_dummy_golem({
+    test_add_file(
       add_js_file,
-      ext = "js",
-      pak = pkg,
-      fp = fp
+      "add_js_file.js"
     )
-    expect_add_file(
+
+    test_add_file(
       add_js_handler,
-      ext = "js",
-      pak = pkg,
-      fp = fp
+      "add_js_handler.js"
     )
-    expect_add_file(
+
+    test_add_file(
       add_js_input_binding,
-      ext = "js",
-      pak = pkg,
-      fp = fp
+      "add_js_input_binding.js",
+      with_template = FALSE,
+      output_suffix = "input-"
     )
-    expect_add_file(
+
+    test_add_file(
       add_js_output_binding,
-      ext = "js",
-      pak = pkg,
-      fp = fp
+      "add_js_output_binding.js",
+      with_template = FALSE,
+      output_suffix = "output-"
     )
-    expect_add_file(
+
+    test_add_file(
+      add_css_file,
+      "add_css_file.css"
+    )
+
+    test_add_file(
+      add_sass_file,
+      "add_sass_file.sass"
+    )
+
+    test_add_file(
+      add_empty_file,
+      "add_empty_file"
+    )
+
+    add_html_template(
+      open = FALSE
+    )
+
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        "template.html"
+      )
+    )
+    test_already_there_dance(
       add_html_template,
-      ext = "html",
-      pak = pkg,
-      fp = fp
+      "template.html"
     )
-    expect_add_file(
+
+    add_partial_html_template(
+      open = FALSE
+    )
+
+    expect_exists(
+      file.path(
+        "inst/app/www",
+        "partial_template.html"
+      )
+    )
+    test_already_there_dance(
       add_partial_html_template,
-      ext = "html",
-      pak = pkg,
-      fp = fp
+      "partial_template.html"
+    )
+
+    for (
+      file in c(
+        "warn_add_js_file.js",
+        "warn_add_css_file.css",
+        "warn_add_sass_file.sass",
+        "warn_template.html"
+      )
+    ) {
+      expect_warning(
+        add_empty_file(
+          file,
+          open = FALSE
+        )
+      )
+    }
+    res <- expect_warning(
+      add_ui_server_files(
+        pkg = "."
+      )
+    )
+    expect_exists(
+      "inst/app/ui.R"
+    )
+    expect_exists(
+      "inst/app/server.R"
+    )
+    res <- expect_warning(
+      add_ui_server_files(
+        pkg = "."
+      )
     )
   })
 })
 
-test_that("add_ui_server_files", {
-  with_dir(pkg, {
-    remove_file("inst/app/ui.R")
-    remove_file("inst/app/server.R")
-    expect_warning(add_ui_server_files(pkg = pkg))
-    expect_true(file.exists("inst/app/ui.R"))
-    expect_true(file.exists("inst/app/server.R"))
-    script <- list.files("inst/app/", pattern = "ui")
-    expect_equal(tools::file_ext(script), "R")
-    script <- list.files("inst/app/", pattern = "server")
-    expect_equal(tools::file_ext(script), "R")
-
-    # Check content is not over-added
-    l_ui <- length(
-      readLines(
-        list.files(
-          "inst/app/",
-          pattern = "ui",
-          full.names = TRUE
-        )
-      )
-    )
-    l_server <- length(
-      readLines(
-        list.files(
-          "inst/app/",
-          pattern = "server",
-          full.names = TRUE
-        )
-      )
-    )
-    expect_warning(
-      add_ui_server_files(pkg = pkg)
-    )
-    expect_equal(
-      l_ui,
-      length(
-        readLines(
-          list.files(
-            "inst/app/",
-            pattern = "ui",
-            full.names = TRUE
+test_that(
+  "add_empty_file throws a warning if using an extension that is already handled by another function",
+  {
+    run_quietly_in_a_dummy_golem({
+      for (file in c(
+        "add_js_file.js",
+        "add_css_file.css",
+        "add_sass_file.sass",
+        "template.html"
+      )) {
+        expect_warning(
+          add_empty_file(
+            file,
+            open = FALSE
           )
         )
-      )
-    )
-    expect_equal(
-      l_server,
-      length(
-        readLines(
-          list.files(
-            "inst/app/",
-            pattern = "server",
-            full.names = TRUE
-          )
-        )
-      )
-    )
-
-    expect_warning(
-      add_ui_server_files(pkg = pkg)
-    )
-
-    remove_file("inst/app/ui.R")
-    remove_file("inst/app/server.R")
-  })
-})
+      }
+    })
+  }
+)

@@ -3,6 +3,7 @@
 \name{add_fct}
 \alias{add_fct}
 \alias{add_utils}
+\alias{add_r6}
 \title{Add fct_ and utils_ files}
 \usage{
 add_fct(
@@ -15,6 +16,15 @@ add_fct(
 )
 
 add_utils(
+  name,
+  module = NULL,
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE,
+  with_test = FALSE
+)
+
+add_r6(
   name,
   module = NULL,
   pkg = get_golem_wd(),

@@ -1,4 +1,4 @@
-#' Install {golem} dev dependencies
+#' Install `{golem}` dev dependencies
 #'
 #' This function will run rlang::check_installed() on:
 #' + {usethis}
@@ -17,10 +17,11 @@
 #' + {testthat}
 #' + {rstudioapi}
 #'
-#' @param force_install If force_install is installed,
+#' @param force_install If force_install is TRUE,
 #'  then the user is not interactively asked
 #'  to install them.
 #' @param ... further arguments passed to the install function.
+#' @param dev_deps optional character vector of packages to install
 #'
 #' @export
 #'
@@ -31,6 +32,7 @@
 #'
 #' @return Used for side-effects
 install_dev_deps <- function(
+    dev_deps,
     force_install = FALSE,
     ...) {
   if (!force_install) {
@@ -47,7 +49,7 @@ install_dev_deps <- function(
     # want to install, which is what they want
     f <- rlang::check_installed
   } else {
-    # Case 2, the user runs this function with force_install to FALSE
+    # Case 2, the user runs this function with force_install to TRUE
     # At that point, the user probably has pak installed
     # If yes, the installation function
     # will be pak::pkg_install, otherwise
@@ -60,6 +62,11 @@ install_dev_deps <- function(
     }
   }
 
+  if (missing(dev_deps)){
+    dev_deps <- getFromNamespace("dev_deps", "golem")
+  }
+
+
   for (
     pak in dev_deps
   ) {
@@ -68,6 +75,7 @@ install_dev_deps <- function(
     }
   }
 }
+
 
 dev_deps <- unique(
   c(
@@ -79,11 +87,12 @@ dev_deps <- unique(
     "dockerfiler",
     "fs",
     "here",
+    "httpuv",
     "pkgbuild",
     "pkgload",
     "processx",
-    "roxygen2",
     "renv",
+    "roxygen2",
     "rsconnect",
     "rstudioapi",
     "testthat",
@@ -94,7 +103,7 @@ dev_deps <- unique(
 check_dev_deps_are_installed <- function() {
   are_installed <- sapply(
     dev_deps,
-    FUN = rlang::is_installed
+    FUN = rlang_is_installed
   )
   if (!all(are_installed)) {
     message(

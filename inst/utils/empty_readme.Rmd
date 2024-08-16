@@ -1,0 +1,59 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+  knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    fig.path = "man/figures/README-",
+    out.width = "100%%"
+)
+```
+
+# `{%s}`
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+## Installation
+
+You can install the development version of `{%s}` like so:
+
+```{r}
+# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+```
+
+## Run
+
+You can launch the application by running:
+
+```{r, eval = FALSE}
+%s::run_app()
+```
+
+## About
+
+You are reading the doc about version : `r golem::pkg_version()`
+
+This README has been compiled on the
+
+```{r}
+Sys.time()
+```
+
+Here are the tests results and package coverage:
+
+```{r, error = TRUE}
+devtools::check(quiet = TRUE)
+```
+
+```{r echo = FALSE}
+unloadNamespace("%s")
+```
+
+```{r, error = TRUE}
+covr::package_coverage()
+```

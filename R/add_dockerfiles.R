@@ -140,7 +140,8 @@ add_dockerfile_ <- talk_once(
       open = TRUE,
       update_tar_gz = TRUE,
       build_golem_from_source = TRUE,
-      extra_sysreqs = NULL) {
+      extra_sysreqs = NULL
+) {
     where <- fs_path(pkg, output)
 
     usethis_use_build_ignore(
@@ -403,9 +404,10 @@ golem::add_dockerfile_heroku() is not recommended anymore.\nPlease use golem::ad
 )
 
 alert_build <- function(
-    path,
-    output,
-    build_golem_from_source) {
+  path,
+  output,
+  build_golem_from_source
+) {
   cat_created(output, "Dockerfile")
   if (!build_golem_from_source) {
     cat_red_bullet(

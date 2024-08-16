@@ -25,7 +25,8 @@
 #' @param talkative Should the messages be printed to the console?
 #' @param name The name of the app
 #' @param version The version of the app
-#' @param config_file path to the {golem} config file
+#' @param config_file path to the `{golem}` config file
+#' @param old_name The old name of the app, used when changing the name
 #' @inheritParams config::get
 #'
 #' @rdname golem_opts
@@ -68,6 +69,7 @@ set_golem_options <- function(
   # we use the explicit path
 
   set_golem_wd(
+    golem_wd = golem_wd,
     pkg = golem_wd,
     talkative = talkative
   )

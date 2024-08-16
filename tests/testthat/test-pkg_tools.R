@@ -1,11 +1,30 @@
-skip_if_not_installed("pkgload")
-
-test_that("pkgtools works", {
-  withr::with_dir(pkg, {
-    expect_equal(pkgload::pkg_name(), fakename)
-    expect_equal(as.character(pkgload::pkg_version()), "0.0.0.9000")
-    # F-word windows path
-    skip_on_os("windows")
-    expect_equal(pkgload::pkg_path(), pkg)
-  })
-})
+test_that(
+  "daf_desc & pkg works",
+  {
+    run_quietly_in_a_dummy_golem({
+      expect_equal(
+        daf_desc(
+          ".",
+          "Package"
+        ),
+        "shinyexample"
+      )
+      expect_equal(
+        pkg_name(
+          "."
+        ),
+        "shinyexample"
+      )
+      expect_equal(
+        pkg_version(
+          "."
+        ),
+        "0.0.0.9000"
+      )
+      expect_equal(
+        pkg_path(),
+        getwd()
+      )
+    })
+  }
+)

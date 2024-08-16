@@ -1,6 +1,11 @@
 # This file contains all the necessary functions
 # required to manipualte the golem-config file.
 
+add_expr_tag <- function(tag) {
+  attr(tag[[1]], "tag") <- "!expr"
+  tag
+}
+
 # find and tag expressions in a yaml
 # used internally in `amend_golem_config`
 # This is an utilitary function to prevent
@@ -32,10 +37,6 @@ find_and_tag_exprs <- function(conf_path) {
     expr_list
   )
 
-  add_expr_tag <- function(tag) {
-    attr(tag[[1]], "tag") <- "!expr"
-    tag
-  }
   tagged_exprs <- lapply(
     expr_list,
     add_expr_tag
@@ -46,6 +47,8 @@ find_and_tag_exprs <- function(conf_path) {
     tagged_exprs
   )
 }
+
+
 
 #' Amend golem config file
 #'

@@ -183,9 +183,11 @@ golem::fill_desc(
   pkg_name = "golemmetrics", # The Name of the package containing the App
   pkg_title = "A App with Metrics about 'Golem'", # The Title of the package containing the App
   pkg_description = "Read metrics about {golem}.", # The Description of the package containing the App
-  author_first_name = "Colin", # Your First Name
-  author_last_name = "Fay", # Your Last Name
-  author_email = "colin@thinkr.fr", # Your Email
+  authors = person(
+    given = "Colin", # Your First Name
+    family = "Fay", # Your Last Name
+    role = c("cre", "aut"),
+    email = "colin@thinkr.fr"),
   repo_url = NULL, # The URL of the GitHub Repo (optional)
   pkg_version = "0.0.0.9000" # The Version of the package containing the App
 )
@@ -223,7 +225,6 @@ cat_ok()
 
 cli::cat_rule("set_golem_options")
 
-golem::set_golem_options()
 expect_equal(
   golem::get_golem_wd(),
   golem::pkg_path()
@@ -376,7 +377,7 @@ golem::document_and_reload()
 
 usethis::use_dev_package(
   "golem",
-  remotes = "https://github.com/ThinkR-open/golem"
+  remote = "https://github.com/ThinkR-open/golem"
 )
 
 devtools::test()
@@ -390,7 +391,7 @@ remotes::install_local(targz, force = TRUE, upgrade = FALSE)
 
 cat_ok()
 
-golem::add_rstudioconnect_file()
+golem::add_positconnect_file()
 
 golem::add_dockerfile_with_renv(
   repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest",

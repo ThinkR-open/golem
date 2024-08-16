@@ -7,6 +7,7 @@
 \alias{add_js_output_binding}
 \alias{add_css_file}
 \alias{add_sass_file}
+\alias{add_empty_file}
 \alias{add_html_template}
 \alias{add_partial_html_template}
 \alias{add_ui_server_files}
@@ -69,6 +70,16 @@ add_sass_file(
   open = TRUE,
   dir_create = TRUE,
   template = golem::sass_template,
+  ...
+)
+
+add_empty_file(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE,
+  template = golem::empty_template,
   ...
 )
 

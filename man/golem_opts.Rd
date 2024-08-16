@@ -34,7 +34,8 @@ set_golem_wd(
 set_golem_name(
   name = golem::pkg_name(),
   pkg = golem::pkg_path(),
-  talkative = TRUE
+  talkative = TRUE,
+  old_name = golem::pkg_name()
 )
 
 set_golem_version(
@@ -69,6 +70,8 @@ the value of the \code{R_CONFIG_ACTIVE} environment variable
 
 \item{name}{The name of the app}
 
+\item{old_name}{The old name of the app, used when changing the name}
+
 \item{version}{The version of the app}
 
 \item{golem_name}{Name of the current golem.}
@@ -77,7 +80,7 @@ the value of the \code{R_CONFIG_ACTIVE} environment variable
 
 \item{app_prod}{Is the \code{{golem}} in prod mode?}
 
-\item{config_file}{path to the {golem} config file}
+\item{config_file}{path to the \code{{golem}} config file}
 }
 \value{
 Used for side-effects for the setters, and values from the

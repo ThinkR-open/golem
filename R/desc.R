@@ -1,65 +1,103 @@
-#' Fill your description
+#' Fill your `DESCRIPTION` file
+#'
+#' Generates a standard `DESCRIPTION` file as used in R packages. Also sets
+#' a series of global options inside `golem-config.yml` that will be reused
+#' inside `{golem}` (see `set_options` and [set_golem_options()] for details).
 #'
 #' @param pkg_name The name of the package
 #' @param pkg_title The title of the package
 #' @param pkg_description Description of the package
-#' @param author_first_name First Name of the author
-#' @param author_last_name Last Name of the author
-#' @param author_email Email of the author
-#' @param author_orcid ORCID of the author
+#' @param authors a character string (or vector) of class person
+#'    (see [person()] for details)
 #' @param repo_url URL (if needed)
 #' @param pkg_version The version of the package. Default is 0.0.0.9000
 #' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
-#'
+#' @param author_first_name to be deprecated: use character for first name via
+#'    `authors = person(given = "authors_first_name")` instead
+#' @param author_last_name  to be deprecated: use character for last name via
+#'    `authors = person(given = "authors_last_name")` instead
+#' @param author_email to be deprecated: use character for first name via
+#'    `authors = person(email = "author_email")` instead
+#' @param author_orcid to be deprecated
+#' @param set_options logical; the default `TRUE` sets all recommended
+#'    options but this can be suppressed with `FALSE`. For details on the
+#'    exact behaviour see the help [set_golem_options()].
 #'
 #' @export
+#' @importFrom utils person
 #'
-#' @return The {desc} object, invisibly.
+#' @return The `{desc}` object, invisibly.
 fill_desc <- function(
   pkg_name,
   pkg_title,
   pkg_description,
-  author_first_name,
-  author_last_name,
-  author_email,
-  author_orcid = NULL,
+  authors = person(
+    given = NULL,
+    family = NULL,
+    email = NULL,
+    role = NULL,
+    comment = NULL
+  ),
   repo_url = NULL,
   pkg_version = "0.0.0.9000",
-  pkg = get_golem_wd()
+  pkg = get_golem_wd(),
+  author_first_name = NULL,
+  author_last_name = NULL,
+  author_email = NULL,
+  author_orcid = NULL,
+  set_options = TRUE
 ) {
+  stopifnot(`'set_options' must be logical` = is.logical(set_options))
+  stopifnot(`'authors' must be of class 'person'` = inherits(authors, "person"))
+
+  # Handling retrocompatibility
+
+  # Case 1 : old author params are not null
+  any_author_params_is_not_null <- all(
+    vapply(
+      list(
+        author_first_name,
+        author_last_name,
+        author_email,
+        author_orcid
+      ),
+      is.null,
+      logical(1)
+    )
+  )
+
+  if (!any_author_params_is_not_null) {
+    warning("The `author_first_name`, `author_last_name`, `author_email` and `author_orcid` parameters will be deprecated from fill_desc() in the next version of {golem}. \nPlease use the `authors` parameter instead.\nSee ?person for more details on how to use it.")
+    # Case 1.1 : old author params are null and authors is empty
+    if (length(authors) == 0) {
+      # We use the old author params to fill the DESCRIPTION file
+      cli_cli_alert_info(
+        "the `authors` argument is empty, using `author_first_name`, `author_last_name`, `author_email` and `author_orcid` to fill the DESCRIPTION file."
+      )
+      authors <- person(
+        given = author_first_name,
+        family = author_last_name,
+        email = author_email,
+        role = NULL,
+        comment = c(ORCID = author_orcid)
+      )
+    } else {
+      # Case 1.2, old author params are null and authors is not empty
+      # We keep the authors as is
+      cli_cli_alert_info(
+        "the `authors` argument is not empty, using it to fill the DESCRIPTION file, the old author params are ignored."
+      )
+    }
+  }
+  # the else here is the case 2 : old author params are null and authors is set, we keep the authors as is
+
   path <- fs_path_abs(pkg)
 
   desc <- desc_description(
     file = fs_path(path, "DESCRIPTION")
   )
+  desc$set_authors(authors)
 
-  if (!is.null(author_orcid) & !is.character(author_orcid)) {
-    stop("ORCID ID must be provided as a character object")
-  }
-
-
-  if (is.null(author_orcid)) {
-    desc$set(
-      "Authors@R",
-      sprintf(
-        "person('%s', '%s', email = '%s', role = c('cre', 'aut'))",
-        author_first_name,
-        author_last_name,
-        author_email
-      )
-    )
-  } else {
-    desc$set(
-      "Authors@R",
-      sprintf(
-        "person('%s', '%s', email = '%s', role = c('cre', 'aut'), comment = c(ORCID = '%s'))",
-        author_first_name,
-        author_last_name,
-        author_email,
-        author_orcid
-      )
-    )
-  }
   desc$del(
     keys = "Maintainer"
   )
@@ -77,7 +115,10 @@ fill_desc <- function(
     name = pkg_name,
     path = pkg
   )
-  set_golem_name(pkg_name)
+  set_golem_name(
+    pkg_name,
+    pkg = path
+  )
 
   desc$set(
     Title = pkg_title
@@ -112,6 +153,9 @@ fill_desc <- function(
     bullet = "tick",
     bullet_col = "green"
   )
+
+  if (isTRUE(set_options)) set_golem_options()
+
   return(
     invisible(
       desc

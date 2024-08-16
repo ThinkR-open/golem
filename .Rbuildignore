@@ -23,3 +23,5 @@
 ^\.github$
 ^revdep$
 README.html
+^CRAN-SUBMISSION$
+^dev$

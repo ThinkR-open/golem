@@ -10,6 +10,7 @@
 #' @param dir_create Creates the directory if it doesn't exist, default is `TRUE`.
 #' @param fct If specified, creates a `mod_fct` file.
 #' @param utils If specified, creates a `mod_utils` file.
+#' @param r6 If specified, creates a `mod_class` file.
 #' @param js,js_handler If specified, creates a module related JavaScript file.
 #' @param export Should the module be exported? Default is `FALSE`.
 #' @param module_template Function that serves as a module template.
@@ -31,6 +32,7 @@ add_module <- function(
   dir_create = TRUE,
   fct = NULL,
   utils = NULL,
+  r6 = NULL,
   js = NULL,
   js_handler = NULL,
   export = FALSE,
@@ -38,12 +40,23 @@ add_module <- function(
   with_test = FALSE,
   ...
 ) {
-  check_name_length(name)
-  name <- file_path_sans_ext(name)
+  # Let's start with the checks for the validity of the name
+  check_name_length_is_one(name)
+  check_name_syntax(name)
 
+  # We now check that:
+  # - The file name has no "mod_" prefix
+  # - The file name has no extension
+  name <- mod_remove(
+    file_path_sans_ext(name)
+  )
+
+  # Performing the creation inside the pkg root
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
+  # The module creation only works if the R folder
+  # is there
   dir_created <- create_if_needed(
     fs_path(pkg, "R"),
     type = "directory"
@@ -54,17 +67,23 @@ add_module <- function(
     return(invisible(FALSE))
   }
 
+  # Now we build the correct module file name
   where <- fs_path(
     "R",
     paste0("mod_", name, ".R")
   )
 
+  # If the file doesn't exist, we create it
   if (!fs_file_exists(where)) {
     fs_file_create(where)
 
-    module_template(name = name, path = where, export = export, ...)
+    module_template(
+      name = name,
+      path = where,
+      export = export,
+      ...
+    )
 
-    # write_there(" ")
     cat_created(where)
     open_or_go_to(where, open)
   } else {
@@ -74,20 +93,42 @@ add_module <- function(
     )
   }
 
+  # Creating all the files that come with the module
   if (!is.null(fct)) {
-    add_fct(fct, module = name, open = open)
+    add_fct(
+      fct,
+      module = name,
+      open = open
+    )
   }
 
   if (!is.null(utils)) {
-    add_utils(utils, module = name, open = open)
+    add_utils(
+      utils,
+      module =
+        name,
+      open = open
+    )
   }
 
   if (!is.null(js)) {
-    add_js_file(js, pkg = pkg, open = open)
+    add_js_file(
+      js,
+      pkg = pkg,
+      open = open
+    )
   }
 
   if (!is.null(js_handler)) {
-    add_js_handler(js_handler, pkg = pkg, open = open)
+    add_js_handler(
+      js_handler,
+      pkg = pkg,
+      open = open
+    )
+  }
+
+  if (!is.null(r6)) {
+    add_r6(r6, module = name, open = open)
   }
 
   if (with_test) {
@@ -171,7 +212,7 @@ module_template <- function(
   }
   write_there("#'")
   write_there("#' @importFrom shiny NS tagList ")
-  write_there(sprintf("mod_%s_ui <- function(id){", name))
+  write_there(sprintf("mod_%s_ui <- function(id) {", name))
   write_there("  ns <- NS(id)")
   write_there("  tagList(")
   write_there(ph_ui)
@@ -188,7 +229,7 @@ module_template <- function(
     } else {
       write_there("#' @noRd ")
     }
-    write_there(sprintf("mod_%s_server <- function(input, output, session){", name))
+    write_there(sprintf("mod_%s_server <- function(input, output, session) {", name))
     write_there("  ns <- session$ns")
     write_there(ph_server)
     write_there("}")
@@ -209,7 +250,7 @@ module_template <- function(
       write_there("#' @noRd ")
     }
     write_there(sprintf("mod_%s_server <- function(id){", name))
-    write_there("  moduleServer( id, function(input, output, session){")
+    write_there("  moduleServer(id, function(input, output, session){")
     write_there("    ns <- session$ns")
     write_there(ph_server)
     write_there("  })")
@@ -242,7 +283,7 @@ use_module_test <- function(
   # Remove the "mod_" if any
   name <- mod_remove(name)
 
-  if (!is_existing_module(name)) {
+  if (!is_existing_module(name, pkg = pkg)) {
     stop(
       sprintf(
         "The module '%s' does not exist.\nYou can call `golem::add_module('%s')` to create it.",
@@ -338,9 +379,14 @@ use_module_test <- function(
 }
 
 mod_remove <- function(string) {
-  gsub(
-    "^mod_",
-    "",
-    string
-  )
+  while (
+    grepl("^mod_", string)
+  ) {
+    string <- gsub(
+      "^mod_",
+      "",
+      string
+    )
+  }
+  string
 }

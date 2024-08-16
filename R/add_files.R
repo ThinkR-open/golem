@@ -44,7 +44,7 @@ add_js_file <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   name <- file_path_sans_ext(name)
 
@@ -112,7 +112,7 @@ add_js_handler <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   name <- file_path_sans_ext(name)
 
@@ -177,7 +177,7 @@ add_js_input_binding <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   attempt::stop_if(
     length(events$name) == 0,
@@ -319,7 +319,7 @@ add_js_output_binding <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   raw_name <- name
 
@@ -403,7 +403,7 @@ add_css_file <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   name <- file_path_sans_ext(name)
 
@@ -465,7 +465,7 @@ add_sass_file <- function(
     msg = "`name` is required"
   )
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   name <- file_path_sans_ext(name)
 
@@ -521,6 +521,126 @@ add_sass_file <- function(
   }
 }
 
+add_sass_code <- function(where, dir, name) {
+  if (fs_file_exists(where)) {
+    if (fs_file_exists("dev/run_dev.R")) {
+      lines <- readLines("dev/run_dev.R")
+      new_lines <- append(
+        x = lines,
+        values = c(
+          "# Sass code compilation",
+          sprintf(
+            'sass::sass(input = sass::sass_file("%s/%s.sass"), output = "%s/%s.css", cache = NULL)',
+            dir,
+            name,
+            dir,
+            name
+          ),
+          ""
+        ),
+        after = 0
+      )
+      writeLines(
+        text = new_lines,
+        con = "dev/run_dev.R"
+      )
+
+      cat_green_tick(
+        "Code added in run_dev.R to compile your Sass file to CSS file."
+      )
+    }
+  }
+}
+
+#' @export
+#' @rdname add_files
+#' @importFrom tools file_ext
+add_empty_file <- function(
+  name,
+  pkg = get_golem_wd(),
+  dir = "inst/app/www",
+  open = TRUE,
+  dir_create = TRUE,
+  template = golem::empty_template,
+  ...
+) {
+  attempt::stop_if(
+    missing(name),
+    msg = "`name` is required"
+  )
+
+  check_name_length_is_one(name)
+
+  extension <- file_ext(name)
+
+  if (extension == "js") {
+    warning("We've noticed you are trying to create a .js file. \nYou may want to use `add_js_file()` in future calls.")
+  }
+  if (extension == "css") {
+    warning("We've noticed you are trying to create a .css file. \nYou may want to use `add_css_file()` in future calls.")
+  }
+  if (extension == "sass") {
+    warning("We've noticed you are trying to create a .sass file. \nYou may want to use `add_sass_file()` in future calls.")
+  }
+  if (extension == "html") {
+    warning("We've noticed you are trying to create a .html file. \nYou may want to use `add_html_template()` in future calls.")
+  }
+
+  name <- file_path_sans_ext(name)
+
+  old <- setwd(fs_path_abs(pkg))
+  on.exit(setwd(old))
+
+  dir_created <- create_if_needed(
+    dir,
+    type = "directory"
+  )
+
+  if (!dir_created) {
+    cat_dir_necessary()
+    return(invisible(FALSE))
+  }
+
+  dir <- fs_path_abs(dir)
+
+  if (extension != "") {
+    where <- fs_path(
+      dir,
+      sprintf(
+        "%s.%s",
+        name,
+        extension
+      )
+    )
+  } else {
+    where <- fs_path(
+      dir,
+      sprintf(
+        "%s",
+        name
+      )
+    )
+  }
+
+  if (!fs_file_exists(where)) {
+    fs_file_create(where)
+    template(path = where, ...)
+    file_created_dance(
+      where,
+      after_creation_message_generic,
+      pkg,
+      dir,
+      name,
+      open
+    )
+  } else {
+    file_already_there_dance(
+      where = where,
+      open_file = open
+    )
+  }
+}
+
 #' @export
 #' @rdname add_files
 add_html_template <- function(
@@ -532,7 +652,7 @@ add_html_template <- function(
 ) {
   name <- file_path_sans_ext(name)
 
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
@@ -601,7 +721,7 @@ add_partial_html_template <- function(
   dir_create = TRUE
 ) {
   name <- file_path_sans_ext(name)
-  check_name_length(name)
+  check_name_length_is_one(name)
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))

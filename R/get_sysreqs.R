@@ -1,11 +1,9 @@
-# Now in {dockerfiler}
+# Now in `{dockerfiler}`
 
 #' Get system requirements (Deprecated)
 #'
-#' This function retrieves information about the
-#' system requirements using the <https://sysreqs.r-hub.io>
-#' API. This function is now deprecated, and was moved to
-#' {dockerfiler}.
+#' This function is now deprecated, and was moved to
+#' `{dockerfiler}`.
 #'
 #' @param packages character vector. Packages names.
 #' @param batch_n numeric. Number of simultaneous packages to ask.

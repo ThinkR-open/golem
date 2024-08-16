@@ -30,7 +30,40 @@ replace_package_name <- function(
   }
 }
 
+copy_golem_skeleton_and_replace_name <- function(
+  path_to_golem,
+  package_name
+){
+    cli_cat_rule("Copying package skeleton")
+    from <- golem_sys("shinyexample")
 
+    # Copy over whole directory
+    fs_dir_copy(
+      path = from,
+      new_path = path_to_golem,
+      overwrite = TRUE
+    )
+
+    # Listing copied files ***from source directory***
+    copied_files <- list.files(
+      path = from,
+      full.names = FALSE,
+      all.files = TRUE,
+      recursive = TRUE
+    )
+
+    replace_package_name(
+      copied_files,
+      package_name,
+      path_to_golem
+    )
+    cat_green_tick("Copied app skeleton")
+}
+
+# For mocking in tests
+here_set_here <- function(...){
+  here::set_here(...)
+}
 
 #' Create a package for a Shiny App using `{golem}`
 #'
@@ -40,10 +73,10 @@ replace_package_name <- function(
 #'     correct according to CRAN requirements.
 #' @param open Boolean. Open the created project?
 #' @param overwrite Boolean. Should the already existing project be overwritten ?
-#' @param package_name Package name to use. By default, {golem} uses
+#' @param package_name Package name to use. By default, `{golem}` uses
 #'     `basename(path)`. If `path == '.'` & `package_name` is
 #'     not explicitly set, then `basename(getwd())` will be used.
-#' @param without_comments Boolean. Start project without golem comments
+#' @param without_comments Boolean. Start project without `{golem}` comments
 #' @param project_hook A function executed as a hook after project
 #'     creation. Can be used to change the default `{golem}` structure.
 #'     to override the files and content. This function is executed just
@@ -66,7 +99,7 @@ create_golem <- function(
   check_name = TRUE,
   open = TRUE,
   overwrite = FALSE,
-  package_name = basename(path),
+  package_name = basename(normalizePath(path, mustWork = FALSE)),
   without_comments = FALSE,
   project_hook = golem::project_hook,
   with_git = FALSE,
@@ -113,37 +146,15 @@ create_golem <- function(
       open = FALSE
     )
     if (!file.exists(".here")) {
-      here::set_here(path_to_golem)
+      here_set_here(path_to_golem)
     }
     cat_green_tick("Created package directory")
   }
 
-
-  cli_cat_rule("Copying package skeleton")
-  from <- golem_sys("shinyexample")
-
-  # Copy over whole directory
-  fs_dir_copy(
-    path = from,
-    new_path = path_to_golem,
-    overwrite = TRUE
+  copy_golem_skeleton_and_replace_name(
+    path_to_golem,
+    package_name
   )
-
-  # Listing copied files ***from source directory***
-  copied_files <- list.files(
-    path = from,
-    full.names = FALSE,
-    all.files = TRUE,
-    recursive = TRUE
-  )
-
-  replace_package_name(
-    copied_files,
-    package_name,
-    path_to_golem
-  )
-
-  cat_green_tick("Copied app skeleton")
 
   old <- setwd(path_to_golem)
 
@@ -194,30 +205,15 @@ create_golem <- function(
     }
   }
 
+  # lets not use latest deps for now
 
-  old <- setwd(path_to_golem)
+  # old <- setwd(path_to_golem)
 
-  if (!requireNamespace("desc", quietly = TRUE)) {
-    check_desc_installed()
-  } # incase of {desc} not installed by {usethis}
+  # if (!requireNamespace("desc", quietly = TRUE)) {
+  #   check_desc_installed()
+  # } # incase of {desc} not installed by {usethis}
 
-  usethis_use_latest_dependencies()
-
-  # No .Rprofile for now
-  # cli_cat_rule("Appending .Rprofile")
-  # write("# Sourcing user .Rprofile if it exists ", ".Rprofile", append = TRUE)
-  # write("home_profile <- file.path(", ".Rprofile", append = TRUE)
-  # write("  Sys.getenv(\"HOME\"), ", ".Rprofile", append = TRUE)
-  # write("  \".Rprofile\"", ".Rprofile", append = TRUE)
-  # write(")", ".Rprofile", append = TRUE)
-  # write("if (file.exists(home_profile)){", ".Rprofile", append = TRUE)
-  # write("  source(home_profile)", ".Rprofile", append = TRUE)
-  # write("}", ".Rprofile", append = TRUE)
-  # write("rm(home_profile)", ".Rprofile", append = TRUE)
-  #
-  # write("# Setting shiny.autoload.r to FALSE ", ".Rprofile", append = TRUE)
-  # write("options(shiny.autoload.r = FALSE)", ".Rprofile", append = TRUE)
-  # cat_green_tick("Appended")
+  # usethis_use_latest_dependencies()
 
   setwd(old)
 

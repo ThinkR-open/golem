@@ -1,0 +1,48 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+
+# Controls when the action will run: for now dev and master
+on:
+  push:
+    branches: [main, master, dev,test-for-gh]
+
+name: render-rmarkdown
+
+jobs:
+  render-rmarkdown:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    # Checks-out golem repo so the job can access it
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: r-lib/actions/setup-pandoc@v2
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+    # install linux packages
+      - name: install linux packages
+        run: sudo apt-get install -y libgit2-dev
+    # install CRAN packages used inside README.Rmd
+      - name: install required packages
+        run: Rscript -e 'install.packages("remotes");remotes::install_cran(c("rmarkdown", "covr", "gert",  "knitr", "devtools", "desc"), repos = "https://packagemanager.posit.co/cran/__linux__/jammy/latest")'
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rcmdcheck
+          needs: check
+
+    # Render READEME.md using rmarkdown
+      - name: render README
+        run: Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'
+      - name: Commit Results
+        run: |
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git add README.md DESCRIPTION
+          git commit -m "Re-build README.md" || echo "No changes to commit"
+          git push origin || echo "No changes to commit"

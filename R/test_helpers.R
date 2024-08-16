@@ -62,7 +62,7 @@ expect_html_equal <- function(
     )
   }
 
-  testthat::expect_snapshot(
+  testthat_expect_snapshot(
     x = ui,
     ...
   )
@@ -86,7 +86,7 @@ expect_running <- function(
   testthat::skip_on_cran()
 
   # Ok for now we'll get back to this
-  testthat::skip_if_not(interactive())
+  testthat::skip_if_not(rlang_is_interactive())
 
   # Oh boy using testthat and processx is a mess
   #
@@ -195,3 +195,5 @@ expect_running <- function(
   testthat::expect_true(shinyproc$is_alive())
   shinyproc$kill()
 }
+
+

@@ -17,8 +17,6 @@ get_sysreqs(packages, quiet = TRUE, batch_n = 30)
 A vector of system requirements.
 }
 \description{
-This function retrieves information about the
-system requirements using the \url{https://sysreqs.r-hub.io}
-API. This function is now deprecated, and was moved to
-{dockerfiler}.
+This function is now deprecated, and was moved to
+\code{{dockerfiler}}.
 }

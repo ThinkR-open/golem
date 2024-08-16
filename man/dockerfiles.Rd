@@ -57,7 +57,7 @@ add_dockerfile_heroku(
 )
 
 add_dockerfile_with_renv(
-  source_folder = ".",
+  source_folder = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
@@ -73,11 +73,12 @@ add_dockerfile_with_renv(
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
   dockerfile_cmd = NULL,
+  user = "rstudio",
   ...
 )
 
 add_dockerfile_with_renv_shinyproxy(
-  source_folder = ".",
+  source_folder = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
@@ -90,11 +91,12 @@ add_dockerfile_with_renv_shinyproxy(
   open = TRUE,
   document = TRUE,
   update_tar_gz = TRUE,
+  user = "rstudio",
   ...
 )
 
 add_dockerfile_with_renv_heroku(
-  source_folder = ".",
+  source_folder = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
@@ -106,6 +108,7 @@ add_dockerfile_with_renv_heroku(
   extra_sysreqs = NULL,
   open = TRUE,
   document = TRUE,
+  user = "rstudio",
   update_tar_gz = TRUE,
   ...
 )
@@ -151,9 +154,9 @@ the Dockerfile directly mount the source folder.}
 \item{extra_sysreqs}{character vector. Extra debian system requirements.}
 
 \item{source_folder}{path to the Package/golem source folder to deploy.
-default is current folder '.'}
+default is retrieved via \code{\link[=get_golem_wd]{get_golem_wd()}}.}
 
-\item{lockfile}{path to the renv.lock file to use. default is \code{NULL}}
+\item{lockfile}{path to the renv.lock file to use. default is \code{NULL}.}
 
 \item{output_dir}{folder to export everything deployment related.}
 
@@ -163,9 +166,11 @@ See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
 \item{document}{boolean. If TRUE (by default), DESCRIPTION file is updated using \code{\link[attachment:att_amend_desc]{attachment::att_amend_desc()}} before creating the renv.lock file}
 
 \item{dockerfile_cmd}{What is the CMD to add to the Dockerfile. If NULL, the default,
-the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}');library(\{appname\});\{appname\}::run_app()\\}}
+the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}');library(\{appname\});\{appname\}::run_app()\\}.}
 
-\item{...}{Other arguments to pass to \code{\link[renv:snapshot]{renv::snapshot()}}}
+\item{user}{Name of the user to specify in the Dockerfile with the USER instruction. Default is \code{rstudio}, if set to \code{NULL} no the user from the FROM image is used.}
+
+\item{...}{Other arguments to pass to \code{\link[renv:snapshot]{renv::snapshot()}}.}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.

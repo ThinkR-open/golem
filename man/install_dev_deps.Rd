@@ -2,12 +2,14 @@
 % Please edit documentation in R/install_dev_deps.R
 \name{install_dev_deps}
 \alias{install_dev_deps}
-\title{Install {golem} dev dependencies}
+\title{Install \code{{golem}} dev dependencies}
 \usage{
-install_dev_deps(force_install = FALSE, ...)
+install_dev_deps(dev_deps, force_install = FALSE, ...)
 }
 \arguments{
-\item{force_install}{If force_install is installed,
+\item{dev_deps}{optional character vector of packages to install}
+
+\item{force_install}{If force_install is TRUE,
 then the user is not interactively asked
 to install them.}
 

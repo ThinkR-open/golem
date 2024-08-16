@@ -25,7 +25,8 @@ knitr::opts_chunk$set(
 
 ## About the `run_app()` function
 
-When launching the app, you might have noticed that the `dev/run_dev.R` function calls `run_app()`, which has the following structure:
+When launching the app, you might have noticed that the `dev/run_dev.R` function
+calls `run_app()`, which has the following structure:
 
 ```{r}
 run_app <- function(...) {
@@ -39,9 +40,14 @@ run_app <- function(...) {
 }
 ```
 
-This function might looks a little bit weird, but there's a long story behind it, and you can read more about it [there](https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/).
+This function might look a little bit weird, but there's a long story behind
+it, and you can read more about it
+[there](https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/).
 
-But long story short, this combination of `with_golem_options` & `golem_opts = list(...)` allows you to pass argument to the function to be used inside the application, from UI or from server side, which you can get with `get_golem_options()`.
+But long story short, this combination of `with_golem_options` & `golem_opts =
+list(...)` allows you to pass arguments to the function to be used inside the
+application, from UI or from server side, which you can get with
+`get_golem_options()`.
 
 ```{r}
 run_app(this = "that")
@@ -49,26 +55,30 @@ run_app(this = "that")
 this <- get_golem_options("this")
 ```
 
-The idea is to provide more flexibility for deployment on each platform you want to run your app on.
+The idea is to provide more flexibility for deployment on each platform you want
+to run your app on.
 
 ## Deploying Apps with `{golem}`
 
-The `dev/03_deploy.R` file contains function for deploying on various platforms. 
+The `dev/03_deploy.R` file contains functions for deployment on various platforms. 
 
-### RStudio Products
+### Posit Products
 
 ```{r}
-golem::add_rstudioconnect_file()
+golem::add_positconnect_file()
 golem::add_shinyappsio_file()
 golem::add_shinyserver_file()
 ```
 
+For Git backed deployment on Posit (for [details](https://docs.posit.co/connect/user/git-backed/#linking-git-to-posit-connect)
+a `manifest.json` file is required which can be added (or updated) via:
+```{r}
+rsconnect::writeManifest()
+```
 
 ### Docker 
 
-#### without using {renv}
-
-
+#### Without using `{renv}`
 
 ```{r}
 # If you want to deploy via a generic Dockerfile
@@ -81,10 +91,7 @@ golem::add_dockerfile_shinyproxy()
 golem::add_dockerfile_heroku()
 ```
 
-#### using {renv}
-
-
-#### CASE 1 : you didn't use renv during developpment process
+#### Using `{renv}` - CASE 1 : you didn't use renv during development process
 
 
 > this functions will create a "deploy" folder containing : 
@@ -98,8 +105,7 @@ deploy/
 \-- renv.lock.prod
 ```
 
-then follow the README file
-
+then follow the `README` file.
 
 ```{r}
 # If you want to deploy via a generic Dockerfile
@@ -109,7 +115,8 @@ golem::add_dockerfile_with_renv(output_dir = "deploy")
 golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy")
 ```
 
-If you would like to use {renv} during developpement, you can init a renv.lock file with
+If you would like to use `{renv}` during development, you can init a 
+`renv.lock` file with
 
 ```{r}
 attachment::create_renv_for_dev(dev_pkg = c(
@@ -127,21 +134,17 @@ attachment::create_renv_for_dev(dev_pkg = c(
   "golem"
 ))
 ```
-an activate {renv} with
+
+and activate `{renv}` with
 
 ```{r}
 renv::activate()
 ```
 
 
-
-
-
-#### CASE 2 : you already have a renv.lock file for your project
-
+#### Using `{renv}` - CASE 2: you already have a `renv.lock` file for your project
 
 ```{r}
-
 # If you want to deploy via a generic Dockerfile
 golem::add_dockerfile_with_renv(output_dir = "deploy", lockfile = "renv.lock")
 
@@ -160,4 +163,4 @@ deploy/
 \-- renv.lock.prod
 ```
 
-then follow the README file
+then follow the `README` file.

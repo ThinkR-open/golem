@@ -2,15 +2,56 @@
 % Please edit documentation in R/config.R
 \name{get_current_config}
 \alias{get_current_config}
-\title{Get the path to the current config File}
+\title{Return path to the \code{{golem}} config-file}
 \usage{
 get_current_config(path = getwd())
 }
 \arguments{
-\item{path}{Path to start looking for the config}
+\item{path}{character string giving the path to start looking for the config;
+the usual value is the \code{{golem}}-package top-level directory but a user
+supplied config is now supported (see \strong{Details} for how to use this
+feature).}
+}
+\value{
+character string giving the path to the \code{{golem}} config-file
 }
 \description{
-This function tries to guess where the golem-config file is located.
-If it can't find it, this function asks the
-user if they want to set the golem skeleton.
+This function tries to find the path to the \code{{golem}} config-file currently
+used. If the config-file is not found, the user is asked if they want to set parts
+of the \code{{golem}} skeleton. This includes default versions of "R/app_config"
+and "inst/golem-config.yml" (assuming that the user tries to convert the
+directory to a \code{{golem}} based shiny App).
+}
+\details{
+In most cases this function simply returns the path to the default
+golem-config file located under "inst/golem-config.yml". That config comes
+in \code{yml}-format, see the \href{https://engineering-shiny.org/golem.html?q=config#golem-config}{Engineering Production-Grade Shiny Apps}
+for further details on its format and how to set options therein.
+
+Advanced app developers may benefit from having an additional user
+config-file. This is achieved by copying the file to the new location and
+setting a new path pointing to this file. The path is altered inside the
+\code{app_sys()}-call of the file "R/app_config.R" to point to the (relative to
+\verb{inst/}) location of the user-config i.e. change
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# Modify this if your config file is somewhere else
+file = app_sys("golem-config.yml")
+}\if{html}{\out{</div>}}
+
+to
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# Modify this if your config file is somewhere else
+file = app_sys("configs/user-golem-config.yml")
+}\if{html}{\out{</div>}}
+
+\strong{NOTE}
+\itemize{
+\item the path to the config is changed relative to \strong{\emph{inst/}} from
+\strong{\emph{inst/golem-config.yml}} to \strong{\emph{inst/configs/user-golem-config.yml}}
+\item if both, the default config \strong{\emph{and}} user config files exists (and the
+path is set correctly for the latter), an error is thrown due to ambiguity:
+in this case simply rename/delete the default config or change the entry in
+"R/app_config.R" back to \code{app_sys("golem-config.yml")} to point to the
+default location
+}
 }
