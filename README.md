@@ -72,123 +72,59 @@ with blogposts, and links to other packages of the `golemverse`.
 
 ## Dev part
 
-You’re reading the doc about version: 0.5.3
+You’re reading the doc about version: 0.5.0
 
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-08-16 09:03:08 UTC"
+    #> [1] "2024-08-16 09:12:32 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
-    #> ── R CMD check results ──────────────────────────────────────── golem 0.5.3 ────
-    #> Duration: 44s
+    #> ── R CMD check results ──────────────────────────────────────── golem 0.5.0 ────
+    #> Duration: 3.4s
     #> 
-    #> ❯ checking tests ...
+    #> ❯ checking whether package ‘golem’ can be installed ... ERROR
     #>   See below...
     #> 
-    #> ── Test failures ───────────────────────────────────────────────── testthat ────
+    #> ── Install failure ─────────────────────────────────────────────────────────────
     #> 
-    #> > # This file is part of the standard setup for testthat.
-    #> > # It is recommended that you do not modify it.
-    #> > #
-    #> > # Where should you do additional test configuration?
-    #> > # Learn more about the roles of various files in:
-    #> > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
-    #> > # * https://testthat.r-lib.org/articles/special-files.html
-    #> > 
-    #> > library(testthat)
-    #> > library(golem)
-    #> > 
-    #> > test_check("golem")
-    #> Starting 2 test processes
-    #> [ FAIL 2 | WARN 0 | SKIP 0 | PASS 235 ]
-    #> 
-    #> ══ Failed tests ════════════════════════════════════════════════════════════════
-    #> ── Error ('test-use_utils.R:32:7'): use_utils_ui works ─────────────────────────
-    #> <usethis_error/rlang_error/error/condition>
-    #> Error in `proj_set(".")`: x Path '/tmp/RtmpQVYPK3/file200f24bd2a38/golem.Rcheck/tests/testthat/' does not appear to be inside a project or package.
-    #> i Read more in the help for `usethis::proj_get()`.
-    #> Backtrace:
-    #>      ▆
-    #>   1. ├─withr::with_options(...) at test-use_utils.R:27:3
-    #>   2. │ └─base::force(code)
-    #>   3. └─golem::use_utils_ui(pkg = pkg, with_test = TRUE) at test-use_utils.R:32:7
-    #>   4.   └─golem:::usethis_use_testthat()
-    #>   5.     └─usethis::use_testthat(edition, parallel)
-    #>   6.       └─usethis:::use_testthat_impl(edition, parallel = parallel)
-    #>   7.         └─usethis::use_directory(path("tests", "testthat"))
-    #>   8.           ├─usethis:::create_directory(proj_path(path))
-    #>   9.           │ └─fs::dir_exists(path)
-    #>  10.           │   └─fs::is_dir(path)
-    #>  11.           │     └─fs::file_info(path, follow = follow)
-    #>  12.           │       └─fs::path_expand(path)
-    #>  13.           └─usethis::proj_path(path)
-    #>  14.             ├─fs::path_norm(path(proj_get(), ..., ext = ext))
-    #>  15.             ├─fs::path(proj_get(), ..., ext = ext)
-    #>  16.             └─usethis::proj_get()
-    #>  17.               └─usethis::proj_set(".")
-    #>  18.                 └─usethis:::ui_abort(...)
-    #>  19.                   └─cli::cli_abort(...)
-    #>  20.                     └─rlang::abort(...)
-    #> ── Error ('test-use_utils.R:132:7'): use_utils_ui works ────────────────────────
-    #> <usethis_error/rlang_error/error/condition>
-    #> Error in `proj_set(".")`: x Path '/tmp/RtmpQVYPK3/file200f24bd2a38/golem.Rcheck/tests/testthat/' does not appear to be inside a project or package.
-    #> i Read more in the help for `usethis::proj_get()`.
-    #> Backtrace:
-    #>      ▆
-    #>   1. ├─withr::with_options(...) at test-use_utils.R:127:3
-    #>   2. │ └─base::force(code)
-    #>   3. └─golem::use_utils_server(pkg = pkg, with_test = TRUE) at test-use_utils.R:132:7
-    #>   4.   └─golem:::usethis_use_testthat()
-    #>   5.     └─usethis::use_testthat(edition, parallel)
-    #>   6.       └─usethis:::use_testthat_impl(edition, parallel = parallel)
-    #>   7.         └─usethis::use_directory(path("tests", "testthat"))
-    #>   8.           ├─usethis:::create_directory(proj_path(path))
-    #>   9.           │ └─fs::dir_exists(path)
-    #>  10.           │   └─fs::is_dir(path)
-    #>  11.           │     └─fs::file_info(path, follow = follow)
-    #>  12.           │       └─fs::path_expand(path)
-    #>  13.           └─usethis::proj_path(path)
-    #>  14.             ├─fs::path_norm(path(proj_get(), ..., ext = ext))
-    #>  15.             ├─fs::path(proj_get(), ..., ext = ext)
-    #>  16.             └─usethis::proj_get()
-    #>  17.               └─usethis::proj_set(".")
-    #>  18.                 └─usethis:::ui_abort(...)
-    #>  19.                   └─cli::cli_abort(...)
-    #>  20.                     └─rlang::abort(...)
-    #> 
-    #> [ FAIL 2 | WARN 0 | SKIP 0 | PASS 235 ]
-    #> Error: Test failures
+    #> * installing *source* package ‘golem’ ...
+    #> ** using staged installation
+    #> ** R
+    #> ** inst
+    #> ** byte-compile and prepare package for lazy loading
+    #> Error in loadNamespace(x) : there is no package called ‘testthat’
+    #> Error: unable to load R code in package ‘golem’
     #> Execution halted
+    #> ERROR: lazy loading failed for package ‘golem’
+    #> * removing ‘/tmp/RtmpjbqmN5/file1eda49c97355/golem.Rcheck/golem’
     #> 
     #> 1 error ✖ | 0 warnings ✔ | 0 notes ✔
     #> Error: R CMD check found ERRORs
 
     Sys.setenv("NOT_CRAN" = TRUE);covr::package_coverage()
-    #> golem Coverage: 79.96%
+    #> golem Coverage: 85.43%
     #> R/boostrap_base.R: 0.00%
     #> R/bootstrap_attachment.R: 0.00%
     #> R/bootstrap_pkgload.R: 0.00%
     #> R/bootstrap_roxygen2.R: 0.00%
     #> R/bootstrap_rstudio_api.R: 0.00%
     #> R/bootstrap_dockerfiler.R: 23.33%
-    #> R/test_helpers.R: 30.26%
-    #> R/config.R: 37.69%
     #> R/bootstrap_usethis.R: 38.57%
     #> R/bootstrap_desc.R: 55.56%
-    #> R/after_creation_msg.R: 59.72%
-    #> R/install_dev_deps.R: 60.87%
     #> R/create_golem.R: 64.71%
     #> R/addins.R: 66.67%
-    #> R/modules_fn.R: 73.76%
-    #> R/add_files.R: 77.06%
+    #> R/modules_fn.R: 75.74%
+    #> R/after_creation_msg.R: 76.39%
     #> R/add_rstudio_files.R: 77.88%
+    #> R/install_dev_deps.R: 78.26%
     #> R/add_r_files.R: 78.70%
+    #> R/config.R: 79.23%
     #> R/use_files.R: 80.40%
-    #> R/desc.R: 83.87%
+    #> R/test_helpers.R: 81.58%
     #> R/reload.R: 84.69%
     #> R/disable_autoload.R: 85.00%
     #> R/add_dockerfiles.R: 87.10%
@@ -196,10 +132,12 @@ Here are the test & coverage results:
     #> R/make_dev.R: 90.00%
     #> R/use_favicon.R: 90.32%
     #> R/add_dockerfiles_renv.R: 91.95%
+    #> R/add_files.R: 93.14%
     #> R/golem-yaml-get.R: 93.18%
     #> R/js.R: 93.75%
-    #> R/use_recommended.R: 94.59%
     #> R/run_dev.R: 95.65%
+    #> R/desc.R: 96.77%
+    #> R/use_recommended.R: 97.37%
     #> R/utils.R: 99.19%
     #> R/add_resource_path.R: 100.00%
     #> R/boostrap_cli.R: 100.00%
