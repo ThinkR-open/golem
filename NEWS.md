@@ -1,6 +1,6 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
-# 0.5.0
+# golem 0.5.0
 
 ## New functions
 
@@ -56,7 +56,7 @@
 
 + We create an `.rscignore` in the golem dir whenever creating the connect related file (#110, @ilyaZar)
 
-## Bug fix
+## Bug fixes
 
 + `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)
 
