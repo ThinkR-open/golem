@@ -103,7 +103,7 @@ dev_deps <- unique(
 check_dev_deps_are_installed <- function() {
   are_installed <- sapply(
     dev_deps,
-    FUN = rlang::is_installed
+    FUN = rlang_is_installed
   )
   if (!all(are_installed)) {
     message(

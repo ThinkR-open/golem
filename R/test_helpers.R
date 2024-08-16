@@ -39,6 +39,9 @@ expect_shinytaglist <- function(object) {
   invisible(act$val)
 }
 
+
+testthat_expect_snapshot <- testthat::expect_snapshot
+
 #' @export
 #' @rdname testhelpers
 #' @param ui output of an UI function
@@ -62,7 +65,7 @@ expect_html_equal <- function(
     )
   }
 
-  testthat::expect_snapshot(
+  testthat_expect_snapshot(
     x = ui,
     ...
   )
@@ -86,7 +89,7 @@ expect_running <- function(
   testthat::skip_on_cran()
 
   # Ok for now we'll get back to this
-  testthat::skip_if_not(interactive())
+  testthat::skip_if_not(rlang_is_interactive())
 
   # Oh boy using testthat and processx is a mess
   #
@@ -170,7 +173,7 @@ expect_running <- function(
 
   if (go_for_pkgload) {
     # Using pkgload because we can
-    shinyproc <- processx::process$new(
+    shinyproc <- processx_process(
       command = r_,
       c(
         "-e",
@@ -179,7 +182,7 @@ expect_running <- function(
     )
   } else {
     # Using the temps libPaths because we can
-    shinyproc <- processx::process$new(
+    shinyproc <- processx_process(
       echo_cmd = TRUE,
       command = r_,
       c(
@@ -195,3 +198,6 @@ expect_running <- function(
   testthat::expect_true(shinyproc$is_alive())
   shinyproc$kill()
 }
+
+
+processx_process <- processx::process$new
