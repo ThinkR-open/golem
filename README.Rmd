@@ -41,6 +41,8 @@ cat('[![CRAN status](https://www.r-pkg.org/badges/version/golem)](https://cran.r
 
 # {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
+> You're reading the doc about version: `r pkgload::pkg_version()`. Note that `{golem}` follows the [semantic versioning](https://semver.org/) scheme.
+
 Production-grade `{shiny}` applications, from creation to deployment.
 
 `{golem}` is an opinionated framework that sets the standard for building production-grade `{shiny}` applications. It provides a structured environment that enforces best practices, fosters maintainability, and ensures your applications are reliable, and ready for deployment in real-world environments.
@@ -94,8 +96,6 @@ A list of various `{golem}` related resources (tutorials, video, blog post,...) 
 ---
 
 ## Dev part
-
-You're reading the doc about version: `r pkgload::pkg_version()`
 
 This `README` has been compiled on the
 
