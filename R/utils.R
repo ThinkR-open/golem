@@ -11,11 +11,6 @@ golem_sys <- function(
   )
 }
 
-# For testing purpose
-rlang_is_interactive <- function() {
-  rlang::is_interactive()
-}
-
 create_if_needed <- function(
   path,
   type = c("file", "directory"),

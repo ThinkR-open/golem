@@ -220,13 +220,12 @@ get_current_config <- function(path = getwd()) {
   }
 
   if (!fs_file_exists(path_conf)) {
-    if (rlang::is_interactive()) {
+    if (rlang_is_interactive()) {
       ask <- ask_golem_creation_upon_config(path_conf)
       # Return early if the user doesn't allow
       if (!ask) {
         return(NULL)
       }
-
       fs_file_copy(
         path = golem_sys("shinyexample/inst/golem-config.yml"),
         new_path = fs_path(
@@ -247,7 +246,7 @@ get_current_config <- function(path = getwd()) {
           "R/app_config.R"
         ),
         "shinyexample",
-        golem::pkg_name()
+        golem::pkg_name(path = path)
       )
       # TODO This should also create the dev folder
     } else {
@@ -265,6 +264,8 @@ get_current_config <- function(path = getwd()) {
   )
 }
 
+
+
 ask_golem_creation_upon_config <- function(pth) {
   msg <- paste0(
     "The %s file doesn't exist.",
@@ -273,6 +274,7 @@ ask_golem_creation_upon_config <- function(pth) {
   )
   yesno(sprintf(msg, basename(pth)))
 }
+
 # This function changes the name of the
 # package in app_config when you need to
 # set the {golem} name

@@ -56,6 +56,43 @@ test_that("use_module_test", {
   })
 })
 
+test_that(
+  "module_template works",
+  {
+    module_template(
+      "mod1",
+      path <- tempfile(),
+      export = TRUE,
+      open = FALSE
+    )
+    on.exit({
+      unlink(
+        path,
+        recursive = TRUE,
+        force = TRUE
+      )
+    })
+    mod_read <- paste(
+      readLines(
+        path
+      ),
+      collapse = " "
+    )
+    expect_true(
+      grepl(
+        "mod_mod1",
+        mod_read
+      )
+    )
+    expect_true(
+      grepl(
+        "@export",
+        mod_read
+      )
+    )
+  }
+)
+
 
 test_that("mod_remove work", {
   expect_equal(

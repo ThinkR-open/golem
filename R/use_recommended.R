@@ -69,7 +69,8 @@ use_recommended_tests <- function(
   fs_file_copy(
     golem_sys(
       "utils",
-      "test-golem-recommended.R")
+      "test-golem-recommended.R"
+     )
      ,
     fs_path(pkg, "tests", "testthat"),
     overwrite = TRUE

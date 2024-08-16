@@ -33,3 +33,17 @@ test_that("install_dev_deps works", {
     }
   })
 })
+
+test_that("check_dev_deps_are_installed works", {
+  withr::with_temp_libpaths({
+    testthat::with_mocked_bindings(
+      rlang_is_installed = function(...){
+        return(FALSE)
+      },{
+        expect_message(
+          check_dev_deps_are_installed()
+        )
+      }
+    )
+  })
+})

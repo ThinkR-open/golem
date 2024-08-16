@@ -25,6 +25,16 @@ test_that("after_creation_msg works", {
       "inst/app/www",
       "myhtml"
     )
+    testthat::with_mocked_bindings(
+      fs_path_abs = paste,
+      {
+        after_creation_message_any_file(
+          "mypkg",
+          "inst/app/www",
+          "myhtml"
+        )
+      }
+    )
     file_created_dance(
       "inst/app/www",
       after_creation_message_sass,
@@ -33,6 +43,10 @@ test_that("after_creation_msg works", {
       "mysass",
       open_file = FALSE,
       open_or_go_to = FALSE
+    )
+    file_already_there_dance(
+      "inst/app/www",
+      open_file = FALSE
     )
   })
 })

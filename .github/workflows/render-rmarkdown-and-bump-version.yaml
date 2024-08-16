@@ -37,12 +37,6 @@ jobs:
           needs: check
 
     # Render READEME.md using rmarkdown
-      - name: Maybe bump dev version
-        if: github.ref == 'refs/heads/dev'
-        run: Rscript -e 'desc::desc_bump_version("patch")'
-      - name: Maybe bump master version
-        if: github.ref == 'refs/heads/master'
-        run: Rscript -e 'desc::desc_bump_version("minor")'
       - name: render README
         run: Rscript -e 'rmarkdown::render("README.Rmd", output_format = "md_document")'
       - name: Commit Results
