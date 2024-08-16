@@ -57,3 +57,20 @@ test_that("create_golem works", {
     TRUE
   )
 })
+
+test_that("create_golem_gui works", {
+  testthat::with_mocked_bindings(
+    create_golem = function(...){
+      return(TRUE)
+    }, {
+      expect_error(
+        create_golem_gui()
+      )
+      expect_true(
+        create_golem_gui(
+          project_hook = "golem::project_hook"
+        )
+      )
+    }
+  )
+})
