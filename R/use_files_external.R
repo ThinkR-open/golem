@@ -69,12 +69,10 @@ use_external_js_file <- function(
     return(invisible(FALSE))
   }
 
-  if (file_ext(url) != "js") {
-    cat_red_bullet(
-      "File not added (URL must end with .js extension)"
-    )
-    return(invisible(FALSE))
-  }
+  check_url_has_the_correct_extension(
+    url,
+    "js"
+  )
 
   download_external(url, where)
 
@@ -141,12 +139,10 @@ use_external_css_file <- function(
     return(invisible(FALSE))
   }
 
-  if (file_ext(url) != "css") {
-    cat_red_bullet(
-      "File not added (URL must end with .css extension)"
-    )
-    return(invisible(FALSE))
-  }
+  check_url_has_the_correct_extension(
+    url,
+    "css"
+  )
 
   download_external(url, where)
 
@@ -211,12 +207,10 @@ use_external_html_template <- function(
     return(invisible(FALSE))
   }
 
-  if (file_ext(url) != "html") {
-    cat_red_bullet(
-      "File not added (URL must end with .html extension)"
-    )
-    return(invisible(FALSE))
-  }
+  check_url_has_the_correct_extension(
+    url,
+    "html"
+  )
 
   download_external(url, where)
 

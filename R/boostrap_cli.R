@@ -43,3 +43,12 @@ cli_cli_alert_info <- function(...) {
     )
   })
 }
+
+cli_cli_abort <- function(message) {
+  if (rlang::is_installed("cli")) {
+    cli::cli_abort(message = message, call = NULL)
+  } else {
+    stop(message)
+  }
+}
+

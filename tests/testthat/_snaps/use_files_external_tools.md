@@ -1,3 +1,11 @@
+# check_url_has_the_correct_extension(url, where) works
+
+    Code
+      check_url_has_the_correct_extension("https://www.google.com", "js")
+    Condition
+      Error:
+      ! File not added (URL must end with .js extension)
+
 # download_external(url, where) works
 
     Code
@@ -8,7 +16,7 @@
         download_external("https://www.google.com", "inst/app/www/google.html")
       })
     Output
-
+      
       Initiating file download
       [1] "https://www.google.com"
       [1] "inst/app/www/google.html"
