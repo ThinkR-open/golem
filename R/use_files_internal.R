@@ -11,13 +11,11 @@ use_internal_js_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  if (missing(name)) {
-    name <- basename(path)
-  }
+  name <- build_name_for_file(
+    name,
+    url
+  )
 
-  check_name_length_is_one(name)
-
-  name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.js", name)
 
   dir_created <- tryCatch(
@@ -82,13 +80,11 @@ use_internal_css_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  if (missing(name)) {
-    name <- basename(path)
-  }
+  name <- build_name_for_file(
+    name,
+    url
+  )
 
-  check_name_length_is_one(name)
-
-  name <- file_path_sans_ext(name)
   new_file <- sprintf("%s.css", name)
 
   dir_created <- tryCatch(
@@ -153,7 +149,11 @@ use_internal_html_template <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  check_name_length_is_one(name)
+  name <- build_name_for_file(
+    name,
+    url
+  )
+
 
   new_file <- sprintf(
     "%s.html",
@@ -218,14 +218,13 @@ use_internal_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  if (missing(name)) {
-    name <- basename(path)
-  }
-
-  check_name_length_is_one(name)
-
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
+
+  name <- build_name_for_file(
+    name,
+    url
+  )
 
   dir_created <- tryCatch(
     create_if_needed(
