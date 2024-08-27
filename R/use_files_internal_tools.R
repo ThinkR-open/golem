@@ -24,3 +24,11 @@ check_file_has_the_correct_extension <- function(
     )
   }
 }
+
+check_if_file_exists_and_copy_if_not <- function(
+  path,
+  where_to_copy_to
+) {
+  check_file_exists(where_to_copy_to)
+  copy_internal_file(path, where_to_copy_to)
+}

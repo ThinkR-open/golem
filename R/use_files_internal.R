@@ -25,16 +25,18 @@ use_internal_js_file <- function(
 
   dir <- fs_path_abs(dir)
 
-  where <- fs_path(
+  where_to_copy_to <- fs_path(
     dir,
     sprintf("%s.js", name)
   )
 
-  check_file_exists(where)
-  copy_internal_file(path, where)
+  check_if_file_exists_and_copy_if_not(
+    path,
+    where_to_copy_to = where_to_copy_to
+  )
 
   file_created_dance(
-    where,
+    where = where_to_copy_to,
     after_creation_message_css,
     pkg,
     dir,
@@ -71,19 +73,18 @@ use_internal_css_file <- function(
 
   dir <- fs_path_abs(dir)
 
-  where <- fs_path(
+  where_to_copy_to <- fs_path(
     dir,
     sprintf("%s.css", name)
   )
 
-  check_file_exists(where)
-
-
-
-  copy_internal_file(path, where)
+  check_if_file_exists_and_copy_if_not(
+    path,
+    where_to_copy_to = where_to_copy_to
+  )
 
   file_created_dance(
-    where,
+    where = where_to_copy_to,
     after_creation_message_css,
     pkg,
     dir,
@@ -120,7 +121,7 @@ use_internal_html_template <- function(
 
   dir <- fs_path_abs(dir)
 
-  where <- fs_path(
+  where_to_copy_to <- fs_path(
     dir,
     sprintf(
       "%s.html",
@@ -128,12 +129,13 @@ use_internal_html_template <- function(
     )
   )
 
-  check_file_exists(where)
-
-  copy_internal_file(path, where)
+  check_if_file_exists_and_copy_if_not(
+    path,
+    where_to_copy_to = where_to_copy_to
+  )
 
   file_created_dance(
-    where,
+    where = where_to_copy_to,
     after_creation_message_html_template,
     pkg,
     dir,
@@ -164,16 +166,18 @@ use_internal_file <- function(
     path
   )
 
-  where <- fs_path(
+  where_to_copy_to <- fs_path(
     dir,
     name
   )
-  check_file_exists(where)
 
-  copy_internal_file(path, where)
+  check_if_file_exists_and_copy_if_not(
+    path,
+    where_to_copy_to = where_to_copy_to
+  )
 
   file_created_dance(
-    where,
+    where = where_to_copy_to,
     after_creation_message_any_file,
     pkg,
     dir,
