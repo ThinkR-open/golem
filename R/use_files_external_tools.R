@@ -40,7 +40,7 @@ perform_checks_and_download_if_everything_is_ok <- function(
   on.exit(setwd(old))
   name <- build_name(
     name,
-    url
+    url_to_download_from
   )
   if (is.null(file_type)) {
     where_to_download_to <- fs_path(

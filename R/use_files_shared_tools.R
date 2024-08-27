@@ -1,8 +1,8 @@
 build_name <- function(
-  name,
+  name = NULL,
   url
 ) {
-  if (missing(name) || is.null(name)) {
+  if (is.null(name)) {
     name <- basename(url)
   }
   check_name_length_is_one(name)
