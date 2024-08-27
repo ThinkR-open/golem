@@ -19,7 +19,7 @@ check_file_has_the_correct_extension <- function(
       paste0(
         "File not added (URL must end with .",
         type,
-        " extension)"
+        ")"
       )
     )
   }
