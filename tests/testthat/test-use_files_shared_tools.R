@@ -29,3 +29,12 @@ test_that("build_name works as expected", {
     )
   )
 })
+
+test_that("check_directory_exists works as expected", {
+  expect_error(
+    check_directory_exists("inst/app/www")
+  )
+  expect_null(
+    check_directory_exists(getwd())
+  )
+})

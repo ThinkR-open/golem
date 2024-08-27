@@ -49,8 +49,9 @@ test_that(
           )
           mapply(
             function(fun, ext) {
+
               if (ext != "txt") {
-                expect_false(
+                expect_error(
                   fun(
                     path = "this.nop",
                     pkg = "."

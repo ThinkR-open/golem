@@ -38,22 +38,7 @@ use_external_js_file <- function(
 
   new_file <- sprintf("%s.js", name)
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
+  check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
 
@@ -106,22 +91,7 @@ use_external_css_file <- function(
 
   new_file <- sprintf("%s.css", name)
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
+  check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
 
@@ -177,22 +147,7 @@ use_external_html_template <- function(
     url
   )
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
+  check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
 
@@ -242,22 +197,7 @@ use_external_file <- function(
     url
   )
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
+  check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
 

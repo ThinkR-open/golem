@@ -11,3 +11,11 @@
       [1] "~/here/this.css"
       [1] "inst/app/this.css"
 
+# check_url_has_the_correct_extension(url, where) works
+
+    Code
+      check_file_has_the_correct_extension("https://www.google.com", "js")
+    Condition
+      Error:
+      ! File not added (URL must end with .js extension)
+

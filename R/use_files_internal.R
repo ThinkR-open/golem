@@ -11,29 +11,19 @@ use_internal_js_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name_for_file(
+  check_file_has_the_correct_extension(
+    path,
+    "js"
+  )
+
+  name <- build_name(
     name,
-    url
+    path
   )
 
   new_file <- sprintf("%s.js", name)
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
+  check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
 
@@ -80,29 +70,19 @@ use_internal_css_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name_for_file(
+  check_file_has_the_correct_extension(
+    path,
+    "css"
+  )
+
+  name <- build_name(
     name,
-    url
+    path
   )
 
   new_file <- sprintf("%s.css", name)
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
+  check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
 
@@ -149,33 +129,22 @@ use_internal_html_template <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name_for_file(
-    name,
-    url
+  check_file_has_the_correct_extension(
+    path,
+    "html"
   )
 
+  name <- build_name(
+    name,
+    path
+  )
 
   new_file <- sprintf(
     "%s.html",
     file_path_sans_ext(name)
   )
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
+  check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
 
@@ -189,12 +158,6 @@ use_internal_html_template <- function(
     return(invisible(FALSE))
   }
 
-  if (file_ext(path) != "html") {
-    cat_red_bullet(
-      "File not added (URL must end with .html extension)"
-    )
-    return(invisible(FALSE))
-  }
 
   copy_internal_file(path, where)
 
@@ -221,27 +184,12 @@ use_internal_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name_for_file(
+  name <- build_name(
     name,
-    url
+    path
   )
 
-  dir_created <- tryCatch(
-    create_if_needed(
-      dir,
-      type = "directory"
-    ),
-    error = function(e) {
-      out <- FALSE
-      names(out) <- e[[1]]
-      return(out)
-    }
-  )
-
-  if (isFALSE(dir_created)) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
+  check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
 
