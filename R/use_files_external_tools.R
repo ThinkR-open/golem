@@ -14,6 +14,7 @@ check_url_has_the_correct_extension <- function(
   }
 }
 
+
 download_external <- function(
   url,
   where_to_download
@@ -23,13 +24,22 @@ download_external <- function(
     url,
     where_to_download
   )
-  cat_downloaded(where)
+  cat_downloaded(where_to_download)
 }
 
-check_if_file_exists_and_download_if_not <- function(
-  url,
-  where_to_download
+perform_checks_and_download_if_everything_is_ok <- function(
+  url_to_download_from,
+  directory_to_download_to,
+  where_to_download_to,
+  file_type
 ) {
-  check_file_exists(where_to_download)
-  download_external(url, where_to_download = where_to_download)
+  if (!is.null(file_type)) {
+    check_url_has_the_correct_extension(
+      url = url_to_download_from,
+      file_type
+    )
+  }
+  check_directory_exists(directory_to_download_to)
+  check_file_exists(where_to_download_to)
+  download_external(url, where_to_download = where_to_download_to)
 }

@@ -1,7 +1,3 @@
-# For mocking in test
-utils_download_file <- function(...) {
-  utils_download_file(...)
-}
 #' Use Files
 #'
 #' These functions download files from external sources and put them inside the `inst/app/www` directory.
@@ -31,13 +27,6 @@ use_external_js_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  check_directory_exists(dir)
-
-  check_url_has_the_correct_extension(
-    url,
-    "js"
-  )
-
   name <- build_name(
     name,
     url
@@ -50,9 +39,11 @@ use_external_js_file <- function(
     sprintf("%s.js", name)
   )
 
-  check_if_file_exists_and_download_if_not(
-    url,
-    where_to_download = where_to_download
+  perform_checks_and_download_if_everything_is_ok(
+    url_to_download_from = url,
+    directory_to_download_to = dir,
+    where_to_download_to = where_to_download,
+    file_type = "js"
   )
 
   file_created_dance(
@@ -80,13 +71,6 @@ use_external_css_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  check_directory_exists(dir)
-
-  check_url_has_the_correct_extension(
-    url,
-    "css"
-  )
-
   name <- build_name(
     name,
     url
@@ -99,14 +83,16 @@ use_external_css_file <- function(
     sprintf("%s.css", name)
   )
 
-  check_if_file_exists_and_download_if_not(
-    url,
-    where_to_download = where_to_download
+  perform_checks_and_download_if_everything_is_ok(
+    url_to_download_from = url,
+    directory_to_download_to = dir,
+    where_to_download_to = where_to_download,
+    file_type = "css"
   )
 
   file_created_dance(
     where = where_to_download,
-    after_creation_message_css,
+    fun = after_creation_message_css,
     pkg = pkg,
     dir = dir,
     name = name,
@@ -129,13 +115,6 @@ use_external_html_template <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  check_directory_exists(dir)
-
-  check_url_has_the_correct_extension(
-    url,
-    "html"
-  )
-
   name <- build_name(
     name,
     url
@@ -151,14 +130,16 @@ use_external_html_template <- function(
     )
   )
 
-  check_if_file_exists_and_download_if_not(
-    url,
-    where_to_download = where_to_download
+  perform_checks_and_download_if_everything_is_ok(
+    url_to_download_from = url,
+    directory_to_download_to = dir,
+    where_to_download_to = where_to_download,
+    file_type = "html"
   )
 
   file_created_dance(
     where = where_to_download,
-    after_creation_message_html_template,
+    fun = after_creation_message_html_template,
     pkg = pkg,
     dir = dir,
     name = name,
@@ -180,8 +161,6 @@ use_external_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  check_directory_exists(dir)
-
   name <- build_name(
     name,
     url
@@ -194,9 +173,11 @@ use_external_file <- function(
     name
   )
 
-  check_if_file_exists_and_download_if_not(
-    url,
-    where_to_download = where_to_download
+  perform_checks_and_download_if_everything_is_ok(
+    url_to_download_from = url,
+    directory_to_download_to = dir,
+    where_to_download_to = where_to_download,
+    file_type = NULL
   )
 
   file_created_dance(
