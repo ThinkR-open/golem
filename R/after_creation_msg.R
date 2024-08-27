@@ -123,21 +123,16 @@ file_created_dance <- function(
   dir,
   name,
   open_file,
-  open_or_go_to = TRUE,
   catfun = cat_created
 ) {
   catfun(where)
 
   fun(pkg, dir, basename(where))
 
-  if (open_or_go_to) {
-    open_or_go_to(
-      where = where,
-      open_file = open_file
-    )
-  } else {
-    return(invisible(where))
-  }
+  open_or_go_to(
+    where = where,
+    open_file = open_file
+  )
 }
 
 file_already_there_dance <- function(

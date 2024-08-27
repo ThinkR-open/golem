@@ -77,7 +77,6 @@ perform_checks_and_download_if_everything_is_ok <- function(
     pkg = pkg,
     dir = directory_to_download_to,
     open_file = open,
-    open_or_go_to = FALSE,
     catfun = cat_downloaded
   )
 }
