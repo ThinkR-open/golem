@@ -30,17 +30,29 @@ download_external <- function(
 perform_checks_and_download_if_everything_is_ok <- function(
   url_to_download_from,
   directory_to_download_to,
-  where_to_download_to,
   file_type,
   file_created_fun,
   pkg,
   name,
   open
 ) {
-  if (!is.null(file_type)) {
+  if (is.null(file_type)) {
+    where_to_download_to <- fs_path(
+      dir,
+      name
+    )
+  } else {
     check_url_has_the_correct_extension(
       url = url_to_download_from,
       file_type
+    )
+    where_to_download <- fs_path(
+      dir,
+      sprintf(
+        "%s.%s",
+        name,
+        file_type
+      )
     )
   }
   check_directory_exists(

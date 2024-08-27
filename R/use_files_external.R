@@ -34,11 +34,6 @@ use_external_js_file <- function(
 
   dir <- fs_path_abs(dir)
 
-  where_to_download <- fs_path(
-    dir,
-    sprintf("%s.js", name)
-  )
-
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
     directory_to_download_to = dir,
@@ -72,11 +67,6 @@ use_external_css_file <- function(
 
   dir <- fs_path_abs(dir)
 
-  where_to_download <- fs_path(
-    dir,
-    sprintf("%s.css", name)
-  )
-
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
     directory_to_download_to = dir,
@@ -108,14 +98,6 @@ use_external_html_template <- function(
   )
 
   dir <- fs_path_abs(dir)
-
-  where_to_download <- fs_path(
-    dir,
-    sprintf(
-      "%s.html",
-      name
-    )
-  )
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
@@ -149,15 +131,9 @@ use_external_file <- function(
 
   dir <- fs_path_abs(dir)
 
-  where_to_download <- fs_path(
-    dir,
-    name
-  )
-
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
     directory_to_download_to = dir,
-    where_to_download_to = where_to_download,
     file_type = NULL,
     file_created_fun = after_creation_message_any_file,
     pkg = pkg,
