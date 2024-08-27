@@ -16,17 +16,20 @@ check_url_has_the_correct_extension <- function(
 
 download_external <- function(
   url,
-  where
+  where_to_download
 ) {
   cat_start_download()
-  utils_download_file(url, where)
+  utils_download_file(
+    url,
+    where_to_download
+  )
   cat_downloaded(where)
 }
 
 check_if_file_exists_and_download_if_not <- function(
   url,
   where_to_download
-){
+) {
   check_file_exists(where_to_download)
-  download_external(url, where_to_download)
+  download_external(url, where_to_download = where_to_download)
 }
