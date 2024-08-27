@@ -43,19 +43,13 @@ use_external_js_file <- function(
     url_to_download_from = url,
     directory_to_download_to = dir,
     where_to_download_to = where_to_download,
-    file_type = "js"
+    file_type = "js",
+    file_created_fun = after_creation_message_js,
+    pkg = pkg,
+    name = name,
+    open = open
   )
 
-  file_created_dance(
-    where = where_to_download,
-    after_creation_message_js,
-    pkg = pkg,
-    dir = dir,
-    name = name,
-    open = open,
-    open_or_go_to = FALSE,
-    catfun = cat_downloaded
-  )
 }
 
 #' @export
@@ -87,18 +81,11 @@ use_external_css_file <- function(
     url_to_download_from = url,
     directory_to_download_to = dir,
     where_to_download_to = where_to_download,
-    file_type = "css"
-  )
-
-  file_created_dance(
-    where = where_to_download,
-    fun = after_creation_message_css,
+    file_type = "css",
+    file_created_fun = after_creation_message_css,
     pkg = pkg,
-    dir = dir,
     name = name,
-    open = open,
-    open_or_go_to = FALSE,
-    catfun = cat_downloaded
+    open = open
   )
 }
 
@@ -134,17 +121,11 @@ use_external_html_template <- function(
     url_to_download_from = url,
     directory_to_download_to = dir,
     where_to_download_to = where_to_download,
-    file_type = "html"
-  )
-
-  file_created_dance(
-    where = where_to_download,
-    fun = after_creation_message_html_template,
+    file_type = "html",
+    file_created_fun = after_creation_message_html_template,
     pkg = pkg,
-    dir = dir,
     name = name,
-    open = open,
-    open_or_go_to = FALSE
+    open = open
   )
 }
 
@@ -177,16 +158,10 @@ use_external_file <- function(
     url_to_download_from = url,
     directory_to_download_to = dir,
     where_to_download_to = where_to_download,
-    file_type = NULL
-  )
-
-  file_created_dance(
-    where = where_to_download,
-    fun = after_creation_message_any_file,
+    file_type = NULL,
+    file_created_fun = after_creation_message_any_file,
     pkg = pkg,
-    dir = dir,
     name = name,
-    open = open,
-    open_or_go_to = FALSE
+    open = open
   )
 }
