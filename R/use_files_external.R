@@ -22,8 +22,13 @@ use_external_js_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create
 ) {
+  if (!missing(dir_create)) {
+    cli_cli_abort(
+      "The dir_create argument is deprecated."
+    )
+  }
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
@@ -34,7 +39,6 @@ use_external_js_file <- function(
     name = name,
     open = open
   )
-
 }
 
 #' @export
@@ -45,8 +49,13 @@ use_external_css_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create
 ) {
+  if (!missing(dir_create)) {
+    cli_cli_abort(
+      "The dir_create argument is deprecated."
+    )
+  }
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
@@ -67,8 +76,13 @@ use_external_html_template <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create
 ) {
+  if (!missing(dir_create)) {
+    cli_cli_abort(
+      "The dir_create argument is deprecated."
+    )
+  }
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
@@ -89,8 +103,13 @@ use_external_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create
 ) {
+  if (!missing(dir_create)) {
+    cli_cli_abort(
+      "The dir_create argument is deprecated."
+    )
+  }
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,

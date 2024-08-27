@@ -6,8 +6,14 @@ use_internal_js_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create
 ) {
+
+  if (!missing(dir_create)){
+    cli_cli_abort(
+      "The dir_create argument is deprecated."
+    )
+  }
 
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
@@ -28,8 +34,14 @@ use_internal_css_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create
 ) {
+
+  if (!missing(dir_create)){
+    cli_cli_abort(
+      "The dir_create argument is deprecated."
+    )
+  }
 
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
@@ -50,8 +62,14 @@ use_internal_html_template <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create
 ) {
+
+  if (!missing(dir_create)){
+    cli_cli_abort(
+      "The dir_create argument is deprecated."
+    )
+  }
 
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
@@ -72,8 +90,14 @@ use_internal_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create = TRUE
+  dir_create
 ) {
+
+  if (!missing(dir_create)){
+    cli_cli_abort(
+      "The dir_create argument is deprecated."
+    )
+  }
 
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
