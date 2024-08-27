@@ -36,6 +36,8 @@ perform_checks_and_download_if_everything_is_ok <- function(
   name,
   open
 ) {
+  old <- setwd(fs_path_abs(pkg))
+  on.exit(setwd(old))
   name <- build_name(
     name,
     url

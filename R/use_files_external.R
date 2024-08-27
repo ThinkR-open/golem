@@ -24,8 +24,6 @@ use_external_js_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
@@ -49,8 +47,6 @@ use_external_css_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
@@ -73,8 +69,6 @@ use_external_html_template <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
@@ -97,8 +91,6 @@ use_external_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
