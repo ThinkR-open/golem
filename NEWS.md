@@ -1,5 +1,17 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
+# golem 0.5.1 to 0.6.0
+
+## Breaking change
+
+- The use_*_files now fail when:
+  - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use_*_file functions should only be there to add file (Singe responsabily  )
+  - The file that the user tries to create already exists
+
+## Internal changes
+
+- Full refactoring of the use_*_files functions that now all share the same behavior
+
 # golem 0.5.1
 
 * Hotfixing a bug with utils_download_file (#1168)
