@@ -74,8 +74,8 @@ perform_checks_and_copy_if_everything_is_ok <- function(
     fun = after_creation_message_css,
     pkg = pkg,
     dir = directory_to_copy_to,
-    name = name,
     open_file = open,
+    open_or_go_to = FALSE,
     catfun = cat_copied
   )
 }
