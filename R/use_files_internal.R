@@ -11,28 +11,26 @@ use_internal_js_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
+  check_directory_exists(dir)
+
   check_file_has_the_correct_extension(
     path,
     "js"
   )
 
-  name <- build_name(
-    name,
-    path
-  )
-
-  new_file <- sprintf("%s.js", name)
-
-  check_directory_exists(dir)
-
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
     dir,
-    new_file
+    sprintf("%s.js", name)
   )
 
   check_file_exists(where)
+
+  name <- build_name(
+    name,
+    path
+  )
 
   copy_internal_file(path, where)
 
@@ -60,28 +58,27 @@ use_internal_css_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
+  check_directory_exists(dir)
+
   check_file_has_the_correct_extension(
     path,
     "css"
   )
+
+  dir <- fs_path_abs(dir)
+
+  where <- fs_path(
+    dir,
+    sprintf("%s.css", name)
+  )
+
+  check_file_exists(where)
 
   name <- build_name(
     name,
     path
   )
 
-  new_file <- sprintf("%s.css", name)
-
-  check_directory_exists(dir)
-
-  dir <- fs_path_abs(dir)
-
-  where <- fs_path(
-    dir,
-    new_file
-  )
-
-  check_file_exists(where)
   copy_internal_file(path, where)
 
   file_created_dance(
@@ -108,32 +105,29 @@ use_internal_html_template <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
+  check_directory_exists(dir)
+
   check_file_has_the_correct_extension(
     path,
     "html"
   )
 
-  name <- build_name(
-    name,
-    path
-  )
-
-  new_file <- sprintf(
-    "%s.html",
-    file_path_sans_ext(name)
-  )
-
-  check_directory_exists(dir)
-
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
     dir,
-    new_file
+    sprintf(
+      "%s.html",
+      name
+    )
   )
 
   check_file_exists(where)
 
+  name <- build_name(
+    name,
+    path
+  )
 
   copy_internal_file(path, where)
 
@@ -160,11 +154,6 @@ use_internal_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name(
-    name,
-    path
-  )
-
   check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
@@ -174,6 +163,11 @@ use_internal_file <- function(
     name
   )
   check_file_exists(where)
+
+  name <- build_name(
+    name,
+    path
+  )
 
   copy_internal_file(path, where)
 

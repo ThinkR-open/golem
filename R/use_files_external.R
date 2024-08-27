@@ -31,27 +31,25 @@ use_external_js_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name(
-    name,
-    url
-  )
-
-  new_file <- sprintf("%s.js", name)
-
   check_directory_exists(dir)
+
+  check_url_has_the_correct_extension(
+    url,
+    "js"
+  )
 
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
     dir,
-    new_file
+    sprintf("%s.js", name)
   )
 
   check_file_exists(where)
 
-  check_url_has_the_correct_extension(
-    url,
-    "js"
+  name <- build_name(
+    name,
+    url
   )
 
   download_external(url, where)
@@ -81,27 +79,25 @@ use_external_css_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name(
-    name,
-    url
-  )
-
-  new_file <- sprintf("%s.css", name)
-
   check_directory_exists(dir)
+
+  check_url_has_the_correct_extension(
+    url,
+    "css"
+  )
 
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
     dir,
-    new_file
+    sprintf("%s.css", name)
   )
 
   check_file_exists(where)
 
-  check_url_has_the_correct_extension(
-    url,
-    "css"
+  name <- build_name(
+    name,
+    url
   )
 
   download_external(url, where)
@@ -131,30 +127,29 @@ use_external_html_template <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  new_file <- sprintf(
-    "%s.html",
-    file_path_sans_ext(name)
-  )
-
-  name <- build_name(
-    name,
-    url
-  )
 
   check_directory_exists(dir)
+
+  check_url_has_the_correct_extension(
+    url,
+    "html"
+  )
 
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
     dir,
-    new_file
+    sprintf(
+      "%s.html",
+      name
+    )
   )
 
   check_file_exists(where)
 
-  check_url_has_the_correct_extension(
-    url,
-    "html"
+  name <- build_name(
+    name,
+    url
   )
 
   download_external(url, where)
@@ -183,11 +178,6 @@ use_external_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name(
-    name,
-    url
-  )
-
   check_directory_exists(dir)
 
   dir <- fs_path_abs(dir)
@@ -198,6 +188,11 @@ use_external_file <- function(
   )
 
   check_file_exists(where)
+
+  name <- build_name(
+    name,
+    url
+  )
 
   download_external(url, where)
 
