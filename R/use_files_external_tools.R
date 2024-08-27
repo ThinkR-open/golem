@@ -38,7 +38,7 @@ perform_checks_and_download_if_everything_is_ok <- function(
 ) {
   if (is.null(file_type)) {
     where_to_download_to <- fs_path(
-      dir,
+      directory_to_download_to,
       name
     )
   } else {
@@ -46,8 +46,8 @@ perform_checks_and_download_if_everything_is_ok <- function(
       url = url_to_download_from,
       file_type
     )
-    where_to_download <- fs_path(
-      dir,
+    where_to_download_to <- fs_path(
+      directory_to_download_to,
       sprintf(
         "%s.%s",
         name,
