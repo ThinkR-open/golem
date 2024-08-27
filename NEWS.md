@@ -1,5 +1,9 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
+# golem 0.5.1
+
+* Hotfixing a bug with utils_download_file (#1168)
+
 # golem 0.5.0
 
 ## New functions
