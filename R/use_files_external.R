@@ -38,6 +38,11 @@ use_external_js_file <- function(
     "js"
   )
 
+  name <- build_name(
+    name,
+    url
+  )
+
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
@@ -46,11 +51,6 @@ use_external_js_file <- function(
   )
 
   check_file_exists(where)
-
-  name <- build_name(
-    name,
-    url
-  )
 
   download_external(url, where)
 
@@ -86,6 +86,11 @@ use_external_css_file <- function(
     "css"
   )
 
+  name <- build_name(
+    name,
+    url
+  )
+
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
@@ -94,11 +99,6 @@ use_external_css_file <- function(
   )
 
   check_file_exists(where)
-
-  name <- build_name(
-    name,
-    url
-  )
 
   download_external(url, where)
 
@@ -127,12 +127,16 @@ use_external_html_template <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-
   check_directory_exists(dir)
 
   check_url_has_the_correct_extension(
     url,
     "html"
+  )
+
+  name <- build_name(
+    name,
+    url
   )
 
   dir <- fs_path_abs(dir)
@@ -146,11 +150,6 @@ use_external_html_template <- function(
   )
 
   check_file_exists(where)
-
-  name <- build_name(
-    name,
-    url
-  )
 
   download_external(url, where)
 
@@ -180,6 +179,11 @@ use_external_file <- function(
 
   check_directory_exists(dir)
 
+  name <- build_name(
+    name,
+    url
+  )
+
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
@@ -188,11 +192,6 @@ use_external_file <- function(
   )
 
   check_file_exists(where)
-
-  name <- build_name(
-    name,
-    url
-  )
 
   download_external(url, where)
 

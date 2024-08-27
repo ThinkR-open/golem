@@ -18,6 +18,11 @@ use_internal_js_file <- function(
     "js"
   )
 
+  name <- build_name(
+    name,
+    path
+  )
+
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
@@ -26,12 +31,6 @@ use_internal_js_file <- function(
   )
 
   check_file_exists(where)
-
-  name <- build_name(
-    name,
-    path
-  )
-
   copy_internal_file(path, where)
 
   file_created_dance(
@@ -65,6 +64,11 @@ use_internal_css_file <- function(
     "css"
   )
 
+  name <- build_name(
+    name,
+    path
+  )
+
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
@@ -74,10 +78,7 @@ use_internal_css_file <- function(
 
   check_file_exists(where)
 
-  name <- build_name(
-    name,
-    path
-  )
+
 
   copy_internal_file(path, where)
 
@@ -112,6 +113,11 @@ use_internal_html_template <- function(
     "html"
   )
 
+  name <- build_name(
+    name,
+    path
+  )
+
   dir <- fs_path_abs(dir)
 
   where <- fs_path(
@@ -123,11 +129,6 @@ use_internal_html_template <- function(
   )
 
   check_file_exists(where)
-
-  name <- build_name(
-    name,
-    path
-  )
 
   copy_internal_file(path, where)
 
@@ -158,16 +159,16 @@ use_internal_file <- function(
 
   dir <- fs_path_abs(dir)
 
+  name <- build_name(
+    name,
+    path
+  )
+
   where <- fs_path(
     dir,
     name
   )
   check_file_exists(where)
-
-  name <- build_name(
-    name,
-    path
-  )
 
   copy_internal_file(path, where)
 
