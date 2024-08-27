@@ -45,22 +45,23 @@ use_external_js_file <- function(
 
   dir <- fs_path_abs(dir)
 
-  where <- fs_path(
+  where_to_download <- fs_path(
     dir,
     sprintf("%s.js", name)
   )
 
-  check_file_exists(where)
-
-  download_external(url, where)
+  check_if_file_exists_and_download_if_not(
+    url,
+    where_to_download = where_to_download
+  )
 
   file_created_dance(
-    where,
+    where = where_to_download,
     after_creation_message_js,
-    pkg,
-    dir,
-    name,
-    open,
+    pkg = pkg,
+    dir = dir,
+    name = name,
+    open = open,
     open_or_go_to = FALSE,
     catfun = cat_downloaded
   )
@@ -93,22 +94,23 @@ use_external_css_file <- function(
 
   dir <- fs_path_abs(dir)
 
-  where <- fs_path(
+  where_to_download <- fs_path(
     dir,
     sprintf("%s.css", name)
   )
 
-  check_file_exists(where)
-
-  download_external(url, where)
+  check_if_file_exists_and_download_if_not(
+    url,
+    where_to_download = where_to_download
+  )
 
   file_created_dance(
-    where,
+    where = where_to_download,
     after_creation_message_css,
-    pkg,
-    dir,
-    name,
-    open,
+    pkg = pkg,
+    dir = dir,
+    name = name,
+    open = open,
     open_or_go_to = FALSE,
     catfun = cat_downloaded
   )
@@ -141,7 +143,7 @@ use_external_html_template <- function(
 
   dir <- fs_path_abs(dir)
 
-  where <- fs_path(
+  where_to_download <- fs_path(
     dir,
     sprintf(
       "%s.html",
@@ -149,17 +151,18 @@ use_external_html_template <- function(
     )
   )
 
-  check_file_exists(where)
-
-  download_external(url, where)
+  check_if_file_exists_and_download_if_not(
+    url,
+    where_to_download = where_to_download
+  )
 
   file_created_dance(
-    where,
+    where = where_to_download,
     after_creation_message_html_template,
-    pkg,
-    dir,
-    name,
-    open,
+    pkg = pkg,
+    dir = dir,
+    name = name,
+    open = open,
     open_or_go_to = FALSE
   )
 }
@@ -186,22 +189,23 @@ use_external_file <- function(
 
   dir <- fs_path_abs(dir)
 
-  where <- fs_path(
+  where_to_download <- fs_path(
     dir,
     name
   )
 
-  check_file_exists(where)
-
-  download_external(url, where)
+  check_if_file_exists_and_download_if_not(
+    url,
+    where_to_download = where_to_download
+  )
 
   file_created_dance(
-    where,
-    after_creation_message_any_file,
-    pkg,
-    dir,
-    name,
-    open,
+    where = where_to_download,
+    fun = after_creation_message_any_file,
+    pkg = pkg,
+    dir = dir,
+    name = name,
+    open = open,
     open_or_go_to = FALSE
   )
 }

@@ -23,3 +23,10 @@ download_external <- function(
   cat_downloaded(where)
 }
 
+check_if_file_exists_and_download_if_not <- function(
+  url,
+  where_to_download
+){
+  check_file_exists(where_to_download)
+  download_external(url, where_to_download)
+}
