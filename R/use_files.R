@@ -1,7 +1,3 @@
-# For mocking in test
-utils_download_file <- function(...){
-  utils_download_file(...)
-}
 #' Use Files
 #'
 #' These functions download files from external sources and put them inside the `inst/app/www` directory.
