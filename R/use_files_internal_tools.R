@@ -28,17 +28,29 @@ check_file_has_the_correct_extension <- function(
 perform_checks_and_copy_if_everything_is_ok <- function(
   path_to_copy_from,
   directory_to_copy_to,
-  where_to_copy_to,
   file_type,
   file_created_fun,
   pkg,
   name,
   open
 ) {
-  if (!is.null(file_type)) {
+  if (is.null(file_type)) {
+    where_to_copy_to <- fs_path(
+      directory_to_copy_to,
+      name
+    )
+  } else {
     check_file_has_the_correct_extension(
       path = path_to_copy_from,
       file_type
+    )
+    where_to_copy_to <- fs_path(
+      directory_to_copy_to,
+      sprintf(
+        "%s.%s",
+        name,
+        file_type
+      )
     )
   }
   check_directory_exists(

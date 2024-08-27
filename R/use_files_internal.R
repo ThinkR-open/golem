@@ -16,15 +16,9 @@ use_internal_js_file <- function(
     path
   )
 
-  where_to_copy_to <- fs_path(
-    dir,
-    sprintf("%s.js", name)
-  )
-
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
     directory_to_copy_to = fs_path_abs(dir),
-    where_to_copy_to = where_to_copy_to,
     file_type = "js",
     file_created_fun = after_creation_message_js,
     pkg = pkg,
@@ -51,15 +45,9 @@ use_internal_css_file <- function(
     path
   )
 
-  where_to_copy_to <- fs_path(
-    dir,
-    sprintf("%s.css", name)
-  )
-
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
     directory_to_copy_to = fs_path_abs(dir),
-    where_to_copy_to = where_to_copy_to,
     file_type = "css",
     file_created_fun = after_creation_message_css,
     pkg = pkg,
@@ -86,13 +74,6 @@ use_internal_html_template <- function(
     path
   )
 
-  where_to_copy_to <- fs_path(
-    dir,
-    sprintf(
-      "%s.html",
-      name
-    )
-  )
 
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
@@ -123,12 +104,6 @@ use_internal_file <- function(
     name,
     path
   )
-
-  where_to_copy_to <- fs_path(
-    dir,
-    name
-  )
-
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
     directory_to_copy_to = fs_path_abs(dir),
