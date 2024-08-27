@@ -128,7 +128,7 @@ file_created_dance <- function(
 ) {
   catfun(where)
 
-  fun(pkg, dir, name)
+  fun(pkg, dir, basename(where))
 
   if (open_or_go_to) {
     open_or_go_to(
