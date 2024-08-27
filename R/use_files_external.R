@@ -27,11 +27,6 @@ use_external_js_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name(
-    name,
-    url
-  )
-
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
     directory_to_download_to = fs_path_abs(dir),
@@ -57,11 +52,6 @@ use_external_css_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name(
-    name,
-    url
-  )
-
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
     directory_to_download_to = fs_path_abs(dir),
@@ -85,11 +75,6 @@ use_external_html_template <- function(
 ) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
-
-  name <- build_name(
-    name,
-    url
-  )
 
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
@@ -115,16 +100,9 @@ use_external_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  name <- build_name(
-    name,
-    url
-  )
-
-  dir <- fs_path_abs(dir)
-
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
-    directory_to_download_to = dir,
+    directory_to_download_to = fs_path_abs(dir),
     file_type = NULL,
     file_created_fun = after_creation_message_any_file,
     pkg = pkg,

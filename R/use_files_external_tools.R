@@ -36,6 +36,10 @@ perform_checks_and_download_if_everything_is_ok <- function(
   name,
   open
 ) {
+  name <- build_name(
+    name,
+    url
+  )
   if (is.null(file_type)) {
     where_to_download_to <- fs_path(
       directory_to_download_to,
