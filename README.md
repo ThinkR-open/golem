@@ -11,7 +11,7 @@ status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/
 
 # {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
-> You’re reading the doc about version: 0.5.1. Note that `{golem}`
+> You’re reading the doc about version: 0.5.1.9001. Note that `{golem}`
 > follows the [semantic versioning](https://semver.org/) scheme.
 
 Production-grade `{shiny}` applications, from creation to deployment.
@@ -78,19 +78,19 @@ with blogposts, and links to other packages of the `golemverse`.
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-08-27 09:39:59 UTC"
+    #> [1] "2024-08-27 16:55:17 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
-    #> ── R CMD check results ──────────────────────────────────────── golem 0.5.1 ────
-    #> Duration: 44.8s
+    #> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9001 ────
+    #> Duration: 43.9s
     #> 
     #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
     Sys.setenv("NOT_CRAN" = TRUE);covr::package_coverage()
-    #> golem Coverage: 84.85%
+    #> golem Coverage: 85.53%
     #> R/boostrap_base.R: 0.00%
     #> R/bootstrap_attachment.R: 0.00%
     #> R/bootstrap_pkgload.R: 0.00%
@@ -102,14 +102,15 @@ Here are the test & coverage results:
     #> R/test_helpers.R: 47.37%
     #> R/bootstrap_desc.R: 55.56%
     #> R/addins.R: 66.67%
+    #> R/after_creation_msg.R: 75.71%
     #> R/modules_fn.R: 75.74%
-    #> R/after_creation_msg.R: 76.39%
+    #> R/use_files_external.R: 76.92%
+    #> R/use_files_internal.R: 76.92%
     #> R/create_golem.R: 77.12%
     #> R/add_rstudio_files.R: 77.88%
     #> R/install_dev_deps.R: 78.26%
     #> R/add_r_files.R: 78.70%
     #> R/config.R: 79.23%
-    #> R/use_files.R: 80.63%
     #> R/reload.R: 84.69%
     #> R/disable_autoload.R: 85.00%
     #> R/add_dockerfiles.R: 87.10%
@@ -121,12 +122,12 @@ Here are the test & coverage results:
     #> R/golem-yaml-get.R: 93.18%
     #> R/js.R: 93.75%
     #> R/run_dev.R: 95.65%
+    #> R/boostrap_cli.R: 96.43%
     #> R/desc.R: 96.77%
     #> R/use_recommended.R: 97.37%
     #> R/use_utils.R: 97.40%
     #> R/utils.R: 99.19%
     #> R/add_resource_path.R: 100.00%
-    #> R/boostrap_cli.R: 100.00%
     #> R/boostrap_crayon.R: 100.00%
     #> R/boostrap_fs.R: 100.00%
     #> R/browser_button.R: 100.00%
@@ -144,6 +145,9 @@ Here are the test & coverage results:
     #> R/pkg_tools.R: 100.00%
     #> R/set_golem_options.R: 100.00%
     #> R/templates.R: 100.00%
+    #> R/use_files_external_tools.R: 100.00%
+    #> R/use_files_internal_tools.R: 100.00%
+    #> R/use_files_shared_tools.R: 100.00%
     #> R/use_readme.R: 100.00%
     #> R/with_opt.R: 100.00%
 
