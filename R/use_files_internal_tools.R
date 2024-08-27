@@ -1,7 +1,7 @@
 copy_internal_file <- function(
   path,
   where
-){
+) {
   cat_start_copy()
 
   fs_file_copy(path, where)
@@ -25,10 +25,39 @@ check_file_has_the_correct_extension <- function(
   }
 }
 
-check_if_file_exists_and_copy_if_not <- function(
-  path,
-  where_to_copy_to
+perform_checks_and_copy_if_everything_is_ok <- function(
+  path_to_copy_from,
+  directory_to_copy_to,
+  where_to_copy_to,
+  file_type,
+  file_created_fun,
+  pkg,
+  name,
+  open
 ) {
-  check_file_exists(where_to_copy_to)
-  copy_internal_file(path, where_to_copy_to)
+  if (!is.null(file_type)) {
+    check_file_has_the_correct_extension(
+      path = path_to_copy_from,
+      file_type
+    )
+  }
+  check_directory_exists(
+    directory_to_copy_to
+  )
+  check_file_exists(
+    where_to_copy_to
+  )
+  copy_internal_file(
+    path_to_copy_from,
+    where_to_copy_to
+  )
+  file_created_dance(
+    where = where_to_copy_to,
+    fun = after_creation_message_css,
+    pkg = pkg,
+    dir = directory_to_copy_to,
+    name = name,
+    open_file = open,
+    catfun = cat_copied
+  )
 }

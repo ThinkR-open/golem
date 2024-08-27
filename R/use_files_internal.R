@@ -11,13 +11,6 @@ use_internal_js_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  check_directory_exists(dir)
-
-  check_file_has_the_correct_extension(
-    path,
-    "js"
-  )
-
   name <- build_name(
     name,
     path
@@ -30,19 +23,15 @@ use_internal_js_file <- function(
     sprintf("%s.js", name)
   )
 
-  check_if_file_exists_and_copy_if_not(
-    path,
-    where_to_copy_to = where_to_copy_to
-  )
-
-  file_created_dance(
-    where = where_to_copy_to,
-    after_creation_message_css,
-    pkg,
-    dir,
-    name,
-    open,
-    catfun = cat_copied
+  perform_checks_and_copy_if_everything_is_ok(
+    path_to_copy_from = path,
+    directory_to_copy_to = dir,
+    where_to_copy_to = where_to_copy_to,
+    file_type = "js",
+    file_created_fun = after_creation_message_js,
+    pkg = pkg,
+    name = name,
+    open = open
   )
 }
 
@@ -59,13 +48,6 @@ use_internal_css_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  check_directory_exists(dir)
-
-  check_file_has_the_correct_extension(
-    path,
-    "css"
-  )
-
   name <- build_name(
     name,
     path
@@ -78,19 +60,15 @@ use_internal_css_file <- function(
     sprintf("%s.css", name)
   )
 
-  check_if_file_exists_and_copy_if_not(
-    path,
-    where_to_copy_to = where_to_copy_to
-  )
-
-  file_created_dance(
-    where = where_to_copy_to,
-    after_creation_message_css,
-    pkg,
-    dir,
-    name,
-    open,
-    catfun = cat_copied
+  perform_checks_and_copy_if_everything_is_ok(
+    path_to_copy_from = path,
+    directory_to_copy_to = dir,
+    where_to_copy_to = where_to_copy_to,
+    file_type = "css",
+    file_created_fun = after_creation_message_css,
+    pkg = pkg,
+    name = name,
+    open = open
   )
 }
 
@@ -107,13 +85,6 @@ use_internal_html_template <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  check_directory_exists(dir)
-
-  check_file_has_the_correct_extension(
-    path,
-    "html"
-  )
-
   name <- build_name(
     name,
     path
@@ -129,18 +100,15 @@ use_internal_html_template <- function(
     )
   )
 
-  check_if_file_exists_and_copy_if_not(
-    path,
-    where_to_copy_to = where_to_copy_to
-  )
-
-  file_created_dance(
-    where = where_to_copy_to,
-    after_creation_message_html_template,
-    pkg,
-    dir,
-    name,
-    open
+  perform_checks_and_copy_if_everything_is_ok(
+    path_to_copy_from = path,
+    directory_to_copy_to = dir,
+    where_to_copy_to = where_to_copy_to,
+    file_type = "html",
+    file_created_fun = after_creation_message_html_template,
+    pkg = pkg,
+    name = name,
+    open = open
   )
 }
 
@@ -157,8 +125,6 @@ use_internal_file <- function(
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  check_directory_exists(dir)
-
   dir <- fs_path_abs(dir)
 
   name <- build_name(
@@ -171,18 +137,14 @@ use_internal_file <- function(
     name
   )
 
-  check_if_file_exists_and_copy_if_not(
-    path,
-    where_to_copy_to = where_to_copy_to
-  )
-
-  file_created_dance(
-    where = where_to_copy_to,
-    after_creation_message_any_file,
-    pkg,
-    dir,
-    name,
-    open,
-    open_or_go_to = FALSE
+  perform_checks_and_copy_if_everything_is_ok(
+    path_to_copy_from = path,
+    directory_to_copy_to = dir,
+    where_to_copy_to = where_to_copy_to,
+    file_type = NULL,
+    file_created_fun = after_creation_message_html_template,
+    pkg = pkg,
+    name = name,
+    open = open
   )
 }
