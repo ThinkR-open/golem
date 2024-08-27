@@ -37,7 +37,6 @@ use_external_js_file <- function(
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
     directory_to_download_to = dir,
-    where_to_download_to = where_to_download,
     file_type = "js",
     file_created_fun = after_creation_message_js,
     pkg = pkg,
@@ -70,7 +69,6 @@ use_external_css_file <- function(
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
     directory_to_download_to = dir,
-    where_to_download_to = where_to_download,
     file_type = "css",
     file_created_fun = after_creation_message_css,
     pkg = pkg,
@@ -102,7 +100,6 @@ use_external_html_template <- function(
   perform_checks_and_download_if_everything_is_ok(
     url_to_download_from = url,
     directory_to_download_to = dir,
-    where_to_download_to = where_to_download,
     file_type = "html",
     file_created_fun = after_creation_message_html_template,
     pkg = pkg,
