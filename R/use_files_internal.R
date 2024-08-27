@@ -8,13 +8,6 @@ use_internal_js_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  name <- build_name(
-    name,
-    path
-  )
 
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
@@ -37,13 +30,6 @@ use_internal_css_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  name <- build_name(
-    name,
-    path
-  )
 
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
@@ -66,19 +52,10 @@ use_internal_html_template <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  name <- build_name(
-    name,
-    path
-  )
-
 
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
     directory_to_copy_to = fs_path_abs(dir),
-    where_to_copy_to = where_to_copy_to,
     file_type = "html",
     file_created_fun = after_creation_message_html_template,
     pkg = pkg,
@@ -97,17 +74,10 @@ use_internal_file <- function(
   open = FALSE,
   dir_create = TRUE
 ) {
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
 
-  name <- build_name(
-    name,
-    path
-  )
   perform_checks_and_copy_if_everything_is_ok(
     path_to_copy_from = path,
     directory_to_copy_to = fs_path_abs(dir),
-    where_to_copy_to = where_to_copy_to,
     file_type = NULL,
     file_created_fun = after_creation_message_html_template,
     pkg = pkg,

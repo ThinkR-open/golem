@@ -34,6 +34,12 @@ perform_checks_and_copy_if_everything_is_ok <- function(
   name,
   open
 ) {
+  old <- setwd(fs_path_abs(pkg))
+  on.exit(setwd(old))
+  name <- build_name(
+    name,
+    path_to_copy_from
+  )
   if (is.null(file_type)) {
     where_to_copy_to <- fs_path(
       directory_to_copy_to,
