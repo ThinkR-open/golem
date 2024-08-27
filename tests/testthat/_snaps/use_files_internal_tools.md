@@ -17,5 +17,5 @@
       check_file_has_the_correct_extension("https://www.google.com", "js")
     Condition
       Error:
-      ! File not added (URL must end with .js extension)
+      ! File not added (URL must end with .js)
 
