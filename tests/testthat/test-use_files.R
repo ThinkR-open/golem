@@ -15,6 +15,7 @@ test_that(
           )
           mapply(
             function(fun, ext) {
+              unlink(paste0("this.", ext))
               path_to_file <- fun(
                 url = paste0("this.", ext),
                 pkg = "."

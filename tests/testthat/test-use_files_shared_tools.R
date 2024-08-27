@@ -38,3 +38,30 @@ test_that("check_directory_exists works as expected", {
     check_directory_exists(getwd())
   )
 })
+
+test_that("check_directory_exists works as expected", {
+  expect_snapshot(
+    error = TRUE,
+    {
+      check_directory_exists("inst/app/www")
+    }
+  )
+  expect_error(
+    check_directory_exists("inst/app/www")
+  )
+  expect_null(
+    check_directory_exists(getwd())
+  )
+})
+
+test_that("check_file_exists works as expected", {
+  file <- tempfile(fileext = ".txt")
+  file.create(file)
+  expect_error(
+    check_file_exists(file)
+  )
+  expect_null(
+    check_file_exists(tempfile(fileext = ".txt"))
+  )
+  unlink(file)
+})

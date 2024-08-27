@@ -47,10 +47,7 @@ use_external_js_file <- function(
     new_file
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
+  check_file_exists(where)
 
   check_url_has_the_correct_extension(
     url,
@@ -100,10 +97,7 @@ use_external_css_file <- function(
     new_file
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
+  check_file_exists(where)
 
   check_url_has_the_correct_extension(
     url,
@@ -156,10 +150,7 @@ use_external_html_template <- function(
     new_file
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
+  check_file_exists(where)
 
   check_url_has_the_correct_extension(
     url,
@@ -206,10 +197,7 @@ use_external_file <- function(
     name
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
+  check_file_exists(where)
 
   download_external(url, where)
 

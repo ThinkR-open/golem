@@ -20,3 +20,15 @@ check_directory_exists <- function(dir){
     )
   }
 }
+
+check_file_exists <- function(where) {
+  if (fs_file_exists(where)) {
+    cli_cli_abort(
+      sprintf(
+        "%s already exists.\n\nYou can delete it with:\nunlink('%s', recursive = TRUE).",
+        where,
+        where
+      )
+    )
+  }
+}

@@ -32,17 +32,7 @@ use_internal_js_file <- function(
     new_file
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
-
-  if (file_ext(path) != "js") {
-    cat_red_bullet(
-      "File not added (URL must end with .js extension)"
-    )
-    return(invisible(FALSE))
-  }
+  check_file_exists(where)
 
   copy_internal_file(path, where)
 
@@ -91,18 +81,7 @@ use_internal_css_file <- function(
     new_file
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
-
-  if (file_ext(path) != "css") {
-    cat_red_bullet(
-      "File not added (URL must end with .css extension)"
-    )
-    return(invisible(FALSE))
-  }
-
+  check_file_exists(where)
   copy_internal_file(path, where)
 
   file_created_dance(
@@ -153,10 +132,7 @@ use_internal_html_template <- function(
     new_file
   )
 
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
+  check_file_exists(where)
 
 
   copy_internal_file(path, where)
@@ -197,11 +173,7 @@ use_internal_file <- function(
     dir,
     name
   )
-
-  if (fs_file_exists(where)) {
-    cat_exists(where)
-    return(invisible(FALSE))
-  }
+  check_file_exists(where)
 
   copy_internal_file(path, where)
 
