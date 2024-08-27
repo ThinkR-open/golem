@@ -11,7 +11,7 @@ status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/
 
 # {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
-> You’re reading the doc about version: 0.5.0. Note that `{golem}`
+> You’re reading the doc about version: 0.5.1. Note that `{golem}`
 > follows the [semantic versioning](https://semver.org/) scheme.
 
 Production-grade `{shiny}` applications, from creation to deployment.
@@ -78,14 +78,14 @@ with blogposts, and links to other packages of the `golemverse`.
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-08-19 06:13:54 UTC"
+    #> [1] "2024-08-27 09:39:59 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
-    #> ── R CMD check results ──────────────────────────────────────── golem 0.5.0 ────
-    #> Duration: 43.8s
+    #> ── R CMD check results ──────────────────────────────────────── golem 0.5.1 ────
+    #> Duration: 44.8s
     #> 
     #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
@@ -109,7 +109,7 @@ Here are the test & coverage results:
     #> R/install_dev_deps.R: 78.26%
     #> R/add_r_files.R: 78.70%
     #> R/config.R: 79.23%
-    #> R/use_files.R: 80.40%
+    #> R/use_files.R: 80.63%
     #> R/reload.R: 84.69%
     #> R/disable_autoload.R: 85.00%
     #> R/add_dockerfiles.R: 87.10%
