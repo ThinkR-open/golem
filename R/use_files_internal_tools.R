@@ -36,16 +36,21 @@ perform_checks_and_copy_if_everything_is_ok <- function(
 ) {
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
-  name <- build_name(
-    name,
-    path_to_copy_from
-  )
   if (is.null(file_type)) {
+    name <- build_name(
+      name,
+      path_to_copy_from,
+      with_ext = TRUE
+    )
     where_to_copy_to <- fs_path(
       directory_to_copy_to,
       name
     )
   } else {
+    name <- build_name(
+      name,
+      path_to_copy_from
+    )
     check_file_has_the_correct_extension(
       path = path_to_copy_from,
       file_type

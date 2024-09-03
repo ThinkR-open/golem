@@ -1,12 +1,18 @@
 build_name <- function(
   name = NULL,
-  url
+  url,
+  with_ext = FALSE
 ) {
   if (is.null(name)) {
     name <- basename(url)
   }
   check_name_length_is_one(name)
-  file_path_sans_ext(name)
+  if (with_ext) {
+    return(name)
+  }
+  return(
+    file_path_sans_ext(name)
+  )
 }
 
 check_directory_exists <- function(dir){
