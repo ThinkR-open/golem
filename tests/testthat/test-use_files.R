@@ -66,6 +66,10 @@ test_that(
               expect_exists(
                 path_to_file
               )
+              expect_equal(
+                file_ext(path_to_file),
+                ext
+              )
             },
             funs_and_ext,
             names(funs_and_ext)
