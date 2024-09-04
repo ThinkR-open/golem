@@ -4,7 +4,7 @@ set_golem_wd <- function(
   golem_wd = golem::pkg_path(),
   pkg = golem::pkg_path(),
   talkative = TRUE
-    ) {
+) {
   if (
     golem_wd == "golem::pkg_path()" |
       normalizePath(golem_wd) == normalizePath(golem::pkg_path())
@@ -34,7 +34,6 @@ set_golem_name <- function(
   talkative = TRUE,
   old_name = golem::pkg_name()
 ) {
-
   name <- force(name)
   pkg <- force(pkg)
   old_name <- force(old_name)
@@ -87,7 +86,7 @@ set_golem_name <- function(
     path = path
   )
 
-  if (old_name != name){
+  if (old_name != name) {
     cli_cli_alert_info(
       sprintf("Please note that the old name %s might still be in some places, for example in the ./docs folder.", old_name)
     )
@@ -158,7 +157,7 @@ set_golem_version <- function(
   version = golem::pkg_version(),
   pkg = golem::pkg_path(),
   talkative = TRUE
-    ) {
+) {
   path <- fs_path_abs(pkg)
 
   # Changing in YAML

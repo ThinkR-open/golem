@@ -9,11 +9,11 @@ test_that("is_golem works", {
     value = TRUE
   )
   run_quietly_in_a_dummy_golem({
-     for (file in to_create) {
-       file.create(
-         file
-       )
-     }
+    for (file in to_create) {
+      file.create(
+        file
+      )
+    }
     expect_true(
       is_golem(".")
     )

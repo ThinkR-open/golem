@@ -8,8 +8,7 @@ use_internal_js_file <- function(
   open = FALSE,
   dir_create
 ) {
-
-  if (!missing(dir_create)){
+  if (!missing(dir_create)) {
     cli_cli_abort(
       "The dir_create argument is deprecated."
     )
@@ -36,8 +35,7 @@ use_internal_css_file <- function(
   open = FALSE,
   dir_create
 ) {
-
-  if (!missing(dir_create)){
+  if (!missing(dir_create)) {
     cli_cli_abort(
       "The dir_create argument is deprecated."
     )
@@ -64,8 +62,7 @@ use_internal_html_template <- function(
   open = FALSE,
   dir_create
 ) {
-
-  if (!missing(dir_create)){
+  if (!missing(dir_create)) {
     cli_cli_abort(
       "The dir_create argument is deprecated."
     )
@@ -92,8 +89,7 @@ use_internal_file <- function(
   open = FALSE,
   dir_create
 ) {
-
-  if (!missing(dir_create)){
+  if (!missing(dir_create)) {
     cli_cli_abort(
       "The dir_create argument is deprecated."
     )

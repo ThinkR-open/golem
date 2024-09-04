@@ -57,11 +57,9 @@ check_overwrite <- function(overwrite, tmp_pth) {
       stop("README.Rmd already exists. Set `overwrite = TRUE` to overwrite.")
     }
   }
-
 }
 
 generate_readme_tmpl <- function(pkg_name) {
-
   tmp_file <- readLines(
     golem_sys("utils/empty_readme.Rmd")
   )

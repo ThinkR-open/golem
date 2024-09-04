@@ -87,7 +87,7 @@ sass_template <- function(
 empty_template <- function(
   path,
   code = " "
-    ) {
+) {
   write_there <- write_there_builder(path)
 
   write_there(code)

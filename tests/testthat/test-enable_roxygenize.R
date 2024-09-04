@@ -6,27 +6,28 @@ create_temp_rproj <- function() {
 
 
 test_that(
-  "enable_roxygenize function updates the .Rproj file correctly"
-, {
-  # Create a temporary .Rproj file
-  temp_rproj <- create_temp_rproj()
+  "enable_roxygenize function updates the .Rproj file correctly",
+  {
+    # Create a temporary .Rproj file
+    temp_rproj <- create_temp_rproj()
 
-  withr::with_options(
-    c("usethis.quiet" = TRUE),
-    {
-      enable_roxygenize(path = temp_rproj)
-    }
-  )
+    withr::with_options(
+      c("usethis.quiet" = TRUE),
+      {
+        enable_roxygenize(path = temp_rproj)
+      }
+    )
 
-  updated_content <- yaml::read_yaml(temp_rproj)
+    updated_content <- yaml::read_yaml(temp_rproj)
 
-  expect_equal(
-    updated_content[["PackageRoxygenize"]],
-    "rd,collate,namespace"
-  )
+    expect_equal(
+      updated_content[["PackageRoxygenize"]],
+      "rd,collate,namespace"
+    )
 
-  unlink(temp_rproj)
-})
+    unlink(temp_rproj)
+  }
+)
 
 test_that("enable_roxygenize function prints correct messages", {
   temp_rproj <- create_temp_rproj()

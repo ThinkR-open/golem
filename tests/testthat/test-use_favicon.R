@@ -13,35 +13,36 @@ test_that("use_favicon works", {
           ),
           destfile
         )
-      },{
-         use_favicon()
-         expect_true(
-           file.exists("inst/app/www/favicon.ico")
-         )
+      },
+      {
+        use_favicon()
+        expect_true(
+          file.exists("inst/app/www/favicon.ico")
+        )
 
-         lapply(
-           c(
-             "test.jpeg",
-             "test.bmp",
-             "test.gif",
-             "test.tiff"
-           ),
-           function(.x) {
-             expect_error(
-               use_favicon(path = .x)
-             )
-           }
-         )
-         remove_favicon()
-         expect_false(
-           file.exists("inst/app/www/favicon.ico")
-         )
-         use_favicon(
-           path = "https://fr.wikipedia.org//static/favicon/wikipedia.ico"
-         )
-         expect_true(
-           file.exists("inst/app/www/favicon.ico")
-         )
+        lapply(
+          c(
+            "test.jpeg",
+            "test.bmp",
+            "test.gif",
+            "test.tiff"
+          ),
+          function(.x) {
+            expect_error(
+              use_favicon(path = .x)
+            )
+          }
+        )
+        remove_favicon()
+        expect_false(
+          file.exists("inst/app/www/favicon.ico")
+        )
+        use_favicon(
+          path = "https://fr.wikipedia.org//static/favicon/wikipedia.ico"
+        )
+        expect_true(
+          file.exists("inst/app/www/favicon.ico")
+        )
       }
     )
   })

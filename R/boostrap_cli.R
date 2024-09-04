@@ -51,4 +51,3 @@ cli_cli_abort <- function(message) {
     stop(message)
   }
 }
-

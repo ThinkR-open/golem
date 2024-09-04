@@ -143,12 +143,12 @@ add_utils <- function(
 #' @rdname file_creation
 #' @export
 add_r6 <- function(
-    name,
-    module = NULL,
-    pkg = get_golem_wd(),
-    open = TRUE,
-    dir_create = TRUE,
-    with_test = FALSE
+  name,
+  module = NULL,
+  pkg = get_golem_wd(),
+  open = TRUE,
+  dir_create = TRUE,
+  with_test = FALSE
 ) {
   add_r_files(
     name,
@@ -209,7 +209,7 @@ append_roxygen_comment <- function(
   }
   if (file_type == "R6") {
     write_there(paste0(name, " <- R6::R6Class("))
-    write_there(paste0("  classname = '",  name, "',"))
+    write_there(paste0("  classname = '", name, "',"))
     write_there("  public = list()")
     write_there(")")
   }
