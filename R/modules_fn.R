@@ -194,9 +194,7 @@ module_template <- function(
   ph_server = " ",
   ...
 ) {
-  write_there <- function(...) {
-    write(..., file = path, append = TRUE)
-  }
+  write_there <- write_there_builder(path)
 
   write_there(sprintf("#' %s UI Function", name))
   write_there("#'")
@@ -324,9 +322,7 @@ use_module_test <- function(
   if (!fs_file_exists(path)) {
     fs_file_create(path)
 
-    write_there <- function(...) {
-      write(..., file = path, append = TRUE)
-    }
+    write_there <- write_there_builder(path)
 
     write_there("testServer(")
     write_there(sprintf("  mod_%s_server,", name))

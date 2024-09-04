@@ -177,9 +177,7 @@ append_roxygen_comment <- function(
   ext,
   export = FALSE
 ) {
-  write_there <- function(...) {
-    write(..., file = path, append = TRUE)
-  }
+  write_there <- write_there_builder(path)
 
   file_type <- " "
 

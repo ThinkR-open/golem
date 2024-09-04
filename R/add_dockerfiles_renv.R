@@ -416,9 +416,7 @@ add_dockerfile_with_renv_heroku <- function(
     "README"
   )
 
-  write_there <- function(...) {
-    write(..., file = readme_output, append = TRUE)
-  }
+  write_there <- write_there_builder(readme_output)
 
   write_there("From your command line, run:\n")
 

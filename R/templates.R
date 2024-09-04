@@ -39,9 +39,7 @@ js_handler_template <- function(
   name = "fun",
   code = " "
 ) {
-  write_there <- function(...) {
-    write(..., file = path, append = TRUE)
-  }
+  write_there <- write_there_builder(path)
 
   write_there("$( document ).ready(function() {")
   write_there(
@@ -58,9 +56,7 @@ js_template <- function(
   path,
   code = " "
 ) {
-  write_there <- function(...) {
-    write(..., file = path, append = TRUE)
-  }
+  write_there <- write_there_builder(path)
 
   write_there(code)
 }
@@ -71,10 +67,7 @@ css_template <- function(
   path,
   code = " "
 ) {
-  write_there <- function(...) {
-    write(..., file = path, append = TRUE)
-  }
-
+  write_there <- write_there_builder(path)
   write_there(code)
 }
 
@@ -84,9 +77,7 @@ sass_template <- function(
   path,
   code = " "
 ) {
-  write_there <- function(...) {
-    write(..., file = path, append = TRUE)
-  }
+  write_there <- write_there_builder(path)
 
   write_there(code)
 }
@@ -97,9 +88,7 @@ empty_template <- function(
   path,
   code = " "
     ) {
-  write_there <- function(...) {
-    write(..., file = path, append = TRUE)
-  }
+  write_there <- write_there_builder(path)
 
   write_there(code)
 }
