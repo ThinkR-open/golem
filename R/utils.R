@@ -239,3 +239,9 @@ check_name_syntax <- function(name) {
     )
   }
 }
+
+write_there_builder <- function(file_to_write_to) {
+  function(...) {
+    write(..., file = file_to_write_to, append = TRUE)
+  }
+}
