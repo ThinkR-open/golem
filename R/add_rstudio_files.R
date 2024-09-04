@@ -23,9 +23,7 @@ add_rstudio_files <- function(
   if (!fs_file_exists(where)) {
     fs_file_create(where)
 
-    write_there <- function(..., here = where) {
-      write(..., here, append = TRUE)
-    }
+    write_there <- write_there_builder(where)
 
     usethis_use_build_ignore(basename(where))
     usethis_use_build_ignore("rsconnect")
