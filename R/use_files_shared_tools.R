@@ -15,7 +15,7 @@ build_name <- function(
   )
 }
 
-check_directory_exists <- function(dir){
+check_directory_exists <- function(dir) {
   if (!fs_dir_exists(dir)) {
     cli_cli_abort(
       sprintf(

@@ -94,9 +94,10 @@ test_that("config finding works", {
   )
 })
 
-test_that("ask_golem_creation_upon_config works",{
+test_that("ask_golem_creation_upon_config works", {
   testthat::with_mocked_bindings(
-    yesno = paste,{
+    yesno = paste,
+    {
       expect_snapshot(
         ask_golem_creation_upon_config(
           "/home/golem"

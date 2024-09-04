@@ -70,7 +70,6 @@ test_add_file <- function(
 
 test_that("add_file works", {
   run_quietly_in_a_dummy_golem({
-
     test_add_file(
       add_js_file,
       "add_js_file.js"

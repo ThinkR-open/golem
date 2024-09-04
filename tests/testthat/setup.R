@@ -305,7 +305,6 @@ test_check(\"shinyexample\")",
 }
 
 run_quietly_in_a_dummy_golem <- function(expr) {
-
   on.exit(
     {
       unlink(

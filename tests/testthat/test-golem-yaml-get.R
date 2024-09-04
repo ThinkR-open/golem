@@ -26,5 +26,4 @@ test_that("get_golem_things works", {
       "0.0.0.9000"
     )
   })
-
 })

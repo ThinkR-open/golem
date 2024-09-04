@@ -1,4 +1,3 @@
-
 # All the fns here check that {usethis} is installed
 # before doing anything.
 check_usethis_installed <- function(reason = "for project and file manipulation.") {

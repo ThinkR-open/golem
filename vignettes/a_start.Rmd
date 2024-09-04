@@ -118,7 +118,7 @@ golem::fill_desc(
     email = "AUTHOR@MAIL.COM", # Your email
     role = c("aut", "cre"), # Your role (here author/creator)
     set_options = TRUE # Set the global golem options
-    ),
+  ),
   repo_url = NULL, # The URL of the GitHub repo (optional),
   pkg_version = "0.0.0.9000" # The version of the package containing the app
 )
@@ -167,10 +167,10 @@ golem::use_recommended_deps()
 
 + If you want to change the default favicon:
     ```{r}
-    # Remove current favicon
-    golem::remove_favicon()
-    # Add a new one
-    golem::use_favicon(path = "path/to/favicon")
+# Remove current favicon
+golem::remove_favicon()
+# Add a new one
+golem::use_favicon(path = "path/to/favicon")
     ```
 Note that you can add an URL, and the favicon will be downloaded to the `inst/app/www` folder.
 
@@ -179,8 +179,8 @@ Note that you can add an URL, and the favicon will be downloaded to the `inst/ap
 + Utils: these two functions add two files with additional helper functions for
 your `{golem}` project. They can be used along the process of building your app:
     ```{r}
-    golem::use_utils_ui(with_test = TRUE)
-    golem::use_utils_server(with_test = TRUE)
+golem::use_utils_ui(with_test = TRUE)
+golem::use_utils_server(with_test = TRUE)
     ```
 For a detailed description of the generated functions see the respective files 
 `R/golem_utils_server.R` and `R/golem_utils_ui.R` for which also default tests 

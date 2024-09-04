@@ -50,7 +50,6 @@ test_that(
           )
           mapply(
             function(fun, ext) {
-
               if (ext != "txt") {
                 expect_error(
                   fun(

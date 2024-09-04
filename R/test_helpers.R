@@ -195,5 +195,3 @@ expect_running <- function(
   testthat::expect_true(shinyproc$is_alive())
   shinyproc$kill()
 }
-
-

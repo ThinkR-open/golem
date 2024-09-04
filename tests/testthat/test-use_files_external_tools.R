@@ -1,4 +1,3 @@
-
 test_that("check_url_has_the_correct_extension(url, where) works", {
   testthat::expect_snapshot(error = TRUE, {
     check_url_has_the_correct_extension(

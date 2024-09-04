@@ -1,5 +1,3 @@
-
-
 #' Add a favicon to your shinyapp
 #'
 #' @param path Path to your favicon file (.ico or .png)
@@ -163,5 +161,3 @@ favicon <- function(
     )
   )
 }
-
-
