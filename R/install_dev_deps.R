@@ -8,7 +8,6 @@
 #' + {roxygen2}
 #' + {attachment}
 #' + {rstudioapi}
-#' + {here}
 #' + {fs}
 #' + {desc}
 #' + {pkgbuild}
@@ -87,7 +86,6 @@ dev_deps <- unique(
     "devtools",
     "dockerfiler",
     "fs",
-    "here",
     "httpuv",
     "pkgbuild",
     "pkgload",

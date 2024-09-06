@@ -60,11 +60,6 @@ copy_golem_skeleton_and_replace_name <- function(
   cat_green_tick("Copied app skeleton")
 }
 
-# For mocking in tests
-here_set_here <- function(...) {
-  here::set_here(...)
-}
-
 #' Create a package for a Shiny App using `{golem}`
 #'
 #' @param path Name of the folder to create the package in.
@@ -145,9 +140,6 @@ create_golem <- function(
       path = path_to_golem,
       open = FALSE
     )
-    if (!file.exists(".here")) {
-      here_set_here(path_to_golem)
-    }
     cat_green_tick("Created package directory")
   }
 
