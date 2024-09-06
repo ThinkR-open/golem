@@ -28,7 +28,6 @@ Depends:
 Imports:
     attempt (>= 0.3.0),
     config,
-    here,
     htmltools,
     rlang (>= 1.0.0),
     shiny (>= 1.5.0),
