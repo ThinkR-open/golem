@@ -16,6 +16,13 @@ test_that(
           mapply(
             function(fun, ext) {
               unlink(paste0("this.", ext))
+              expect_error({
+                fun(
+                  url = paste0("this.", ext),
+                  pkg = ".",
+                  dir_create = TRUE
+                )
+              })
               path_to_file <- fun(
                 url = paste0("this.", ext),
                 pkg = "."
