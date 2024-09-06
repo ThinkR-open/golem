@@ -112,10 +112,6 @@ expect_exists <- function(fls) {
 }
 
 create_dummy_golem <- function() {
-  # we're using this fun to do a
-  # minimal reprex of a golem
-  # without having to go through the
-  # create_golem() function
   path_to_golem <- file.path(
     tempdir(),
     "dummygolem"
@@ -123,26 +119,17 @@ create_dummy_golem <- function() {
   if (dir.exists(path_to_golem)) {
     unlink(path_to_golem, recursive = TRUE, force = TRUE)
   }
-  dir.create(
-    path_to_golem,
-    recursive = TRUE
+  withr::with_options(
+    c("usethis.quiet" = TRUE),
+    {
+      create_golem(
+        path_to_golem,
+        open = FALSE,
+        package_name = "shinyexample"
+      )
+    }
   )
-  file.copy(
-    golem_sys(
-      "shinyexample/DESCRIPTION"
-    ),
-    file.path(
-      path_to_golem,
-      "DESCRIPTION"
-    )
-  )
-  dir.create(
-    file.path(
-      path_to_golem,
-      "R"
-    ),
-    recursive = TRUE
-  )
+
   dir.create(
     file.path(
       path_to_golem,
@@ -174,114 +161,7 @@ test_check(\"shinyexample\")",
       "tests/testthat.R"
     )
   )
-  dir.create(
-    file.path(
-      path_to_golem,
-      "dev"
-    ),
-    recursive = TRUE
-  )
-  file.copy(
-    golem_sys(
-      "shinyexample/dev/01_start.R"
-    ),
-    file.path(
-      path_to_golem,
-      "dev/01_start.R"
-    )
-  )
-  file.copy(
-    golem_sys(
-      "shinyexample/dev/02_dev.R"
-    ),
-    file.path(
-      path_to_golem,
-      "dev/02_dev.R"
-    )
-  )
-  file.copy(
-    golem_sys(
-      "shinyexample/dev/03_deploy.R"
-    ),
-    file.path(
-      path_to_golem,
-      "dev/03_deploy.R"
-    )
-  )
-  file.copy(
-    golem_sys(
-      "shinyexample/dev/run_dev.R"
-    ),
-    file.path(
-      path_to_golem,
-      "dev/run_dev.R"
-    )
-  )
-  dir.create(
-    file.path(
-      path_to_golem,
-      "inst/app/www/"
-    ),
-    recursive = TRUE
-  )
-  file.create(
-    file.path(
-      path_to_golem,
-      "inst/app/www/favicon.ico"
-    )
-  )
-  file.copy(
-    golem_sys(
-      "shinyexample/inst/golem-config.yml"
-    ),
-    file.path(
-      path_to_golem,
-      "inst/golem-config.yml"
-    )
-  )
-  file.copy(
-    golem_sys(
-      "shinyexample/R/app_config.R"
-    ),
-    file.path(
-      path_to_golem,
-      "R/app_config.R"
-    )
-  )
-  file.copy(
-    golem_sys(
-      "shinyexample/R/app_ui.R"
-    ),
-    file.path(
-      path_to_golem,
-      "R/app_ui.R"
-    )
-  )
-  file.copy(
-    golem_sys(
-      "shinyexample/R/app_server.R"
-    ),
-    file.path(
-      path_to_golem,
-      "R/app_server.R"
-    )
-  )
-  file.copy(
-    golem_sys(
-      "shinyexample/R/run_app.R"
-    ),
-    file.path(
-      path_to_golem,
-      "R/run_app.R"
-    )
-  )
-  dir.create(
-    file.path(
-      path_to_golem,
-      "man"
-    ),
-    recursive = TRUE
-  )
+
   dir.create(
     file.path(
       path_to_golem,
