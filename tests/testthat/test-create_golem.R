@@ -26,10 +26,6 @@ is_properly_populated_golem <- function(path) {
 
 test_that("create_golem works", {
   testthat::with_mocked_bindings(
-    usethis_create_project = function(path, open) {
-      dir.create(path, recursive = TRUE)
-      return(TRUE)
-    },
     {
       dir <- tempfile(pattern = "golemcreategolem")
       withr::with_options(
