@@ -46,9 +46,7 @@ add_js_file <- function(
   )
 
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   temp_js <- tempfile(fileext = ".js")
@@ -88,9 +86,7 @@ add_js_handler <- function(
   )
 
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   temp_js <- tempfile(fileext = ".js")
@@ -127,9 +123,7 @@ add_js_input_binding <- function(
   )
 
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   attempt::stop_if(
@@ -244,9 +238,7 @@ add_js_output_binding <- function(
   )
 
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   raw_name <- name
@@ -299,9 +291,7 @@ add_css_file <- function(
   )
 
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   temp_css <- tempfile(fileext = ".css")
@@ -333,9 +323,7 @@ add_sass_file <- function(
   )
 
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   temp_js <- tempfile(fileext = ".sass")
@@ -411,9 +399,7 @@ add_empty_file <- function(
   )
 
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   extension <- file_ext(name)
@@ -490,9 +476,7 @@ add_html_template <- function(
   dir_create
 ) {
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   temp_html <- tempfile(fileext = ".html")
@@ -533,9 +517,7 @@ add_partial_html_template <- function(
   dir_create
 ) {
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
   temp_html <- tempfile(fileext = ".html")
   write_there <- write_there_builder(temp_html)
@@ -562,9 +544,7 @@ add_ui_server_files <- function(
   dir_create
 ) {
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
   .Deprecated(msg = "This function will be deprecated in a future version of {golem}.\nPlease comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to stay.")
 
