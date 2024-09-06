@@ -416,9 +416,6 @@ add_empty_file <- function(
     )
   }
 
-
-  check_name_length_is_one(name)
-
   extension <- file_ext(name)
 
   if (extension == "js") {
