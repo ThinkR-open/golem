@@ -4,13 +4,13 @@
 
 ## Breaking change
 
-- The use_*_files now fail when:
+- The `add_*_files` and `use_*_files` now fail when:
   - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use_*_file functions should only be there to add file (Singe responsabily  )
   - The file that the user tries to create already exists
 
 ## Internal changes
 
-- Full refactoring of the use_*_files functions that now all share the same behavior
+- Full refactoring of the `add_*_files` and `use_*_files` functions that now all share the same behavior
 
 # golem 0.5.1
 
