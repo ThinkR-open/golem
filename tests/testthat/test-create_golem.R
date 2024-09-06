@@ -143,6 +143,33 @@ test_that("create_golem can remove comments", {
   )
 })
 
+test_that("create_golem with git works", {
+  dir <- tempfile(pattern = "golemcreategolemfail")
+
+  withr::with_options(
+    c("usethis.quiet" = TRUE),
+    {
+      dir <- create_golem(
+        dir,
+        with_git = TRUE,
+        open = FALSE,
+        package_name = "testpkg"
+      )
+    }
+  )
+  expect_exists(
+    file.path(
+      dir,
+      ".git"
+    )
+  )
+  unlink(
+    dir,
+    TRUE,
+    TRUE
+  )
+})
+
 test_that("create_golem_gui works", {
   testthat::with_mocked_bindings(
     create_golem = function(...) {
