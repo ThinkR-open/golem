@@ -11,7 +11,7 @@ status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/
 
 # {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
-> You’re reading the doc about version: 0.5.1.9002. Note that `{golem}`
+> You’re reading the doc about version: 0.5.1.9003. Note that `{golem}`
 > follows the [semantic versioning](https://semver.org/) scheme.
 
 Production-grade `{shiny}` applications, from creation to deployment.
@@ -78,14 +78,14 @@ with blogposts, and links to other packages of the `golemverse`.
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-09-06 14:23:38 UTC"
+    #> [1] "2024-09-06 14:33:35 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
-    #> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9002 ────
-    #> Duration: 43.9s
+    #> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9003 ────
+    #> Duration: 46.6s
     #> 
     #> ❯ checking tests ...
     #>   See below...
