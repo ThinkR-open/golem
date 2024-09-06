@@ -11,7 +11,7 @@ status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/
 
 # {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
-> You’re reading the doc about version: 0.5.1.9003. Note that `{golem}`
+> You’re reading the doc about version: 0.5.1.9004. Note that `{golem}`
 > follows the [semantic versioning](https://semver.org/) scheme.
 
 Production-grade `{shiny}` applications, from creation to deployment.
@@ -78,14 +78,14 @@ with blogposts, and links to other packages of the `golemverse`.
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-09-06 14:33:35 UTC"
+    #> [1] "2024-09-06 17:15:09 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
-    #> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9003 ────
-    #> Duration: 46.6s
+    #> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9004 ────
+    #> Duration: 48s
     #> 
     #> ❯ checking tests ...
     #>   See below...
@@ -104,8 +104,7 @@ Here are the test & coverage results:
     #> > library(golem)
     #> > 
     #> > test_check("golem")
-    #> Starting 2 test processes
-    #> [ FAIL 1 | WARN 0 | SKIP 0 | PASS 324 ]
+    #> [ FAIL 1 | WARN 0 | SKIP 0 | PASS 329 ]
     #> 
     #> ══ Failed tests ════════════════════════════════════════════════════════════════
     #> ── Failure ('test-install_dev_deps.R:30:7'): install_dev_deps works ────────────
@@ -119,7 +118,7 @@ Here are the test & coverage results:
     #>  2. │ └─base::force(code)
     #>  3. └─testthat::expect_true(rlang::is_installed(pak)) at test-install_dev_deps.R:30:7
     #> 
-    #> [ FAIL 1 | WARN 0 | SKIP 0 | PASS 324 ]
+    #> [ FAIL 1 | WARN 0 | SKIP 0 | PASS 329 ]
     #> Error: Test failures
     #> Execution halted
     #> 
@@ -128,7 +127,7 @@ Here are the test & coverage results:
 
     Sys.setenv("NOT_CRAN" = TRUE)
     covr::package_coverage()
-    #> golem Coverage: 85.76%
+    #> golem Coverage: 86.92%
     #> R/boostrap_base.R: 0.00%
     #> R/bootstrap_attachment.R: 0.00%
     #> R/bootstrap_pkgload.R: 0.00%
@@ -136,13 +135,12 @@ Here are the test & coverage results:
     #> R/bootstrap_rstudio_api.R: 0.00%
     #> R/bootstrap_testthat.R: 0.00%
     #> R/bootstrap_dockerfiler.R: 23.33%
-    #> R/bootstrap_usethis.R: 28.57%
+    #> R/bootstrap_usethis.R: 36.36%
     #> R/test_helpers.R: 47.37%
     #> R/bootstrap_desc.R: 55.56%
     #> R/addins.R: 66.67%
     #> R/cli_msg.R: 73.97%
     #> R/modules_fn.R: 75.25%
-    #> R/create_golem.R: 77.33%
     #> R/add_rstudio_files.R: 77.45%
     #> R/install_dev_deps.R: 78.26%
     #> R/add_r_files.R: 78.30%
@@ -159,6 +157,7 @@ Here are the test & coverage results:
     #> R/js.R: 93.75%
     #> R/add_files.R: 94.71%
     #> R/run_dev.R: 95.65%
+    #> R/create_golem.R: 95.86%
     #> R/boostrap_cli.R: 96.43%
     #> R/desc.R: 96.77%
     #> R/use_recommended.R: 97.30%
