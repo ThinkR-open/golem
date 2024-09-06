@@ -25,9 +25,7 @@ use_external_js_file <- function(
   dir_create
 ) {
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   perform_checks_and_download_if_everything_is_ok(
@@ -52,9 +50,7 @@ use_external_css_file <- function(
   dir_create
 ) {
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   perform_checks_and_download_if_everything_is_ok(
@@ -79,9 +75,7 @@ use_external_html_template <- function(
   dir_create
 ) {
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   perform_checks_and_download_if_everything_is_ok(
@@ -106,9 +100,7 @@ use_external_file <- function(
   dir_create
 ) {
   if (!missing(dir_create)) {
-    cli_cli_abort(
-      "The dir_create argument is deprecated."
-    )
+    cli_abort_dir_create()
   }
 
   perform_checks_and_download_if_everything_is_ok(
