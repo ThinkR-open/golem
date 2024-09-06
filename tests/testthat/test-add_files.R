@@ -20,6 +20,13 @@ test_add_file <- function(
   )
   unlink(output)
   expect_error(fun())
+  expect_error(
+    fun(
+      file_sans_extension,
+      open = FALSE,
+      dir_create = TRUE
+    )
+  )
   fun(
     file_sans_extension,
     open = FALSE
