@@ -49,18 +49,6 @@ usethis_create_project <- function(
     open
   )
 }
-usethis_use_latest_dependencies <- function(
-  overwrite = FALSE,
-  source = c("local", "CRAN")
-) {
-  check_usethis_installed(
-    reason = "to set dependency version."
-  )
-  usethis::use_latest_dependencies(
-    overwrite,
-    source
-  )
-}
 
 usethis_proj_set <- function(
   path = ".",

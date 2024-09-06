@@ -29,10 +29,14 @@ fs_dir_create <- function(
   )
 }
 
-
 fs_file_create <- function(where) {
   check_fs_installed()
   fs::file_create(where)
+}
+
+fs_dir_delete <- function(path) {
+  check_fs_installed()
+  fs::dir_delete(path)
 }
 
 fs_file_delete <- function(path) {

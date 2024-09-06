@@ -25,7 +25,7 @@ correct according to CRAN requirements.}
 
 \item{open}{Boolean. Open the created project?}
 
-\item{overwrite}{Boolean. Should the already existing project be overwritten ?}
+\item{overwrite}{Boolean. Should the already existing project be deleted and replaced?}
 
 \item{package_name}{Package name to use. By default, \code{{golem}} uses
 \code{basename(path)}. If \code{path == '.'} & \code{package_name} is
