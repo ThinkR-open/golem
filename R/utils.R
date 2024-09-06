@@ -90,7 +90,7 @@ remove_comments <- function(file) {
     lines_without_comment <- append(
       lines_without_comment,
       gsub(
-        "(\\s*#+[^'@].*$| #+[^#].*$)",
+        "(\\s*#+[^'@].*$| #+[^#].*$|^#+$)",
         "",
         line
       )
