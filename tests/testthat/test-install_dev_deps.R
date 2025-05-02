@@ -13,28 +13,8 @@ test_that("install_dev_deps works", {
     install_dev_deps(
       force_install = TRUE
     )
-
-    paks <- unique(
-      c(
-        "usethis",
-        "pkgload",
-        "dockerfiler",
-        "devtools",
-        "roxygen2",
-        "attachment",
-        "rstudioapi",
-        "here",
-        "fs",
-        "desc",
-        "pkgbuild",
-        "processx",
-        "rsconnect",
-        "testthat",
-        "rstudioapi", "piff"
-      )
-    )
     for (
-      pak in paks
+      pak in dev_deps
     ) {
       expect_installed(pak)
     }
