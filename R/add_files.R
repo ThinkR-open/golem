@@ -3,6 +3,7 @@
 #' These functions create files inside the `inst/app` folder.
 #'
 #' @inheritParams  add_module
+#' @param dir_create Deprecated. Will be removed in future versions and throws an error for now.
 #' @param dir Path to the dir where the file while be created.
 #' @param with_doc_ready For JS file - Should the default file include `$( document ).ready()`?
 #' @param template Function writing in the created file.
@@ -34,7 +35,7 @@ add_js_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   with_doc_ready = TRUE,
   template = golem::js_template,
   ...
@@ -44,56 +45,28 @@ add_js_file <- function(
     msg = "`name` is required"
   )
 
-  check_name_length_is_one(name)
-
-  name <- file_path_sans_ext(name)
-
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
-  )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
   }
 
-  dir <- fs_path_abs(dir)
+  temp_js <- tempfile(fileext = ".js")
+  write_there <- write_there_builder(temp_js)
 
-  where <- fs_path(
-    dir,
-    sprintf("%s.js", name)
-  )
-
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-    if (with_doc_ready) {
-      write_there <- function(...) {
-        write(..., file = where, append = TRUE)
-      }
-      write_there("$( document ).ready(function() {")
-      template(path = where, ...)
-      write_there("});")
-    } else {
-      template(path = where, ...)
-    }
-    file_created_dance(
-      where,
-      after_creation_message_js,
-      pkg,
-      dir,
-      name,
-      open
-    )
+  if (with_doc_ready) {
+    write_there("$( document ).ready(function() {")
+    template(path = temp_js, ...)
+    write_there("});")
   } else {
-    file_already_there_dance(
-      where = where,
-      open_file = open
-    )
+    template(path = temp_js, ...)
   }
+
+  use_internal_js_file(
+    path = temp_js,
+    name = name,
+    pkg = pkg,
+    dir = dir,
+    open = open
+  )
 }
 
 #' @export
@@ -103,58 +76,30 @@ add_js_handler <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   template = golem::js_handler_template,
   ...
 ) {
-  attempt::stop_if(
+  stop_if(
     missing(name),
     msg = "`name` is required"
   )
 
-  check_name_length_is_one(name)
-
-  name <- file_path_sans_ext(name)
-
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
-  )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
   }
 
-  dir <- fs_path_abs(dir)
+  temp_js <- tempfile(fileext = ".js")
 
-  where <- fs_path(
-    dir,
-    sprintf("%s.js", name)
+  template(path = temp_js, ...)
+
+  use_internal_js_file(
+    path = temp_js,
+    name = name,
+    pkg = pkg,
+    dir = dir,
+    open = open
   )
-
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-
-    template(path = where, ...)
-
-    file_created_dance(
-      where,
-      after_creation_message_js,
-      pkg,
-      dir,
-      name,
-      open_file = open
-    )
-  } else {
-    file_already_there_dance(
-      where,
-      open_file = open
-    )
-  }
 }
 
 #' @export
@@ -164,7 +109,7 @@ add_js_input_binding <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   initialize = FALSE,
   dev = FALSE,
   events = list(
@@ -172,12 +117,14 @@ add_js_input_binding <- function(
     rate_policy = FALSE
   )
 ) {
-  attempt::stop_if(
+  stop_if(
     missing(name),
     msg = "`name` is required"
   )
 
-  check_name_length_is_one(name)
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
+  }
 
   attempt::stop_if(
     length(events$name) == 0,
@@ -189,120 +136,91 @@ add_js_input_binding <- function(
     msg = "Incomplete events list"
   )
 
+  temp_js <- tempfile(fileext = ".js")
+
   raw_name <- name
 
   name <- file_path_sans_ext(
     sprintf("input-%s", name)
   )
 
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
+  temp_js <- tempfile(fileext = ".js")
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
-  )
+  write_there <- write_there_builder(temp_js)
 
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
+  # If we find at least 1 event with a rate policy, we allow
+  # the getRatePolicy method
+  global_rate_policy <- sum(sapply(events$rate_policy, `[[`, 1)) > 0
+
+  write_there(sprintf("var %s = new Shiny.InputBinding();", raw_name))
+  write_there(sprintf("$.extend(%s, {", raw_name))
+  # find
+  write_there("  find: function(scope) {")
+  write_there("    // JS logic $(scope).find('whatever')")
+  write_there("  },")
+  # initialize
+  if (initialize) {
+    write_there("  initialize: function(el) {")
+    write_there("    // optional part. Only if the input relies on a JS API with specific initialization.")
+    write_there("  },")
+  }
+  # get value
+  write_there("  getValue: function(el) {")
+  if (dev) write_there("    console.log($(el));")
+  write_there("    // JS code to get value")
+  write_there("  },")
+  # set value
+  write_there("  setValue: function(el, value) {")
+  if (dev) write_there("    console.log('New value is: ' + value);")
+  write_there("    // JS code to set value")
+  write_there("  },")
+  # receive
+  write_there("  receiveMessage: function(el, data) {")
+  write_there("    // this.setValue(el, data);")
+  if (dev) write_there("    console.log('Updated ...');")
+  write_there("  },")
+  # subscribe
+  write_there("  subscribe: function(el, callback) {")
+  # list of event listeners
+  lapply(seq_along(events$name), function(i) {
+    write_there(sprintf("    $(el).on('%s.%s', function(e) {", events$name[i], raw_name))
+    if (events$rate_policy[i]) {
+      write_there("      callback(true);")
+    } else {
+      write_there("      callback();")
+    }
+    if (dev) write_there("      console.log('Subscribe ...');")
+    write_there("    });")
+    write_there("")
+  })
+  write_there("  },")
+
+  # rate policy if any
+  if (global_rate_policy) {
+    write_there("  getRatePolicy: function() {")
+    write_there("    return {")
+    write_there("      policy: 'debounce',")
+    write_there("      delay: 250")
+    write_there("    };")
+    write_there("  },")
   }
 
-  dir <- fs_path_abs(dir)
+  # unsubscribe
+  write_there("  unsubscribe: function(el) {")
+  write_there(sprintf("    $(el).off('.%s');", raw_name))
+  write_there("  }")
 
-  where <- fs_path(
-    dir,
-    sprintf("%s.js", name)
+  # end
+  write_there("});")
+  write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", raw_name))
+
+  use_internal_js_file(
+    path = temp_js,
+    name = name,
+    pkg = pkg,
+    dir = dir,
+    open = open
   )
-
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-
-    write_there <- function(...) {
-      write(..., file = where, append = TRUE)
-    }
-
-    # If we find at least 1 event with a rate policy, we allow
-    # the getRatePolicy method
-    global_rate_policy <- sum(sapply(events$rate_policy, `[[`, 1)) > 0
-
-    write_there(sprintf("var %s = new Shiny.InputBinding();", raw_name))
-    write_there(sprintf("$.extend(%s, {", raw_name))
-    # find
-    write_there("  find: function(scope) {")
-    write_there("    // JS logic $(scope).find('whatever')")
-    write_there("  },")
-    # initialize
-    if (initialize) {
-      write_there("  initialize: function(el) {")
-      write_there("    // optional part. Only if the input relies on a JS API with specific initialization.")
-      write_there("  },")
-    }
-    # get value
-    write_there("  getValue: function(el) {")
-    if (dev) write_there("    console.log($(el));")
-    write_there("    // JS code to get value")
-    write_there("  },")
-    # set value
-    write_there("  setValue: function(el, value) {")
-    if (dev) write_there("    console.log('New value is: ' + value);")
-    write_there("    // JS code to set value")
-    write_there("  },")
-    # receive
-    write_there("  receiveMessage: function(el, data) {")
-    write_there("    // this.setValue(el, data);")
-    if (dev) write_there("    console.log('Updated ...');")
-    write_there("  },")
-    # subscribe
-    write_there("  subscribe: function(el, callback) {")
-    # list of event listeners
-    lapply(seq_along(events$name), function(i) {
-      write_there(sprintf("    $(el).on('%s.%s', function(e) {", events$name[i], raw_name))
-      if (events$rate_policy[i]) {
-        write_there("      callback(true);")
-      } else {
-        write_there("      callback();")
-      }
-      if (dev) write_there("      console.log('Subscribe ...');")
-      write_there("    });")
-      write_there("")
-    })
-    write_there("  },")
-
-    # rate policy if any
-    if (global_rate_policy) {
-      write_there("  getRatePolicy: function() {")
-      write_there("    return {")
-      write_there("      policy: 'debounce',")
-      write_there("      delay: 250")
-      write_there("    };")
-      write_there("  },")
-    }
-
-    # unsubscribe
-    write_there("  unsubscribe: function(el) {")
-    write_there(sprintf("    $(el).off('.%s');", raw_name))
-    write_there("  }")
-
-    # end
-    write_there("});")
-    write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", raw_name))
-
-
-    file_created_dance(
-      where,
-      after_creation_message_js,
-      pkg,
-      dir,
-      name,
-      open_file = open
-    )
-  } else {
-    file_already_there_dance(
-      where,
-      open_file = open
-    )
-  }
 }
 
 #' @export
@@ -312,14 +230,16 @@ add_js_output_binding <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE
+  dir_create
 ) {
-  attempt::stop_if(
+  stop_if(
     missing(name),
     msg = "`name` is required"
   )
 
-  check_name_length_is_one(name)
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
+  }
 
   raw_name <- name
 
@@ -327,64 +247,31 @@ add_js_output_binding <- function(
     sprintf("output-%s", name)
   )
 
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
+  temp_js <- tempfile(fileext = ".js")
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  write_there <- write_there_builder(temp_js)
+
+  write_there(sprintf("var %s = new Shiny.OutputBinding();", raw_name))
+  write_there(sprintf("$.extend(%s, {", raw_name))
+  # find
+  write_there("  find: function(scope) {")
+  write_there("    // JS logic $(scope).find('whatever')")
+  write_there("  },")
+  # renderValue
+  write_there("  renderValue: function(el, data) {")
+  write_there("    // JS logic")
+  write_there("  }")
+  # end
+  write_there("});")
+  write_there(sprintf("Shiny.outputBindings.register(%s, 'shiny.whatever');", raw_name))
+
+  use_internal_js_file(
+    path = temp_js,
+    name = name,
+    pkg = pkg,
+    dir = dir,
+    open = open
   )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
-
-  dir <- fs_path_abs(dir)
-
-  where <- fs_path(
-    dir,
-    sprintf("%s.js", name)
-  )
-
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-
-    write_there <- function(...) {
-      write(..., file = where, append = TRUE)
-    }
-
-    # write in the file!
-
-    write_there(sprintf("var %s = new Shiny.OutputBinding();", raw_name))
-    write_there(sprintf("$.extend(%s, {", raw_name))
-    # find
-    write_there("  find: function(scope) {")
-    write_there("    // JS logic $(scope).find('whatever')")
-    write_there("  },")
-    # renderValue
-    write_there("  renderValue: function(el, data) {")
-    write_there("    // JS logic")
-    write_there("  }")
-    # end
-    write_there("});")
-    write_there(sprintf("Shiny.outputBindings.register(%s, 'shiny.whatever');", raw_name))
-
-
-    file_created_dance(
-      where,
-      after_creation_message_js,
-      pkg,
-      dir,
-      name,
-      open_file = open
-    )
-  } else {
-    file_already_there_dance(
-      where,
-      open_file = open
-    )
-  }
 }
 
 #' @export
@@ -394,59 +281,29 @@ add_css_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   template = golem::css_template,
   ...
 ) {
-  attempt::stop_if(
+  stop_if(
     missing(name),
     msg = "`name` is required"
   )
 
-  check_name_length_is_one(name)
-
-  name <- file_path_sans_ext(name)
-
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
-  )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
   }
 
-  dir <- fs_path_abs(dir)
+  temp_css <- tempfile(fileext = ".css")
+  template(path = temp_css, ...)
 
-  where <- fs_path(
-    dir,
-    sprintf(
-      "%s.css",
-      name
-    )
+  use_internal_css_file(
+    path = temp_css,
+    name = name,
+    pkg = pkg,
+    dir = dir,
+    open = open
   )
-
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-    template(path = where, ...)
-    file_created_dance(
-      where,
-      after_creation_message_css,
-      pkg,
-      dir,
-      name,
-      open
-    )
-  } else {
-    file_already_there_dance(
-      where = where,
-      open_file = open
-    )
-  }
 }
 
 #' @export
@@ -456,99 +313,71 @@ add_sass_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   template = golem::sass_template,
   ...
 ) {
-  attempt::stop_if(
+  stop_if(
     missing(name),
     msg = "`name` is required"
   )
 
-  check_name_length_is_one(name)
-
-  name <- file_path_sans_ext(name)
-
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
-  )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
   }
 
-  dir_abs <- fs_path_abs(dir)
+  temp_js <- tempfile(fileext = ".sass")
+  template(path = temp_js, ...)
 
-  where <- fs_path(
-    dir_abs,
-    sprintf(
-      "%s.sass",
-      name
-    )
+  add_sass_code_to_dev_script(
+    dir = dir,
+    name = name
   )
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-    template(path = where, ...)
-    file_created_dance(
-      where,
-      after_creation_message_sass,
-      pkg,
-      dir_abs,
-      name,
-      open
-    )
+  use_internal_file(
+    path = temp_js,
+    name = sprintf(
+      "%s.sass",
+      name
+    ),
+    pkg = pkg,
+    dir = dir,
+    open = open
+  )
 
-    add_sass_code(
-      where = where,
-      dir = dir,
-      name = name
-    )
-
+  on.exit({
     cat_green_tick(
       "After running the compilation, your CSS file will be automatically link in `golem_add_external_resources()`."
     )
-  } else {
-    file_already_there_dance(
-      where = where,
-      open_file = open
-    )
-  }
+  })
 }
 
-add_sass_code <- function(where, dir, name) {
-  if (fs_file_exists(where)) {
-    if (fs_file_exists("dev/run_dev.R")) {
-      lines <- readLines("dev/run_dev.R")
-      new_lines <- append(
-        x = lines,
-        values = c(
-          "# Sass code compilation",
-          sprintf(
-            'sass::sass(input = sass::sass_file("%s/%s.sass"), output = "%s/%s.css", cache = NULL)',
-            dir,
-            name,
-            dir,
-            name
-          ),
-          ""
+add_sass_code_to_dev_script <- function(dir, name) {
+  if (fs_file_exists("dev/run_dev.R")) {
+    lines <- readLines("dev/run_dev.R")
+    new_lines <- append(
+      x = lines,
+      values = c(
+        "# Sass code compilation",
+        sprintf(
+          'sass::sass(input = sass::sass_file("%s/%s.sass"), output = "%s/%s.css", cache = NULL)',
+          dir,
+          name,
+          dir,
+          name
         ),
-        after = 0
-      )
-      writeLines(
-        text = new_lines,
-        con = "dev/run_dev.R"
-      )
+        ""
+      ),
+      after = 0
+    )
+    writeLines(
+      text = new_lines,
+      con = "dev/run_dev.R"
+    )
 
-      cat_green_tick(
-        "Code added in run_dev.R to compile your Sass file to CSS file."
-      )
-    }
+    cat_green_tick(
+      "Code added in run_dev.R to compile your Sass file to CSS file."
+    )
   }
 }
 
@@ -560,85 +389,81 @@ add_empty_file <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   template = golem::empty_template,
   ...
 ) {
-  attempt::stop_if(
+  stop_if(
     missing(name),
     msg = "`name` is required"
   )
 
-  check_name_length_is_one(name)
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
+  }
 
   extension <- file_ext(name)
 
   if (extension == "js") {
     warning("We've noticed you are trying to create a .js file. \nYou may want to use `add_js_file()` in future calls.")
+    return(
+      add_js_file(
+        name = name,
+        pkg = pkg,
+        dir = dir,
+        open = open,
+        template = template,
+        ...
+      )
+    )
   }
   if (extension == "css") {
     warning("We've noticed you are trying to create a .css file. \nYou may want to use `add_css_file()` in future calls.")
+    return(
+      add_css_file(
+        name = name,
+        pkg = pkg,
+        dir = dir,
+        open = open,
+        template = template,
+        ...
+      )
+    )
   }
   if (extension == "sass") {
     warning("We've noticed you are trying to create a .sass file. \nYou may want to use `add_sass_file()` in future calls.")
+    return(
+      add_sass_file(
+        name = name,
+        pkg = pkg,
+        dir = dir,
+        open = open,
+        template = template,
+        ...
+      )
+    )
   }
   if (extension == "html") {
     warning("We've noticed you are trying to create a .html file. \nYou may want to use `add_html_template()` in future calls.")
+    return(
+      add_html_template(
+        name = name,
+        pkg = pkg,
+        dir = dir,
+        open = open
+      )
+    )
   }
 
-  name <- file_path_sans_ext(name)
-
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
+  temp_file <- tempfile()
+  template(path = temp_file, ...)
+  use_internal_file(
+    path = temp_file,
+    name = name,
+    pkg = pkg,
+    dir = dir,
+    open = open
   )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
-
-  dir <- fs_path_abs(dir)
-
-  if (extension != "") {
-    where <- fs_path(
-      dir,
-      sprintf(
-        "%s.%s",
-        name,
-        extension
-      )
-    )
-  } else {
-    where <- fs_path(
-      dir,
-      sprintf(
-        "%s",
-        name
-      )
-    )
-  }
-
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-    template(path = where, ...)
-    file_created_dance(
-      where,
-      after_creation_message_generic,
-      pkg,
-      dir,
-      name,
-      open
-    )
-  } else {
-    file_already_there_dance(
-      where = where,
-      open_file = open
-    )
-  }
 }
 
 #' @export
@@ -648,67 +473,38 @@ add_html_template <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE
+  dir_create
 ) {
-  name <- file_path_sans_ext(name)
-
-  check_name_length_is_one(name)
-
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
-  )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
   }
 
-  dir <- fs_path_abs(dir)
+  temp_html <- tempfile(fileext = ".html")
+  write_there <- write_there_builder(temp_html)
 
-  where <- fs_path(
-    dir,
+  write_there("<!DOCTYPE html>")
+  write_there("<html>")
+  write_there("  <head>")
+  write_there(
     sprintf(
-      "%s.html",
-      name
+      "    <title>%s</title>",
+      get_golem_name()
     )
   )
+  write_there("  </head>")
+  write_there("  <body>")
+  write_there("    {{ body }}")
+  write_there("  </body>")
+  write_there("</html>")
+  write_there("")
 
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-    write_there <- function(...) write(..., file = where, append = TRUE)
-    write_there("<!DOCTYPE html>")
-    write_there("<html>")
-    write_there("  <head>")
-    write_there(
-      sprintf(
-        "    <title>%s</title>",
-        get_golem_name()
-      )
-    )
-    write_there("  </head>")
-    write_there("  <body>")
-    write_there("    {{ body }}")
-    write_there("  </body>")
-    write_there("</html>")
-    write_there("")
-    file_created_dance(
-      where,
-      after_creation_message_html_template,
-      pkg,
-      dir,
-      name,
-      open
-    )
-  } else {
-    file_already_there_dance(
-      where = where,
-      open_file = open
-    )
-  }
+  use_internal_html_template(
+    path = temp_html,
+    name = name,
+    pkg = pkg,
+    dir = dir,
+    open = open
+  )
 }
 
 #' @export
@@ -718,55 +514,26 @@ add_partial_html_template <- function(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE
+  dir_create
 ) {
-  name <- file_path_sans_ext(name)
-  check_name_length_is_one(name)
-
-  old <- setwd(fs_path_abs(pkg))
-  on.exit(setwd(old))
-
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
-  )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
   }
+  temp_html <- tempfile(fileext = ".html")
+  write_there <- write_there_builder(temp_html)
 
-  dir <- fs_path_abs(dir)
+  write_there("<div>")
+  write_there("  {{ content }}")
+  write_there("</div>")
+  write_there("")
 
-  where <- fs_path(
-    dir,
-    sprintf(
-      "%s.html",
-      name
-    )
+  use_internal_html_template(
+    path = temp_html,
+    name = name,
+    pkg = pkg,
+    dir = dir,
+    open = open
   )
-
-  if (!fs_file_exists(where)) {
-    fs_file_create(where)
-    write_there <- function(...) write(..., file = where, append = TRUE)
-    write_there("<div>")
-    write_there("  {{ content }}")
-    write_there("</div>")
-    write_there("")
-    file_created_dance(
-      where,
-      after_creation_message_html_template,
-      pkg,
-      dir,
-      name,
-      open
-    )
-  } else {
-    file_already_there_dance(
-      where = where,
-      open_file = open
-    )
-  }
 }
 
 #' @export
@@ -774,24 +541,18 @@ add_partial_html_template <- function(
 add_ui_server_files <- function(
   pkg = get_golem_wd(),
   dir = "inst/app",
-  dir_create = TRUE
+  dir_create
 ) {
+  if (!missing(dir_create)) {
+    cli_abort_dir_create()
+  }
   .Deprecated(msg = "This function will be deprecated in a future version of {golem}.\nPlease comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to stay.")
 
   old <- setwd(fs_path_abs(pkg))
   on.exit(setwd(old))
 
-  dir_created <- create_if_needed(
-    dir,
-    type = "directory"
-  )
-
-  if (!dir_created) {
-    cat_dir_necessary()
-    return(invisible(FALSE))
-  }
-
   dir <- fs_path_abs(dir)
+  check_directory_exists(dir)
 
   # UI
   where <- fs_path(dir, "ui.R")
@@ -799,7 +560,7 @@ add_ui_server_files <- function(
   if (!fs_file_exists(where)) {
     fs_file_create(where)
 
-    write_there <- function(...) write(..., file = where, append = TRUE)
+    write_there <- write_there_builder(where)
 
     pkg <- get_golem_name()
 
@@ -821,7 +582,7 @@ add_ui_server_files <- function(
   if (!fs_file_exists(where)) {
     fs_file_create(where)
 
-    write_there <- function(...) write(..., file = where, append = TRUE)
+    write_there <- write_there_builder(where)
 
     write_there(
       sprintf(

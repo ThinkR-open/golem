@@ -1,4 +1,3 @@
-
 # All the fns here check that {usethis} is installed
 # before doing anything.
 check_usethis_installed <- function(reason = "for project and file manipulation.") {
@@ -36,32 +35,6 @@ usethis_use_package <- function(
   )
 }
 
-usethis_create_project <- function(
-  path,
-  rstudio = rstudioapi::isAvailable(), # rstudioap is usethis Imports, so its ok
-  open = rlang::is_interactive()
-) {
-  check_usethis_installed(
-    reason = "to create a project."
-  )
-  usethis::create_project(
-    path,
-    rstudio,
-    open
-  )
-}
-usethis_use_latest_dependencies <- function(
-  overwrite = FALSE,
-  source = c("local", "CRAN")
-) {
-  check_usethis_installed(
-    reason = "to set dependency version."
-  )
-  usethis::use_latest_dependencies(
-    overwrite,
-    source
-  )
-}
 
 usethis_proj_set <- function(
   path = ".",

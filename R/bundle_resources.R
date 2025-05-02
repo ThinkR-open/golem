@@ -14,6 +14,7 @@
 #' Turn to NULL if you don't want this meta tag to be included.
 #' @inheritParams htmltools::htmlDependency
 #' @param with_sparkles C'est quand que tu vas mettre des paillettes dans ma vie Kevin?
+#' @param activate_js Boolean to enable or disable the injection of JavaScript via activate_js().
 #'
 #' @importFrom htmltools htmlDependency
 #' @export
@@ -30,7 +31,8 @@ bundle_resources <- function(
   package = NULL,
   all_files = TRUE,
   app_builder = "golem",
-  with_sparkles = FALSE
+  with_sparkles = FALSE,
+  activate_js = TRUE
 ) {
   res <- list()
   if (
@@ -54,9 +56,13 @@ bundle_resources <- function(
         as.character(
           tags$title(app_title)
         ),
-        as.character(
-          golem::activate_js()
-        ),
+        {
+          if (activate_js){
+             as.character(
+              golem::activate_js()
+            )
+          }
+        },
         head
       ),
       attachment = attachment,

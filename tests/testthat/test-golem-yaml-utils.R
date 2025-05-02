@@ -49,7 +49,8 @@ test_that(
 )
 
 test_that(
-  "amend_golem_config works", {
+  "amend_golem_config works",
+  {
     run_quietly_in_a_dummy_golem({
       amend_golem_config(
         "this",

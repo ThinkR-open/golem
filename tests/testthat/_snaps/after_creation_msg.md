@@ -26,9 +26,10 @@
       File downloaded at inst/app/www/myhtml
     Code
       file_created_dance("inst/app/www", after_creation_message_sass, "mypkg",
-        "inst/app/www", "mysass", open_file = FALSE, open_or_go_to = FALSE)
+        "inst/app/www", "mysass", open_file = FALSE)
     Output
       v File created at inst/app/www
+      * Go to inst/app/www
     Code
       file_already_there_dance("inst/app/www", open_file = FALSE)
     Output

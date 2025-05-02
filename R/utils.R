@@ -90,7 +90,7 @@ remove_comments <- function(file) {
     lines_without_comment <- append(
       lines_without_comment,
       gsub(
-        "(\\s*#+[^'@].*$| #+[^#].*$)",
+        "(\\s*#+[^'@].*$| #+[^#].*$|^#+$)",
         "",
         line
       )
@@ -237,5 +237,11 @@ check_name_syntax <- function(name) {
     cli_cli_alert_info(
       "This is not necessary as golem will prepend 'mod_' to your module name automatically."
     )
+  }
+}
+
+write_there_builder <- function(file_to_write_to) {
+  function(...) {
+    write(..., file = file_to_write_to, append = TRUE)
   }
 }

@@ -15,6 +15,14 @@ test_that(
           )
           mapply(
             function(fun, ext) {
+              unlink(paste0("this.", ext))
+              expect_error({
+                fun(
+                  url = paste0("this.", ext),
+                  pkg = ".",
+                  dir_create = TRUE
+                )
+              })
               path_to_file <- fun(
                 url = paste0("this.", ext),
                 pkg = "."
@@ -50,7 +58,7 @@ test_that(
           mapply(
             function(fun, ext) {
               if (ext != "txt") {
-                expect_false(
+                expect_error(
                   fun(
                     path = "this.nop",
                     pkg = "."
@@ -63,6 +71,10 @@ test_that(
               )
               expect_exists(
                 path_to_file
+              )
+              expect_equal(
+                file_ext(path_to_file),
+                ext
               )
             },
             funs_and_ext,

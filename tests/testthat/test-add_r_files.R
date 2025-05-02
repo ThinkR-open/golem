@@ -1,7 +1,6 @@
 test_that("add_fct and add_utils", {
   testthat::with_mocked_bindings(
     # This is just to bypass usethis_use_test
-    # setting here()
     usethis_use_test = function(name, ...) {
       file.create(
         file.path(

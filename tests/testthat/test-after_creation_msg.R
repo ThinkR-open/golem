@@ -41,8 +41,7 @@ test_that("after_creation_msg works", {
       "mypkg",
       "inst/app/www",
       "mysass",
-      open_file = FALSE,
-      open_or_go_to = FALSE
+      open_file = FALSE
     )
     file_already_there_dance(
       "inst/app/www",

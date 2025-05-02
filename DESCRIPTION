@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.5.1
+Version: 0.5.1.9005
 Authors@R: c(
     person("Colin", "Fay", , "contact@colinfay.me", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0001-7343-1846")),
@@ -28,7 +28,6 @@ Depends:
 Imports:
     attempt (>= 0.3.0),
     config,
-    here,
     htmltools,
     rlang (>= 1.0.0),
     shiny (>= 1.5.0),
@@ -69,7 +68,6 @@ Suggests:
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3
-Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)

@@ -7,7 +7,7 @@ add_rstudio_files <- function(
     "Shiny Server",
     "ShinyApps.io"
   )
-    ) {
+) {
   service <- match.arg(service)
   where <- fs_path(pkg, "app.R")
 
@@ -23,9 +23,7 @@ add_rstudio_files <- function(
   if (!fs_file_exists(where)) {
     fs_file_create(where)
 
-    write_there <- function(..., here = where) {
-      write(..., here, append = TRUE)
-    }
+    write_there <- write_there_builder(where)
 
     usethis_use_build_ignore(basename(where))
     usethis_use_build_ignore("rsconnect")
@@ -113,7 +111,7 @@ add_rstudio_files <- function(
 add_positconnect_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
-    ) {
+) {
   add_rstudio_files(
     pkg = pkg,
     open = open,
@@ -140,7 +138,7 @@ add_rstudioconnect_file <- function(
 add_shinyappsio_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
-    ) {
+) {
   add_rstudio_files(
     pkg = pkg,
     open = open,
@@ -153,7 +151,7 @@ add_shinyappsio_file <- function(
 add_shinyserver_file <- function(
   pkg = get_golem_wd(),
   open = TRUE
-    ) {
+) {
   add_rstudio_files(
     pkg = pkg,
     open = open,

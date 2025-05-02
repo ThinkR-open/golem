@@ -1,23 +1,3 @@
-test_already_there_dance <- function(
-  fun,
-  filename,
-  template
-) {
-  testthat::with_mocked_bindings(
-    file_already_there_dance = function(...) {
-      return(TRUE)
-    },
-    {
-      expect_true(
-        fun(
-          filename,
-          open = FALSE
-        )
-      )
-    }
-  )
-}
-
 test_add_file <- function(
   fun,
   file_with_extension,
@@ -30,25 +10,31 @@ test_add_file <- function(
   file_sans_extension <- tools::file_path_sans_ext(
     file_with_extension
   )
+  output <- file.path(
+    "inst/app/www",
+    sprintf(
+      "%s%s",
+      output_suffix,
+      file_with_extension
+    )
+  )
+  unlink(output)
   expect_error(fun())
+  expect_error(
+    fun(
+      file_sans_extension,
+      open = FALSE,
+      dir_create = TRUE
+    )
+  )
   fun(
     file_sans_extension,
     open = FALSE
   )
   expect_exists(
-    file.path(
-      "inst/app/www",
-      sprintf(
-        "%s%s",
-        output_suffix,
-        file_with_extension
-      )
-    )
+    output
   )
-  test_already_there_dance(
-    fun,
-    file_sans_extension
-  )
+  unlink(output)
   if (with_template) {
     fun(
       sprintf(
@@ -85,6 +71,7 @@ test_add_file <- function(
         all_lines
       )
     )
+    unlink(output)
   }
 }
 
@@ -94,7 +81,6 @@ test_that("add_file works", {
       add_js_file,
       "add_js_file.js"
     )
-
     test_add_file(
       add_js_handler,
       "add_js_handler.js"
@@ -139,10 +125,6 @@ test_that("add_file works", {
         "template.html"
       )
     )
-    test_already_there_dance(
-      add_html_template,
-      "template.html"
-    )
 
     add_partial_html_template(
       open = FALSE
@@ -153,10 +135,6 @@ test_that("add_file works", {
         "inst/app/www",
         "partial_template.html"
       )
-    )
-    test_already_there_dance(
-      add_partial_html_template,
-      "partial_template.html"
     )
 
     for (

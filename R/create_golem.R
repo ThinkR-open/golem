@@ -33,36 +33,31 @@ replace_package_name <- function(
 copy_golem_skeleton_and_replace_name <- function(
   path_to_golem,
   package_name
-){
-    cli_cat_rule("Copying package skeleton")
-    from <- golem_sys("shinyexample")
+) {
+  cli_cat_rule("Copying package skeleton")
+  from <- golem_sys("shinyexample")
 
-    # Copy over whole directory
-    fs_dir_copy(
-      path = from,
-      new_path = path_to_golem,
-      overwrite = TRUE
-    )
+  # Copy over whole directory
+  fs_dir_copy(
+    path = from,
+    new_path = path_to_golem,
+    overwrite = TRUE
+  )
 
-    # Listing copied files ***from source directory***
-    copied_files <- list.files(
-      path = from,
-      full.names = FALSE,
-      all.files = TRUE,
-      recursive = TRUE
-    )
+  # Listing copied files ***from source directory***
+  copied_files <- list.files(
+    path = from,
+    full.names = FALSE,
+    all.files = TRUE,
+    recursive = TRUE
+  )
 
-    replace_package_name(
-      copied_files,
-      package_name,
-      path_to_golem
-    )
-    cat_green_tick("Copied app skeleton")
-}
-
-# For mocking in tests
-here_set_here <- function(...){
-  here::set_here(...)
+  replace_package_name(
+    copied_files,
+    package_name,
+    path_to_golem
+  )
+  cat_green_tick("Copied app skeleton")
 }
 
 #' Create a package for a Shiny App using `{golem}`
@@ -72,7 +67,7 @@ here_set_here <- function(...){
 #' @param check_name Should we check that the package name is
 #'     correct according to CRAN requirements.
 #' @param open Boolean. Open the created project?
-#' @param overwrite Boolean. Should the already existing project be overwritten ?
+#' @param overwrite Boolean. Should the already existing project be deleted and replaced?
 #' @param package_name Package name to use. By default, `{golem}` uses
 #'     `basename(path)`. If `path == '.'` & `package_name` is
 #'     not explicitly set, then `basename(getwd())` will be used.
@@ -129,26 +124,17 @@ create_golem <- function(
     if (!isTRUE(overwrite)) {
       stop(
         paste(
-          "Project directory already exists. \n",
-          "Set `create_golem(overwrite = TRUE)` to overwrite anyway.\n",
-          "Be careful this will restore a brand new golem. \n",
-          "You might be at risk of losing your work !"
+          "The directory already exists.\n",
+          "Set `create_golem(overwrite = TRUE)` to delete and replace.\n",
+          "Be careful this will delete the old folder.\n",
+          "You might be at risk of losing your work!"
         ),
         call. = FALSE
       )
     } else {
-      cat_red_bullet("Overwriting existing project.")
+      cat_green_tick("Deleting existing project.")
+      fs_dir_delete(path_to_golem)
     }
-  } else {
-    cli_cat_rule("Creating dir")
-    usethis_create_project(
-      path = path_to_golem,
-      open = FALSE
-    )
-    if (!file.exists(".here")) {
-      here_set_here(path_to_golem)
-    }
-    cat_green_tick("Created package directory")
   }
 
   copy_golem_skeleton_and_replace_name(
@@ -190,7 +176,6 @@ create_golem <- function(
     }
   }
 
-
   if (isTRUE(with_git)) {
     cli_cat_rule("Initializing git repository")
     git_output <- system(
@@ -199,21 +184,11 @@ create_golem <- function(
       ignore.stderr = TRUE
     )
     if (git_output) {
-      cat_red_bullet("Error initializing git epository")
+      cat_red_bullet("Error initializing git repository")
     } else {
       cat_green_tick("Initialized git repository")
     }
   }
-
-  # lets not use latest deps for now
-
-  # old <- setwd(path_to_golem)
-
-  # if (!requireNamespace("desc", quietly = TRUE)) {
-  #   check_desc_installed()
-  # } # incase of {desc} not installed by {usethis}
-
-  # usethis_use_latest_dependencies()
 
   setwd(old)
 
@@ -231,7 +206,6 @@ create_golem <- function(
   )
 
   check_dev_deps_are_installed()
-
 
   if (isTRUE(open)) {
     if (

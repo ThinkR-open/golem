@@ -18,7 +18,7 @@ add_js_file(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   with_doc_ready = TRUE,
   template = golem::js_template,
   ...
@@ -29,7 +29,7 @@ add_js_handler(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   template = golem::js_handler_template,
   ...
 )
@@ -39,7 +39,7 @@ add_js_input_binding(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   initialize = FALSE,
   dev = FALSE,
   events = list(name = "click", rate_policy = FALSE)
@@ -50,7 +50,7 @@ add_js_output_binding(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE
+  dir_create
 )
 
 add_css_file(
@@ -58,7 +58,7 @@ add_css_file(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   template = golem::css_template,
   ...
 )
@@ -68,7 +68,7 @@ add_sass_file(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   template = golem::sass_template,
   ...
 )
@@ -78,7 +78,7 @@ add_empty_file(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE,
+  dir_create,
   template = golem::empty_template,
   ...
 )
@@ -88,7 +88,7 @@ add_html_template(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE
+  dir_create
 )
 
 add_partial_html_template(
@@ -96,10 +96,10 @@ add_partial_html_template(
   pkg = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create = TRUE
+  dir_create
 )
 
-add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app", dir_create = TRUE)
+add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app", dir_create)
 }
 \arguments{
 \item{name}{The name of the module.}
@@ -110,7 +110,7 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app", dir_create = TRUE)
 
 \item{open}{Should the created file be opened?}
 
-\item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+\item{dir_create}{Deprecated. Will be removed in future versions and throws an error for now.}
 
 \item{with_doc_ready}{For JS file - Should the default file include \verb{$( document ).ready()}?}
 

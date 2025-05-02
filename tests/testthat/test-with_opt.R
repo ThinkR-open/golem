@@ -1,4 +1,3 @@
-
 test_that(
   "with_golem_options() returns the maintenance page",
   {
@@ -32,10 +31,11 @@ test_that(
 )
 
 test_that(
-  "We can explicitely print the golem app", {
+  "We can explicitely print the golem app",
+  {
     res <- testthat::with_mocked_bindings(
       .package = "base",
-      print = function(...){
+      print = function(...) {
         return("Kilian Jornet")
       },
       code = {
@@ -85,7 +85,7 @@ test_that(
     expect_true(
       inherits(
         this_shouldnt_be_printed_but_be_a_shiny_app_obj,
-      "shiny.appobj"
+        "shiny.appobj"
       )
     )
   }

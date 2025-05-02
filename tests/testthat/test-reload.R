@@ -1,9 +1,10 @@
 test_that("detach_all_attached works", {
   testthat::with_mocked_bindings(
     .package = "base",
-    detach = function(...){
+    detach = function(...) {
       return(TRUE)
-    },{
+    },
+    {
       res <- detach_all_attached()
     }
   )
@@ -42,12 +43,13 @@ test_that("test document_and_reload", {
     3
   )
   testthat::with_mocked_bindings(
-    roxygen2_roxygenise = function(...){
+    roxygen2_roxygenise = function(...) {
       return(TRUE)
     },
-    pkgload_load_all = function(...){
+    pkgload_load_all = function(...) {
       return(TRUE)
-    },{
+    },
+    {
       run_quietly_in_a_dummy_golem({
         expect_null(
           document_and_reload(

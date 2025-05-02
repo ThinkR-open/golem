@@ -73,25 +73,24 @@ test_that(
         }
       )
     })
-        # Testing adding testthat if processx
-        # is not available
-        run_quietly_in_a_dummy_golem({
-          testthat::with_mocked_bindings(
-            usethis_use_testthat = function() {
-              dir.create("tests")
-              dir.create("tests/testthat")
-              file.create(
-                "tests/testthat.R"
-              )
-            },
-            {
-
-              use_recommended_tests(
-                pkg = ".",
-                spellcheck = FALSE
-              )
-            }
+    # Testing adding testthat if processx
+    # is not available
+    run_quietly_in_a_dummy_golem({
+      testthat::with_mocked_bindings(
+        usethis_use_testthat = function() {
+          dir.create("tests")
+          dir.create("tests/testthat")
+          file.create(
+            "tests/testthat.R"
           )
-        })
+        },
+        {
+          use_recommended_tests(
+            pkg = ".",
+            spellcheck = FALSE
+          )
+        }
+      )
+    })
   }
 )

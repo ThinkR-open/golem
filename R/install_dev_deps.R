@@ -8,7 +8,6 @@
 #' + {roxygen2}
 #' + {attachment}
 #' + {rstudioapi}
-#' + {here}
 #' + {fs}
 #' + {desc}
 #' + {pkgbuild}
@@ -32,9 +31,10 @@
 #'
 #' @return Used for side-effects
 install_dev_deps <- function(
-    dev_deps,
-    force_install = FALSE,
-    ...) {
+  dev_deps,
+  force_install = FALSE,
+  ...
+) {
   if (!force_install) {
     if (!interactive()) {
       # In non interactive mode with force_install turned to FALSE,
@@ -62,7 +62,7 @@ install_dev_deps <- function(
     }
   }
 
-  if (missing(dev_deps)){
+  if (missing(dev_deps)) {
     dev_deps <- getFromNamespace("dev_deps", "golem")
   }
 
@@ -86,7 +86,6 @@ dev_deps <- unique(
     "devtools",
     "dockerfiler",
     "fs",
-    "here",
     "httpuv",
     "pkgbuild",
     "pkgload",

@@ -28,7 +28,6 @@ This function will run rlang::check_installed() on:
 \item {roxygen2}
 \item {attachment}
 \item {rstudioapi}
-\item {here}
 \item {fs}
 \item {desc}
 \item {pkgbuild}

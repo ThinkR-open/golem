@@ -3,7 +3,8 @@
 # Throws a warning, we'll expect_silent() the readLines()
 
 test_that(
-  "All files have a proper EOF",{
+  "All files have a proper EOF",
+  {
     new_golem <- perform_inside_a_new_golem(function() {
       return(getwd())
     })

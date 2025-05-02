@@ -123,21 +123,16 @@ file_created_dance <- function(
   dir,
   name,
   open_file,
-  open_or_go_to = TRUE,
   catfun = cat_created
 ) {
   catfun(where)
 
-  fun(pkg, dir, name)
+  fun(pkg, dir, basename(where))
 
-  if (open_or_go_to) {
-    open_or_go_to(
-      where = where,
-      open_file = open_file
-    )
-  } else {
-    return(invisible(where))
-  }
+  open_or_go_to(
+    where = where,
+    open_file = open_file
+  )
 }
 
 file_already_there_dance <- function(
@@ -148,5 +143,11 @@ file_already_there_dance <- function(
   open_or_go_to(
     where = where,
     open_file = open_file
+  )
+}
+
+cli_abort_dir_create <- function(){
+  cli_cli_abort(
+    "The dir_create argument is deprecated."
   )
 }
