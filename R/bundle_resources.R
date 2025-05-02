@@ -32,7 +32,7 @@ bundle_resources <- function(
   all_files = TRUE,
   app_builder = "golem",
   with_sparkles = FALSE,
-  activate_js = TRUE # Nouveau paramètre
+  activate_js = TRUE
 ) {
   res <- list()
   if (
@@ -62,7 +62,7 @@ bundle_resources <- function(
               golem::activate_js()
             )
           }
-        }, 
+        },
         head
       ),
       attachment = attachment,
