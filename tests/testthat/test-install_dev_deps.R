@@ -1,3 +1,13 @@
+expect_installed <- function(pkg) {
+  expect(
+    rlang::is_installed(pkg),
+    failure_message = paste0(
+      "Package '", pkg, "' is not installed. Installed from ",
+      getOption("repos")
+    )
+  )
+}
+
 test_that("install_dev_deps works", {
   withr::with_temp_libpaths({
     install_dev_deps(
@@ -20,15 +30,13 @@ test_that("install_dev_deps works", {
         "processx",
         "rsconnect",
         "testthat",
-        "rstudioapi"
+        "rstudioapi", "piff"
       )
     )
     for (
       pak in paks
     ) {
-      expect_true(
-        rlang::is_installed(pak)
-      )
+      expect_installed(pak)
     }
   })
 })
