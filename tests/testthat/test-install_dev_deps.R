@@ -1,8 +1,7 @@
 test_that("install_dev_deps works", {
   withr::with_temp_libpaths({
     install_dev_deps(
-      force_install = TRUE,
-      repos = "https://cran.rstudio.com"
+      force_install = TRUE
     )
 
     paks <- unique(
