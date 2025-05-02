@@ -1,5 +1,6 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
+
 # golem 0.5.1 to 0.6.0
 
 ## Breaking change
