@@ -1,5 +1,5 @@
-pandoc: 2.7.3
-pkgdown: 2.0.6
+pandoc: 3.1.11
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   a_start: a_start.html
@@ -9,5 +9,4 @@ articles:
   e_config: e_config.html
   f_extending_golem: f_extending_golem.html
   z_golem_cheatsheet: z_golem_cheatsheet.html
-last_built: 2022-12-12T09:38Z
-
+last_built: 2025-05-02T13:55Z

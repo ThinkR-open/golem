@@ -1,171 +1,62 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/a_start.html</loc>
-  </url>
-  <url>
-    <loc>/articles/b_dev.html</loc>
-  </url>
-  <url>
-    <loc>/articles/c_deploy.html</loc>
-  </url>
-  <url>
-    <loc>/articles/d_js.html</loc>
-  </url>
-  <url>
-    <loc>/articles/e_config.html</loc>
-  </url>
-  <url>
-    <loc>/articles/f_extending_golem.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/z_golem_cheatsheet.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_files.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_module.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_resource_path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addins.html</loc>
-  </url>
-  <url>
-    <loc>/reference/amend_golem_config.html</loc>
-  </url>
-  <url>
-    <loc>/reference/browser_button.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bundle_resources.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_golem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/detach_all_attached.html</loc>
-  </url>
-  <url>
-    <loc>/reference/disable_autoload.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dockerfiles.html</loc>
-  </url>
-  <url>
-    <loc>/reference/document_and_reload.html</loc>
-  </url>
-  <url>
-    <loc>/reference/favicon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/file_creation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fill_desc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_current_config.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_golem_options.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_sysreqs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/golem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/golem_js.html</loc>
-  </url>
-  <url>
-    <loc>/reference/golem_opts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/install_dev_deps.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is_running.html</loc>
-  </url>
-  <url>
-    <loc>/reference/made_dev.html</loc>
-  </url>
-  <url>
-    <loc>/reference/maintenance_page.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_dev.html</loc>
-  </url>
-  <url>
-    <loc>/reference/module_template.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pkg_tools.html</loc>
-  </url>
-  <url>
-    <loc>/reference/prod.html</loc>
-  </url>
-  <url>
-    <loc>/reference/project_hook.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rstudio_deploy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/run_dev.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sanity_check.html</loc>
-  </url>
-  <url>
-    <loc>/reference/template.html</loc>
-  </url>
-  <url>
-    <loc>/reference/testhelpers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_files.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_module_test.html</loc>
-  </url>
-  <url>
-    <loc>/reference/use_recommended.html</loc>
-  </url>
-  <url>
-    <loc>/reference/utils_files.html</loc>
-  </url>
-  <url>
-    <loc>/reference/with_golem_options.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>/CONTRIBUTING.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/a_start.html</loc></url>
+<url><loc>/articles/b_dev.html</loc></url>
+<url><loc>/articles/c_deploy.html</loc></url>
+<url><loc>/articles/d_js.html</loc></url>
+<url><loc>/articles/e_config.html</loc></url>
+<url><loc>/articles/f_extending_golem.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/z_golem_cheatsheet.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/add_files.html</loc></url>
+<url><loc>/reference/add_module.html</loc></url>
+<url><loc>/reference/add_resource_path.html</loc></url>
+<url><loc>/reference/addins.html</loc></url>
+<url><loc>/reference/amend_golem_config.html</loc></url>
+<url><loc>/reference/browser_button.html</loc></url>
+<url><loc>/reference/bundle_resources.html</loc></url>
+<url><loc>/reference/create_golem.html</loc></url>
+<url><loc>/reference/detach_all_attached.html</loc></url>
+<url><loc>/reference/disable_autoload.html</loc></url>
+<url><loc>/reference/dockerfiles.html</loc></url>
+<url><loc>/reference/document_and_reload.html</loc></url>
+<url><loc>/reference/favicon.html</loc></url>
+<url><loc>/reference/file_creation.html</loc></url>
+<url><loc>/reference/fill_desc.html</loc></url>
+<url><loc>/reference/get_current_config.html</loc></url>
+<url><loc>/reference/get_golem_options.html</loc></url>
+<url><loc>/reference/get_sysreqs.html</loc></url>
+<url><loc>/reference/golem.html</loc></url>
+<url><loc>/reference/golem_js.html</loc></url>
+<url><loc>/reference/golem_opts.html</loc></url>
+<url><loc>/reference/golem_welcome_page.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/install_dev_deps.html</loc></url>
+<url><loc>/reference/is_golem.html</loc></url>
+<url><loc>/reference/is_running.html</loc></url>
+<url><loc>/reference/made_dev.html</loc></url>
+<url><loc>/reference/maintenance_page.html</loc></url>
+<url><loc>/reference/make_dev.html</loc></url>
+<url><loc>/reference/module_template.html</loc></url>
+<url><loc>/reference/pkg_tools.html</loc></url>
+<url><loc>/reference/prod.html</loc></url>
+<url><loc>/reference/project_hook.html</loc></url>
+<url><loc>/reference/rstudio_deploy.html</loc></url>
+<url><loc>/reference/run_dev.html</loc></url>
+<url><loc>/reference/sanity_check.html</loc></url>
+<url><loc>/reference/template.html</loc></url>
+<url><loc>/reference/testhelpers.html</loc></url>
+<url><loc>/reference/use_files.html</loc></url>
+<url><loc>/reference/use_module_test.html</loc></url>
+<url><loc>/reference/use_readme_rmd.html</loc></url>
+<url><loc>/reference/use_recommended.html</loc></url>
+<url><loc>/reference/utils_files.html</loc></url>
+<url><loc>/reference/with_golem_options.html</loc></url>
 </urlset>
+
