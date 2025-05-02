@@ -15,7 +15,8 @@ bundle_resources(
   package = NULL,
   all_files = TRUE,
   app_builder = "golem",
-  with_sparkles = FALSE
+  with_sparkles = FALSE,
+  activate_js = TRUE
 )
 }
 \arguments{
@@ -47,6 +48,8 @@ dependency files.}
 Turn to NULL if you don't want this meta tag to be included.}
 
 \item{with_sparkles}{C'est quand que tu vas mettre des paillettes dans ma vie Kevin?}
+
+\item{activate_js}{Boolean to enable or disable the injection of JavaScript via activate_js().}
 }
 \value{
 an htmlDependency
