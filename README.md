@@ -78,56 +78,20 @@ with blogposts, and links to other packages of the `golemverse`.
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2024-09-06 17:15:09 UTC"
+    #> [1] "2025-05-02 09:22:03 UTC"
 
 Here are the test & coverage results:
 
     devtools::check(quiet = TRUE)
     #> ℹ Loading golem
     #> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9004 ────
-    #> Duration: 48s
+    #> Duration: 47.9s
     #> 
-    #> ❯ checking tests ...
-    #>   See below...
-    #> 
-    #> ── Test failures ───────────────────────────────────────────────── testthat ────
-    #> 
-    #> > # This file is part of the standard setup for testthat.
-    #> > # It is recommended that you do not modify it.
-    #> > #
-    #> > # Where should you do additional test configuration?
-    #> > # Learn more about the roles of various files in:
-    #> > # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
-    #> > # * https://testthat.r-lib.org/articles/special-files.html
-    #> > 
-    #> > library(testthat)
-    #> > library(golem)
-    #> > 
-    #> > test_check("golem")
-    #> [ FAIL 1 | WARN 0 | SKIP 0 | PASS 329 ]
-    #> 
-    #> ══ Failed tests ════════════════════════════════════════════════════════════════
-    #> ── Failure ('test-install_dev_deps.R:30:7'): install_dev_deps works ────────────
-    #> rlang::is_installed(pak) is not TRUE
-    #> 
-    #> `actual`:   FALSE
-    #> `expected`: TRUE 
-    #> Backtrace:
-    #>     ▆
-    #>  1. ├─withr::with_temp_libpaths(...) at test-install_dev_deps.R:2:3
-    #>  2. │ └─base::force(code)
-    #>  3. └─testthat::expect_true(rlang::is_installed(pak)) at test-install_dev_deps.R:30:7
-    #> 
-    #> [ FAIL 1 | WARN 0 | SKIP 0 | PASS 329 ]
-    #> Error: Test failures
-    #> Execution halted
-    #> 
-    #> 1 error ✖ | 0 warnings ✔ | 0 notes ✔
-    #> Error: R CMD check found ERRORs
+    #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
     Sys.setenv("NOT_CRAN" = TRUE)
     covr::package_coverage()
-    #> golem Coverage: 86.92%
+    #> golem Coverage: 86.93%
     #> R/boostrap_base.R: 0.00%
     #> R/bootstrap_attachment.R: 0.00%
     #> R/bootstrap_pkgload.R: 0.00%
