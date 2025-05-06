@@ -4,7 +4,7 @@ author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{c_deploy}
+  %\VignetteIndexEntry{03 Deploy your app}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
