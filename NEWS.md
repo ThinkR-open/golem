@@ -21,6 +21,10 @@
 
 - Full refactoring of the `add_*_files` and `use_*_files` functions that now all share the same behavior
 
+## Doc
+
+- Vignettes have been renamed
+
 # golem 0.5.1
 
 * Hotfixing a bug with utils_download_file (#1168)
