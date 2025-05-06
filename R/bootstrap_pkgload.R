@@ -20,7 +20,7 @@ pkgload_load_all <- function(
   export_imports = export_all,
   helpers = TRUE,
   attach_testthat = uses_testthat(path),
-  quiet = NULL,
+  quiet = TRUE,
   recompile = FALSE,
   warn_conflicts = TRUE
 ) {
