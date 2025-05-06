@@ -15,7 +15,7 @@
 
 ## User visible change
 
-- `run_dev()` only prints one message
+- `run_dev()` only prints one message (#1191 / @howardbaik)
 
 ## Bug fix
 
