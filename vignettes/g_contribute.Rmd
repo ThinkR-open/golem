@@ -1,8 +1,8 @@
 ---
-title: "Contribute to Golem"
+title: "07 - Contribute to Golem"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Contribute}
+  %\VignetteIndexEntry{07 - Contribute to Golem}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -76,5 +76,5 @@ devtools::check()
 
 ## Code of Conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](https://www.contributor-covenant.org/version/1/0/0/code-of-conduct.html). 
+Please note that this project is released with a [Contributor Code of Conduct](https://www.contributor-covenant.org/version/1/0/0/code-of-conduct.html).
 By participating in this project you agree to abide by its terms.

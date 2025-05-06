@@ -1,12 +1,12 @@
 ---
-title: "e_config"
+title: "05 - Configuration"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{config}
+  %\VignetteIndexEntry{05 - Configuration}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-  
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -34,9 +34,9 @@ old <- setwd(x)
 
 ## About `inst/golem-config.yml`
 
-When you start a new `{golem}` application, you'll find a file called `golem-config.yml` in the `inst/` folder. 
+When you start a new `{golem}` application, you'll find a file called `golem-config.yml` in the `inst/` folder.
 
-By default, this file contains the name of your app, its version, and the default working directory (which is the root of your package). 
+By default, this file contains the name of your app, its version, and the default working directory (which is the root of your package).
 
 This config file is based on the [`{config}`](https://github.com/rstudio/config) format, which allows you to create configuration files for different application contexts. Please refer to this package documentation for more information.
 
@@ -57,13 +57,13 @@ dev:
   golem_wd: !expr golem::pkg_path()
 ```
 
-+ default/golem_name, default/golem_version, default/app_prod are usable across the whole life of your golem app: while developing, and also when in production. 
-+ production/app_prod might be used for adding elements that are to be used once the app is in production. 
++ default/golem_name, default/golem_version, default/app_prod are usable across the whole life of your golem app: while developing, and also when in production.
++ production/app_prod might be used for adding elements that are to be used once the app is in production.
 + dev/golem_wd is in a `dev` config because the only moment you might reliably use this config is while developing your app. Use the `app_sys()` function if you want to rely on the package path once the app is deployed.
 
 The good news is that if you don't want/need to use `{config}`, you can safely ignore this file, __just leave it where it is: it is used internally by the `{golem}` functions__.
 
-These options are globally set with: 
+These options are globally set with:
 
 ```{r}
 set_golem_options()
@@ -78,7 +78,7 @@ cat(
 )
 ```
 
-The functions reading the options in this config file are: 
+The functions reading the options in this config file are:
 
 ```{r}
 get_golem_name()
@@ -86,7 +86,7 @@ get_golem_wd()
 get_golem_version()
 ```
 
-You can set these with: 
+You can set these with:
 
 ```{r eval = FALSE}
 set_golem_name("this")
@@ -106,7 +106,7 @@ cat(
 
 ## Using `golem-config`
 
-If you're already familiar with the `{config}` package, you can use this file just as any config file. 
+If you're already familiar with the `{config}` package, you can use this file just as any config file.
 
 `{golem}` comes with an `amend_golem_config()` function to add elements to it.
 
@@ -136,7 +136,7 @@ cat(
 
 ## `app_config.R`
 
-In `R/app_config.R`, you'll find a `get_golem_config()` function that allows you to retrieve config from this config file: 
+In `R/app_config.R`, you'll find a `get_golem_config()` function that allows you to retrieve config from this config file:
 
 ```{r}
 pkgload::load_all()
@@ -149,7 +149,7 @@ get_golem_config(
 )
 ```
 
-Or using the env var (default `{config}` behavior): 
+Or using the env var (default `{config}` behavior):
 
 ```{r}
 Sys.setenv("R_CONFIG_ACTIVE" = "production")
@@ -158,20 +158,20 @@ get_golem_config("where")
 
 ## `golem_config` vs `golem_options`
 
-There is two ways to configure golem apps: 
+There is two ways to configure golem apps:
 
-+ The `golem_opts` in the `run_app()` function 
++ The `golem_opts` in the `run_app()` function
 + The `golem-config.yml` file
- 
-The big difference between these two is that the golem options from `run_app()` are meant to be configured during runtime: you'll be doing `run_app(val = "this")`, whereas the `golem-config` is meant to be used in the back-end, and will not be linked to the parameters passed to `run_app()` (even if this is technically possible, this is not the main objective),. 
 
-It's also linked to the `R_CONFIG_ACTIVE` environment variable, just as any `{config}` file. 
+The big difference between these two is that the golem options from `run_app()` are meant to be configured during runtime: you'll be doing `run_app(val = "this")`, whereas the `golem-config` is meant to be used in the back-end, and will not be linked to the parameters passed to `run_app()` (even if this is technically possible, this is not the main objective),.
 
-The idea is also that the `golem-config.yml` file is shareable across `{golem}` projects (`golem_opts` are application specific), and will be tracked by version control systems. 
+It's also linked to the `R_CONFIG_ACTIVE` environment variable, just as any `{config}` file.
 
-## Note for `{golem}` < 0.2.0 users 
+The idea is also that the `golem-config.yml` file is shareable across `{golem}` projects (`golem_opts` are application specific), and will be tracked by version control systems.
 
-If you've built an app with `{golem}` before the version 0.2.0, this config file doesn't exist: you'll be prompted to create it if you update a newer version of `{golem}`. 
+## Note for `{golem}` < 0.2.0 users
+
+If you've built an app with `{golem}` before the version 0.2.0, this config file doesn't exist: you'll be prompted to create it if you update a newer version of `{golem}`.
 
 ```{r echo = FALSE}
 setwd(old)

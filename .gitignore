@@ -11,3 +11,5 @@ Meta
 revdep/
 README.html
 *.Rproj
+/doc/
+/Meta/
