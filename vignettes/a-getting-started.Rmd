@@ -1,10 +1,10 @@
 ---
-title: "a_start"
+title: "01. Getting started"
 author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{a_start}
+  %\VignetteIndexEntry{01 Getting started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -156,7 +156,7 @@ About [tests in a package](https://r-pkgs.org/testing-basics.html).
 
 ### Use Recommended Packages
 
-This will add `{shiny}`, `{DT}`, `{attempt}`, `{glue}`, `{htmltools}`, and 
+This will add `{shiny}`, `{DT}`, `{attempt}`, `{glue}`, `{htmltools}`, and
 `{golem}` as dependencies to your package:
 
 ```{r}
@@ -182,8 +182,8 @@ your `{golem}` project. They can be used along the process of building your app:
 golem::use_utils_ui(with_test = TRUE)
 golem::use_utils_server(with_test = TRUE)
     ```
-For a detailed description of the generated functions see the respective files 
-`R/golem_utils_server.R` and `R/golem_utils_ui.R` for which also default tests 
+For a detailed description of the generated functions see the respective files
+`R/golem_utils_server.R` and `R/golem_utils_ui.R` for which also default tests
 are added in `tests/testthat` (to suppress this set `with_test = FALSE` in the
 above calls).
 
