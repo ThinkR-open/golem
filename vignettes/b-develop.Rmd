@@ -1,5 +1,5 @@
 ---
-title: "02 Day to day development"
+title: "02. Day to day development"
 author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

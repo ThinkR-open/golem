@@ -1,5 +1,5 @@
 ---
-title: "06 - Extending `{golem}`"
+title: "06. Extending `{golem}`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{06 - Extending golem}

@@ -1,5 +1,5 @@
 ---
-title: "03 Deploy your app"
+title: "03. Deploy your app"
 author: "Colin Fay"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette

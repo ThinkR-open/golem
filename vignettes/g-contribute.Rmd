@@ -1,5 +1,5 @@
 ---
-title: "07 - Contribute to Golem"
+title: "07. Contribute to Golem"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{07 - Contribute to Golem}
