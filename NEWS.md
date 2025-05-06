@@ -13,6 +13,10 @@
 
 - Creating a golem with `create_golem(overwrite = TRUE)` will now __delete the old folder__ and replace with the golem skeleton.
 
+## User visible change
+
+- `run_dev()` only prints one message
+
 ## Bug fix
 
 - Removing the comments on golem creation didn't work fully, this has been fixed.
