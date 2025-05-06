@@ -8,9 +8,6 @@ check_pkgload_installed <- function() {
   )
 }
 
-
-
-
 pkgload_load_all <- function(
   path = ".",
   reset = TRUE,
@@ -20,7 +17,7 @@ pkgload_load_all <- function(
   export_imports = export_all,
   helpers = TRUE,
   attach_testthat = uses_testthat(path),
-  quiet = TRUE,
+  quiet = NULL,
   recompile = FALSE,
   warn_conflicts = TRUE
 ) {

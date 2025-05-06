@@ -134,6 +134,7 @@ document_and_reload <- function(
       export_all = export_all,
       helpers = helpers,
       attach_testthat = attach_testthat,
+      quiet = TRUE,
       ...
     )
   })
