@@ -150,10 +150,16 @@ try_user_config_location <- function(pth) {
 }
 guess_lines_to_config_file <- function(guess_text) {
   # I. Check if the path is a one-liner i.e. try to match `app_sys(...)` string
-  tmp_guess_lines <- which(grepl("app_sys\\((.|\n)*\\)$", guess_text))
+  tmp_guess_lines <- which(
+    grepl("app_sys\\((.|\n)*\\)$", guess_text) &
+      !grepl("^\\s*#", guess_text)
+  )
   if (identical(integer(0), tmp_guess_lines)) {
     # II. If that is not the case, identify lines that contain the path info
-    tmp_guess_multi_liner <- which(grepl("app_sys\\(", guess_text))
+    tmp_guess_multi_liner <- which(
+      grepl("app_sys\\(", guess_text) &
+        !grepl("^\\s*#", guess_text)
+    )
     if (identical(integer(0), tmp_guess_multi_liner)) {
       # Early return NULL if file does not contain the `app_sys()` command;
       # alternatively, there could be an error thrown here if `app_sys()` must
@@ -169,7 +175,8 @@ guess_lines_to_config_file <- function(guess_text) {
     # contain information on the path.
     tmp_end_line <- NULL
     for (i in tmp_check_lines) {
-      if (grepl(".*\\)", guess_text[i])) {
+      if (grepl(".*\\)", guess_text[i]) &&
+          !grepl("^\\s*#", guess_text[i])) {
         tmp_end_line <- i
         break
       }
