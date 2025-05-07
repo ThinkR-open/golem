@@ -62,7 +62,7 @@ add_dockerfile_with_renv(
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
   from = "rocker/verse",
-  as = NULL,
+  as = "builder",
   sysreqs = TRUE,
   port = 80,
   host = "0.0.0.0",
@@ -74,6 +74,8 @@ add_dockerfile_with_renv(
   update_tar_gz = TRUE,
   dockerfile_cmd = NULL,
   user = "rstudio",
+  single_file = TRUE,
+  set_golem.app.prod = TRUE,
   ...
 )
 
@@ -92,6 +94,8 @@ add_dockerfile_with_renv_shinyproxy(
   document = TRUE,
   update_tar_gz = TRUE,
   user = "rstudio",
+  single_file = TRUE,
+  set_golem.app.prod = TRUE,
   ...
 )
 
@@ -110,6 +114,8 @@ add_dockerfile_with_renv_heroku(
   document = TRUE,
   user = "rstudio",
   update_tar_gz = TRUE,
+  single_file = TRUE,
+  set_golem.app.prod = TRUE,
   ...
 )
 }
@@ -166,9 +172,16 @@ See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
 \item{document}{boolean. If TRUE (by default), DESCRIPTION file is updated using \code{\link[attachment:att_amend_desc]{attachment::att_amend_desc()}} before creating the renv.lock file}
 
 \item{dockerfile_cmd}{What is the CMD to add to the Dockerfile. If NULL, the default,
-the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}');library(\{appname\});\{appname\}::run_app()\\}.}
+the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}',golem.app.prod = \{set_golem.app.prod\});library(\{appname\});\{appname\}::run_app()\\}.}
 
 \item{user}{Name of the user to specify in the Dockerfile with the USER instruction. Default is \code{rstudio}, if set to \code{NULL} no the user from the FROM image is used.}
+
+\item{single_file}{boolean.
+If \code{TRUE} (by default), generate a single multi-stage Dockerfile .
+If \code{FALSE}, produce two distinct Dockerfiles to be run sequentially
+for the build and production phases.}
+
+\item{set_golem.app.prod}{boolean If \code{TRUE} (by default) set options(golem.app.prod = TRUE) in dockerfile_cmd.}
 
 \item{...}{Other arguments to pass to \code{\link[renv:snapshot]{renv::snapshot()}}.}
 }
