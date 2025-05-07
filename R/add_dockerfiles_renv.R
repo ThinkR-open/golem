@@ -7,7 +7,7 @@ add_dockerfile_with_renv_ <- function(
   ),
   distro = "focal",
   FROM = "rocker/verse",
-  AS = NULL,
+  AS = "builder",
   sysreqs = TRUE,
   repos = c(
     CRAN = "https://cran.rstudio.com/"
@@ -16,6 +16,7 @@ add_dockerfile_with_renv_ <- function(
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
   document = FALSE,
+  single_file = FALSE,
   ...
 ) {
   check_dockerfiler_installed()
@@ -89,6 +90,12 @@ add_dockerfile_with_renv_ <- function(
     extra_sysreqs = extra_sysreqs
   )
 
+  
+
+  
+  
+  if ( !single_file){
+    
   socle$write(
     as = file.path(
       output_dir,
@@ -109,10 +116,52 @@ add_dockerfile_with_renv_ <- function(
     )
   )
 
+  
+  } else {
+    
+    # ici on va faire le fork
+    # et ici faut append
+    
+    my_dock <- dockerfiler_Dockerfile()$new(
+      FROM = AS, AS = "final"
+    )
+    
+    socle$write(    as = file.path(
+      output_dir,
+      "Dockerfile"
+    ))
+
+  
+    
+    
+  }
+  
+  
   my_dock$COPY(basename(lockfile), "renv.lock")
-
+  
   my_dock$RUN("R -e 'options(renv.config.pak.enabled = FALSE);renv::restore()'")
-
+  
+  # we use an already built tar.gz file
+  my_dock$COPY(
+    from =
+      paste0(
+        get_golem_name(
+          pkg = source_folder
+        ),
+        "_*.tar.gz"
+      ),
+    to = "/app.tar.gz"
+  )
+  my_dock$RUN(
+    "R -e 'remotes::install_local(\"/app.tar.gz\",upgrade=\"never\")'"
+  )
+  my_dock$RUN("rm /app.tar.gz")
+  
+  
+  
+  
+  
+  
   if (update_tar_gz) {
     old_version <- list.files(
       path = output_dir,
@@ -137,7 +186,7 @@ add_dockerfile_with_renv_ <- function(
         )
       )
     }
-
+    
     if (
       isTRUE(
         requireNamespace(
@@ -174,22 +223,9 @@ add_dockerfile_with_renv_ <- function(
       stop("please install {pkgbuild}")
     }
   }
-
-  # we use an already built tar.gz file
-  my_dock$COPY(
-    from =
-      paste0(
-        get_golem_name(
-          pkg = source_folder
-        ),
-        "_*.tar.gz"
-      ),
-    to = "/app.tar.gz"
-  )
-  my_dock$RUN(
-    "R -e 'remotes::install_local(\"/app.tar.gz\",upgrade=\"never\")'"
-  )
-  my_dock$RUN("rm /app.tar.gz")
+  
+  
+  
   my_dock
 }
 
@@ -213,7 +249,7 @@ add_dockerfile_with_renv <- function(
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
   from = "rocker/verse",
-  as = NULL,
+  as = "builder",
   sysreqs = TRUE,
   port = 80,
   host = "0.0.0.0",
@@ -225,6 +261,7 @@ add_dockerfile_with_renv <- function(
   update_tar_gz = TRUE,
   dockerfile_cmd = NULL,
   user = "rstudio",
+  single_file = FALSE,
   ...
 ) {
   base_dock <- add_dockerfile_with_renv_(
@@ -240,6 +277,7 @@ add_dockerfile_with_renv <- function(
     extra_sysreqs = extra_sysreqs,
     update_tar_gz = update_tar_gz,
     document = document,
+    single_file = single_file,
     ...
   )
   if (!is.null(port)) {
@@ -262,10 +300,15 @@ add_dockerfile_with_renv <- function(
     dockerfile_cmd
   )
   base_dock
-  base_dock$write(as = file.path(output_dir, "Dockerfile"))
+  base_dock$write(as = file.path(output_dir, "Dockerfile"),
+                  append = single_file)
 
+  
+  if (!single_file){
   out <- sprintf(
-    "docker build -f Dockerfile_base --progress=plain -t %s .
+    "
+    #cd to/your/output/dir
+    docker build -f Dockerfile_base --progress=plain -t %s .
 docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
 # then go to 127.0.0.1:%s",
@@ -292,7 +335,46 @@ docker run -p %s:%s %s
       ":latest"
     )),
     port
-  )
+  )} else {
+    
+    
+    
+    
+    out <- sprintf(
+      "
+      #cd to/your/output/dir
+      docker build -f Dockerfile --target=final --progress=plain -t %s .
+docker run -p %s:%s %s
+# then go to 127.0.0.1:%s",
+      tolower(paste0(
+        get_golem_name(
+          pkg = source_folder
+        ),
+        ":latest"
+      )),
+      port,
+      port,
+      tolower(paste0(
+        get_golem_name(
+          pkg = source_folder
+        ),
+        ":latest"
+      )),
+      port
+    )
+    
+    
+    
+    
+    
+    
+    
+  }
+  
+  
+  
+  
+  
 
   cat(out, file = file.path(output_dir, "README"))
 
@@ -321,6 +403,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
   document = TRUE,
   update_tar_gz = TRUE,
   user = "rstudio",
+  single_file = FALSE,
   ...
 ) {
   add_dockerfile_with_renv(
@@ -340,6 +423,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
     open = open,
     document = document,
     user = user,
+    single_file = single_file,
     dockerfile_cmd = sprintf(
       "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       get_golem_name(
@@ -369,6 +453,7 @@ add_dockerfile_with_renv_heroku <- function(
   document = TRUE,
   user = "rstudio",
   update_tar_gz = TRUE,
+  single_file = FALSE,
   ...
 ) {
   add_dockerfile_with_renv(
@@ -388,6 +473,7 @@ add_dockerfile_with_renv_heroku <- function(
     open = FALSE,
     document = document,
     user = user,
+    single_file = single_file,
     dockerfile_cmd = sprintf(
       "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       get_golem_name(
