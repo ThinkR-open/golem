@@ -32,8 +32,12 @@ get_golem_config <- function(
     )
   ),
   use_parent = TRUE,
-  # Modify this if your config file is somewhere else
-  file = app_sys("golem-config.yml")
+  # If you don't want to use the default config file:
+  # - replace the function call
+  #   and write the path to your config file
+  # - set a `GOLEM_CONFIG_PATH` env var that will
+  #   be picked by golem::get_current_config()
+  file = golem::get_current_config()
 ) {
   config::get(
     value = value,

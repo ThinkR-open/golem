@@ -12,82 +12,20 @@ guess_where_config <- function(
   path = golem::pkg_path(),
   file = "inst/golem-config.yml"
 ) {
-  # We'll try to guess where the path to the golem-config file is. Since the
-  # user can now supply a user-defined golem-config there may be several cases
-  # to consider:
-
-  # 0. Firstly:
-  # Read from default and possible user specified locations:
-  ret_pth_def <- fs_path(path, file)
-  ret_pth_usr <- try_user_config_location(pth = path)
-  # Define booleans for different cases
-  CONFIG_DFLT_EXISTS <- fs_file_exists(ret_pth_def)
-  CONFIG_DFLT_MISSNG <- !CONFIG_DFLT_EXISTS
-  CONFIG_USER_EXISTS <- !is.null(ret_pth_usr) && (!identical(ret_pth_usr, ret_pth_def))
-  CONFIG_USER_MISSNG <- !CONFIG_USER_EXISTS
-
-  # Case I.
-  # The default config exists AND "R/app_config.R" does not provide any
-  # information about a possible user config (this one should be correct in 99%
-  # of the cases if no changes to the default param values are made).
-  # => read config from "inst/golem-config.yml"
-  if (CONFIG_DFLT_EXISTS && CONFIG_USER_MISSNG) {
-    return(fs_path_abs(ret_pth_def))
-  }
-
-  # Case II.
-  # The default config does not exists AND "R/app_config.R" provides information
-  # about a possible user config (this one should be correct if the user changed
-  # the location of the golem-config and properly deleted the (default) file in
-  # the  default path "inst/golem-config.yml").
-  # => read path to user-config from argument to the app_sys()-call inside
-  # "R/app_config.R"
-  if (CONFIG_DFLT_MISSNG && CONFIG_USER_EXISTS) {
-    return(fs_path_abs(ret_pth_usr))
-  }
-
-  # Case III.
-  # The default config does exists AND "R/app_config.R" provides information
-  # about a possible user config which is found! (this occurs if the user
-  # changed the location/name of the golem-config, properly adjusted the
-  # corresponding line in "R/app_config.R" but forgot to delete the (default)
-  # config file in the default path "inst/golem-config.yml").
-  # => Throw error and prompt user to check whether default config or user
-  # config should be used.
-  if (CONFIG_DFLT_EXISTS && CONFIG_USER_EXISTS) {
-    msg_err <- paste0(
-      "It appears that two golem config files exist:\n",
-      "- the default 'inst/golem-config.yml'\n",
-      "- file read from an app_sys()-call in 'R/app_config.R'\n",
-      "=> Resolve via either of the two options:\n",
-      "1. KEEP USER-FILE: rename/delete default 'inst/golem-config.yml'\n",
-      "2. KEEP DEFAULT: change 'app_sys(...)' to 'app_sys('golem-config.yml')'."
+  if (Sys.getenv("GOLEM_CONFIG_PATH") == "") {
+    path_to_config <- fs_path(
+      path,
+      file
     )
-    stop(msg_err)
+  } else {
+    path_to_config <- Sys.getenv("GOLEM_CONFIG_PATH")
   }
-
-  # Case IV. All other "exotic" cases
-  # IV.A Maybe for some reason we are in inst/
-  ret_pth <- "golem-config.yml"
-  if (fs_file_exists(ret_pth)) {
-    return(fs_path_abs(ret_pth))
-  }
-  # IV.B Try with pkg_path() and default filename in case function arguments
-  # 'path' and 'file' are not working (though it's unusual to set values for
-  # this arguments to something different from the defaults we still want to
-  # cover this case)
-  ret_pth <- attempt({
-    fs_path(
-      golem::pkg_path(),
-      "inst/golem-config.yml"
+  path_to_config <- fs_path_abs(path_to_config)
+  if (!fs_file_exists(path_to_config)) {
+    stop(
+      "Unable to locate config file. Either use the default path at inst/golem-config.yml or set it with a GOLEM_CONFIG_PATH environment variable"
     )
-  })
-  if (!is_try_error(ret_pth) && fs_file_exists(ret_pth)) {
-    return(fs_path_abs(ret_pth))
   }
-
-  # If all cases fail return NULL
-  return(NULL)
 }
 try_user_config_location <- function(pth) {
   # I. try to retrieve from possible user change in app_config.R
