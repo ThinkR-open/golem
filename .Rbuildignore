@@ -25,3 +25,4 @@
 README.html
 ^CRAN-SUBMISSION$
 ^dev$
+^\.pre-commit-config\.yaml$
