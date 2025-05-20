@@ -34,27 +34,58 @@ detach_all_attached <- function() {
 check_name_consistency <- function(pkg) {
   old_dir <- setwd(pkg)
 
-  package_name <- desc_get(keys = "Package")
+  package_name_from_desc <- desc_get(keys = "Package")
+  package_name_from_config <- c()
+
   pth <- fs_path(
     pkg,
     "R",
     "app_config.R"
   )
-  app_config <- readLines(pth)
+  app_config <- parse(file = pth)
 
-  where_system.file <- app_config[
-    grep(
-      "system.file",
-      app_config
-    )
-  ]
+  lapply(
+    app_config,
+    function(expr) {
+      codetools::walkCode(
+        expr,
+        codetools::makeCodeWalker(
+          handler = function(e, w) return(NULL),
+          call = function(expr, w) {
+            fn <- expr[[1]]
+            if (
+              is.symbol(fn) &&
+                as.character(fn) == "system.file"
+            ) {
+              args <- as.list(expr)[-1]
+              package_name_from_config <<- c(
+                package_name_from_config,
+                args$package
+              )
+            }
+            for (e in as.list(expr)[-1L]) {
+              codetools::walkCode(e, w)
+            }
+          },
+          leaf = function(e, w) return(NULL)
+        )
+      )
+    }
+  )
 
   setwd(old_dir)
 
-  if (grepl(
-    package_name,
-    where_system.file
-  )) {
+  if (
+    length(
+      unique(
+        c(
+          package_name_from_config,
+          package_name_from_desc
+        )
+      )
+    ) ==
+      1
+  ) {
     return(invisible(TRUE))
   } else {
     stop(
@@ -62,17 +93,17 @@ check_name_consistency <- function(pkg) {
       "Package name does not match in DESCRIPTION and `app_sys()`.\n",
       "\n",
       sprintf(
-        "DESCRIPTION: '%s'\n",
-        package_name
+        "In DESCRIPTION: '%s'\n",
+        package_name_from_desc
       ),
       sprintf(
-        "R/app_config.R - app_sys(): '%s'\n",
-        where_system.file
+        "R/app_config.R : '%s'\n",
+        paste(package_name_from_config, collapse = ", ")
       ),
       "\n",
       sprintf(
         "Please make both these names match before continuing, for example using golem::set_golem_name('%s')",
-        package_name
+        package_name_from_desc
       )
     )
   }
