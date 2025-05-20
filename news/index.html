@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="internal-changes-0-5-1">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-0-5-1"></a></h3>
-<ul><li>Full refactoring of the <code>add_*_files</code> and <code>use_*_files</code> functions that now all share the same behavior</li>
+<ul><li><p>Full refactoring of the <code>add_*_files</code> and <code>use_*_files</code> functions that now all share the same behavior</p></li>
+<li><p>The internal <code>check_name_consistency()</code> now parses the code of <code>app_config.R</code> and get the <code>package</code> arg of <code>system.file</code>, instead of doing a text based search. This allows the function to detect several calls to <code>system.file</code> and fixes the bug from <a href="https://github.com/ThinkR-open/golem/issues/1179" class="external-link">#1179</a></p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="doc-0-5-1">Doc<a class="anchor" aria-label="anchor" href="#doc-0-5-1"></a></h3>
