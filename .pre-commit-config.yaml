@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      # https://github.com/posit-dev/air
+      - id: air
+        name: Format R code with air
+        entry: air format .
+        language: system
+        files: \.R$
