@@ -24,6 +24,16 @@ test_that(
       )
       expect_error(check_name_consistency("."))
     })
+      run_quietly_in_a_dummy_golem({
+        res <- check_name_consistency(".")
+        expect_true(res)
+        write(
+          "app_sys_2 <- function(...){system.file(..., package = 'blabla')}",
+          "R/app_config.R",
+          append = TRUE
+        )
+        expect_error(check_name_consistency("."))
+      })
   }
 )
 

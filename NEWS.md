@@ -25,6 +25,8 @@
 
 - Full refactoring of the `add_*_files` and `use_*_files` functions that now all share the same behavior
 
+- The internal `check_name_consistency()` now parses the code of `app_config.R` and get the `package` arg of `system.file`, instead of doing a text based search. This allows the function to detect several calls to `system.file` and fixes the bug from #1179
+
 ## Doc
 
 - Vignettes have been renamed
