@@ -26,3 +26,4 @@ README.html
 ^CRAN-SUBMISSION$
 ^dev$
 ^pkgdown$
+^\.pre-commit-config\.yaml$
