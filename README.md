@@ -78,7 +78,7 @@ with blogposts, and links to other packages of the `golemverse`.
 This `README` has been compiled on the
 
     Sys.time()
-    #> [1] "2025-05-02 13:51:12 UTC"
+    #> [1] "2025-05-20 14:14:43 UTC"
 
 Here are the test & coverage results:
 
@@ -86,7 +86,7 @@ Here are the test & coverage results:
     #> ℹ Loading golem
     #> Writing 'use_files.Rd'
     #> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9005 ────
-    #> Duration: 46.8s
+    #> Duration: 48s
     #> 
     #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
