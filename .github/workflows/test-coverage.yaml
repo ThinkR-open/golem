@@ -1,10 +1,11 @@
-# .github/workflows/test-coverage.yaml
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
     branches: [main, master, '*coverage*']
   pull_request:
 
-name: test-coverage
+name: test-coverage.yaml
 
 permissions: read-all
 
@@ -15,42 +16,47 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v4          # ok
+      - uses: actions/checkout@v4
 
-      # --- R -----------------------------------------------------------------
-      - uses: r-lib/actions/setup-r@v2.11.3          # <- pin vers release ≥ 2.11.x
+      - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2.11.3
+      - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::covr, any::xml2
           needs: coverage
 
-      # --- tests & couverture -------------------------------------------------
       - name: Test coverage
-        shell: Rscript {0}
         run: |
           cov <- covr::package_coverage(
             quiet = FALSE,
-            clean  = FALSE,
+            clean = FALSE,
             install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
           )
           print(cov)
-          covr::to_cobertura(cov, file = "cobertura.xml")    # <-- écrit le fichier
+          covr::to_cobertura(cov)
+        shell: Rscript {0}
 
-      # --- Upload vers Codecov -----------------------------------------------
-      - uses: codecov/codecov-action@v5      # ok
+      - uses: codecov/codecov-action@v5
         with:
+          # Fail if error if not on PR, or if on PR and token is given
           fail_ci_if_error: ${{ github.event_name != 'pull_request' || secrets.CODECOV_TOKEN }}
-          files: cobertura.xml               # chemin exact
+          files: ./cobertura.xml
           plugins: noop
           disable_search: true
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      # --- Journal de tests ---------------------------------------------------
       - name: Show testthat output
         if: always()
-        shell: bash
         run: |
-          find '${{ runner.temp }}/package
+          ## --------------------------------------------------------------------
+          find '${{ runner.temp }}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
+        shell: bash
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: coverage-test-failures
+          path: ${{ runner.temp }}/package
