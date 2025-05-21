@@ -171,14 +171,14 @@ test_check(\"shinyexample\")",
   file.create(
     file.path(
       path_to_golem,
-      "vignettes/shinyexample.Rmd"
+      "vignettes/myvignette.Rmd"
     )
   )
   write(
     "library(shinyexample)",
     file.path(
       path_to_golem,
-      "vignettes/shinyexample.Rmd"
+      "vignettes/myvignette.Rmd"
     )
   )
   return(path_to_golem)
