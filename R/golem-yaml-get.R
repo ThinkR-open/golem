@@ -10,6 +10,7 @@ get_golem_things <- function(
   ),
   use_parent = TRUE,
   golem_wd,
+  fall_back_fun = list,
   path
 ) {
   signal_arg_is_deprecated(
@@ -24,12 +25,16 @@ get_golem_things <- function(
     is.null,
     "Unable to retrieve golem config file."
   )
-  config::get(
+  res <- config::get(
     value = value,
     config = config,
     file = conf_path,
     use_parent = TRUE
   )
+  if (is.null(res)) {
+    res <- fall_back_fun()
+  }
+  return(res)
 }
 
 #' @export
@@ -45,16 +50,13 @@ get_golem_wd <- function(
     first_arg = "pkg"
   )
 
-  pth <- get_golem_things(
+  get_golem_things(
     value = "golem_wd",
     config = "dev",
     use_parent = use_parent,
-    golem_wd = fs_path_abs(golem_wd)
+    golem_wd = fs_path_abs(golem_wd),
+    fall_back_fun = golem::pkg_path
   )
-  if (is.null(pth)) {
-    pth <- golem::pkg_path()
-  }
-  return(pth)
 }
 
 #' @export
@@ -76,16 +78,13 @@ get_golem_name <- function(
     fun = as.character(sys.call()[[1]]),
     first_arg = "pkg"
   )
-  nm <- get_golem_things(
+  get_golem_things(
     value = "golem_name",
     config = config,
     use_parent = use_parent,
-    golem_wd = fs_path_abs(golem_wd)
+    golem_wd = fs_path_abs(golem_wd),
+    fall_back_fun = golem::pkg_name
   )
-  if (is.null(nm)) {
-    nm <- golem::pkg_name()
-  }
-  return(nm)
 }
 
 #' @export
@@ -107,14 +106,11 @@ get_golem_version <- function(
     fun = as.character(sys.call()[[1]]),
     first_arg = "pkg"
   )
-  vers <- get_golem_things(
+  get_golem_things(
     value = "golem_version",
     config = config,
     use_parent = use_parent,
-    golem_wd = fs_path_abs(golem_wd)
+    golem_wd = fs_path_abs(golem_wd),
+    fall_back_fun = golem::pkg_version
   )
-  if (is.null(vers)) {
-    vers <- golem::pkg_version()
-  }
-  return(vers)
 }
