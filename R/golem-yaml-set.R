@@ -52,7 +52,7 @@ set_golem_name <- function(
   # Changing in app_config.R
   change_app_config_name(
     name = name,
-    path = path
+    golem_wd = path
   )
 
   # Changing in DESCRIPTION

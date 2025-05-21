@@ -113,7 +113,7 @@ fill_desc <- function(
   )
   change_app_config_name(
     name = pkg_name,
-    path = pkg
+    golem_wd = pkg
   )
   set_golem_name(
     pkg_name,
