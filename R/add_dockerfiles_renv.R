@@ -101,7 +101,7 @@ add_dockerfile_with_renv_ <- function(
       tolower(
         paste0(
           get_golem_name(
-            pkg = source_folder
+            golem_wd = source_folder
           ),
           "_base"
         )
@@ -118,7 +118,7 @@ add_dockerfile_with_renv_ <- function(
       path = output_dir,
       pattern = paste0(
         get_golem_name(
-          pkg = source_folder
+          golem_wd = source_folder
         ),
         "_*.*.tar.gz"
       ),
@@ -177,13 +177,12 @@ add_dockerfile_with_renv_ <- function(
 
   # we use an already built tar.gz file
   my_dock$COPY(
-    from =
-      paste0(
-        get_golem_name(
-          pkg = source_folder
-        ),
-        "_*.tar.gz"
+    from = paste0(
+      get_golem_name(
+        golem_wd = source_folder
       ),
+      "_*.tar.gz"
+    ),
     to = "/app.tar.gz"
   )
   my_dock$RUN(
@@ -254,7 +253,7 @@ add_dockerfile_with_renv <- function(
       port,
       host,
       get_golem_name(
-        pkg = source_folder
+        golem_wd = source_folder
       )
     )
   }
@@ -272,14 +271,14 @@ docker run -p %s:%s %s
     tolower(
       paste0(
         get_golem_name(
-          pkg = source_folder
+          golem_wd = source_folder
         ),
         "_base"
       )
     ),
     tolower(paste0(
       get_golem_name(
-        pkg = source_folder
+        golem_wd = source_folder
       ),
       ":latest"
     )),
@@ -287,7 +286,7 @@ docker run -p %s:%s %s
     port,
     tolower(paste0(
       get_golem_name(
-        pkg = source_folder
+        golem_wd = source_folder
       ),
       ":latest"
     )),
@@ -343,7 +342,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
     dockerfile_cmd = sprintf(
       "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       get_golem_name(
-        pkg = source_folder
+        golem_wd = source_folder
       )
     ),
     ...
@@ -391,7 +390,7 @@ add_dockerfile_with_renv_heroku <- function(
     dockerfile_cmd = sprintf(
       "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       get_golem_name(
-        pkg = source_folder
+        golem_wd = source_folder
       )
     ),
     ...
@@ -403,10 +402,10 @@ add_dockerfile_with_renv_heroku <- function(
     sprintf(
       "%s-%s",
       get_golem_name(
-        pkg = source_folder
+        golem_wd = source_folder
       ),
       get_golem_version(
-        pkg = source_folder
+        golem_wd = source_folder
       )
     )
   )
@@ -425,7 +424,7 @@ add_dockerfile_with_renv_heroku <- function(
       "docker build -f Dockerfile_base --progress=plain -t %s .",
       paste0(
         get_golem_name(
-          pkg = source_folder
+          golem_wd = source_folder
         ),
         "_base"
       )
@@ -437,7 +436,7 @@ add_dockerfile_with_renv_heroku <- function(
       "docker build -f Dockerfile --progress=plain -t %s .\n",
       paste0(
         get_golem_name(
-          pkg = source_folder
+          golem_wd = source_folder
         ),
         ":latest"
       )
