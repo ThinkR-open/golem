@@ -67,7 +67,9 @@ fill_desc <- function(
   )
 
   if (!any_author_params_is_not_null) {
-    warning("The `author_first_name`, `author_last_name`, `author_email` and `author_orcid` parameters will be deprecated from fill_desc() in the next version of {golem}. \nPlease use the `authors` parameter instead.\nSee ?person for more details on how to use it.")
+    warning(
+      "The `author_first_name`, `author_last_name`, `author_email` and `author_orcid` parameters will be deprecated from fill_desc() in the next version of {golem}. \nPlease use the `authors` parameter instead.\nSee ?person for more details on how to use it."
+    )
     # Case 1.1 : old author params are null and authors is empty
     if (length(authors) == 0) {
       # We use the old author params to fill the DESCRIPTION file
@@ -106,7 +108,7 @@ fill_desc <- function(
   )
   set_golem_version(
     version = pkg_version,
-    pkg = path
+    golem_wd = path
   )
   desc$set(
     Package = as.character(pkg_name)
@@ -117,7 +119,7 @@ fill_desc <- function(
   )
   set_golem_name(
     pkg_name,
-    pkg = path
+    golem_wd = path
   )
 
   desc$set(

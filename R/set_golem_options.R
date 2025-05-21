@@ -58,7 +58,7 @@ set_golem_options <- function(
   # Setting name of the golem
   set_golem_name(
     name = golem_name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     talkative = talkative
   )
 
@@ -69,15 +69,15 @@ set_golem_options <- function(
   # we use the explicit path
 
   set_golem_wd(
-    golem_wd = golem_wd,
-    pkg = golem_wd,
+    new_golem_wd = golem_wd,
+    current_golem_wd = golem_wd,
     talkative = talkative
   )
 
   # Setting golem_version
   set_golem_version(
     version = golem_version,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     talkative = talkative
   )
 
