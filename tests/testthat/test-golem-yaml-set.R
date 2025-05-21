@@ -54,7 +54,7 @@ test_that(
       # - DESCRIPTION
       expect_equal(
         golem::pkg_name(
-          path = "."
+          golem_wd = "."
         ),
         "testpkg"
       )
