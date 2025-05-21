@@ -23,7 +23,8 @@ guess_where_config <- function(
   # Define booleans for different cases
   CONFIG_DFLT_EXISTS <- fs_file_exists(ret_pth_def)
   CONFIG_DFLT_MISSNG <- !CONFIG_DFLT_EXISTS
-  CONFIG_USER_EXISTS <- !is.null(ret_pth_usr) && (!identical(ret_pth_usr, ret_pth_def))
+  CONFIG_USER_EXISTS <- !is.null(ret_pth_usr) &&
+    (!identical(ret_pth_usr, ret_pth_def))
   CONFIG_USER_MISSNG <- !CONFIG_USER_EXISTS
 
   # Case I.
@@ -98,7 +99,8 @@ try_user_config_location <- function(pth) {
   if (
     isFALSE(
       fs_file_exists(user_location_default)
-    )) {
+    )
+  ) {
     return(NULL)
   }
 
@@ -247,7 +249,9 @@ get_current_config <- function(path = getwd()) {
           "R/app_config.R"
         ),
         "shinyexample",
-        golem::pkg_name(path = path)
+        golem::pkg_name(
+          golem_wd = path
+        )
       )
       # TODO This should also create the dev folder
     } else {
@@ -264,7 +268,6 @@ get_current_config <- function(path = getwd()) {
     invisible(path_conf)
   )
 }
-
 
 
 ask_golem_creation_upon_config <- function(pth) {
