@@ -245,3 +245,20 @@ write_there_builder <- function(file_to_write_to) {
     write(..., file = file_to_write_to, append = TRUE)
   }
 }
+
+signal_path_is_deprecated <- function(
+  path,
+  fun,
+  golem_wd
+) {
+  if (!rlang::is_missing(path)) {
+    warning(
+      sprintf(
+        "The `path` argument of `%s()` is deprecated\nand will be removed in a future version of {golem}. \nPlease use the `golem_wd` argument instead.\nNote that the current call to `%s()` will not \nuse the value from `path` and will read the value\nfrom `golem_wd`.",
+        as.character(fun),
+        as.character(fun)
+      ),
+      call. = FALSE
+    )
+  }
+}

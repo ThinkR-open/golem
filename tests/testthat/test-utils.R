@@ -401,3 +401,15 @@ test_that(
     )
   }
 )
+
+test_that("signal_path_is_deprecated works", {
+  expect_warning(
+    {
+      signal_path_is_deprecated(
+        path = "plop",
+        fun = "blabla"
+      )
+    },
+    regexp = "blabla"
+  )
+})
