@@ -30,14 +30,18 @@ test_that(
       )
       expect_equal(
         normalizePath(
-          get_golem_wd(pkg = ".")
+          get_golem_wd(
+            golem_wd = "."
+          )
         ),
         normalizePath(
           golem_wd
         )
       )
       expect_equal(
-        get_golem_name(pkg = "."),
+        get_golem_name(
+          golem_wd = "."
+        ),
         "testpkg"
       )
       expect_true(
@@ -63,7 +67,9 @@ test_that(
         )
       )
       expect_equal(
-        get_golem_version(pkg = "."),
+        get_golem_version(
+          golem_wd = "."
+        ),
         "0.0.0.912"
       )
     })
