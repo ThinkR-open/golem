@@ -9,28 +9,31 @@
 add_fct(
   name,
   module = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   open = TRUE,
   dir_create = TRUE,
-  with_test = FALSE
+  with_test = FALSE,
+  pkg
 )
 
 add_utils(
   name,
   module = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   open = TRUE,
   dir_create = TRUE,
-  with_test = FALSE
+  with_test = FALSE,
+  pkg
 )
 
 add_r6(
   name,
   module = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   open = TRUE,
   dir_create = TRUE,
-  with_test = FALSE
+  with_test = FALSE,
+  pkg
 )
 }
 \arguments{
@@ -39,13 +42,13 @@ add_r6(
 \item{module}{If not NULL, the file will be module specific
 in the naming (you don't need to add the leading \code{mod_}).}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
-
 \item{open}{Should the created file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
 \item{with_test}{should the module be created with tests?}
+
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 }
 \value{
 The path to the file, invisibly.
