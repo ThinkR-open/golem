@@ -281,7 +281,12 @@ use_module_test <- function(
   # Remove the "mod_" if any
   name <- mod_remove(name)
 
-  if (!is_existing_module(name, pkg = pkg)) {
+  if (
+    !is_existing_module(
+      name,
+      golem_wd = pkg
+    )
+  ) {
     stop(
       sprintf(
         "The module '%s' does not exist.\nYou can call `golem::add_module('%s')` to create it.",

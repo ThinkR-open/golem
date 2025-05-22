@@ -177,15 +177,23 @@ yesno <- function(...) {
 #' @noRd
 is_existing_module <- function(
   module,
-  pkg = "."
+  golem_wd = golem::get_golem_wd(),
+  pkg
 ) {
-  stopifnot(`Cannot be called when not inside a R-package` = dir.exists(
-    file.path(pkg, "R")
-  ))
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
+  stopifnot(
+    `Cannot be called when not inside a R-package` = dir.exists(
+      file.path(golem_wd, "R")
+    )
+  )
   # stopifnot(`Cannot be called when not inside a golem-project` = is.golem())
   existing_module_files <- list.files(
     file.path(
-      pkg,
+      golem_wd,
       "R/"
     ),
     pattern = "^mod_"
