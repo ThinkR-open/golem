@@ -24,10 +24,16 @@
 #' @return pure side-effect function; returns invisibly
 run_dev <- function(
   file = "dev/run_dev.R",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   save_all = TRUE,
-  install_required_packages = TRUE
+  install_required_packages = TRUE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   if (save_all) {
     if (
       rlang::is_installed("rstudioapi") &&
@@ -38,10 +44,9 @@ run_dev <- function(
     }
   }
 
-
   # We'll look for the run_dev script in the current dir
   try_dev <- file.path(
-    pkg,
+    golem_wd,
     file
   )
 
@@ -57,7 +62,10 @@ run_dev <- function(
   if (install_required_packages) {
     install_dev_deps("attachment", force_install = install_required_packages)
     to_install <- attachment::att_from_rscript(path = try_dev)
-    install_dev_deps(dev_deps = to_install, force_install = install_required_packages)
+    install_dev_deps(
+      dev_deps = to_install,
+      force_install = install_required_packages
+    )
   }
 
   eval(
