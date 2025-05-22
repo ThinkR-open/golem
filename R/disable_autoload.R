@@ -9,9 +9,17 @@
 #'   disable_autoload()
 #' }
 #' @return The path to the file, invisibly.
-disable_autoload <- function(pkg = get_golem_wd()) {
-  fls <- fs_path(
+disable_autoload <- function(
+  golem_wd = get_golem_wd(),
+  pkg
+) {
+  signal_arg_is_deprecated(
     pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
+  fls <- fs_path(
+    golem_wd,
     "R",
     "_disable_autoload.R"
   )
