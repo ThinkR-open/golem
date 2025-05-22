@@ -72,6 +72,9 @@ Note that it will be passed to \code{normalizePath}.}
 the value of the \code{R_CONFIG_ACTIVE} environment variable
 ("default" if the variable does not exist).}
 
+\item{new_golem_wd, current_golem_wd}{New & current directory,
+to be used in \code{set_golem_wd()}}
+
 \item{talkative}{Should the messages be printed to the console?}
 
 \item{name}{The name of the app}

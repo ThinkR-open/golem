@@ -2,7 +2,7 @@
 #'
 #' These functions create files inside the `inst/app` folder.
 #'
-#' @inheritParams  add_module
+#' @inheritParams add_module
 #' @param dir_create Deprecated. Will be removed in future versions and throws an error for now.
 #' @param dir Path to the dir where the file while be created.
 #' @param with_doc_ready For JS file - Should the default file include `$( document ).ready()`?

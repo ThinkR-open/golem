@@ -7,7 +7,9 @@
 disable_autoload(golem_wd = get_golem_wd(), pkg)
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 The path to the file, invisibly.

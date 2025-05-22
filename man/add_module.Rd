@@ -6,7 +6,7 @@
 \usage{
 add_module(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   open = TRUE,
   dir_create = TRUE,
   fct = NULL,
@@ -17,13 +17,14 @@ add_module(
   export = FALSE,
   module_template = golem::module_template,
   with_test = FALSE,
-  ...
+  ...,
+  pkg
 )
 }
 \arguments{
 \item{name}{The name of the module.}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{open}{Should the created file be opened?}
 
@@ -44,6 +45,8 @@ add_module(
 \item{with_test}{should the module be created with tests?}
 
 \item{...}{Arguments to be passed to the \code{module_template} function.}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 The path to the file, invisibly.

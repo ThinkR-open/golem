@@ -42,13 +42,15 @@ add_r6(
 \item{module}{If not NULL, the file will be module specific
 in the naming (you don't need to add the leading \code{mod_}).}
 
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+
 \item{open}{Should the created file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
 \item{with_test}{should the module be created with tests?}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 The path to the file, invisibly.

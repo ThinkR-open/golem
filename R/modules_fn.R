@@ -5,7 +5,7 @@
 #' of a `{golem}` project.
 #'
 #' @param name The name of the module.
-#' @param pkg Path to the root of the package. Default is `get_golem_wd()`.
+#' @param golem_wd Path to the root of the package. Default is `get_golem_wd()`.
 #' @param open Should the created file be opened?
 #' @param dir_create Creates the directory if it doesn't exist, default is `TRUE`.
 #' @param fct If specified, creates a `mod_fct` file.
@@ -16,6 +16,7 @@
 #' @param module_template Function that serves as a module template.
 #' @param with_test should the module be created with tests?
 #' @param ... Arguments to be passed to the `module_template` function.
+#' @param pkg Deprecated, please use golem_wd instead
 #'
 #' @note This function will prefix the `name` argument with `mod_`.
 #'

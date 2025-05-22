@@ -13,7 +13,9 @@ pkg_version(golem_wd = get_golem_wd(), path)
 pkg_path()
 }
 \arguments{
-\item{path}{Path to use to read the DESCRIPTION}
+\item{golem_wd}{Path to use to read the DESCRIPTION}
+
+\item{path}{Deprecated, use golem_wd instead}
 }
 \value{
 The value of the entry in the DESCRIPTION file

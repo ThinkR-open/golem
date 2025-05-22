@@ -20,7 +20,7 @@ applicable, or via \code{\link[utils:file.edit]{utils::file.edit()}} otherwise.}
 \item{overwrite}{an optional \code{logical} flag; if \code{TRUE}, overwrite
 existing \code{README.Rmd}, else throws an error if \code{README.Rmd} exists}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 pure side-effect function that generates template \code{README.Rmd}

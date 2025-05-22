@@ -28,7 +28,8 @@ daf_desc <- function(
 #' These are functions to help you navigate
 #' inside your project while developing
 #'
-#' @param path Path to use to read the DESCRIPTION
+#' @param golem_wd Path to use to read the DESCRIPTION
+#' @param path Deprecated, use golem_wd instead
 #'
 #' @export
 #' @rdname pkg_tools

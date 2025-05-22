@@ -20,9 +20,11 @@ add_shinyserver_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 add_rscignore_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 }
 \arguments{
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+
 \item{open}{Should the created file be opened?}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 Side-effect functions for file creation returning the path to the

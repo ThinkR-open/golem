@@ -14,7 +14,7 @@ run_dev(
 \arguments{
 \item{file}{String with (relative) file path to a \code{run_dev.R}-file}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{save_all}{Boolean; if \code{TRUE} saves all open files before sourcing
 \code{file}}

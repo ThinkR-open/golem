@@ -118,6 +118,8 @@ add_ui_server_files(
 \arguments{
 \item{name}{The name of the module.}
 
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+
 \item{dir}{Path to the dir where the file while be created.}
 
 \item{open}{Should the created file be opened?}
@@ -131,7 +133,7 @@ You may overwrite this with your own template function.}
 
 \item{...}{Arguments to be passed to the \code{template} function.}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{initialize}{For JS file - Whether to add the initialize method.
 Default to FALSE. Some JavaScript API require to initialize components

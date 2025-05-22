@@ -17,6 +17,8 @@
 #' + `get_golem_version()`
 #'
 #' @param golem_name Name of the current golem.
+#' @param new_golem_wd,current_golem_wd New & current directory,
+#'     to be used in `set_golem_wd()`
 #' @param golem_version Version of the current golem.
 #' @param golem_wd Working directory of the current golem package.
 #' @param app_prod Is the `{golem}` in prod mode?
