@@ -7,7 +7,7 @@ test_that("use_recommended_deps works", {
         {
           expect_warning(
             use_recommended_deps(
-              pkg = tempdir()
+              tempdir()
             )
           )
         }
@@ -28,7 +28,7 @@ test_that(
         },
         {
           use_recommended_tests(
-            pkg = "."
+            golem_wd = "."
           )
 
           expect_exists(
@@ -40,7 +40,7 @@ test_that(
           )
           expect_error(
             use_recommended_tests(
-              pkg = "."
+              golem_wd = "."
             )
           )
         }
@@ -59,7 +59,7 @@ test_that(
         {
           unlink("tests", TRUE, TRUE)
           use_recommended_tests(
-            pkg = ".",
+            golem_wd = ".",
             spellcheck = FALSE
           )
 
@@ -86,7 +86,7 @@ test_that(
         },
         {
           use_recommended_tests(
-            pkg = ".",
+            golem_wd = ".",
             spellcheck = FALSE
           )
         }

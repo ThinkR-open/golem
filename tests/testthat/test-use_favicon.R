@@ -57,7 +57,7 @@ test_that("use_favicon fails on 404", {
     },
     {
       expect_error(
-        use_favicon(pkg = "dummy")
+        use_favicon(golem_wd = "dummy")
       )
     }
   )
@@ -70,7 +70,7 @@ test_that("use_favicon fails on error", {
     },
     {
       expect_error(
-        use_favicon(pkg = "dummy")
+        use_favicon(golem_wd = "dummy")
       )
     }
   )
