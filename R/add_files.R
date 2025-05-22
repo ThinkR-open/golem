@@ -465,7 +465,7 @@ add_empty_file <- function(
     return(
       add_js_file(
         name = name,
-        pkg = golem_wd,
+        golem_wd = golem_wd,
         dir = dir,
         open = open,
         template = template,
@@ -480,7 +480,7 @@ add_empty_file <- function(
     return(
       add_css_file(
         name = name,
-        pkg = golem_wd,
+        golem_wd = golem_wd,
         dir = dir,
         open = open,
         template = template,
@@ -495,7 +495,7 @@ add_empty_file <- function(
     return(
       add_sass_file(
         name = name,
-        pkg = golem_wd,
+        golem_wd = golem_wd,
         dir = dir,
         open = open,
         template = template,
@@ -510,7 +510,7 @@ add_empty_file <- function(
     return(
       add_html_template(
         name = name,
-        pkg = golem_wd,
+        golem_wd = golem_wd,
         dir = dir,
         open = open
       )

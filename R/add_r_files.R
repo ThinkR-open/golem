@@ -2,16 +2,22 @@ add_r_files <- function(
   name,
   ext = c("fct", "utils"),
   module = "",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   open = TRUE,
   dir_create = TRUE,
-  with_test = FALSE
+  with_test = FALSE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   name <- file_path_sans_ext(name)
 
   check_name_length_is_one(name)
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(fs_path_abs(golem_wd))
   on.exit(setwd(old))
 
   dir_created <- create_if_needed(
@@ -103,16 +109,22 @@ add_r_files <- function(
 add_fct <- function(
   name,
   module = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   open = TRUE,
   dir_create = TRUE,
-  with_test = FALSE
+  with_test = FALSE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   add_r_files(
     name,
     module,
     ext = "fct",
-    pkg = pkg,
+    golem_wd = golem_wd,
     open = open,
     dir_create = dir_create,
     with_test = with_test
@@ -124,16 +136,22 @@ add_fct <- function(
 add_utils <- function(
   name,
   module = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   open = TRUE,
   dir_create = TRUE,
-  with_test = FALSE
+  with_test = FALSE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   add_r_files(
     name,
     module,
     ext = "utils",
-    pkg = pkg,
+    golem_wd = golem_wd,
     open = open,
     dir_create = dir_create,
     with_test = with_test
@@ -145,16 +163,22 @@ add_utils <- function(
 add_r6 <- function(
   name,
   module = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   open = TRUE,
   dir_create = TRUE,
-  with_test = FALSE
+  with_test = FALSE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   add_r_files(
     name,
     module,
     ext = "class",
-    pkg = pkg,
+    golem_wd = golem_wd,
     open = open,
     dir_create = dir_create,
     with_test = with_test
