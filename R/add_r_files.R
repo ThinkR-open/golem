@@ -35,9 +35,19 @@ add_r_files <- function(
     module <- file_path_sans_ext(module)
     # Remove the "mod_" if any
     module <- mod_remove(module)
-    if (!is_existing_module(module)) {
+    if (
+      !is_existing_module(
+        module,
+        golem_wd = golem_wd
+      )
+    ) {
       # Check for esoteric 'mod_mod_' module names and if that fails throw error
-      if (!is_existing_module(paste0("mod_", module))) {
+      if (
+        !is_existing_module(
+          paste0("mod_", module),
+          golem_wd = golem_wd
+        )
+      ) {
         stop(
           sprintf(
             "The module '%s' does not exist.\nYou can call `golem::add_module('%s')` to create it.",
