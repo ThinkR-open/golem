@@ -31,14 +31,14 @@ detach_all_attached <- function() {
   return(invisible(TRUE))
 }
 
-check_name_consistency <- function(pkg) {
-  old_dir <- setwd(pkg)
+check_name_consistency <- function(golem_wd) {
+  old_dir <- setwd(golem_wd)
 
   package_name_from_desc <- desc_get(keys = "Package")
   package_name_from_config <- c()
 
   pth <- fs_path(
-    pkg,
+    golem_wd,
     "R",
     "app_config.R"
   )
@@ -123,18 +123,24 @@ check_name_consistency <- function(pkg) {
 #'
 #' @return Used for side-effects
 document_and_reload <- function(
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   roclets = NULL,
   load_code = NULL,
   clean = FALSE,
   export_all = FALSE,
   helpers = FALSE,
   attach_testthat = FALSE,
-  ...
+  ...,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   # We'll start by checking if the package name is correct
 
-  check_name_consistency(pkg)
+  check_name_consistency(golem_wd)
   rlang::check_installed("pkgload")
 
   if (
@@ -146,7 +152,7 @@ document_and_reload <- function(
   }
   roxed <- try({
     roxygen2_roxygenise(
-      package.dir = pkg,
+      package.dir = golem_wd,
       roclets = roclets,
       load_code = load_code,
       clean = clean
@@ -161,7 +167,7 @@ document_and_reload <- function(
   }
   loaded <- try({
     pkgload_load_all(
-      pkg,
+      golem_wd,
       export_all = export_all,
       helpers = helpers,
       attach_testthat = attach_testthat,

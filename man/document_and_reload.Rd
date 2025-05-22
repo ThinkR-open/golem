@@ -5,18 +5,19 @@
 \title{Document and reload your package}
 \usage{
 document_and_reload(
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   roclets = NULL,
   load_code = NULL,
   clean = FALSE,
   export_all = FALSE,
   helpers = FALSE,
   attach_testthat = FALSE,
-  ...
+  ...,
+  pkg
 )
 }
 \arguments{
-\item{pkg}{Deprecated, please use golem_wd instead}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{roclets}{Character vector of roclet names to use with package.
 The default, \code{NULL}, uses the roxygen \code{roclets} option,
@@ -40,6 +41,8 @@ in the NAMESPACE file.}
 which more closely mimics the environment within test files.}
 
 \item{...}{Other arguments passed to \code{pkgload::load_all()}}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 Used for side-effects
