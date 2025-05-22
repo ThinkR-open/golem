@@ -6,7 +6,7 @@
 \alias{favicon}
 \title{Add a favicon to your shinyapp}
 \usage{
-use_favicon(path, pkg = get_golem_wd(), method = "curl")
+use_favicon(path, golem_wd = get_golem_wd(), method = "curl", pkg)
 
 remove_favicon(path = "inst/app/www/favicon.ico")
 
@@ -20,9 +20,11 @@ favicon(
 \arguments{
 \item{path}{Path to your favicon file (.ico or .png)}
 
-\item{pkg}{Deprecated, please use golem_wd instead}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{method}{Method to be used for downloading files, 'curl' is default see \code{\link[utils:download.file]{utils::download.file()}}.}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{ico}{path to favicon file}
 
