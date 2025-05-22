@@ -1,15 +1,21 @@
 #' @importFrom utils capture.output
 add_rstudio_files <- function(
-  pkg,
+  golem_wd,
   open,
   service = c(
     "RStudio Connect",
     "Shiny Server",
     "ShinyApps.io"
-  )
+  ),
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   service <- match.arg(service)
-  where <- fs_path(pkg, "app.R")
+  where <- fs_path(golem_wd, "app.R")
 
   rlang::check_installed(
     "pkgload",
@@ -17,7 +23,7 @@ add_rstudio_files <- function(
   )
 
   disable_autoload(
-    pkg = pkg
+    pkg = golem_wd
   )
 
   if (!fs_file_exists(where)) {
@@ -31,7 +37,9 @@ add_rstudio_files <- function(
     write_there("# To deploy, run: rsconnect::deployApp()")
     write_there("# Or use the blue button on top of this file")
     write_there("")
-    write_there("pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)")
+    write_there(
+      "pkgload::load_all(export_all = FALSE,helpers = FALSE,attach_testthat = FALSE)"
+    )
     write_there("options( \"golem.app.prod\" = TRUE)")
     write_there(
       sprintf(
@@ -53,7 +61,10 @@ add_rstudio_files <- function(
       )
     )
 
-    add_rscignore_file(pkg = pkg, open = open)
+    add_rscignore_file(
+      golem_wd = golem_wd,
+      open = open
+    )
 
     open_or_go_to(where, open)
   } else {
@@ -109,11 +120,17 @@ add_rstudio_files <- function(
 #'   add_shinyappsio_file()
 #' }
 add_positconnect_file <- function(
-  pkg = get_golem_wd(),
-  open = TRUE
+  golem_wd = get_golem_wd(),
+  open = TRUE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   add_rstudio_files(
-    pkg = pkg,
+    golem_wd = golem_wd,
     open = open,
     service = "RStudio Connect"
   )
@@ -123,12 +140,18 @@ add_positconnect_file <- function(
 #' @note `add_rstudioconnect_file` is now deprecated; replace by [add_positconnect_file()].
 #' @export
 add_rstudioconnect_file <- function(
-  pkg = get_golem_wd(),
-  open = TRUE
+  golem_wd = get_golem_wd(),
+  open = TRUE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   .Deprecated("add_positconnect_file")
   add_positconnect_file(
-    pkg = get_golem_wd(),
+    golem_wd = get_golem_wd(),
     open = TRUE
   )
 }
@@ -136,11 +159,17 @@ add_rstudioconnect_file <- function(
 #' @rdname rstudio_deploy
 #' @export
 add_shinyappsio_file <- function(
-  pkg = get_golem_wd(),
-  open = TRUE
+  golem_wd = get_golem_wd(),
+  open = TRUE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   add_rstudio_files(
-    pkg = pkg,
+    golem_wd = golem_wd,
     open = open,
     service = "ShinyApps.io"
   )
@@ -149,11 +178,17 @@ add_shinyappsio_file <- function(
 #' @rdname rstudio_deploy
 #' @export
 add_shinyserver_file <- function(
-  pkg = get_golem_wd(),
-  open = TRUE
+  golem_wd = get_golem_wd(),
+  open = TRUE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   add_rstudio_files(
-    pkg = pkg,
+    golem_wd = golem_wd,
     open = open,
     service = "Shiny Server"
   )
@@ -161,9 +196,21 @@ add_shinyserver_file <- function(
 #' @inheritParams add_module
 #' @rdname rstudio_deploy
 #' @export
-add_rscignore_file <- function(pkg = get_golem_wd(), open = TRUE) {
+add_rscignore_file <- function(
+  golem_wd = get_golem_wd(),
+  open = TRUE,
+  pkg
+) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   min_rsc <- "0.8.25"
-  check_min_rsc <- rlang::is_installed("rsconnect", version = min_rsc)
+  check_min_rsc <- rlang::is_installed(
+    "rsconnect",
+    version = min_rsc
+  )
   if (isFALSE(check_min_rsc)) {
     cat_red_bullet(
       sprintf(
@@ -171,17 +218,20 @@ add_rscignore_file <- function(pkg = get_golem_wd(), open = TRUE) {
         min_rsc
       )
     )
-    return(invisible(pkg))
+    return(invisible(golem_wd))
   }
 
-  where <- fs_path(pkg, ".rscignore")
+  where <- fs_path(
+    golem_wd,
+    ".rscignore"
+  )
   if (isTRUE(fs_file_exists(where))) {
     cat_green_tick("The '.rscignore'-file already exists.")
     open_or_go_to(
       where = where,
       open_file = open
     )
-    return(invisible(pkg))
+    return(invisible(golem_wd))
   }
   list_exclusion_defaults <- c(
     ".here",
@@ -200,9 +250,12 @@ add_rscignore_file <- function(pkg = get_golem_wd(), open = TRUE) {
     "vignettes",
     "tests"
   )
-  writeLines(text = list_exclusion_defaults, con = where)
+  writeLines(
+    text = list_exclusion_defaults,
+    con = where
+  )
   usethis_use_build_ignore(".rscignore")
 
   cat_created(where)
-  return(invisible(pkg))
+  return(invisible(golem_wd))
 }
