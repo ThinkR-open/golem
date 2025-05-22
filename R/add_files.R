@@ -69,7 +69,7 @@ add_js_file <- function(
   use_internal_js_file(
     path = temp_js,
     name = name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -108,7 +108,7 @@ add_js_handler <- function(
   use_internal_js_file(
     path = temp_js,
     name = name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -244,7 +244,7 @@ add_js_input_binding <- function(
   use_internal_js_file(
     path = temp_js,
     name = name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -304,7 +304,7 @@ add_js_output_binding <- function(
   use_internal_js_file(
     path = temp_js,
     name = name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -342,7 +342,7 @@ add_css_file <- function(
   use_internal_css_file(
     path = temp_css,
     name = name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -388,7 +388,7 @@ add_sass_file <- function(
       "%s.sass",
       name
     ),
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -522,7 +522,7 @@ add_empty_file <- function(
   use_internal_file(
     path = temp_file,
     name = name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -569,7 +569,7 @@ add_html_template <- function(
   use_internal_html_template(
     path = temp_html,
     name = name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -604,7 +604,7 @@ add_partial_html_template <- function(
   use_internal_html_template(
     path = temp_html,
     name = name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )

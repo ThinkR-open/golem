@@ -19,13 +19,13 @@ test_that(
               expect_error({
                 fun(
                   url = paste0("this.", ext),
-                  pkg = ".",
+                  golem_wd = ".",
                   dir_create = TRUE
                 )
               })
               path_to_file <- fun(
                 url = paste0("this.", ext),
-                pkg = "."
+                golem_wd = "."
               )
               expect_exists(
                 path_to_file
@@ -61,13 +61,13 @@ test_that(
                 expect_error(
                   fun(
                     path = "this.nop",
-                    pkg = "."
+                    golem_wd = "."
                   )
                 )
               }
               path_to_file <- fun(
                 path = paste0("this.", ext),
-                pkg = "."
+                golem_wd = "."
               )
               expect_exists(
                 path_to_file

@@ -23,7 +23,7 @@ add_rstudio_files <- function(
   )
 
   disable_autoload(
-    pkg = golem_wd
+    golem_wd = golem_wd
   )
 
   if (!fs_file_exists(where)) {
