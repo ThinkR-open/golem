@@ -85,7 +85,7 @@ set_golem_options <- function(
   amend_golem_config(
     "app_prod",
     app_prod,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     talkative = talkative
   )
 

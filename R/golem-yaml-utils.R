@@ -66,10 +66,16 @@ amend_golem_config <- function(
   key,
   value,
   config = "default",
-  pkg = golem::pkg_path(),
-  talkative = TRUE
+  golem_wd = golem::pkg_path(),
+  talkative = TRUE,
+  pkg
 ) {
-  conf_path <- get_current_config(pkg)
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
+  conf_path <- get_current_config(golem_wd)
 
   stop_if(
     conf_path,
@@ -78,8 +84,8 @@ amend_golem_config <- function(
   )
 
   cat_if_talk <- function(
-  ...,
-  fun = cat_green_tick
+    ...,
+    fun = cat_green_tick
   ) {
     if (talkative) {
       fun(...)

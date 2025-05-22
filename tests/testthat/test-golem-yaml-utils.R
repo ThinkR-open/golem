@@ -56,7 +56,7 @@ test_that(
         "this",
         "that",
         config = "default",
-        pkg = ".",
+        golem_wd = ".",
         talkative = FALSE
       )
       expect_equal(
@@ -73,7 +73,7 @@ test_that(
         "this",
         "that",
         config = "pif",
-        pkg = ".",
+        golem_wd = ".",
         talkative = FALSE
       )
 
