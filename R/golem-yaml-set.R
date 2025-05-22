@@ -33,7 +33,7 @@ set_golem_wd <- function(
     key = "golem_wd",
     value = golem_yaml_path,
     config = "dev",
-    pkg = current_golem_wd,
+    golem_wd = current_golem_wd,
     talkative = talkative
   )
 
@@ -58,7 +58,7 @@ set_golem_name <- function(
     key = "golem_name",
     value = name,
     config = "default",
-    pkg = fs_path_abs(golem_wd),
+    golem_wd = fs_path_abs(golem_wd),
     talkative = talkative
   )
 
@@ -189,7 +189,7 @@ set_golem_version <- function(
     key = "golem_version",
     value = as.character(version),
     config = "default",
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     talkative = talkative
   )
 
