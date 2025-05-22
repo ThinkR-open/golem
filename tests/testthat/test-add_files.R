@@ -154,7 +154,7 @@ test_that("add_file works", {
     }
     res <- expect_warning(
       add_ui_server_files(
-        pkg = "."
+        golem_wd = "."
       )
     )
     expect_exists(
@@ -165,7 +165,7 @@ test_that("add_file works", {
     )
     res <- expect_warning(
       add_ui_server_files(
-        pkg = "."
+        golem_wd = "."
       )
     )
   })
