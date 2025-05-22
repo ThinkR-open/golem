@@ -47,6 +47,140 @@ test_that("create_golem works", {
   )
 })
 
+test_that("the dev files work", {
+  skip_on_cran()
+  dir <- tempfile(pattern = "golemcreategolem")
+  withr::with_options(
+    c("usethis.quiet" = TRUE),
+    {
+      dir <- create_golem(
+        dir,
+        open = FALSE,
+        package_name = "testpkg"
+      )
+      old_dir <- setwd(dir)
+      # We'll test some of the functions from dev
+      one <- readLines(
+        "dev/01_start.R"
+      )
+      one[
+        grepl(
+          "golem::use_recommended_tests",
+          one
+        )
+      ] <- "golem::use_recommended_tests(spellcheck = FALSE)"
+      one[
+        grepl(
+          "usethis::use_git()",
+          one,
+          fixed = TRUE
+        )
+      ] <- "# usethis::use_git()"
+      one[
+        grepl(
+          "devtools::build_readme()",
+          one,
+          fixed = TRUE
+        )
+      ] <- "# devtools::build_readme()"
+      one[
+        which(
+          grepl(
+            "use_git_remote",
+            one
+          )
+        ) +
+          0:3
+      ] <- ''
+      write(one, "dev/01_start.R")
+      source("dev/01_start.R")
+      expect_true(
+        unname(desc::desc_get("Package")) == "testpkg"
+      )
+      expect_true(
+        unname(desc::desc_get("Title")) == "PKG_TITLE"
+      )
+      expect_true(
+        unname(desc::desc_get("Description")) == "MIT + file LICENSE"
+      )
+      expect_true(
+        unname(desc::desc_get("License")) == "MIT + file LICENSE"
+      )
+      expect_exists("README.Rmd")
+      expect_exists("NEWS.md")
+      expect_exists("R/golem_utils_server.R")
+      expect_exists("R/golem_utils_ui.R")
+      expect_exists("tests/testthat/test-golem_utils_server.R")
+      expect_exists("tests/testthat/test-golem_utils_ui.R")
+      expect_exists("tests/testthat/test-golem-recommended.R")
+
+      two <- readLines(
+        "dev/02_dev.R"
+      )
+      # We'll test a subset of the vignette, as the rest is in usethis
+      two <- two[
+        which(
+          grepl("golem::add_module", two)
+        )[1]:which(
+          grepl("use_vignette", two)
+        )[1]
+      ]
+      write(two, "dev/02_dev.R")
+      source("dev/02_dev.R")
+      expect_exists(
+        "R/mod_name_of_module1.R"
+      )
+      expect_exists(
+        "tests/testthat/test-mod_name_of_module1.R"
+      )
+      expect_exists(
+        "R/mod_name_of_module2.R"
+      )
+      expect_exists(
+        "tests/testthat/test-mod_name_of_module2.R"
+      )
+      expect_exists(
+        "R/fct_helpers.R"
+      )
+      expect_exists(
+        "tests/testthat/test-fct_helpers.R"
+      )
+      expect_exists(
+        "R/utils_helpers.R"
+      )
+      expect_exists(
+        "tests/testthat/test-utils_helpers.R"
+      )
+      expect_exists(
+        "inst/app/www/handlers.js"
+      )
+      expect_exists(
+        "inst/app/www/custom.css"
+      )
+      expect_exists(
+        "inst/app/www/custom.sass"
+      )
+      expect_exists(
+        "inst/app/www/file.json"
+      )
+      expect_exists(
+        "data-raw/my_dataset.R"
+      )
+      expect_exists(
+        "tests/testthat/test-app.R"
+      )
+      setwd(old_dir)
+    }
+  )
+
+  unlink(
+    dir,
+    TRUE,
+    TRUE
+  )
+})
+
+
 test_that("create_golem fails if the dir already exists", {
   dir <- tempfile(pattern = "golemcreategolemfail")
   dir.create(dir)
