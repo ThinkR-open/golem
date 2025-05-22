@@ -18,7 +18,14 @@
 #'
 use_recommended_deps <- function(
   pkg = get_golem_wd(),
-  recommended = c("shiny", "DT", "attempt", "glue", "htmltools", "golem")
+  recommended = c(
+    "shiny",
+    "DT",
+    "attempt",
+    "glue",
+    "htmltools",
+    "golem"
+  )
 ) {
   .Deprecated(
     old = "use_recommended_deps",
@@ -41,27 +48,42 @@ use_recommended_deps <- function(
 #' @importFrom utils capture.output
 #' @importFrom attempt without_warning stop_if
 use_recommended_tests <- function(
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   spellcheck = TRUE,
   vignettes = TRUE,
   lang = "en-US",
-  error = FALSE
+  error = FALSE,
+  pkg
 ) {
-  old <- setwd(fs_path_abs(pkg))
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
+  old <- setwd(fs_path_abs(golem_wd))
 
   on.exit(setwd(old))
 
-  if (!fs_dir_exists(
-    fs_path(fs_path_abs(pkg), "tests")
-  )) {
+  if (
+    !fs_dir_exists(
+      fs_path(fs_path_abs(golem_wd), "tests")
+    )
+  ) {
     without_warning(usethis_use_testthat)()
   }
   if (!requireNamespace("processx")) {
-    stop("Please install the {processx} package to add the recommended tests.")
+    stop(
+      "Please install the {processx} package to add the recommended tests."
+    )
   }
 
   stop_if(
-    fs_path(pkg, "tests", "testthat", "test-golem-recommended.R"),
+    fs_path(
+      golem_wd,
+      "tests",
+      "testthat",
+      "test-golem-recommended.R"
+    ),
     fs_file_exists,
     "test-golem-recommended.R already exists. \nPlease remove it first if you need to reinsert it."
   )
@@ -71,7 +93,11 @@ use_recommended_tests <- function(
       "utils",
       "test-golem-recommended.R"
     ),
-    fs_path(pkg, "tests", "testthat"),
+    fs_path(
+      golem_wd,
+      "tests",
+      "testthat"
+    ),
     overwrite = TRUE
   )
 
