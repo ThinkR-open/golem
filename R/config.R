@@ -116,26 +116,50 @@ try_user_config_location <- function(pth) {
   #      path! This is important if the path is a (complicated) multi-line path.
   tmp_guess_subtext <- paste0(tmp_guess_text[tmp_guess_lines], collapse = "")
 
-  # IV. Identify quoted string that gives new config-path
-  tmp_config_expr <- regexpr("\\((.|\n)*\\)$", tmp_guess_subtext)
-  tmp_config_char <- regmatches(tmp_guess_subtext, tmp_config_expr)
+  # IV. Parse the collapsed text to extract the default config path from call
+  #     structures like app_sys("...") or Sys.getenv(..., app_sys("..."))
+  expr_arg_file <- parse(text = tmp_guess_subtext)[[1]]
+  # extract the right-hand side of assignment
+  rhs_call <- expr_arg_file[[3]]
+  # define temp. variable that checks for user file name from different calls
+  tmp_usr_fn <- NULL
 
-  # V. Manually remove quotes/character-artefacts to form a proper path
-  out_config_char <- regmatches(
-    tmp_config_char,
-    regexpr('\\".*\\"', tmp_config_char)
-  )
-  out_config_char <- substring(out_config_char, 2, nchar(out_config_char) - 1)
+  # IV.a identify supported expression types on RHS
+  IS_APP_SYS_CALL <- is.call(rhs_call) && as.character(rhs_call[[1]]) == "app_sys"
+  IS_SYSGETENV_WITH_APPSYS <- is.call(rhs_call) &&
+    as.character(rhs_call[[1]]) == "Sys.getenv" &&
+    length(rhs_call) >= 3 &&
+    is.call(rhs_call[[3]]) &&
+    as.character(rhs_call[[3]][[1]]) == "app_sys"
 
-  # V. return full path to new config file including pkg-path and 'inst'
+  # IV.b extract config path depending on expression type
+  if (IS_APP_SYS_CALL) {
+    tmp_usr_fn <- rhs_call[[2]]
+  }
+
+  if (IS_SYSGETENV_WITH_APPSYS) {
+    tmp_usr_fn <- rhs_call[[3]][[2]]
+  }
+
+  # early return if no valid default path was found
+  if (is.null(tmp_usr_fn)) return(NULL)
+
+  # V. Coerce default path into string and construct final path to config
+  out_config_char <- as.character(tmp_usr_fn)
   return(fs_path(pth, "inst", out_config_char))
 }
 guess_lines_to_config_file <- function(guess_text) {
   # I. Check if the path is a one-liner i.e. try to match `app_sys(...)` string
-  tmp_guess_lines <- which(grepl("app_sys\\((.|\n)*\\)$", guess_text))
+  tmp_guess_lines <- which(
+    grepl("app_sys\\((.|\n)*\\)$", guess_text) &
+      !grepl("^\\s*#", guess_text)
+  )
   if (identical(integer(0), tmp_guess_lines)) {
     # II. If that is not the case, identify lines that contain the path info
-    tmp_guess_multi_liner <- which(grepl("app_sys\\(", guess_text))
+    tmp_guess_multi_liner <- which(
+      grepl("app_sys\\(", guess_text) &
+        !grepl("^\\s*#", guess_text)
+    )
     if (identical(integer(0), tmp_guess_multi_liner)) {
       # Early return NULL if file does not contain the `app_sys()` command;
       # alternatively, there could be an error thrown here if `app_sys()` must
@@ -151,7 +175,8 @@ guess_lines_to_config_file <- function(guess_text) {
     # contain information on the path.
     tmp_end_line <- NULL
     for (i in tmp_check_lines) {
-      if (grepl(".*\\)", guess_text[i])) {
+      if (grepl(".*\\)", guess_text[i]) &&
+          !grepl("^\\s*#", guess_text[i])) {
         tmp_end_line <- i
         break
       }
