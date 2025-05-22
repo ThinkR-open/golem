@@ -17,9 +17,15 @@
 #' }
 use_favicon <- function(
   path,
-  pkg = get_golem_wd(),
-  method = "curl"
+  golem_wd = get_golem_wd(),
+  method = "curl",
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   if (missing(path)) {
     path <- golem_sys(
       "shinyexample/inst/app/www",
@@ -69,12 +75,12 @@ use_favicon <- function(
     path <- fs_path_abs(destfile)
   }
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(fs_path_abs(golem_wd))
 
   on.exit(setwd(old))
 
   to <- fs_path(
-    fs_path_abs(pkg),
+    fs_path_abs(golem_wd),
     "inst/app/www",
     sprintf(
       "favicon.%s",

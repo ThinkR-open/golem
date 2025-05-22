@@ -5,7 +5,7 @@ test_that(
       add_module(
         "mod1",
         open = FALSE,
-        pkg = ".",
+        golem_wd = ".",
         with_test = TRUE
       )
       expect_exists(
