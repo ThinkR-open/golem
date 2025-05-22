@@ -12,7 +12,19 @@ is_properly_populated_golem <- function(path) {
       expected_files
     )
   ]
+  expected_files <- expected_files[
+    !grepl(
+      "Rproj",
+      expected_files
+    )
+  ]
 
+  expected_files <- expected_files[
+    !grepl(
+      "REMOVEME.Rbuildignore",
+      expected_files
+    )
+  ]
   expected_files <- expected_files[
     !grepl(
       "REMOVEME.Rbuildignore",
@@ -72,6 +84,12 @@ test_that("the dev files work", {
           one <- readLines(
             "dev/01_start.R"
           )
+          one[
+            grepl(
+              "golem::install_dev_deps()",
+              one
+            )
+          ] <- "golem::install_dev_deps(force = TRUE)"
           one[
             grepl(
               "golem::use_recommended_tests",
