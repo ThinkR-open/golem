@@ -46,7 +46,7 @@ test_that("use_readme_rmd works", {
           use_readme_rmd(
             open = FALSE,
             overwrite = TRUE,
-            pkg = getwd(),
+            golem_wd = getwd(),
             pkg_name = "rand_name"
           )
         )

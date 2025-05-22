@@ -8,7 +8,8 @@ use_readme_rmd(
   open = rlang::is_interactive(),
   pkg_name = golem::get_golem_name(),
   overwrite = FALSE,
-  pkg = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  pkg
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ applicable, or via \code{\link[utils:file.edit]{utils::file.edit()}} otherwise.}
 
 \item{overwrite}{an optional \code{logical} flag; if \code{TRUE}, overwrite
 existing \code{README.Rmd}, else throws an error if \code{README.Rmd} exists}
+
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{pkg}{Deprecated, please use golem_wd instead}
 }
