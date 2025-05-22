@@ -4,7 +4,7 @@
 \alias{disable_autoload}
 \title{Disabling Shiny Autoload of R Scripts}
 \usage{
-disable_autoload(pkg = get_golem_wd())
+disable_autoload(golem_wd = get_golem_wd(), pkg)
 }
 \arguments{
 \item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}

@@ -15,96 +15,108 @@
 \usage{
 add_js_file(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   with_doc_ready = TRUE,
   template = golem::js_template,
-  ...
+  ...,
+  pkg
 )
 
 add_js_handler(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   template = golem::js_handler_template,
-  ...
+  ...,
+  pkg
 )
 
 add_js_input_binding(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   initialize = FALSE,
   dev = FALSE,
-  events = list(name = "click", rate_policy = FALSE)
+  events = list(name = "click", rate_policy = FALSE),
+  pkg
 )
 
 add_js_output_binding(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create
+  dir_create,
+  pkg
 )
 
 add_css_file(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   template = golem::css_template,
-  ...
+  ...,
+  pkg
 )
 
 add_sass_file(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   template = golem::sass_template,
-  ...
+  ...,
+  pkg
 )
 
 add_empty_file(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   template = golem::empty_template,
-  ...
+  ...,
+  pkg
 )
 
 add_html_template(
   name = "template.html",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create
+  dir_create,
+  pkg
 )
 
 add_partial_html_template(
   name = "partial_template.html",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create
+  dir_create,
+  pkg
 )
 
-add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app", dir_create)
+add_ui_server_files(
+  golem_wd = get_golem_wd(),
+  dir = "inst/app",
+  dir_create,
+  pkg
+)
 }
 \arguments{
 \item{name}{The name of the module.}
-
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{dir}{Path to the dir where the file while be created.}
 
@@ -118,6 +130,8 @@ add_ui_server_files(pkg = get_golem_wd(), dir = "inst/app", dir_create)
 You may overwrite this with your own template function.}
 
 \item{...}{Arguments to be passed to the \code{template} function.}
+
+\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{initialize}{For JS file - Whether to add the initialize method.
 Default to FALSE. Some JavaScript API require to initialize components
