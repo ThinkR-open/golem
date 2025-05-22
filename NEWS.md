@@ -21,6 +21,8 @@
 
 - Removing the comments on golem creation didn't work fully, this has been fixed.
 
+- Renamed a function in 02_dev.R (add_any_file => add_empty_file)
+
 ## Internal changes
 
 - Full refactoring of the `add_*_files` and `use_*_files` functions that now all share the same behavior
