@@ -27,7 +27,7 @@
 #' @return The path to the file, invisibly.
 add_module <- function(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   open = TRUE,
   dir_create = TRUE,
   fct = NULL,
@@ -38,8 +38,14 @@ add_module <- function(
   export = FALSE,
   module_template = golem::module_template,
   with_test = FALSE,
-  ...
+  ...,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   # Let's start with the checks for the validity of the name
   check_name_length_is_one(name)
   check_name_syntax(name)
@@ -52,13 +58,13 @@ add_module <- function(
   )
 
   # Performing the creation inside the pkg root
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(fs_path_abs(golem_wd))
   on.exit(setwd(old))
 
   # The module creation only works if the R folder
   # is there
   dir_created <- create_if_needed(
-    fs_path(pkg, "R"),
+    fs_path(golem_wd, "R"),
     type = "directory"
   )
 
@@ -105,8 +111,7 @@ add_module <- function(
   if (!is.null(utils)) {
     add_utils(
       utils,
-      module =
-        name,
+      module = name,
       open = open
     )
   }
@@ -114,7 +119,7 @@ add_module <- function(
   if (!is.null(js)) {
     add_js_file(
       js,
-      pkg = pkg,
+      golem_wd = golem_wd,
       open = open
     )
   }
@@ -122,19 +127,24 @@ add_module <- function(
   if (!is.null(js_handler)) {
     add_js_handler(
       js_handler,
-      pkg = pkg,
+      golem_wd = golem_wd,
       open = open
     )
   }
 
   if (!is.null(r6)) {
-    add_r6(r6, module = name, open = open)
+    add_r6(
+      r6,
+      module = name,
+      golem_wd = golem_wd,
+      open = open
+    )
   }
 
   if (with_test) {
     use_module_test(
       name = name,
-      pkg = pkg,
+      golem_wd = golem_wd,
       open = open
     )
   }
@@ -273,9 +283,15 @@ module_template <- function(
 #' @export
 use_module_test <- function(
   name,
-  pkg = get_golem_wd(),
-  open = TRUE
+  golem_wd = get_golem_wd(),
+  open = TRUE,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   # Remove the extension if any
   name <- file_path_sans_ext(name)
   # Remove the "mod_" if any
@@ -284,7 +300,7 @@ use_module_test <- function(
   if (
     !is_existing_module(
       name,
-      golem_wd = pkg
+      golem_wd = golem_wd
     )
   ) {
     stop(
@@ -303,18 +319,27 @@ use_module_test <- function(
     "to build the test structure."
   )
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(
+    fs_path_abs(
+      golem_wd
+    )
+  )
   on.exit(setwd(old))
 
-
-  if (!fs_dir_exists(
-    fs_path(pkg, "tests", "testthat")
-  )) {
+  if (
+    !fs_dir_exists(
+      fs_path(
+        golem_wd,
+        "tests",
+        "testthat"
+      )
+    )
+  ) {
     usethis_use_testthat()
   }
 
   path <- fs_path(
-    pkg,
+    golem_wd,
     "tests",
     "testthat",
     sprintf(
@@ -344,7 +369,8 @@ use_module_test <- function(
     write_there("    expect_true(")
     write_there("      grepl(\"test\", ns(\"test\"))")
     write_there("    )")
-    write_there("    # Here are some examples of tests you can
+    write_there(
+      "    # Here are some examples of tests you can
     # run on your module
     # - Testing the setting of inputs
     # session$setInputs(x = 1)
@@ -354,7 +380,8 @@ use_module_test <- function(
     # - to the testServer function via args = list()
     # expect_true(r$x == 1)
     # - Testing output
-    # expect_true(inherits(output$tbl$html, \"html\"))")
+    # expect_true(inherits(output$tbl$html, \"html\"))"
+    )
     write_there("})")
     write_there(" ")
     write_there("test_that(\"module ui works\", {")

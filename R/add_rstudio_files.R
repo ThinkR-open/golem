@@ -30,7 +30,6 @@ add_rstudio_files <- function(
     fs_file_create(where)
 
     write_there <- write_there_builder(where)
-
     usethis_use_build_ignore(basename(where))
     usethis_use_build_ignore("rsconnect")
     write_there("# Launch the ShinyApp (Do not remove this comment)")
