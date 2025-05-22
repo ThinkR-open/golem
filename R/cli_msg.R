@@ -1,5 +1,5 @@
 after_creation_message_generic <- function(
-  pkg,
+  golem_wd,
   dir,
   name
 ) {
@@ -14,13 +14,11 @@ after_creation_message_generic <- function(
 }
 
 after_creation_message_js <- function(
-  pkg,
+  golem_wd,
   dir,
   name
 ) {
-  if (
-    desc_exist(pkg)
-  ) {
+  if (desc_exist(golem_wd)) {
     if (
       fs_path_abs(dir) != fs_path_abs("inst/app/www") &
         utils::packageVersion("golem") < "0.2.0"
@@ -37,15 +35,14 @@ after_creation_message_js <- function(
   }
 }
 after_creation_message_css <- function(
-  pkg,
+  golem_wd,
   dir,
   name
 ) {
-  if (
-    desc_exist(pkg)
-  ) {
-    if (fs_path_abs(dir) != fs_path_abs("inst/app/www") &
-      utils::packageVersion("golem") < "0.2.0"
+  if (desc_exist(golem_wd)) {
+    if (
+      fs_path_abs(dir) != fs_path_abs("inst/app/www") &
+        utils::packageVersion("golem") < "0.2.0"
     ) {
       cat_red_bullet(
         sprintf(
@@ -60,15 +57,14 @@ after_creation_message_css <- function(
 }
 
 after_creation_message_sass <- function(
-  pkg,
+  golem_wd,
   dir,
   name
 ) {
-  if (
-    desc_exist(pkg)
-  ) {
-    if (fs_path_abs(dir) != fs_path_abs("inst/app/www") &
-      utils::packageVersion("golem") < "0.2.0"
+  if (desc_exist(golem_wd)) {
+    if (
+      fs_path_abs(dir) != fs_path_abs("inst/app/www") &
+        utils::packageVersion("golem") < "0.2.0"
     ) {
       cat_red_bullet(
         sprintf(
@@ -80,15 +76,20 @@ after_creation_message_sass <- function(
 }
 
 after_creation_message_html_template <- function(
-  pkg,
+  golem_wd,
   dir,
   name
 ) {
   do_if_unquiet({
     cli_cat_line("")
-    cli_cat_line("To use this html file as a template, add the following code in your UI:")
+    cli_cat_line(
+      "To use this html file as a template, add the following code in your UI:"
+    )
     cli_cat_line(crayon_darkgrey("htmlTemplate("))
-    cli_cat_line(crayon_darkgrey(sprintf('    app_sys("app/www/%s.html"),', file_path_sans_ext(name))))
+    cli_cat_line(crayon_darkgrey(sprintf(
+      '    app_sys("app/www/%s.html"),',
+      file_path_sans_ext(name)
+    )))
     cli_cat_line(crayon_darkgrey("    body = tagList()"))
     cli_cat_line(crayon_darkgrey("    # add here other template arguments"))
     cli_cat_line(crayon_darkgrey(")"))
@@ -96,7 +97,7 @@ after_creation_message_html_template <- function(
 }
 
 after_creation_message_any_file <- function(
-  pkg,
+  golem_wd,
   dir,
   name
 ) {
@@ -119,7 +120,7 @@ after_creation_message_any_file <- function(
 file_created_dance <- function(
   where,
   fun,
-  pkg,
+  golem_wd,
   dir,
   name,
   open_file,
@@ -127,7 +128,7 @@ file_created_dance <- function(
 ) {
   catfun(where)
 
-  fun(pkg, dir, basename(where))
+  fun(golem_wd, dir, basename(where))
 
   open_or_go_to(
     where = where,

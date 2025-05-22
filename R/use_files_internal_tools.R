@@ -30,11 +30,11 @@ perform_checks_and_copy_if_everything_is_ok <- function(
   directory_to_copy_to,
   file_type,
   file_created_fun,
-  pkg,
+  golem_wd,
   name,
   open
 ) {
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(fs_path_abs(golem_wd))
   on.exit(setwd(old))
   if (is.null(file_type)) {
     name <- build_name(
@@ -77,7 +77,7 @@ perform_checks_and_copy_if_everything_is_ok <- function(
   file_created_dance(
     where = where_to_copy_to,
     fun = after_creation_message_css,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = directory_to_copy_to,
     open_file = open,
     catfun = cat_copied
