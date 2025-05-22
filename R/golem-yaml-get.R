@@ -32,7 +32,7 @@ get_golem_things <- function(
     use_parent = TRUE
   )
   if (is.null(res)) {
-    res <- fall_back_fun()
+    res <- fall_back_fun(golem_wd)
   }
   return(res)
 }

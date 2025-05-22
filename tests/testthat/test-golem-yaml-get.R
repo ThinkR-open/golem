@@ -49,5 +49,21 @@ test_that("get_golem_things works", {
         pkg = "."
       )
     )
+    # Testing the fallback fun
+    golem_config <- yaml::read_yaml(
+      "inst/golem-config.yml",
+      eval.expr = TRUE
+    )
+    golem_config$default$golem_version <- NULL
+    yaml::write_yaml(
+      golem_config,
+      "inst/golem-config.yml"
+    )
+    expect_equal(
+      get_golem_version(
+        golem_wd = "."
+      ),
+      "0.0.0.9000"
+    )
   })
 })
