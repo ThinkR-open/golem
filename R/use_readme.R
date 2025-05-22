@@ -11,18 +11,24 @@ use_readme_rmd <- function(
   open = rlang::is_interactive(),
   pkg_name = golem::get_golem_name(),
   overwrite = FALSE,
-  pkg = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   stopifnot(`Arg. 'overwrite' must be logical` = is.logical(overwrite))
 
   # We move the working directory to perform this action,
   # in case we're launching the action from somewhere else
-  old <- setwd(pkg)
+  old <- setwd(golem_wd)
   on.exit(setwd(old))
 
   # Guess the readme path
   readme_path <- file.path(
-    pkg,
+    golem_wd,
     "README.Rmd"
   )
 
