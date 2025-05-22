@@ -96,13 +96,15 @@ use_internal_file(
 
 \item{name}{The name of the module.}
 
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+
 \item{dir}{Path to the dir where the file while be created.}
 
 \item{open}{Should the created file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{path}{String representation of the local path for the file to be implemented (use_file only)}
 }

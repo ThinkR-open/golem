@@ -20,7 +20,7 @@ favicon(
 \arguments{
 \item{path}{Path to your favicon file (.ico or .png)}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{method}{Method to be used for downloading files, 'curl' is default see \code{\link[utils:download.file]{utils::download.file()}}.}
 

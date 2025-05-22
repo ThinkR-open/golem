@@ -118,7 +118,7 @@ add_dockerfile_with_renv_heroku(
 
 \item{output}{name of the Dockerfile output.}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{from}{The FROM of the Dockerfile. Default is
 

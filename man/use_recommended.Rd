@@ -19,7 +19,7 @@ use_recommended_tests(
 )
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{recommended}{A vector of recommended packages.}
 

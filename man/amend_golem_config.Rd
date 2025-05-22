@@ -22,11 +22,11 @@ amend_golem_config(
 the value of the \code{R_CONFIG_ACTIVE} environment variable
 ("default" if the variable does not exist).}
 
-\item{golem_wd}{Working directory of the current golem package.}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{talkative}{Should the messages be printed to the console?}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 Used for side effects.

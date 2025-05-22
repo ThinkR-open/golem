@@ -18,7 +18,7 @@ use_utils_test_ui(pkg = get_golem_wd())
 use_utils_test_server(pkg = get_golem_wd())
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{with_test}{should the module be created with tests?}
 }

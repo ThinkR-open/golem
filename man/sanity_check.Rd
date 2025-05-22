@@ -7,7 +7,7 @@
 sanity_check(pkg = get_golem_wd())
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 A DataFrame if any of the words has been found.

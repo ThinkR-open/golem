@@ -16,7 +16,7 @@ document_and_reload(
 )
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{roclets}{Character vector of roclet names to use with package.
 The default, \code{NULL}, uses the roxygen \code{roclets} option,
