@@ -12,179 +12,35 @@ guess_where_config <- function(
   path = golem::pkg_path(),
   file = "inst/golem-config.yml"
 ) {
-  # We'll try to guess where the path to the golem-config file is. Since the
-  # user can now supply a user-defined golem-config there may be several cases
-  # to consider:
-
-  # 0. Firstly:
-  # Read from default and possible user specified locations:
-  ret_pth_def <- fs_path(path, file)
-  ret_pth_usr <- try_user_config_location(pth = path)
-  # Define booleans for different cases
-  CONFIG_DFLT_EXISTS <- fs_file_exists(ret_pth_def)
-  CONFIG_DFLT_MISSNG <- !CONFIG_DFLT_EXISTS
-  CONFIG_USER_EXISTS <- !is.null(ret_pth_usr) && (!identical(ret_pth_usr, ret_pth_def))
-  CONFIG_USER_MISSNG <- !CONFIG_USER_EXISTS
-
-  # Case I.
-  # The default config exists AND "R/app_config.R" does not provide any
-  # information about a possible user config (this one should be correct in 99%
-  # of the cases if no changes to the default param values are made).
-  # => read config from "inst/golem-config.yml"
-  if (CONFIG_DFLT_EXISTS && CONFIG_USER_MISSNG) {
-    return(fs_path_abs(ret_pth_def))
-  }
-
-  # Case II.
-  # The default config does not exists AND "R/app_config.R" provides information
-  # about a possible user config (this one should be correct if the user changed
-  # the location of the golem-config and properly deleted the (default) file in
-  # the  default path "inst/golem-config.yml").
-  # => read path to user-config from argument to the app_sys()-call inside
-  # "R/app_config.R"
-  if (CONFIG_DFLT_MISSNG && CONFIG_USER_EXISTS) {
-    return(fs_path_abs(ret_pth_usr))
-  }
-
-  # Case III.
-  # The default config does exists AND "R/app_config.R" provides information
-  # about a possible user config which is found! (this occurs if the user
-  # changed the location/name of the golem-config, properly adjusted the
-  # corresponding line in "R/app_config.R" but forgot to delete the (default)
-  # config file in the default path "inst/golem-config.yml").
-  # => Throw error and prompt user to check whether default config or user
-  # config should be used.
-  if (CONFIG_DFLT_EXISTS && CONFIG_USER_EXISTS) {
-    msg_err <- paste0(
-      "It appears that two golem config files exist:\n",
-      "- the default 'inst/golem-config.yml'\n",
-      "- file read from an app_sys()-call in 'R/app_config.R'\n",
-      "=> Resolve via either of the two options:\n",
-      "1. KEEP USER-FILE: rename/delete default 'inst/golem-config.yml'\n",
-      "2. KEEP DEFAULT: change 'app_sys(...)' to 'app_sys('golem-config.yml')'."
-    )
-    stop(msg_err)
-  }
-
-  # Case IV. All other "exotic" cases
-  # IV.A Maybe for some reason we are in inst/
-  ret_pth <- "golem-config.yml"
-  if (fs_file_exists(ret_pth)) {
-    return(fs_path_abs(ret_pth))
-  }
-  # IV.B Try with pkg_path() and default filename in case function arguments
-  # 'path' and 'file' are not working (though it's unusual to set values for
-  # this arguments to something different from the defaults we still want to
-  # cover this case)
-  ret_pth <- attempt({
-    fs_path(
-      golem::pkg_path(),
-      "inst/golem-config.yml"
-    )
-  })
-  if (!is_try_error(ret_pth) && fs_file_exists(ret_pth)) {
-    return(fs_path_abs(ret_pth))
-  }
-
-  # If all cases fail return NULL
-  return(NULL)
-}
-try_user_config_location <- function(pth) {
-  # I. try to retrieve from possible user change in app_config.R
-  user_location_default <- file.path(
-    pth,
-    "R/app_config.R"
-  )
-  if (
-    isFALSE(
-      fs_file_exists(user_location_default)
-    )) {
-    return(NULL)
-  }
-
-  # II. if successful, read file and find line where new config is located
-  tmp_guess_text <- readLines(
-    user_location_default
-  )
-  tmp_guess_lines <- guess_lines_to_config_file(tmp_guess_text)
-  ## -> early return if malformation i.e. no lines found that match app_sys(...)
-  if (is.null(tmp_guess_lines)) {
-    return(NULL)
-  }
-
-  # III. Collapse character-text found into a single char from which to retrieve
-  #      path! This is important if the path is a (complicated) multi-line path.
-  tmp_guess_subtext <- paste0(tmp_guess_text[tmp_guess_lines], collapse = "")
-
-  # IV. Parse the collapsed text to extract the default config path from call
-  #     structures like app_sys("...") or Sys.getenv(..., app_sys("..."))
-  expr_arg_file <- parse(text = tmp_guess_subtext)[[1]]
-  # extract the right-hand side of assignment
-  rhs_call <- expr_arg_file[[3]]
-  # define temp. variable that checks for user file name from different calls
-  tmp_usr_fn <- NULL
-
-  # IV.a identify supported expression types on RHS
-  IS_APP_SYS_CALL <- is.call(rhs_call) && as.character(rhs_call[[1]]) == "app_sys"
-  IS_SYSGETENV_WITH_APPSYS <- is.call(rhs_call) &&
-    as.character(rhs_call[[1]]) == "Sys.getenv" &&
-    length(rhs_call) >= 3 &&
-    is.call(rhs_call[[3]]) &&
-    as.character(rhs_call[[3]][[1]]) == "app_sys"
-
-  # IV.b extract config path depending on expression type
-  if (IS_APP_SYS_CALL) {
-    tmp_usr_fn <- rhs_call[[2]]
-  }
-
-  if (IS_SYSGETENV_WITH_APPSYS) {
-    tmp_usr_fn <- rhs_call[[3]][[2]]
-  }
-
-  # early return if no valid default path was found
-  if (is.null(tmp_usr_fn)) return(NULL)
-
-  # V. Coerce default path into string and construct final path to config
-  out_config_char <- as.character(tmp_usr_fn)
-  return(fs_path(pth, "inst", out_config_char))
-}
-guess_lines_to_config_file <- function(guess_text) {
-  # I. Check if the path is a one-liner i.e. try to match `app_sys(...)` string
-  tmp_guess_lines <- which(
-    grepl("app_sys\\((.|\n)*\\)$", guess_text) &
-      !grepl("^\\s*#", guess_text)
-  )
-  if (identical(integer(0), tmp_guess_lines)) {
-    # II. If that is not the case, identify lines that contain the path info
-    tmp_guess_multi_liner <- which(
-      grepl("app_sys\\(", guess_text) &
-        !grepl("^\\s*#", guess_text)
-    )
-    if (identical(integer(0), tmp_guess_multi_liner)) {
-      # Early return NULL if file does not contain the `app_sys()` command;
-      # alternatively, there could be an error thrown here if `app_sys()` must
-      # be present inside any `R/app_config.R`; think about this later
-      return(NULL)
+  # 1. DEV USER: envir var is set, and if the file does not exist hard stop
+  if (Sys.getenv("GOLEM_CONFIG_PATH") != "") {
+    path_to_config <- fs_path_abs(Sys.getenv("GOLEM_CONFIG_PATH"))
+    if (!fs_file_exists(path_to_config)) {
+      msg_err <- paste0(
+        "Unable to locate a config file using the environment variable
+        'GOLEM_CONFIG_PATH'. Check for typos in the (path to the) filename.")
+      stop(msg_err)
     }
-    tmp_guess_lines <- tmp_guess_multi_liner
-    tmp_check_lines <- seq(
-      from = tmp_guess_lines + 1,
-      to = length(guess_text)
+  } else if (Sys.getenv("GOLEM_CONFIG_PATH") == "") {
+    path_to_config <- fs_path(
+      path,
+      file
     )
-    # Find the closing brace `)` of app_sys(...) - identified code portion must
-    # contain information on the path.
-    tmp_end_line <- NULL
-    for (i in tmp_check_lines) {
-      if (grepl(".*\\)", guess_text[i]) &&
-          !grepl("^\\s*#", guess_text[i])) {
-        tmp_end_line <- i
-        break
+    # 2.A standard user: sets default path -> all is fine
+    CHECK_DEFAULT_PATH <- grepl("*./inst/golem-config.yml$", path_to_config)
+    if (isFALSE(CHECK_DEFAULT_PATH)) {
+    # 2.B DEV USER: sets non-default path, if the file does not exist hard stop
+      if (!fs_file_exists(path_to_config)) {
+        msg_err <- paste0(
+          "Unable to locate a config file from either the 'path' and 'file'",
+          "arguments, or  the 'GOLEM_CONFIG_PATH' environment variable.",
+          "Check for typos."
+        )
+        stop(msg_err)
       }
     }
-    # Return value is a sequence of line numbers where to elicit the config-path
-    tmp_guess_lines <- seq(from = tmp_guess_lines, to = tmp_end_line)
   }
-  return(tmp_guess_lines)
+  return(path_to_config)
 }
 #' Return path to the `{golem}` config-file
 #'
@@ -236,14 +92,6 @@ guess_lines_to_config_file <- function(guess_text) {
 get_current_config <- function(path = getwd()) {
   # We check whether we can guess where the config file is
   path_conf <- guess_where_config(path)
-
-  # We default to inst/ if this doesn't exist
-  if (is.null(path_conf)) {
-    path_conf <- fs_path(
-      path,
-      "inst/golem-config.yml"
-    )
-  }
 
   if (!fs_file_exists(path_conf)) {
     if (rlang_is_interactive()) {
