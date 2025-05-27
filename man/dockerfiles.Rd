@@ -12,7 +12,7 @@
 add_dockerfile(
   path = "DESCRIPTION",
   output = "Dockerfile",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   from = paste0("rocker/verse:", R.Version()$major, ".", R.Version()$minor),
   as = NULL,
   port = 80,
@@ -23,13 +23,14 @@ add_dockerfile(
   open = TRUE,
   update_tar_gz = TRUE,
   build_golem_from_source = TRUE,
-  extra_sysreqs = NULL
+  extra_sysreqs = NULL,
+  pkg
 )
 
 add_dockerfile_shinyproxy(
   path = "DESCRIPTION",
   output = "Dockerfile",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   from = paste0("rocker/verse:", R.Version()$major, ".", R.Version()$minor),
   as = NULL,
   sysreqs = TRUE,
@@ -38,13 +39,14 @@ add_dockerfile_shinyproxy(
   open = TRUE,
   update_tar_gz = TRUE,
   build_golem_from_source = TRUE,
-  extra_sysreqs = NULL
+  extra_sysreqs = NULL,
+  pkg
 )
 
 add_dockerfile_heroku(
   path = "DESCRIPTION",
   output = "Dockerfile",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   from = paste0("rocker/verse:", R.Version()$major, ".", R.Version()$minor),
   as = NULL,
   sysreqs = TRUE,
@@ -53,11 +55,12 @@ add_dockerfile_heroku(
   open = TRUE,
   update_tar_gz = TRUE,
   build_golem_from_source = TRUE,
-  extra_sysreqs = NULL
+  extra_sysreqs = NULL,
+  pkg
 )
 
 add_dockerfile_with_renv(
-  source_folder = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
@@ -74,11 +77,12 @@ add_dockerfile_with_renv(
   update_tar_gz = TRUE,
   dockerfile_cmd = NULL,
   user = "rstudio",
-  ...
+  ...,
+  source_folder
 )
 
 add_dockerfile_with_renv_shinyproxy(
-  source_folder = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
@@ -92,11 +96,12 @@ add_dockerfile_with_renv_shinyproxy(
   document = TRUE,
   update_tar_gz = TRUE,
   user = "rstudio",
-  ...
+  ...,
+  source_folder
 )
 
 add_dockerfile_with_renv_heroku(
-  source_folder = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
@@ -110,7 +115,8 @@ add_dockerfile_with_renv_heroku(
   document = TRUE,
   user = "rstudio",
   update_tar_gz = TRUE,
-  ...
+  ...,
+  source_folder
 )
 }
 \arguments{
@@ -118,7 +124,8 @@ add_dockerfile_with_renv_heroku(
 
 \item{output}{name of the Dockerfile output.}
 
-\item{pkg}{Deprecated, please use golem_wd instead}
+\item{golem_wd}{path to the Package/golem source folder to deploy.
+default is retrieved via \code{\link[=get_golem_wd]{get_golem_wd()}}.}
 
 \item{from}{The FROM of the Dockerfile. Default is
 
@@ -153,8 +160,7 @@ the Dockerfile directly mount the source folder.}
 
 \item{extra_sysreqs}{character vector. Extra debian system requirements.}
 
-\item{source_folder}{path to the Package/golem source folder to deploy.
-default is retrieved via \code{\link[=get_golem_wd]{get_golem_wd()}}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{lockfile}{path to the renv.lock file to use. default is \code{NULL}.}
 
@@ -171,6 +177,8 @@ the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}')
 \item{user}{Name of the user to specify in the Dockerfile with the USER instruction. Default is \code{rstudio}, if set to \code{NULL} no the user from the FROM image is used.}
 
 \item{...}{Other arguments to pass to \code{\link[renv:snapshot]{renv::snapshot()}}.}
+
+\item{source_folder}{deprecated, use golem_wd instead}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.

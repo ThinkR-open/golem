@@ -1,5 +1,5 @@
 add_dockerfile_with_renv_ <- function(
-  source_folder = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(
     tempdir(),
@@ -16,8 +16,15 @@ add_dockerfile_with_renv_ <- function(
   extra_sysreqs = NULL,
   update_tar_gz = TRUE,
   document = FALSE,
-  ...
+  ...,
+  source_folder
 ) {
+  signal_arg_is_deprecated(
+    source_folder,
+    fun = as.character(sys.call()[[1]]),
+    "source_folder"
+  )
+
   check_dockerfiler_installed()
 
   if (is.null(lockfile)) {
@@ -43,27 +50,34 @@ add_dockerfile_with_renv_ <- function(
   })
 
   # add output_dir in Rbuildignore if the output is inside the golem
-  if (
-    normalizePath(dirname(output_dir)) ==
-      normalizePath(source_folder)
-  ) {
+  if (normalizePath(dirname(output_dir)) == normalizePath(golem_wd)) {
     usethis_use_build_ignore(output_dir)
   }
 
   if (is.null(lockfile)) {
     if (isTRUE(document)) {
-      cli_cat_line("You set `document = TRUE` and you did not pass your own renv.lock file,")
-      cli_cat_line("as a consequence {golem} will use `attachment::att_amend_desc()` to update your ")
+      cli_cat_line(
+        "You set `document = TRUE` and you did not pass your own renv.lock file,"
+      )
+      cli_cat_line(
+        "as a consequence {golem} will use `attachment::att_amend_desc()` to update your "
+      )
       cli_cat_line("DESCRIPTION file before creating the renv.lock file")
       cli_cat_line("")
-      cli_cat_line("you can set `document = FALSE` to use your actual DESCRIPTION file,")
-      cli_cat_line("or pass you own renv.lock to use, using the `lockfile` parameter")
+      cli_cat_line(
+        "you can set `document = FALSE` to use your actual DESCRIPTION file,"
+      )
+      cli_cat_line(
+        "or pass you own renv.lock to use, using the `lockfile` parameter"
+      )
       cli_cat_line("")
-      cli_cat_line("In any case be sure to have no Error or Warning at `devtools::check()`")
+      cli_cat_line(
+        "In any case be sure to have no Error or Warning at `devtools::check()`"
+      )
     }
 
     lockfile <- attachment_create_renv_for_prod(
-      path = source_folder,
+      path = golem_wd,
       check_if_suggests_is_installed = FALSE,
       document = document,
       output = file.path(
@@ -101,7 +115,7 @@ add_dockerfile_with_renv_ <- function(
       tolower(
         paste0(
           get_golem_name(
-            golem_wd = source_folder
+            golem_wd = golem_wd
           ),
           "_base"
         )
@@ -118,7 +132,7 @@ add_dockerfile_with_renv_ <- function(
       path = output_dir,
       pattern = paste0(
         get_golem_name(
-          golem_wd = source_folder
+          golem_wd = golem_wd
         ),
         "_*.*.tar.gz"
       ),
@@ -147,7 +161,7 @@ add_dockerfile_with_renv_ <- function(
       )
     ) {
       out <- pkgbuild::build(
-        path = source_folder,
+        path = golem_wd,
         dest_path = output_dir,
         vignettes = FALSE,
         quiet = {
@@ -179,7 +193,7 @@ add_dockerfile_with_renv_ <- function(
   my_dock$COPY(
     from = paste0(
       get_golem_name(
-        golem_wd = source_folder
+        golem_wd = golem_wd
       ),
       "_*.tar.gz"
     ),
@@ -192,7 +206,7 @@ add_dockerfile_with_renv_ <- function(
   my_dock
 }
 
-#' @param source_folder path to the Package/golem source folder to deploy.
+#' @param golem_wd path to the Package/golem source folder to deploy.
 #' default is retrieved via [get_golem_wd()].
 #' @param lockfile path to the renv.lock file to use. default is `NULL`.
 #' @param output_dir folder to export everything deployment related.
@@ -203,11 +217,12 @@ add_dockerfile_with_renv_ <- function(
 #' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\`.
 #' @param user Name of the user to specify in the Dockerfile with the USER instruction. Default is `rstudio`, if set to `NULL` no the user from the FROM image is used.
 #' @param ... Other arguments to pass to [renv::snapshot()].
+#' @param source_folder deprecated, use golem_wd instead
 #' @inheritParams add_dockerfile
 #' @rdname dockerfiles
 #' @export
 add_dockerfile_with_renv <- function(
-  source_folder = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
@@ -224,10 +239,17 @@ add_dockerfile_with_renv <- function(
   update_tar_gz = TRUE,
   dockerfile_cmd = NULL,
   user = "rstudio",
-  ...
+  ...,
+  source_folder
 ) {
+  signal_arg_is_deprecated(
+    source_folder,
+    fun = as.character(sys.call()[[1]]),
+    "source_folder"
+  )
+
   base_dock <- add_dockerfile_with_renv_(
-    source_folder = source_folder,
+    golem_wd = golem_wd,
     lockfile = lockfile,
     output_dir = output_dir,
     distro = distro,
@@ -253,7 +275,7 @@ add_dockerfile_with_renv <- function(
       port,
       host,
       get_golem_name(
-        golem_wd = source_folder
+        golem_wd = golem_wd
       )
     )
   }
@@ -271,14 +293,14 @@ docker run -p %s:%s %s
     tolower(
       paste0(
         get_golem_name(
-          golem_wd = source_folder
+          golem_wd = golem_wd
         ),
         "_base"
       )
     ),
     tolower(paste0(
       get_golem_name(
-        golem_wd = source_folder
+        golem_wd = golem_wd
       ),
       ":latest"
     )),
@@ -286,7 +308,7 @@ docker run -p %s:%s %s
     port,
     tolower(paste0(
       get_golem_name(
-        golem_wd = source_folder
+        golem_wd = golem_wd
       ),
       ":latest"
     )),
@@ -306,7 +328,7 @@ docker run -p %s:%s %s
 #' @export
 #' @export
 add_dockerfile_with_renv_shinyproxy <- function(
-  source_folder = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
@@ -320,10 +342,17 @@ add_dockerfile_with_renv_shinyproxy <- function(
   document = TRUE,
   update_tar_gz = TRUE,
   user = "rstudio",
-  ...
+  ...,
+  source_folder
 ) {
+  signal_arg_is_deprecated(
+    source_folder,
+    fun = as.character(sys.call()[[1]]),
+    "source_folder"
+  )
+
   add_dockerfile_with_renv(
-    source_folder = source_folder,
+    golem_wd = golem_wd,
     lockfile = lockfile,
     output_dir = output_dir,
     distro = distro,
@@ -342,7 +371,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
     dockerfile_cmd = sprintf(
       "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       get_golem_name(
-        golem_wd = source_folder
+        golem_wd = golem_wd
       )
     ),
     ...
@@ -354,7 +383,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
 #' @export
 #' @export
 add_dockerfile_with_renv_heroku <- function(
-  source_folder = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   lockfile = NULL,
   output_dir = fs::path(tempdir(), "deploy"),
   distro = "focal",
@@ -368,10 +397,17 @@ add_dockerfile_with_renv_heroku <- function(
   document = TRUE,
   user = "rstudio",
   update_tar_gz = TRUE,
-  ...
+  ...,
+  source_folder
 ) {
+  signal_arg_is_deprecated(
+    source_folder,
+    fun = as.character(sys.call()[[1]]),
+    "source_folder"
+  )
+
   add_dockerfile_with_renv(
-    source_folder = source_folder,
+    golem_wd = golem_wd,
     lockfile = lockfile,
     output_dir = output_dir,
     distro = distro,
@@ -390,7 +426,7 @@ add_dockerfile_with_renv_heroku <- function(
     dockerfile_cmd = sprintf(
       "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
       get_golem_name(
-        golem_wd = source_folder
+        golem_wd = golem_wd
       )
     ),
     ...
@@ -402,10 +438,10 @@ add_dockerfile_with_renv_heroku <- function(
     sprintf(
       "%s-%s",
       get_golem_name(
-        golem_wd = source_folder
+        golem_wd = golem_wd
       ),
       get_golem_version(
-        golem_wd = source_folder
+        golem_wd = golem_wd
       )
     )
   )
@@ -424,7 +460,7 @@ add_dockerfile_with_renv_heroku <- function(
       "docker build -f Dockerfile_base --progress=plain -t %s .",
       paste0(
         get_golem_name(
-          golem_wd = source_folder
+          golem_wd = golem_wd
         ),
         "_base"
       )
@@ -436,7 +472,7 @@ add_dockerfile_with_renv_heroku <- function(
       "docker build -f Dockerfile --progress=plain -t %s .\n",
       paste0(
         get_golem_name(
-          golem_wd = source_folder
+          golem_wd = golem_wd
         ),
         ":latest"
       )
