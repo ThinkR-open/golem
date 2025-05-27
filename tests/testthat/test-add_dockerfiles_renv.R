@@ -20,23 +20,23 @@ test_that("add_dockerfile_with_renv_ works", {
         c("usethis.quiet" = TRUE),
         {
           dockerfile_with_renv <- add_dockerfile_with_renv_(
-            source_folder = dummy_golem,
+            golem_wd = dummy_golem,
             lockfile = "renv.lock.prod",
             pkgbuild_quiet = TRUE
           )
 
           dockerfile_with_renv_output <- add_dockerfile_with_renv(
-            source_folder = dummy_golem,
+            golem_wd = dummy_golem,
             lockfile = "renv.lock.prod",
             open = FALSE
           )
           dockerfile_with_renv_shinyproxy_output <- add_dockerfile_with_renv_shinyproxy(
-            source_folder = dummy_golem,
+            golem_wd = dummy_golem,
             lockfile = "renv.lock.prod",
             open = FALSE
           )
           dockerfile_with_renv_heroku_output <- add_dockerfile_with_renv_heroku(
-            source_folder = dummy_golem,
+            golem_wd = dummy_golem,
             lockfile = "renv.lock.prod",
             open = FALSE
           )

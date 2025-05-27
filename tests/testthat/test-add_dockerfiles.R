@@ -30,7 +30,7 @@ test_that("add_dockerfile works", {
               dummy_golem,
               "DESCRIPTION"
             ),
-            pkg = dummy_golem,
+            golem_wd = dummy_golem,
             output = file.path(
               dummy_golem,
               "Dockerfile_add_dockerfile"
@@ -42,7 +42,7 @@ test_that("add_dockerfile works", {
               dummy_golem,
               "DESCRIPTION"
             ),
-            pkg = dummy_golem,
+            golem_wd = dummy_golem,
             output = file.path(
               dummy_golem,
               "Dockerfile_add_dockerfile_shinyproxy"
@@ -55,7 +55,7 @@ test_that("add_dockerfile works", {
               dummy_golem,
               "DESCRIPTION"
             ),
-            pkg = dummy_golem,
+            golem_wd = dummy_golem,
             ,
             output = file.path(
               dummy_golem,
