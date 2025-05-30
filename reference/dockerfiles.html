@@ -15,7 +15,7 @@ add_dockerfile_heroku() creates platform specific Dockerfile."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9011</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,7 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_dockerfile</span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="st">"DESCRIPTION"</span>,</span>
 <span>  output <span class="op">=</span> <span class="st">"Dockerfile"</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"rocker/verse:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Version.html" class="external-link">R.Version</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">major</span>, <span class="st">"."</span>, <span class="fu"><a href="https://rdrr.io/r/base/Version.html" class="external-link">R.Version</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">minor</span><span class="op">)</span>,</span>
 <span>  as <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  port <span class="op">=</span> <span class="fl">80</span>,</span>
@@ -76,13 +76,14 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  build_golem_from_source <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  extra_sysreqs <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  extra_sysreqs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_dockerfile_shinyproxy</span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="st">"DESCRIPTION"</span>,</span>
 <span>  output <span class="op">=</span> <span class="st">"Dockerfile"</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"rocker/verse:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Version.html" class="external-link">R.Version</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">major</span>, <span class="st">"."</span>, <span class="fu"><a href="https://rdrr.io/r/base/Version.html" class="external-link">R.Version</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">minor</span><span class="op">)</span>,</span>
 <span>  as <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sysreqs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -91,13 +92,14 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  build_golem_from_source <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  extra_sysreqs <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  extra_sysreqs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_dockerfile_heroku</span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="st">"DESCRIPTION"</span>,</span>
 <span>  output <span class="op">=</span> <span class="st">"Dockerfile"</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"rocker/verse:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Version.html" class="external-link">R.Version</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">major</span>, <span class="st">"."</span>, <span class="fu"><a href="https://rdrr.io/r/base/Version.html" class="external-link">R.Version</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">minor</span><span class="op">)</span>,</span>
 <span>  as <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sysreqs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -106,11 +108,12 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  build_golem_from_source <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  extra_sysreqs <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  extra_sysreqs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_dockerfile_with_renv</span><span class="op">(</span></span>
-<span>  source_folder <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  lockfile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  output_dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"deploy"</span><span class="op">)</span>,</span>
 <span>  distro <span class="op">=</span> <span class="st">"focal"</span>,</span>
@@ -127,11 +130,12 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  dockerfile_cmd <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  user <span class="op">=</span> <span class="st">"rstudio"</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">source_folder</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_dockerfile_with_renv_shinyproxy</span><span class="op">(</span></span>
-<span>  source_folder <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  lockfile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  output_dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"deploy"</span><span class="op">)</span>,</span>
 <span>  distro <span class="op">=</span> <span class="st">"focal"</span>,</span>
@@ -145,11 +149,12 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  document <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  user <span class="op">=</span> <span class="st">"rstudio"</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">source_folder</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_dockerfile_with_renv_heroku</span><span class="op">(</span></span>
-<span>  source_folder <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  lockfile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  output_dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"deploy"</span><span class="op">)</span>,</span>
 <span>  distro <span class="op">=</span> <span class="st">"focal"</span>,</span>
@@ -163,7 +168,8 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  document <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  user <span class="op">=</span> <span class="st">"rstudio"</span>,</span>
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">source_folder</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -179,8 +185,9 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <dd><p>name of the Dockerfile output.</p></dd>
 
 
-<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
-<dd><p>Path to the root of the package. Default is <code><a href="golem_opts.html">get_golem_wd()</a></code>.</p></dd>
+<dt id="arg-golem-wd">golem_wd<a class="anchor" aria-label="anchor" href="#arg-golem-wd"></a></dt>
+<dd><p>path to the Package/golem source folder to deploy.
+default is retrieved via <code><a href="golem_opts.html">get_golem_wd()</a></code>.</p></dd>
 
 
 <dt id="arg-from">from<a class="anchor" aria-label="anchor" href="#arg-from"></a></dt>
@@ -236,9 +243,8 @@ the Dockerfile directly mount the source folder.</p></dd>
 <dd><p>character vector. Extra debian system requirements.</p></dd>
 
 
-<dt id="arg-source-folder">source_folder<a class="anchor" aria-label="anchor" href="#arg-source-folder"></a></dt>
-<dd><p>path to the Package/golem source folder to deploy.
-default is retrieved via <code><a href="golem_opts.html">get_golem_wd()</a></code>.</p></dd>
+<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dd><p>Deprecated, please use golem_wd instead</p></dd>
 
 
 <dt id="arg-lockfile">lockfile<a class="anchor" aria-label="anchor" href="#arg-lockfile"></a></dt>
@@ -269,6 +275,10 @@ the CMD will be <code>R -e "options('shiny.port'={port},shiny.host='{host}');lib
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Other arguments to pass to <code><a href="https://rstudio.github.io/renv/reference/snapshot.html" class="external-link">renv::snapshot()</a></code>.</p></dd>
+
+
+<dt id="arg-source-folder">source_folder<a class="anchor" aria-label="anchor" href="#arg-source-folder"></a></dt>
+<dd><p>deprecated, use golem_wd instead</p></dd>
 
 </dl></div>
     <div class="section level2">

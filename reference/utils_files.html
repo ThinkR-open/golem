@@ -27,7 +27,7 @@ Copies the golem_utils_server.R to the R folder.
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9011</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,27 +77,31 @@ Copies the golem_utils_server.R to the R folder.
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_utils_ui</span><span class="op">(</span>pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, with_test <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">use_utils_ui</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, with_test <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">pkg</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">use_utils_test_ui</span><span class="op">(</span>pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">use_utils_test_ui</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">pkg</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">use_utils_server</span><span class="op">(</span>pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, with_test <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">use_utils_server</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, with_test <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">pkg</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">use_utils_test_ui</span><span class="op">(</span>pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">use_utils_test_ui</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">pkg</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">use_utils_test_server</span><span class="op">(</span>pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">use_utils_test_server</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">pkg</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dl><dt id="arg-golem-wd">golem_wd<a class="anchor" aria-label="anchor" href="#arg-golem-wd"></a></dt>
 <dd><p>Path to the root of the package. Default is <code><a href="golem_opts.html">get_golem_wd()</a></code>.</p></dd>
 
 
 <dt id="arg-with-test">with_test<a class="anchor" aria-label="anchor" href="#arg-with-test"></a></dt>
 <dd><p>should the module be created with tests?</p></dd>
+
+
+<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dd><p>Deprecated, please use golem_wd instead</p></dd>
 
 </dl></div>
     <div class="section level2">

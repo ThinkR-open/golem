@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9011</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,91 +52,105 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_js_file</span><span class="op">(</span></span>
 <span>  <span class="va">name</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
 <span>  with_doc_ready <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  template <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="va"><a href="template.html">js_template</a></span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_js_handler</span><span class="op">(</span></span>
 <span>  <span class="va">name</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
 <span>  template <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="va"><a href="template.html">js_handler_template</a></span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_js_input_binding</span><span class="op">(</span></span>
 <span>  <span class="va">name</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  dev <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  events <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"click"</span>, rate_policy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  events <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"click"</span>, rate_policy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_js_output_binding</span><span class="op">(</span></span>
 <span>  <span class="va">name</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  <span class="va">dir_create</span></span>
+<span>  <span class="va">dir_create</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_css_file</span><span class="op">(</span></span>
 <span>  <span class="va">name</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
 <span>  template <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="va"><a href="template.html">css_template</a></span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_sass_file</span><span class="op">(</span></span>
 <span>  <span class="va">name</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
 <span>  template <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="va"><a href="template.html">sass_template</a></span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_empty_file</span><span class="op">(</span></span>
 <span>  <span class="va">name</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
 <span>  template <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="va"><a href="template.html">empty_template</a></span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_html_template</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"template.html"</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  <span class="va">dir_create</span></span>
+<span>  <span class="va">dir_create</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">add_partial_html_template</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="st">"partial_template.html"</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  <span class="va">dir_create</span></span>
+<span>  <span class="va">dir_create</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">add_ui_server_files</span><span class="op">(</span>pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, dir <span class="op">=</span> <span class="st">"inst/app"</span>, <span class="va">dir_create</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">add_ui_server_files</span><span class="op">(</span></span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  dir <span class="op">=</span> <span class="st">"inst/app"</span>,</span>
+<span>  <span class="va">dir_create</span>,</span>
+<span>  <span class="va">pkg</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -147,7 +161,7 @@
 <dd><p>The name of the module.</p></dd>
 
 
-<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dt id="arg-golem-wd">golem_wd<a class="anchor" aria-label="anchor" href="#arg-golem-wd"></a></dt>
 <dd><p>Path to the root of the package. Default is <code><a href="golem_opts.html">get_golem_wd()</a></code>.</p></dd>
 
 
@@ -174,6 +188,10 @@ You may overwrite this with your own template function.</p></dd>
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments to be passed to the <code>template</code> function.</p></dd>
+
+
+<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dd><p>Deprecated, please use golem_wd instead</p></dd>
 
 
 <dt id="arg-initialize">initialize<a class="anchor" aria-label="anchor" href="#arg-initialize"></a></dt>

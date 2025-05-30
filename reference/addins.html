@@ -11,7 +11,7 @@ common files used in developing a {golem} application."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9011</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,27 +58,31 @@ common files used in developing a <code>{golem}</code> application.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">insert_ns</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">go_to_start</span><span class="op">(</span>wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">go_to_start</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">wd</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">go_to_dev</span><span class="op">(</span>wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">go_to_dev</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">wd</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">go_to_deploy</span><span class="op">(</span>wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">go_to_deploy</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">wd</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">go_to_run_dev</span><span class="op">(</span>wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">go_to_run_dev</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">wd</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">go_to_app_ui</span><span class="op">(</span>wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">go_to_app_ui</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">wd</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">go_to_app_server</span><span class="op">(</span>wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">go_to_app_server</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">wd</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">go_to_run_app</span><span class="op">(</span>wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">go_to_run_app</span><span class="op">(</span>golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">wd</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-wd">wd<a class="anchor" aria-label="anchor" href="#arg-wd"></a></dt>
+<dl><dt id="arg-golem-wd">golem_wd<a class="anchor" aria-label="anchor" href="#arg-golem-wd"></a></dt>
 <dd><p>The working directory of the <code>{golem}</code> application.</p></dd>
+
+
+<dt id="arg-wd">wd<a class="anchor" aria-label="anchor" href="#arg-wd"></a></dt>
+<dd><p>Deperecated. Use <code>golem_wd</code> instead.</p></dd>
 
 </dl></div>
 

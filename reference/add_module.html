@@ -11,7 +11,7 @@ of a {golem} project."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9011</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@ of a <code>{golem}</code> project.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">add_module</span><span class="op">(</span></span>
 <span>  <span class="va">name</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  golem_wd <span class="op">=</span> <span class="fu"><a href="golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  dir_create <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  fct <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -69,7 +69,8 @@ of a <code>{golem}</code> project.</p>
 <span>  export <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  module_template <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="va"><a href="module_template.html">module_template</a></span>,</span>
 <span>  with_test <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -81,7 +82,7 @@ of a <code>{golem}</code> project.</p>
 <dd><p>The name of the module.</p></dd>
 
 
-<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dt id="arg-golem-wd">golem_wd<a class="anchor" aria-label="anchor" href="#arg-golem-wd"></a></dt>
 <dd><p>Path to the root of the package. Default is <code><a href="golem_opts.html">get_golem_wd()</a></code>.</p></dd>
 
 
@@ -123,6 +124,10 @@ of a <code>{golem}</code> project.</p>
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Arguments to be passed to the <code>module_template</code> function.</p></dd>
+
+
+<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dd><p>Deprecated, please use golem_wd instead</p></dd>
 
 </dl></div>
     <div class="section level2">

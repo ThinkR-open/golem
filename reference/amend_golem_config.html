@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9011</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,8 +54,9 @@
 <span>  <span class="va">key</span>,</span>
 <span>  <span class="va">value</span>,</span>
 <span>  config <span class="op">=</span> <span class="st">"default"</span>,</span>
-<span>  pkg <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="pkg_tools.html">pkg_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  talkative <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="pkg_tools.html">pkg_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  talkative <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -77,12 +78,16 @@ the value of the <code>R_CONFIG_ACTIVE</code> environment variable
 ("default" if the variable does not exist).</p></dd>
 
 
-<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dt id="arg-golem-wd">golem_wd<a class="anchor" aria-label="anchor" href="#arg-golem-wd"></a></dt>
 <dd><p>Path to the root of the package. Default is <code><a href="golem_opts.html">get_golem_wd()</a></code>.</p></dd>
 
 
 <dt id="arg-talkative">talkative<a class="anchor" aria-label="anchor" href="#arg-talkative"></a></dt>
 <dd><p>Should the messages be printed to the console?</p></dd>
+
+
+<dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
+<dd><p>Deprecated, please use golem_wd instead</p></dd>
 
 </dl></div>
     <div class="section level2">
