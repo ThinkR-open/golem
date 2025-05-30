@@ -65,7 +65,7 @@
 <div class="page-header"><h1 id="golem-">{golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#golem-"></a>
 </h1></div>
 <blockquote>
-<p>You’re reading the doc about version: 0.5.1.9005. Note that <a href="https://thinkr-open.github.io/golem/">golem</a> follows the <a href="https://semver.org/" class="external-link">semantic versioning</a> scheme.</p>
+<p>You’re reading the doc about version: 0.5.1.9011. Note that <a href="https://thinkr-open.github.io/golem/">golem</a> follows the <a href="https://semver.org/" class="external-link">semantic versioning</a> scheme.</p>
 </blockquote>
 <p>Production-grade <a href="https://shiny.posit.co/" class="external-link">shiny</a> applications, from creation to deployment.</p>
 <p><a href="https://thinkr-open.github.io/golem/">golem</a> is an opinionated framework that sets the standard for building production-grade <a href="https://shiny.posit.co/" class="external-link">shiny</a> applications. It provides a structured environment that enforces best practices, fosters maintainability, and ensures your applications are reliable, and ready for deployment in real-world environments.</p>
@@ -118,14 +118,13 @@
 <p>This <code>README</code> has been compiled on the</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2025-05-02 13:39:15 UTC"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2025-05-30 15:24:30 CEST"</span></span></code></pre></div>
 <p>Here are the test &amp; coverage results:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ℹ Loading golem</span></span>
-<span><span class="co">#&gt; Writing 'use_files.Rd'</span></span>
-<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────── golem 0.5.1.9005 ────</span></span>
-<span><span class="co">#&gt; Duration: 1m 20.5s</span></span>
+<span><span class="co">#&gt; ── R CMD check results ─────────────────────────────────── golem 0.5.1.9011 ────</span></span>
+<span><span class="co">#&gt; Duration: 52.7s</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ❯ checking for future file timestamps ... NOTE</span></span>
 <span><span class="co">#&gt;   unable to verify current time</span></span>
@@ -134,7 +133,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"NOT_CRAN"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">covr</span><span class="fu">::</span><span class="fu"><a href="http://covr.r-lib.org/reference/package_coverage.html" class="external-link">package_coverage</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; golem Coverage: 86.93%</span></span>
+<span><span class="co">#&gt; golem Coverage: 88.56%</span></span>
 <span><span class="co">#&gt; R/boostrap_base.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/bootstrap_attachment.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/bootstrap_pkgload.R: 0.00%</span></span>
@@ -142,34 +141,33 @@
 <span><span class="co">#&gt; R/bootstrap_rstudio_api.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/bootstrap_testthat.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/bootstrap_dockerfiler.R: 23.33%</span></span>
-<span><span class="co">#&gt; R/bootstrap_usethis.R: 36.36%</span></span>
 <span><span class="co">#&gt; R/test_helpers.R: 47.37%</span></span>
 <span><span class="co">#&gt; R/bootstrap_desc.R: 55.56%</span></span>
-<span><span class="co">#&gt; R/addins.R: 66.67%</span></span>
-<span><span class="co">#&gt; R/cli_msg.R: 73.97%</span></span>
-<span><span class="co">#&gt; R/modules_fn.R: 75.25%</span></span>
-<span><span class="co">#&gt; R/add_rstudio_files.R: 77.45%</span></span>
+<span><span class="co">#&gt; R/cli_msg.R: 75.64%</span></span>
+<span><span class="co">#&gt; R/modules_fn.R: 76.44%</span></span>
 <span><span class="co">#&gt; R/install_dev_deps.R: 78.26%</span></span>
-<span><span class="co">#&gt; R/add_r_files.R: 78.30%</span></span>
-<span><span class="co">#&gt; R/config.R: 79.23%</span></span>
-<span><span class="co">#&gt; R/reload.R: 84.69%</span></span>
-<span><span class="co">#&gt; R/disable_autoload.R: 85.00%</span></span>
-<span><span class="co">#&gt; R/add_dockerfiles.R: 87.10%</span></span>
-<span><span class="co">#&gt; R/sanity_check.R: 87.18%</span></span>
+<span><span class="co">#&gt; R/addins.R: 78.65%</span></span>
+<span><span class="co">#&gt; R/add_r_files.R: 78.79%</span></span>
+<span><span class="co">#&gt; R/config.R: 80.29%</span></span>
+<span><span class="co">#&gt; R/add_rstudio_files.R: 80.82%</span></span>
+<span><span class="co">#&gt; R/bootstrap_usethis.R: 85.45%</span></span>
+<span><span class="co">#&gt; R/disable_autoload.R: 88.00%</span></span>
+<span><span class="co">#&gt; R/reload.R: 88.64%</span></span>
+<span><span class="co">#&gt; R/sanity_check.R: 88.64%</span></span>
+<span><span class="co">#&gt; R/add_dockerfiles.R: 89.61%</span></span>
+<span><span class="co">#&gt; R/add_dockerfiles_renv.R: 89.68%</span></span>
 <span><span class="co">#&gt; R/make_dev.R: 90.00%</span></span>
-<span><span class="co">#&gt; R/use_favicon.R: 90.32%</span></span>
-<span><span class="co">#&gt; R/use_files_internal.R: 90.91%</span></span>
-<span><span class="co">#&gt; R/add_dockerfiles_renv.R: 91.90%</span></span>
-<span><span class="co">#&gt; R/golem-yaml-get.R: 93.18%</span></span>
+<span><span class="co">#&gt; R/use_favicon.R: 90.82%</span></span>
 <span><span class="co">#&gt; R/js.R: 93.75%</span></span>
-<span><span class="co">#&gt; R/add_files.R: 94.71%</span></span>
-<span><span class="co">#&gt; R/run_dev.R: 95.65%</span></span>
+<span><span class="co">#&gt; R/use_files_internal.R: 93.75%</span></span>
+<span><span class="co">#&gt; R/use_recommended.R: 94.34%</span></span>
+<span><span class="co">#&gt; R/add_files.R: 95.15%</span></span>
 <span><span class="co">#&gt; R/create_golem.R: 95.86%</span></span>
 <span><span class="co">#&gt; R/boostrap_cli.R: 96.43%</span></span>
-<span><span class="co">#&gt; R/desc.R: 96.77%</span></span>
-<span><span class="co">#&gt; R/use_recommended.R: 97.30%</span></span>
-<span><span class="co">#&gt; R/use_utils.R: 97.40%</span></span>
-<span><span class="co">#&gt; R/utils.R: 99.21%</span></span>
+<span><span class="co">#&gt; R/run_dev.R: 96.77%</span></span>
+<span><span class="co">#&gt; R/desc.R: 96.84%</span></span>
+<span><span class="co">#&gt; R/use_utils.R: 98.04%</span></span>
+<span><span class="co">#&gt; R/utils.R: 99.32%</span></span>
 <span><span class="co">#&gt; R/add_resource_path.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/boostrap_crayon.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/boostrap_fs.R: 100.00%</span></span>
@@ -180,6 +178,7 @@
 <span><span class="co">#&gt; R/get_sysreqs.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/globals.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/golem_welcome_page.R: 100.00%</span></span>
+<span><span class="co">#&gt; R/golem-yaml-get.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/golem-yaml-set.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/golem-yaml-utils.R: 100.00%</span></span>
 <span><span class="co">#&gt; R/is_golem.R: 100.00%</span></span>
@@ -263,7 +262,7 @@
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://github.com/ThinkR-open/golem/actions" class="external-link"><img src="https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/github/ThinkR-open/golem/tree/HEAD" class="external-link"><img src="https://codecov.io/gh/ThinkR-open/golem/branch/HEAD/graph/badge.svg" alt="Coverage status"></a></li>
+<li><a href="https://app.codecov.io/github/ThinkR-open/golem/tree/master" class="external-link"><img src="https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 <li><a href="https://cran.r-project.org/package=golem" class="external-link"><img src="https://www.r-pkg.org/badges/version/golem" alt="CRAN status"></a></li>
 </ul>
 </div>
