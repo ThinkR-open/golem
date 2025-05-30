@@ -4,7 +4,9 @@
 #'  The series of `go_to_*()` addins help you go to
 #'  common files used in developing a `{golem}` application.
 #'
-#' @param wd The working directory of the `{golem}` application.
+
+#' @param golem_wd The working directory of the `{golem}` application.
+#' @param wd Deperecated. Use `golem_wd` instead.
 #'
 #' @importFrom attempt stop_if_not
 #'
