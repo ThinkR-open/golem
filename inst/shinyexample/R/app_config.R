@@ -32,8 +32,13 @@ get_golem_config <- function(
     )
   ),
   use_parent = TRUE,
-  # Modify this if your config file is somewhere else
-  file = app_sys("golem-config.yml")
+  # If you don't want to use the default config file,
+  # set a `GOLEM_CONFIG_PATH` environment variable that points
+  # to your custom config file.
+  file = Sys.getenv(
+    "GOLEM_CONFIG_PATH",
+    app_sys("golem-config.yml")
+  )
 ) {
   config::get(
     value = value,
