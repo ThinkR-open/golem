@@ -10,47 +10,61 @@ test_that("config finding works", {
     )
     # II. Testing behavior of the helper function - second case:
     # file lives in default path, and envir-variable set correctly
-    Sys.setenv("GOLEM_CONFIG_PATH" = "./inst/golem-config.yml")
-    config <- guess_where_config(
-      path = "."
+
+    withr::with_envvar(
+      c("GOLEM_CONFIG_PATH" = "./inst/golem-config.yml"),
+      {
+        config <- guess_where_config(
+          path = "."
+        )
+        expect_exists(
+          config
+        )
+      }
     )
-    expect_exists(
-      config
-    )
+
     # III. Testing behavior of the helper function - third case:
     # file lives in default path, and envir-variable set incorrectly
-    Sys.setenv("GOLEM_CONFIG_PATH" = "./inst/golem-config2.yml")
-    testthat::expect_error(
-      config <- guess_where_config(
-        path = "."
-        ),
-      regexp = "Unable to locate a config file using the environment variable"
+    withr::with_envvar(
+      c("GOLEM_CONFIG_PATH" = "./inst/golem-config2.yml"),
+      {
+        testthat::expect_error(
+          guess_where_config(
+            path = "."
+          ),
+          regexp = "but we were unable to locate"
+        )
+      }
     )
-    Sys.setenv("GOLEM_CONFIG_PATH" = "")
+
     # IV. Testing behavior of the helper function - fourth case:
     # file lives in another path, and hard coded path is wrongly passed
-    file.copy(from = "./inst/golem-config.yml",
-                to = "./inst/golem-config3.yml")
+    file.copy(
+      from = "./inst/golem-config.yml",
+      to = "./inst/golem-config3.yml"
+    )
     file.remove("./inst/golem-config.yml")
     testthat::expect_error(
-      config <- guess_where_config(
+      guess_where_config(
         path = ".",
         file = "inst/golem-config2.yml"
       ),
-      regexp = "Unable to locate a config file from either the 'path' and 'file'"
+      regexp = "Unable to locate a config file"
     )
     # V. Testing behavior of the helper function:
     # file lives in another path, and envir-var or path to file is wrong
     Sys.setenv("GOLEM_CONFIG_PATHHHHH" = "./inst/golem-config2.yml")
     testthat::expect_error(
-      config <- guess_where_config(
+      guess_where_config(
         path = ".",
         file = "inst/golem-config2.yml"
       ),
-      regexp = "Unable to locate a config file from either the 'path' and 'file'"
+      regexp = "Unable to locate a config file"
     )
-    file.copy(from = "./inst/golem-config3.yml",
-              to = "./inst/golem-config.yml")
+    file.copy(
+      from = "./inst/golem-config3.yml",
+      to = "./inst/golem-config.yml"
+    )
     file.remove("./inst/golem-config3.yml")
     expect_exists(
       config
@@ -129,7 +143,6 @@ test_that("config finding works", {
       }
     )
   })
-
 
   # testthat::with_mocked_bindings(
   #   fs_file_exists = function(...) {
