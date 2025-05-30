@@ -5,14 +5,14 @@
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)[![R-CMD-check](https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg)](https://github.com/ThinkR-open/golem/actions)
 [![Coverage
-status](https://codecov.io/gh/ThinkR-open/golem/branch/HEAD/graph/badge.svg)](https://app.codecov.io/github/ThinkR-open/golem/tree/HEAD)[![CRAN
+status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](https://app.codecov.io/github/ThinkR-open/golem/tree/master)[![CRAN
 status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
 
 <!-- badges: end -->
 
 # {golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"/>
 
-> You’re reading the doc about version: 0.5.1.9005. Note that `{golem}`
+> You’re reading the doc about version: 0.5.1.9011. Note that `{golem}`
 > follows the [semantic versioning](https://semver.org/) scheme.
 
 Production-grade `{shiny}` applications, from creation to deployment.
@@ -82,7 +82,7 @@ This `README` has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2025-05-02 13:39:15 UTC"
+#> [1] "2025-05-30 15:24:30 CEST"
 ```
 
 Here are the test & coverage results:
@@ -90,9 +90,8 @@ Here are the test & coverage results:
 ``` r
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
-#> Writing 'use_files.Rd'
-#> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9005 ────
-#> Duration: 1m 20.5s
+#> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9011 ────
+#> Duration: 52.7s
 #> 
 #> ❯ checking for future file timestamps ... NOTE
 #>   unable to verify current time
@@ -103,7 +102,7 @@ devtools::check(quiet = TRUE)
 ``` r
 Sys.setenv("NOT_CRAN" = TRUE)
 covr::package_coverage()
-#> golem Coverage: 86.93%
+#> golem Coverage: 88.56%
 #> R/boostrap_base.R: 0.00%
 #> R/bootstrap_attachment.R: 0.00%
 #> R/bootstrap_pkgload.R: 0.00%
@@ -111,34 +110,33 @@ covr::package_coverage()
 #> R/bootstrap_rstudio_api.R: 0.00%
 #> R/bootstrap_testthat.R: 0.00%
 #> R/bootstrap_dockerfiler.R: 23.33%
-#> R/bootstrap_usethis.R: 36.36%
 #> R/test_helpers.R: 47.37%
 #> R/bootstrap_desc.R: 55.56%
-#> R/addins.R: 66.67%
-#> R/cli_msg.R: 73.97%
-#> R/modules_fn.R: 75.25%
-#> R/add_rstudio_files.R: 77.45%
+#> R/cli_msg.R: 75.64%
+#> R/modules_fn.R: 76.44%
 #> R/install_dev_deps.R: 78.26%
-#> R/add_r_files.R: 78.30%
-#> R/config.R: 79.23%
-#> R/reload.R: 84.69%
-#> R/disable_autoload.R: 85.00%
-#> R/add_dockerfiles.R: 87.10%
-#> R/sanity_check.R: 87.18%
+#> R/addins.R: 78.65%
+#> R/add_r_files.R: 78.79%
+#> R/config.R: 80.29%
+#> R/add_rstudio_files.R: 80.82%
+#> R/bootstrap_usethis.R: 85.45%
+#> R/disable_autoload.R: 88.00%
+#> R/reload.R: 88.64%
+#> R/sanity_check.R: 88.64%
+#> R/add_dockerfiles.R: 89.61%
+#> R/add_dockerfiles_renv.R: 89.68%
 #> R/make_dev.R: 90.00%
-#> R/use_favicon.R: 90.32%
-#> R/use_files_internal.R: 90.91%
-#> R/add_dockerfiles_renv.R: 91.90%
-#> R/golem-yaml-get.R: 93.18%
+#> R/use_favicon.R: 90.82%
 #> R/js.R: 93.75%
-#> R/add_files.R: 94.71%
-#> R/run_dev.R: 95.65%
+#> R/use_files_internal.R: 93.75%
+#> R/use_recommended.R: 94.34%
+#> R/add_files.R: 95.15%
 #> R/create_golem.R: 95.86%
 #> R/boostrap_cli.R: 96.43%
-#> R/desc.R: 96.77%
-#> R/use_recommended.R: 97.30%
-#> R/use_utils.R: 97.40%
-#> R/utils.R: 99.21%
+#> R/run_dev.R: 96.77%
+#> R/desc.R: 96.84%
+#> R/use_utils.R: 98.04%
+#> R/utils.R: 99.32%
 #> R/add_resource_path.R: 100.00%
 #> R/boostrap_crayon.R: 100.00%
 #> R/boostrap_fs.R: 100.00%
@@ -149,6 +147,7 @@ covr::package_coverage()
 #> R/get_sysreqs.R: 100.00%
 #> R/globals.R: 100.00%
 #> R/golem_welcome_page.R: 100.00%
+#> R/golem-yaml-get.R: 100.00%
 #> R/golem-yaml-set.R: 100.00%
 #> R/golem-yaml-utils.R: 100.00%
 #> R/is_golem.R: 100.00%
