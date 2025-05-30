@@ -32,11 +32,13 @@ get_golem_config <- function(
     )
   ),
   use_parent = TRUE,
-  # If you don't want to use the default config file:
-  # - replace the function call and write a hard coded path to your config file
-  # - set a `GOLEM_CONFIG_PATH` environment variable that points to the file
-  #   (which will be picked up by golem::guess_where_config() internally)
-  file = golem::get_current_config()
+  # If you don't want to use the default config file,
+  # set a `GOLEM_CONFIG_PATH` environment variable that points
+  # to your custom config file.
+  file = Sys.getenv(
+    "GOLEM_CONFIG_PATH",
+    app_sys("golem-config.yml")
+  )
 ) {
   config::get(
     value = value,
