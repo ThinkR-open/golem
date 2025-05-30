@@ -52,7 +52,7 @@ go_to <- function(
     "wd"
   )
   file <- fs_path(
-    wd,
+    golem_wd,
     file
   )
   if (!fs_file_exists(file)) {
@@ -80,7 +80,7 @@ go_to_start <- function(
   )
   go_to(
     "dev/01_start.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }
 #' @rdname addins
@@ -96,7 +96,7 @@ go_to_dev <- function(
   )
   go_to(
     "dev/02_dev.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }
 #' @rdname addins
@@ -136,7 +136,7 @@ go_to_app_ui <- function(
   )
   go_to(
     "R/app_ui.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }
 #' @rdname addins
@@ -152,7 +152,7 @@ go_to_app_server <- function(
   )
   go_to(
     "R/app_server.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }
 #' @rdname addins
@@ -168,6 +168,6 @@ go_to_run_app <- function(
   )
   go_to(
     "R/run_app.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }
