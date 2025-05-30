@@ -12,35 +12,42 @@ guess_where_config <- function(
   path = golem::pkg_path(),
   file = "inst/golem-config.yml"
 ) {
-  # 1. DEV USER: envir var is set, and if the file does not exist hard stop
+  # Case one: Env var is set, and if the file does not exist hard stop
   if (Sys.getenv("GOLEM_CONFIG_PATH") != "") {
-    path_to_config <- fs_path_abs(Sys.getenv("GOLEM_CONFIG_PATH"))
+    path_to_config <- fs_path_abs(
+      Sys.getenv(
+        "GOLEM_CONFIG_PATH"
+      )
+    )
     if (!fs_file_exists(path_to_config)) {
-      msg_err <- paste0(
-        "Unable to locate a config file using the environment variable
-        'GOLEM_CONFIG_PATH'. Check for typos in the (path to the) filename."
+      msg_err <- paste(
+        "`GOLEM_CONFIG_PATH` is set, but we were unable to locate",
+        "a config file using this environment variable.\n",
+        "Check for typos and set the environment variable to a valid path."
       )
       stop(msg_err)
     }
-  } else if (Sys.getenv("GOLEM_CONFIG_PATH") == "") {
-    path_to_config <- fs_path(
-      path,
-      file
-    )
-    # 2.A standard user: sets default path -> all is fine
-    CHECK_DEFAULT_PATH <- grepl("*./inst/golem-config.yml$", path_to_config)
-    if (isFALSE(CHECK_DEFAULT_PATH)) {
-      # 2.B DEV USER: sets non-default path, if the file does not exist hard stop
-      if (!fs_file_exists(path_to_config)) {
-        msg_err <- paste0(
-          "Unable to locate a config file from either the 'path' and 'file'",
-          "arguments, or  the 'GOLEM_CONFIG_PATH' environment variable.",
-          "Check for typos."
-        )
-        stop(msg_err)
-      }
-    }
+    return(path_to_config)
   }
+
+  # Case two: Env var not set, we default to the
+  # standard path
+  path_to_config <- fs_path(
+    path,
+    file
+  )
+
+  if (!fs_file_exists(path_to_config)) {
+    msg_err <- paste0(
+      "Unable to locate a config file from the default location.",
+      "Please restore this file or use the 'GOLEM_CONFIG_PATH' environment variable to
+      set a custom path to the config file.\n",
+      "The default path is: ",
+      fs_path_abs(path_to_config)
+    )
+    stop(msg_err)
+  }
+
   return(path_to_config)
 }
 #' Return path to the `{golem}` config-file
