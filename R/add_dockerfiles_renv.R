@@ -104,12 +104,12 @@ add_dockerfile_with_renv_ <- function(
     extra_sysreqs = extra_sysreqs
   )
 
-  
 
-  
-  
+
+
+
   if ( !single_file){
-    
+
   socle$write(
     as = file.path(
       output_dir,
@@ -130,26 +130,26 @@ add_dockerfile_with_renv_ <- function(
     )
   )
 
-  
+
   } else {
-    
+
     # ici on va faire le fork
     # et ici faut append
-    
+
     my_dock <- dockerfiler_Dockerfile()$new(
       FROM = AS, AS = "final"
     )
-    
+
     socle$write(    as = file.path(
       output_dir,
       "Dockerfile"
     ))
 
-  
-    
-    
+
+
+
   }
-  
+
   if (!single_file){
   my_dock$COPY(basename(lockfile), "renv.lock")
   my_dock$RUN("R -e 'options(renv.config.pak.enabled = FALSE);renv::restore()'")
@@ -169,12 +169,12 @@ add_dockerfile_with_renv_ <- function(
     "R -e 'remotes::install_local(\"/app.tar.gz\",upgrade=\"never\")'"
   )
   my_dock$RUN("rm /app.tar.gz")
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   if (update_tar_gz) {
     old_version <- list.files(
       path = output_dir,
@@ -199,7 +199,7 @@ add_dockerfile_with_renv_ <- function(
         )
       )
     }
-    
+
     if (
       isTRUE(
         requireNamespace(
@@ -250,11 +250,11 @@ add_dockerfile_with_renv_ <- function(
 #' @param dockerfile_cmd What is the CMD to add to the Dockerfile. If NULL, the default,
 #' the CMD will be `R -e "options('shiny.port'={port},shiny.host='{host}',golem.app.prod = {set_golem.app.prod});library({appname});{appname}::run_app()\`.
 #' @param user Name of the user to specify in the Dockerfile with the USER instruction. Default is `rstudio`, if set to `NULL` no the user from the FROM image is used.
-#' @param single_file boolean.  
-#'   If `TRUE` (by default), generate a single multi-stage Dockerfile .  
+#' @param single_file boolean.
+#'   If `TRUE` (by default), generate a single multi-stage Dockerfile .
 #'   If `FALSE`, produce two distinct Dockerfiles to be run sequentially
 #'   for the build and production phases.
-#' @param set_golem.app.prod boolean If `TRUE` (by default) set options(golem.app.prod = TRUE) in dockerfile_cmd. 
+#' @param set_golem.app.prod boolean If `TRUE` (by default) set options(golem.app.prod = TRUE) in dockerfile_cmd.
 #' @param ... Other arguments to pass to [renv::snapshot()].
 #' @param source_folder deprecated, use golem_wd instead
 #' @inheritParams add_dockerfile
@@ -329,7 +329,7 @@ add_dockerfile_with_renv <- function(
   base_dock$write(as = file.path(output_dir, "Dockerfile"),
                   append = single_file)
 
-  
+
   if (!single_file){
   out <- sprintf(
 "# use cd to moove to the folder containing the Dockerfile
@@ -361,13 +361,13 @@ docker run -p %s:%s %s
     )),
     port
   )} else {
-    
-    
-    
-    
+
+
+
+
     out <- sprintf(
 "# use cd to moove to the folder containing the Dockerfile
-docker build -f Dockerfile --target=final --progress=plain -t %s .
+docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
 # then go to 127.0.0.1:%s",
       tolower(paste0(
@@ -386,9 +386,9 @@ docker run -p %s:%s %s
       )),
       port
     )
-    
+
   }
-  
+
   cat(out, file = file.path(output_dir, "README"))
 
   open_or_go_to(
