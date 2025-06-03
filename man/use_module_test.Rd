@@ -4,14 +4,16 @@
 \alias{use_module_test}
 \title{Add a test file for a module}
 \usage{
-use_module_test(name, pkg = get_golem_wd(), open = TRUE)
+use_module_test(name, golem_wd = get_golem_wd(), open = TRUE, pkg)
 }
 \arguments{
 \item{name}{The name of the module.}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{open}{Should the created file be opened?}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 Used for side effect. Returns the path invisibly.

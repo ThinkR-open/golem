@@ -6,21 +6,24 @@
 \usage{
 run_dev(
   file = "dev/run_dev.R",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   save_all = TRUE,
-  install_required_packages = TRUE
+  install_required_packages = TRUE,
+  pkg
 )
 }
 \arguments{
 \item{file}{String with (relative) file path to a \code{run_dev.R}-file}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{save_all}{Boolean; if \code{TRUE} saves all open files before sourcing
 \code{file}}
 
 \item{install_required_packages}{Boolean; if \code{TRUE} install the packages
 used in \code{run_dev.R}-file}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 pure side-effect function; returns invisibly

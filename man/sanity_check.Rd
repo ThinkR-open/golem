@@ -4,10 +4,12 @@
 \alias{sanity_check}
 \title{Sanity check for R files in the project}
 \usage{
-sanity_check(pkg = get_golem_wd())
+sanity_check(golem_wd = get_golem_wd(), pkg)
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 A DataFrame if any of the words has been found.

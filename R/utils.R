@@ -177,15 +177,23 @@ yesno <- function(...) {
 #' @noRd
 is_existing_module <- function(
   module,
-  pkg = "."
+  golem_wd = golem::get_golem_wd(),
+  pkg
 ) {
-  stopifnot(`Cannot be called when not inside a R-package` = dir.exists(
-    file.path(pkg, "R")
-  ))
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
+  stopifnot(
+    `Cannot be called when not inside a R-package` = dir.exists(
+      file.path(golem_wd, "R")
+    )
+  )
   # stopifnot(`Cannot be called when not inside a golem-project` = is.golem())
   existing_module_files <- list.files(
     file.path(
-      pkg,
+      golem_wd,
       "R/"
     ),
     pattern = "^mod_"
@@ -243,5 +251,27 @@ check_name_syntax <- function(name) {
 write_there_builder <- function(file_to_write_to) {
   function(...) {
     write(..., file = file_to_write_to, append = TRUE)
+  }
+}
+
+signal_arg_is_deprecated <- function(
+  path,
+  fun,
+  first_arg = "path",
+  second_arg = "golem_wd"
+) {
+  if (!rlang::is_missing(path)) {
+    warning(
+      sprintf(
+        "The `%s` argument of `%s()` is deprecated\nand will be removed in a future version of {golem}. \nPlease use the `%s` argument instead.\nNote that the current call to `%s()` will not \nuse the value from `%s` and will read the value\nfrom `%s`.",
+        first_arg,
+        as.character(fun),
+        second_arg,
+        as.character(fun),
+        first_arg,
+        second_arg
+      ),
+      call. = FALSE
+    )
   }
 }

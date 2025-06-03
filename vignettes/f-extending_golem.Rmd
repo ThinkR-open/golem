@@ -1,8 +1,8 @@
 ---
-title: "f_extending_golem"
+title: "06. Extending `{golem}`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{f_extending_golem}
+  %\VignetteIndexEntry{06 - Extending golem}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

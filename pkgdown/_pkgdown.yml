@@ -1,0 +1,49 @@
+url: https://thinkr-open.github.io/golem/
+
+template:
+  bootstrap: 5
+  theme: github-dark
+  bslib:
+    pkgdown-nav-height: 100px
+    primary: "#7176b8"
+    info: "#f15521"
+    bg: "#fafafa"
+    fg: "#38424f"
+    navbar-brand-font-size: 2rem
+    navbar-light-brand-color: "#fafafa"
+    navbar-light-brand-hover-color: "#fafafa"
+    navbar-light-color: "#fafafa"
+    navbar-light-hover-color: "#fafafa"
+    navbar-light-toggler-border-color: "#fafafa"
+    link-color: "#f15521"
+    link-decoration: underline dotted
+    dropdown-link-active-bg: "#f15521"
+    code-bg: "#f155212b"
+    base_font: { google: "Rubik" }
+    heading_font: { google: "Rubik" }
+
+navbar:
+  bg: info
+  type: light
+  structure:
+    left: [reference, articles, resources, news]
+    right: [github, golemverse]
+  components:
+    contribute:
+      text: Contribute
+      href: articles/contribute.html
+    golemverse:
+      icon: fas fa-toolbox
+      href: https://golemverse.org/
+      aria-label: Golemverse
+    resources:
+      text: Resources
+      href: articles/resources.html
+
+footer:
+  structure:
+    left: thinkr
+    right: [golemverse]
+  components:
+    thinkr: <a href="https://thinkr.fr/" target="_blank">© ThinkR - A French company of R experts</a>
+    golemverse: <a href="https://golemverse.org/" target="_blank">Explore the Golemverse</a>

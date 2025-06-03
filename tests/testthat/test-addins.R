@@ -13,25 +13,25 @@ test_that("go_to works", {
     code = {
       these_all_should_be_true <- c(
         go_to_start(
-          wd = dummy_golem
+          golem_wd = dummy_golem
         ),
         go_to_dev(
-          wd = dummy_golem
+          golem_wd = dummy_golem
         ),
         go_to_deploy(
-          wd = dummy_golem
+          golem_wd = dummy_golem
         ),
         go_to_run_dev(
-          wd = dummy_golem
+          golem_wd = dummy_golem
         ),
         go_to_app_ui(
-          wd = dummy_golem
+          golem_wd = dummy_golem
         ),
         go_to_app_server(
-          wd = dummy_golem
+          golem_wd = dummy_golem
         ),
         go_to_run_app(
-          wd = dummy_golem
+          golem_wd = dummy_golem
         )
       )
     }

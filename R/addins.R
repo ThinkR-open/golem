@@ -4,7 +4,9 @@
 #'  The series of `go_to_*()` addins help you go to
 #'  common files used in developing a `{golem}` application.
 #'
-#' @param wd The working directory of the `{golem}` application.
+
+#' @param golem_wd The working directory of the `{golem}` application.
+#' @param wd Deperecated. Use `golem_wd` instead.
 #'
 #' @importFrom attempt stop_if_not
 #'
@@ -43,10 +45,16 @@ insert_ns <- function() {
 
 go_to <- function(
   file,
-  wd = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  wd
 ) {
-  file <- fs_path(
+  signal_arg_is_deprecated(
     wd,
+    fun = as.character(sys.call()[[1]]),
+    "wd"
+  )
+  file <- fs_path(
+    golem_wd,
     file
   )
   if (!fs_file_exists(file)) {
@@ -64,70 +72,104 @@ go_to <- function(
 #' @rdname addins
 #' @aliases addins
 go_to_start <- function(
-  wd = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  wd
 ) {
+  signal_arg_is_deprecated(
+    wd,
+    fun = as.character(sys.call()[[1]]),
+    "wd"
+  )
   go_to(
     "dev/01_start.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }
 #' @rdname addins
 #' @aliases addins
 go_to_dev <- function(
-  wd = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  wd
 ) {
+  signal_arg_is_deprecated(
+    wd,
+    fun = as.character(sys.call()[[1]]),
+    "wd"
+  )
   go_to(
     "dev/02_dev.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }
 #' @rdname addins
 #' @aliases addins
 go_to_deploy <- function(
-  wd = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  wd
 ) {
-  go_to(
-    "dev/03_deploy.R",
-    wd = wd
+  signal_arg_is_deprecated(
+    wd,
+    fun = as.character(sys.call()[[1]]),
+    "wd"
   )
 }
 #' @rdname addins
 #' @aliases addins
 go_to_run_dev <- function(
-  wd = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  wd
 ) {
-  go_to(
-    "dev/run_dev.R",
-    wd = wd
+  signal_arg_is_deprecated(
+    wd,
+    fun = as.character(sys.call()[[1]]),
+    "wd"
   )
 }
 #' @rdname addins
 #' @aliases addins
 go_to_app_ui <- function(
-  wd = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  wd
 ) {
+  signal_arg_is_deprecated(
+    wd,
+    fun = as.character(sys.call()[[1]]),
+    "wd"
+  )
   go_to(
     "R/app_ui.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }
 #' @rdname addins
 #' @aliases addins
 go_to_app_server <- function(
-  wd = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  wd
 ) {
+  signal_arg_is_deprecated(
+    wd,
+    fun = as.character(sys.call()[[1]]),
+    "wd"
+  )
   go_to(
     "R/app_server.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }
 #' @rdname addins
 #' @aliases addins
 go_to_run_app <- function(
-  wd = golem::get_golem_wd()
+  golem_wd = golem::get_golem_wd(),
+  wd
 ) {
+  signal_arg_is_deprecated(
+    wd,
+    fun = as.character(sys.call()[[1]]),
+    "wd"
+  )
   go_to(
     "R/run_app.R",
-    wd = wd
+   golem_wd = golem_wd
   )
 }

@@ -109,10 +109,13 @@ test_that("ask_golem_creation_upon_config works", {
 
 test_that("change_app_config_name works", {
   run_quietly_in_a_dummy_golem({
-    change_app_config_name(
-      "new_name",
-      "."
-    )
+    expect_warning({
+      change_app_config_name(
+        "new_name",
+        ".",
+        "here"
+      )
+    })
     expect_true(
       grepl(
         "new_name",

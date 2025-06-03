@@ -1,25 +1,39 @@
 #' @export
 #' @rdname golem_opts
 set_golem_wd <- function(
-  golem_wd = golem::pkg_path(),
-  pkg = golem::pkg_path(),
-  talkative = TRUE
+  new_golem_wd = golem::pkg_path(),
+  current_golem_wd = golem::pkg_path(),
+  talkative = TRUE,
+  golem_wd,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    golem_wd,
+    fun = as.character(sys.call()[[1]]),
+    "golem_wd",
+    "new_golem_wd"
+  )
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg",
+    "old_golem_wd"
+  )
   if (
-    golem_wd == "golem::pkg_path()" |
-      normalizePath(golem_wd) == normalizePath(golem::pkg_path())
+    new_golem_wd == "golem::pkg_path()" |
+      normalizePath(new_golem_wd) == normalizePath(golem::pkg_path())
   ) {
     golem_yaml_path <- "golem::pkg_path()"
     attr(golem_yaml_path, "tag") <- "!expr"
   } else {
-    golem_yaml_path <- fs_path_abs(golem_wd)
+    golem_yaml_path <- fs_path_abs(new_golem_wd)
   }
 
   amend_golem_config(
     key = "golem_wd",
     value = golem_yaml_path,
     config = "dev",
-    pkg = pkg,
+    golem_wd = current_golem_wd,
     talkative = talkative
   )
 
@@ -30,35 +44,34 @@ set_golem_wd <- function(
 #' @rdname golem_opts
 set_golem_name <- function(
   name = golem::pkg_name(),
-  pkg = golem::pkg_path(),
+  golem_wd = golem::pkg_path(),
   talkative = TRUE,
-  old_name = golem::pkg_name()
+  old_name = golem::pkg_name(),
+  pkg
 ) {
-  name <- force(name)
-  pkg <- force(pkg)
-  old_name <- force(old_name)
-
-  path <- fs_path_abs(pkg)
-
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]])
+  )
   # Changing in YAML
   amend_golem_config(
     key = "golem_name",
     value = name,
     config = "default",
-    pkg = pkg,
+    golem_wd = fs_path_abs(golem_wd),
     talkative = talkative
   )
 
   # Changing in app_config.R
   change_app_config_name(
     name = name,
-    path = path
+    golem_wd = golem_wd
   )
 
   # Changing in DESCRIPTION
   desc <- desc_description(
     file = fs_path(
-      path,
+      golem_wd,
       "DESCRIPTION"
     )
   )
@@ -67,7 +80,7 @@ set_golem_name <- function(
   )
   desc$write(
     file = fs_path(
-      path,
+      golem_wd,
       "DESCRIPTION"
     )
   )
@@ -76,19 +89,22 @@ set_golem_name <- function(
   set_golem_name_tests(
     old_name = old_name,
     new_name = name,
-    path = path
+    golem_wd = golem_wd
   )
 
   # Changing in ./vignettes/ if dir present
   set_golem_name_vignettes(
     old_name = old_name,
     new_name = name,
-    path = path
+    golem_wd = golem_wd
   )
 
   if (old_name != name) {
     cli_cli_alert_info(
-      sprintf("Please note that the old name %s might still be in some places, for example in the ./docs folder.", old_name)
+      sprintf(
+        "Please note that the old name %s might still be in some places, for example in the ./docs folder.",
+        old_name
+      )
     )
     cli_cli_alert_info(
       "You might need to change it manually there.",
@@ -101,15 +117,16 @@ set_golem_name <- function(
 set_golem_name_tests <- function(
   old_name,
   new_name,
-  path
+  golem_wd
 ) {
   pth_dir_tests <- file.path(
-    path,
+    golem_wd,
     "tests"
   )
 
   check_dir_tests <- fs_dir_exists(pth_dir_tests)
 
+  # This will update the library call in the testthat folder
   if (check_dir_tests) {
     pth_testthat_r <- file.path(pth_dir_tests, "testthat.R")
     old_testthat_r <- readLines(pth_testthat_r)
@@ -123,29 +140,30 @@ set_golem_name_tests <- function(
 set_golem_name_vignettes <- function(
   old_name,
   new_name,
-  path
+  golem_wd
 ) {
   pth_dir_vignettes <- file.path(
-    path,
+    golem_wd,
     "vignettes"
   )
 
   check_dir_vignettes <- fs_dir_exists(pth_dir_vignettes)
 
+  # We'll read the vignette and change the value of
+  # the name if ever it is found in a vignette
   if (check_dir_vignettes) {
-    pth_vignette_old <- file.path(
+    list_of_vignettes_to_gsub <- list.files(
       pth_dir_vignettes,
-      paste0(old_name, ".Rmd")
+      full.names = TRUE,
+      pattern = ".Rmd"
     )
-    old_vignette_r <- readLines(pth_vignette_old)
-    new_vignette_r <- gsub(old_name, new_name, old_vignette_r)
-
-    pth_vignette_new <- file.path(
-      pth_dir_vignettes,
-      paste0(new_name, ".Rmd")
-    )
-    writeLines(new_vignette_r, pth_vignette_new)
-    file.remove(pth_vignette_old)
+    if (length(list_of_vignettes_to_gsub) > 0) {
+      for (one_vignette in list_of_vignettes_to_gsub) {
+        old_vignette_r <- readLines(one_vignette)
+        new_vignette_r <- gsub(old_name, new_name, old_vignette_r)
+        writeLines(new_vignette_r, one_vignette)
+      }
+    }
   }
 
   return(invisible(old_name))
@@ -155,23 +173,29 @@ set_golem_name_vignettes <- function(
 #' @rdname golem_opts
 set_golem_version <- function(
   version = golem::pkg_version(),
-  pkg = golem::pkg_path(),
-  talkative = TRUE
+  golem_wd = golem::pkg_path(),
+  talkative = TRUE,
+  pkg
 ) {
-  path <- fs_path_abs(pkg)
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
+  golem_wd <- fs_path_abs(golem_wd)
 
   # Changing in YAML
   amend_golem_config(
     key = "golem_version",
     value = as.character(version),
     config = "default",
-    pkg = pkg,
+    golem_wd = golem_wd,
     talkative = talkative
   )
 
   desc <- desc_description(
     file = fs_path(
-      path,
+      golem_wd,
       "DESCRIPTION"
     )
   )

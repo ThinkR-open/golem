@@ -17,6 +17,8 @@
 #' + `get_golem_version()`
 #'
 #' @param golem_name Name of the current golem.
+#' @param new_golem_wd,current_golem_wd New & current directory,
+#'     to be used in `set_golem_wd()`
 #' @param golem_version Version of the current golem.
 #' @param golem_wd Working directory of the current golem package.
 #' @param app_prod Is the `{golem}` in prod mode?
@@ -58,7 +60,7 @@ set_golem_options <- function(
   # Setting name of the golem
   set_golem_name(
     name = golem_name,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     talkative = talkative
   )
 
@@ -69,15 +71,15 @@ set_golem_options <- function(
   # we use the explicit path
 
   set_golem_wd(
-    golem_wd = golem_wd,
-    pkg = golem_wd,
+    new_golem_wd = golem_wd,
+    current_golem_wd = golem_wd,
     talkative = talkative
   )
 
   # Setting golem_version
   set_golem_version(
     version = golem_version,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     talkative = talkative
   )
 
@@ -85,7 +87,7 @@ set_golem_options <- function(
   amend_golem_config(
     "app_prod",
     app_prod,
-    pkg = golem_wd,
+    golem_wd = golem_wd,
     talkative = talkative
   )
 

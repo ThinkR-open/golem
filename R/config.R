@@ -23,7 +23,8 @@ guess_where_config <- function(
   # Define booleans for different cases
   CONFIG_DFLT_EXISTS <- fs_file_exists(ret_pth_def)
   CONFIG_DFLT_MISSNG <- !CONFIG_DFLT_EXISTS
-  CONFIG_USER_EXISTS <- !is.null(ret_pth_usr) && (!identical(ret_pth_usr, ret_pth_def))
+  CONFIG_USER_EXISTS <- !is.null(ret_pth_usr) &&
+    (!identical(ret_pth_usr, ret_pth_def))
   CONFIG_USER_MISSNG <- !CONFIG_USER_EXISTS
 
   # Case I.
@@ -98,7 +99,8 @@ try_user_config_location <- function(pth) {
   if (
     isFALSE(
       fs_file_exists(user_location_default)
-    )) {
+    )
+  ) {
     return(NULL)
   }
 
@@ -247,7 +249,9 @@ get_current_config <- function(path = getwd()) {
           "R/app_config.R"
         ),
         "shinyexample",
-        golem::pkg_name(path = path)
+        golem::pkg_name(
+          golem_wd = path
+        )
       )
       # TODO This should also create the dev folder
     } else {
@@ -266,7 +270,6 @@ get_current_config <- function(path = getwd()) {
 }
 
 
-
 ask_golem_creation_upon_config <- function(pth) {
   msg <- paste0(
     "The %s file doesn't exist.",
@@ -281,9 +284,14 @@ ask_golem_creation_upon_config <- function(pth) {
 # set the {golem} name
 change_app_config_name <- function(
   name,
-  path = get_golem_wd()
+  golem_wd = get_golem_wd(),
+  path
 ) {
-  pth <- fs_path(path, "R", "app_config.R")
+  signal_arg_is_deprecated(
+    path,
+    fun = as.character(sys.call()[[1]])
+  )
+  pth <- fs_path(golem_wd, "R", "app_config.R")
   app_config <- readLines(pth)
 
   where_system.file <- grep("system.file", app_config)

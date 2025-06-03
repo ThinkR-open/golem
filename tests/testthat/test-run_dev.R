@@ -2,7 +2,7 @@ test_that("run_dev works", {
   expect_error(
     run_dev(
       file = tempfile(),
-      pkg = tempdir(),
+      golem_wd = tempdir(),
       save_all = FALSE
     )
   )
@@ -14,7 +14,7 @@ test_that("run_dev works", {
   expect_equal(
     run_dev(
       file = basename(fake_run_dev),
-      pkg = dirname(fake_run_dev),
+      golem_wd = dirname(fake_run_dev),
       save_all = FALSE
     ),
     2
@@ -22,7 +22,7 @@ test_that("run_dev works", {
   expect_equal(
     run_dev(
       file = basename(fake_run_dev),
-      pkg = dirname(fake_run_dev),
+      golem_wd = dirname(fake_run_dev),
       save_all = TRUE
     ),
     2

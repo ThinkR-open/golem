@@ -14,73 +14,81 @@
 use_external_js_file(
   url,
   name = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 )
 
 use_external_css_file(
   url,
   name = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 )
 
 use_external_html_template(
   url,
   name = "template.html",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 )
 
 use_external_file(
   url,
   name = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 )
 
 use_internal_js_file(
   path,
   name = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 )
 
 use_internal_css_file(
   path,
   name = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 )
 
 use_internal_html_template(
   path,
   name = "template.html",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 )
 
 use_internal_file(
   path,
   name = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 )
 }
 \arguments{
@@ -88,13 +96,15 @@ use_internal_file(
 
 \item{name}{The name of the module.}
 
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{dir}{Path to the dir where the file while be created.}
 
 \item{open}{Should the created file be opened?}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{path}{String representation of the local path for the file to be implemented (use_file only)}
 }

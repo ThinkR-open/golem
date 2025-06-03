@@ -19,11 +19,17 @@
 use_external_js_file <- function(
   url,
   name = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   if (!missing(dir_create)) {
     cli_abort_dir_create()
   }
@@ -33,7 +39,7 @@ use_external_js_file <- function(
     directory_to_download_to = fs_path_abs(dir),
     file_type = "js",
     file_created_fun = after_creation_message_js,
-    pkg = pkg,
+    golem_wd = golem_wd,
     name = name,
     open = open
   )
@@ -44,11 +50,17 @@ use_external_js_file <- function(
 use_external_css_file <- function(
   url,
   name = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   if (!missing(dir_create)) {
     cli_abort_dir_create()
   }
@@ -58,7 +70,7 @@ use_external_css_file <- function(
     directory_to_download_to = fs_path_abs(dir),
     file_type = "css",
     file_created_fun = after_creation_message_css,
-    pkg = pkg,
+    golem_wd = golem_wd,
     name = name,
     open = open
   )
@@ -69,11 +81,17 @@ use_external_css_file <- function(
 use_external_html_template <- function(
   url,
   name = "template.html",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   if (!missing(dir_create)) {
     cli_abort_dir_create()
   }
@@ -83,7 +101,7 @@ use_external_html_template <- function(
     directory_to_download_to = fs_path_abs(dir),
     file_type = "html",
     file_created_fun = after_creation_message_html_template,
-    pkg = pkg,
+    golem_wd = golem_wd,
     name = name,
     open = open
   )
@@ -94,11 +112,17 @@ use_external_html_template <- function(
 use_external_file <- function(
   url,
   name = NULL,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  dir_create
+  dir_create,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   if (!missing(dir_create)) {
     cli_abort_dir_create()
   }
@@ -108,7 +132,7 @@ use_external_file <- function(
     directory_to_download_to = fs_path_abs(dir),
     file_type = NULL,
     file_created_fun = after_creation_message_any_file,
-    pkg = pkg,
+    golem_wd = golem_wd,
     name = name,
     open = open
   )

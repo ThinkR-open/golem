@@ -5,7 +5,7 @@ test_that(
       add_module(
         "mod1",
         open = FALSE,
-        pkg = ".",
+        golem_wd = ".",
         with_test = TRUE
       )
       expect_exists(
@@ -30,12 +30,12 @@ test_that("use_module_test", {
     add_module(
       "mod1",
       open = FALSE,
-      pkg = ".",
+      golem_wd = ".",
       with_test = FALSE
     )
     use_module_test(
       "mod1",
-      pkg = ".",
+      golem_wd = ".",
       open = FALSE
     )
     expect_exists(
@@ -48,7 +48,7 @@ test_that("use_module_test", {
     expect_error(
       use_module_test(
         "phatom",
-        pkg = ".",
+        golem_wd = ".",
         open = FALSE
       ),
       regex = "The module 'phatom' does not exist"

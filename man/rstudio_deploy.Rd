@@ -9,20 +9,22 @@
 \alias{add_rscignore_file}
 \title{Add an \code{app.R} at the root of your package to deploy on RStudio Connect}
 \usage{
-add_positconnect_file(pkg = get_golem_wd(), open = TRUE)
+add_positconnect_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 
-add_rstudioconnect_file(pkg = get_golem_wd(), open = TRUE)
+add_rstudioconnect_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 
-add_shinyappsio_file(pkg = get_golem_wd(), open = TRUE)
+add_shinyappsio_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 
-add_shinyserver_file(pkg = get_golem_wd(), open = TRUE)
+add_shinyserver_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 
-add_rscignore_file(pkg = get_golem_wd(), open = TRUE)
+add_rscignore_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{open}{Should the created file be opened?}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 Side-effect functions for file creation returning the path to the

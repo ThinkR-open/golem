@@ -8,9 +8,6 @@ check_pkgload_installed <- function() {
   )
 }
 
-
-
-
 pkgload_load_all <- function(
   path = ".",
   reset = TRUE,

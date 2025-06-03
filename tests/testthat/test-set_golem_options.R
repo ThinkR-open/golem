@@ -15,13 +15,13 @@ test_that("set_golem_options works", {
         )
         expect_equal(
           get_golem_name(
-            pkg = "."
+            golem_wd = "."
           ),
           "dummygolem"
         )
         expect_equal(
           get_golem_version(
-            pkg = "."
+            golem_wd = "."
           ),
           "0.0.0.912"
         )

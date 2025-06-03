@@ -2,7 +2,7 @@
 #'
 #' These functions create files inside the `inst/app` folder.
 #'
-#' @inheritParams  add_module
+#' @inheritParams add_module
 #' @param dir_create Deprecated. Will be removed in future versions and throws an error for now.
 #' @param dir Path to the dir where the file while be created.
 #' @param with_doc_ready For JS file - Should the default file include `$( document ).ready()`?
@@ -32,14 +32,20 @@
 #' @return The path to the file, invisibly.
 add_js_file <- function(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   with_doc_ready = TRUE,
   template = golem::js_template,
-  ...
+  ...,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   stop_if(
     missing(name),
     msg = "`name` is required"
@@ -63,7 +69,7 @@ add_js_file <- function(
   use_internal_js_file(
     path = temp_js,
     name = name,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -73,13 +79,19 @@ add_js_file <- function(
 #' @rdname add_files
 add_js_handler <- function(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   template = golem::js_handler_template,
-  ...
+  ...,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   stop_if(
     missing(name),
     msg = "`name` is required"
@@ -96,7 +108,7 @@ add_js_handler <- function(
   use_internal_js_file(
     path = temp_js,
     name = name,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -106,7 +118,7 @@ add_js_handler <- function(
 #' @rdname add_files
 add_js_input_binding <- function(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
@@ -115,8 +127,14 @@ add_js_input_binding <- function(
   events = list(
     name = "click",
     rate_policy = FALSE
-  )
+  ),
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   stop_if(
     missing(name),
     msg = "`name` is required"
@@ -161,7 +179,9 @@ add_js_input_binding <- function(
   # initialize
   if (initialize) {
     write_there("  initialize: function(el) {")
-    write_there("    // optional part. Only if the input relies on a JS API with specific initialization.")
+    write_there(
+      "    // optional part. Only if the input relies on a JS API with specific initialization."
+    )
     write_there("  },")
   }
   # get value
@@ -183,7 +203,11 @@ add_js_input_binding <- function(
   write_there("  subscribe: function(el, callback) {")
   # list of event listeners
   lapply(seq_along(events$name), function(i) {
-    write_there(sprintf("    $(el).on('%s.%s', function(e) {", events$name[i], raw_name))
+    write_there(sprintf(
+      "    $(el).on('%s.%s', function(e) {",
+      events$name[i],
+      raw_name
+    ))
     if (events$rate_policy[i]) {
       write_there("      callback(true);")
     } else {
@@ -212,12 +236,15 @@ add_js_input_binding <- function(
 
   # end
   write_there("});")
-  write_there(sprintf("Shiny.inputBindings.register(%s, 'shiny.whatever');", raw_name))
+  write_there(sprintf(
+    "Shiny.inputBindings.register(%s, 'shiny.whatever');",
+    raw_name
+  ))
 
   use_internal_js_file(
     path = temp_js,
     name = name,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -227,11 +254,17 @@ add_js_input_binding <- function(
 #' @rdname add_files
 add_js_output_binding <- function(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create
+  dir_create,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   stop_if(
     missing(name),
     msg = "`name` is required"
@@ -263,12 +296,15 @@ add_js_output_binding <- function(
   write_there("  }")
   # end
   write_there("});")
-  write_there(sprintf("Shiny.outputBindings.register(%s, 'shiny.whatever');", raw_name))
+  write_there(sprintf(
+    "Shiny.outputBindings.register(%s, 'shiny.whatever');",
+    raw_name
+  ))
 
   use_internal_js_file(
     path = temp_js,
     name = name,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -278,13 +314,19 @@ add_js_output_binding <- function(
 #' @rdname add_files
 add_css_file <- function(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   template = golem::css_template,
-  ...
+  ...,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   stop_if(
     missing(name),
     msg = "`name` is required"
@@ -300,7 +342,7 @@ add_css_file <- function(
   use_internal_css_file(
     path = temp_css,
     name = name,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -310,13 +352,19 @@ add_css_file <- function(
 #' @rdname add_files
 add_sass_file <- function(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   template = golem::sass_template,
-  ...
+  ...,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   stop_if(
     missing(name),
     msg = "`name` is required"
@@ -340,7 +388,7 @@ add_sass_file <- function(
       "%s.sass",
       name
     ),
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -386,13 +434,19 @@ add_sass_code_to_dev_script <- function(dir, name) {
 #' @importFrom tools file_ext
 add_empty_file <- function(
   name,
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
   dir_create,
   template = golem::empty_template,
-  ...
+  ...,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   stop_if(
     missing(name),
     msg = "`name` is required"
@@ -405,11 +459,13 @@ add_empty_file <- function(
   extension <- file_ext(name)
 
   if (extension == "js") {
-    warning("We've noticed you are trying to create a .js file. \nYou may want to use `add_js_file()` in future calls.")
+    warning(
+      "We've noticed you are trying to create a .js file. \nYou may want to use `add_js_file()` in future calls."
+    )
     return(
       add_js_file(
         name = name,
-        pkg = pkg,
+        golem_wd = golem_wd,
         dir = dir,
         open = open,
         template = template,
@@ -418,11 +474,13 @@ add_empty_file <- function(
     )
   }
   if (extension == "css") {
-    warning("We've noticed you are trying to create a .css file. \nYou may want to use `add_css_file()` in future calls.")
+    warning(
+      "We've noticed you are trying to create a .css file. \nYou may want to use `add_css_file()` in future calls."
+    )
     return(
       add_css_file(
         name = name,
-        pkg = pkg,
+        golem_wd = golem_wd,
         dir = dir,
         open = open,
         template = template,
@@ -431,11 +489,13 @@ add_empty_file <- function(
     )
   }
   if (extension == "sass") {
-    warning("We've noticed you are trying to create a .sass file. \nYou may want to use `add_sass_file()` in future calls.")
+    warning(
+      "We've noticed you are trying to create a .sass file. \nYou may want to use `add_sass_file()` in future calls."
+    )
     return(
       add_sass_file(
         name = name,
-        pkg = pkg,
+        golem_wd = golem_wd,
         dir = dir,
         open = open,
         template = template,
@@ -444,11 +504,13 @@ add_empty_file <- function(
     )
   }
   if (extension == "html") {
-    warning("We've noticed you are trying to create a .html file. \nYou may want to use `add_html_template()` in future calls.")
+    warning(
+      "We've noticed you are trying to create a .html file. \nYou may want to use `add_html_template()` in future calls."
+    )
     return(
       add_html_template(
         name = name,
-        pkg = pkg,
+        golem_wd = golem_wd,
         dir = dir,
         open = open
       )
@@ -460,7 +522,7 @@ add_empty_file <- function(
   use_internal_file(
     path = temp_file,
     name = name,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -470,11 +532,17 @@ add_empty_file <- function(
 #' @rdname add_files
 add_html_template <- function(
   name = "template.html",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create
+  dir_create,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   if (!missing(dir_create)) {
     cli_abort_dir_create()
   }
@@ -501,7 +569,7 @@ add_html_template <- function(
   use_internal_html_template(
     path = temp_html,
     name = name,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -511,11 +579,17 @@ add_html_template <- function(
 #' @rdname add_files
 add_partial_html_template <- function(
   name = "partial_template.html",
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = TRUE,
-  dir_create
+  dir_create,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   if (!missing(dir_create)) {
     cli_abort_dir_create()
   }
@@ -530,7 +604,7 @@ add_partial_html_template <- function(
   use_internal_html_template(
     path = temp_html,
     name = name,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = dir,
     open = open
   )
@@ -539,16 +613,24 @@ add_partial_html_template <- function(
 #' @export
 #' @rdname add_files
 add_ui_server_files <- function(
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   dir = "inst/app",
-  dir_create
+  dir_create,
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   if (!missing(dir_create)) {
     cli_abort_dir_create()
   }
-  .Deprecated(msg = "This function will be deprecated in a future version of {golem}.\nPlease comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to stay.")
+  .Deprecated(
+    msg = "This function will be deprecated in a future version of {golem}.\nPlease comment on https://github.com/ThinkR-open/golem/issues/445 if you want it to stay."
+  )
 
-  old <- setwd(fs_path_abs(pkg))
+  old <- setwd(fs_path_abs(golem_wd))
   on.exit(setwd(old))
 
   dir <- fs_path_abs(dir)

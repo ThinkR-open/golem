@@ -11,10 +11,16 @@
 #'
 #' @return A DataFrame if any of the words has been found.
 sanity_check <- function(
-  pkg = get_golem_wd()
+  golem_wd = get_golem_wd(),
+  pkg
 ) {
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
   all_R_files <- list.files(
-    path = pkg,
+    path = golem_wd,
     pattern = "\\.R$",
     recursive = TRUE,
     full.names = TRUE
@@ -53,7 +59,8 @@ sanity_check <- function(
     if (
       rlang::is_installed("rstudioapi") &&
         rstudioapi::isAvailable() &&
-        rstudioapi::hasFun("sourceMarkers")) {
+        rstudioapi::hasFun("sourceMarkers")
+    ) {
       rstudioapi::sourceMarkers(
         "sanity_check",
         markers = source_markers

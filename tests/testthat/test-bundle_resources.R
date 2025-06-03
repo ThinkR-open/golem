@@ -1,12 +1,12 @@
 test_that("multiplication works", {
   run_quietly_in_a_dummy_golem({
     add_css_file(
-      pkg = ".",
+      golem_wd = ".",
       "bundle",
       open = FALSE
     )
     add_js_file(
-      pkg = ".",
+      golem_wd = ".",
       "bundle",
       open = FALSE
     )

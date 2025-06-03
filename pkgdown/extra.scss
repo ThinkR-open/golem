@@ -1,0 +1,70 @@
+.navbar-dark input[type="search"] {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+.navbar-light .navbar-nav .active > .nav-link {
+  color: var(--bs-body-bg);
+  background: var(--bs-info);
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: var(--bs-body-bg);
+  background: var(--bs-info);
+}
+
+.text-muted {
+  color: var(--bs-body-bg) !important;
+  background-color: #7176b83d;
+  padding: 1.5px 2px;
+  border-radius: 4px;
+}
+
+/* ---- Callouts ---- */
+.callout {
+  border: 1px solid var(--bs-primary);
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  border-radius: var(--bs-border-radius);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 3rem;
+  background: #7176b817;
+
+  p {
+    margin: 10px 0;
+  }
+}
+
+@mixin callout($content, $color) {
+  &::before {
+    content: $content;
+    font-weight: bold;
+    font-size: 1.25rem;
+    font-style: italic;
+    font-family: serif;
+    border-radius: 50%;
+    color: var(--bs-body-bg);
+    background-color: $color;
+    width: 2rem;
+    height: 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.callout.callout-note {
+  @include callout("i", var(--bs-primary));
+}
+
+.callout.callout-danger {
+  @include callout("!", var(--bs-warning));
+}
+
+strong {
+  color: var(--bs-primary);
+  text-decoration: underline;
+}

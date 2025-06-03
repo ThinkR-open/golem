@@ -32,11 +32,17 @@ perform_checks_and_download_if_everything_is_ok <- function(
   directory_to_download_to,
   file_type,
   file_created_fun,
-  pkg,
+  golem_wd,
   name,
-  open
+  open,
+  pkg
 ) {
-  old <- setwd(fs_path_abs(pkg))
+  signal_arg_is_deprecated(
+    pkg,
+    fun = as.character(sys.call()[[1]]),
+    "pkg"
+  )
+  old <- setwd(fs_path_abs(golem_wd))
   on.exit(setwd(old))
   name <- build_name(
     name,
@@ -74,7 +80,7 @@ perform_checks_and_download_if_everything_is_ok <- function(
   file_created_dance(
     where = where_to_download_to,
     fun = file_created_fun,
-    pkg = pkg,
+    golem_wd = golem_wd,
     dir = directory_to_download_to,
     open_file = open,
     catfun = cat_downloaded

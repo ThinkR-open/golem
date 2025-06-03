@@ -11,17 +11,20 @@ use_recommended_deps(
 )
 
 use_recommended_tests(
-  pkg = get_golem_wd(),
+  golem_wd = get_golem_wd(),
   spellcheck = TRUE,
   vignettes = TRUE,
   lang = "en-US",
-  error = FALSE
+  error = FALSE,
+  pkg
 )
 }
 \arguments{
-\item{pkg}{Path to the root of the package. Default is \code{get_golem_wd()}.}
+\item{pkg}{Deprecated, please use golem_wd instead}
 
 \item{recommended}{A vector of recommended packages.}
+
+\item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{spellcheck}{Whether or not to use a spellcheck test.}
 

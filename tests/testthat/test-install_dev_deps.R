@@ -1,35 +1,22 @@
+expect_installed <- function(pkg) {
+  expect(
+    rlang::is_installed(pkg),
+    failure_message = paste0(
+      "Package '", pkg, "' is not installed. Installed from ",
+      getOption("repos")
+    )
+  )
+}
+
 test_that("install_dev_deps works", {
   withr::with_temp_libpaths({
     install_dev_deps(
-      force_install = TRUE,
-      repos = "https://cran.rstudio.com"
-    )
-
-    paks <- unique(
-      c(
-        "usethis",
-        "pkgload",
-        "dockerfiler",
-        "devtools",
-        "roxygen2",
-        "attachment",
-        "rstudioapi",
-        "here",
-        "fs",
-        "desc",
-        "pkgbuild",
-        "processx",
-        "rsconnect",
-        "testthat",
-        "rstudioapi"
-      )
+      force_install = TRUE
     )
     for (
-      pak in paks
+      pak in dev_deps
     ) {
-      expect_true(
-        rlang::is_installed(pak)
-      )
+      expect_installed(pak)
     }
   })
 })
