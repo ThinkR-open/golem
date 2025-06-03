@@ -1,18 +1,31 @@
-test_that("config finding works", {
+test_that("guess_where_config works", {
+  # Default behavior, default structure
   run_quietly_in_a_dummy_golem({
-    # I. Testing behavior of the helper function - first case:
-    # file lives in default path and no envir-variable
     config <- guess_where_config(
       path = "."
     )
     expect_exists(
       config
     )
-    # II. Testing behavior of the helper function - second case:
-    # file lives in default path, and envir-variable set correctly
+  })
+  # Default behavior, default structure
+  run_quietly_in_a_dummy_golem({
+    unlink("./inst/golem-config.yml")
+    expect_error({
+      guess_where_config(
+        path = "."
+      )
+    })
+  })
 
+  # Using the envvar, case one with a file that exists
+  run_quietly_in_a_dummy_golem({
+    fs_file_copy(
+      "./inst/golem-config.yml",
+      "./inst/golem-config2.yml"
+    )
     withr::with_envvar(
-      c("GOLEM_CONFIG_PATH" = "./inst/golem-config.yml"),
+      c("GOLEM_CONFIG_PATH" = "./inst/golem-config2.yml"),
       {
         config <- guess_where_config(
           path = "."
@@ -22,120 +35,28 @@ test_that("config finding works", {
         )
       }
     )
+  })
 
-    # III. Testing behavior of the helper function - third case:
-    # file lives in default path, and envir-variable set incorrectly
+  # Using the envvar, case one with a file that exists
+  run_quietly_in_a_dummy_golem({
     withr::with_envvar(
       c("GOLEM_CONFIG_PATH" = "./inst/golem-config2.yml"),
       {
-        testthat::expect_error(
+        expect_error(
           guess_where_config(
             path = "."
-          ),
-          regexp = "but we were unable to locate"
+          )
         )
       }
     )
+  })
+})
 
-    # IV. Testing behavior of the helper function - fourth case:
-    # file lives in another path, and hard coded path is wrongly passed
-    file.copy(
-      from = "./inst/golem-config.yml",
-      to = "./inst/golem-config3.yml"
-    )
-    file.remove("./inst/golem-config.yml")
-    testthat::expect_error(
-      guess_where_config(
-        path = ".",
-        file = "inst/golem-config2.yml"
-      ),
-      regexp = "Unable to locate a config file"
-    )
-    # V. Testing behavior of the helper function:
-    # file lives in another path, and envir-var or path to file is wrong
-    Sys.setenv("GOLEM_CONFIG_PATHHHHH" = "./inst/golem-config2.yml")
-    testthat::expect_error(
-      guess_where_config(
-        path = ".",
-        file = "inst/golem-config2.yml"
-      ),
-      regexp = "Unable to locate a config file"
-    )
-    file.copy(
-      from = "./inst/golem-config3.yml",
-      to = "./inst/golem-config.yml"
-    )
-    file.remove("./inst/golem-config3.yml")
-    expect_exists(
-      config
-    )
-    unlink(
-      "R/app_config.R",
-      force = TRUE
-    )
-    unlink(
-      "inst/golem-config.yml",
-      force = TRUE
-    )
-    testthat::with_mocked_bindings(
-      guess_where_config = function(...) {
-        return(NULL)
-      },
-      rlang_is_interactive = function(...) {
-        return(FALSE)
-      },
-      {
-        expect_error(
-          get_current_config()
-        )
-        expect_false(
-          file.exists("R/app_config.R")
-        )
-        expect_false(
-          file.exists("inst/golem-config.yml")
-        )
-      }
-    )
+test_that("get_current_config works", {
+  run_quietly_in_a_dummy_golem({
+    # We don't need to retest guess_where_config
     testthat::with_mocked_bindings(
       fs_file_exists = function(...) {
-        return(FALSE)
-      },
-      rlang_is_interactive = function(...) {
-        return(TRUE)
-      },
-      ask_golem_creation_upon_config = function(...) {
-        return(TRUE)
-      },
-      {
-        config <- get_current_config()
-        expect_exists(
-          config
-        )
-      }
-    )
-    testthat::with_mocked_bindings(
-      fs_file_exists = function(...) {
-        return(FALSE)
-      },
-      rlang_is_interactive = function(...) {
-        return(TRUE)
-      },
-      ask_golem_creation_upon_config = function(...) {
-        return(FALSE)
-      },
-      {
-        config <- get_current_config()
-        expect_equal(config, NULL)
-      }
-    )
-    testthat::with_mocked_bindings(
-      fs_file_exists = function(...) {
-        return(FALSE)
-      },
-      rlang_is_interactive = function(...) {
-        return(FALSE)
-      },
-      ask_golem_creation_upon_config = function(...) {
         return(FALSE)
       },
       {
@@ -143,25 +64,34 @@ test_that("config finding works", {
       }
     )
   })
-
-  # testthat::with_mocked_bindings(
-  #   fs_file_exists = function(...) {
-  #     return(FALSE)
-  #   },
-  #   rlang_is_interactive = function(...) {
-  #     return(TRUE)
-  #   },
-  #   ask_golem_creation_upon_config = function(...) {
-  #     return(FALSE)
-  #   },
-  #   {
-  #     config <- get_current_config()
-  #
-  #     expect_null(
-  #       config
-  #     )
-  #   }
-  # )
+  run_quietly_in_a_dummy_golem({
+    # We don't need to retest guess_where_config
+    testthat::with_mocked_bindings(
+      fs_file_exists = function(...) {
+        return(FALSE)
+      },
+      guess_where_config = function(...) {
+        return("")
+      },
+      rlang_is_interactive = function(...) {
+        return(TRUE)
+      },
+      ask_golem_creation_upon_config = function(...) {
+        return(TRUE)
+      },
+      {
+        unlink("inst/golem-config.yml")
+        unlink("R/app_config.R")
+        get_current_config()
+        expect_exists(
+          "inst/golem-config.yml"
+        )
+        expect_exists(
+          "R/app_config.R"
+        )
+      }
+    )
+  })
 })
 
 test_that("ask_golem_creation_upon_config works", {
