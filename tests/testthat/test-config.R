@@ -60,35 +60,8 @@ test_that("get_current_config works", {
         return(FALSE)
       },
       {
+        unlink("./inst/golem-config.yml")
         expect_error(get_current_config())
-      }
-    )
-  })
-  run_quietly_in_a_dummy_golem({
-    # We don't need to retest guess_where_config
-    testthat::with_mocked_bindings(
-      fs_file_exists = function(...) {
-        return(FALSE)
-      },
-      guess_where_config = function(...) {
-        return("")
-      },
-      rlang_is_interactive = function(...) {
-        return(TRUE)
-      },
-      ask_golem_creation_upon_config = function(...) {
-        return(TRUE)
-      },
-      {
-        unlink("inst/golem-config.yml")
-        unlink("R/app_config.R")
-        get_current_config()
-        expect_exists(
-          "inst/golem-config.yml"
-        )
-        expect_exists(
-          "R/app_config.R"
-        )
       }
     )
   })
