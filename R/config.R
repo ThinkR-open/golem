@@ -1,11 +1,10 @@
 # This file contains everything related to the
 # manipulation of the golem-config file
 
-# We first need something to guess where the file
-# is. 99.99% of the time it will be
-# ./inst/golem-config.yml but if for some reason
-# you're somewhere else, functions still need to
-# work
+# {golem} no longer tries to do some magic to
+# guess where the config file is.
+# It's either inst/golem-config.yml or
+# GOLEM_CONFIG_PATH env var
 
 #' @importFrom attempt attempt is_try_error
 guess_where_config <- function(
@@ -52,11 +51,8 @@ guess_where_config <- function(
 }
 #' Return path to the `{golem}` config-file
 #'
-#' This function tries to find the path to the `{golem}` config-file currently
-#' used. If the config-file is not found, the user is asked if they want to set parts
-#' of the `{golem}` skeleton. This includes default versions of "R/app_config"
-#' and "inst/golem-config.yml" (assuming that the user tries to convert the
-#' directory to a `{golem}` based shiny App).
+#' This function tries to find the current config file, being
+#' either inst/golem-config.yml or the GOLEM_CONFIG_PATH env var
 #'
 #' In most cases this function simply returns the path to the default
 #' golem-config file located under "inst/golem-config.yml". That config comes
@@ -64,30 +60,8 @@ guess_where_config <- function(
 #' for further details on its format and how to set options therein.
 #'
 #' Advanced app developers may benefit from having an additional user
-#' config-file. This is achieved by copying the file to the new location and
-#' setting a new path pointing to this file. The path is altered inside the
-#' `app_sys()`-call of the file "R/app_config.R" to point to the (relative to
-#' `inst/`) location of the user-config i.e. change
+#' config-file. This is achieved with setting the GOLEM_CONFIG_PATH env var.
 #'
-#' ```
-#' # Modify this if your config file is somewhere else
-#' file = app_sys("golem-config.yml")
-#' ```
-#'
-#' to
-#' ```
-#' # Modify this if your config file is somewhere else
-#' file = app_sys("configs/user-golem-config.yml")
-#' ```
-#'
-#' __NOTE__
-#' + the path to the config is changed relative to __*inst/*__ from
-#' __*inst/golem-config.yml*__ to __*inst/configs/user-golem-config.yml*__
-#' + if both, the default config __*and*__ user config files exists (and the
-#' path is set correctly for the latter), an error is thrown due to ambiguity:
-#' in this case simply rename/delete the default config or change the entry in
-#' "R/app_config.R" back to `app_sys("golem-config.yml")` to point to the
-#' default location
 #'
 #'
 #' @param path character string giving the path to start looking for the config;
@@ -101,48 +75,9 @@ get_current_config <- function(path = getwd()) {
   # We check whether we can guess where the config file is
   path_conf <- guess_where_config(path)
 
-  if (!fs_file_exists(path_conf)) {
-    if (rlang_is_interactive()) {
-      ask <- ask_golem_creation_upon_config(path_conf)
-      # Return early if the user doesn't allow
-      if (!ask) {
-        return(NULL)
-      }
-      fs_file_copy(
-        path = golem_sys("shinyexample/inst/golem-config.yml"),
-        new_path = fs_path(
-          path,
-          "inst/golem-config.yml"
-        )
-      )
-      fs_file_copy(
-        path = golem_sys("shinyexample/R/app_config.R"),
-        new_path = fs_path(
-          path,
-          "R/app_config.R"
-        )
-      )
-      replace_word(
-        fs_path(
-          path,
-          "R/app_config.R"
-        ),
-        "shinyexample",
-        golem::pkg_name(
-          golem_wd = path
-        )
-      )
-      # TODO This should also create the dev folder
-    } else {
-      stop(
-        sprintf(
-          "The %s file doesn't exist.",
-          basename(path_conf)
-        )
-      )
-    }
-  }
-
+  # 2025-06-05
+  # There used to be a copy skeleton mechanism but I feel like
+  # we should not support this
   return(
     invisible(path_conf)
   )
