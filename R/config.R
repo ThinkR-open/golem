@@ -79,7 +79,7 @@ get_current_config <- function(path = getwd()) {
   # There used to be a copy skeleton mechanism but I feel like
   # we should not support this
   return(
-    invisible(path_conf)
+    path_conf
   )
 }
 
