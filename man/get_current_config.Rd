@@ -16,11 +16,8 @@ feature).}
 character string giving the path to the \code{{golem}} config-file
 }
 \description{
-This function tries to find the path to the \code{{golem}} config-file currently
-used. If the config-file is not found, the user is asked if they want to set parts
-of the \code{{golem}} skeleton. This includes default versions of "R/app_config"
-and "inst/golem-config.yml" (assuming that the user tries to convert the
-directory to a \code{{golem}} based shiny App).
+This function tries to find the current config file, being
+either inst/golem-config.yml or the GOLEM_CONFIG_PATH env var
 }
 \details{
 In most cases this function simply returns the path to the default
@@ -29,29 +26,5 @@ in \code{yml}-format, see the \href{https://engineering-shiny.org/golem.html?q=c
 for further details on its format and how to set options therein.
 
 Advanced app developers may benefit from having an additional user
-config-file. This is achieved by copying the file to the new location and
-setting a new path pointing to this file. The path is altered inside the
-\code{app_sys()}-call of the file "R/app_config.R" to point to the (relative to
-\verb{inst/}) location of the user-config i.e. change
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{# Modify this if your config file is somewhere else
-file = app_sys("golem-config.yml")
-}\if{html}{\out{</div>}}
-
-to
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{# Modify this if your config file is somewhere else
-file = app_sys("configs/user-golem-config.yml")
-}\if{html}{\out{</div>}}
-
-\strong{NOTE}
-\itemize{
-\item the path to the config is changed relative to \strong{\emph{inst/}} from
-\strong{\emph{inst/golem-config.yml}} to \strong{\emph{inst/configs/user-golem-config.yml}}
-\item if both, the default config \strong{\emph{and}} user config files exists (and the
-path is set correctly for the latter), an error is thrown due to ambiguity:
-in this case simply rename/delete the default config or change the entry in
-"R/app_config.R" back to \code{app_sys("golem-config.yml")} to point to the
-default location
-}
+config-file. This is achieved with setting the GOLEM_CONFIG_PATH env var.
 }
