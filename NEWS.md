@@ -4,7 +4,7 @@
 
 ## Breaking change
 
-- The `get_current_config()` has been rework in two ways: (1) it nows either check the `GOLEM_CONFIG_PATH` env var or the default path (inst/golem-config.yml). `{golem}` no longer tries to guess non standard paths, and does a hard fail if the file doesn't exist, (2) the function no longer copy the `config` files from the skeleton if ever the files are not there.
+- The `get_current_config()` has been rework in two ways: (1) it nows either check the `GOLEM_CONFIG_PATH` env var or the default path (inst/golem-config.yml). `{golem}` no longer tries to guess non standard paths, and does a hard fail if the file doesn't exist, (2) the function no longer copy the `config` files from the skeleton if ever the files are not there (@ilyaZar, @LDSamson, #1178)
 
 - `{golem}` functions used to rely on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This has now been standardized and all functions rely on `golem_wd` now (@ilyaZar, #845)
 
