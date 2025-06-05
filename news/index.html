@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9011</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9012</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,8 @@
 <h2 class="pkg-version" data-toc-text="0.5.1" id="golem-051-to-060">golem 0.5.1 to 0.6.0<a class="anchor" aria-label="anchor" href="#golem-051-to-060"></a></h2><p class="text-muted">CRAN release: 2024-08-27</p>
 <div class="section level3">
 <h3 id="breaking-change-0-5-1">Breaking change<a class="anchor" aria-label="anchor" href="#breaking-change-0-5-1"></a></h3>
-<ul><li><p>/! Breaking change in the name of the arguments /! <a href="https://thinkr-open.github.io/golem/">golem</a> functions used to rely on arguments that where either <code>wd</code>, <code>path</code>, <code>pkg</code> or <code>golem_wd</code>. This has now been standardized and all functions rely on <code>golem_wd</code> now (<a href="https://github.com/ilyaZar" class="external-link">@ilyaZar</a>, <a href="https://github.com/ThinkR-open/golem/issues/845" class="external-link">#845</a>)</p></li>
+<ul><li><p>The <code><a href="../reference/get_current_config.html">get_current_config()</a></code> has been rework in two ways: (1) it nows either check the <code>GOLEM_CONFIG_PATH</code> env var or the default path (inst/golem-config.yml). <a href="https://thinkr-open.github.io/golem/">golem</a> no longer tries to guess non standard paths, and does a hard fail if the file doesn’t exist, (2) the function no longer copy the <code>config</code> files from the skeleton if ever the files are not there (<a href="https://github.com/ilyaZar" class="external-link">@ilyaZar</a>, <a href="https://github.com/LDSamson" class="external-link">@LDSamson</a>, <a href="https://github.com/ThinkR-open/golem/issues/1178" class="external-link">#1178</a>)</p></li>
+<li><p><a href="https://thinkr-open.github.io/golem/">golem</a> functions used to rely on arguments that where either <code>wd</code>, <code>path</code>, <code>pkg</code> or <code>golem_wd</code>. This has now been standardized and all functions rely on <code>golem_wd</code> now (<a href="https://github.com/ilyaZar" class="external-link">@ilyaZar</a>, <a href="https://github.com/ThinkR-open/golem/issues/845" class="external-link">#845</a>)</p></li>
 <li><p>Creating a <code>golem</code> doesn’t call <code>set_here()</code> nor <code><a href="https://usethis.r-lib.org/reference/create_package.html" class="external-link">usethis::create_project()</a></code> anymore. It used to be because we wanted to be able to use <code>here::here()</code>, but the function should be able to find its way based using <code>DESCRIPTION</code>. It gives a lighter implementation of golem projects creation as it doesn’t mess up with where <code>here()</code> is anymore.</p></li>
 <li>
 <p>The <code>add_*_files</code> and <code>use_*_files</code> now fail when:</p>
