@@ -42,7 +42,7 @@ Suggests:
     crayon,
     desc,
     devtools,
-    dockerfiler (>= 0.2.0),
+    dockerfiler (>= 0.2.5),
     fs,
     httpuv,
     knitr,
