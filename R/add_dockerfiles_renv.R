@@ -332,7 +332,7 @@ add_dockerfile_with_renv <- function(
 
   if (!single_file){
   out <- sprintf(
-"# use cd to moove to the folder containing the Dockerfile
+"# use cd to move to the folder containing the Dockerfile
 docker build -f Dockerfile_base --progress=plain -t %s .
 docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
