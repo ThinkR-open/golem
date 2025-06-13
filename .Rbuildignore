@@ -29,3 +29,4 @@ README.html
 ^\.pre-commit-config\.yaml$
 ^[\.]?air\.toml$
 ^\.vscode$
+^\.lintr$

@@ -1,0 +1,7 @@
+linters: linters_with_defaults(
+  defaults = default_linters,
+  whitespace_linter = NULL,
+  indentation_linter = indentation_linter(
+      indent = 1L,
+    )
+  )

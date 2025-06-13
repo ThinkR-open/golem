@@ -39,64 +39,66 @@
 #' @return Used for side-effects for the setters, and values from the
 #'     config in the getters.
 set_golem_options <- function(
-  golem_name = golem::pkg_name(),
-  golem_version = golem::pkg_version(),
-  golem_wd = golem::pkg_path(),
-  app_prod = FALSE,
-  talkative = TRUE,
-  config_file = golem::get_current_config(golem_wd)
+	golem_name = golem::pkg_name(),
+	golem_version = golem::pkg_version(),
+	golem_wd = golem::pkg_path(),
+	app_prod = FALSE,
+	talkative = TRUE,
+	config_file = golem::get_current_config(golem_wd)
 ) {
-  # TODO here we'll run the
-  # golem_install_dev_pkg() function
+	# TODO here we'll run the
+	# golem_install_dev_pkg() function
 
-  if (talkative) {
-    cli_cat_rule(
-      "Setting {golem} options in `golem-config.yml`"
-    )
-  }
+	if (talkative) {
+		cli_cat_rule(
+			"Setting {golem} options in `golem-config.yml`"
+		)
+	}
 
-  # Let's do this in the order of the
-  # parameters
-  # Setting name of the golem
-  set_golem_name(
-    name = golem_name,
-    golem_wd = golem_wd,
-    talkative = talkative
-  )
+	# Let's do this in the order of the
+	# parameters
+	# Setting name of the golem
+	set_golem_name(
+		name = golem_name,
+		golem_wd = golem_wd,
+		talkative = talkative
+	)
 
-  # Let's start with wd
-  # Basically here the idea is to be able
-  # to keep the wd as an expr if it is the
-  # same as golem::pkg_path(), otherwise
-  # we use the explicit path
+	# Let's start with wd
+	# Basically here the idea is to be able
+	# to keep the wd as an expr if it is the
+	# same as golem::pkg_path(), otherwise
+	# we use the explicit path
 
-  set_golem_wd(
-    new_golem_wd = golem_wd,
-    current_golem_wd = golem_wd,
-    talkative = talkative
-  )
+	set_golem_wd(
+		new_golem_wd = golem_wd,
+		current_golem_wd = golem_wd,
+		talkative = talkative
+	)
 
-  # Setting golem_version
-  set_golem_version(
-    version = golem_version,
-    golem_wd = golem_wd,
-    talkative = talkative
-  )
+	# Setting golem_version
+	set_golem_version(
+		version = golem_version,
+		golem_wd = golem_wd,
+		talkative = talkative
+	)
 
-  # Setting app_prod
-  amend_golem_config(
-    "app_prod",
-    app_prod,
-    golem_wd = golem_wd,
-    talkative = talkative
-  )
+	# Setting app_prod
+	amend_golem_config(
+		"app_prod",
+		app_prod,
+		golem_wd = golem_wd,
+		talkative = talkative
+	)
 
-  # This part is for {usethis} and {here}
-  if (talkative) {
-    cli_cat_rule(
-      "Setting {usethis} project as `golem_wd`"
-    )
-  }
+	# This part is for {usethis} and {here}
+	if (talkative) {
+		cli_cat_rule(
+			"Setting {usethis} project as `golem_wd`"
+		)
+	}
 
-  usethis_proj_set(golem_wd)
+	usethis_proj_set(
+		golem_wd
+	)
 }

@@ -8,8 +8,10 @@
 #' within your package. The default, none, returns the root of the app.
 #'
 #' @noRd
-app_sys <- function(...) {
-  system.file(..., package = "shinyexample")
+app_sys <- function(
+	...
+) {
+	system.file(..., package = "shinyexample")
 }
 
 
@@ -23,27 +25,29 @@ app_sys <- function(...) {
 #'
 #' @noRd
 get_golem_config <- function(
-  value,
-  config = Sys.getenv(
-    "GOLEM_CONFIG_ACTIVE",
-    Sys.getenv(
-      "R_CONFIG_ACTIVE",
-      "default"
-    )
-  ),
-  use_parent = TRUE,
-  # If you don't want to use the default config file,
-  # set a `GOLEM_CONFIG_PATH` environment variable that points
-  # to your custom config file.
-  file = Sys.getenv(
-    "GOLEM_CONFIG_PATH",
-    app_sys("golem-config.yml")
-  )
+	value,
+	config = Sys.getenv(
+		"GOLEM_CONFIG_ACTIVE",
+		Sys.getenv(
+			"R_CONFIG_ACTIVE",
+			"default"
+		)
+	),
+	use_parent = TRUE,
+	# If you don't want to use the default config file,
+	# set a `GOLEM_CONFIG_PATH` environment variable that points
+	# to your custom config file.
+	file = Sys.getenv(
+		"GOLEM_CONFIG_PATH",
+		app_sys(
+			"golem-config.yml"
+		)
+	)
 ) {
-  config::get(
-    value = value,
-    config = config,
-    file = file,
-    use_parent = use_parent
-  )
+	config::get(
+		value = value,
+		config = config,
+		file = file,
+		use_parent = use_parent
+	)
 }

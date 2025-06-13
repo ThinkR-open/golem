@@ -1,30 +1,27 @@
-test_that(
-  "daf_desc & pkg works",
-  {
-    run_quietly_in_a_dummy_golem({
-      expect_equal(
-        daf_desc(
-          ".",
-          "Package"
-        ),
-        "shinyexample"
-      )
-      expect_equal(
-        pkg_name(
-          "."
-        ),
-        "shinyexample"
-      )
-      expect_equal(
-        pkg_version(
-          "."
-        ),
-        "0.0.0.9000"
-      )
-      expect_equal(
-        pkg_path(),
-        getwd()
-      )
-    })
-  }
-)
+test_that("daf_desc & pkg works", {
+	run_quietly_in_a_dummy_golem({
+		expect_equal(
+			daf_desc(
+				".",
+				"Package"
+			),
+			"shinyexample"
+		)
+		expect_equal(
+			pkg_name(
+				"."
+			),
+			"shinyexample"
+		)
+		expect_equal(
+			pkg_version(
+				"."
+			),
+			"0.0.0.9000"
+		)
+		expect_equal(
+			pkg_path(),
+			getwd()
+		)
+	})
+})
