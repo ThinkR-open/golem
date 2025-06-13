@@ -39,9 +39,12 @@
 #'
 #' @return Used for side-effects.
 activate_js <- function() {
-  includeScript(
-    system.file("utils/golem-js.js", package = "golem")
-  )
+	includeScript(
+		system.file(
+			"utils/golem-js.js",
+			package = "golem"
+		)
+	)
 }
 
 #' @export
@@ -132,21 +135,31 @@ activate_js <- function() {
 #'   shinyApp(ui, server)
 #' }
 invoke_js <- function(
-  fun,
-  ...,
-  session = shiny::getDefaultReactiveDomain()
+	fun,
+	...,
+	session = shiny::getDefaultReactiveDomain()
 ) {
-  attempt::stop_if(
-    fun == "",
-    msg = "Error: Empty string is not a valid JS handler name"
-  )
-  messages <- list(...)
-  res <- lapply(
-    messages,
-    function(message, fun) {
-      session$sendCustomMessage(fun, message)
-    },
-    fun = fun
-  )
-  invisible(res)
+	attempt::stop_if(
+		fun == "",
+		msg = "Error: Empty string is not a valid JS handler name"
+	)
+	messages <- list(
+		...
+	)
+	res <- lapply(
+		messages,
+		function(
+			message,
+			fun
+		) {
+			session$sendCustomMessage(
+				fun,
+				message
+			)
+		},
+		fun = fun
+	)
+	invisible(
+		res
+	)
 }

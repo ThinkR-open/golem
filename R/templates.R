@@ -17,8 +17,14 @@
 #'   }
 #'   create_golem("ici", project_template = my_proj)
 #' }
-project_hook <- function(path, package_name, ...) {
-  return(TRUE)
+project_hook <- function(
+	path,
+	package_name,
+	...
+) {
+	return(
+		TRUE
+	)
 }
 
 #' Golem's default custom templates
@@ -35,60 +41,87 @@ project_hook <- function(path, package_name, ...) {
 #' @export
 #' @seealso [add_js_handler()]
 js_handler_template <- function(
-  path,
-  name = "fun",
-  code = " "
+	path,
+	name = "fun",
+	code = " "
 ) {
-  write_there <- write_there_builder(path)
+	write_there <- write_there_builder(
+		path
+	)
 
-  write_there("$( document ).ready(function() {")
-  write_there(
-    sprintf("  Shiny.addCustomMessageHandler('%s', function(arg) {", name)
-  )
-  write_there(code)
-  write_there("  })")
-  write_there("});")
+	write_there(
+		"$( document ).ready(function() {"
+	)
+	write_there(
+		sprintf(
+			"  Shiny.addCustomMessageHandler('%s', function(arg) {",
+			name
+		)
+	)
+	write_there(
+		code
+	)
+	write_there(
+		"  })"
+	)
+	write_there(
+		"});"
+	)
 }
 
 #' @export
 #' @rdname template
 js_template <- function(
-  path,
-  code = " "
+	path,
+	code = " "
 ) {
-  write_there <- write_there_builder(path)
-
-  write_there(code)
+	write_there <- write_there_builder(
+		path
+	)
+	write_there(
+		code
+	)
 }
 
 #' @export
 #' @rdname template
 css_template <- function(
-  path,
-  code = " "
+	path,
+	code = " "
 ) {
-  write_there <- write_there_builder(path)
-  write_there(code)
+	write_there <- write_there_builder(
+		path
+	)
+	write_there(
+		code
+	)
 }
 
 #' @export
 #' @rdname template
 sass_template <- function(
-  path,
-  code = " "
+	path,
+	code = " "
 ) {
-  write_there <- write_there_builder(path)
-
-  write_there(code)
+	write_there <- write_there_builder(
+		path
+	)
+	write_there(
+		code
+	)
 }
 
 #' @export
 #' @rdname template
 empty_template <- function(
-  path,
-  code = " "
+	path,
+	code = " "
 ) {
-  write_there <- write_there_builder(path)
+	write_there <- write_there_builder(
+		path
+	)
 
-  write_there(code)
+	write_there(
+		code
+	)
 }

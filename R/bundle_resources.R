@@ -21,97 +21,123 @@
 #'
 #' @return an htmlDependency
 bundle_resources <- function(
-  path,
-  app_title,
-  name = "golem_resources",
-  version = "0.0.1",
-  meta = NULL,
-  head = NULL,
-  attachment = NULL,
-  package = NULL,
-  all_files = TRUE,
-  app_builder = "golem",
-  with_sparkles = FALSE,
-  activate_js = TRUE
+	path,
+	app_title,
+	name = "golem_resources",
+	version = "0.0.1",
+	meta = NULL,
+	head = NULL,
+	attachment = NULL,
+	package = NULL,
+	all_files = TRUE,
+	app_builder = "golem",
+	with_sparkles = FALSE,
+	activate_js = TRUE
 ) {
-  res <- list()
-  if (
-    length(
-      list.files(path)
-    ) > 0
-  ) {
-    res[[
-      length(res) + 1
-    ]] <- htmltools::htmlDependency(
-      name,
-      version,
-      src = path,
-      script = list.files(
-        path,
-        pattern = "\\.js$",
-        recursive = TRUE
-      ),
-      meta = c("app-builder" = app_builder, meta),
-      head = c(
-        as.character(
-          tags$title(app_title)
-        ),
-        {
-          if (activate_js){
-             as.character(
-              golem::activate_js()
-            )
-          }
-        },
-        head
-      ),
-      attachment = attachment,
-      package = package,
-      all_files = all_files
-    )
-    # For some reason `htmlDependency` doesn't bundle css,
-    # So add them by hand
-    css_list <- list.files(
-      path,
-      pattern = "\\.css$",
-      recursive = TRUE
-    )
+	res <- list()
+	if (
+		length(
+			list.files(
+				path
+			)
+		) >
+			0
+	) {
+		res[[
+			length(
+				res
+			) +
+				1
+		]] <- htmltools::htmlDependency(
+			name,
+			version,
+			src = path,
+			script = list.files(
+				path,
+				pattern = "\\.js$",
+				recursive = TRUE
+			),
+			meta = c(
+				"app-builder" = app_builder,
+				meta
+			),
+			head = c(
+				as.character(
+					tags$title(
+						app_title
+					)
+				),
+				{
+					if (activate_js) {
+						as.character(
+							golem::activate_js()
+						)
+					}
+				},
+				head
+			),
+			attachment = attachment,
+			package = package,
+			all_files = all_files
+		)
+		# For some reason `htmlDependency` doesn't bundle css,
+		# So add them by hand
+		css_list <- list.files(
+			path,
+			pattern = "\\.css$",
+			recursive = TRUE
+		)
 
-    if (length(css_list) > 0) {
-      css_nms <- paste0(
-        basename(path),
-        "/",
-        list.files(
-          path,
-          pattern = "\\.css$",
-          recursive = TRUE
-        )
-      )
+		if (
+			length(
+				css_list
+			) >
+				0
+		) {
+			css_nms <- paste0(
+				basename(
+					path
+				),
+				"/",
+				list.files(
+					path,
+					pattern = "\\.css$",
+					recursive = TRUE
+				)
+			)
 
-      for (i in css_nms) {
-        res[[
-          length(res) + 1
-        ]] <- tags$link(
-          href = i,
-          rel = "stylesheet"
-        )
-      }
-    }
-  }
+			for (i in css_nms) {
+				res[[
+					length(
+						res
+					) +
+						1
+				]] <- tags$link(
+					href = i,
+					rel = "stylesheet"
+				)
+			}
+		}
+	}
 
-  if (with_sparkles) {
-    res[[
-      length(res) + 1
-    ]] <- htmlDependency(
-      "sparkles",
-      version = utils::packageVersion("golem"),
-      src = system.file(
-        "utils",
-        package = "golem"
-      ),
-      script = "sparkle.js"
-    )
-  }
+	if (with_sparkles) {
+		res[[
+			length(
+				res
+			) +
+				1
+		]] <- htmlDependency(
+			"sparkles",
+			version = utils::packageVersion(
+				"golem"
+			),
+			src = system.file(
+				"utils",
+				package = "golem"
+			),
+			script = "sparkle.js"
+		)
+	}
 
-  res
+	res
 }

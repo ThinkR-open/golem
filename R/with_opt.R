@@ -14,50 +14,67 @@
 #' @return a shiny.appObj object
 #' @export
 with_golem_options <- function(
-  app,
-  golem_opts,
-  maintenance_page = golem::maintenance_page,
-  print = FALSE
+	app,
+	golem_opts,
+	maintenance_page = golem::maintenance_page,
+	print = FALSE
 ) {
-  # Check if app is in maintenance
-  if (Sys.getenv("GOLEM_MAINTENANCE_ACTIVE", "FALSE") == "TRUE") {
-    app <- shiny::shinyApp(
-      ui = maintenance_page,
-      server = function(input, output, session) {}
-    )
-  }
+	# Check if app is in maintenance
+	if (
+		Sys.getenv(
+			"GOLEM_MAINTENANCE_ACTIVE",
+			"FALSE"
+		) ==
+			"TRUE"
+	) {
+		app <- shiny::shinyApp(
+			ui = maintenance_page,
+			server = function(
+				input,
+				output,
+				session
+			) {}
+		)
+	}
 
-  # Setting the running option
-  set_golem_global(
-    "running",
-    TRUE
-  )
-  # Removing the option when the function exits
-  on.exit(
-    set_golem_global(
-      "running",
-      FALSE
-    )
-  )
+	# Setting the running option
+	set_golem_global(
+		"running",
+		TRUE
+	)
+	# Removing the option when the function exits
+	on.exit(
+		set_golem_global(
+			"running",
+			FALSE
+		)
+	)
 
-  # Bundling the options inside the shinyApp object
-  app$appOptions$golem_options <- golem_opts
+	# Bundling the options inside the shinyApp object
+	app$appOptions$golem_options <- golem_opts
 
-  # On shiny server, Connect & shinyapp.io, print should be turned off,
-  # as it would throw an error
+	# On shiny server, Connect & shinyapp.io, print should be turned off,
+	# as it would throw an error
 
-  if (Sys.getenv("SHINY_PORT") != "") {
-    print <- FALSE
-  }
+	if (
+		Sys.getenv(
+			"SHINY_PORT"
+		) !=
+			""
+	) {
+		print <- FALSE
+	}
 
-  # Almost all cases will be ok with not explicitely printing the
-  # application object, but for corner cases like direct shinyApp
-  # object manipulation, this feature can be turned on
-  if (print) {
-    print(app)
-  } else {
-    app
-  }
+	# Almost all cases will be ok with not explicitely printing the
+	# application object, but for corner cases like direct shinyApp
+	# object manipulation, this feature can be turned on
+	if (print) {
+		print(
+			app
+		)
+	} else {
+		app
+	}
 }
 
 #' Get all or one golem options
@@ -120,9 +137,19 @@ with_golem_options <- function(
 #' }
 #'
 get_golem_options <- function(which = NULL) {
-  if (is.null(which)) {
-    getShinyOption("golem_options")
-  } else {
-    getShinyOption("golem_options")[[which]]
-  }
+	if (
+		is.null(
+			which
+		)
+	) {
+		getShinyOption(
+			"golem_options"
+		)
+	} else {
+		getShinyOption(
+			"golem_options"
+		)[[
+			which
+		]]
+	}
 }

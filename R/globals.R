@@ -2,5 +2,5 @@
 .golem_globals$running <- FALSE
 
 set_golem_global <- function(name, val) {
-  .golem_globals[[name]] <- val
+	.golem_globals[[name]] <- val
 }

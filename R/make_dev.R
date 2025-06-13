@@ -8,16 +8,33 @@
 #' @export
 #'
 #' @return Used for side-effects
-make_dev <- function(fun) {
-  function(...) {
-    if (golem::app_dev()) {
-      fun(...)
-    }
-  }
+make_dev <- function(
+	fun
+) {
+	function(
+		...
+	) {
+		if (golem::app_dev()) {
+			fun(
+				...
+			)
+		}
+	}
 }
 
-`%||%` <- function(x, y) {
-  if (is.null(x)) y else x
+`%||%` <- function(
+	x,
+	y
+) {
+	if (
+		is.null(
+			x
+		)
+	) {
+		y
+	} else {
+		x
+	}
 }
 
 #' Is the app in dev mode or prod mode?
@@ -27,14 +44,17 @@ make_dev <- function(fun) {
 #'
 #' @rdname prod
 app_prod <- function() {
-  getOption("golem.app.prod") %||% FALSE
+	getOption(
+		"golem.app.prod"
+	) %||%
+		FALSE
 }
 
 # Well, this one does the opposite
 #' @rdname prod
 #' @export
 app_dev <- function() {
-  !golem::app_prod()
+	!golem::app_prod()
 }
 
 #' Functions already made dev dependent
@@ -45,24 +65,34 @@ app_dev <- function() {
 #' @inheritParams base::cat
 #' @export
 #' @return A modified function.
-cat_dev <- make_dev(base::cat)
+cat_dev <- make_dev(
+	base::cat
+)
 
 #' @rdname made_dev
 #' @export
 #' @inheritParams base::print
-print_dev <- make_dev(base::print)
+print_dev <- make_dev(
+	base::print
+)
 
 #' @rdname made_dev
 #' @export
 #' @inheritParams base::message
-message_dev <- make_dev(base::message)
+message_dev <- make_dev(
+	base::message
+)
 
 #' @rdname made_dev
 #' @export
 #' @inheritParams base::warning
-warning_dev <- make_dev(base::warning)
+warning_dev <- make_dev(
+	base::warning
+)
 
 #' @rdname made_dev
 #' @export
 #' @inheritParams base::browser
-browser_dev <- make_dev(base::browser)
+browser_dev <- make_dev(
+	base::browser
+)

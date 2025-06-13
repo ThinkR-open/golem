@@ -16,123 +16,165 @@
 #'   use_favicon(path = "path/to/your/favicon.ico")
 #' }
 use_favicon <- function(
-  path,
-  golem_wd = get_golem_wd(),
-  method = "curl",
-  pkg
+	path,
+	golem_wd = get_golem_wd(),
+	method = "curl",
+	pkg
 ) {
-  signal_arg_is_deprecated(
-    pkg,
-    fun = as.character(sys.call()[[1]]),
-    "pkg"
-  )
-  if (missing(path)) {
-    path <- golem_sys(
-      "shinyexample/inst/app/www",
-      "favicon.ico"
-    )
-  }
+	signal_arg_is_deprecated(
+		pkg,
+		fun = as.character(
+			sys.call()[[1]]
+		),
+		"pkg"
+	)
+	if (
+		missing(
+			path
+		)
+	) {
+		path <- golem_sys(
+			"shinyexample/inst/app/www",
+			"favicon.ico"
+		)
+	}
 
-  ext <- file_ext(path)
+	ext <- file_ext(
+		path
+	)
 
-  stop_if_not(
-    ext,
-    ~ .x %in% c("png", "ico"),
-    "favicon must have .ico or .png extension"
-  )
+	stop_if_not(
+		ext,
+		~ .x %in%
+			c(
+				"png",
+				"ico"
+			),
+		"favicon must have .ico or .png extension"
+	)
 
-  local <- fs_file_exists(path)
+	local <- fs_file_exists(
+		path
+	)
 
-  if (!local) {
-    if (getRversion() >= "3.5") {
-      try_online <- attempt::attempt(
-        curl_get_headers(path),
-        silent = TRUE
-      )
-      attempt::stop_if(
-        try_online,
-        attempt::is_try_error,
-        "Provided path is neither a local path nor a reachable url."
-      )
+	if (!local) {
+		if (getRversion() >= "3.5") {
+			try_online <- attempt::attempt(
+				curl_get_headers(
+					path
+				),
+				silent = TRUE
+			)
+			attempt::stop_if(
+				try_online,
+				attempt::is_try_error,
+				"Provided path is neither a local path nor a reachable url."
+			)
 
-      attempt::stop_if_not(
-        attr(try_online, "status"),
-        ~ .x == 200,
-        "Unable to reach provided url (response code is not 200)."
-      )
-    }
+			attempt::stop_if_not(
+				attr(
+					try_online,
+					"status"
+				),
+				~ .x == 200,
+				"Unable to reach provided url (response code is not 200)."
+			)
+		}
 
-    destfile <- tempfile(
-      fileext = paste0(".", ext),
-      pattern = "favicon"
-    )
+		destfile <- tempfile(
+			fileext = paste0(
+				".",
+				ext
+			),
+			pattern = "favicon"
+		)
 
-    utils_download_file(
-      path,
-      destfile,
-      method = method
-    )
-    path <- fs_path_abs(destfile)
-  }
+		utils_download_file(
+			path,
+			destfile,
+			method = method
+		)
+		path <- fs_path_abs(
+			destfile
+		)
+	}
 
-  old <- setwd(fs_path_abs(golem_wd))
+	old <- setwd(
+		fs_path_abs(
+			golem_wd
+		)
+	)
 
-  on.exit(setwd(old))
+	on.exit(
+		setwd(
+			old
+		)
+	)
 
-  to <- fs_path(
-    fs_path_abs(golem_wd),
-    "inst/app/www",
-    sprintf(
-      "favicon.%s",
-      ext
-    )
-  )
+	to <- fs_path(
+		fs_path_abs(
+			golem_wd
+		),
+		"inst/app/www",
+		sprintf(
+			"favicon.%s",
+			ext
+		)
+	)
 
-  if (!(path == to)) {
-    fs_file_copy(
-      path,
-      to,
-      overwrite = TRUE
-    )
-    cat_green_tick(
-      sprintf(
-        "favicon.%s created at %s",
-        ext,
-        to
-      )
-    )
-  }
+	if (!(path == to)) {
+		fs_file_copy(
+			path,
+			to,
+			overwrite = TRUE
+		)
+		cat_green_tick(
+			sprintf(
+				"favicon.%s created at %s",
+				ext,
+				to
+			)
+		)
+	}
 
-  if (ext == "png") {
-    cat_red_bullet(
-      "You choose a png favicon, please add `ext = 'png'` to `favicon()` within the `golem_add_external_resources()` function in 'app_ui.R'."
-    )
-  } else {
-    cli_cat_line(
-      "Favicon is automatically linked in app_ui via `golem_add_external_resources()`"
-    )
-  }
+	if (ext == "png") {
+		cat_red_bullet(
+			"You choose a png favicon, please add `ext = 'png'` to `favicon()` within the `golem_add_external_resources()` function in 'app_ui.R'."
+		)
+	} else {
+		cli_cat_line(
+			"Favicon is automatically linked in app_ui via `golem_add_external_resources()`"
+		)
+	}
 }
 
 #' @rdname favicon
 #' @export
-remove_favicon <- function(path = "inst/app/www/favicon.ico") {
-  if (fs_file_exists(path)) {
-    cat_green_tick(
-      sprintf(
-        "Removing favicon at %s",
-        path
-      )
-    )
-    fs_file_delete(path)
-  } else {
-    cat_red_bullet(
-      sprintf(
-        "No file found at %s",
-        path
-      )
-    )
-  }
+remove_favicon <- function(
+	path = "inst/app/www/favicon.ico"
+) {
+	if (
+		fs_file_exists(
+			path
+		)
+	) {
+		cat_green_tick(
+			sprintf(
+				"Removing favicon at %s",
+				path
+			)
+		)
+		fs_file_delete(
+			path
+		)
+	} else {
+		cat_red_bullet(
+			sprintf(
+				"No file found at %s",
+				path
+			)
+		)
+	}
 }
 
 #' Add favicon to your app
@@ -149,21 +191,21 @@ remove_favicon <- function(path = "inst/app/www/favicon.ico") {
 #'
 #' @return An HTML tag.
 favicon <- function(
-  ico = "favicon",
-  rel = "shortcut icon",
-  resources_path = "www",
-  ext = "ico"
+	ico = "favicon",
+	rel = "shortcut icon",
+	resources_path = "www",
+	ext = "ico"
 ) {
-  ico <- fs_path(
-    resources_path,
-    ico,
-    ext = ext
-  )
+	ico <- fs_path(
+		resources_path,
+		ico,
+		ext = ext
+	)
 
-  tags$head(
-    tags$link(
-      rel = rel,
-      href = ico
-    )
-  )
+	tags$head(
+		tags$link(
+			rel = rel,
+			href = ico
+		)
+	)
 }

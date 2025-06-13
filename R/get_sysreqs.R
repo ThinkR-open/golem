@@ -14,12 +14,12 @@
 #'
 #' @return A vector of system requirements.
 get_sysreqs <- function(
-  packages,
-  quiet = TRUE,
-  batch_n = 30
+	packages,
+	quiet = TRUE,
+	batch_n = 30
 ) {
-  .Deprecated(
-    "dockerfiler::get_sysreqs",
-    msg = "get_sysreqs() is deprecated and has been moved to {dockerfiler}."
-  )
+	.Deprecated(
+		"dockerfiler::get_sysreqs",
+		msg = "get_sysreqs() is deprecated and has been moved to {dockerfiler}."
+	)
 }
