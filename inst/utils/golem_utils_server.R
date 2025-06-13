@@ -18,7 +18,7 @@ not_na <- Negate(is.na)
 #' @example
 #' drop_nulls(list(1, NULL, 2))
 drop_nulls <- function(x) {
-  x[!sapply(x, is.null)]
+	x[!sapply(x, is.null)]
 }
 
 #' If x is `NULL`, return y, otherwise return x
@@ -30,11 +30,11 @@ drop_nulls <- function(x) {
 #' @examples
 #' NULL %||% 1
 "%||%" <- function(x, y) {
-  if (is.null(x)) {
-    y
-  } else {
-    x
-  }
+	if (is.null(x)) {
+		y
+	} else {
+		x
+	}
 }
 
 #' If x is `NA`, return y, otherwise return x
@@ -46,11 +46,11 @@ drop_nulls <- function(x) {
 #' @examples
 #' NA %|NA|% 1
 "%|NA|%" <- function(x, y) {
-  if (is.na(x)) {
-    y
-  } else {
-    x
-  }
+	if (is.na(x)) {
+		y
+	} else {
+		x
+	}
 }
 
 #' Typing reactiveValues is too long
@@ -59,5 +59,15 @@ drop_nulls <- function(x) {
 #' @inheritParams reactiveValuesToList
 #'
 #' @noRd
-rv <- function(...) shiny::reactiveValues(...)
-rvtl <- function(...) shiny::reactiveValuesToList(...)
+rv <- function(
+	...
+) {
+	shiny::reactiveValues(
+		...
+	)
+}
+rvtl <- function(
+	...
+) {
+	shiny::reactiveValuesToList(...)
+}
