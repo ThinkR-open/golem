@@ -15,7 +15,7 @@ add_dockerfile_heroku() creates platform specific Dockerfile."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -118,7 +118,7 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  output_dir <span class="op">=</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"deploy"</span><span class="op">)</span>,</span>
 <span>  distro <span class="op">=</span> <span class="st">"focal"</span>,</span>
 <span>  from <span class="op">=</span> <span class="st">"rocker/verse"</span>,</span>
-<span>  as <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  as <span class="op">=</span> <span class="st">"builder"</span>,</span>
 <span>  sysreqs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  port <span class="op">=</span> <span class="fl">80</span>,</span>
 <span>  host <span class="op">=</span> <span class="st">"0.0.0.0"</span>,</span>
@@ -130,6 +130,8 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  dockerfile_cmd <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  user <span class="op">=</span> <span class="st">"rstudio"</span>,</span>
+<span>  single_file <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  set_golem.app.prod <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  <span class="va">source_folder</span></span>
 <span><span class="op">)</span></span>
@@ -149,6 +151,8 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  document <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  user <span class="op">=</span> <span class="st">"rstudio"</span>,</span>
+<span>  single_file <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  set_golem.app.prod <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  <span class="va">source_folder</span></span>
 <span><span class="op">)</span></span>
@@ -168,6 +172,8 @@ a generic Dockerfile, while <code>add_dockerfile_shinyproxy()</code>,
 <span>  document <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  user <span class="op">=</span> <span class="st">"rstudio"</span>,</span>
 <span>  update_tar_gz <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  single_file <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  set_golem.app.prod <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  <span class="va">source_folder</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -266,11 +272,22 @@ See available distributions at https://hub.docker.com/r/rstudio/r-base/.</p></dd
 
 <dt id="arg-dockerfile-cmd">dockerfile_cmd<a class="anchor" aria-label="anchor" href="#arg-dockerfile-cmd"></a></dt>
 <dd><p>What is the CMD to add to the Dockerfile. If NULL, the default,
-the CMD will be <code>R -e "options('shiny.port'={port},shiny.host='{host}');library({appname});{appname}::run_app()\</code>.</p></dd>
+the CMD will be <code>R -e "options('shiny.port'={port},shiny.host='{host}',golem.app.prod = {set_golem.app.prod});library({appname});{appname}::run_app()\</code>.</p></dd>
 
 
 <dt id="arg-user">user<a class="anchor" aria-label="anchor" href="#arg-user"></a></dt>
 <dd><p>Name of the user to specify in the Dockerfile with the USER instruction. Default is <code>rstudio</code>, if set to <code>NULL</code> no the user from the FROM image is used.</p></dd>
+
+
+<dt id="arg-single-file">single_file<a class="anchor" aria-label="anchor" href="#arg-single-file"></a></dt>
+<dd><p>boolean.
+If <code>TRUE</code> (by default), generate a single multi-stage Dockerfile .
+If <code>FALSE</code>, produce two distinct Dockerfiles to be run sequentially
+for the build and production phases.</p></dd>
+
+
+<dt id="arg-set-golem-app-prod">set_golem.app.prod<a class="anchor" aria-label="anchor" href="#arg-set-golem-app-prod"></a></dt>
+<dd><p>boolean If <code>TRUE</code> (by default) set options(golem.app.prod = TRUE) in dockerfile_cmd.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

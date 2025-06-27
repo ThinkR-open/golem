@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,6 +45,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.1" id="golem-051-to-060">golem 0.5.1 to 0.6.0<a class="anchor" aria-label="anchor" href="#golem-051-to-060"></a></h2><p class="text-muted">CRAN release: 2024-08-27</p>
+<div class="section level3">
+<h3 id="new-features--user-visible-changes-0-5-1">New features / user-visible changes<a class="anchor" aria-label="anchor" href="#new-features--user-visible-changes-0-5-1"></a></h3>
+<ul><li>The <code>add_dockerfile_with_renv_*</code> function now generates a multi-stage Dockerfile by default (use <code>single_file = FALSE</code> to retain the previous behavior).</li>
+<li>The <code>add_dockerfile_with_renv_*</code> function now creates a Dockerfile that sets <code>golem.app.prod = TRUE</code> by default (use <code>set_golem.app.prod = FALSE</code> to retain the previous behavior).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="breaking-change-0-5-1">Breaking change<a class="anchor" aria-label="anchor" href="#breaking-change-0-5-1"></a></h3>
 <ul><li><p>The <code><a href="../reference/get_current_config.html">get_current_config()</a></code> has been rework in two ways: (1) it nows either check the <code>GOLEM_CONFIG_PATH</code> env var or the default path (inst/golem-config.yml). <a href="https://thinkr-open.github.io/golem/">golem</a> no longer tries to guess non standard paths, and does a hard fail if the file doesn’t exist, (2) the function no longer copy the <code>config</code> files from the skeleton if ever the files are not there (<a href="https://github.com/ilyaZar" class="external-link">@ilyaZar</a>, <a href="https://github.com/LDSamson" class="external-link">@LDSamson</a>, <a href="https://github.com/ThinkR-open/golem/issues/1178" class="external-link">#1178</a>)</p></li>
