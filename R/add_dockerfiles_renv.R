@@ -20,225 +20,211 @@ add_dockerfile_with_renv_ <- function(
 	...,
 	source_folder
 ) {
-  signal_arg_is_deprecated(
-    source_folder,
-    fun = as.character(sys.call()[[1]]),
-    "source_folder"
-  )
+	signal_arg_is_deprecated(
+		source_folder,
+		fun = as.character(sys.call()[[1]]),
+		"source_folder"
+	)
 
-  check_dockerfiler_installed()
+	check_dockerfiler_installed()
 
+	if (is.null(lockfile)) {
+		rlang::check_installed(
+			c("renv", "attachment"),
+			reason = "to build a Dockerfile with automatic renv.lock creation. Use the `lockfile` parameter to pass your own `renv.lock` file."
+		)
+	}
 
-  if (is.null(lockfile)) {
-    rlang::check_installed(
-      c("renv", "attachment"),
-      reason = "to build a Dockerfile with automatic renv.lock creation. Use the `lockfile` parameter to pass your own `renv.lock` file."
-    )
-  }
+	# Small hack to prevent warning from rlang::lang() in tests
+	# This should be managed in {attempt} later on
+	x <- suppressWarnings({
+		rlang::lang(print)
+	})
+	dir.create(output_dir, showWarnings = {
+		!getOption(
+			"golem.quiet",
+			getOption(
+				"usethis.quiet",
+				default = FALSE
+			)
+		)
+	})
 
-  # Small hack to prevent warning from rlang::lang() in tests
-  # This should be managed in {attempt} later on
-  x <- suppressWarnings({
-    rlang::lang(print)
-  })
-  dir.create(output_dir, showWarnings = {
-    !getOption(
-      "golem.quiet",
-      getOption(
-        "usethis.quiet",
-        default = FALSE
-      )
-    )
-  })
+	# add output_dir in Rbuildignore if the output is inside the golem
+	if (normalizePath(dirname(output_dir)) == normalizePath(golem_wd)) {
+		usethis_use_build_ignore(output_dir)
+	}
 
-  # add output_dir in Rbuildignore if the output is inside the golem
-  if (normalizePath(dirname(output_dir)) == normalizePath(golem_wd)) {
-    usethis_use_build_ignore(output_dir)
-  }
+	if (is.null(lockfile)) {
+		if (isTRUE(document)) {
+			cli_cat_line(
+				"You set `document = TRUE` and you did not pass your own renv.lock file,"
+			)
+			cli_cat_line(
+				"as a consequence {golem} will use `attachment::att_amend_desc()` to update your "
+			)
+			cli_cat_line("DESCRIPTION file before creating the renv.lock file")
+			cli_cat_line("")
+			cli_cat_line(
+				"you can set `document = FALSE` to use your actual DESCRIPTION file,"
+			)
+			cli_cat_line(
+				"or pass you own renv.lock to use, using the `lockfile` parameter"
+			)
+			cli_cat_line("")
+			cli_cat_line(
+				"In any case be sure to have no Error or Warning at `devtools::check()`"
+			)
+		}
 
-  if (is.null(lockfile)) {
-    if (isTRUE(document)) {
-      cli_cat_line(
-        "You set `document = TRUE` and you did not pass your own renv.lock file,"
-      )
-      cli_cat_line(
-        "as a consequence {golem} will use `attachment::att_amend_desc()` to update your "
-      )
-      cli_cat_line("DESCRIPTION file before creating the renv.lock file")
-      cli_cat_line("")
-      cli_cat_line(
-        "you can set `document = FALSE` to use your actual DESCRIPTION file,"
-      )
-      cli_cat_line(
-        "or pass you own renv.lock to use, using the `lockfile` parameter"
-      )
-      cli_cat_line("")
-      cli_cat_line(
-        "In any case be sure to have no Error or Warning at `devtools::check()`"
-      )
-    }
+		lockfile <- attachment_create_renv_for_prod(
+			path = golem_wd,
+			check_if_suggests_is_installed = FALSE,
+			document = document,
+			output = file.path(
+				output_dir,
+				"renv.lock.prod"
+			),
+			...
+		)
+	}
+	file.copy(
+		from = lockfile,
+		to = output_dir
+	)
 
-    lockfile <- attachment_create_renv_for_prod(
-      path = golem_wd,
-      check_if_suggests_is_installed = FALSE,
-      document = document,
-      output = file.path(
-        output_dir,
-        "renv.lock.prod"
-      ),
-      ...
-    )
-  }
-  file.copy(
-    from = lockfile,
-    to = output_dir
-  )
+	socle <- dockerfiler_dock_from_renv(
+		lockfile = lockfile,
+		distro = distro,
+		FROM = FROM,
+		repos = repos,
+		AS = AS,
+		sysreqs = sysreqs,
+		expand = expand,
+		extra_sysreqs = extra_sysreqs
+	)
 
-  socle <- dockerfiler_dock_from_renv(
-    lockfile = lockfile,
-    distro = distro,
-    FROM = FROM,
-    repos = repos,
-    AS = AS,
-    sysreqs = sysreqs,
-    expand = expand,
-    extra_sysreqs = extra_sysreqs
-  )
+	if (!single_file) {
+		socle$write(
+			as = file.path(
+				output_dir,
+				"Dockerfile_base"
+			)
+		)
 
+		my_dock <- dockerfiler_Dockerfile()$new(
+			FROM = tolower(
+				tolower(
+					paste0(
+						get_golem_name(
+							golem_wd = golem_wd
+						),
+						"_base"
+					)
+				)
+			)
+		)
+	} else {
+		# ici on va faire le fork
+		# et ici faut append
 
+		my_dock <- dockerfiler_Dockerfile()$new(
+			FROM = AS,
+			AS = "final"
+		)
 
+		socle$write(
+			as = file.path(
+				output_dir,
+				"Dockerfile"
+			)
+		)
+	}
 
+	if (!single_file) {
+		my_dock$COPY(basename(lockfile), "renv.lock")
+		my_dock$RUN(
+			"R -e 'options(renv.config.pak.enabled = FALSE);renv::restore()'"
+		)
+	}
+	# we use an already built tar.gz file
+	my_dock$COPY(
+		from = paste0(
+			get_golem_name(
+				golem_wd = golem_wd
+			),
+			"_*.tar.gz"
+		),
+		to = "/app.tar.gz"
+	)
+	my_dock$RUN(
+		"R -e 'remotes::install_local(\"/app.tar.gz\",upgrade=\"never\")'"
+	)
+	my_dock$RUN("rm /app.tar.gz")
 
-  if ( !single_file){
+	if (update_tar_gz) {
+		old_version <- list.files(
+			path = output_dir,
+			pattern = paste0(
+				get_golem_name(
+					golem_wd = golem_wd
+				),
+				"_*.*.tar.gz"
+			),
+			full.names = TRUE
+		)
+		if (length(old_version) > 0) {
+			lapply(old_version, file.remove)
+			lapply(old_version, unlink, force = TRUE)
+			cat_red_bullet(
+				sprintf(
+					"%s were removed from folder",
+					paste(
+						old_version,
+						collapse = ", "
+					)
+				)
+			)
+		}
 
-  socle$write(
-    as = file.path(
-      output_dir,
-      "Dockerfile_base"
-    )
-  )
+		if (
+			isTRUE(
+				requireNamespace(
+					"pkgbuild",
+					quietly = TRUE
+				)
+			)
+		) {
+			out <- pkgbuild::build(
+				path = golem_wd,
+				dest_path = output_dir,
+				vignettes = FALSE,
+				quiet = {
+					getOption(
+						"golem.quiet",
+						getOption(
+							"usethis.quiet",
+							default = FALSE
+						)
+					)
+				}
+			)
+			if (missing(out)) {
+				cat_red_bullet("Error during tar.gz building")
+			} else {
+				cat_green_tick(
+					sprintf(
+						" %s created.",
+						out
+					)
+				)
+			}
+		} else {
+			stop("please install {pkgbuild}")
+		}
+	}
 
-  my_dock <- dockerfiler_Dockerfile()$new(
-    FROM = tolower(
-      tolower(
-        paste0(
-          get_golem_name(
-            golem_wd = golem_wd
-          ),
-          "_base"
-        )
-      )
-    )
-  )
-
-
-  } else {
-
-    # ici on va faire le fork
-    # et ici faut append
-
-    my_dock <- dockerfiler_Dockerfile()$new(
-      FROM = AS, AS = "final"
-    )
-
-    socle$write(    as = file.path(
-      output_dir,
-      "Dockerfile"
-    ))
-
-
-
-
-  }
-
-  if (!single_file){
-  my_dock$COPY(basename(lockfile), "renv.lock")
-  my_dock$RUN("R -e 'options(renv.config.pak.enabled = FALSE);renv::restore()'")
-  }
-  # we use an already built tar.gz file
-  my_dock$COPY(
-    from =
-      paste0(
-        get_golem_name(
-          golem_wd = golem_wd
-        ),
-        "_*.tar.gz"
-      ),
-    to = "/app.tar.gz"
-  )
-  my_dock$RUN(
-    "R -e 'remotes::install_local(\"/app.tar.gz\",upgrade=\"never\")'"
-  )
-  my_dock$RUN("rm /app.tar.gz")
-
-
-
-
-
-
-  if (update_tar_gz) {
-    old_version <- list.files(
-      path = output_dir,
-      pattern = paste0(
-        get_golem_name(
-          golem_wd = golem_wd
-        ),
-        "_*.*.tar.gz"
-      ),
-      full.names = TRUE
-    )
-    if (length(old_version) > 0) {
-      lapply(old_version, file.remove)
-      lapply(old_version, unlink, force = TRUE)
-      cat_red_bullet(
-        sprintf(
-          "%s were removed from folder",
-          paste(
-            old_version,
-            collapse = ", "
-          )
-        )
-      )
-    }
-
-    if (
-      isTRUE(
-        requireNamespace(
-          "pkgbuild",
-          quietly = TRUE
-        )
-      )
-    ) {
-      out <- pkgbuild::build(
-        path = golem_wd,
-        dest_path = output_dir,
-        vignettes = FALSE,
-        quiet = {
-          getOption(
-            "golem.quiet",
-            getOption(
-              "usethis.quiet",
-              default = FALSE
-            )
-          )
-        }
-      )
-      if (missing(out)) {
-        cat_red_bullet("Error during tar.gz building")
-      } else {
-        cat_green_tick(
-          sprintf(
-            " %s created.",
-            out
-          )
-        )
-      }
-    } else {
-      stop("please install {pkgbuild}")
-    }
-  }
-
-  my_dock
+	my_dock
 }
 
 #' @param golem_wd path to the Package/golem source folder to deploy.
