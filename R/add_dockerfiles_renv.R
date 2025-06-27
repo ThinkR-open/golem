@@ -445,24 +445,24 @@ add_dockerfile_with_renv_shinyproxy <- function(
 #' @export
 #' @export
 add_dockerfile_with_renv_heroku <- function(
-  golem_wd = get_golem_wd(),
-  lockfile = NULL,
-  output_dir = fs::path(tempdir(), "deploy"),
-  distro = "focal",
-  from = "rocker/verse",
-  as = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  extra_sysreqs = NULL,
-  open = TRUE,
-  document = TRUE,
-  user = "rstudio",
-  update_tar_gz = TRUE,
-  single_file = TRUE,
-  set_golem.app.prod = TRUE,
-  ...,
-  source_folder
+	golem_wd = get_golem_wd(),
+	lockfile = NULL,
+	output_dir = fs::path(tempdir(), "deploy"),
+	distro = "focal",
+	from = "rocker/verse",
+	as = NULL,
+	sysreqs = TRUE,
+	repos = c(CRAN = "https://cran.rstudio.com/"),
+	expand = FALSE,
+	extra_sysreqs = NULL,
+	open = TRUE,
+	document = TRUE,
+	user = "rstudio",
+	update_tar_gz = TRUE,
+	single_file = TRUE,
+	set_golem.app.prod = TRUE,
+	...,
+	source_folder
 ) {
 	signal_arg_is_deprecated(
 		source_folder,
