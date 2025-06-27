@@ -87,13 +87,16 @@ test_that("add_dockerfile_with_renv_ works", {
 		"Dockerfile"
 	))
 
-  expect_true(
-    any(grepl("library\\(shinyexample\\)",dock))
-  )
-  expect_true(
-    any(grepl("golem.app.prod=TRUE",dock))
-  )
-dock_dev <- readLines(file.path(dirname(dockerfile_with_renv_output_dev),"Dockerfile"))
+	expect_true(
+		any(grepl("library\\(shinyexample\\)", dock))
+	)
+	expect_true(
+		any(grepl("golem.app.prod=TRUE", dock))
+	)
+	dock_dev <- readLines(file.path(
+		dirname(dockerfile_with_renv_output_dev),
+		"Dockerfile"
+	))
 
   expect_true(
     any(grepl("library\\(shinyexample\\)",dock_dev))
