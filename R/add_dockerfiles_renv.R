@@ -357,31 +357,30 @@ docker run -p %s:%s %s
 docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
 # then go to 127.0.0.1:%s",
-      tolower(paste0(
-        get_golem_name(
-          golem_wd = golem_wd
-        ),
-        ":latest"
-      )),
-      port,
-      port,
-      tolower(paste0(
-        get_golem_name(
-          golem_wd = golem_wd
-        ),
-        ":latest"
-      )),
-      port
-    )
+			tolower(paste0(
+				get_golem_name(
+					golem_wd = golem_wd
+				),
+				":latest"
+			)),
+			port,
+			port,
+			tolower(paste0(
+				get_golem_name(
+					golem_wd = golem_wd
+				),
+				":latest"
+			)),
+			port
+		)
+	}
 
-  }
+	cat(out, file = file.path(output_dir, "README"))
 
-  cat(out, file = file.path(output_dir, "README"))
-
-  open_or_go_to(
-    where = file.path(output_dir, "README"),
-    open_file = open
-  )
+	open_or_go_to(
+		where = file.path(output_dir, "README"),
+		open_file = open
+	)
 }
 
 #' @inheritParams add_dockerfile_with_renv
