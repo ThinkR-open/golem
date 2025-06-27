@@ -98,12 +98,12 @@ test_that("add_dockerfile_with_renv_ works", {
 		"Dockerfile"
 	))
 
-  expect_true(
-    any(grepl("library\\(shinyexample\\)",dock_dev))
-  )
-  expect_true(
-    any(grepl("golem.app.prod=FALSE",dock_dev))
-  )
+	expect_true(
+		any(grepl("library\\(shinyexample\\)", dock_dev))
+	)
+	expect_true(
+		any(grepl("golem.app.prod=FALSE", dock_dev))
+	)
 
 	expect_true(
 		file.exists(
