@@ -99,20 +99,19 @@ dock_dev <- readLines(file.path(dirname(dockerfile_with_renv_output_dev),"Docker
     any(grepl("golem.app.prod=FALSE",dock_dev))
   )
 
-
-  expect_true(
-    file.exists(
-      dockerfile_with_renv_shinyproxy_output
-    )
-  )
-  expect_true(
-    file.exists(
-      dockerfile_with_renv_heroku_output
-    )
-  )
-  unlink(
-    dummy_golem,
-    TRUE,
-    TRUE
-  )
+	expect_true(
+		file.exists(
+			dockerfile_with_renv_shinyproxy_output
+		)
+	)
+	expect_true(
+		file.exists(
+			dockerfile_with_renv_heroku_output
+		)
+	)
+	unlink(
+		dummy_golem,
+		TRUE,
+		TRUE
+	)
 })
