@@ -26,61 +26,61 @@ test_that("add_dockerfile_with_renv_ works", {
 						output_dir = tempfile()
 					)
 
-          dockerfile_with_renv_output <- add_dockerfile_with_renv(
-            golem_wd = dummy_golem,
-            lockfile = "renv.lock.prod",
-            open = FALSE,
-            output_dir=tempfile()
-          )
-          dockerfile_with_renv_output_dev <- add_dockerfile_with_renv(
-            set_golem.app.prod = FALSE,
-            golem_wd = dummy_golem,
-            lockfile = "renv.lock.prod",
-            open = FALSE,
-            output_dir=tempfile()
-          )
-          dockerfile_with_renv_shinyproxy_output <- add_dockerfile_with_renv_shinyproxy(
-            golem_wd = dummy_golem,
-            lockfile = "renv.lock.prod",
-            open = FALSE,
-            output_dir=tempfile()
-          )
-          dockerfile_with_renv_heroku_output <- add_dockerfile_with_renv_heroku(
-            golem_wd = dummy_golem,
-            lockfile = "renv.lock.prod",
-            open = FALSE,
-            output_dir=tempfile()
-          )
-        }
-      )
-    }
-  )
-  expect_true(
-    inherits(
-      dockerfile_with_renv,
-      "Dockerfile"
-    )
-  )
-  expect_true(
-    file.exists(
-      dockerfile_with_renv_output
-    )
-  )
-  expect_true(
-    file.exists(
-      dockerfile_with_renv_output_dev
-    )
-  )
-  expect_true(
-    file.exists(
-      file.path(dirname(dockerfile_with_renv_output),"Dockerfile")
-    )
-  )
-  expect_true(
-    file.exists(
-      file.path(dirname(dockerfile_with_renv_output_dev),"Dockerfile")
-    )
-  )
+					dockerfile_with_renv_output <- add_dockerfile_with_renv(
+						golem_wd = dummy_golem,
+						lockfile = "renv.lock.prod",
+						open = FALSE,
+						output_dir = tempfile()
+					)
+					dockerfile_with_renv_output_dev <- add_dockerfile_with_renv(
+						set_golem.app.prod = FALSE,
+						golem_wd = dummy_golem,
+						lockfile = "renv.lock.prod",
+						open = FALSE,
+						output_dir = tempfile()
+					)
+					dockerfile_with_renv_shinyproxy_output <- add_dockerfile_with_renv_shinyproxy(
+						golem_wd = dummy_golem,
+						lockfile = "renv.lock.prod",
+						open = FALSE,
+						output_dir = tempfile()
+					)
+					dockerfile_with_renv_heroku_output <- add_dockerfile_with_renv_heroku(
+						golem_wd = dummy_golem,
+						lockfile = "renv.lock.prod",
+						open = FALSE,
+						output_dir = tempfile()
+					)
+				}
+			)
+		}
+	)
+	expect_true(
+		inherits(
+			dockerfile_with_renv,
+			"Dockerfile"
+		)
+	)
+	expect_true(
+		file.exists(
+			dockerfile_with_renv_output
+		)
+	)
+	expect_true(
+		file.exists(
+			dockerfile_with_renv_output_dev
+		)
+	)
+	expect_true(
+		file.exists(
+			file.path(dirname(dockerfile_with_renv_output), "Dockerfile")
+		)
+	)
+	expect_true(
+		file.exists(
+			file.path(dirname(dockerfile_with_renv_output_dev), "Dockerfile")
+		)
+	)
 
 	dock <- readLines(file.path(
 		dirname(dockerfile_with_renv_output),
