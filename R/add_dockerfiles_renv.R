@@ -325,36 +325,33 @@ docker build -f Dockerfile_base --progress=plain -t %s .
 docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
 # then go to 127.0.0.1:%s",
-    tolower(
-      paste0(
-        get_golem_name(
-          golem_wd = golem_wd
-        ),
-        "_base"
-      )
-    ),
-    tolower(paste0(
-      get_golem_name(
-        golem_wd = golem_wd
-      ),
-      ":latest"
-    )),
-    port,
-    port,
-    tolower(paste0(
-      get_golem_name(
-        golem_wd = golem_wd
-      ),
-      ":latest"
-    )),
-    port
-  )} else {
-
-
-
-
-    out <- sprintf(
-"# use cd to moove to the folder containing the Dockerfile
+			tolower(
+				paste0(
+					get_golem_name(
+						golem_wd = golem_wd
+					),
+					"_base"
+				)
+			),
+			tolower(paste0(
+				get_golem_name(
+					golem_wd = golem_wd
+				),
+				":latest"
+			)),
+			port,
+			port,
+			tolower(paste0(
+				get_golem_name(
+					golem_wd = golem_wd
+				),
+				":latest"
+			)),
+			port
+		)
+	} else {
+		out <- sprintf(
+			"# use cd to moove to the folder containing the Dockerfile
 docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
 # then go to 127.0.0.1:%s",
