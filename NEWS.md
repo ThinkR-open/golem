@@ -1,6 +1,5 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
-
 # golem 0.5.1 to 0.6.0
 
 
@@ -12,15 +11,18 @@
 
 ## Breaking change
 
-- /!\ Breaking change in the name of the arguments /!\ `{golem}` functions used to rely on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This has now been standardized and all functions rely on `golem_wd` now (@ilyaZar, #845)
+- The `get_current_config()` has been rework in two ways: (1) it nows either check the `GOLEM_CONFIG_PATH` env var or the default path (inst/golem-config.yml). `{golem}` no longer tries to guess non standard paths, and does a hard fail if the file doesn't exist, (2) the function no longer copy the `config` files from the skeleton if ever the files are not there (@ilyaZar, @LDSamson, #1178)
+
+- `{golem}` functions used to rely on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This has now been standardized and all functions rely on `golem_wd` now (@ilyaZar, #845)
 
 - Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
 
 - The `add_*_files` and `use_*_files` now fail when:
-  - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use_*_file functions should only be there to add file (Singe responsabily  )
+
+  - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use\_\*\_file functions should only be there to add file (Singe responsabily )
   - The file that the user tries to create already exists
 
-- Creating a golem with `create_golem(overwrite = TRUE)` will now __delete the old folder__ and replace with the golem skeleton.
+- Creating a golem with `create_golem(overwrite = TRUE)` will now **delete the old folder** and replace with the golem skeleton.
 
 ## User visible change
 
@@ -44,91 +46,91 @@
 
 # golem 0.5.1
 
-* Hotfixing a bug with utils_download_file (#1168)
+- Hotfixing a bug with utils_download_file (#1168)
 
 # golem 0.5.0
 
 ## New functions
 
-+ `is_golem()` tries to guess if the current folder is a `{golem}`-based app (#836)
+- `is_golem()` tries to guess if the current folder is a `{golem}`-based app (#836)
 
-+ `use_readme_rmd()` adds a `{golem}` specific `README.Rmd` (@ilyaZar, #1011)
+- `use_readme_rmd()` adds a `{golem}` specific `README.Rmd` (@ilyaZar, #1011)
 
-+ rename `add_rstudioconnect_file()` to `add_positconnect_file()` (@ilyaZar, #1017)
+- rename `add_rstudioconnect_file()` to `add_positconnect_file()` (@ilyaZar, #1017)
 
-+ `add_empty_file` creates an empty file in the www directory (#837)
+- `add_empty_file` creates an empty file in the www directory (#837)
 
-+ `add_r6()` adds an empty R6 file (@ilyaZar, #1009)
+- `add_r6()` adds an empty R6 file (@ilyaZar, #1009)
 
-+ `golem::welcome_page()` now display a page on default scaffold app (#1126)
+- `golem::welcome_page()` now display a page on default scaffold app (#1126)
 
-+ Defunct usethis functions has been removed from dev.R (@ilyaZar, #1125)
+- Defunct usethis functions has been removed from dev.R (@ilyaZar, #1125)
 
 ## New features / user visible changes
 
-+ sourcing `dev/01_start.R` leaves the file in a clean state with all files added to the initial commit (#1094, @ilyaZar)
+- sourcing `dev/01_start.R` leaves the file in a clean state with all files added to the initial commit (#1094, @ilyaZar)
 
-+ allow for user supplied `run_dev`-files (#886, @ilyaZar)
+- allow for user supplied `run_dev`-files (#886, @ilyaZar)
 
-+ `README` is re-styled and links to various external resources of the `golemverse` (#1064, @ilyaZar)
+- `README` is re-styled and links to various external resources of the `golemverse` (#1064, @ilyaZar)
 
-+ `a_start`-vignette has updated documentation (#1046, @ilyaZar)
+- `a_start`-vignette has updated documentation (#1046, @ilyaZar)
 
-+ `fill_desc()` automatically calls `set_options()`; see `dev/01_start.R` as well (#1040, @ilyaZar)
+- `fill_desc()` automatically calls `set_options()`; see `dev/01_start.R` as well (#1040, @ilyaZar)
 
-+ `fill_desc()` now uses a `person` vector (#1027, @jmeyer2482, @ColinFay and @ilyaZar)
+- `fill_desc()` now uses a `person` vector (#1027, @jmeyer2482, @ColinFay and @ilyaZar)
 
-+ `use_{internal,external}_XXX_file()` function family has improved error handling for non-interactive usage (#1062, @ilyaZar)
+- `use_{internal,external}_XXX_file()` function family has improved error handling for non-interactive usage (#1062, @ilyaZar)
 
-+ `add_fct()` now adds the skeleton for a function (#1004, @ilyaZar)
+- `add_fct()` now adds the skeleton for a function (#1004, @ilyaZar)
 
-+ The module skeleton now stick to tidyverse style (#1019, @ni2scmn)
+- The module skeleton now stick to tidyverse style (#1019, @ni2scmn)
 
-+ Better comments to `fill_desc()` in `01_start.R`  (#1021, @ilyaZar)
+- Better comments to `fill_desc()` in `01_start.R` (#1021, @ilyaZar)
 
-+ `01_start.R` now has a call to `usethis::use_git_remote()` (#1015, @ilyaZar)
+- `01_start.R` now has a call to `usethis::use_git_remote()` (#1015, @ilyaZar)
 
-+ Tests for `R/golem_utils_server.R` and `R/golem_utils_ui.R` now have full code coverage (#1020, @ilyaZar)
+- Tests for `R/golem_utils_server.R` and `R/golem_utils_ui.R` now have full code coverage (#1020, @ilyaZar)
 
-+ When setting a new name, `{golem}` now browses tests & vignettes (#805, @ilyaZar)
+- When setting a new name, `{golem}` now browses tests & vignettes (#805, @ilyaZar)
 
-+ Adding `writeManifest()` to `deploy.R` (#1063, @ilyaZar)
+- Adding `writeManifest()` to `deploy.R` (#1063, @ilyaZar)
 
-+ `use_git()` is now at the bottom of 01_dev.R ((#1094, @ilyaZar))
+- `use_git()` is now at the bottom of 01_dev.R ((#1094, @ilyaZar))
 
-+ `golem::add_dockerfile_with_renv_*()` set "rstudio" as default USER in Dockerfile to avoid launching app as root
+- `golem::add_dockerfile_with_renv_*()` set "rstudio" as default USER in Dockerfile to avoid launching app as root
 
-+ It is now easier to modify the renv.config.pak.enabled parameter in the Dockerfile generated by `golem::add_dockerfile_with_renv_*()` functions.
+- It is now easier to modify the renv.config.pak.enabled parameter in the Dockerfile generated by `golem::add_dockerfile_with_renv_*()` functions.
 
-+ We create an `.rscignore` in the golem dir whenever creating the connect related file (#110, @ilyaZar)
+- We create an `.rscignore` in the golem dir whenever creating the connect related file (#110, @ilyaZar)
 
 ## Bug fixes
 
-+ `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)
+- `use_{internal,external}_XXX_file()` function family works with default missing `name` argument (#1060, @ilyaZar)
 
-+ `run_dev()` now install needed dependencies to source `dev/run_dev.R` if needed (#942, @ilyaZar, @vincentGuyader)
+- `run_dev()` now install needed dependencies to source `dev/run_dev.R` if needed (#942, @ilyaZar, @vincentGuyader)
 
-+ `use_readme_rmd()` does not pop up when argument `open=FALSE` is set (#1044, @ilyaZar)
+- `use_readme_rmd()` does not pop up when argument `open=FALSE` is set (#1044, @ilyaZar)
 
-+ Docker commands now take the `-it` flag so it can be killed with `^C` (#1002, @ivokwee)
+- Docker commands now take the `-it` flag so it can be killed with `^C` (#1002, @ivokwee)
 
-+ `add_module()` now behaves correctly when trying to use `mod_mod_XXX` and no longer opens an interactive menu (#997, @ilyaZar)
+- `add_module()` now behaves correctly when trying to use `mod_mod_XXX` and no longer opens an interactive menu (#997, @ilyaZar)
 
-+ `{attachment}` now has a minimum version requirement (#1104, @ilyaZar)
+- `{attachment}` now has a minimum version requirement (#1104, @ilyaZar)
 
-+ `{pkgload}` now has a minimum version requirement (#1106)
+- `{pkgload}` now has a minimum version requirement (#1106)
 
-+ `create_golem()` can be now used with path = "." and package_name empty
+- `create_golem()` can be now used with path = "." and package_name empty
 
 ## Internal changes
 
-+ Add tests for (under/un)-tested files and functions and improve code coverage of `{golem}` (#1043, #1050, #1059, #1066, #1075, @ilyaZar)
+- Add tests for (under/un)-tested files and functions and improve code coverage of `{golem}` (#1043, #1050, #1059, #1066, #1075, @ilyaZar)
 
-+ `guess_where_config()` now finds the user config-yaml by reading its new location from user changes in "R/app_config.R" (#887, @ilyaZar)
+- `guess_where_config()` now finds the user config-yaml by reading its new location from user changes in "R/app_config.R" (#887, @ilyaZar)
 
-+ All functions that require to get a path now rely on `get_golem_wd()` (#1016, @ilyaZar)
+- All functions that require to get a path now rely on `get_golem_wd()` (#1016, @ilyaZar)
 
-+ The test suite has been refactored and is now silent and faster.
+- The test suite has been refactored and is now silent and faster.
 
 # 0.4.1
 
@@ -166,7 +168,7 @@ This is an intermediate release after CRAN feedback.
 
 ## Internal changes
 
-+ `add_dockerfile_with_renv` now works well with uppercase in package name
+- `add_dockerfile_with_renv` now works well with uppercase in package name
 
 # golem 0.3.5
 

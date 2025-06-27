@@ -10,21 +10,27 @@
 #'
 #' @return Used for side effects.
 add_resource_path <- function(
-  prefix,
-  directoryPath,
-  warn_empty = FALSE
+	prefix,
+	directoryPath,
+	warn_empty = FALSE
 ) {
-  list_f <- length(
-    list.files(
-      path = directoryPath
-    )
-  ) == 0
+	list_f <- length(
+		list.files(
+			path = directoryPath
+		)
+	) ==
+		0
 
-  if (list_f) {
-    if (warn_empty) {
-      warning("No resources to add from resource path (directory empty).")
-    }
-  } else {
-    addResourcePath(prefix, directoryPath)
-  }
+	if (list_f) {
+		if (warn_empty) {
+			warning(
+				"No resources to add from resource path (directory empty)."
+			)
+		}
+	} else {
+		addResourcePath(
+			prefix,
+			directoryPath
+		)
+	}
 }

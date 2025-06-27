@@ -10,5 +10,5 @@
 #' @examples
 #' is_running()
 is_running <- function() {
-  .golem_globals$running
+	.golem_globals$running
 }

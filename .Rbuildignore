@@ -27,3 +27,6 @@ README.html
 ^dev$
 ^pkgdown$
 ^\.pre-commit-config\.yaml$
+^[\.]?air\.toml$
+^\.vscode$
+^\.lintr$
