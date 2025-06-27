@@ -28,6 +28,7 @@ add_dockerfile_with_renv_ <- function(
 
   check_dockerfiler_installed()
 
+
   if (is.null(lockfile)) {
     rlang::check_installed(
       c("renv", "attachment"),
@@ -159,7 +160,7 @@ add_dockerfile_with_renv_ <- function(
     from =
       paste0(
         get_golem_name(
-          pkg = source_folder
+          golem_wd = golem_wd
         ),
         "_*.tar.gz"
       ),
@@ -313,7 +314,7 @@ add_dockerfile_with_renv <- function(
   }
   if (is.null(dockerfile_cmd)) {
     dockerfile_cmd <- sprintf(
-      "R -e \"options('shiny.port'=%s,shiny.host='%s',golem.app.prod=%s);library(%3$s);%3$s::run_app()\"",
+      "R -e \"options('shiny.port'=%s,shiny.host='%s',golem.app.prod=%s);library(%4$s);%4$s::run_app()\"",
       port,
       host,
       set_golem.app.prod,
@@ -372,7 +373,7 @@ docker run -p %s:%s %s
 # then go to 127.0.0.1:%s",
       tolower(paste0(
         get_golem_name(
-          pkg = source_folder
+          golem_wd = golem_wd
         ),
         ":latest"
       )),
@@ -380,7 +381,7 @@ docker run -p %s:%s %s
       port,
       tolower(paste0(
         get_golem_name(
-          pkg = source_folder
+          golem_wd = golem_wd
         ),
         ":latest"
       )),
