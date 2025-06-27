@@ -270,56 +270,57 @@ add_dockerfile_with_renv <- function(
 	...,
 	source_folder
 ) {
-  signal_arg_is_deprecated(
-    source_folder,
-    fun = as.character(sys.call()[[1]]),
-    "source_folder"
-  )
+	signal_arg_is_deprecated(
+		source_folder,
+		fun = as.character(sys.call()[[1]]),
+		"source_folder"
+	)
 
-  base_dock <- add_dockerfile_with_renv_(
-    golem_wd = golem_wd,
-    lockfile = lockfile,
-    output_dir = output_dir,
-    distro = distro,
-    FROM = from,
-    AS = as,
-    sysreqs = sysreqs,
-    repos = repos,
-    expand = expand,
-    extra_sysreqs = extra_sysreqs,
-    update_tar_gz = update_tar_gz,
-    document = document,
-    single_file = single_file,
-    ...
-  )
-  if (!is.null(port)) {
-    base_dock$EXPOSE(port)
-  }
-  if (!is.null(user)) {
-    base_dock$USER(user)
-  }
-  if (is.null(dockerfile_cmd)) {
-    dockerfile_cmd <- sprintf(
-      "R -e \"options('shiny.port'=%s,shiny.host='%s',golem.app.prod=%s);library(%4$s);%4$s::run_app()\"",
-      port,
-      host,
-      set_golem.app.prod,
-      get_golem_name(
-        golem_wd = golem_wd
-      )
-    )
-  }
-  base_dock$CMD(
-    dockerfile_cmd
-  )
-  base_dock
-  base_dock$write(as = file.path(output_dir, "Dockerfile"),
-                  append = single_file)
+	base_dock <- add_dockerfile_with_renv_(
+		golem_wd = golem_wd,
+		lockfile = lockfile,
+		output_dir = output_dir,
+		distro = distro,
+		FROM = from,
+		AS = as,
+		sysreqs = sysreqs,
+		repos = repos,
+		expand = expand,
+		extra_sysreqs = extra_sysreqs,
+		update_tar_gz = update_tar_gz,
+		document = document,
+		single_file = single_file,
+		...
+	)
+	if (!is.null(port)) {
+		base_dock$EXPOSE(port)
+	}
+	if (!is.null(user)) {
+		base_dock$USER(user)
+	}
+	if (is.null(dockerfile_cmd)) {
+		dockerfile_cmd <- sprintf(
+			"R -e \"options('shiny.port'=%s,shiny.host='%s',golem.app.prod=%s);library(%4$s);%4$s::run_app()\"",
+			port,
+			host,
+			set_golem.app.prod,
+			get_golem_name(
+				golem_wd = golem_wd
+			)
+		)
+	}
+	base_dock$CMD(
+		dockerfile_cmd
+	)
+	base_dock
+	base_dock$write(
+		as = file.path(output_dir, "Dockerfile"),
+		append = single_file
+	)
 
-
-  if (!single_file){
-  out <- sprintf(
-"# use cd to move to the folder containing the Dockerfile
+	if (!single_file) {
+		out <- sprintf(
+			"# use cd to move to the folder containing the Dockerfile
 docker build -f Dockerfile_base --progress=plain -t %s .
 docker build -f Dockerfile --progress=plain -t %s .
 docker run -p %s:%s %s
