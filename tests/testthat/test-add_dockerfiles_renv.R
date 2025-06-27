@@ -82,7 +82,10 @@ test_that("add_dockerfile_with_renv_ works", {
     )
   )
 
-dock <- readLines(file.path(dirname(dockerfile_with_renv_output),"Dockerfile"))
+	dock <- readLines(file.path(
+		dirname(dockerfile_with_renv_output),
+		"Dockerfile"
+	))
 
   expect_true(
     any(grepl("library\\(shinyexample\\)",dock))
