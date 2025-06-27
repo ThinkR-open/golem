@@ -405,39 +405,39 @@ add_dockerfile_with_renv_shinyproxy <- function(
   ...,
   source_folder
 ) {
-  signal_arg_is_deprecated(
-    source_folder,
-    fun = as.character(sys.call()[[1]]),
-    "source_folder"
-  )
+	signal_arg_is_deprecated(
+		source_folder,
+		fun = as.character(sys.call()[[1]]),
+		"source_folder"
+	)
 
-  add_dockerfile_with_renv(
-    golem_wd = golem_wd,
-    lockfile = lockfile,
-    output_dir = output_dir,
-    distro = distro,
-    from = from,
-    as = as,
-    sysreqs = sysreqs,
-    repos = repos,
-    expand = expand,
-    port = 3838,
-    host = "0.0.0.0",
-    extra_sysreqs = extra_sysreqs,
-    update_tar_gz = update_tar_gz,
-    open = open,
-    document = document,
-    user = user,
-    single_file = single_file,
-    set_golem.app.prod = set_golem.app.prod,
-    dockerfile_cmd = sprintf(
-      "R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
-      get_golem_name(
-        golem_wd = golem_wd
-      )
-    ),
-    ...
-  )
+	add_dockerfile_with_renv(
+		golem_wd = golem_wd,
+		lockfile = lockfile,
+		output_dir = output_dir,
+		distro = distro,
+		from = from,
+		as = as,
+		sysreqs = sysreqs,
+		repos = repos,
+		expand = expand,
+		port = 3838,
+		host = "0.0.0.0",
+		extra_sysreqs = extra_sysreqs,
+		update_tar_gz = update_tar_gz,
+		open = open,
+		document = document,
+		user = user,
+		single_file = single_file,
+		set_golem.app.prod = set_golem.app.prod,
+		dockerfile_cmd = sprintf(
+			"R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
+			get_golem_name(
+				golem_wd = golem_wd
+			)
+		),
+		...
+	)
 }
 
 #' @inheritParams add_dockerfile_with_renv
