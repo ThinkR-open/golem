@@ -467,112 +467,112 @@ add_dockerfile_with_renv_heroku <- function(
   ...,
   source_folder
 ) {
-  signal_arg_is_deprecated(
-    source_folder,
-    fun = as.character(sys.call()[[1]]),
-    "source_folder"
-  )
+	signal_arg_is_deprecated(
+		source_folder,
+		fun = as.character(sys.call()[[1]]),
+		"source_folder"
+	)
 
-  add_dockerfile_with_renv(
-    golem_wd = golem_wd,
-    lockfile = lockfile,
-    output_dir = output_dir,
-    distro = distro,
-    from = from,
-    as = as,
-    sysreqs = sysreqs,
-    repos = repos,
-    expand = expand,
-    port = NULL,
-    host = "0.0.0.0",
-    extra_sysreqs = extra_sysreqs,
-    update_tar_gz = update_tar_gz,
-    open = FALSE,
-    document = document,
-    user = user,
-    single_file = single_file,
-    set_golem.app.prod = set_golem.app.prod,
-    dockerfile_cmd = sprintf(
-      "R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
-      get_golem_name(
-        golem_wd = golem_wd
-      )
-    ),
-    ...
-  )
+	add_dockerfile_with_renv(
+		golem_wd = golem_wd,
+		lockfile = lockfile,
+		output_dir = output_dir,
+		distro = distro,
+		from = from,
+		as = as,
+		sysreqs = sysreqs,
+		repos = repos,
+		expand = expand,
+		port = NULL,
+		host = "0.0.0.0",
+		extra_sysreqs = extra_sysreqs,
+		update_tar_gz = update_tar_gz,
+		open = FALSE,
+		document = document,
+		user = user,
+		single_file = single_file,
+		set_golem.app.prod = set_golem.app.prod,
+		dockerfile_cmd = sprintf(
+			"R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
+			get_golem_name(
+				golem_wd = golem_wd
+			)
+		),
+		...
+	)
 
-  apps_h <- gsub(
-    "\\.",
-    "-",
-    sprintf(
-      "%s-%s",
-      get_golem_name(
-        golem_wd = golem_wd
-      ),
-      get_golem_version(
-        golem_wd = golem_wd
-      )
-    )
-  )
+	apps_h <- gsub(
+		"\\.",
+		"-",
+		sprintf(
+			"%s-%s",
+			get_golem_name(
+				golem_wd = golem_wd
+			),
+			get_golem_version(
+				golem_wd = golem_wd
+			)
+		)
+	)
 
-  readme_output <- fs_path(
-    output_dir,
-    "README"
-  )
+	readme_output <- fs_path(
+		output_dir,
+		"README"
+	)
 
-  write_there <- write_there_builder(readme_output)
+	write_there <- write_there_builder(readme_output)
 
-  write_there("From your command line, run:\n")
+	write_there("From your command line, run:\n")
 
-  write_there(
-    sprintf(
-      "docker build -f Dockerfile_base --progress=plain -t %s .",
-      paste0(
-        get_golem_name(
-          golem_wd = golem_wd
-        ),
-        "_base"
-      )
-    )
-  )
+	write_there(
+		sprintf(
+			"docker build -f Dockerfile_base --progress=plain -t %s .",
+			paste0(
+				get_golem_name(
+					golem_wd = golem_wd
+				),
+				"_base"
+			)
+		)
+	)
 
-  write_there(
-    sprintf(
-      "docker build -f Dockerfile --progress=plain -t %s .\n",
-      paste0(
-        get_golem_name(
-          golem_wd = golem_wd
-        ),
-        ":latest"
-      )
-    )
-  )
+	write_there(
+		sprintf(
+			"docker build -f Dockerfile --progress=plain -t %s .\n",
+			paste0(
+				get_golem_name(
+					golem_wd = golem_wd
+				),
+				":latest"
+			)
+		)
+	)
 
-  write_there("Then, to push on heroku:\n")
+	write_there("Then, to push on heroku:\n")
 
-  write_there("heroku container:login")
-  write_there(
-    sprintf("heroku create %s", apps_h)
-  )
-  write_there(
-    sprintf("heroku container:push web --app %s", apps_h)
-  )
-  write_there(
-    sprintf("heroku container:release web --app %s", apps_h)
-  )
-  write_there(
-    sprintf("heroku open --app %s\n", apps_h)
-  )
-  write_there("> Be sure to have the heroku CLI installed.")
+	write_there("heroku container:login")
+	write_there(
+		sprintf("heroku create %s", apps_h)
+	)
+	write_there(
+		sprintf("heroku container:push web --app %s", apps_h)
+	)
+	write_there(
+		sprintf("heroku container:release web --app %s", apps_h)
+	)
+	write_there(
+		sprintf("heroku open --app %s\n", apps_h)
+	)
+	write_there("> Be sure to have the heroku CLI installed.")
 
-  write_there(
-    sprintf("> You can replace %s with another app name.", apps_h)
-  )
+	write_there(
+		sprintf("> You can replace %s with another app name.", apps_h)
+	)
 
-  # The open is deported here just to be sure
-  # That we open the README once it has been populated
-  open_or_go_to(
-    where = readme_output,
-    open_file = open
-  )
+	# The open is deported here just to be sure
+	# That we open the README once it has been populated
+	open_or_go_to(
+		where = readme_output,
+		open_file = open
+	)
 }
