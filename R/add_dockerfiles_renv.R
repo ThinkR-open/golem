@@ -1,24 +1,24 @@
 add_dockerfile_with_renv_ <- function(
-  golem_wd = get_golem_wd(),
-  lockfile = NULL,
-  output_dir = fs::path(
-    tempdir(),
-    "deploy"
-  ),
-  distro = "focal",
-  FROM = "rocker/verse",
-  AS = "builder",
-  sysreqs = TRUE,
-  repos = c(
-    CRAN = "https://cran.rstudio.com/"
-  ),
-  expand = FALSE,
-  extra_sysreqs = NULL,
-  update_tar_gz = TRUE,
-  document = FALSE,
-  single_file = FALSE,
-  ...,
-  source_folder
+	golem_wd = get_golem_wd(),
+	lockfile = NULL,
+	output_dir = fs::path(
+		tempdir(),
+		"deploy"
+	),
+	distro = "focal",
+	FROM = "rocker/verse",
+	AS = "builder",
+	sysreqs = TRUE,
+	repos = c(
+		CRAN = "https://cran.rstudio.com/"
+	),
+	expand = FALSE,
+	extra_sysreqs = NULL,
+	update_tar_gz = TRUE,
+	document = FALSE,
+	single_file = FALSE,
+	...,
+	source_folder
 ) {
   signal_arg_is_deprecated(
     source_folder,
