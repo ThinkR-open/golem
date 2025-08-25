@@ -18,9 +18,9 @@ add_r_files <- function(
 		),
 		"pkg"
 	)
-	name <- file_path_sans_ext(
+	name <- sanitize_r_name(file_path_sans_ext(
 		name
-	)
+	))
 
 	check_name_length_is_one(
 		name

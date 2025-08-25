@@ -331,6 +331,22 @@ check_name_length_is_one <- function(
 	)
 }
 
+# Convert filename to lowercase and replace space/special with underscores
+# Similar to janitor::make_clean_names() but without the dependency
+sanitize_r_name <- function(name) {
+	name <- tolower(name)
+	name <- gsub("[^a-z0-9_]", "_", name)
+	name <- gsub("^_+|_+$", "", name)
+	name <- gsub("_+", "_", name)
+	if (grepl("^[0-9]", name)) {
+		name <- paste0("x", name)
+	}
+	if (name == "" || is.na(name)) {
+		name <- "unnamed"
+	}
+	name
+}
+
 do_if_unquiet <- function(
 	expr
 ) {
