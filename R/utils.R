@@ -341,9 +341,7 @@ sanitize_r_name <- function(name) {
 	if (grepl("^[0-9]", name)) {
 		name <- paste0("x", name)
 	}
-	if (name == "" || is.na(name)) {
-		name <- "unnamed"
-	}
+	if (name == "" || is.na(name)) name <- ""
 	name
 }
 
