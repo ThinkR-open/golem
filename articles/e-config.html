@@ -75,6 +75,30 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://thinkr-open.github.io/golem/">golem</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
+<h2 id="two-ways-to-manage-production-vs-development-mode">Two Ways to Manage Production vs Development Mode<a class="anchor" aria-label="anchor" href="#two-ways-to-manage-production-vs-development-mode"></a>
+</h2>
+<p><a href="https://thinkr-open.github.io/golem/">golem</a> provides two separate mechanisms for managing
+production and development modes in your Shiny applications:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>R Options Approach</strong>: Using
+<code>options(golem.app.prod = TRUE/FALSE)</code> which is checked by
+<code><a href="../reference/prod.html">app_prod()</a></code> and <code><a href="../reference/prod.html">app_dev()</a></code> functions. This
+approach controls the behavior of <a href="https://thinkr-open.github.io/golem/">golem</a>’s
+development-aware utility functions like <code><a href="../reference/made_dev.html">cat_dev()</a></code>,
+<code><a href="../reference/made_dev.html">print_dev()</a></code>, <code><a href="../reference/made_dev.html">message_dev()</a></code>, and similar
+tools.</p></li>
+<li><p><strong>Configuration File Approach</strong>: Using the
+<code>golem-config.yml</code> file to store configuration values
+(including an <code>app_prod</code> setting) that can be retrieved in
+your application code using <code>get_golem_config()</code>.</p></li>
+</ol>
+<p><strong>Important</strong>: These two mechanisms are independent and
+serve different purposes. The R option controls <a href="https://thinkr-open.github.io/golem/">golem</a>’s
+built-in development tools, while the config file provides a flexible
+way to store and retrieve application-specific settings. This vignette
+focuses on the configuration file approach.</p>
+</div>
+<div class="section level2">
 <h2 id="about-instgolem-config-yml">About <code>inst/golem-config.yml</code><a class="anchor" aria-label="anchor" href="#about-instgolem-config-yml"></a>
 </h2>
 <p>When you start a new <a href="https://thinkr-open.github.io/golem/">golem</a> application, you’ll find a
@@ -102,11 +126,11 @@ production:
 dev:
   golem_wd: !expr golem::pkg_path()</code></pre>
 <ul>
-<li>default/golem_name, default/golem_version, default/app_prod are
-usable across the whole life of your golem app: while developing, and
-also when in production.</li>
-<li>production/app_prod might be used for adding elements that are to be
-used once the app is in production.</li>
+<li>default/golem_name, default/golem_version, default/app_prod can be
+used across the whole life of your <a href="https://thinkr-open.github.io/golem/">golem</a> app: while
+developing, and also when in production.</li>
+<li>production/app_prod can be used to add elements that are to be used
+once the app is in production.</li>
 <li>dev/golem_wd is in a <code>dev</code> config because the only moment
 you might reliably use this config is while developing your app. Use the
 <code>app_sys()</code> function if you want to rely on the package path
@@ -126,7 +150,7 @@ functions</strong>.</p>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `golem_version` to 0.0.0.9000</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting `app_prod` to FALSE</span></span>
 <span><span class="co">#&gt; ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">"/tmp/RtmpmkgxOP/golex"</span>.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Setting active project to <span style="color: #0000BB;">"/tmp/RtmprQiRok/golex"</span>.</span></span></code></pre></div>
 <pre><code>default:
   golem_name: golex
   golem_version: 0.0.0.9000
@@ -140,7 +164,7 @@ dev:
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/golem_opts.html">get_golem_name</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "golex"</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">get_golem_wd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/tmp/RtmpmkgxOP/golex"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmprQiRok/golex"</span></span>
 <span><span class="fu"><a href="../reference/golem_opts.html">get_golem_version</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "0.0.0.9000"</span></span></code></pre></div>
 <p>You can set these with:</p>
@@ -217,24 +241,99 @@ config from this config file:</p>
 <h2 id="golem_config-vs-golem_options">
 <code>golem_config</code> vs <code>golem_options</code><a class="anchor" aria-label="anchor" href="#golem_config-vs-golem_options"></a>
 </h2>
-<p>There is two ways to configure golem apps:</p>
+<p>There are two ways to configure golem apps:</p>
 <ul>
 <li>The <code>golem_opts</code> in the <code>run_app()</code>
 function</li>
 <li>The <code>golem-config.yml</code> file</li>
 </ul>
-<p>The big difference between these two is that the golem options from
-<code>run_app()</code> are meant to be configured during runtime: you’ll
-be doing <code>run_app(val = "this")</code>, whereas the
-<code>golem-config</code> is meant to be used in the back-end, and will
+<p>The main difference between these two is that the
+<a href="https://thinkr-open.github.io/golem/">golem</a> options from <code>run_app()</code> are meant to be
+configured during runtime: you’ll be doing
+<code>run_app(val = "this")</code>, whereas the
+<code>golem-config</code> is meant to be used in the backend, and will
 not be linked to the parameters passed to <code>run_app()</code> (even
-if this is technically possible, this is not the main objective),.</p>
-<p>It’s also linked to the <code>R_CONFIG_ACTIVE</code> environment
-variable, just as any <a href="https://rstudio.github.io/config/" class="external-link">config</a> file.</p>
-<p>The idea is also that the <code>golem-config.yml</code> file is
-shareable across <a href="https://thinkr-open.github.io/golem/">golem</a> projects (<code>golem_opts</code>
+if this is technically possible, this is not the main objective).</p>
+<p>The <code>golem-config.yml</code> file is also linked to the
+<code>R_CONFIG_ACTIVE</code> environment variable, just as any
+<a href="https://rstudio.github.io/config/" class="external-link">config</a> file.</p>
+<p>Additionally, the <code>golem-config.yml</code> file is shareable
+across <a href="https://thinkr-open.github.io/golem/">golem</a> projects (whereas <code>golem_opts</code>
 are application specific), and will be tracked by version control
 systems.</p>
+</div>
+<div class="section level2">
+<h2 id="connecting-back-to-the-r-options-approach">Connecting Back to the R Options Approach<a class="anchor" aria-label="anchor" href="#connecting-back-to-the-r-options-approach"></a>
+</h2>
+<p>As mentioned at the beginning of this vignette, <a href="https://thinkr-open.github.io/golem/">golem</a>
+uses two separate mechanisms for production/development configuration.
+While this vignette has focused on the <code>golem-config.yml</code>
+file, it’s important to understand how this relates to the R options
+approach.</p>
+<div class="section level3">
+<h3 id="the-r-options-mechanism">The R Options Mechanism<a class="anchor" aria-label="anchor" href="#the-r-options-mechanism"></a>
+</h3>
+<p>The R option <code>options(golem.app.prod)</code> is used by
+<a href="https://thinkr-open.github.io/golem/">golem</a>’s development-aware functions:</p>
+<ul>
+<li>
+<code><a href="../reference/prod.html">app_prod()</a></code> - Returns <code>TRUE</code> if the app is in
+production mode</li>
+<li>
+<code><a href="../reference/prod.html">app_dev()</a></code> - Returns <code>TRUE</code> if the app is in
+development mode</li>
+<li>Development-only output functions: <code><a href="../reference/made_dev.html">cat_dev()</a></code>,
+<code><a href="../reference/made_dev.html">print_dev()</a></code>, <code><a href="../reference/made_dev.html">message_dev()</a></code>,
+<code><a href="../reference/made_dev.html">warning_dev()</a></code>, <code><a href="../reference/made_dev.html">browser_dev()</a></code>
+</li>
+</ul>
+<p>These functions check <code>getOption("golem.app.prod")</code>
+directly and do not read from the config file.</p>
+</div>
+<div class="section level3">
+<h3 id="important-the-two-mechanisms-are-independent">Important: The Two Mechanisms Are Independent<a class="anchor" aria-label="anchor" href="#important-the-two-mechanisms-are-independent"></a>
+</h3>
+<p>The <code>app_prod</code> value in <code>golem-config.yml</code> and
+the <code>options(golem.app.prod)</code> R option are <strong>not
+automatically synchronized</strong>. They serve different purposes:</p>
+<ul>
+<li><p><strong>Config file <code>app_prod</code></strong>: A persistent
+configuration value that you can retrieve using
+<code>get_golem_config("app_prod")</code> to use in your own application
+logic. This value can vary by environment (default, production, dev)
+using the <code>R_CONFIG_ACTIVE</code> environment variable.</p></li>
+<li><p><strong>R option <code>golem.app.prod</code></strong>: A
+session-level setting that controls <a href="https://thinkr-open.github.io/golem/">golem</a>’s built-in
+development tools. This must be explicitly set in your code or launch
+configuration (e.g., in Docker CMD or <code>run_dev.R</code>).</p></li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="best-practices">Best Practices<a class="anchor" aria-label="anchor" href="#best-practices"></a>
+</h3>
+<ul>
+<li><p><strong>Set the R option explicitly</strong>: When deploying to
+production, ensure you set <code>options(golem.app.prod = TRUE)</code>
+in your app’s launch script or Docker configuration. The
+<a href="https://thinkr-open.github.io/golem/">golem</a> Dockerfile templates handle this
+automatically.</p></li>
+<li><p><strong>Use the config file for your app’s logic</strong>: If you
+need environment-specific configuration in your application code (e.g.,
+different API endpoints for dev vs production), use
+<code>get_golem_config()</code> to retrieve values from
+<code>golem-config.yml</code>.</p></li>
+<li><p><strong>Keep them in sync if needed</strong>: If you want the
+config file’s <code>app_prod</code> setting to match your R option,
+you’ll need to manage this synchronization in your own code. For
+example, in your <code>run_app()</code> function, you could set the
+option based on the config value:</p></li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Example: sync config to R option (optional)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu">get_golem_config</span><span class="op">(</span><span class="st">"app_prod"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>golem.app.prod <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 id="note-for-golem-0-2-0-users">Note for <code>{golem}</code> &lt; 0.2.0 users<a class="anchor" aria-label="anchor" href="#note-for-golem-0-2-0-users"></a>
