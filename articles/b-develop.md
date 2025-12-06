@@ -1,0 +1,200 @@
+# 02. Day to day development
+
+## Day to day development with `{golem}`
+
+Now that you’re all set with your project init, time to move to
+development!
+
+App development should happen through the `dev/02_dev.R` file, which
+contains common commands for developing.
+
+## Launching the app
+
+To run the app, go to the `dev/run_dev.R` file, and run the all thing.
+
+## `dev/02_dev.R`
+
+### Add dependencies
+
+You can use
+[`attachment::att_amend_desc()`](https://thinkr-open.github.io/attachment/reference/att_amend_desc.html)
+to parse the code in your `.R` files, detect `@import` `@importFrom` and
+`::`, and fill your `DESCRIPTION` accordingly.
+
+Note that the [attachment](https://thinkr-open.github.io/attachment/)
+package should be installed on your machine.
+
+``` r
+attachment::att_amend_desc()
+```
+
+About [package
+dependencies](https://r-pkgs.org/dependencies-mindset-background.html).
+
+### Add modules
+
+The
+[`golem::add_module()`](https://thinkr-open.github.io/golem/reference/add_module.md)
+functions creates a module in the `R` folder. The file and the modules
+will be named after the `name` parameter, by adding `mod_` to the R
+file, and `mod_*_ui` and `mod_*_server` to the UI and server functions.
+
+``` r
+golem::add_module(name = "my_first_module") # Name of the module
+```
+
+The new file will contain:
+
+``` r
+# mod_UI
+mod_my_first_module_ui <- function(id) {
+  ns <- NS(id)
+  tagList()
+}
+
+mod_my_first_module_server <- function(input, output, session) {
+  ns <- session$ns
+}
+
+## To be copied in the UI
+# mod_my_first_module_ui("my_first_module_1")
+
+## To be copied in the server
+# callModule(mod_my_first_module_server, "my_first_module_1")
+```
+
+At the end of the file, you will find a piece of code that has to be
+copied and pasted inside your UI and server functions.
+
+## Add function files
+
+``` r
+golem::add_fct("helpers")
+golem::add_utils("helpers")
+```
+
+These two function create `R/fct_helpers.R` and `R/utils_helpers.R`, two
+file you can use to add business logic functions.
+
+### Add external files
+
+These functions create external dependencies (JavaScript, CSS and Sass).
+[`add_js_file()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+creates a simple JavaScript file, while
+[`add_js_handler()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+adds a file with a skeleton for shiny custom handlers.
+
+``` r
+golem::add_js_file("script")
+golem::add_js_handler("script")
+golem::add_css_file("custom")
+golem::add_sass_file("custom")
+```
+
+Note: While the general philosophy of
+[golem](https://thinkr-open.github.io/golem/) is being based on the idea
+that you’re building a package, these functions can be used outside of a
+[golem](https://thinkr-open.github.io/golem/) project.
+
+Note that you can also download external CSS and JavaScript files with:
+
+``` r
+golem::use_external_css_file(url = "url", name = "your_provided_name")
+golem::use_external_js_file(url = "url", name = "your_provided_name")
+```
+
+The above has the effect of downloading the file at the specified url
+and giving it a provided name. If the intent is to use a CDN hosted
+CSS/JS file then manually add the tag -
+`tags$script(src = "source_of_ur_css/js")` in the function
+`golem_add_external_resources` in file `app-ui.R`. The tag can be added
+inside the `tags$head(...)` if the intent is to load the js/css file in
+the `<head>` of the document or outside it if it is intended in the
+`<body>`.
+
+### Adding these external resources to your app
+
+You can add any external resource into `inst/app/www`.
+
+JavaScript and CSS are automatically linked in the
+`golem_add_external_resources()` function. If you add other resources
+(example images), you can link them in the app with the `www` prefix:
+
+``` r
+tags$img(src = "www/my.png")
+```
+
+You can also list here the use of other packages, for example
+`useShinyalert()` from the
+[shinyalert](https://github.com/daattali/shinyalert) package.
+
+### Add a data-raw folder
+
+If you have data in your package:
+
+``` r
+usethis::use_data_raw()
+```
+
+About [data in a package](https://r-pkgs.org/data.html).
+
+### Add tests
+
+Add more tests to your application:
+
+``` r
+usethis::use_test("app")
+```
+
+About [testing a package](https://r-pkgs.org/testing-basics.html).
+
+## Documentation
+
+### Vignette
+
+``` r
+usethis::use_vignette("shinyexample")
+devtools::build_vignettes()
+```
+
+About [package Vignette](https://r-pkgs.org/vignettes.html).
+
+### Code coverage
+
+``` r
+usethis::use_coverage()
+```
+
+## Using `{golem}` dev functions
+
+There’s a series of tools to make your app behave differently whether
+it’s in dev or prod mode. Notably, the
+[`app_prod()`](https://thinkr-open.github.io/golem/reference/prod.md)
+and [`app_dev()`](https://thinkr-open.github.io/golem/reference/prod.md)
+function tests for `options( "golem.app.prod")` (or return TRUE if this
+option doesn’t exist).
+
+Setting this options at the beginning of your dev process allows to make
+your app behave in a specific way when you are in dev mode. For example,
+printing message to the console with
+[`cat_dev()`](https://thinkr-open.github.io/golem/reference/made_dev.md).
+
+``` r
+options("golem.app.prod" = TRUE)
+golem::cat_dev("hey\n")
+options("golem.app.prod" = FALSE)
+golem::cat_dev("hey\n")
+#> hey
+```
+
+You can then make any function being “dev-dependent” with the
+[`make_dev()`](https://thinkr-open.github.io/golem/reference/make_dev.md)
+function:
+
+``` r
+log_dev <- golem::make_dev(log)
+log_dev(10)
+#> [1] 2.302585
+options("golem.app.prod" = TRUE)
+log_dev(10)
+```

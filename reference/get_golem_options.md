@@ -1,0 +1,69 @@
+# Get all or one golem options
+
+This function is to be used inside the server and UI from your app, in
+order to call the parameters passed to `run_app()`.
+
+## Usage
+
+``` r
+get_golem_options(which = NULL)
+```
+
+## Arguments
+
+- which:
+
+  NULL (default), or the name of an option
+
+## Value
+
+The value of the option.
+
+## Examples
+
+``` r
+# Define and use golem_options
+if (interactive()) {
+  # 1. Pass parameters directly to `run_app`
+
+  run_app(
+    title = "My Golem App",
+    content = "something"
+  )
+
+  # 2. Get the values
+  # 2.1 from the UI side
+
+  h1(get_golem_options("title"))
+
+  # 2.2 from the server-side
+
+  output$param <- renderPrint({
+    paste("param content = ", get_golem_options("content"))
+  })
+
+  output$param_full <- renderPrint({
+    get_golem_options() # list of all golem options as a list.
+  })
+
+  # 3. If needed, to set default value, edit `run_app` like this :
+
+  run_app <- function(
+  title = "this",
+  content = "that",
+  ...
+  ) {
+    with_golem_options(
+      app = shinyApp(
+        ui = app_ui,
+        server = app_server
+      ),
+      golem_opts = list(
+        title = title,
+        content = content,
+        ...
+      )
+    )
+  }
+}
+```

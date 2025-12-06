@@ -1,0 +1,416 @@
+# {golem} ![](https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png)
+
+> You’re reading the doc about version: 0.5.1.9011. Note that
+> [golem](https://thinkr-open.github.io/golem/) follows the [semantic
+> versioning](https://semver.org/) scheme.
+
+Production-grade [shiny](https://shiny.posit.co/) applications, from
+creation to deployment.
+
+[golem](https://thinkr-open.github.io/golem/) is an opinionated
+framework that sets the standard for building production-grade
+[shiny](https://shiny.posit.co/) applications. It provides a structured
+environment that enforces best practices, fosters maintainability, and
+ensures your applications are reliable, and ready for deployment in
+real-world environments.
+
+With [golem](https://thinkr-open.github.io/golem/), developers can focus
+on creating high-quality, robust [shiny](https://shiny.posit.co/) apps
+with confidence, knowing that the framework guides them through every
+step of the development process.
+
+## Installation
+
+- You can install the stable version from CRAN with:
+
+``` r
+install.packages("golem")
+```
+
+- You can install the development version from
+  [GitHub](https://github.com/Thinkr-open/golem) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("Thinkr-open/golem") # Stable development version
+# remotes::install_github("Thinkr-open/golem@dev") # Bleeding edge development version
+```
+
+## Get Started
+
+Create a new app with the project template from RStudio:
+
+![](https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/img/golemtemplate.png)
+
+Or use the
+[`golem::create_golem()`](https://thinkr-open.github.io/golem/reference/create_golem.md)
+function:
+
+``` r
+golem::create_golem("myapp")
+```
+
+See your app in action by running
+[`golem::run_dev()`](https://thinkr-open.github.io/golem/reference/run_dev.md)
+function.
+
+Then, follow the scripts at:
+
+- `dev/01_start.R` to configure your project at launch
+- `dev/02_dev.R` for day to day development
+- `dev/03_deploy.R` to build the deployment enabler for your app
+
+## Resources
+
+The [golem](https://thinkr-open.github.io/golem/) package is part of the
+[`{golemverse}`](https://golemverse.org/), a series of tools for
+building production [shiny](https://shiny.posit.co/) apps.
+
+A list of various [golem](https://thinkr-open.github.io/golem/) related
+resources (tutorials, video, blog post,…) can be found
+[here](https://golemverse.org/resources/), along with blogposts, and
+links to other packages of the `golemverse`.
+
+------------------------------------------------------------------------
+
+## Dev part
+
+This `README` has been compiled on the
+
+``` r
+Sys.time()
+#> [1] "2025-05-30 15:24:30 CEST"
+```
+
+Here are the test & coverage results:
+
+``` r
+devtools::check(quiet = TRUE)
+#> ℹ Loading golem
+#> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9011 ────
+#> Duration: 52.7s
+#> 
+#> ❯ checking for future file timestamps ... NOTE
+#>   unable to verify current time
+#> 
+#> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
+```
+
+``` r
+Sys.setenv("NOT_CRAN" = TRUE)
+covr::package_coverage()
+#> golem Coverage: 88.56%
+#> R/boostrap_base.R: 0.00%
+#> R/bootstrap_attachment.R: 0.00%
+#> R/bootstrap_pkgload.R: 0.00%
+#> R/bootstrap_roxygen2.R: 0.00%
+#> R/bootstrap_rstudio_api.R: 0.00%
+#> R/bootstrap_testthat.R: 0.00%
+#> R/bootstrap_dockerfiler.R: 23.33%
+#> R/test_helpers.R: 47.37%
+#> R/bootstrap_desc.R: 55.56%
+#> R/cli_msg.R: 75.64%
+#> R/modules_fn.R: 76.44%
+#> R/install_dev_deps.R: 78.26%
+#> R/addins.R: 78.65%
+#> R/add_r_files.R: 78.79%
+#> R/config.R: 80.29%
+#> R/add_rstudio_files.R: 80.82%
+#> R/bootstrap_usethis.R: 85.45%
+#> R/disable_autoload.R: 88.00%
+#> R/reload.R: 88.64%
+#> R/sanity_check.R: 88.64%
+#> R/add_dockerfiles.R: 89.61%
+#> R/add_dockerfiles_renv.R: 89.68%
+#> R/make_dev.R: 90.00%
+#> R/use_favicon.R: 90.82%
+#> R/js.R: 93.75%
+#> R/use_files_internal.R: 93.75%
+#> R/use_recommended.R: 94.34%
+#> R/add_files.R: 95.15%
+#> R/create_golem.R: 95.86%
+#> R/boostrap_cli.R: 96.43%
+#> R/run_dev.R: 96.77%
+#> R/desc.R: 96.84%
+#> R/use_utils.R: 98.04%
+#> R/utils.R: 99.32%
+#> R/add_resource_path.R: 100.00%
+#> R/boostrap_crayon.R: 100.00%
+#> R/boostrap_fs.R: 100.00%
+#> R/browser_button.R: 100.00%
+#> R/bundle_resources.R: 100.00%
+#> R/cats.R: 100.00%
+#> R/enable_roxygenize.R: 100.00%
+#> R/get_sysreqs.R: 100.00%
+#> R/globals.R: 100.00%
+#> R/golem_welcome_page.R: 100.00%
+#> R/golem-yaml-get.R: 100.00%
+#> R/golem-yaml-set.R: 100.00%
+#> R/golem-yaml-utils.R: 100.00%
+#> R/is_golem.R: 100.00%
+#> R/is_running.R: 100.00%
+#> R/maintenance_page.R: 100.00%
+#> R/pkg_tools.R: 100.00%
+#> R/set_golem_options.R: 100.00%
+#> R/templates.R: 100.00%
+#> R/use_files_external_tools.R: 100.00%
+#> R/use_files_external.R: 100.00%
+#> R/use_files_internal_tools.R: 100.00%
+#> R/use_files_shared_tools.R: 100.00%
+#> R/use_readme.R: 100.00%
+#> R/with_opt.R: 100.00%
+```
+
+## CoC
+
+Please note that this project is released with a [Contributor Code of
+Conduct](https://www.contributor-covenant.org/version/1/0/0/code-of-conduct.html).
+By participating in this project you agree to abide by its terms.
+
+## Note for the contributors
+
+Please style the files according to `grkstyle::grk_style_transformer()`
+
+``` r
+# If you work in RStudio
+options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
+
+# If you work in VSCode
+options(languageserver.formatting_style = function(options) {
+  grkstyle::grk_style_transformer()
+})
+```
+
+# Package index
+
+## All functions
+
+- [`add_js_file()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  [`add_js_handler()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  [`add_js_input_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  [`add_js_output_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  [`add_css_file()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  [`add_sass_file()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  [`add_empty_file()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  [`add_html_template()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  [`add_partial_html_template()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  [`add_ui_server_files()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  : Create Files
+
+- [`add_module()`](https://thinkr-open.github.io/golem/reference/add_module.md)
+  : Create a module
+
+- [`add_resource_path()`](https://thinkr-open.github.io/golem/reference/add_resource_path.md)
+  : Add resource path
+
+- [`insert_ns()`](https://thinkr-open.github.io/golem/reference/addins.md)
+  [`go_to_start()`](https://thinkr-open.github.io/golem/reference/addins.md)
+  [`go_to_dev()`](https://thinkr-open.github.io/golem/reference/addins.md)
+  [`go_to_deploy()`](https://thinkr-open.github.io/golem/reference/addins.md)
+  [`go_to_run_dev()`](https://thinkr-open.github.io/golem/reference/addins.md)
+  [`go_to_app_ui()`](https://thinkr-open.github.io/golem/reference/addins.md)
+  [`go_to_app_server()`](https://thinkr-open.github.io/golem/reference/addins.md)
+  [`go_to_run_app()`](https://thinkr-open.github.io/golem/reference/addins.md)
+  :
+
+  [golem](https://thinkr-open.github.io/golem/) addins
+
+- [`amend_golem_config()`](https://thinkr-open.github.io/golem/reference/amend_golem_config.md)
+  : Amend golem config file
+
+- [`browser_button()`](https://thinkr-open.github.io/golem/reference/browser_button.md)
+  : Insert an hidden browser button
+
+- [`bundle_resources()`](https://thinkr-open.github.io/golem/reference/bundle_resources.md)
+  : Automatically serve golem external resources
+
+- [`create_golem()`](https://thinkr-open.github.io/golem/reference/create_golem.md)
+  :
+
+  Create a package for a Shiny App using
+  [golem](https://thinkr-open.github.io/golem/)
+
+- [`detach_all_attached()`](https://thinkr-open.github.io/golem/reference/detach_all_attached.md)
+  : Detach all attached package
+
+- [`disable_autoload()`](https://thinkr-open.github.io/golem/reference/disable_autoload.md)
+  : Disabling Shiny Autoload of R Scripts
+
+- [`add_dockerfile()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md)
+  [`add_dockerfile_shinyproxy()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md)
+  [`add_dockerfile_heroku()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md)
+  [`add_dockerfile_with_renv()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md)
+  [`add_dockerfile_with_renv_shinyproxy()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md)
+  [`add_dockerfile_with_renv_heroku()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md)
+  : Create a Dockerfile for your App
+
+- [`document_and_reload()`](https://thinkr-open.github.io/golem/reference/document_and_reload.md)
+  : Document and reload your package
+
+- [`use_favicon()`](https://thinkr-open.github.io/golem/reference/favicon.md)
+  [`remove_favicon()`](https://thinkr-open.github.io/golem/reference/favicon.md)
+  [`favicon()`](https://thinkr-open.github.io/golem/reference/favicon.md)
+  : Add a favicon to your shinyapp
+
+- [`add_fct()`](https://thinkr-open.github.io/golem/reference/file_creation.md)
+  [`add_utils()`](https://thinkr-open.github.io/golem/reference/file_creation.md)
+  [`add_r6()`](https://thinkr-open.github.io/golem/reference/file_creation.md)
+  : Add fct\_ and utils\_ files
+
+- [`fill_desc()`](https://thinkr-open.github.io/golem/reference/fill_desc.md)
+  :
+
+  Fill your `DESCRIPTION` file
+
+- [`get_current_config()`](https://thinkr-open.github.io/golem/reference/get_current_config.md)
+  :
+
+  Return path to the [golem](https://thinkr-open.github.io/golem/)
+  config-file
+
+- [`get_golem_options()`](https://thinkr-open.github.io/golem/reference/get_golem_options.md)
+  : Get all or one golem options
+
+- [`get_sysreqs()`](https://thinkr-open.github.io/golem/reference/get_sysreqs.md)
+  : Get system requirements (Deprecated)
+
+- [`golem-package`](https://thinkr-open.github.io/golem/reference/golem.md)
+  [`golem`](https://thinkr-open.github.io/golem/reference/golem.md) : A
+  package for building Shiny App
+
+- [`activate_js()`](https://thinkr-open.github.io/golem/reference/golem_js.md)
+  [`invoke_js()`](https://thinkr-open.github.io/golem/reference/golem_js.md)
+  : Interact with JavaScript built-in Functions
+
+- [`get_golem_wd()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
+  [`get_golem_name()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
+  [`get_golem_version()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
+  [`set_golem_wd()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
+  [`set_golem_name()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
+  [`set_golem_version()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
+  [`set_golem_options()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
+  :
+
+  [golem](https://thinkr-open.github.io/golem/) options
+
+- [`golem_welcome_page()`](https://thinkr-open.github.io/golem/reference/golem_welcome_page.md)
+  : Welcome Page
+
+- [`install_dev_deps()`](https://thinkr-open.github.io/golem/reference/install_dev_deps.md)
+  :
+
+  Install [golem](https://thinkr-open.github.io/golem/) dev dependencies
+
+- [`is_golem()`](https://thinkr-open.github.io/golem/reference/is_golem.md)
+  : Is the directory a golem-based app?
+
+- [`is_running()`](https://thinkr-open.github.io/golem/reference/is_running.md)
+  : Is the running app a golem app?
+
+- [`cat_dev()`](https://thinkr-open.github.io/golem/reference/made_dev.md)
+  [`print_dev()`](https://thinkr-open.github.io/golem/reference/made_dev.md)
+  [`message_dev()`](https://thinkr-open.github.io/golem/reference/made_dev.md)
+  [`warning_dev()`](https://thinkr-open.github.io/golem/reference/made_dev.md)
+  [`browser_dev()`](https://thinkr-open.github.io/golem/reference/made_dev.md)
+  : Functions already made dev dependent
+
+- [`maintenance_page()`](https://thinkr-open.github.io/golem/reference/maintenance_page.md)
+  : maintenance_page
+
+- [`make_dev()`](https://thinkr-open.github.io/golem/reference/make_dev.md)
+  : Make a function dependent to dev mode
+
+- [`module_template()`](https://thinkr-open.github.io/golem/reference/module_template.md)
+  : Golem Module Template Function
+
+- [`pkg_name()`](https://thinkr-open.github.io/golem/reference/pkg_tools.md)
+  [`pkg_version()`](https://thinkr-open.github.io/golem/reference/pkg_tools.md)
+  [`pkg_path()`](https://thinkr-open.github.io/golem/reference/pkg_tools.md)
+  : Package tools
+
+- [`app_prod()`](https://thinkr-open.github.io/golem/reference/prod.md)
+  [`app_dev()`](https://thinkr-open.github.io/golem/reference/prod.md) :
+  Is the app in dev mode or prod mode?
+
+- [`project_hook()`](https://thinkr-open.github.io/golem/reference/project_hook.md)
+  : Project Hook
+
+- [`add_positconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
+  [`add_rstudioconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
+  [`add_shinyappsio_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
+  [`add_shinyserver_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
+  [`add_rscignore_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
+  :
+
+  Add an `app.R` at the root of your package to deploy on RStudio
+  Connect
+
+- [`run_dev()`](https://thinkr-open.github.io/golem/reference/run_dev.md)
+  :
+
+  Run the `dev/run_dev.R` file
+
+- [`sanity_check()`](https://thinkr-open.github.io/golem/reference/sanity_check.md)
+  : Sanity check for R files in the project
+
+- [`js_handler_template()`](https://thinkr-open.github.io/golem/reference/template.md)
+  [`js_template()`](https://thinkr-open.github.io/golem/reference/template.md)
+  [`css_template()`](https://thinkr-open.github.io/golem/reference/template.md)
+  [`sass_template()`](https://thinkr-open.github.io/golem/reference/template.md)
+  [`empty_template()`](https://thinkr-open.github.io/golem/reference/template.md)
+  : Golem's default custom templates
+
+- [`expect_shinytag()`](https://thinkr-open.github.io/golem/reference/testhelpers.md)
+  [`expect_shinytaglist()`](https://thinkr-open.github.io/golem/reference/testhelpers.md)
+  [`expect_html_equal()`](https://thinkr-open.github.io/golem/reference/testhelpers.md)
+  [`expect_running()`](https://thinkr-open.github.io/golem/reference/testhelpers.md)
+  : Test helpers
+
+- [`use_external_js_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  [`use_external_css_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  [`use_external_html_template()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  [`use_external_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  [`use_internal_js_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  [`use_internal_css_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  [`use_internal_html_template()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  [`use_internal_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  : Use Files
+
+- [`use_module_test()`](https://thinkr-open.github.io/golem/reference/use_module_test.md)
+  : Add a test file for a module
+
+- [`use_readme_rmd()`](https://thinkr-open.github.io/golem/reference/use_readme_rmd.md)
+  : Generate a README.Rmd
+
+- [`use_recommended_deps()`](https://thinkr-open.github.io/golem/reference/use_recommended.md)
+  [`use_recommended_tests()`](https://thinkr-open.github.io/golem/reference/use_recommended.md)
+  : Add recommended elements
+
+- [`use_utils_ui()`](https://thinkr-open.github.io/golem/reference/utils_files.md)
+  [`use_utils_test_ui()`](https://thinkr-open.github.io/golem/reference/utils_files.md)
+  [`use_utils_server()`](https://thinkr-open.github.io/golem/reference/utils_files.md)
+  [`use_utils_test_server()`](https://thinkr-open.github.io/golem/reference/utils_files.md)
+  : Use the utils files
+
+- [`with_golem_options()`](https://thinkr-open.github.io/golem/reference/with_golem_options.md)
+  : Add Golem options to a Shiny App
+
+# Articles
+
+### All vignettes
+
+- [01. Getting
+  started](https://thinkr-open.github.io/golem/articles/a-getting-started.md):
+- [02. Day to day
+  development](https://thinkr-open.github.io/golem/articles/b-develop.md):
+- [03. Deploy your
+  app](https://thinkr-open.github.io/golem/articles/c-deploy.md):
+- [04.
+  JavaScript](https://thinkr-open.github.io/golem/articles/d-js.md):
+- [05.
+  Configuration](https://thinkr-open.github.io/golem/articles/e-config.md):
+- [06. Extending
+  \`{golem}\`](https://thinkr-open.github.io/golem/articles/f-extending_golem.md):
+- [07. Contribute to
+  Golem](https://thinkr-open.github.io/golem/articles/g-contribute.md):
+- [Resources](https://thinkr-open.github.io/golem/articles/h-resources.md):

@@ -1,0 +1,141 @@
+# 03. Deploy your app
+
+## About the `run_app()` function
+
+When launching the app, you might have noticed that the `dev/run_dev.R`
+function calls `run_app()`, which has the following structure:
+
+``` r
+run_app <- function(...) {
+  with_golem_options(
+    app = shinyApp(
+      ui = app_ui,
+      server = app_server
+    ),
+    golem_opts = list(...)
+  )
+}
+```
+
+This function might look a little bit weird, but there’s a long story
+behind it, and you can read more about it
+[there](https://rtask.thinkr.fr/shinyapp-runapp-shinyappdir-difference/).
+
+But long story short, this combination of `with_golem_options` &
+`golem_opts = list(...)` allows you to pass arguments to the function to
+be used inside the application, from UI or from server side, which you
+can get with
+[`get_golem_options()`](https://thinkr-open.github.io/golem/reference/get_golem_options.md).
+
+``` r
+run_app(this = "that")
+# And in the app
+this <- get_golem_options("this")
+```
+
+The idea is to provide more flexibility for deployment on each platform
+you want to run your app on.
+
+## Deploying Apps with `{golem}`
+
+The `dev/03_deploy.R` file contains functions for deployment on various
+platforms.
+
+### Posit Products
+
+``` r
+golem::add_positconnect_file()
+golem::add_shinyappsio_file()
+golem::add_shinyserver_file()
+```
+
+For Git backed deployment on Posit (for
+[details](https://docs.posit.co/connect/user/git-backed/#linking-git-to-posit-connect)
+a `manifest.json` file is required which can be added (or updated) via:
+
+``` r
+rsconnect::writeManifest()
+```
+
+### Docker
+
+#### Without using `{renv}`
+
+``` r
+# If you want to deploy via a generic Dockerfile
+golem::add_dockerfile()
+
+# If you want to deploy to ShinyProxy
+golem::add_dockerfile_shinyproxy()
+
+# If you want to deploy to Heroku
+golem::add_dockerfile_heroku()
+```
+
+#### Using `{renv}` - CASE 1 : you didn’t use renv during development process
+
+> this functions will create a “deploy” folder containing :
+
+    deploy/
+    +-- Dockerfile
+    +-- Dockerfile_base
+    +-- yourgolem_0.0.0.9000.tar.gz
+    +-- README
+    \-- renv.lock.prod
+
+then follow the `README` file.
+
+``` r
+# If you want to deploy via a generic Dockerfile
+golem::add_dockerfile_with_renv(output_dir = "deploy")
+
+# If you want to deploy to ShinyProxy
+golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy")
+```
+
+If you would like to use [renv](https://rstudio.github.io/renv/) during
+development, you can init a `renv.lock` file with
+
+``` r
+attachment::create_renv_for_dev(dev_pkg = c(
+  "renv",
+  "devtools",
+  "roxygen2",
+  "usethis",
+  "pkgload",
+  "testthat",
+  "remotes",
+  "covr",
+  "attachment",
+  "pak",
+  "dockerfiler",
+  "golem"
+))
+```
+
+and activate [renv](https://rstudio.github.io/renv/) with
+
+``` r
+renv::activate()
+```
+
+#### Using `{renv}` - CASE 2: you already have a `renv.lock` file for your project
+
+``` r
+# If you want to deploy via a generic Dockerfile
+golem::add_dockerfile_with_renv(output_dir = "deploy", lockfile = "renv.lock")
+
+# If you want to deploy to ShinyProxy
+golem::add_dockerfile_with_renv_shinyproxy(output_dir = "deploy", lockfile = "renv.lock")
+```
+
+> this functions will create a “deploy” folder containing :
+
+    deploy/
+    +-- Dockerfile
+    +-- Dockerfile_base
+    +-- yourgolem_0.0.0.9000.tar.gz
+    +-- README
+    \-- renv.lock.prod
+
+then follow the `README` file.

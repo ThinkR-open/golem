@@ -1,0 +1,70 @@
+# 04. JavaScript
+
+## Using `{golem}` js functions
+
+[golem](https://thinkr-open.github.io/golem/) comes with a series of
+JavaScript functions that you can call from the server. These functions
+are added by default with
+[`bundle_resources()`](https://thinkr-open.github.io/golem/reference/bundle_resources.md)
+.
+
+Then they are called with `golem::invoke_js("fonction", "ui_element")`.
+
+This `ui_element` define the UI element to interact with. It can be a
+full jQuery selector, an id or a class. Note that you can add several
+elements and iterate other them.
+
+`invoke_js` can be used with any function defined in a [JavaScript
+Custom
+Handler](https://shiny.rstudio.com/articles/communicating-with-js.html#from-r-to-javascript),
+that you can build with
+[`golem::add_js_handler()`](https://thinkr-open.github.io/golem/reference/add_files.md).
+
+### `golem::invoke_js()`
+
+- `showid` & `hideid`, `showclass` & `hideclass` show and hide elements
+  through their id or class.
+
+``` r
+golem::invoke_js("showid", ns("plot"))
+```
+
+- `showhref` & `hidehref` hide and show a link by trying to match the
+  `href` content.
+
+``` r
+golem::invoke_js("showhref", "panel2")
+```
+
+- `clickon` click on the element. You have to use the full jQuery
+  selector.
+
+- `show` & `hide` show and hide elements, using the full jQuery
+  selector.
+
+- `disable` & `reable` able and disable specific element, using the full
+  jQuery selector.
+
+See `?golem::activate_js()` for the full list.
+
+### A quick intro to jQuery selectors
+
+- `#plop`: the element with the id `plop`
+
+- `.pouet`: elements of class `pouet`
+
+- `"button:contains('this')"`: buttons with a text containing `'this'`
+
+Note that in html, tags contains attributes. For example:
+
+``` html
+<a href = "https://thinkr.fr" data-value = "panel2">ThinkR</a>
+```
+
+contains `href` & `data-value`. You can refer to these attributes with
+`[]` after the tag name.
+
+- `a[href = "https://thinkr.fr"]`: link with `href` being
+  `https://thinkr.fr`
+
+- `a[data-value="panel2"]`: link with `data-value` being `"panel2"`
