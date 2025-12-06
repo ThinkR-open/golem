@@ -32,6 +32,16 @@ library(golem)
 old <- setwd(x)
 ```
 
+## Two Ways to Manage Production vs Development Mode
+
+`{golem}` provides two separate mechanisms for managing production and development modes in your Shiny applications:
+
+1. **R Options Approach**: Using `options(golem.app.prod = TRUE/FALSE)` which is checked by `app_prod()` and `app_dev()` functions. This approach controls the behavior of golem's development-aware utility functions like `cat_dev()`, `print_dev()`, `message_dev()`, and similar tools.
+
+2. **Configuration File Approach**: Using the `golem-config.yml` file to store configuration values (including an `app_prod` setting) that can be retrieved in your application code using `get_golem_config()`.
+
+**Important**: These two mechanisms are independent and serve different purposes. The R option controls golem's built-in development tools, while the config file provides a flexible way to store and retrieve application-specific settings. This vignette focuses on the configuration file approach.
+
 ## About `inst/golem-config.yml`
 
 When you start a new `{golem}` application, you'll find a file called `golem-config.yml` in the `inst/` folder.
@@ -168,6 +178,43 @@ The main difference between these two is that the golem options from `run_app()`
 The `golem-config.yml` file is also linked to the `R_CONFIG_ACTIVE` environment variable, just as any `{config}` file.
 
 Additionally, the `golem-config.yml` file is shareable across `{golem}` projects (whereas `golem_opts` are application specific), and will be tracked by version control systems.
+
+## Connecting Back to the R Options Approach
+
+As mentioned at the beginning of this vignette, golem uses two separate mechanisms for production/development configuration. While this vignette has focused on the `golem-config.yml` file, it's important to understand how this relates to the R options approach.
+
+### The R Options Mechanism
+
+The R option `options(golem.app.prod)` is used by golem's development-aware functions:
+
+- `app_prod()` - Returns `TRUE` if the app is in production mode
+- `app_dev()` - Returns `TRUE` if the app is in development mode
+- Development-only output functions: `cat_dev()`, `print_dev()`, `message_dev()`, `warning_dev()`, `browser_dev()`
+
+These functions check `getOption("golem.app.prod")` directly and do not read from the config file.
+
+### Important: The Two Mechanisms Are Independent
+
+The `app_prod` value in `golem-config.yml` and the `options(golem.app.prod)` R option are **not automatically synchronized**. They serve different purposes:
+
+- **Config file `app_prod`**: A persistent configuration value that you can retrieve using `get_golem_config("app_prod")` to use in your own application logic. This value can vary by environment (default, production, dev) using the `R_CONFIG_ACTIVE` environment variable.
+
+- **R option `golem.app.prod`**: A session-level setting that controls golem's built-in development tools. This must be explicitly set in your code or launch configuration (e.g., in Docker CMD or `run_dev.R`).
+
+### Best Practices
+
+- **Set the R option explicitly**: When deploying to production, ensure you set `options(golem.app.prod = TRUE)` in your app's launch script or Docker configuration. The golem Dockerfile templates handle this automatically.
+
+- **Use the config file for your app's logic**: If you need environment-specific configuration in your application code (e.g., different API endpoints for dev vs production), use `get_golem_config()` to retrieve values from `golem-config.yml`.
+
+- **Keep them in sync if needed**: If you want the config file's `app_prod` setting to match your R option, you'll need to manage this synchronization in your own code. For example, in your `run_app()` function, you could set the option based on the config value:
+
+```r
+# Example: sync config to R option (optional)
+if (get_golem_config("app_prod")) {
+  options(golem.app.prod = TRUE)
+}
+```
 
 ## Note for `{golem}` < 0.2.0 users
 
