@@ -31,14 +31,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/ThinkR-open/golem/blob/master/DESCRIPTION)
 
-Fay C, Guyader V, Rochette S, Girard C (2025). *golem: A Framework for
-Robust Shiny Applications*. R package version 0.5.1.9013,
+Fay C, Guyader V, Rochette S, Girard C (2026). *golem: A Framework for
+Robust Shiny Applications*. R package version 0.5.1.9014,
 <https://thinkr-open.github.io/golem/>.
 
     @Manual{,
       title = {golem: A Framework for Robust Shiny Applications},
       author = {Colin Fay and Vincent Guyader and Sébastien Rochette and Cervan Girard},
-      year = {2025},
-      note = {R package version 0.5.1.9013},
+      year = {2026},
+      note = {R package version 0.5.1.9014},
       url = {https://thinkr-open.github.io/golem/},
     }
