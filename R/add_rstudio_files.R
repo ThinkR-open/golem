@@ -63,6 +63,12 @@ add_rstudio_files <- function(
 			"# Or use the blue button on top of this file"
 		)
 		write_there(
+			sprintf(
+				"# Note that you'll need to upload the whole package to %s",
+				service
+			)
+		)
+		write_there(
 			""
 		)
 		write_there(
