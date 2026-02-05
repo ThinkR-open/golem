@@ -50,7 +50,7 @@ golem::invoke_js("showhref", "panel2")
 
 + `show` & `hide` show and hide elements, using the full jQuery selector.
 
-+ `disable` & `reable` able and disable specific element, using the full jQuery selector.
++ `disable` & `reenable` enable and disable specific element, using the full jQuery selector.
 
 See `?golem::activate_js()` for the full list.
 

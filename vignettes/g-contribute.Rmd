@@ -42,7 +42,7 @@ If you want to contribute to the package, please note that the package is struct
 
 Golem package follows the `grkstyle` style guide. Please make sure to follow the same style when contributing to the package.
 
-If your are using RStudio, you can set the `grkstyle` style guide as the default style guide for the package by running the following code:
+If you are using RStudio, you can set the `grkstyle` style guide as the default style guide for the package by running the following code:
 
 ```{r eval=FALSE}
 options(
@@ -50,7 +50,7 @@ options(
 )
 ```
 
-If your are using VSCode, you can set the `grkstyle` style guide as the default style guide for the package by running the following code:
+If you are using VSCode, you can set the `grkstyle` style guide as the default style guide for the package by running the following code:
 
 ```{r eval=FALSE}
 options(languageserver.formatting_style = function(options) {
