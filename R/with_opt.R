@@ -33,8 +33,7 @@ with_golem_options <- function(
 				input,
 				output,
 				session
-			) {
-			}
+			) {}
 		)
 	}
 
