@@ -82,8 +82,7 @@ test_that("with_golem_options() disables 'print'-flag on Posit for SHINY_PORT", 
 						input,
 						output,
 						session
-					) {
-					}
+					) {}
 				),
 				golem_opts = list()
 			)
