@@ -32,6 +32,62 @@ test_that("add_fct and add_utils", {
 					open = FALSE,
 					with_test = TRUE
 				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand.R"
+					)
+				)
+				add_module(
+					"rand2",
+					open = FALSE,
+					with_test = TRUE,
+					fct = "test",
+					utils = "test"
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand2.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand2_fct_test.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand2_utils_test.R"
+					)
+				)
+				add_module(
+					"rand3",
+					open = FALSE,
+					with_test = TRUE,
+					fct = "",
+					utils = ""
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand3.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand3_fct.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand3_utils.R"
+					)
+				)
 				add_fct(
 					"ui",
 					"rand",
@@ -48,6 +104,7 @@ test_that("add_fct and add_utils", {
 						"fct_ui.R"
 					)
 				)
+
 				expect_exists(
 					file.path(
 						"R",

@@ -342,7 +342,7 @@ sanitize_r_name <- function(name) {
 		name <- paste0("x", name)
 	}
 	if (name == "" || is.na(name)) {
-		name <- "unnamed"
+		name <- ""
 	}
 	name
 }
