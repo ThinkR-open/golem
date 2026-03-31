@@ -11,8 +11,7 @@ test_that("with_golem_options() returns the maintenance page", {
 						input,
 						output,
 						session
-					) {
-					}
+					) {}
 				),
 				golem_opts = list()
 			)
