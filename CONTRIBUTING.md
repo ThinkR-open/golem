@@ -1,4 +1,4 @@
-# If you work in VSCode
+# NA
 
 ## Contributing
 
@@ -39,11 +39,11 @@ issue first so that we can discuss the feature / confirm the bug.**
 
     git clone https://github.com/YOURNAME/golem.git
 
-3.  Work on the `dev` branch.
+3.  Work on a feature branch.
 
 &nbsp;
 
-    git branch dev
+    git branch my-feature
 
 Or use the Git panel from RStudio
 
@@ -60,7 +60,8 @@ devtools::check()
 If ever you have some errors, please specify it in your commit message /
 PR comment
 
-6.  PR the change **into golem dev branch**, not straight to master
+6.  PR the change **into golem master branch**, and allow modification
+    by maintainer
 
 7.  In your PR message, please add the reference of the issue, and the
     content to be used in NEWS.md. Changes can be : `## New Functions`,
@@ -71,11 +72,8 @@ See <https://github.com/ThinkR-open/golem/pull/149> for an example
 
 ### Styling
 
-Please style the files according to `grkstyle::grk_style_transformer()`
+Please format files using `air`:
 
-\`\`\`{r} \# If you work in RStudio
-options(styler.addins_style_transformer =
-“grkstyle::grk_style_transformer()”)
-
-options(languageserver.formatting_style = function(options) {
-grkstyle::grk_style_transformer() }) \`\`\`
+``` sh
+air format .
+```

@@ -32,4 +32,4 @@ go_to_run_app(golem_wd = golem::get_golem_wd(), wd)
 
 - wd:
 
-  Deperecated. Use `golem_wd` instead.
+  Deprecated. Use `golem_wd` instead.

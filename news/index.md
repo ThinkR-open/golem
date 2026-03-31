@@ -17,7 +17,7 @@ CRAN release: 2024-08-27
 
 - The
   [`get_current_config()`](https://thinkr-open.github.io/golem/reference/get_current_config.md)
-  has been rework in two ways: (1) it nows either check the
+  has been rework in two ways: (1) it now either check the
   `GOLEM_CONFIG_PATH` env var or the default path
   (inst/golem-config.yml). [golem](https://thinkr-open.github.io/golem/)
   no longer tries to guess non standard paths, and does a hard fail if
@@ -67,6 +67,9 @@ CRAN release: 2024-08-27
 - Renamed a function in 02_dev.R (add_any_file =\> add_empty_file)
 
 ### Internal changes
+
+- [golem](https://thinkr-open.github.io/golem/) now embarks a
+  `claude.md` file and a series of skills
 
 - Full refactoring of the `add_*_files` and `use_*_files` functions that
   now all share the same behavior
