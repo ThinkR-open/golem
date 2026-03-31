@@ -236,3 +236,81 @@ test_that("add_fct sanitizes names correctly", {
 		)
 	})
 })
+
+test_that("add_r6 creates a class_ file", {
+	run_quietly_in_a_dummy_golem({
+		add_r6(
+			"myclass",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"class_myclass.R"
+			)
+		)
+		file_content <- readLines(
+			file.path(
+				"R",
+				"class_myclass.R"
+			)
+		)
+		expect_true(
+			any(grepl(
+				"R6::R6Class",
+				file_content,
+				fixed = TRUE
+			))
+		)
+		expect_true(
+			any(grepl(
+				"myclass",
+				file_content,
+				fixed = TRUE
+			))
+		)
+	})
+})
+
+test_that("append_roxygen_comment writes correct boilerplate for fct", {
+	tmp <- tempfile(fileext = ".R")
+	file.create(tmp)
+	append_roxygen_comment(
+		name = "my_fun",
+		path = tmp,
+		ext = "fct"
+	)
+	content <- readLines(tmp)
+	expect_true(any(grepl("@description A fct function", content, fixed = TRUE)))
+	expect_true(any(grepl("my_fun <- function", content, fixed = TRUE)))
+	expect_true(any(grepl("@noRd", content, fixed = TRUE)))
+	unlink(tmp)
+})
+
+test_that("append_roxygen_comment writes correct boilerplate for utils", {
+	tmp <- tempfile(fileext = ".R")
+	file.create(tmp)
+	append_roxygen_comment(
+		name = "my_util",
+		path = tmp,
+		ext = "utils"
+	)
+	content <- readLines(tmp)
+	expect_true(any(grepl("@description A utils function", content, fixed = TRUE)))
+	expect_true(any(grepl("utility", content, fixed = TRUE)))
+	unlink(tmp)
+})
+
+test_that("append_roxygen_comment writes R6 boilerplate for class", {
+	tmp <- tempfile(fileext = ".R")
+	file.create(tmp)
+	append_roxygen_comment(
+		name = "MyClass",
+		path = tmp,
+		ext = "class"
+	)
+	content <- readLines(tmp)
+	expect_true(any(grepl("R6::R6Class", content, fixed = TRUE)))
+	expect_true(any(grepl("MyClass", content, fixed = TRUE)))
+	unlink(tmp)
+})

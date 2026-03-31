@@ -489,3 +489,16 @@ test_that("signal_path_is_deprecated works", {
 		regexp = "mons"
 	)
 })
+
+test_that("write_there_builder returns a function that appends to a file", {
+	tmp <- tempfile(fileext = ".R")
+	file.create(tmp)
+	write_there <- write_there_builder(tmp)
+	expect_type(write_there, "closure")
+	write_there("first line")
+	write_there("second line")
+	content <- readLines(tmp)
+	expect_true(any(grepl("first line", content, fixed = TRUE)))
+	expect_true(any(grepl("second line", content, fixed = TRUE)))
+	unlink(tmp)
+})

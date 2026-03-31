@@ -49,3 +49,9 @@ test_that("after_creation_msg works", {
 		)
 	})
 })
+
+test_that("cli_abort_dir_create() aborts with an error", {
+	expect_error(
+		cli_abort_dir_create()
+	)
+})

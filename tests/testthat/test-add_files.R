@@ -201,3 +201,35 @@ test_that("add_empty_file throws a warning if using an extension that is already
 		}
 	})
 })
+
+test_that("add_sass_code_to_dev_script appends sass compilation code to run_dev.R", {
+	run_quietly_in_a_dummy_golem({
+		original_lines <- readLines("dev/run_dev.R")
+		add_sass_code_to_dev_script(
+			dir = "inst/app/www",
+			name = "mysass"
+		)
+		new_lines <- readLines("dev/run_dev.R")
+		expect_true(
+			length(new_lines) > length(original_lines)
+		)
+		expect_true(
+			any(grepl("sass::sass", new_lines, fixed = TRUE))
+		)
+		expect_true(
+			any(grepl("mysass.sass", new_lines, fixed = TRUE))
+		)
+	})
+})
+
+test_that("add_sass_code_to_dev_script does nothing when dev/run_dev.R does not exist", {
+	tmp <- tempdir()
+	withr::with_dir(tmp, {
+		expect_null(
+			add_sass_code_to_dev_script(
+				dir = "inst/app/www",
+				name = "mysass"
+			)
+		)
+	})
+})
