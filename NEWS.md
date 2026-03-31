@@ -2,8 +2,6 @@
 
 # golem 0.5.1 to 0.6.0
 
-
-
 ## New features / user-visible changes
 
 - The `add_dockerfile_with_renv_*` function now generates a multi-stage Dockerfile by default (use `single_file = FALSE` to retain the previous behavior).
@@ -11,14 +9,13 @@
 
 ## Breaking change
 
-- The `get_current_config()` has been rework in two ways: (1) it nows either check the `GOLEM_CONFIG_PATH` env var or the default path (inst/golem-config.yml). `{golem}` no longer tries to guess non standard paths, and does a hard fail if the file doesn't exist, (2) the function no longer copy the `config` files from the skeleton if ever the files are not there (@ilyaZar, @LDSamson, #1178)
+- The `get_current_config()` has been rework in two ways: (1) it now either check the `GOLEM_CONFIG_PATH` env var or the default path (inst/golem-config.yml). `{golem}` no longer tries to guess non standard paths, and does a hard fail if the file doesn't exist, (2) the function no longer copy the `config` files from the skeleton if ever the files are not there (@ilyaZar, @LDSamson, #1178)
 
 - `{golem}` functions used to rely on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This has now been standardized and all functions rely on `golem_wd` now (@ilyaZar, #845)
 
 - Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
 
 - The `add_*_files` and `use_*_files` now fail when:
-
   - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use\_\*\_file functions should only be there to add file (Singe responsabily )
   - The file that the user tries to create already exists
 
@@ -35,6 +32,8 @@
 - Renamed a function in 02_dev.R (add_any_file => add_empty_file)
 
 ## Internal changes
+
+- `{golem}` now embarks a `claude.md` file and a series of skills
 
 - Full refactoring of the `add_*_files` and `use_*_files` functions that now all share the same behavior
 

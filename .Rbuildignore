@@ -30,3 +30,5 @@ README.html
 ^[\.]?air\.toml$
 ^\.vscode$
 ^\.lintr$
+^\.claude$
+^CLAUDE\.md$

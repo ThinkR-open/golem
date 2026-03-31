@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(wc:*)",
+      "Bash(xargs cat:*)",
+      "Bash(Rscript:*)",
+      "Bash(Rscript -e \"devtools::check\\(\\)\" 2>&1)",
+      "Bash(Rscript -e \"rmarkdown::render\\('vignettes/g-contribute.Rmd'\\)\" 2>&1)"
+    ]
+  }
+}

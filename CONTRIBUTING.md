@@ -33,13 +33,13 @@ You're welcome to fix the bug or implement the feature, but __please don't PR in
   git clone https://github.com/YOURNAME/golem.git
   ```
 
-3. Work on the `dev` branch.
- 
+3. Work on a feature branch.
+
   ```
-  git branch dev
+  git branch my-feature
   ```
 
-  Or use the Git panel from RStudio 
+  Or use the Git panel from RStudio
 
 4. Make the changes locally. 
 
@@ -51,7 +51,7 @@ You're welcome to fix the bug or implement the feature, but __please don't PR in
   
   If ever you have some errors, please specify it in your commit message / PR comment
 
-6. PR the change __into golem dev branch__, not straight to master
+6. PR the change __into golem master branch__, and allow modification by maintainer
 
 7. In your PR message, please add the reference of the issue, and the content to be used in NEWS.md. Changes can be : `## New Functions`, `## New features`, `## Breaking changes`, `## Bug fix`, `## Bug fix`, `## Internal changes`
 
@@ -59,14 +59,8 @@ You're welcome to fix the bug or implement the feature, but __please don't PR in
 
 ### Styling
 
-Please style the files according to `grkstyle::grk_style_transformer()`
+Please format files using `air`:
 
-```{r}
-# If you work in RStudio
-options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
-
-# If you work in VSCode
-options(languageserver.formatting_style = function(options) {
-  grkstyle::grk_style_transformer()
-})
+```sh
+air format .
 ```
