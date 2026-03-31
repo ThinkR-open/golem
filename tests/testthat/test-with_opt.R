@@ -52,8 +52,7 @@ test_that("We can explicitely print the golem app", {
 						input,
 						output,
 						session
-					) {
-					}
+					) {}
 				),
 				golem_opts = list()
 			)
