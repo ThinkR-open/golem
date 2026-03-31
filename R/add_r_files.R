@@ -100,9 +100,27 @@ add_r_files <- function(
 			"_"
 		)
 	}
-	tmp_name <- paste0(module, ext,  "_", name, ".R")
+	tmp_name <- paste0(
+		module,
+		ext,
+		"_",
+		name,
+		".R"
+	)
 	# Only if the fct. name is "".
-	if(name == "" && grepl("_.R$", tmp_name)) tmp_name <- gsub("_.R$", ".R", tmp_name)
+	if (
+		name == "" &&
+			grepl(
+				"_.R$",
+				tmp_name
+			)
+	) {
+		tmp_name <- gsub(
+			"_.R$",
+			".R",
+			tmp_name
+		)
+	}
 	where <- fs_path("R", tmp_name)
 
 	if (
