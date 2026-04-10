@@ -18,8 +18,7 @@ create_if_needed <- function(
 		"directory"
 	),
 	content = NULL,
-	overwrite = FALSE,
-	warn_if_exists = TRUE
+	overwrite = FALSE
 ) {
 	type <- match.arg(
 		type
@@ -32,69 +31,49 @@ create_if_needed <- function(
 		already_exists <- fs_dir_exists(path)
 	}
 
-	# If it already exists, handle overwrite logic
-	if (already_exists) {
-		if (!overwrite) {
-			if (rlang_is_interactive()) {
-				# In interactive mode, ask user if they want to overwrite
-				ask <- yesno(
-					sprintf(
-						"The %s %s already exists, overwrite?",
-						basename(path),
-						type
-					)
-				)
-				if (!ask) {
-					return(TRUE) # File exists, user doesn't want to overwrite
-				}
-			} else {
-				# In non-interactive mode, warn but don't overwrite (if warnings enabled)
-				if (warn_if_exists) {
-					warning(
-						sprintf(
-							"The %s %s already exists and will not be overwritten. Set overwrite = TRUE to force overwrite.",
-							basename(path),
-							type
-						),
-						call. = FALSE
-					)
-				}
-				return(TRUE) # File exists, not overwriting
-			}
-		}
-		# If we reach here, either overwrite = TRUE or user said yes to overwrite
+	# If it already exists and overwrite is FALSE, do nothing
+	if (already_exists && !overwrite) {
+		return(TRUE)
 	}
 
-	# If it doesn't exist, or we're overwriting, create it
-	if (!already_exists || overwrite) {
-		if (rlang_is_interactive() && !already_exists) {
-			# In interactive mode, ask if we should create new files/dirs
+	# File doesn't exist (or we're overwriting) - need to create it
+	if (!already_exists) {
+		if (rlang_is_interactive()) {
+			# In interactive mode, ask user for permission
 			ask <- ask_golem_creation_file(
 				path,
 				type
 			)
-			# Return early if the user doesn't allow
 			if (!ask) {
 				return(FALSE)
 			}
-		}
-
-		# Create the file or directory
-		if (type == "file") {
-			fs_file_create(path)
-			if (!is.null(content)) {
-				write(
-					content,
-					path,
-					append = !overwrite # If overwriting, don't append
+		} else {
+			# In non-interactive mode, inform user of creation
+			message(
+				sprintf(
+					"Creating %s %s",
+					type,
+					path
 				)
-			}
-		} else if (type == "directory") {
-			fs_dir_create(
-				path,
-				recurse = TRUE
 			)
 		}
+	}
+
+	# Create the file or directory
+	if (type == "file") {
+		fs_file_create(path)
+		if (!is.null(content)) {
+			write(
+				content,
+				path,
+				append = !overwrite
+			)
+		}
+	} else if (type == "directory") {
+		fs_dir_create(
+			path,
+			recurse = TRUE
+		)
 	}
 
 	# TRUE means that file exists (either created or already there)

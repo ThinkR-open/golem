@@ -39,8 +39,7 @@ add_r_files <- function(
 
 	dir_created <- create_if_needed(
 		"R",
-		type = "directory",
-		warn_if_exists = FALSE
+		type = "directory"
 	)
 
 	if (!dir_created) {
