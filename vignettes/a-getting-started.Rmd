@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 ## Installing {golem}
 
 You can install the stable version of `{golem}` from CRAN:
-``` {r}
+```{r}
 install.packages("golem")
 ```
 
@@ -205,4 +205,3 @@ rstudioapi::navigateToFile("dev/02_dev.R")
 ```{r, eval = TRUE, include = FALSE}
 try(fs::dir_delete(x), silent = TRUE)
 ```
-

@@ -32,6 +32,62 @@ test_that("add_fct and add_utils", {
 					open = FALSE,
 					with_test = TRUE
 				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand.R"
+					)
+				)
+				add_module(
+					"rand2",
+					open = FALSE,
+					with_test = TRUE,
+					fct = "test",
+					utils = "test"
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand2.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand2_fct_test.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand2_utils_test.R"
+					)
+				)
+				add_module(
+					"rand3",
+					open = FALSE,
+					with_test = TRUE,
+					fct = "",
+					utils = ""
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand3.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand3_fct.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand3_utils.R"
+					)
+				)
 				add_fct(
 					"ui",
 					"rand",
@@ -48,6 +104,7 @@ test_that("add_fct and add_utils", {
 						"fct_ui.R"
 					)
 				)
+
 				expect_exists(
 					file.path(
 						"R",
@@ -111,4 +168,71 @@ test_that("add_fct and add_utils", {
 			})
 		}
 	)
+})
+
+test_that("add_fct sanitizes names correctly", {
+	run_quietly_in_a_dummy_golem({
+		# Name with spaces
+
+		add_fct(
+			"ma fonction",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"fct_ma_fonction.R"
+			)
+		)
+
+		# Name with special characters
+
+		add_fct(
+			"my-special@function!",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"fct_my_special_function.R"
+			)
+		)
+
+		file_content2 <- readLines(
+			file.path(
+				"R",
+				"fct_my_special_function.R"
+			)
+		)
+		expect_true(
+			any(grepl(
+				"my_special_function <- function",
+				file_content2,
+				fixed = TRUE
+			))
+		)
+
+		# Name starting with number
+
+		add_fct(
+			"123function",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"fct_x123function.R"
+			)
+		)
+
+		file_content3 <- readLines(
+			file.path(
+				"R",
+				"fct_x123function.R"
+			)
+		)
+		expect_true(
+			any(grepl("x123function <- function", file_content3, fixed = TRUE))
+		)
+	})
 })

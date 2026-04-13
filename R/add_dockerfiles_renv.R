@@ -318,6 +318,15 @@ add_dockerfile_with_renv <- function(
 		append = single_file
 	)
 
+	if (set_golem.app.prod) {
+		cat_info(
+			sprintf(
+				"Dockerfile CMD sets options(golem.app.prod = %s)",
+				set_golem.app.prod
+			)
+		)
+	}
+
 	if (!single_file) {
 		out <- sprintf(
 			"# use cd to move to the folder containing the Dockerfile
@@ -431,10 +440,11 @@ add_dockerfile_with_renv_shinyproxy <- function(
 		single_file = single_file,
 		set_golem.app.prod = set_golem.app.prod,
 		dockerfile_cmd = sprintf(
-			"R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
+			"R -e \"options('shiny.port'=3838,shiny.host='0.0.0.0',golem.app.prod=%2$s);library(%1$s);%1$s::run_app()\"",
 			get_golem_name(
 				golem_wd = golem_wd
-			)
+			),
+			set_golem.app.prod
 		),
 		...
 	)
@@ -490,10 +500,11 @@ add_dockerfile_with_renv_heroku <- function(
 		single_file = single_file,
 		set_golem.app.prod = set_golem.app.prod,
 		dockerfile_cmd = sprintf(
-			"R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
+			"R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0',golem.app.prod=%2$s);library(%1$s);%1$s::run_app()\"",
 			get_golem_name(
 				golem_wd = golem_wd
-			)
+			),
+			set_golem.app.prod
 		),
 		...
 	)

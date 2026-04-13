@@ -44,7 +44,7 @@ Golem package follows the `grkstyle` style guide. Please make sure to follow the
 
 If your are using RStudio, you can set the `grkstyle` style guide as the default style guide for the package by running the following code:
 
-``` {r eval=FALSE}
+```{r eval=FALSE}
 options(
   styler.addins_style_transformer = "grkstyle::grk_style_transformer()"
 )
@@ -52,7 +52,7 @@ options(
 
 If your are using VSCode, you can set the `grkstyle` style guide as the default style guide for the package by running the following code:
 
-``` {r eval=FALSE}
+```{r eval=FALSE}
 options(languageserver.formatting_style = function(options) {
   grkstyle::grk_style_transformer()
 })
@@ -60,13 +60,13 @@ options(languageserver.formatting_style = function(options) {
 
 It's also possible to style one file at a time by running the following code:
 
-``` {r eval=FALSE}
+```{r eval=FALSE}
 grkstyle::grk_style_file("README.Rmd")
 ```
 
 ## Actual state of the package
 
-The package is in active development. The actual state of the check for `master` is: [![R-CMD-check](https://github.com/ThinkR-open/golem/actions/workflows/R-CMD-check.yaml/badge.svg?branch=master)](https://github.com/ThinkR-open/golem/actions/workflows/R-CMD-check.yaml)
+The package is in active development. The actual state of the check for `master` is available on [GitHub Actions](https://github.com/ThinkR-open/golem/actions/workflows/R-CMD-check.yaml).
 
 Please make sure that your contribution does not break the package. You can run the checks locally by running the following code:
 
