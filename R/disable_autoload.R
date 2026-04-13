@@ -30,7 +30,7 @@ disable_autoload <- function(
 			fls
 		)
 	) {
-		cat_red_bullet(
+		cli_alert_info(
 			"_disable_autoload.R already exists, skipping its creation."
 		)
 	} else {

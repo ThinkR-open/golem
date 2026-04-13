@@ -100,9 +100,9 @@ add_rstudio_files <- function(
 				"rsconnect::deployApp()\n"
 			)
 		)
-		cat_red_bullet(
+		cli_alert_info(
 			sprintf(
-				"Note that you'll need to upload the whole package to %s",
+				"Note that you'll need to upload the whole package to %s.",
 				service
 			)
 		)
@@ -279,7 +279,7 @@ add_rscignore_file <- function(
 			check_min_rsc
 		)
 	) {
-		cat_red_bullet(
+		cli_alert_warning(
 			sprintf(
 				"Not creating '.rscignore'. Required 'rsconnect' version >= %s!",
 				min_rsc

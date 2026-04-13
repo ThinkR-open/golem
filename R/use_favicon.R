@@ -138,8 +138,8 @@ use_favicon <- function(
 	}
 
 	if (ext == "png") {
-		cat_red_bullet(
-			"You choose a png favicon, please add `ext = 'png'` to `favicon()` within the `golem_add_external_resources()` function in 'app_ui.R'."
+		cli_alert_warning(
+			"You've chosen a png favicon, please add `ext = 'png'` to `favicon()` within the `golem_add_external_resources()` function in 'app_ui.R'."
 		)
 	} else {
 		cli_cat_line(
@@ -168,9 +168,9 @@ remove_favicon <- function(
 			path
 		)
 	} else {
-		cat_red_bullet(
+		cli_alert_warning(
 			sprintf(
-				"No file found at %s",
+				"No file found at %s.",
 				path
 			)
 		)

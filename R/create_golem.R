@@ -274,8 +274,8 @@ create_golem <- function(
 			ignore.stderr = TRUE
 		)
 		if (git_output) {
-			cat_red_bullet(
-				"Error initializing git repository"
+			cli_alert_danger(
+				"Error initializing git repository."
 			)
 		} else {
 			cli_alert_success(

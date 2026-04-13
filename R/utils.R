@@ -153,9 +153,9 @@ open_or_go_to <- function(
 			where
 		)
 	} else {
-		cat_red_bullet(
+		cli_alert_info(
 			sprintf(
-				"Go to %s",
+				"Go to %s.",
 				where
 			)
 		)

@@ -1,15 +1,3 @@
-cat_red_bullet <- function(
-	...
-) {
-	do_if_unquiet({
-		cli_cat_bullet(
-			...,
-			bullet = "bullet",
-			bullet_col = "red"
-		)
-	})
-}
-
 cat_info <- function(
 	...
 ) {
@@ -27,7 +15,7 @@ cat_exists <- function(
 	where
 ) {
 	do_if_unquiet({
-		cat_red_bullet(
+		cli_alert_info(
 			sprintf(
 				"[Skipped] %s already exists.",
 				basename(
@@ -48,8 +36,8 @@ cat_exists <- function(
 
 cat_dir_necessary <- function() {
 	do_if_unquiet({
-		cat_red_bullet(
-			"File not added (needs a valid directory)"
+		cli_alert_warning(
+			"File not added (needs a valid directory)."
 		)
 	})
 }

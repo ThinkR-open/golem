@@ -176,9 +176,9 @@ add_dockerfile_with_renv_ <- function(
 		if (length(old_version) > 0) {
 			lapply(old_version, file.remove)
 			lapply(old_version, unlink, force = TRUE)
-			cat_red_bullet(
+			cli_alert_warning(
 				sprintf(
-					"%s were removed from folder",
+					"%s were removed from folder.",
 					paste(
 						old_version,
 						collapse = ", "
@@ -210,7 +210,7 @@ add_dockerfile_with_renv_ <- function(
 				}
 			)
 			if (missing(out)) {
-				cat_red_bullet("Error during tar.gz building")
+				cli_alert_danger("Error during tar.gz building.")
 			} else {
 				cli_alert_success(
 					sprintf(

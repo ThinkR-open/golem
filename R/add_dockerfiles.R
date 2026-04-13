@@ -8,7 +8,7 @@ talk_once <- function(
 	) {
 		if (talk) {
 			talk <<- FALSE
-			cat_red_bullet(
+			cli_alert_warning(
 				msg
 			)
 		}
@@ -501,10 +501,10 @@ add_dockerfile_heroku_ <- talk_once(
 				apps_h
 			)
 		)
-		cat_red_bullet(
+		cli_alert_warning(
 			"Be sure to have the heroku CLI installed."
 		)
-		cat_red_bullet(
+		cli_alert_info(
 			sprintf(
 				"You can replace %s with another app name.",
 				apps_h
@@ -541,7 +541,7 @@ alert_build <- function(
 		dcf_read <- read.dcf(
 			path
 		)
-		cat_red_bullet(
+		cli_alert_warning(
 			sprintf(
 				"Be sure to keep your %s_%s.tar.gz file (generated using `pkgbuild::build(vignettes = FALSE)` ) in the same folder as the %s file generated",
 				dcf_read[1],

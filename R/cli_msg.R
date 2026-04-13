@@ -27,9 +27,9 @@ after_creation_message_js <- function(
 			fs_path_abs(dir) != fs_path_abs("inst/app/www") &&
 				utils::packageVersion("golem") < "0.2.0"
 		) {
-			cat_red_bullet(
+			cli_alert_warning(
 				sprintf(
-					'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/%s.js")`',
+					'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/%s.js")`.',
 					name
 				)
 			)
@@ -48,9 +48,9 @@ after_creation_message_css <- function(
 			fs_path_abs(dir) != fs_path_abs("inst/app/www") &&
 				utils::packageVersion("golem") < "0.2.0"
 		) {
-			cat_red_bullet(
+			cli_alert_warning(
 				sprintf(
-					'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`',
+					'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`.',
 					name
 				)
 			)
@@ -70,9 +70,9 @@ after_creation_message_sass <- function(
 			fs_path_abs(dir) != fs_path_abs("inst/app/www") &&
 				utils::packageVersion("golem") < "0.2.0"
 		) {
-			cat_red_bullet(
+			cli_alert_warning(
 				sprintf(
-					'After compile your Sass file, to link your css file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`'
+					'After compiling your Sass file, to link your css file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`.'
 				)
 			)
 		}

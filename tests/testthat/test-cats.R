@@ -3,7 +3,7 @@ test_that("cats works", {
 		cli_alert_success(
 			"File downloaded at /tmp."
 		)
-		cat_red_bullet(
+		cli_alert_warning(
 			"File not added (needs a valid directory)"
 		)
 		cat_info(
