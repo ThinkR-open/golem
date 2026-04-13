@@ -2,8 +2,6 @@
 
 # golem 0.5.1 to 0.6.0
 
-
-
 ## New features / user-visible changes
 
 - The `add_dockerfile_with_renv_*` function now generates a multi-stage Dockerfile by default (use `single_file = FALSE` to retain the previous behavior).
@@ -18,7 +16,6 @@
 - Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
 
 - The `add_*_files` and `use_*_files` now fail when:
-
   - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use\_\*\_file functions should only be there to add file (Singe responsabily )
   - The file that the user tries to create already exists
 
@@ -33,6 +30,8 @@
 - Removing the comments on golem creation didn't work fully, this has been fixed.
 
 - Renamed a function in 02_dev.R (add_any_file => add_empty_file)
+
+- The `create_if_needed()` function has been fixed to work in non interactive mode (#1154, @pachadotdev)
 
 ## Internal changes
 
