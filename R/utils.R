@@ -17,7 +17,8 @@ create_if_needed <- function(
 		"file",
 		"directory"
 	),
-	content = NULL
+	content = NULL,
+	overwrite = FALSE
 ) {
 	type <- match.arg(
 		type
@@ -25,65 +26,58 @@ create_if_needed <- function(
 
 	# Check if file or dir already exist
 	if (type == "file") {
-		dont_exist <- Negate(
-			fs_file_exists
-		)(
-			path
-		)
+		already_exists <- fs_file_exists(path)
 	} else if (type == "directory") {
-		dont_exist <- Negate(
-			fs_dir_exists
-		)(
-			path
-		)
+		already_exists <- fs_dir_exists(path)
 	}
-	# If it doesn't exist, ask if we are allowed to create it
-	if (dont_exist) {
+
+	# If it already exists and overwrite is FALSE, do nothing
+	if (already_exists && !overwrite) {
+		return(TRUE)
+	}
+
+	# File doesn't exist (or we're overwriting) - need to create it
+	if (!already_exists) {
 		if (rlang_is_interactive()) {
+			# In interactive mode, ask user for permission
 			ask <- ask_golem_creation_file(
 				path,
 				type
 			)
-			# Return early if the user doesn't allow
 			if (!ask) {
-				return(
-					FALSE
-				)
-			}
-			# Create the file
-			if (type == "file") {
-				fs_file_create(
-					path
-				)
-				write(
-					content,
-					path,
-					append = TRUE
-				)
-			} else if (type == "directory") {
-				fs_dir_create(
-					path,
-					recurse = TRUE
-				)
+				return(FALSE)
 			}
 		} else {
-			# We don't create the file if we are not in
-			# interactive mode
-			stop(
+			# In non-interactive mode, inform user of creation
+			message(
 				sprintf(
-					"The %s %s doesn't exist.",
-					basename(
-						path
-					),
-					type
+					"Creating %s %s",
+					type,
+					path
 				)
 			)
 		}
 	}
+
+	# Create the file or directory
+	if (type == "file") {
+		fs_file_create(path)
+		if (!is.null(content)) {
+			write(
+				content,
+				path,
+				append = !overwrite
+			)
+		}
+	} else if (type == "directory") {
+		fs_dir_create(
+			path,
+			recurse = TRUE
+		)
+	}
+
 	# TRUE means that file exists (either created or already there)
-	return(
-		TRUE
-	)
+	return(TRUE)
 }
 
 ask_golem_creation_file <- function(

@@ -31,6 +31,8 @@
 
 - Renamed a function in 02_dev.R (add_any_file => add_empty_file)
 
+- The `create_if_needed()` function has been fixed to work in non interactive mode (#1154, @pachadotdev)
+
 ## Internal changes
 
 - `{golem}` now embarks a `claude.md` file and a series of skills
