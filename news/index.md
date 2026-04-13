@@ -66,6 +66,11 @@ CRAN release: 2024-08-27
 
 - Renamed a function in 02_dev.R (add_any_file =\> add_empty_file)
 
+- The `create_if_needed()` function has been fixed to work in non
+  interactive mode
+  ([\#1154](https://github.com/ThinkR-open/golem/issues/1154),
+  [@pachadotdev](https://github.com/pachadotdev))
+
 ### Internal changes
 
 - [golem](https://thinkr-open.github.io/golem/) now embarks a
