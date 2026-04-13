@@ -319,9 +319,9 @@ add_dockerfile_with_renv <- function(
 	)
 
 	if (set_golem.app.prod) {
-		cat_info(
+		cli_alert_info(
 			sprintf(
-				"Dockerfile CMD sets options(golem.app.prod = %s)",
+				"Dockerfile CMD sets options(golem.app.prod = %s).",
 				set_golem.app.prod
 			)
 		)

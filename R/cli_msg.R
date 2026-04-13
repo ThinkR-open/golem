@@ -4,9 +4,9 @@ after_creation_message_generic <- function(
 	name
 ) {
 	do_if_unquiet({
-		cli_cat_bullet(
+		cli_alert_success(
 			sprintf(
-				"File %s created",
+				"File %s created.",
 				name
 			)
 		)

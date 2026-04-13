@@ -6,7 +6,7 @@ test_that("cats works", {
 		cli_alert_warning(
 			"File not added (needs a valid directory)"
 		)
-		cat_info(
+		cli_alert_info(
 			"File copied to /tmp"
 		)
 		cat_exists(

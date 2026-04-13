@@ -1,16 +1,3 @@
-cat_info <- function(
-	...
-) {
-	do_if_unquiet({
-		cli_cat_bullet(
-			...,
-			bullet = "arrow_right",
-			bullet_col = "grey"
-		)
-	})
-}
-
-
 cat_exists <- function(
 	where
 ) {
@@ -23,7 +10,7 @@ cat_exists <- function(
 				)
 			)
 		)
-		cat_info(
+		cli_alert_warning(
 			sprintf(
 				"If you want replace it, remove the %s file first.",
 				basename(
