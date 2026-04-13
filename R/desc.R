@@ -173,15 +173,9 @@ fill_desc <- function(
 		)
 	)
 
-	desc$write(
-		file = "DESCRIPTION"
-	)
+	desc$write(file = "DESCRIPTION")
 
-	cli_cat_bullet(
-		"DESCRIPTION file modified",
-		bullet = "tick",
-		bullet_col = "green"
-	)
+	cli_alert_success("DESCRIPTION file modified.")
 
 	if (
 		isTRUE(

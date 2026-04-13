@@ -10,24 +10,18 @@ enable_roxygenize <- function(
 		full.names = TRUE
 	)[1]
 ) {
-	cli_cat_bullet(
+	cli_alert_info(
 		sprintf(
-			"Reading %s content ",
+			"Reading %s content.",
 			basename(
 				path
 			)
-		),
-		bullet = "info",
-		bullet_col = "green"
+		)
 	)
 	source <- yaml::read_yaml(
 		file = path
 	)
-	cli_cat_bullet(
-		"Enable roxygen2",
-		bullet = "info",
-		bullet_col = "green"
-	)
+	cli_alert_info("Enable roxygen2.")
 	source[["PackageRoxygenize"]] <- "rd,collate,namespace"
 	yaml::write_yaml(
 		x = source,

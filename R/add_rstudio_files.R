@@ -92,12 +92,13 @@ add_rstudio_files <- function(
 		cat_created(
 			where
 		)
-		cli_cat_line(
-			"To deploy, run:"
-		)
-		cli_cat_bullet(
-			crayon_darkgrey(
-				"rsconnect::deployApp()\n"
+		cli_alert_info(
+			paste0(
+				"To deploy, run: ",
+				cli::style_bold(
+					cli::col_yellow("rsconnect::deployApp()")
+				),
+				"."
 			)
 		)
 		cli_alert_info(

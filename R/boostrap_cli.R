@@ -10,16 +10,6 @@ check_cli_installed <- function(
 	)
 }
 
-cli_cat_bullet <- function(
-	...
-) {
-	check_cli_installed()
-	do_if_unquiet({
-		cli::cat_bullet(...)
-	})
-}
-
-
 cli_cat_line <- function(
 	...
 ) {
@@ -39,18 +29,6 @@ cli_cat_rule <- function(
 
 	do_if_unquiet({
 		cli::cat_rule(
-			...
-		)
-	})
-}
-
-cli_alert <- function(
-	...
-) {
-	check_cli_installed()
-
-	do_if_unquiet({
-		cli::cli_alert(
 			...
 		)
 	})
@@ -79,7 +57,6 @@ cli_alert_success <- function(
 		)
 	})
 }
-
 
 cli_alert_danger <- function(
 	...

@@ -288,9 +288,7 @@ create_golem <- function(
 		old
 	)
 
-	cli_cat_rule(
-		"Done"
-	)
+	cli_alert_success("Done.")
 
 	cli_cat_line(
 		paste0(
