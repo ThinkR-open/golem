@@ -44,6 +44,18 @@ cli_cat_rule <- function(
 	})
 }
 
+cli_alert <- function(
+	...
+) {
+	check_cli_installed()
+
+	do_if_unquiet({
+		cli::cli_alert(
+			...
+		)
+	})
+}
+
 cli_cli_alert_info <- function(
 	...
 ) {
@@ -51,6 +63,43 @@ cli_cli_alert_info <- function(
 
 	do_if_unquiet({
 		cli::cli_alert_info(
+			...
+		)
+	})
+}
+
+cli_alert_success <- function(
+	...
+) {
+	check_cli_installed()
+
+	do_if_unquiet({
+		cli::cli_alert_success(
+			...
+		)
+	})
+}
+
+
+cli_alert_danger <- function(
+	...
+) {
+	check_cli_installed()
+
+	do_if_unquiet({
+		cli::cli_alert_danger(
+			...
+		)
+	})
+}
+
+cli_alert_warning <- function(
+	...
+) {
+	check_cli_installed()
+
+	do_if_unquiet({
+		cli::cli_alert_warning(
 			...
 		)
 	})
