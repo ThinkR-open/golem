@@ -34,7 +34,7 @@ enable_roxygenize <- function(
 		file = path
 	)
 
-	cat_green_tick(
-		"Done"
+	cli_alert_success(
+		"Done."
 	)
 }

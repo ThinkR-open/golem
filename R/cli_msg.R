@@ -160,7 +160,7 @@ file_already_there_dance <- function(
 	where,
 	open_file
 ) {
-	cat_green_tick("File already exists.")
+	cli_alert_info("File already exists.")
 	open_or_go_to(
 		where = where,
 		open_file = open_file

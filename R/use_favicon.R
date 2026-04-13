@@ -128,9 +128,9 @@ use_favicon <- function(
 			to,
 			overwrite = TRUE
 		)
-		cat_green_tick(
+		cli_alert_success(
 			sprintf(
-				"favicon.%s created at %s",
+				"favicon.%s created at %s.",
 				ext,
 				to
 			)
@@ -158,9 +158,9 @@ remove_favicon <- function(
 			path
 		)
 	) {
-		cat_green_tick(
+		cli_alert_success(
 			sprintf(
-				"Removing favicon at %s",
+				"Removed favicon at %s.",
 				path
 			)
 		)

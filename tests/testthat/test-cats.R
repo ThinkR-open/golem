@@ -1,7 +1,7 @@
 test_that("cats works", {
 	expect_snapshot({
-		cat_green_tick(
-			"File downloaded at /tmp"
+		cli_alert_success(
+			"File downloaded at /tmp."
 		)
 		cat_red_bullet(
 			"File not added (needs a valid directory)"

@@ -1,15 +1,3 @@
-cat_green_tick <- function(
-	...
-) {
-	do_if_unquiet({
-		cli_cat_bullet(
-			...,
-			bullet = "tick",
-			bullet_col = "green"
-		)
-	})
-}
-
 cat_red_bullet <- function(
 	...
 ) {
@@ -82,9 +70,9 @@ cat_downloaded <- function(
 	file = "File"
 ) {
 	do_if_unquiet({
-		cat_green_tick(
+		cli_alert_success(
 			sprintf(
-				"%s downloaded at %s",
+				"%s downloaded at %s.",
 				file,
 				where
 			)
@@ -108,9 +96,9 @@ cat_copied <- function(
 	file = "File"
 ) {
 	do_if_unquiet({
-		cat_green_tick(
+		cli_alert_success(
 			sprintf(
-				"%s copied to %s",
+				"%s copied to %s.",
 				file,
 				where
 			)
@@ -123,9 +111,9 @@ cat_created <- function(
 	file = "File"
 ) {
 	do_if_unquiet({
-		cat_green_tick(
+		cli_alert_success(
 			sprintf(
-				"%s created at %s",
+				"%s created at %s.",
 				file,
 				where
 			)
@@ -135,7 +123,7 @@ cat_created <- function(
 
 cat_automatically_linked <- function() {
 	do_if_unquiet({
-		cat_green_tick(
+		cli_alert_success(
 			"File automatically linked in `golem_add_external_resources()`."
 		)
 	})

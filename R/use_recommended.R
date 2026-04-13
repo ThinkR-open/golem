@@ -53,8 +53,8 @@ use_recommended_deps <- function(
 		)
 	}
 
-	cat_green_tick(
-		"Dependencies added"
+	cli_alert_success(
+		"Dependencies added."
 	)
 }
 
@@ -145,7 +145,7 @@ use_recommended_tests <- function(
 			error = error
 		)
 	}
-	cat_green_tick(
-		"Tests added"
+	cli_alert_success(
+		"Tests added."
 	)
 }

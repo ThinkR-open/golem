@@ -32,8 +32,8 @@ use_utils_ui <- function(
 	)
 
 	if (added) {
-		cat_green_tick(
-			"Utils UI added"
+		cli_alert_success(
+			"Utils UI added."
 		)
 
 		if (with_test) {
@@ -90,8 +90,8 @@ use_utils_test_ui <- function(
 	)
 
 	if (added) {
-		cat_green_tick(
-			"Tests on utils_ui added"
+		cli_alert_success(
+			"Tests on utils_ui added."
 		)
 	}
 }
@@ -116,8 +116,8 @@ use_utils_server <- function(
 		golem_wd = golem_wd
 	)
 	if (added) {
-		cat_green_tick(
-			"Utils server added"
+		cli_alert_success(
+			"Utils server added."
 		)
 
 		if (with_test) {
@@ -174,8 +174,8 @@ use_utils_test_ <- function(
 	)
 
 	if (added) {
-		cat_green_tick(
-			"Tests on utils_server added"
+		cli_alert_success(
+			"Tests on utils_server added."
 		)
 	}
 }

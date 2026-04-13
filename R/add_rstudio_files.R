@@ -117,7 +117,7 @@ add_rstudio_files <- function(
 			open
 		)
 	} else {
-		cat_green_tick(
+		cli_alert_info(
 			"The 'app.R'-file already exists."
 		)
 		open_or_go_to(
@@ -303,7 +303,7 @@ add_rscignore_file <- function(
 			)
 		)
 	) {
-		cat_green_tick(
+		cli_alert_info(
 			"The '.rscignore'-file already exists."
 		)
 		open_or_go_to(
