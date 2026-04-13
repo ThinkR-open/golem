@@ -13,9 +13,9 @@ check_cli_installed <- function(
 cli_cat_line <- function(
 	...
 ) {
-	check_cli_installed()
-
 	do_if_unquiet({
+		check_cli_installed()
+
 		cli::cat_line(
 			...
 		)
@@ -25,9 +25,9 @@ cli_cat_line <- function(
 cli_cat_rule <- function(
 	...
 ) {
-	check_cli_installed()
-
 	do_if_unquiet({
+		check_cli_installed()
+
 		cli::cat_rule(
 			...
 		)
@@ -37,9 +37,9 @@ cli_cat_rule <- function(
 cli_alert_info <- function(
 	...
 ) {
-	check_cli_installed()
-
 	do_if_unquiet({
+		check_cli_installed()
+
 		cli::cli_alert_info(
 			...
 		)
@@ -49,9 +49,9 @@ cli_alert_info <- function(
 cli_alert_success <- function(
 	...
 ) {
-	check_cli_installed()
-
 	do_if_unquiet({
+		check_cli_installed()
+
 		cli::cli_alert_success(
 			...
 		)
@@ -61,9 +61,9 @@ cli_alert_success <- function(
 cli_alert_danger <- function(
 	...
 ) {
-	check_cli_installed()
-
 	do_if_unquiet({
+		check_cli_installed()
+
 		cli::cli_alert_danger(
 			...
 		)
@@ -73,9 +73,9 @@ cli_alert_danger <- function(
 cli_alert_warning <- function(
 	...
 ) {
-	check_cli_installed()
-
 	do_if_unquiet({
+		check_cli_installed()
+
 		cli::cli_alert_warning(
 			...
 		)
