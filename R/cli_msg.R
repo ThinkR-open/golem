@@ -168,7 +168,7 @@ file_already_there_dance <- function(
 }
 
 cli_abort_dir_create <- function() {
-	cli_cli_abort(
+	cli_abort(
 		"The dir_create argument is deprecated."
 	)
 }

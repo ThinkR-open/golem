@@ -31,7 +31,7 @@ check_file_has_the_correct_extension <- function(
 		) !=
 			type
 	) {
-		cli_cli_abort(
+		cli_abort(
 			paste0(
 				"File not added (URL must end with .",
 				type,

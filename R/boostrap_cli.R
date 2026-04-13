@@ -56,7 +56,7 @@ cli_alert <- function(
 	})
 }
 
-cli_cli_alert_info <- function(
+cli_alert_info <- function(
 	...
 ) {
 	check_cli_installed()
@@ -105,7 +105,7 @@ cli_alert_warning <- function(
 	})
 }
 
-cli_cli_abort <- function(
+cli_abort <- function(
 	message
 ) {
 	if (

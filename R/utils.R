@@ -373,10 +373,10 @@ check_name_syntax <- function(
 			)
 		)
 	) {
-		cli_cli_alert_info(
+		cli_alert_info(
 			"You set a 'name' that starts with 'mod_'."
 		)
-		cli_cli_alert_info(
+		cli_alert_info(
 			"This is not necessary as golem will prepend 'mod_' to your module name automatically."
 		)
 	}
