@@ -9,9 +9,6 @@ test_that("cats works", {
 		cli_alert_info(
 			"File copied to /tmp"
 		)
-		cat_exists(
-			"/tmp"
-		)
 		cat_dir_necessary()
 		cat_start_download()
 		cat_downloaded(

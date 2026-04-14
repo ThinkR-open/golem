@@ -34,6 +34,18 @@ cli_cat_rule <- function(
 	})
 }
 
+cli_alert <- function(
+	...
+) {
+	do_if_unquiet({
+		check_cli_installed()
+
+		cli::cli_alert(
+			...
+		)
+	})
+}
+
 cli_alert_info <- function(
 	...
 ) {

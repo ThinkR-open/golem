@@ -246,8 +246,21 @@ use_utils <- function(
 			destination
 		)
 	) {
-		cat_exists(
-			destination
+		cli_alert_info(
+			sprintf(
+				"[Skipped] %s already exists.",
+				basename(
+					destination
+				)
+			)
+		)
+		cli_alert_warning(
+			sprintf(
+				"If you want replace it, remove the %s file first.",
+				basename(
+					destination
+				)
+			)
 		)
 		return(
 			FALSE

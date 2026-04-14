@@ -1,24 +1,3 @@
-cat_exists <- function(
-	where
-) {
-	cli_alert_info(
-		sprintf(
-			"[Skipped] %s already exists.",
-			basename(
-				where
-			)
-		)
-	)
-	cli_alert_warning(
-		sprintf(
-			"If you want replace it, remove the %s file first.",
-			basename(
-				where
-			)
-		)
-	)
-}
-
 cat_dir_necessary <- function() {
 	cli_alert_warning(
 		"File not added (needs a valid directory)."
@@ -26,11 +5,8 @@ cat_dir_necessary <- function() {
 }
 
 cat_start_download <- function() {
-	cli_cat_line(
-		""
-	)
-	cli_cat_line(
-		"Initiating file download"
+	cli_alert(
+		"Initiating file download."
 	)
 }
 
@@ -48,11 +24,8 @@ cat_downloaded <- function(
 }
 
 cat_start_copy <- function() {
-	cli_cat_line(
-		""
-	)
-	cli_cat_line(
-		"Copying file"
+	cli_alert(
+		"Copying file."
 	)
 }
 
