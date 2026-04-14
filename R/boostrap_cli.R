@@ -1,5 +1,5 @@
-# All the fns here check that {cli} is installed
-# before doing anything.
+# All functions here check that {cli} is installed.
+# This is done only when golem is not set to quiet mode.
 check_cli_installed <- function(
 	reason = "to have attractive command line interfaces with {golem}.\nYou can install all {golem} dev dependencies with `golem::install_dev_deps()`."
 ) {
