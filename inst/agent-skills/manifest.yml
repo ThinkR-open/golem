@@ -1,0 +1,11 @@
+version: 0.1.0
+settings:
+  claude:
+    path: .claude/skills
+    main_file_name: CLAUDE.md
+  agents:
+    path: .agents/skills
+    main_file_name: AGENTS.md
+skills_available:
+  - golem-upgrade
+  - golem-fix-missing-ns
