@@ -104,10 +104,10 @@ perform_checks_and_copy_if_everything_is_ok <- function(
 	)
 	file_created_dance(
 		where = where_to_copy_to,
-		fun = after_creation_message_css,
+		fun = file_created_fun,
 		golem_wd = golem_wd,
 		dir = directory_to_copy_to,
 		open_file = open,
-		catfun = cat_copied
+		catfun = NULL
 	)
 }

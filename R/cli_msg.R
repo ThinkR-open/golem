@@ -64,21 +64,6 @@ cat_automatically_linked <- function() {
 	)
 }
 
-after_creation_message_generic <- function(
-	golem_wd,
-	dir,
-	name
-) {
-	do_if_unquiet({
-		cli_alert_success(
-			sprintf(
-				"File %s created.",
-				name
-			)
-		)
-	})
-}
-
 after_creation_message_js <- function(
 	golem_wd,
 	dir,
@@ -126,25 +111,6 @@ after_creation_message_css <- function(
 	}
 }
 
-after_creation_message_sass <- function(
-	golem_wd,
-	dir,
-	name
-) {
-	if (desc_exist(golem_wd)) {
-		if (
-			fs_path_abs(dir) != fs_path_abs("inst/app/www") &&
-				utils::packageVersion("golem") < "0.2.0"
-		) {
-			cli_alert_warning(
-				sprintf(
-					'After compiling your Sass file, to link your css file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`.'
-				)
-			)
-		}
-	}
-}
-
 after_creation_message_html_template <- function(
 	golem_wd,
 	dir,
@@ -178,43 +144,26 @@ after_creation_message_html_template <- function(
 	})
 }
 
-after_creation_message_any_file <- function(
-	golem_wd,
-	dir,
-	name
-) {
-	do_if_unquiet({
-		cli_cat_line("")
-		cli_cat_line(
-			sprintf(
-				"File downloaded at %s",
-				fs_path_abs(
-					fs_path(
-						dir,
-						name
-					)
-				)
-			)
-		)
-	})
-}
-
 file_created_dance <- function(
 	where,
-	fun,
+	fun = NULL,
 	golem_wd,
 	dir,
 	name,
 	open_file,
 	catfun = cat_created
 ) {
-	catfun(where)
+	if (!is.null(catfun)) {
+		catfun(where)
+	}
 
-	fun(
-		golem_wd,
-		dir,
-		basename(where)
-	)
+	if (!is.null(fun)) {
+		fun(
+			golem_wd,
+			dir,
+			basename(where)
+		)
+	}
 
 	open_or_go_to(
 		where = where,

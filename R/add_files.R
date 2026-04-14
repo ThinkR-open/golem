@@ -629,7 +629,7 @@ add_sass_file <- function(
 
 	on.exit({
 		cli_alert_success(
-			"After running the compilation, your CSS file will be automatically link in `golem_add_external_resources()`."
+			"After running the compilation, the generated CSS file will be automatically linked in `golem_add_external_resources()`."
 		)
 	})
 }
