@@ -175,7 +175,7 @@ test_that("remove_comments works", {
 })
 
 test_that("open_or_go_to works", {
-	res <- testthat::capture_output_lines({
+	res <- testthat::capture_messages({
 		open_or_go_to(
 			"jurek",
 			FALSE
