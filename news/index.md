@@ -12,6 +12,10 @@ CRAN release: 2024-08-27
 - The `add_dockerfile_with_renv_*` function now creates a Dockerfile
   that sets `golem.app.prod = TRUE` by default (use
   `set_golem.app.prod = FALSE` to retain the previous behavior).
+- Print functions have be reworked standardized using the
+  [cli](https://cli.r-lib.org) package
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#89](https://github.com/ThinkR-open/golem/issues/89))
 
 ### Breaking change
 

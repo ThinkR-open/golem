@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9015</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1.9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,6 +49,7 @@
 <h3 id="new-features--user-visible-changes-0-5-1">New features / user-visible changes<a class="anchor" aria-label="anchor" href="#new-features--user-visible-changes-0-5-1"></a></h3>
 <ul><li>The <code>add_dockerfile_with_renv_*</code> function now generates a multi-stage Dockerfile by default (use <code>single_file = FALSE</code> to retain the previous behavior).</li>
 <li>The <code>add_dockerfile_with_renv_*</code> function now creates a Dockerfile that sets <code>golem.app.prod = TRUE</code> by default (use <code>set_golem.app.prod = FALSE</code> to retain the previous behavior).</li>
+<li>Print functions have be reworked standardized using the <a href="https://cli.r-lib.org" class="external-link">cli</a> package (<a href="https://github.com/ilyaZar" class="external-link">@ilyaZar</a>, <a href="https://github.com/ThinkR-open/golem/issues/89" class="external-link">#89</a>)</li>
 </ul></div>
 <div class="section level3">
 <h3 id="breaking-change-0-5-1">Breaking change<a class="anchor" aria-label="anchor" href="#breaking-change-0-5-1"></a></h3>
