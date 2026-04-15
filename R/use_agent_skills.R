@@ -4,6 +4,10 @@
 #'   interactive menu.
 #' @param agent_specs Which agent specifications to install. Use `"ask"` for the
 #'   interactive menu.
+#' @param skills Skills to install. Use `NULL` for the interactive selector, or
+#'   `"all"` to install all available skills.
+#' @param overwrite How to handle existing files. Use `"ask"` for the
+#'   interactive menu.
 #' @param golem_wd Path to the golem project where files should be copied.
 #'
 #' @return A list of selected options and copied paths, invisibly.
@@ -11,10 +15,13 @@
 use_agent_skills <- function(
 	source = c("ask", "local", "remote"),
 	agent_specs = c("ask", "claude", "agents", "both"),
+	skills = NULL,
+	overwrite = c("ask", "overwrite", "skip", "abort"),
 	golem_wd = get_golem_wd()
 ) {
 	source <- match.arg(source)
 	agent_specs <- match.arg(agent_specs)
+	overwrite <- match.arg(overwrite)
 
 	if (identical(source, "ask")) source <- ask_agent_skills_source()
 	# early return if user cancels interaction
@@ -36,6 +43,10 @@ use_agent_skills <- function(
 	}
 
 	if (identical(agent_specs, "ask")) agent_specs <- ask_agent_skills_specs()
+	if (is.null(agent_specs)) {
+		cli_alert_warning("Abort selection.")
+		return(invisible(NULL))
+	}
 	selected_agent_specs <- switch(
 		agent_specs,
 		claude = "claude",
@@ -43,13 +54,15 @@ use_agent_skills <- function(
 		both = c("claude", "agents"),
 		NULL
 	)
-	# early return if user cancels interaction
-	if (is.null(selected_agent_specs)) {
-		cli_alert_warning("Abort selection.")
-		return(invisible(NULL))
-	}
 
-	skills <- ask_agent_skills_selection(manifest$skills_available)
+	if (is.null(skills)) {
+		skills <- ask_agent_skills_selection(manifest$skills_available)
+	} else {
+		skills <- normalize_agent_skills_argument(
+			skills = skills,
+			skills_available = manifest$skills_available
+		)
+	}
 	if (is.null(skills)) {
 		cli_alert_warning("Abort selection.")
 		return(invisible(NULL))
@@ -60,6 +73,7 @@ use_agent_skills <- function(
 		manifest = manifest,
 		selected_agent_specs = selected_agent_specs,
 		skills = skills,
+		overwrite = overwrite,
 		golem_wd = golem_wd
 	)
 
@@ -70,6 +84,7 @@ use_agent_skills <- function(
 		agent_specs = agent_specs,
 		selected_agent_specs = selected_agent_specs,
 		skills = skills,
+		overwrite = overwrite,
 		root = root,
 		copied = copied
 	)
@@ -181,11 +196,36 @@ normalize_agent_skills_selection <- function(
 	selected
 }
 
+normalize_agent_skills_argument <- function(
+	skills,
+	skills_available
+) {
+	if (
+		length(skills) == 1 &&
+		tolower(skills) == "all"
+	) {
+		return(skills_available)
+	}
+
+	unknown_skills <- setdiff(skills, skills_available)
+	if (length(unknown_skills)) {
+		cli_abort(
+			sprintf(
+				"Unknown agent skill(s): %s.",
+				paste(unknown_skills, collapse = ", ")
+			)
+		)
+	}
+
+	skills
+}
+
 copy_agent_skills <- function(
 	root,
 	manifest,
 	selected_agent_specs,
 	skills,
+	overwrite,
 	golem_wd
 ) {
 	copied <- character()
@@ -196,6 +236,7 @@ copy_agent_skills <- function(
 		copied_file <- copy_agent_skill_path(
 			source = file.path(root, settings$main_file_name),
 			target = file.path(golem_wd, settings$main_file_name),
+			overwrite = overwrite,
 			type = "file"
 		)
 		if (is.null(copied_file)) return(NULL)
@@ -205,6 +246,7 @@ copy_agent_skills <- function(
 			copied_dir <- copy_agent_skill_path(
 				source = file.path(root, "skills", skill),
 				target = file.path(golem_wd, settings$path, skill),
+				overwrite = overwrite,
 				type = "dir"
 			)
 			if (is.null(copied_dir)) return(NULL)
@@ -218,8 +260,10 @@ copy_agent_skills <- function(
 copy_agent_skill_path <- function(
 	source,
 	target,
+	overwrite = c("ask", "overwrite", "skip", "abort"),
 	type = c("file", "dir")
 ) {
+	overwrite <- match.arg(overwrite)
 	type <- match.arg(type)
 
 	if (!file.exists(source)) {
@@ -227,7 +271,13 @@ copy_agent_skill_path <- function(
 	}
 
 	if (file.exists(target)) {
-		action <- ask_agent_skills_overwrite(target)
+		action <- switch(
+			overwrite,
+			ask = ask_agent_skills_overwrite(target),
+			overwrite = "overwrite",
+			skip = "skip",
+			abort = cli_abort(sprintf("Agent skill target already exists at %s.", target))
+		)
 		if (identical(action, "cancel")) return(NULL)
 		if (identical(action, "skip")) return(NA_character_)
 	}
