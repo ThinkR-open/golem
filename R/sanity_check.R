@@ -100,7 +100,7 @@ sanity_check <- function(
 			source_markers
 		)
 	} else {
-		cat_green_tick(
+		cli_alert_success(
 			"Sanity check passed successfully."
 		)
 	}

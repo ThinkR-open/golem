@@ -143,7 +143,7 @@ use_internal_file <- function(
 		path_to_copy_from = path,
 		directory_to_copy_to = fs_path_abs(dir),
 		file_type = NULL,
-		file_created_fun = after_creation_message_html_template,
+		file_created_fun = NULL,
 		golem_wd = golem_wd,
 		name = name,
 		open = open

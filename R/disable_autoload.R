@@ -30,7 +30,7 @@ disable_autoload <- function(
 			fls
 		)
 	) {
-		cat_red_bullet(
+		cli_alert_info(
 			"_disable_autoload.R already exists, skipping its creation."
 		)
 	} else {
@@ -41,8 +41,8 @@ disable_autoload <- function(
 			"# Disabling shiny autoload\n\n# See ?shiny::loadSupport for more information",
 			fls
 		)
-		cat_green_tick(
-			"Created"
+		cli_alert_success(
+			"Created."
 		)
 	}
 	return(

@@ -155,7 +155,7 @@ use_external_file <- function(
 		url_to_download_from = url,
 		directory_to_download_to = fs_path_abs(dir),
 		file_type = NULL,
-		file_created_fun = after_creation_message_any_file,
+		file_created_fun = NULL,
 		golem_wd = golem_wd,
 		name = name,
 		open = open

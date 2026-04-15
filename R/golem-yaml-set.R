@@ -120,13 +120,13 @@ set_golem_name <- function(
 	)
 
 	if (old_name != name) {
-		cli_cli_alert_info(
+		cli_alert_info(
 			sprintf(
 				"Please note that the old name %s might still be in some places, for example in the ./docs folder.",
 				old_name
 			)
 		)
-		cli_cli_alert_info(
+		cli_alert_info(
 			"You might need to change it manually there.",
 		)
 	}

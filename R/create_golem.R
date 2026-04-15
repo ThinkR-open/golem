@@ -88,8 +88,8 @@ copy_golem_skeleton_and_replace_name <- function(
 		package_name,
 		path_to_golem
 	)
-	cat_green_tick(
-		"Copied app skeleton"
+	cli_alert_success(
+		"Copied app skeleton."
 	)
 }
 
@@ -158,8 +158,8 @@ create_golem <- function(
 		)(
 			package_name
 		)
-		cat_green_tick(
-			"Valid package name"
+		cli_alert_success(
+			"Valid package name."
 		)
 	}
 
@@ -183,7 +183,7 @@ create_golem <- function(
 				call. = FALSE
 			)
 		} else {
-			cat_green_tick(
+			cli_alert_success(
 				"Deleting existing project."
 			)
 			fs_dir_delete(
@@ -229,8 +229,8 @@ create_golem <- function(
 		old
 	)
 
-	cat_green_tick
-	("All set")
+	cli_alert_success
+	("All set.")
 
 	if (
 		isTRUE(
@@ -274,12 +274,12 @@ create_golem <- function(
 			ignore.stderr = TRUE
 		)
 		if (git_output) {
-			cat_red_bullet(
-				"Error initializing git repository"
+			cli_alert_danger(
+				"Error initializing git repository."
 			)
 		} else {
-			cat_green_tick(
-				"Initialized git repository"
+			cli_alert_success(
+				"Initialized git repository."
 			)
 		}
 	}
@@ -288,9 +288,7 @@ create_golem <- function(
 		old
 	)
 
-	cli_cat_rule(
-		"Done"
-	)
+	cli_alert_success("Done.")
 
 	cli_cat_line(
 		paste0(

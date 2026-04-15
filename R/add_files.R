@@ -628,8 +628,8 @@ add_sass_file <- function(
 	)
 
 	on.exit({
-		cat_green_tick(
-			"After running the compilation, your CSS file will be automatically link in `golem_add_external_resources()`."
+		cli_alert_success(
+			"After running the compilation, the generated CSS file will be automatically linked in `golem_add_external_resources()`."
 		)
 	})
 }
@@ -666,7 +666,7 @@ add_sass_code_to_dev_script <- function(
 			con = "dev/run_dev.R"
 		)
 
-		cat_green_tick(
+		cli_alert_success(
 			"Code added in run_dev.R to compile your Sass file to CSS file."
 		)
 	}
@@ -989,7 +989,7 @@ add_ui_server_files <- function(
 			"ui file"
 		)
 	} else {
-		cat_green_tick(
+		cli_alert_info(
 			"UI file already exists."
 		)
 	}
@@ -1024,8 +1024,8 @@ add_ui_server_files <- function(
 			"server file"
 		)
 	} else {
-		cat_green_tick(
-			"server file already exists."
+		cli_alert_info(
+			"Server file already exists."
 		)
 	}
 }

@@ -153,9 +153,9 @@ open_or_go_to <- function(
 			where
 		)
 	} else {
-		cat_red_bullet(
+		cli_alert_info(
 			sprintf(
-				"Go to %s",
+				"Go to %s.",
 				where
 			)
 		)
@@ -373,10 +373,10 @@ check_name_syntax <- function(
 			)
 		)
 	) {
-		cli_cli_alert_info(
+		cli_alert_info(
 			"You set a 'name' that starts with 'mod_'."
 		)
-		cli_cli_alert_info(
+		cli_alert_info(
 			"This is not necessary as golem will prepend 'mod_' to your module name automatically."
 		)
 	}

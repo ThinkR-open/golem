@@ -1,5 +1,5 @@
-# All the fns here check that {cli} is installed
-# before doing anything.
+# All functions here check that {cli} is installed.
+# This is done only when golem is not set to quiet mode.
 check_cli_installed <- function(
 	reason = "to have attractive command line interfaces with {golem}.\nYou can install all {golem} dev dependencies with `golem::install_dev_deps()`."
 ) {
@@ -10,22 +10,12 @@ check_cli_installed <- function(
 	)
 }
 
-cli_cat_bullet <- function(
-	...
-) {
-	check_cli_installed()
-	do_if_unquiet({
-		cli::cat_bullet(...)
-	})
-}
-
-
 cli_cat_line <- function(
 	...
 ) {
-	check_cli_installed()
-
 	do_if_unquiet({
+		check_cli_installed()
+
 		cli::cat_line(
 			...
 		)
@@ -35,28 +25,76 @@ cli_cat_line <- function(
 cli_cat_rule <- function(
 	...
 ) {
-	check_cli_installed()
-
 	do_if_unquiet({
+		check_cli_installed()
+
 		cli::cat_rule(
 			...
 		)
 	})
 }
 
-cli_cli_alert_info <- function(
+cli_alert <- function(
 	...
 ) {
-	check_cli_installed()
-
 	do_if_unquiet({
+		check_cli_installed()
+
+		cli::cli_alert(
+			...
+		)
+	})
+}
+
+cli_alert_info <- function(
+	...
+) {
+	do_if_unquiet({
+		check_cli_installed()
+
 		cli::cli_alert_info(
 			...
 		)
 	})
 }
 
-cli_cli_abort <- function(
+cli_alert_success <- function(
+	...
+) {
+	do_if_unquiet({
+		check_cli_installed()
+
+		cli::cli_alert_success(
+			...
+		)
+	})
+}
+
+cli_alert_danger <- function(
+	...
+) {
+	do_if_unquiet({
+		check_cli_installed()
+
+		cli::cli_alert_danger(
+			...
+		)
+	})
+}
+
+cli_alert_warning <- function(
+	...
+) {
+	do_if_unquiet({
+		check_cli_installed()
+
+		cli::cli_alert_warning(
+			...
+		)
+	})
+}
+
+cli_abort <- function(
 	message
 ) {
 	if (

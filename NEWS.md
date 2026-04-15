@@ -6,6 +6,7 @@
 
 - The `add_dockerfile_with_renv_*` function now generates a multi-stage Dockerfile by default (use `single_file = FALSE` to retain the previous behavior).
 - The `add_dockerfile_with_renv_*` function now creates a Dockerfile that sets `golem.app.prod = TRUE` by default (use `set_golem.app.prod = FALSE` to retain the previous behavior).
+- Print functions have be reworked standardized using the `{cli}` package (@ilyaZar, #89)
 
 ## Breaking change
 

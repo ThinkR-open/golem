@@ -15,7 +15,7 @@ check_url_has_the_correct_extension <- function(
 		) !=
 			type
 	) {
-		cli_cli_abort(
+		cli_abort(
 			paste0(
 				"File not added (URL must end with .",
 				type,
@@ -110,6 +110,6 @@ perform_checks_and_download_if_everything_is_ok <- function(
 		golem_wd = golem_wd,
 		dir = directory_to_download_to,
 		open_file = open,
-		catfun = cat_downloaded
+		catfun = NULL
 	)
 }

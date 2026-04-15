@@ -89,7 +89,7 @@ fill_desc <- function(
 				0
 		) {
 			# We use the old author params to fill the DESCRIPTION file
-			cli_cli_alert_info(
+			cli_alert_info(
 				"the `authors` argument is empty, using `author_first_name`, `author_last_name`, `author_email` and `author_orcid` to fill the DESCRIPTION file."
 			)
 			authors <- person(
@@ -104,7 +104,7 @@ fill_desc <- function(
 		} else {
 			# Case 1.2, old author params are null and authors is not empty
 			# We keep the authors as is
-			cli_cli_alert_info(
+			cli_alert_info(
 				"the `authors` argument is not empty, using it to fill the DESCRIPTION file, the old author params are ignored."
 			)
 		}
@@ -173,15 +173,9 @@ fill_desc <- function(
 		)
 	)
 
-	desc$write(
-		file = "DESCRIPTION"
-	)
+	desc$write(file = "DESCRIPTION")
 
-	cli_cat_bullet(
-		"DESCRIPTION file modified",
-		bullet = "tick",
-		bullet_col = "green"
-	)
+	cli_alert_success("DESCRIPTION file modified.")
 
 	if (
 		isTRUE(

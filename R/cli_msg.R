@@ -1,16 +1,67 @@
-after_creation_message_generic <- function(
-	golem_wd,
-	dir,
-	name
+# All user facing logging/printing functions. Includes:
+# - basic cli wrappers for standard messages
+# - more elaborate messaging and dance type functions
+cat_dir_necessary <- function() {
+	cli_alert_warning(
+		"File not added (needs a valid directory)."
+	)
+}
+
+cat_start_download <- function() {
+	cli_alert(
+		"Initiating file download."
+	)
+}
+
+cat_downloaded <- function(
+	where,
+	file = "File"
 ) {
-	do_if_unquiet({
-		cli_cat_bullet(
-			sprintf(
-				"File %s created",
-				name
-			)
+	cli_alert_success(
+		sprintf(
+			"%s downloaded at %s.",
+			file,
+			where
 		)
-	})
+	)
+}
+
+cat_start_copy <- function() {
+	cli_alert(
+		"Copying file."
+	)
+}
+
+cat_copied <- function(
+	where,
+	file = "File"
+) {
+	cli_alert_success(
+		sprintf(
+			"%s copied to %s.",
+			file,
+			where
+		)
+	)
+}
+
+cat_created <- function(
+	where,
+	file = "File"
+) {
+	cli_alert_success(
+		sprintf(
+			"%s created at %s.",
+			file,
+			where
+		)
+	)
+}
+
+cat_automatically_linked <- function() {
+	cli_alert_success(
+		"File automatically linked in `golem_add_external_resources()`."
+	)
 }
 
 after_creation_message_js <- function(
@@ -27,9 +78,9 @@ after_creation_message_js <- function(
 			fs_path_abs(dir) != fs_path_abs("inst/app/www") &&
 				utils::packageVersion("golem") < "0.2.0"
 		) {
-			cat_red_bullet(
+			cli_alert_warning(
 				sprintf(
-					'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/%s.js")`',
+					'To link to this file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$script(src="www/%s.js")`.',
 					name
 				)
 			)
@@ -48,33 +99,14 @@ after_creation_message_css <- function(
 			fs_path_abs(dir) != fs_path_abs("inst/app/www") &&
 				utils::packageVersion("golem") < "0.2.0"
 		) {
-			cat_red_bullet(
+			cli_alert_warning(
 				sprintf(
-					'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`',
+					'To link to this file,  go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`.',
 					name
 				)
 			)
 		} else {
 			cat_automatically_linked()
-		}
-	}
-}
-
-after_creation_message_sass <- function(
-	golem_wd,
-	dir,
-	name
-) {
-	if (desc_exist(golem_wd)) {
-		if (
-			fs_path_abs(dir) != fs_path_abs("inst/app/www") &&
-				utils::packageVersion("golem") < "0.2.0"
-		) {
-			cat_red_bullet(
-				sprintf(
-					'After compile your Sass file, to link your css file, go to the `golem_add_external_resources()` function in `app_ui.R` and add `tags$link(rel="stylesheet", type="text/css", href="www/.css")`'
-				)
-			)
 		}
 	}
 }
@@ -112,43 +144,26 @@ after_creation_message_html_template <- function(
 	})
 }
 
-after_creation_message_any_file <- function(
-	golem_wd,
-	dir,
-	name
-) {
-	do_if_unquiet({
-		cli_cat_line("")
-		cli_cat_line(
-			sprintf(
-				"File downloaded at %s",
-				fs_path_abs(
-					fs_path(
-						dir,
-						name
-					)
-				)
-			)
-		)
-	})
-}
-
 file_created_dance <- function(
 	where,
-	fun,
+	fun = NULL,
 	golem_wd,
 	dir,
 	name,
 	open_file,
 	catfun = cat_created
 ) {
-	catfun(where)
+	if (!is.null(catfun)) {
+		catfun(where)
+	}
 
-	fun(
-		golem_wd,
-		dir,
-		basename(where)
-	)
+	if (!is.null(fun)) {
+		fun(
+			golem_wd,
+			dir,
+			basename(where)
+		)
+	}
 
 	open_or_go_to(
 		where = where,
@@ -160,7 +175,7 @@ file_already_there_dance <- function(
 	where,
 	open_file
 ) {
-	cat_green_tick("File already exists.")
+	cli_alert_info("File already exists.")
 	open_or_go_to(
 		where = where,
 		open_file = open_file
@@ -168,7 +183,7 @@ file_already_there_dance <- function(
 }
 
 cli_abort_dir_create <- function() {
-	cli_cli_abort(
+	cli_abort(
 		"The dir_create argument is deprecated."
 	)
 }

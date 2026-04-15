@@ -3,7 +3,7 @@ test_that("talk_once", {
 		sum,
 		"Hey there"
 	)
-	expect_output(
+	expect_message(
 		once_sum(),
 		"Hey there"
 	)

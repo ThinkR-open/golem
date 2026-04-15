@@ -92,17 +92,18 @@ add_rstudio_files <- function(
 		cat_created(
 			where
 		)
-		cli_cat_line(
-			"To deploy, run:"
-		)
-		cli_cat_bullet(
-			crayon_darkgrey(
-				"rsconnect::deployApp()\n"
+		cli_alert_info(
+			paste0(
+				"To deploy, run: ",
+				cli::style_bold(
+					cli::col_yellow("rsconnect::deployApp()")
+				),
+				"."
 			)
 		)
-		cat_red_bullet(
+		cli_alert_info(
 			sprintf(
-				"Note that you'll need to upload the whole package to %s",
+				"Note that you'll need to upload the whole package to %s.",
 				service
 			)
 		)
@@ -117,7 +118,7 @@ add_rstudio_files <- function(
 			open
 		)
 	} else {
-		cat_green_tick(
+		cli_alert_info(
 			"The 'app.R'-file already exists."
 		)
 		open_or_go_to(
@@ -279,7 +280,7 @@ add_rscignore_file <- function(
 			check_min_rsc
 		)
 	) {
-		cat_red_bullet(
+		cli_alert_warning(
 			sprintf(
 				"Not creating '.rscignore'. Required 'rsconnect' version >= %s!",
 				min_rsc
@@ -303,7 +304,7 @@ add_rscignore_file <- function(
 			)
 		)
 	) {
-		cat_green_tick(
+		cli_alert_info(
 			"The '.rscignore'-file already exists."
 		)
 		open_or_go_to(
