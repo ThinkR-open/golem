@@ -278,7 +278,10 @@ copy_agent_skill_path <- function(
 			skip = "skip",
 			abort = cli_abort(sprintf("Agent skill target already exists at %s.", target))
 		)
-		if (identical(action, "cancel")) return(NULL)
+		if (identical(action, "cancel")) {
+			cli_alert_warning("Abort selection.")
+			return(NULL)
+		}
 		if (identical(action, "skip")) return(NA_character_)
 	}
 
@@ -300,7 +303,7 @@ ask_agent_skills_overwrite <- function(target) {
 			"Skip.",
 			"Cancel."
 		),
-		title = sprintf("%s already exists. What do you want to do?", target)
+		title = sprintf("%s already exists.\nWhat do you want to do?", target)
 	)
 
 	switch(
