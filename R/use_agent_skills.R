@@ -69,6 +69,7 @@ use_agent_skills <- function(
 	}
 
 	copied <- copy_agent_skills(
+		source = source,
 		root = root,
 		manifest = manifest,
 		selected_agent_specs = selected_agent_specs,
@@ -221,6 +222,7 @@ normalize_agent_skills_argument <- function(
 }
 
 copy_agent_skills <- function(
+	source,
 	root,
 	manifest,
 	selected_agent_specs,
@@ -244,7 +246,12 @@ copy_agent_skills <- function(
 
 		for (skill in skills) {
 			copied_dir <- copy_agent_skill_path(
-				source = file.path(root, "skills", skill),
+				source = get_agent_skill_source_dir(
+					source = source,
+					root = root,
+					settings = settings,
+					skill = skill
+				),
 				target = file.path(golem_wd, settings$path, skill),
 				overwrite = overwrite,
 				type = "dir"
@@ -255,6 +262,20 @@ copy_agent_skills <- function(
 	}
 
 	copied[!is.na(copied)]
+}
+
+get_agent_skill_source_dir <- function(
+	source,
+	root,
+	settings,
+	skill
+) {
+	switch(
+		source,
+		local = file.path(root, "skills", skill),
+		remote = file.path(root, settings$path, skill),
+		cli_abort(sprintf("Unsupported agent skill source %s.", source))
+	)
 }
 
 copy_agent_skill_path <- function(
