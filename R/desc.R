@@ -12,13 +12,13 @@
 #' @param repo_url URL (if needed)
 #' @param pkg_version The version of the package. Default is 0.0.0.9000
 #' @param pkg Path to look for the DESCRIPTION. Default is `get_golem_wd()`.
-#' @param author_first_name to be deprecated: use character for first name via
-#'    `authors = person(given = "authors_first_name")` instead
-#' @param author_last_name  to be deprecated: use character for last name via
-#'    `authors = person(given = "authors_last_name")` instead
-#' @param author_email to be deprecated: use character for first name via
-#'    `authors = person(email = "author_email")` instead
-#' @param author_orcid to be deprecated
+#' @param author_first_name Deprecated: use `authors = person(given = ...)`
+#'    instead
+#' @param author_last_name Deprecated: use `authors = person(family = ...)`
+#'    instead
+#' @param author_email Deprecated: use `authors = person(email = ...)` instead
+#' @param author_orcid Deprecated: use `authors = person(comment = c(ORCID = ...))`
+#'    instead
 #' @param set_options logical; the default `TRUE` sets all recommended
 #'    options but this can be suppressed with `FALSE`. For details on the
 #'    exact behaviour see the help [set_golem_options()].
@@ -79,7 +79,7 @@ fill_desc <- function(
 
 	if (!any_author_params_is_not_null) {
 		warning(
-			"The `author_first_name`, `author_last_name`, `author_email` and `author_orcid` parameters will be deprecated from fill_desc() in the next version of {golem}. \nPlease use the `authors` parameter instead.\nSee ?person for more details on how to use it."
+			"The `author_first_name`, `author_last_name`, `author_email` and `author_orcid` parameters of `fill_desc()` are deprecated and will be removed in a future version of {golem}. \nPlease use the `authors` parameter instead.\nSee ?person for more details on how to use it."
 		)
 		# Case 1.1 : old author params are null and authors is empty
 		if (
