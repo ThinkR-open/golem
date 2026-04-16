@@ -1,5 +1,6 @@
-version: 0.1.0
-settings:
+version: 0.2.0
+skills_root: skills
+targets:
   claude:
     path: .claude/skills
     main_file_name: CLAUDE.md
@@ -7,5 +8,11 @@ settings:
     path: .agents/skills
     main_file_name: AGENTS.md
 skills_available:
+  - golem-create-golem
+  - golem-add-module
+  - golem-add-function
+  - golem-check-app
+  - golem-run-tests
+  - golem-fix-missing-ns-colin
   - golem-upgrade
   - golem-fix-missing-ns
