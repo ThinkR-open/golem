@@ -18,6 +18,8 @@
 
 - `use_recommended_deps()` has been removed.
 
+- `add_rstudioconnect_file()` has been removed; use `add_positconnect_file()` instead.
+
 - Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
 
 - The `add_*_files` and `use_*_files` now fail when:
