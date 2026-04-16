@@ -2,12 +2,19 @@
 #'
 #' See \url{https://rtask.thinkr.fr/a-little-trick-for-debugging-shiny/} for more context.
 #'
+#' @note `browser_button()` is now soft deprecated and will be removed in a
+#' future version of `{golem}`.
+#'
 #' @return Used for side effects.
 #'     Prints the code to the console.
 #' @export
 #'
 
 browser_button <- function() {
+	.Deprecated(
+		old = "browser_button",
+		msg = "browser_button() is currently soft deprecated and will be removed in future versions of {golem}."
+	)
 	cli_cat_rule(
 		"To be copied in your UI"
 	)
