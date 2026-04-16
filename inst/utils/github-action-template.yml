@@ -1,0 +1,72 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  push:
+    branches: [main, master]
+
+name: shiny-deploy.yaml
+
+permissions: read-all
+
+jobs:
+  shiny-deploy:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::rsconnect, local::.
+          needs: shiny
+
+      - name: Validate deployment settings
+        env:
+          APPNAME: __APPNAME__
+          ACCOUNT: your-account-name
+          SERVER: shinyapps.io
+          RSCONNECT_USER: ${{ secrets.RSCONNECT_USER }}
+          RSCONNECT_TOKEN: ${{ secrets.RSCONNECT_TOKEN }}
+          RSCONNECT_SECRET: ${{ secrets.RSCONNECT_SECRET }}
+        run: |
+          required <- c("RSCONNECT_USER", "RSCONNECT_TOKEN", "RSCONNECT_SECRET")
+          missing <- required[vapply(required, function(x) Sys.getenv(x) == "", logical(1))]
+          if (length(missing) > 0) {
+            stop(
+              sprintf(
+                "Missing GitHub Actions secrets: %s",
+                paste(missing, collapse = ", ")
+              ),
+              call. = FALSE
+            )
+          }
+          if (Sys.getenv("ACCOUNT") == "your-account-name") {
+            stop(
+              "Set ACCOUNT in the workflow before deploying.",
+              call. = FALSE
+            )
+          }
+          if (Sys.getenv("SERVER") == "") {
+            stop(
+              "Set SERVER in the workflow before deploying.",
+              call. = FALSE
+            )
+          }
+        shell: Rscript {0}
+
+      - name: Authorize and deploy app
+        env:
+          APPNAME: __APPNAME__
+          ACCOUNT: your-account-name
+          SERVER: shinyapps.io
+        run: |
+          rsconnect::setAccountInfo("${{ secrets.RSCONNECT_USER }}", "${{ secrets.RSCONNECT_TOKEN }}", "${{ secrets.RSCONNECT_SECRET }}")
+          rsconnect::deployApp(appDir = ".", appPrimaryDoc = "app.R", appName = Sys.getenv("APPNAME"), account = Sys.getenv("ACCOUNT"), server = Sys.getenv("SERVER"))
+        shell: Rscript {0}

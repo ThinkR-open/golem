@@ -1,0 +1,14 @@
+stages:
+  - deploy
+
+deploy-shiny:
+  stage: deploy
+  image: rocker/verse:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  before_script:
+    - Rscript -e 'install.packages(c("remotes", "rsconnect"), repos = "https://cran.rstudio.com")'
+    - Rscript -e 'remotes::install_deps(dependencies = TRUE, repos = "https://cran.rstudio.com"); remotes::install_local(".", dependencies = FALSE, upgrade = "never", repos = "https://cran.rstudio.com")'
+  script:
+    - Rscript -e 'required <- c("RSCONNECT_USER", "RSCONNECT_TOKEN", "RSCONNECT_SECRET"); missing <- required[vapply(required, function(x) Sys.getenv(x) == "", logical(1))]; if (length(missing) > 0) stop(sprintf("Missing CI variables: %s", paste(missing, collapse = ", ")), call. = FALSE); if (Sys.getenv("ACCOUNT", unset = "your-account-name") == "your-account-name") stop("Set ACCOUNT before deploying.", call. = FALSE); if (Sys.getenv("SERVER", unset = "") == "") stop("Set SERVER before deploying.", call. = FALSE)'
+    - Rscript -e 'rsconnect::setAccountInfo(name = Sys.getenv("RSCONNECT_USER"), token = Sys.getenv("RSCONNECT_TOKEN"), secret = Sys.getenv("RSCONNECT_SECRET")); rsconnect::deployApp(appDir = ".", appPrimaryDoc = "app.R", appName = Sys.getenv("APPNAME", unset = "__APPNAME__"), account = Sys.getenv("ACCOUNT", unset = "your-account-name"), server = Sys.getenv("SERVER", unset = "shinyapps.io"))'
