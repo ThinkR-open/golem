@@ -3,7 +3,8 @@ check_url_has_the_correct_extension <- function(
 	type = c(
 		"js",
 		"css",
-		"html"
+		"html",
+		"zip"
 	)
 ) {
 	type <- match.arg(
@@ -37,6 +38,21 @@ download_external <- function(
 	)
 	cat_downloaded(
 		where_to_download
+	)
+}
+
+unzip_bundled_html <- function(
+	from,
+	to
+) {
+	cat_start_unzip()
+	utils::unzip(
+		zipfile = from,
+		exdir = to
+	)
+	cat_unzipped(
+		to,
+		"Bundle"
 	)
 }
 

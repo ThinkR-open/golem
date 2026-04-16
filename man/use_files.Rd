@@ -38,7 +38,8 @@ use_external_html_template(
   dir = "inst/app/www",
   open = FALSE,
   dir_create,
-  pkg
+  extract = c("ask", "yes", "no"),
+  delete_zip = c("ask", "yes", "no")
 )
 
 use_external_file(
@@ -105,6 +106,10 @@ use_internal_file(
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
 \item{pkg}{Deprecated, please use golem_wd instead}
+
+\item{extract}{Whether to extract a downloaded HTML zip bundle. Use \code{"ask"} to prompt.}
+
+\item{delete_zip}{Whether to delete the raw HTML zip after extraction. Use \code{"ask"} to prompt.}
 
 \item{path}{String representation of the local path for the file to be implemented (use_file only)}
 }
