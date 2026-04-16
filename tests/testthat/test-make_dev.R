@@ -86,8 +86,11 @@ test_that("test browser_button", {
 	withr::with_options(
 		c("golem.quiet" = FALSE),
 		{
-			output <- capture_output_lines(
-				browser_button()
+			expect_warning(
+				output <- capture_output_lines(
+					browser_button()
+				),
+				"browser_button\\(\\) is currently soft deprecated"
 			)
 		}
 	)

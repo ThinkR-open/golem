@@ -26,6 +26,10 @@
 
 - `run_dev()` only prints one message (#1191 / @howardbaik)
 
+## Soft deprecated
+
+- `browser_button()` is now soft deprecated (#1155)
+
 ## Bug fix
 
 - Removing the comments on golem creation didn't work fully, this has been fixed.
