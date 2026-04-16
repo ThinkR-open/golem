@@ -10,7 +10,6 @@
 \alias{add_empty_file}
 \alias{add_html_template}
 \alias{add_partial_html_template}
-\alias{add_ui_server_files}
 \title{Create Files}
 \usage{
 add_js_file(
@@ -108,12 +107,6 @@ add_partial_html_template(
   pkg
 )
 
-add_ui_server_files(
-  golem_wd = get_golem_wd(),
-  dir = "inst/app",
-  dir_create,
-  pkg
-)
 }
 \arguments{
 \item{name}{The name of the module.}
@@ -154,9 +147,6 @@ The path to the file, invisibly.
 }
 \description{
 These functions create files inside the \code{inst/app} folder.
-}
-\note{
-\code{add_ui_server_files} will be deprecated in future version of \code{{golem}}
 }
 \seealso{
 \code{\link{js_template}}, \code{\link{js_handler_template}}, and \code{\link{css_template}}

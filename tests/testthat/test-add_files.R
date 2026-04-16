@@ -165,22 +165,6 @@ test_that("add_file works", {
 				)
 			)
 		}
-		res <- expect_warning(
-			add_ui_server_files(
-				golem_wd = "."
-			)
-		)
-		expect_exists(
-			"inst/app/ui.R"
-		)
-		expect_exists(
-			"inst/app/server.R"
-		)
-		res <- expect_warning(
-			add_ui_server_files(
-				golem_wd = "."
-			)
-		)
 	})
 })
 
