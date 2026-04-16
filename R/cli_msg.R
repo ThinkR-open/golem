@@ -32,6 +32,12 @@ cat_start_copy <- function() {
 	)
 }
 
+cat_start_unzip <- function() {
+	cli_alert(
+		"Unzipping file."
+	)
+}
+
 cat_copied <- function(
 	where,
 	file = "File"
@@ -52,6 +58,19 @@ cat_created <- function(
 	cli_alert_success(
 		sprintf(
 			"%s created at %s.",
+			file,
+			where
+		)
+	)
+}
+
+cat_unzipped <- function(
+	where,
+	file = "File"
+) {
+	cli_alert_success(
+		sprintf(
+			"%s unzipped to %s.",
 			file,
 			where
 		)
