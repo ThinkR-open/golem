@@ -14,6 +14,8 @@
 
 - `{golem}` functions used to rely on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This has now been standardized and all functions rely on `golem_wd` now (@ilyaZar, #845)
 
+- `get_sysreqs()` has been removed; use `dockerfiler::get_sysreqs()` instead.
+
 - Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
 
 - The `add_*_files` and `use_*_files` now fail when:
