@@ -36,16 +36,17 @@ fill_desc(
 
 \item{pkg}{Path to look for the DESCRIPTION. Default is \code{get_golem_wd()}.}
 
-\item{author_first_name}{to be deprecated: use character for first name via
-\code{authors = person(given = "authors_first_name")} instead}
+\item{author_first_name}{Deprecated: use \code{authors = person(given = ...)}
+instead}
 
-\item{author_last_name}{to be deprecated: use character for last name via
-\code{authors = person(given = "authors_last_name")} instead}
+\item{author_last_name}{Deprecated: use \code{authors = person(family = ...)}
+instead}
 
-\item{author_email}{to be deprecated: use character for first name via
-\code{authors = person(email = "author_email")} instead}
+\item{author_email}{Deprecated: use \code{authors = person(email = ...)}
+instead}
 
-\item{author_orcid}{to be deprecated}
+\item{author_orcid}{Deprecated: use
+\code{authors = person(comment = c(ORCID = ...))} instead}
 
 \item{set_options}{logical; the default \code{TRUE} sets all recommended
 options but this can be suppressed with \code{FALSE}. For details on the
