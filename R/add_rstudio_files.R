@@ -150,7 +150,7 @@ add_rstudio_files <- function(
 #'
 #'
 #' @inheritParams add_module
-#' @aliases add_rconnect_file add_rstudioconnect_file add_positconnect_file
+#' @aliases add_rconnect_file add_positconnect_file
 #' @export
 #'
 #' @rdname rstudio_deploy
@@ -187,30 +187,6 @@ add_positconnect_file <- function(
 		golem_wd = golem_wd,
 		open = open,
 		service = "RStudio Connect"
-	)
-}
-
-#' @rdname rstudio_deploy
-#' @note `add_rstudioconnect_file` is now deprecated; replace by [add_positconnect_file()].
-#' @export
-add_rstudioconnect_file <- function(
-	golem_wd = get_golem_wd(),
-	open = TRUE,
-	pkg
-) {
-	signal_arg_is_deprecated(
-		pkg,
-		fun = as.character(
-			sys.call()[[1]]
-		),
-		"pkg"
-	)
-	.Deprecated(
-		"add_positconnect_file"
-	)
-	add_positconnect_file(
-		golem_wd = get_golem_wd(),
-		open = TRUE
 	)
 }
 
