@@ -16,6 +16,8 @@
 
 - `get_sysreqs()` has been removed; use `dockerfiler::get_sysreqs()` instead.
 
+- `use_recommended_deps()` has been removed.
+
 - Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
 
 - The `add_*_files` and `use_*_files` now fail when:

@@ -1,13 +1,7 @@
 #' Add recommended elements
 #'
-#' \describe{
-#'   \item{use_recommended_deps}{Adds `shiny`, `DT`, `attempt`, `glue`, `golem`, `htmltools` to dependencies}
-#'   \item{use_recommended_tests}{Adds a test folder and copy the golem tests}
-#' }
-#'
 #' @inheritParams add_module
 #' @inheritParams usethis::use_spell_check
-#' @param recommended A vector of recommended packages.
 #' @param spellcheck Whether or not to use a spellcheck test.
 #'
 #' @rdname use_recommended
@@ -16,49 +10,6 @@
 #'
 #' @return Used for side-effects.
 #'
-use_recommended_deps <- function(
-	pkg = get_golem_wd(),
-	recommended = c(
-		"shiny",
-		"DT",
-		"attempt",
-		"glue",
-		"htmltools",
-		"golem"
-	)
-) {
-	.Deprecated(
-		old = "use_recommended_deps",
-		msg = "use_recommended_deps() is currently soft deprecated and will be removed in future versions of {golem}."
-	)
-
-	old <- setwd(
-		fs_path_abs(
-			pkg
-		)
-	)
-	on.exit(
-		setwd(
-			old
-		)
-	)
-
-	for (i in sort(
-		recommended
-	)) {
-		try(
-			usethis_use_package(
-				i
-			)
-		)
-	}
-
-	cli_alert_success(
-		"Dependencies added."
-	)
-}
-
-
 #' @rdname use_recommended
 #' @export
 #' @importFrom utils capture.output
