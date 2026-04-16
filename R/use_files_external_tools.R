@@ -40,6 +40,70 @@ download_external <- function(
 	)
 }
 
+unzip_bundled_html <- function(
+	path_from,
+	path_to
+) {
+	cat_start_unzip()
+	utils::unzip(
+		zipfile = path_from,
+		exdir = path_to
+	)
+	bundle_file_entries <- list.files(
+		path_to,
+		full.names = TRUE
+	)
+	# the following condition checks: exactly one file/dir exist
+	# and what exist is really a dir (not, e.g. index.html)
+	if (
+		length(bundle_file_entries) == 1 &&
+			dir.exists(bundle_file_entries[[1]])
+	) {
+		# Move one level up when the archive wraps everything in a single dir.
+		wrapper_dir <- bundle_file_entries[[1]]
+		wrapper_entries <- list.files(
+			wrapper_dir,
+			all.files = TRUE,
+			no.. = TRUE,
+			full.names = TRUE
+		)
+		for (entry in wrapper_entries) {
+			check_tmp <- file.rename(
+				entry,
+				file.path(path_to, basename(entry))
+			)
+			if (isFALSE(check_tmp)) {
+				cli_abort(
+					sprintf("Failed to move %s.", entry)
+				)
+			}
+		}
+		unlink(wrapper_dir, recursive = TRUE, force = TRUE)
+		# When the default target dir is "template", prefer the wrapper dir name.
+		if (basename(path_to) == "template") {
+			# make sure that, whenever does not supply a 'name' arg, i.e.,
+			# name defaults to "template" **and** there is a top level dir
+			# in the bundle itself, use the top-level dir:
+			path_new <- file.path(
+				dirname(path_to),
+				basename(wrapper_dir)
+			)
+			check_tmp <- file.rename(path_to, path_new)
+			if (isFALSE(check_tmp)) {
+				cli_abort(
+					sprintf("Failed to rename %s.", path_to)
+				)
+			}
+			path_to <- path_new
+		}
+	}
+	cat_unzipped(
+		path_to,
+		"Bundle"
+	)
+	return(path_to)
+}
+
 perform_checks_and_download_if_everything_is_ok <- function(
 	url_to_download_from,
 	directory_to_download_to,

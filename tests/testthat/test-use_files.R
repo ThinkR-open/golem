@@ -115,3 +115,103 @@ test_that("use_internal_*_file works", {
 		)
 	})
 })
+
+test_that("use_external_html_template extracts bundle into named dir", {
+	skip_if(Sys.which("zip") == "")
+	make_bundle <- function() {
+		src <- tempfile()
+		dir.create(src)
+		dir.create(file.path(src, "resume"))
+		writeLines("<html></html>", file.path(src, "resume", "index.html"))
+		zipfile <- tempfile(fileext = ".zip")
+		old <- setwd(src)
+		on.exit(setwd(old), add = TRUE)
+		utils::zip(zipfile = zipfile, files = "resume/index.html")
+		zipfile
+	}
+
+	run_quietly_in_a_dummy_golem({
+		zipfile <- make_bundle()
+		out <- testthat::with_mocked_bindings(
+			utils_download_file = function(url, where) {
+				file.copy(zipfile, where, overwrite = TRUE)
+			},
+			cli_progress_bar = function(...) 1,
+			cli_progress_update = function(...) invisible(NULL),
+			cli_progress_done = function(...) invisible(NULL),
+			{
+				use_external_html_template(
+					url = "https://example.com/template.zip",
+					golem_wd = ".",
+					extract = "yes",
+					delete_zip = "yes"
+				)
+			}
+		)
+		expect_equal(out, as.character(fs_path_abs("inst/app/www/resume")))
+		expect_true(file.exists("inst/app/www/resume/index.html"))
+		expect_false(file.exists("inst/app/www/template_bundle.zip"))
+	})
+})
+
+test_that("use_external_html_template keeps expected archive name when not extracted", {
+	run_quietly_in_a_dummy_golem({
+		archive_names <- c()
+		cases <- list(
+			list(name = NULL, expected = "template_bundle.zip"),
+			list(name = "foo.zip", expected = "foo.zip"),
+			list(name = "foo", expected = "foo_bundle.zip"),
+			list(name = "foo.html", expected = "foo_bundle.zip")
+		)
+
+		for (case in cases) {
+			out <- testthat::with_mocked_bindings(
+				utils_download_file = function(url, where) {
+					archive_names <<- c(archive_names, basename(where))
+					file.create(where)
+				},
+				cli_progress_bar = function(...) 1,
+				cli_progress_update = function(...) invisible(NULL),
+				cli_progress_done = function(...) invisible(NULL),
+				{
+					args <- list(
+						url = "https://example.com/template.zip",
+						golem_wd = ".",
+						extract = "no"
+					)
+					if (!is.null(case$name)) {
+						args$name <- case$name
+					}
+					do.call(use_external_html_template, args)
+				}
+			)
+			expect_equal(basename(out), case$expected)
+			unlink(out, force = TRUE)
+		}
+
+		expect_equal(
+			archive_names,
+			vapply(cases, `[[`, character(1), "expected")
+		)
+	})
+})
+
+test_that("use_external_html_template cancels and removes downloaded zip", {
+	run_quietly_in_a_dummy_golem({
+		out <- testthat::with_mocked_bindings(
+			utils_download_file = function(url, where) file.create(where),
+			cat_yes_no_or_cancel = function(...) "cancel",
+			cli_progress_bar = function(...) 1,
+			cli_progress_update = function(...) invisible(NULL),
+			cli_progress_done = function(...) invisible(NULL),
+			{
+				use_external_html_template(
+					url = "https://example.com/template.zip",
+					golem_wd = "."
+				)
+			}
+		)
+		expect_null(out)
+		expect_false(file.exists("inst/app/www/template_bundle.zip"))
+	})
+})

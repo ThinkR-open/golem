@@ -293,6 +293,20 @@ test_that("yesno works", {
 	)
 })
 
+test_that("cat_yes_no_or_cancel works", {
+	expect_equal(
+		testthat::with_mocked_bindings(
+			utils_menu = function(
+				...
+			) {
+				3
+			},
+			cat_yes_no_or_cancel()
+		),
+		"cancel"
+	)
+})
+
 test_that("is_existing_module() properly detects modules if they are present", {
 	dummy_golem <- create_dummy_golem()
 	dummy_module_files <- c(

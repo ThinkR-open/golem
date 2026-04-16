@@ -257,6 +257,17 @@ yesno <- function(
 		1
 }
 
+cat_yes_no_or_cancel <- function(
+	...
+) {
+	cat(paste0(..., collapse = ""))
+	c("yes", "no", "cancel")[
+		utils_menu(
+			c("Yes", "No", "Cancel")
+		)
+	]
+}
+
 #' Check if a module (`R`-file) already exists
 #'
 #' Should be called at the root of a `{golem}` project; but an error is thrown

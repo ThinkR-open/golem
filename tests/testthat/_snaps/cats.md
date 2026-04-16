@@ -33,6 +33,14 @@
     Message
       v File copied to /tmp.
     Code
+      cat_start_unzip()
+    Message
+      > Unzipping file.
+    Code
+      cat_unzipped("/tmp")
+    Message
+      v File unzipped to /tmp.
+    Code
       cat_created("/tmp")
     Message
       v File created at /tmp.
