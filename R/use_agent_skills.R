@@ -31,7 +31,9 @@ use_agent_implement <- function(
 	main_md_files <- match.arg(main_md_files)
 	overwrite <- match.arg(overwrite)
 
-	if (identical(source, "ask")) source <- ask_agent_skills_source()
+	if (identical(source, "ask")) {
+		source <- ask_agent_skills_source()
+	}
 	if (is.null(source)) {
 		cli_alert_warning("Abort selection.")
 		return(invisible(NULL))
@@ -49,7 +51,9 @@ use_agent_implement <- function(
 	}
 	settings <- get_agent_skills_settings(manifest)
 
-	if (identical(agent_specs, "ask")) agent_specs <- ask_agent_skills_specs()
+	if (identical(agent_specs, "ask")) {
+		agent_specs <- ask_agent_skills_specs()
+	}
 	if (is.null(agent_specs)) {
 		cli_alert_warning("Abort selection.")
 		return(invisible(NULL))
@@ -102,7 +106,9 @@ use_agent_implement <- function(
 		copy_main_files = copy_main_files
 	)
 
-	if (is.null(copied)) return(invisible(NULL))
+	if (is.null(copied)) {
+		return(invisible(NULL))
+	}
 
 	invisible(
 		list(
@@ -221,11 +227,15 @@ use_skill <- function(
 		cli_abort("`name` must be a single non-empty skill name.")
 	}
 
-	if (is.null(source)) source <- "ask"
+	if (is.null(source)) {
+		source <- "ask"
+	}
 	source <- match.arg(source, c("ask", "local", "remote"))
 	overwrite <- match.arg(overwrite)
 
-	if (identical(source, "ask")) source <- ask_agent_skills_source()
+	if (identical(source, "ask")) {
+		source <- ask_agent_skills_source()
+	}
 	if (is.null(source)) {
 		cli_alert_warning("Abort selection.")
 		return(invisible(NULL))
@@ -269,7 +279,9 @@ use_skill <- function(
 		copy_main_files = FALSE
 	)
 
-	if (is.null(copied)) return(invisible(NULL))
+	if (is.null(copied)) {
+		return(invisible(NULL))
+	}
 
 	invisible(
 		list(
@@ -285,7 +297,9 @@ use_skill <- function(
 
 get_agent_skills_golem_root <- function() {
 	root <- golem_sys("agent-skills", mustWork = FALSE)
-	if (nzchar(root)) return(root)
+	if (nzchar(root)) {
+		return(root)
+	}
 	file.path("inst", "agent-skills")
 }
 
@@ -466,7 +480,9 @@ ask_agent_skills_selection <- function(skills) {
 get_agent_skills_settings <- function(manifest) {
 	settings <- manifest$targets %||% manifest$settings
 	if (is.null(settings)) {
-		cli_abort("Agent skills manifest must define either `targets` or `settings`.")
+		cli_abort(
+			"Agent skills manifest must define either `targets` or `settings`."
+		)
 	}
 
 	settings
@@ -519,9 +535,13 @@ normalize_agent_skills_selection <- function(
 	selected,
 	skills
 ) {
-	if (!length(selected) || "Cancel." %in% selected) return(NULL)
+	if (!length(selected) || "Cancel." %in% selected) {
+		return(NULL)
+	}
 
-	if ("All." %in% selected) return(skills)
+	if ("All." %in% selected) {
+		return(skills)
+	}
 
 	selected
 }
@@ -532,7 +552,7 @@ normalize_agent_skills_argument <- function(
 ) {
 	if (
 		length(skills) == 1 &&
-		tolower(skills) == "all"
+			tolower(skills) == "all"
 	) {
 		return(skills_available)
 	}
@@ -636,7 +656,9 @@ copy_agent_skills <- function(
 			overwrite = overwrite,
 			type = entry$type
 		)
-		if (is.null(copied_entry)) return(NULL)
+		if (is.null(copied_entry)) {
+			return(NULL)
+		}
 		copied <- c(copied, copied_entry)
 		cli_progress_update(id = progress_id)
 	}
@@ -659,7 +681,10 @@ resolve_agent_skill_overwrite <- function(
 		ask = ask_agent_skills_overwrite(target),
 		overwrite = "overwrite",
 		skip = "skip",
-		abort = cli_abort(sprintf("Agent skill target already exists at %s.", target))
+		abort = cli_abort(sprintf(
+			"Agent skill target already exists at %s.",
+			target
+		))
 	)
 
 	if (identical(action, "cancel")) {
@@ -710,8 +735,12 @@ copy_agent_skill_path <- function(
 		target = target,
 		overwrite = overwrite
 	)
-	if (is.null(action)) return(NULL)
-	if (identical(action, "skip")) return(NA_character_)
+	if (is.null(action)) {
+		return(NULL)
+	}
+	if (identical(action, "skip")) {
+		return(NA_character_)
+	}
 
 	fs_dir_create(dirname(target))
 
