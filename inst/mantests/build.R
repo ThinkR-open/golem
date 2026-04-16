@@ -304,8 +304,6 @@ expect_true(
 	dir.exists("tests")
 )
 
-# golem::use_recommended_deps()
-
 golem::use_utils_ui(with_test = TRUE)
 expect_true(
 	file.exists("R/golem_utils_ui.R")
