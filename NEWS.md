@@ -38,6 +38,10 @@
 
 - `browser_button()` is now soft deprecated (#1155)
 
+- `add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
+  `add_dockerfile_heroku()` are now explicitly soft deprecated; use the
+  corresponding `add_dockerfile_with_renv_*()` functions.
+
 ## Bug fix
 
 - Removing the comments on golem creation didn't work fully, this has been fixed.
