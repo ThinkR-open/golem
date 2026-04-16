@@ -39,16 +39,10 @@ use_agent_implement <- function(
 
 	if (identical(source, "local")) {
 		root <- get_agent_skills_golem_root()
-		manifest <- get_agent_skills_manifest(root)
+		manifest <- get_agent_skills_golem_manifest(root)
 	}
 	if (identical(source, "remote")) {
-		remote_source <- get_agent_skills_golem_github()
-		root <- remote_source$root
-		on.exit(
-			unlink(remote_source$cleanup, recursive = TRUE, force = TRUE),
-			add = TRUE
-		)
-		manifest <- get_agent_skills_manifest(root)
+		manifest <- get_agent_skills_github_manifest()
 	}
 	if (is.null(manifest)) {
 		cli_abort(sprintf("Could not read manifest from source %s.", source))
@@ -85,6 +79,15 @@ use_agent_implement <- function(
 	if (is.null(skills)) {
 		cli_alert_warning("Abort selection.")
 		return(invisible(NULL))
+	}
+
+	if (identical(source, "remote")) {
+		remote_source <- get_agent_skills_golem_github()
+		root <- remote_source$root
+		on.exit(
+			unlink(remote_source$cleanup, recursive = TRUE, force = TRUE),
+			add = TRUE
+		)
 	}
 
 	copied <- copy_agent_skills(
@@ -230,7 +233,7 @@ use_skill <- function(
 
 	if (identical(source, "local")) {
 		root <- get_agent_skills_golem_root()
-		manifest <- get_agent_skills_manifest(root)
+		manifest <- get_agent_skills_golem_manifest(root)
 	}
 	if (identical(source, "remote")) {
 		remote_source <- get_agent_skills_golem_github()
@@ -239,7 +242,7 @@ use_skill <- function(
 			unlink(remote_source$cleanup, recursive = TRUE, force = TRUE),
 			add = TRUE
 		)
-		manifest <- get_agent_skills_manifest(root)
+		manifest <- get_agent_skills_golem_manifest(root)
 	}
 	if (is.null(manifest)) {
 		cli_abort(sprintf("Could not read manifest from source %s.", source))
@@ -293,6 +296,12 @@ get_agent_skills_golem_github <- function(
 	archive <- tempfile(fileext = ".zip")
 	extract_dir <- tempfile("golem-agent-skills-")
 	dir.create(extract_dir)
+	progress_id <- cli_progress_bar(
+		name = "Fetching remote agent skills",
+		total = 3,
+		type = "tasks"
+	)
+	on.exit(cli_progress_done(id = progress_id), add = TRUE)
 
 	url <- sprintf(
 		"https://github.com/%s/archive/refs/heads/%s.zip",
@@ -300,15 +309,16 @@ get_agent_skills_golem_github <- function(
 		ref
 	)
 
-	cat_start_download()
 	utils_download_file(url, archive, quiet = TRUE)
+	cli_progress_update(id = progress_id)
 	utils::unzip(archive, exdir = extract_dir)
+	cli_progress_update(id = progress_id)
 
 	roots <- list.dirs(extract_dir, recursive = FALSE, full.names = TRUE)
 	if (!length(roots)) {
 		cli_abort(sprintf("Could not extract agent skills from %s.", url))
 	}
-	cat_downloaded(roots[[1]], "Agent skills")
+	cli_progress_update(id = progress_id)
 
 	list(
 		root = roots[[1]],
@@ -316,7 +326,24 @@ get_agent_skills_golem_github <- function(
 	)
 }
 
-get_agent_skills_manifest <- function(root) {
+get_agent_skills_github_manifest <- function(
+	repo = "ilyaZar/golem-agent-skills",
+	ref = "main"
+) {
+	manifest_file <- tempfile(fileext = ".yml")
+	on.exit(unlink(manifest_file, force = TRUE), add = TRUE)
+
+	url <- sprintf(
+		"https://raw.githubusercontent.com/%s/%s/manifest.yml",
+		repo,
+		ref
+	)
+
+	utils_download_file(url, manifest_file, quiet = TRUE)
+	yaml::read_yaml(manifest_file)
+}
+
+get_agent_skills_golem_manifest <- function(root) {
 	manifest_path <- file.path(root, "manifest.yml")
 	if (!file.exists(manifest_path)) {
 		cli_abort(sprintf("Agent skills manifest not found at %s.", manifest_path))
@@ -341,61 +368,6 @@ ask_agent_skills_source <- function() {
 		"3" = NULL,
 		NULL
 	)
-}
-
-ask_agent_skills_specs <- function() {
-	choice <- utils_menu(
-		c(
-			"Only CLAUDE specifications.",
-			"Only OpenAI AGENTS (.agents) specifications.",
-			"Both.",
-			"Cancel."
-		),
-		title = "Which specifications do you want to install?"
-	)
-
-	switch(
-		choice,
-		"1" = "claude",
-		"2" = "agents",
-		"3" = "both",
-		"4" = NULL,
-		NULL
-	)
-}
-
-get_agent_skills_settings <- function(manifest) {
-	settings <- manifest$targets %||% manifest$settings
-	if (is.null(settings)) {
-		cli_abort("Agent skills manifest must define either `targets` or `settings`.")
-	}
-
-	settings
-}
-
-normalize_agent_skills_specs <- function(
-	agent_specs,
-	settings
-) {
-	selected <- switch(
-		agent_specs,
-		claude = "claude",
-		agents = "agents",
-		both = c("claude", "agents"),
-		NULL
-	)
-
-	missing_specs <- setdiff(unique(selected), names(settings))
-	if (length(missing_specs)) {
-		cli_abort(
-			sprintf(
-				"Agent skills manifest is missing target(s): %s.",
-				paste(missing_specs, collapse = ", ")
-			)
-		)
-	}
-
-	unique(selected)
 }
 
 ask_agent_skills_main_files <- function(
@@ -438,19 +410,41 @@ ask_agent_skills_main_files <- function(
 	)
 }
 
-normalize_agent_skills_main_files <- function(
-	main_md_files,
-	selected_agent_specs,
-	settings
-) {
-	switch(
-		main_md_files,
-		ask = ask_agent_skills_main_files(
-			selected_agent_specs = selected_agent_specs,
-			settings = settings
+ask_agent_skills_overwrite <- function(target) {
+	choice <- utils_menu(
+		c(
+			"Overwrite.",
+			"Skip.",
+			"Cancel."
 		),
-		yes = TRUE,
-		no = FALSE,
+		title = sprintf("%s already exists.\nWhat do you want to do?", target)
+	)
+
+	switch(
+		choice,
+		"1" = "overwrite",
+		"2" = "skip",
+		"3" = "cancel",
+		"cancel"
+	)
+}
+ask_agent_skills_specs <- function() {
+	choice <- utils_menu(
+		c(
+			"Only CLAUDE specifications.",
+			"Only OpenAI AGENTS (.agents) specifications.",
+			"Both.",
+			"Cancel."
+		),
+		title = "Which specifications do you want to install?"
+	)
+
+	switch(
+		choice,
+		"1" = "claude",
+		"2" = "agents",
+		"3" = "both",
+		"4" = NULL,
 		NULL
 	)
 }
@@ -466,6 +460,58 @@ ask_agent_skills_selection <- function(skills) {
 	normalize_agent_skills_selection(
 		selected = selected,
 		skills = skills
+	)
+}
+
+get_agent_skills_settings <- function(manifest) {
+	settings <- manifest$targets %||% manifest$settings
+	if (is.null(settings)) {
+		cli_abort("Agent skills manifest must define either `targets` or `settings`.")
+	}
+
+	settings
+}
+
+normalize_agent_skills_specs <- function(
+	agent_specs,
+	settings
+) {
+	selected <- switch(
+		agent_specs,
+		claude = "claude",
+		agents = "agents",
+		both = c("claude", "agents"),
+		NULL
+	)
+
+	missing_specs <- setdiff(unique(selected), names(settings))
+	if (length(missing_specs)) {
+		cli_abort(
+			sprintf(
+				"Agent skills manifest is missing target(s): %s.",
+				paste(missing_specs, collapse = ", ")
+			)
+		)
+	}
+
+	unique(selected)
+}
+
+
+normalize_agent_skills_main_files <- function(
+	main_md_files,
+	selected_agent_specs,
+	settings
+) {
+	switch(
+		main_md_files,
+		ask = ask_agent_skills_main_files(
+			selected_agent_specs = selected_agent_specs,
+			settings = settings
+		),
+		yes = TRUE,
+		no = FALSE,
+		NULL
 	)
 }
 
@@ -508,32 +554,28 @@ get_installed_agent_skills_specs <- function(
 	golem_wd,
 	settings
 ) {
-	installed <- character()
-
-	if (
-		!is.null(settings$claude) &&
-		dir.exists(file.path(golem_wd, settings$claude$path))
-	) {
-		installed <- c(installed, "claude")
-	}
-
-	if (
-		!is.null(settings$agents) &&
-		dir.exists(file.path(golem_wd, settings$agents$path))
-	) {
-		installed <- c(installed, "agents")
-	}
+	target_specs <- intersect(c("claude", "agents"), names(settings))
+	installed <- Filter(
+		function(agent_spec) {
+			dir.exists(file.path(golem_wd, settings[[agent_spec]]$path))
+		},
+		target_specs
+	)
 
 	if (!length(installed)) {
+		expected_dirs <- vapply(
+			target_specs,
+			function(agent_spec) file.path(golem_wd, settings[[agent_spec]]$path),
+			character(1)
+		)
 		cli_abort(
 			sprintf(
 				paste(
 					"No installed agent specifications found in %s.",
-					"Expected an existing %s or %s directory."
+					"Expected an existing %s directory."
 				),
 				golem_wd,
-				file.path(golem_wd, ".claude"),
-				file.path(golem_wd, ".agents")
+				paste(expected_dirs, collapse = " or ")
 			)
 		)
 	}
@@ -552,24 +594,21 @@ copy_agent_skills <- function(
 	golem_wd,
 	copy_main_files = TRUE
 ) {
-	copied <- character()
+	entries <- list()
 
 	for (agent_spec in selected_agent_specs) {
 		spec_settings <- settings[[agent_spec]]
 
 		if (isTRUE(copy_main_files)) {
-			copied_file <- copy_agent_skill_path(
+			entries[[length(entries) + 1]] <- list(
 				source = file.path(root, spec_settings$main_file_name),
 				target = file.path(golem_wd, spec_settings$main_file_name),
-				overwrite = overwrite,
 				type = "file"
 			)
-			if (is.null(copied_file)) return(NULL)
-			copied <- c(copied, copied_file)
 		}
 
 		for (skill in skills) {
-			copied_dir <- copy_agent_skill_path(
+			entries[[length(entries) + 1]] <- list(
 				source = get_agent_skill_source_dir(
 					source = source,
 					root = root,
@@ -578,15 +617,57 @@ copy_agent_skills <- function(
 					skill = skill
 				),
 				target = file.path(golem_wd, spec_settings$path, skill),
-				overwrite = overwrite,
 				type = "dir"
 			)
-			if (is.null(copied_dir)) return(NULL)
-			copied <- c(copied, copied_dir)
 		}
 	}
 
+	copied <- character()
+	progress_id <- cli_progress_bar(
+		name = "Copying agent skills",
+		total = length(entries)
+	)
+	on.exit(cli_progress_done(id = progress_id), add = TRUE)
+
+	for (entry in entries) {
+		copied_entry <- copy_agent_skill_path(
+			source = entry$source,
+			target = entry$target,
+			overwrite = overwrite,
+			type = entry$type
+		)
+		if (is.null(copied_entry)) return(NULL)
+		copied <- c(copied, copied_entry)
+		cli_progress_update(id = progress_id)
+	}
+
 	copied[!is.na(copied)]
+}
+
+resolve_agent_skill_overwrite <- function(
+	target,
+	overwrite = c("ask", "overwrite", "skip", "abort")
+) {
+	overwrite <- match.arg(overwrite)
+
+	if (!file.exists(target)) {
+		return(overwrite)
+	}
+
+	action <- switch(
+		overwrite,
+		ask = ask_agent_skills_overwrite(target),
+		overwrite = "overwrite",
+		skip = "skip",
+		abort = cli_abort(sprintf("Agent skill target already exists at %s.", target))
+	)
+
+	if (identical(action, "cancel")) {
+		cli_alert_warning("Abort selection.")
+		return(NULL)
+	}
+
+	action
 }
 
 get_agent_skill_source_dir <- function(
@@ -625,50 +706,20 @@ copy_agent_skill_path <- function(
 		cli_abort(sprintf("Agent skill source not found at %s.", source))
 	}
 
-	if (file.exists(target)) {
-		action <- switch(
-			overwrite,
-			ask = ask_agent_skills_overwrite(target),
-			overwrite = "overwrite",
-			skip = "skip",
-			abort = cli_abort(sprintf("Agent skill target already exists at %s.", target))
-		)
-		if (identical(action, "cancel")) {
-			cli_alert_warning("Abort selection.")
-			return(NULL)
-		}
-		if (identical(action, "skip")) return(NA_character_)
-	}
+	action <- resolve_agent_skill_overwrite(
+		target = target,
+		overwrite = overwrite
+	)
+	if (is.null(action)) return(NULL)
+	if (identical(action, "skip")) return(NA_character_)
 
 	fs_dir_create(dirname(target))
-	cat_start_copy()
 
 	if (identical(type, "file")) {
 		fs_file_copy(source, target, overwrite = TRUE)
-		cat_copied(target, "File")
 	} else {
 		fs_dir_copy(source, target, overwrite = TRUE)
-		cat_copied(target, "Directory")
 	}
 
 	target
-}
-
-ask_agent_skills_overwrite <- function(target) {
-	choice <- utils_menu(
-		c(
-			"Overwrite.",
-			"Skip.",
-			"Cancel."
-		),
-		title = sprintf("%s already exists.\nWhat do you want to do?", target)
-	)
-
-	switch(
-		choice,
-		"1" = "overwrite",
-		"2" = "skip",
-		"3" = "cancel",
-		"cancel"
-	)
 }

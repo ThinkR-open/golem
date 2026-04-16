@@ -203,7 +203,7 @@ test_that("use_agent_implement() supports non-interactive skills and overwrite",
 		get_agent_skills_golem_root = function() {
 			"/tmp/agent-skills"
 		},
-		get_agent_skills_manifest = function(root) {
+		get_agent_skills_golem_manifest = function(root) {
 			manifest
 		},
 		ask_agent_skills_main_files = function(selected_agent_specs, settings) {
@@ -269,7 +269,7 @@ test_that("use_agent_implement() returns invisibly when specs selection is cance
 		get_agent_skills_golem_root = function() {
 			"/tmp/agent-skills"
 		},
-		get_agent_skills_manifest = function(root) {
+		get_agent_skills_golem_manifest = function(root) {
 			manifest
 		},
 		ask_agent_skills_specs = function() {
@@ -304,7 +304,7 @@ test_that("use_agent_implement() returns invisibly when main file selection is c
 		get_agent_skills_golem_root = function() {
 			"/tmp/agent-skills"
 		},
-		get_agent_skills_manifest = function(root) {
+		get_agent_skills_golem_manifest = function(root) {
 			manifest
 		},
 		ask_agent_skills_main_files = function(selected_agent_specs, settings) {
@@ -322,6 +322,116 @@ test_that("use_agent_implement() returns invisibly when main file selection is c
 	)
 
 	expect_null(result)
+})
+
+test_that("use_agent_implement() defers remote archive fetch until after prompts", {
+	events <- character()
+	manifest <- list(
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_github_manifest = function() {
+			events <<- c(events, "manifest")
+			manifest
+		},
+		ask_agent_skills_specs = function() {
+			events <<- c(events, "specs")
+			"agents"
+		},
+		ask_agent_skills_main_files = function(selected_agent_specs, settings) {
+			events <<- c(events, "main_md")
+			FALSE
+		},
+		ask_agent_skills_selection = function(skills) {
+			events <<- c(events, "skills")
+			"skill-a"
+		},
+		get_agent_skills_golem_github = function() {
+			events <<- c(events, "archive")
+			list(
+				root = "/tmp/agent-skills",
+				cleanup = character()
+			)
+		},
+		copy_agent_skills = function(...) {
+			events <<- c(events, "copy")
+			character()
+		},
+		{
+			use_agent_implement(
+				source = "remote",
+				agent_specs = "ask",
+				skills = NULL,
+				main_md_files = "ask",
+				overwrite = "skip",
+				golem_wd = "/tmp/project"
+			)
+		}
+	)
+
+	expect_equal(
+		events,
+		c("manifest", "specs", "main_md", "skills", "archive", "copy")
+	)
+})
+
+test_that("use_skill() fetches remote archive before reading remote manifest", {
+	events <- character()
+	manifest <- list(
+		skills_available = "skill-a",
+		targets = list(
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_golem_github = function() {
+			events <<- c(events, "archive")
+			list(
+				root = "/tmp/agent-skills",
+				cleanup = character()
+			)
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			events <<- c(events, paste("manifest", root))
+			manifest
+		},
+		get_installed_agent_skills_specs = function(golem_wd, settings) {
+			events <<- c(events, "installed")
+			"agents"
+		},
+		copy_agent_skills = function(...) {
+			events <<- c(events, "copy")
+			character()
+		},
+		{
+			use_skill(
+				name = "skill-a",
+				source = "remote",
+				overwrite = "skip",
+				golem_wd = "/tmp/project"
+			)
+		}
+	)
+
+	expect_equal(
+		events,
+		c("archive", "manifest /tmp/agent-skills", "installed", "copy")
+	)
 })
 
 test_that("wrappers forward the expected agent_specs", {
@@ -451,6 +561,21 @@ test_that("get_installed_agent_skills_specs() detects installed targets", {
 	)
 })
 
+test_that("get_installed_agent_skills_specs() reports configured target paths", {
+	settings <- list(
+		claude = list(path = "custom/claude"),
+		agents = list(path = "custom/agents")
+	)
+
+	expect_error(
+		get_installed_agent_skills_specs(
+			golem_wd = tempfile("golem-empty-"),
+			settings = settings
+		),
+		"custom/claude.*custom/agents"
+	)
+})
+
 test_that("use_skill() installs into pre-existing agent targets only", {
 	manifest <- list(
 		skills_root = "skills",
@@ -471,7 +596,7 @@ test_that("use_skill() installs into pre-existing agent targets only", {
 		get_agent_skills_golem_root = function() {
 			"/tmp/agent-skills"
 		},
-		get_agent_skills_manifest = function(root) {
+		get_agent_skills_golem_manifest = function(root) {
 			manifest
 		},
 		get_installed_agent_skills_specs = function(golem_wd, settings) {
@@ -532,7 +657,7 @@ test_that("use_skill() validates the requested skill name", {
 			get_agent_skills_golem_root = function() {
 				"/tmp/agent-skills"
 			},
-			get_agent_skills_manifest = function(root) {
+			get_agent_skills_golem_manifest = function(root) {
 				manifest
 			},
 			get_installed_agent_skills_specs = function(golem_wd, settings) {
@@ -624,4 +749,23 @@ test_that("copy_agent_skill_path() respects non-interactive overwrite modes", {
 			}
 		)
 	)
+})
+
+test_that("resolve_agent_skill_overwrite() resolves ask mode before copy", {
+	target <- tempfile()
+	file.create(target)
+
+	resolved <- testthat::with_mocked_bindings(
+		ask_agent_skills_overwrite = function(target) {
+			"skip"
+		},
+		{
+			resolve_agent_skill_overwrite(
+				target = target,
+				overwrite = "ask"
+			)
+		}
+	)
+
+	expect_equal(resolved, "skip")
 })
