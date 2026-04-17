@@ -9,6 +9,8 @@ add_r_files <- function(
 	open = TRUE,
 	dir_create = TRUE,
 	with_test = FALSE,
+	template = NULL,
+	...,
 	pkg
 ) {
 	signal_arg_is_deprecated(
@@ -140,12 +142,26 @@ add_r_files <- function(
 					module
 				)
 		) {
-			# Must be a function or utility file being created
-			append_roxygen_comment(
-				name = name,
-				path = where,
-				ext = ext
-			)
+			if (
+				ext == "fct" &&
+					!is.null(
+						template
+					)
+			) {
+				template(
+					name = name,
+					path = where,
+					export = FALSE,
+					...
+				)
+			} else {
+				# Must be a function or utility file being created
+				append_roxygen_comment(
+					name = name,
+					path = where,
+					ext = ext
+				)
+			}
 		}
 
 		cat_created(
@@ -184,6 +200,10 @@ add_r_files <- function(
 #' @param name The name of the file
 #' @param module If not NULL, the file will be module specific
 #'     in the naming (you don't need to add the leading `mod_`).
+#' @param template Function writing the default contents of a function file.
+#'     Defaults to the built-in function template. Ignored for
+#'     module-specific files.
+#' @param ... Arguments passed to the `template` function.
 #' @inheritParams  add_module
 #'
 #' @rdname file_creation
@@ -197,6 +217,8 @@ add_fct <- function(
 	open = TRUE,
 	dir_create = TRUE,
 	with_test = FALSE,
+	template = fct_template,
+	...,
 	pkg
 ) {
 	signal_arg_is_deprecated(
@@ -207,13 +229,15 @@ add_fct <- function(
 		"pkg"
 	)
 	add_r_files(
-		name,
-		module,
+		name = name,
 		ext = "fct",
+		module = module,
 		golem_wd = golem_wd,
 		open = open,
 		dir_create = dir_create,
-		with_test = with_test
+		with_test = with_test,
+		template = template,
+		...
 	)
 }
 
@@ -236,9 +260,9 @@ add_utils <- function(
 		"pkg"
 	)
 	add_r_files(
-		name,
-		module,
+		name = name,
 		ext = "utils",
+		module = module,
 		golem_wd = golem_wd,
 		open = open,
 		dir_create = dir_create,
@@ -265,15 +289,42 @@ add_r6 <- function(
 		"pkg"
 	)
 	add_r_files(
-		name,
-		module,
+		name = name,
 		ext = "class",
+		module = module,
 		golem_wd = golem_wd,
 		open = open,
 		dir_create = dir_create,
 		with_test = with_test
 	)
 }
+
+#' Default template for `add_fct()`
+#'
+#' This function does not aim at being called as is by
+#' users, but to be passed as an argument to [add_fct()].
+#'
+#' @param path The path to the R script where the function will be written.
+#' @param name The name of the generated function.
+#' @param export Whether the generated function should be exported.
+#'
+#' @return Used for side effect
+#' @keywords internal
+#' @noRd
+fct_template <- function(
+	name,
+	path,
+	export = FALSE,
+	...
+) {
+	append_roxygen_comment(
+		name = name,
+		path = path,
+		ext = "fct",
+		export = export
+	)
+}
+
 #' Append roxygen comments to `fct_` and `utils_` files
 #'
 #' This function add boilerplate roxygen comments
