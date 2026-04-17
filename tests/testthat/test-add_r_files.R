@@ -236,3 +236,86 @@ test_that("add_fct sanitizes names correctly", {
 		)
 	})
 })
+
+test_that("fct_template works", {
+	fct_template(
+		"my_fun",
+		path <- tempfile(),
+		export = TRUE
+	)
+	on.exit({
+		unlink(
+			path,
+			recursive = TRUE,
+			force = TRUE
+		)
+	})
+	fct_read <- paste(
+		readLines(
+			path
+		),
+		collapse = " "
+	)
+	expect_true(
+		grepl(
+			"my_fun <- function",
+			fct_read
+		)
+	)
+	expect_true(
+		grepl(
+			"@export",
+			fct_read
+		)
+	)
+})
+
+test_that("add_fct accepts a template", {
+	run_quietly_in_a_dummy_golem({
+		add_fct(
+			"custom",
+			open = FALSE,
+			template = function(
+				name,
+				path,
+				export = FALSE,
+				...
+			) {
+				writeLines(
+					c(
+						"#' custom function",
+						if (export) "#' @export" else "#' @noRd",
+						sprintf(
+							"%s <- function() \"ok\"",
+							name
+						)
+					),
+					con = path
+				)
+			}
+		)
+
+		expect_exists(
+			file.path(
+				"R",
+				"fct_custom.R"
+			)
+		)
+
+		file_content <- paste(
+			readLines(
+				file.path(
+					"R",
+					"fct_custom.R"
+				)
+			),
+			collapse = " "
+		)
+		expect_true(
+			grepl(
+				'custom <- function\\(\\) "ok"',
+				file_content
+			)
+		)
+	})
+})
