@@ -231,7 +231,7 @@ binding_name_parts <- function(name) {
 		input_registration = paste0(
 			"golem.",
 			base_name,
-		"Input"
+			"Input"
 		),
 		output_registration = paste0(
 			"golem.",
