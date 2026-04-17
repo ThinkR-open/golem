@@ -36,6 +36,8 @@
 
 ## Internal changes
 
+- Added internal `cli_progress_bar()`, `cli_progress_update()`, `cli_progress_done()` wrappers and `cat_start_unzip()` / `cat_unzipped()` helpers (@ilyaZar, #1234)
+
 - `{golem}` now embarks a `claude.md` file and a series of skills
 
 - Full refactoring of the `add_*_files` and `use_*_files` functions that now all share the same behavior
