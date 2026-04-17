@@ -42,11 +42,10 @@ instead}
 \item{author_last_name}{Deprecated: use \code{authors = person(family = ...)}
 instead}
 
-\item{author_email}{Deprecated: use \code{authors = person(email = ...)}
-instead}
+\item{author_email}{Deprecated: use \code{authors = person(email = ...)} instead}
 
-\item{author_orcid}{Deprecated: use
-\code{authors = person(comment = c(ORCID = ...))} instead}
+\item{author_orcid}{Deprecated: use \code{authors = person(comment = c(ORCID = ...))}
+instead}
 
 \item{set_options}{logical; the default \code{TRUE} sets all recommended
 options but this can be suppressed with \code{FALSE}. For details on the

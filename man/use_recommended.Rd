@@ -14,8 +14,6 @@ use_recommended_tests(
 )
 }
 \arguments{
-\item{pkg}{Deprecated, please use golem_wd instead}
-
 \item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
 \item{spellcheck}{Whether or not to use a spellcheck test.}
@@ -29,10 +27,12 @@ the \verb{vignettes/} folder.}
 \item{error}{Logical, indicating whether the unit test should fail if
 spelling errors are found. Defaults to \code{FALSE}, which does not error, but
 prints potential spelling errors}
+
+\item{pkg}{Deprecated, please use golem_wd instead}
 }
 \value{
 Used for side-effects.
 }
 \description{
-Adds a test folder and copy the golem tests.
+Add recommended elements
 }

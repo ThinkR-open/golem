@@ -196,17 +196,17 @@ for the build and production phases.}
 \value{
 The \code{{dockerfiler}} object, invisibly.
 }
-\note{
-\code{add_dockerfile()}, \code{add_dockerfile_shinyproxy()}, and
-\code{add_dockerfile_heroku()} are now soft deprecated; use the corresponding
-\code{add_dockerfile_with_renv_*()} functions instead.
-}
 \description{
 Build a container containing your Shiny App. \code{add_dockerfile()} and
 \code{add_dockerfile_with_renv()} and \code{add_dockerfile_with_renv()} creates
 a generic Dockerfile, while \code{add_dockerfile_shinyproxy()},
 \code{add_dockerfile_with_renv_shinyproxy()} , \code{add_dockerfile_with_renv_shinyproxy()} and
 \code{add_dockerfile_heroku()} creates platform specific Dockerfile.
+}
+\note{
+\code{add_dockerfile()}, \code{add_dockerfile_shinyproxy()}, and
+\code{add_dockerfile_heroku()} are now soft deprecated; use the corresponding
+\verb{add_dockerfile_with_renv_*()} functions instead.
 }
 \examples{
 \donttest{
