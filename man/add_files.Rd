@@ -44,7 +44,7 @@ add_js_input_binding(
   dir_create,
   initialize = FALSE,
   dev = FALSE,
-  events = list(name = "click", rate_policy = FALSE),
+  events = list(name = c("change", "input"), rate_policy = c(FALSE, FALSE)),
   pkg
 )
 
