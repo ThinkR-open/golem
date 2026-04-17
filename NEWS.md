@@ -7,6 +7,7 @@
 - The `add_dockerfile_with_renv_*` function now generates a multi-stage Dockerfile by default (use `single_file = FALSE` to retain the previous behavior).
 - The `add_dockerfile_with_renv_*` function now creates a Dockerfile that sets `golem.app.prod = TRUE` by default (use `set_golem.app.prod = FALSE` to retain the previous behavior).
 - Print functions have be reworked standardized using the `{cli}` package (@ilyaZar, #89)
+- `use_bundled_html()` downloads bundled HTML templates as zip archives, optionally extracts them into `inst/app/www`, and can remove the raw zip afterwards (#848)
 
 - `add_fct()` gains a `template` argument to customize the content of the generated file; the default template is now exposed as the exported `fct_template()` function, mirroring the `module_template()` / `add_module()` pattern (@ilyaZar, #838)
 
