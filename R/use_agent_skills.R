@@ -110,6 +110,11 @@ use_agent_implement <- function(
 		return(invisible(NULL))
 	}
 
+	cli_alert_success(agent_skills_install_success_message(
+		selected_agent_specs = selected_agent_specs,
+		settings = settings
+	))
+
 	invisible(
 		list(
 			source = source,
@@ -282,6 +287,11 @@ use_skill <- function(
 	if (is.null(copied)) {
 		return(invisible(NULL))
 	}
+
+	cli_alert_success(agent_skills_install_success_message(
+		selected_agent_specs = selected_agent_specs,
+		settings = settings
+	))
 
 	invisible(
 		list(
@@ -486,6 +496,22 @@ get_agent_skills_settings <- function(manifest) {
 	}
 
 	settings
+}
+
+agent_skills_install_success_message <- function(
+	selected_agent_specs,
+	settings
+) {
+	paths <- vapply(
+		selected_agent_specs,
+		function(agent_spec) settings[[agent_spec]]$path,
+		character(1)
+	)
+
+	sprintf(
+		"Skills installed under %s.",
+		paste(sprintf("`%s`", paths), collapse = " and ")
+	)
 }
 
 normalize_agent_skills_specs <- function(

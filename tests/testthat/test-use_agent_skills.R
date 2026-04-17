@@ -254,6 +254,54 @@ test_that("use_agent_implement() supports non-interactive skills and overwrite",
 	)
 })
 
+test_that("use_agent_implement() prints a final success message for selected targets", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+	success <- character()
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		copy_agent_skills = function(...) {
+			"/tmp/project/.claude/skills/skill-a"
+		},
+		cli_alert_success = function(message) {
+			success <<- c(success, message)
+		},
+		{
+			use_agent_implement(
+				source = "local",
+				agent_specs = "claude",
+				skills = "skill-a",
+				main_md_files = "yes",
+				overwrite = "skip",
+				golem_wd = "/tmp/project"
+			)
+		}
+	)
+
+	expect_equal(
+		tail(success, 1),
+		"Skills installed under `.claude/skills`."
+	)
+})
+
 test_that("use_agent_implement() returns invisibly when specs selection is cancelled", {
 	manifest <- list(
 		skills_available = c("skill-a", "skill-b"),
@@ -638,6 +686,58 @@ test_that("use_skill() installs into pre-existing agent targets only", {
 			skills = "skill-a",
 			copy_main_files = FALSE
 		)
+	)
+})
+
+test_that("use_skill() prints a final success message for installed targets", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+	success <- character()
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		get_installed_agent_skills_specs = function(golem_wd, settings) {
+			c("claude", "agents")
+		},
+		copy_agent_skills = function(...) {
+			c(
+				"/tmp/project/.claude/skills/skill-a",
+				"/tmp/project/.agents/skills/skill-a"
+			)
+		},
+		cli_alert_success = function(message) {
+			success <<- c(success, message)
+		},
+		{
+			use_skill(
+				name = "skill-a",
+				source = "local",
+				overwrite = "skip",
+				golem_wd = "/tmp/project"
+			)
+		}
+	)
+
+	expect_equal(
+		tail(success, 1),
+		"Skills installed under `.claude/skills` and `.agents/skills`."
 	)
 })
 
