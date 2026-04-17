@@ -299,29 +299,91 @@ add_r6 <- function(
 	)
 }
 
-#' Default template for `add_fct()`
+#' Golem Function Template
 #'
-#' This function does not aim at being called as is by
-#' users, but to be passed as an argument to [add_fct()].
+#' Function templates can be used to extend the `add_fct()` creation
+#' mechanism with your own template, so that you can be even more
+#' productive when building your `{shiny}` app.
+#' Function template functions do not aim at being called as is by
+#' users, but to be passed as an argument to the `add_fct()` function.
 #'
-#' @param path The path to the R script where the function will be written.
+#' A template function can take the following arguments to be passed
+#' from `add_fct()`:
+#' + name: the name of the function
+#' + path: the path to the file in R/
+#' + export: a TRUE/FALSE value
+#'
+#' If you want your function to ignore these parameters, set `...` as
+#' the last argument of your function, then these will be ignored. See
+#' the examples section of this help.
+#'
+#' @examples
+#' if (interactive()) {
+#'   my_tmpl <- function(name, path, ...) {
+#'     # Define a template that writes to the function file
+#'     write(name, path)
+#'   }
+#'   golem::add_fct(name = "custom", template = my_tmpl)
+#' }
+#'
 #' @param name The name of the generated function.
+#' @param path The path to the R script where the function will be written.
+#'     Note that this path will not be set by the user but via
+#'     `add_fct()`.
 #' @param export Whether the generated function should be exported.
+#' @param ... Extra arguments, ignored by the default template.
 #'
 #' @return Used for side effect
-#' @keywords internal
-#' @noRd
+#' @export
+#' @seealso [add_fct()]
 fct_template <- function(
 	name,
 	path,
 	export = FALSE,
 	...
 ) {
-	append_roxygen_comment(
-		name = name,
-		path = path,
-		ext = "fct",
-		export = export
+	write_there <- write_there_builder(
+		path
+	)
+
+	write_there(
+		sprintf(
+			"#' %s ",
+			name
+		)
+	)
+	write_there(
+		"#'"
+	)
+	write_there(
+		"#' @description A fct function"
+	)
+	write_there(
+		"#'"
+	)
+	write_there(
+		"#' @return The return value, if any, from executing the function."
+	)
+	write_there(
+		"#'"
+	)
+	if (export) {
+		write_there(
+			"#' @export"
+		)
+	} else {
+		write_there(
+			"#' @noRd"
+		)
+	}
+	write_there(
+		paste(
+			name,
+			"<- function() {"
+		)
+	)
+	write_there(
+		"}"
 	)
 }
 
