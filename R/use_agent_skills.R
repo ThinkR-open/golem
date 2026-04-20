@@ -314,7 +314,7 @@ get_agent_skills_golem_root <- function() {
 }
 
 get_agent_skills_golem_github <- function(
-	repo = "ilyaZar/golem-agent-skills",
+	repo = "ThinkR-open/golem-agent-skills",
 	ref = "main"
 ) {
 	archive <- tempfile(fileext = ".zip")
@@ -351,7 +351,7 @@ get_agent_skills_golem_github <- function(
 }
 
 get_agent_skills_github_manifest <- function(
-	repo = "ilyaZar/golem-agent-skills",
+	repo = "ThinkR-open/golem-agent-skills",
 	ref = "main"
 ) {
 	manifest_file <- tempfile(fileext = ".yml")
@@ -379,7 +379,7 @@ ask_agent_skills_source <- function() {
 	choice <- utils_menu(
 		c(
 			"Locally from the {golem} package (no internet required).",
-			"Remote from ilyaZar/golem-agent-skills (internet required).",
+			"Remote from ThinkR-open/golem-agent-skills (internet required).",
 			"Cancel."
 		),
 		title = "Decide on the source to take the agent skills from:"
