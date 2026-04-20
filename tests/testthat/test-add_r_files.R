@@ -234,6 +234,19 @@ test_that("add_fct sanitizes names correctly", {
 		expect_true(
 			any(grepl("x123function <- function", file_content3, fixed = TRUE))
 		)
+
+		# Name with accented latin characters
+
+		add_fct(
+			"éclair",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"fct_eclair.R"
+			)
+		)
 	})
 })
 
