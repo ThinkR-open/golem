@@ -168,36 +168,47 @@ binding_name_parts <- function(name) {
 	base_name <- binding_base_name(
 		name
 	)
-	parts <- strsplit(
-		base_name,
-		"_",
-		fixed = TRUE
-	)[[1]]
-	parts <- parts[
+
+	# Derive pascal from original name before lowercasing so that
+	# "MyWidget" and "my_widget" both yield "MyWidget".
+	raw <- file_path_sans_ext(
+		name
+	)
+	raw <- gsub(
+		"([a-z])([A-Z])",
+		"\\1_\\2",
+		raw
+	)
+	raw_parts <- unlist(
+		strsplit(
+			raw,
+			"[^a-zA-Z0-9]+"
+		)
+	)
+	raw_parts <- raw_parts[
 		nzchar(
-			parts
+			raw_parts
 		)
 	]
-
 	if (
 		length(
-			parts
+			raw_parts
 		) ==
 			0
 	) {
-		parts <- base_name
+		raw_parts <- base_name
 	}
 
 	pascal <- paste0(
 		toupper(
 			substring(
-				parts,
+				raw_parts,
 				1,
 				1
 			)
 		),
 		substring(
-			parts,
+			raw_parts,
 			2
 		),
 		collapse = ""
@@ -265,9 +276,6 @@ write_binding_r_file <- function(
 	lines,
 	open = FALSE
 ) {
-	fs_file_create(
-		where
-	)
 	writeLines(
 		lines,
 		con = where
@@ -282,144 +290,49 @@ write_binding_r_file <- function(
 }
 
 input_binding_r_lines <- function(parts) {
-	c(
-		sprintf(
-			"#' Create a %s input",
-			parts$pascal
+	template <- readLines(
+		system.file(
+			"bindings/input_binding.R",
+			package = "golem"
 		),
-		"#'",
-		"#' @param inputId The input slot that will be used to access the value.",
-		"#' @param label Display label for the input.",
-		"#' @param value Initial value.",
-		"#' @param ... Additional HTML attributes passed to the input element.",
-		"#'",
-		"#' @export",
-		sprintf(
-			"%s <- function(inputId, label, value = \"\", ...) {",
-			parts$input_constructor
-		),
-		"  shiny::tags$div(",
-		sprintf(
-			"    class = \"golem-%s-input\",",
-			parts$file
-		),
-		"    shiny::tags$label(",
-		"      `for` = inputId,",
-		"      label",
-		"    ),",
-		"    shiny::tags$input(",
-		"      id = inputId,",
-		"      type = \"text\",",
-		"      value = value,",
-		sprintf(
-			"      `data-input-type` = \"%s\",",
-			parts$input_type
-		),
-		"      class = \"form-control\",",
-		"      ...",
-		"    )",
-		"  )",
-		"}",
-		"",
-		sprintf(
-			"#' Update a %s input",
-			parts$pascal
-		),
-		"#'",
-		"#' @param session A Shiny session object.",
-		"#' @param inputId The id of the input object.",
-		"#' @param label New label value.",
-		"#' @param value New input value.",
-		"#'",
-		"#' @export",
-		sprintf(
-			"%s <- function(session, inputId, label = NULL, value = NULL) {",
-			parts$update_input
-		),
-		"  message <- list()",
-		"  if (!is.null(label)) {",
-		"    message$label <- label",
-		"  }",
-		"  if (!is.null(value)) {",
-		"    message$value <- value",
-		"  }",
-		"  session$sendInputMessage(inputId, message)",
-		"}",
-		""
+		warn = FALSE
 	)
+	for (nm in names(parts)) {
+		template <- gsub(
+			paste0(
+				"{",
+				nm,
+				"}"
+			),
+			parts[[nm]],
+			template,
+			fixed = TRUE
+		)
+	}
+	template
 }
 
 output_binding_r_lines <- function(parts) {
-	c(
-		sprintf(
-			"#' Create a %s output",
-			parts$pascal
+	template <- readLines(
+		system.file(
+			"bindings/output_binding.R",
+			package = "golem"
 		),
-		"#'",
-		"#' @param outputId The output slot that will be used to display the value.",
-		"#' @param ... Additional HTML attributes passed to the output element.",
-		"#'",
-		"#' @export",
-		sprintf(
-			"%s <- function(outputId, ...) {",
-			parts$output_constructor
-		),
-		"  shiny::tags$div(",
-		"    id = outputId,",
-		sprintf(
-			"    class = \"golem-%s-output\",",
-			parts$file
-		),
-		sprintf(
-			"    `data-output-type` = \"%s\",",
-			parts$output_type
-		),
-		"    ...",
-		"  )",
-		"}",
-		"",
-		sprintf(
-			"#' Render a %s output",
-			parts$pascal
-		),
-		"#'",
-		"#' @param expr An expression that returns the value to display.",
-		"#' @param env The parent environment for the reactive expression.",
-		"#' @param quoted Is the expression quoted?",
-		"#' @param outputArgs A list of arguments to pass through to the output function.",
-		"#'",
-		"#' @export",
-		sprintf(
-			"%s <- function(expr, env = parent.frame(), quoted = FALSE, outputArgs = list()) {",
-			parts$render_output
-		),
-		"  func <- shiny::installExprFunction(",
-		"    expr,",
-		"    \"func\",",
-		"    env,",
-		"    quoted,",
-		sprintf(
-			"    label = \"%s\"",
-			parts$render_output
-		),
-		"  )",
-		"",
-		"  shiny::createRenderFunction(",
-		"    func,",
-		"    transform = function(value, session, name, ...) {",
-		"      list(",
-		"        value = as.character(value)",
-		"      )",
-		"    },",
-		sprintf(
-			"    outputFunc = %s,",
-			parts$output_constructor
-		),
-		"    outputArgs = outputArgs",
-		"  )",
-		"}",
-		""
+		warn = FALSE
 	)
+	for (nm in names(parts)) {
+		template <- gsub(
+			paste0(
+				"{",
+				nm,
+				"}"
+			),
+			parts[[nm]],
+			fixed = TRUE,
+			x = template
+		)
+	}
+	template
 }
 
 #' @export
@@ -727,8 +640,9 @@ add_js_input_binding <- function(
 		input_binding_r_lines(
 			parts
 		),
-		open = FALSE
+		open = open
 	)
+	cat_document_reminder()
 
 	use_internal_js_file(
 		path = temp_js,
@@ -889,8 +803,9 @@ add_js_output_binding <- function(
 		output_binding_r_lines(
 			parts
 		),
-		open = FALSE
+		open = open
 	)
+	cat_document_reminder()
 
 	use_internal_js_file(
 		path = temp_js,

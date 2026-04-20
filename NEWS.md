@@ -10,6 +10,8 @@
 
 - `add_fct()` gains a `template` argument to customize the content of the generated file; the default template is now exposed as the exported `fct_template()` function, mirroring the `module_template()` / `add_module()` pattern (@ilyaZar, #838)
 
+- `add_js_input_binding()` and `add_js_output_binding()` now generate a functional binding: the JS file contains working `find`, `getValue`/`renderValue`, `setValue`, `receiveMessage`, and `subscribe` implementations, and an R companion file (`fct_<name>_input_binding.R` / `fct_<name>_output_binding.R`) is created alongside it with ready-to-use UI constructor, update, and render functions (@ilyaZar, #868, #869)
+
 ## Breaking change
 
 - The `get_current_config()` has been rework in two ways: (1) it now either check the `GOLEM_CONFIG_PATH` env var or the default path (inst/golem-config.yml). `{golem}` no longer tries to guess non standard paths, and does a hard fail if the file doesn't exist, (2) the function no longer copy the `config` files from the skeleton if ever the files are not there (@ilyaZar, @LDSamson, #1178)
@@ -29,6 +31,10 @@
   - The file that the user tries to create already exists
 
 - Creating a golem with `create_golem(overwrite = TRUE)` will now **delete the old folder** and replace with the golem skeleton.
+
+- `add_js_input_binding()` and `add_js_output_binding()` generate JS files with a new naming scheme: `<name>-input.js` / `<name>-output.js` (previously `input-<name>.js` / `output-<name>.js`). Manually rename or delete any old binding files (@ilyaZar, #868, #869)
+
+- The default `events` argument of `add_js_input_binding()` has changed from `list(name = "click", rate_policy = FALSE)` to `list(name = c("change", "input"), rate_policy = c(FALSE, FALSE))` to produce a functional input binding out of the box (@ilyaZar, #868)
 
 ## User visible change
 
