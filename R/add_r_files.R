@@ -112,12 +112,12 @@ add_r_files <- function(
 	if (
 		name == "" &&
 			grepl(
-				"_.R$",
+				"_\\.R$",
 				tmp_name
 			)
 	) {
-		tmp_name <- gsub(
-			"_.R$",
+		tmp_name <- sub(
+			"_\\.R$",
 			".R",
 			tmp_name
 		)
