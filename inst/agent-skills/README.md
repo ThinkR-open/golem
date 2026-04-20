@@ -83,7 +83,7 @@ air format .
 
 1. Add the marketplace from GitHub:
     ```text
-    /plugin marketplace add ilyaZar/golem-agent-skills
+    /plugin marketplace add ThinkR-open/golem-agent-skills
     ```
 
 2. Confirm the marketplace is available:
