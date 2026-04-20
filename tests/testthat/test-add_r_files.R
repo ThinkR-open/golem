@@ -236,3 +236,43 @@ test_that("add_fct sanitizes names correctly", {
 		)
 	})
 })
+
+test_that("add_module with empty fct or utils does not create trailing underscore filenames", {
+	run_quietly_in_a_dummy_golem({
+		add_module(
+			"FixHumanity",
+			fct = "",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"mod_FixHumanity_fct.R"
+			)
+		)
+		expect_false(
+			file.exists(file.path(
+				"R",
+				"mod_FixHumanity_fct_.R"
+			))
+		)
+
+		add_module(
+			"FixCompassion",
+			utils = "",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"mod_FixCompassion_utils.R"
+			)
+		)
+		expect_false(
+			file.exists(file.path(
+				"R",
+				"mod_FixCompassion_utils_.R"
+			))
+		)
+	})
+})
