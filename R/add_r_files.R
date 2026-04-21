@@ -20,13 +20,13 @@ add_r_files <- function(
 		),
 		"pkg"
 	)
-	name <- sanitize_r_name(file_path_sans_ext(
-		name
-	))
-
 	check_name_length_is_one(
 		name
 	)
+
+	name <- sanitize_r_name(file_path_sans_ext(
+		name
+	))
 
 	old <- setwd(
 		fs_path_abs(
@@ -102,6 +102,7 @@ add_r_files <- function(
 			"_"
 		)
 	}
+
 	tmp_name <- paste0(
 		module,
 		ext,
@@ -113,12 +114,12 @@ add_r_files <- function(
 	if (
 		name == "" &&
 			grepl(
-				"_.R$",
+				"_\\.R$",
 				tmp_name
 			)
 	) {
-		tmp_name <- gsub(
-			"_.R$",
+		tmp_name <- sub(
+			"_\\.R$",
 			".R",
 			tmp_name
 		)
