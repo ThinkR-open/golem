@@ -19,12 +19,12 @@ browser_button <- function() {
 		"To be copied in your UI"
 	)
 	cli_cat_line(
-		crayon_darkgrey(
+		cli_darkgrey(
 			'actionButton("browser", "browser"),'
 		)
 	)
 	cli_cat_line(
-		crayon_darkgrey(
+		cli_darkgrey(
 			'tags$script("$(\'#browser\').hide();")'
 		)
 	)
@@ -33,17 +33,17 @@ browser_button <- function() {
 		"To be copied in your server"
 	)
 	cli_cat_line(
-		crayon_darkgrey(
+		cli_darkgrey(
 			"observeEvent(input$browser,{"
 		)
 	)
 	cli_cat_line(
-		crayon_darkgrey(
+		cli_darkgrey(
 			"  browser()"
 		)
 	)
 	cli_cat_line(
-		crayon_darkgrey(
+		cli_darkgrey(
 			"})"
 		)
 	)
