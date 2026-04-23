@@ -166,3 +166,13 @@ cli_abort <- function(
 		)
 	}
 }
+
+cli_darkgrey <- function(
+	...
+) {
+	check_cli_installed()
+	tmp_fun <- cli::make_ansi_style(
+		"darkgrey"
+	)
+	tmp_fun(...)
+}

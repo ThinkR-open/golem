@@ -147,10 +147,10 @@ after_creation_message_html_template <- function(
 			"To use this html file as a template, add the following code in your UI:"
 		)
 		cli_cat_line(
-			crayon_darkgrey("htmlTemplate(")
+			cli_darkgrey("htmlTemplate(")
 		)
 		cli_cat_line(
-			crayon_darkgrey(
+			cli_darkgrey(
 				sprintf(
 					'    app_sys("app/www/%s.html"),',
 					file_path_sans_ext(name)
@@ -158,13 +158,13 @@ after_creation_message_html_template <- function(
 			)
 		)
 		cli_cat_line(
-			crayon_darkgrey("    body = tagList()")
+			cli_darkgrey("    body = tagList()")
 		)
 		cli_cat_line(
-			crayon_darkgrey("    # add here other template arguments")
+			cli_darkgrey("    # add here other template arguments")
 		)
 		cli_cat_line(
-			crayon_darkgrey(")")
+			cli_darkgrey(")")
 		)
 	})
 }

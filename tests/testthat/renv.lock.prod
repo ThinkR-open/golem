@@ -111,18 +111,6 @@
       ],
       "Hash": "8b7222e9d9eb5178eea545c0c4d33fc2"
     },
-    "crayon": {
-      "Package": "crayon",
-      "Version": "1.5.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "grDevices",
-        "methods",
-        "utils"
-      ],
-      "Hash": "859d96e65ef198fd43e82b9628d593ef"
-    },
     "digest": {
       "Package": "digest",
       "Version": "0.6.36",
@@ -395,7 +383,6 @@
         "bslib",
         "cachem",
         "commonmark",
-        "crayon",
         "fastmap",
         "fontawesome",
         "glue",
