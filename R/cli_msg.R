@@ -83,6 +83,12 @@ cat_automatically_linked <- function() {
 	)
 }
 
+cat_document_reminder <- function() {
+	cli_alert_info(
+		"Run `devtools::document()` to register the new exported functions in NAMESPACE."
+	)
+}
+
 after_creation_message_js <- function(
 	golem_wd,
 	dir,

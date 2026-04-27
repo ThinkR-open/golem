@@ -3,15 +3,12 @@
 \name{add_positconnect_file}
 \alias{add_positconnect_file}
 \alias{add_rconnect_file}
-\alias{add_rstudioconnect_file}
 \alias{add_shinyappsio_file}
 \alias{add_shinyserver_file}
 \alias{add_rscignore_file}
 \title{Add an \code{app.R} at the root of your package to deploy on RStudio Connect}
 \usage{
 add_positconnect_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
-
-add_rstudioconnect_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 
 add_shinyappsio_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 
@@ -36,8 +33,6 @@ Additionally, adds a \code{.rscignore} at the root of the \code{{golem}} project
 }
 \note{
 In previous versions, this function was called add_rconnect_file.
-
-\code{add_rstudioconnect_file} is now deprecated; replace by \code{\link[=add_positconnect_file]{add_positconnect_file()}}.
 }
 \section{List of excluded files in \code{.rscignore}}{
 

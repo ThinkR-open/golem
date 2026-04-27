@@ -13,3 +13,7 @@ Prints the code to the console.
 \description{
 See \url{https://rtask.thinkr.fr/a-little-trick-for-debugging-shiny/} for more context.
 }
+\note{
+\code{browser_button()} is now soft deprecated and will be removed in a
+future version of \code{{golem}}.
+}

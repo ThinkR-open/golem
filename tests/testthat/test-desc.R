@@ -99,7 +99,8 @@ test_that("desc works", {
 						),
 						repo_url = "http://repo_url.com",
 						pkg_version = "0.0.0.9010"
-					)
+					),
+					"parameters of `fill_desc\\(\\)` are deprecated"
 				)
 			}
 		)
@@ -131,7 +132,8 @@ test_that("desc works", {
 						author_orcid = NULL,
 						repo_url = "http://repo_url.com",
 						pkg_version = "0.0.0.9010"
-					)
+					),
+					"parameters of `fill_desc\\(\\)` are deprecated"
 				)
 				expect_equal(
 					as.character(

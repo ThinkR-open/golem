@@ -9,11 +9,21 @@
 - Print functions have be reworked standardized using the `{cli}` package (@ilyaZar, #89)
 - `use_bundled_html()` downloads bundled HTML templates as zip archives, optionally extracts them into `inst/app/www`, and can remove the raw zip afterwards (#848)
 
+- `add_fct()` gains a `template` argument to customize the content of the generated file; the default template is now exposed as the exported `fct_template()` function, mirroring the `module_template()` / `add_module()` pattern (@ilyaZar, #838)
+
+- `add_js_input_binding()` and `add_js_output_binding()` now generate a functional binding: the JS file contains working `find`, `getValue`/`renderValue`, `setValue`, `receiveMessage`, and `subscribe` implementations, and an R companion file (`fct_<name>_input_binding.R` / `fct_<name>_output_binding.R`) is created alongside it with ready-to-use UI constructor, update, and render functions (@ilyaZar, #868, #869)
+
 ## Breaking change
 
 - The `get_current_config()` has been rework in two ways: (1) it now either check the `GOLEM_CONFIG_PATH` env var or the default path (inst/golem-config.yml). `{golem}` no longer tries to guess non standard paths, and does a hard fail if the file doesn't exist, (2) the function no longer copy the `config` files from the skeleton if ever the files are not there (@ilyaZar, @LDSamson, #1178)
 
 - `{golem}` functions used to rely on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This has now been standardized and all functions rely on `golem_wd` now (@ilyaZar, #845)
+
+- `get_sysreqs()` has been removed; use `dockerfiler::get_sysreqs()` instead.
+
+- `use_recommended_deps()` has been removed.
+
+- `add_rstudioconnect_file()` has been removed; use `add_positconnect_file()` instead.
 
 - Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
 
@@ -23,9 +33,21 @@
 
 - Creating a golem with `create_golem(overwrite = TRUE)` will now **delete the old folder** and replace with the golem skeleton.
 
+- `add_js_input_binding()` and `add_js_output_binding()` generate JS files with a new naming scheme: `<name>-input.js` / `<name>-output.js` (previously `input-<name>.js` / `output-<name>.js`). Manually rename or delete any old binding files (@ilyaZar, #868, #869)
+
+- The default `events` argument of `add_js_input_binding()` has changed from `list(name = "click", rate_policy = FALSE)` to `list(name = c("change", "input"), rate_policy = c(FALSE, FALSE))` to produce a functional input binding out of the box (@ilyaZar, #868)
+
 ## User visible change
 
 - `run_dev()` only prints one message (#1191 / @howardbaik)
+
+## Soft deprecated
+
+- `browser_button()` is now soft deprecated (#1155)
+
+- `add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
+  `add_dockerfile_heroku()` are now explicitly soft deprecated; use the
+  corresponding `add_dockerfile_with_renv_*()` functions.
 
 ## Bug fix
 
@@ -36,6 +58,8 @@
 - The `create_if_needed()` function has been fixed to work in non interactive mode (#1154, @pachadotdev)
 
 ## Internal changes
+
+- Added internal `cli_progress_bar()`, `cli_progress_update()`, `cli_progress_done()` wrappers and `cat_start_unzip()` / `cat_unzipped()` helpers (@ilyaZar, #1234)
 
 - `{golem}` now embarks a `claude.md` file and a series of skills
 
