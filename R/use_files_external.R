@@ -9,7 +9,11 @@
 #' @param path String representation of the local path for the file to be implemented (use_file only)
 #' @param dir Path to the dir where the file while be created.
 #' @param extract Whether to extract a downloaded HTML zip bundle. Use `"ask"` to prompt.
+#'   Only used by `use_bundled_html()` and by `use_external_html_template()`
+#'   when `url` points to a `.zip` archive.
 #' @param delete_zip Whether to delete the raw HTML zip after extraction. Use `"ask"` to prompt.
+#'   Only used by `use_bundled_html()` and by `use_external_html_template()`
+#'   when `url` points to a `.zip` archive.
 #'
 #' @note See `?htmltools::htmlTemplate` and `https://shiny.rstudio.com/articles/templates.html`
 #'     for more information about `htmlTemplate`.
@@ -109,17 +113,18 @@ use_external_html_template <- function(
 	html_bundle <- check_if_html_bundle(url)
 
 	if (html_bundle) {
-		return(
-			use_bundled_html(
-				url = url,
-				name = name,
-				golem_wd = golem_wd,
-				dir = dir,
-				open = open,
-				extract = extract,
-				delete_zip = delete_zip
-			)
+		bundle_args <- list(
+			url = url,
+			golem_wd = golem_wd,
+			dir = dir,
+			open = open,
+			extract = extract,
+			delete_zip = delete_zip
 		)
+		if (!missing(name)) {
+			bundle_args$name <- name
+		}
+		return(do.call(use_bundled_html, bundle_args))
 	}
 
 	perform_checks_and_download_if_everything_is_ok(
@@ -174,9 +179,11 @@ use_external_file <- function(
 	)
 }
 
+#' @export
+#' @rdname use_files
 use_bundled_html <- function(
 	url,
-	name = "template.html",
+	name = NULL,
 	golem_wd = get_golem_wd(),
 	dir = "inst/app/www",
 	open = FALSE,
@@ -189,7 +196,7 @@ use_bundled_html <- function(
 	on.exit(setwd(old))
 	dir <- fs_path_abs(dir)
 
-	if (name == "template.html") {
+	if (is.null(name)) {
 		name <- "template"
 	}
 	name_zip <- build_name(name, url, with_ext = TRUE)
@@ -230,12 +237,12 @@ use_bundled_html <- function(
 		extract <- cat_yes_no_or_cancel(
 			sprintf(
 				"Extract %s?",
-				basename(where_zip)
+				fs_path_file(where_zip)
 			)
 		)
 	}
 	if (identical(extract, "cancel")) {
-		unlink(where_zip, force = TRUE)
+		fs_file_delete(where_zip)
 		cli_alert_warning("Abort html template download.")
 		return(invisible(NULL))
 	}
@@ -248,9 +255,9 @@ use_bundled_html <- function(
 	if (
 		identical(delete_zip, "yes") ||
 			(identical(delete_zip, "ask") &&
-				yesno(sprintf("Delete %s?", basename(where_zip))))
+				yesno(sprintf("Delete %s?", fs_path_file(where_zip))))
 	) {
-		unlink(where_zip, force = TRUE)
+		fs_file_delete(where_zip)
 	}
 	cli_progress_update(id = progress_id)
 

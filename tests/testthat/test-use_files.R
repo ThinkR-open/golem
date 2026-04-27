@@ -148,7 +148,10 @@ test_that("use_external_html_template extracts bundle into named dir", {
 				)
 			}
 		)
-		expect_equal(out, as.character(fs_path_abs("inst/app/www/resume")))
+		expect_equal(
+			as.character(out),
+			as.character(fs_path_abs("inst/app/www/resume"))
+		)
 		expect_true(file.exists("inst/app/www/resume/index.html"))
 		expect_false(file.exists("inst/app/www/template_bundle.zip"))
 	})

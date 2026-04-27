@@ -49,51 +49,33 @@ unzip_bundled_html <- function(
 		zipfile = path_from,
 		exdir = path_to
 	)
-	bundle_file_entries <- list.files(
-		path_to,
-		full.names = TRUE
-	)
+	bundle_file_entries <- fs_dir_ls(path_to)
 	# the following condition checks: exactly one file/dir exist
 	# and what exist is really a dir (not, e.g. index.html)
 	if (
 		length(bundle_file_entries) == 1 &&
-			dir.exists(bundle_file_entries[[1]])
+			fs_dir_exists(bundle_file_entries[[1]])
 	) {
 		# Move one level up when the archive wraps everything in a single dir.
 		wrapper_dir <- bundle_file_entries[[1]]
-		wrapper_entries <- list.files(
-			wrapper_dir,
-			all.files = TRUE,
-			no.. = TRUE,
-			full.names = TRUE
-		)
+		wrapper_entries <- fs_dir_ls(wrapper_dir, all = TRUE)
 		for (entry in wrapper_entries) {
-			check_tmp <- file.rename(
+			fs_file_move(
 				entry,
-				file.path(path_to, basename(entry))
+				fs_path(path_to, fs_path_file(entry))
 			)
-			if (isFALSE(check_tmp)) {
-				cli_abort(
-					sprintf("Failed to move %s.", entry)
-				)
-			}
 		}
-		unlink(wrapper_dir, recursive = TRUE, force = TRUE)
+		fs_dir_delete(wrapper_dir)
 		# When the default target dir is "template", prefer the wrapper dir name.
-		if (basename(path_to) == "template") {
+		if (fs_path_file(path_to) == "template") {
 			# make sure that, whenever does not supply a 'name' arg, i.e.,
 			# name defaults to "template" **and** there is a top level dir
 			# in the bundle itself, use the top-level dir:
-			path_new <- file.path(
-				dirname(path_to),
-				basename(wrapper_dir)
+			path_new <- fs_path(
+				fs_path_dir(path_to),
+				fs_path_file(wrapper_dir)
 			)
-			check_tmp <- file.rename(path_to, path_new)
-			if (isFALSE(check_tmp)) {
-				cli_abort(
-					sprintf("Failed to rename %s.", path_to)
-				)
-			}
+			fs_file_move(path_to, path_new)
 			path_to <- path_new
 		}
 	}
