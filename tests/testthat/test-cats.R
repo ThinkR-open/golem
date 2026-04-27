@@ -18,6 +18,10 @@ test_that("cats works", {
 		cat_copied(
 			"/tmp"
 		)
+		cat_start_unzip()
+		cat_unzipped(
+			"/tmp"
+		)
 		cat_created(
 			"/tmp"
 		)
