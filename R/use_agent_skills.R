@@ -576,10 +576,7 @@ normalize_agent_skills_argument <- function(
 	skills,
 	skills_available
 ) {
-	if (
-		length(skills) == 1 &&
-			tolower(skills) == "all"
-	) {
+	if (length(skills) == 1 && tolower(skills) == "all") {
 		return(skills_available)
 	}
 
