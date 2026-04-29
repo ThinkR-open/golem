@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      APPNAME: __APPNAME__
+      CONNECT_SERVER: ${{ secrets.CONNECT_SERVER }}
+      CONNECT_API_KEY: ${{ secrets.CONNECT_API_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -28,15 +31,8 @@ jobs:
           needs: shiny
 
       - name: Validate deployment settings
-        env:
-          APPNAME: __APPNAME__
-          ACCOUNT: your-account-name
-          SERVER: shinyapps.io
-          RSCONNECT_USER: ${{ secrets.RSCONNECT_USER }}
-          RSCONNECT_TOKEN: ${{ secrets.RSCONNECT_TOKEN }}
-          RSCONNECT_SECRET: ${{ secrets.RSCONNECT_SECRET }}
         run: |
-          required <- c("RSCONNECT_USER", "RSCONNECT_TOKEN", "RSCONNECT_SECRET")
+          required <- c("CONNECT_SERVER", "CONNECT_API_KEY")
           missing <- required[vapply(required, function(x) Sys.getenv(x) == "", logical(1))]
           if (length(missing) > 0) {
             stop(
@@ -47,26 +43,16 @@ jobs:
               call. = FALSE
             )
           }
-          if (Sys.getenv("ACCOUNT") == "your-account-name") {
+          if (Sys.getenv("APPNAME") == "") {
             stop(
-              "Set ACCOUNT in the workflow before deploying.",
-              call. = FALSE
-            )
-          }
-          if (Sys.getenv("SERVER") == "") {
-            stop(
-              "Set SERVER in the workflow before deploying.",
+              "Set APPNAME in the workflow before deploying.",
               call. = FALSE
             )
           }
         shell: Rscript {0}
 
       - name: Authorize and deploy app
-        env:
-          APPNAME: __APPNAME__
-          ACCOUNT: your-account-name
-          SERVER: shinyapps.io
         run: |
-          rsconnect::setAccountInfo("${{ secrets.RSCONNECT_USER }}", "${{ secrets.RSCONNECT_TOKEN }}", "${{ secrets.RSCONNECT_SECRET }}")
-          rsconnect::deployApp(appDir = ".", appPrimaryDoc = "app.R", appName = Sys.getenv("APPNAME"), account = Sys.getenv("ACCOUNT"), server = Sys.getenv("SERVER"))
+          rsconnect::connectApiUser(server = Sys.getenv("CONNECT_SERVER"), apiKey = Sys.getenv("CONNECT_API_KEY"), quiet = TRUE)
+          rsconnect::deployApp(appDir = ".", appPrimaryDoc = "app.R", appName = Sys.getenv("APPNAME"), server = Sys.getenv("CONNECT_SERVER"), forceUpdate = TRUE)
         shell: Rscript {0}
