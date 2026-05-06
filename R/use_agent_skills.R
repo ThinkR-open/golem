@@ -11,6 +11,8 @@
 #' @param overwrite How to handle existing files. Use `"ask"` for the
 #'   interactive menu.
 #' @param golem_wd Path to the golem project where files should be copied.
+#' @param interactive Whether `"ask"` values and `skills = NULL` should prompt.
+#'   In non-interactive mode, those values use local defaults.
 #'
 #' @seealso [use_skills()], [use_agent_skills()], [use_claude_skills()],
 #'   [use_skill()]
@@ -24,12 +26,32 @@ use_agent_implement <- function(
 	skills = NULL,
 	main_md_files = c("ask", "yes", "no"),
 	overwrite = c("ask", "overwrite", "skip", "abort"),
-	golem_wd = get_golem_wd()
+	golem_wd = get_golem_wd(),
+	interactive = rlang_is_interactive()
 ) {
 	source <- match.arg(source)
 	agent_specs <- match.arg(agent_specs)
 	main_md_files <- match.arg(main_md_files)
 	overwrite <- match.arg(overwrite)
+	interactive <- isTRUE(interactive)
+
+	if (!interactive) {
+		if (identical(source, "ask")) {
+			source <- "local"
+		}
+		if (identical(agent_specs, "ask")) {
+			agent_specs <- "both"
+		}
+		if (is.null(skills)) {
+			skills <- "all"
+		}
+		if (identical(main_md_files, "ask")) {
+			main_md_files <- "yes"
+		}
+		if (identical(overwrite, "ask")) {
+			overwrite <- "skip"
+		}
+	}
 
 	if (identical(source, "ask")) {
 		source <- ask_agent_skills_source()
@@ -144,7 +166,8 @@ use_skills <- function(
 	skills = NULL,
 	main_md_files = c("ask", "yes", "no"),
 	overwrite = c("ask", "overwrite", "skip", "abort"),
-	golem_wd = get_golem_wd()
+	golem_wd = get_golem_wd(),
+	interactive = rlang_is_interactive()
 ) {
 	use_agent_implement(
 		source = source,
@@ -152,7 +175,8 @@ use_skills <- function(
 		skills = skills,
 		main_md_files = main_md_files,
 		overwrite = overwrite,
-		golem_wd = golem_wd
+		golem_wd = golem_wd,
+		interactive = interactive
 	)
 }
 
@@ -170,7 +194,8 @@ use_agent_skills <- function(
 	skills = NULL,
 	main_md_files = c("ask", "yes", "no"),
 	overwrite = c("ask", "overwrite", "skip", "abort"),
-	golem_wd = get_golem_wd()
+	golem_wd = get_golem_wd(),
+	interactive = rlang_is_interactive()
 ) {
 	use_agent_implement(
 		source = source,
@@ -178,7 +203,8 @@ use_agent_skills <- function(
 		skills = skills,
 		main_md_files = main_md_files,
 		overwrite = overwrite,
-		golem_wd = golem_wd
+		golem_wd = golem_wd,
+		interactive = interactive
 	)
 }
 
@@ -196,7 +222,8 @@ use_claude_skills <- function(
 	skills = NULL,
 	main_md_files = c("ask", "yes", "no"),
 	overwrite = c("ask", "overwrite", "skip", "abort"),
-	golem_wd = get_golem_wd()
+	golem_wd = get_golem_wd(),
+	interactive = rlang_is_interactive()
 ) {
 	use_agent_implement(
 		source = source,
@@ -204,7 +231,8 @@ use_claude_skills <- function(
 		skills = skills,
 		main_md_files = main_md_files,
 		overwrite = overwrite,
-		golem_wd = golem_wd
+		golem_wd = golem_wd,
+		interactive = interactive
 	)
 }
 
