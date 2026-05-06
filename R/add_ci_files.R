@@ -2,7 +2,9 @@
 #'
 #' Creates a minimal GitHub Actions workflow for deploying a `{golem}` app to
 #' Posit Connect via `{rsconnect}`. If needed, this function also creates a
-#' root `app.R` and `.rscignore` by calling [add_positconnect_file()].
+#' root `app.R` and `.rscignore` by calling [add_positconnect_file()]. The
+#' generated Posit Connect entrypoint uses `{pkgload}`, so `{pkgload}` is added
+#' to `DESCRIPTION`.
 #'
 #' @inheritParams add_module
 #'
@@ -30,7 +32,9 @@ add_github_action <- function(
 #'
 #' Creates a minimal GitLab CI file for deploying a `{golem}` app to Posit
 #' Connect via `{rsconnect}`. If needed, this function also creates a root
-#' `app.R` and `.rscignore` by calling [add_positconnect_file()].
+#' `app.R` and `.rscignore` by calling [add_positconnect_file()]. The
+#' generated Posit Connect entrypoint uses `{pkgload}`, so `{pkgload}` is added
+#' to `DESCRIPTION`.
 #'
 #' @inheritParams add_module
 #'
@@ -55,6 +59,7 @@ add_deploy_ci_ <- function(
 	golem_wd <- fs_path_abs(golem_wd)
 
 	ensure_deploy_entrypoint_(golem_wd = golem_wd)
+	ensure_deploy_dependencies_(golem_wd = golem_wd)
 
 	if (fs_file_exists(output)) {
 		cli_alert_info(sprintf("The '%s'-file already exists.", basename(output)))
@@ -101,6 +106,21 @@ ensure_deploy_entrypoint_ <- function(golem_wd = get_golem_wd()) {
 
 	if (!fs_file_exists(rscignore_file)) {
 		add_rscignore_file(golem_wd = golem_wd, open = FALSE)
+	}
+
+	return(invisible(golem_wd))
+}
+
+ensure_deploy_dependencies_ <- function(golem_wd = get_golem_wd()) {
+	desc_file <- fs_path(golem_wd, "DESCRIPTION")
+	deps <- desc_get_deps(file = desc_file)
+	has_pkgload <- any(
+		deps$package == "pkgload" &
+			deps$type %in% c("Depends", "Imports")
+	)
+
+	if (!has_pkgload) {
+		desc::desc_set_dep("pkgload", type = "Imports", file = desc_file)
 	}
 
 	return(invisible(golem_wd))

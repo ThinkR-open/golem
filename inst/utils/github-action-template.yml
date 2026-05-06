@@ -25,10 +25,41 @@ jobs:
         with:
           use-public-rspm: true
 
+      - uses: r-lib/actions/setup-renv@v2
+        if: ${{ hashFiles('renv.lock') != '' }}
+
       - uses: r-lib/actions/setup-r-dependencies@v2
+        if: ${{ hashFiles('renv.lock') == '' }}
         with:
           extra-packages: any::rsconnect, local::.
           needs: shiny
+
+      - name: Install deployment tooling
+        if: ${{ hashFiles('renv.lock') != '' }}
+        run: |
+          install.packages("rsconnect")
+        shell: Rscript {0}
+
+      - name: Check deployment dependencies
+        run: |
+          required <- c("pkgload", "rsconnect")
+          missing <- required[
+            !vapply(required, requireNamespace, logical(1), quietly = TRUE)
+          ]
+          if (length(missing) > 0) {
+            stop(
+              sprintf(
+                paste(
+                  "Missing deployment packages: %s.",
+                  "Run renv::snapshot() after generating this workflow",
+                  "if you use renv."
+                ),
+                paste(missing, collapse = ", ")
+              ),
+              call. = FALSE
+            )
+          }
+        shell: Rscript {0}
 
       - name: Validate deployment settings
         run: |
@@ -49,6 +80,11 @@ jobs:
               call. = FALSE
             )
           }
+        shell: Rscript {0}
+
+      - name: Generate deployment manifest
+        run: |
+          rsconnect::writeManifest(appDir = ".", appPrimaryDoc = "app.R")
         shell: Rscript {0}
 
       - name: Authorize and deploy app

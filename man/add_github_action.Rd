@@ -17,5 +17,7 @@ The path to the created workflow, invisibly.
 \description{
 Creates a minimal GitHub Actions workflow for deploying a \code{{golem}} app to
 Posit Connect via \code{{rsconnect}}. If needed, this function also creates a
-root \code{app.R} and \code{.rscignore} by calling \code{\link[=add_positconnect_file]{add_positconnect_file()}}.
+root \code{app.R} and \code{.rscignore} by calling \code{\link[=add_positconnect_file]{add_positconnect_file()}}. The
+generated Posit Connect entrypoint uses \code{{pkgload}}, so \code{{pkgload}} is added
+to \code{DESCRIPTION}.
 }
