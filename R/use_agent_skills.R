@@ -678,14 +678,22 @@ copy_agent_skills <- function(
 		}
 
 		for (skill in skills) {
+			skill_source <- get_agent_skill_source_dir(
+				source = source,
+				root = root,
+				manifest = manifest,
+				settings = spec_settings,
+				skill = skill
+			)
+			if (!file.exists(skill_source)) {
+				cli_abort(sprintf(
+					"Agent skill `%s` is listed in the manifest but missing upstream and at %s.",
+					skill,
+					skill_source
+				))
+			}
 			entries[[length(entries) + 1]] <- list(
-				source = get_agent_skill_source_dir(
-					source = source,
-					root = root,
-					manifest = manifest,
-					settings = spec_settings,
-					skill = skill
-				),
+				source = skill_source,
 				target = file.path(golem_wd, spec_settings$path, skill),
 				type = "dir"
 			)
