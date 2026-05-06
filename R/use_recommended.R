@@ -10,7 +10,6 @@
 #'
 #' @return Used for side-effects.
 #'
-#' @rdname use_recommended
 #' @export
 #' @importFrom utils capture.output
 #' @importFrom attempt without_warning stop_if
