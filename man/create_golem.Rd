@@ -13,6 +13,8 @@ create_golem(
   without_comments = FALSE,
   project_hook = golem::project_hook,
   with_git = FALSE,
+  with_agents = FALSE,
+  with_agents_options = NULL,
   ...
 )
 }
@@ -40,7 +42,13 @@ after the project is created.}
 
 \item{with_git}{Boolean. Initialize git repository}
 
+\item{with_agents}{Boolean. If \code{TRUE}, the fresh package is initialized with skills
+files and \code{CLAUDE/AGENTS.md}}
+
 \item{...}{Arguments passed to the \code{project_hook()} function.}
+
+\item{a}{named list of options passed to \code{\link[=use_skills]{use_skills()}}; list names must match
+argument names of \code{use_skills()}}
 }
 \value{
 The path, invisibly.
