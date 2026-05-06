@@ -69,6 +69,11 @@ copy_golem_skeleton_and_replace_name <- function(path_to_golem, package_name) {
 #'     to override the files and content. This function is executed just
 #'     after the project is created.
 #' @param with_git Boolean. Initialize git repository
+#' @param with_agents Boolean. If `TRUE`, the fresh package is initialized with skills
+#'     files and `CLAUDE/AGENTS.md`
+#' @param with_agents_options named list of options passed to [use_skills()];
+#'     list names must match `use_skills()` argument names except `golem_wd`
+#'     and `interactive`.
 #' @param ... Arguments passed to the `project_hook()` function.
 #'
 #' @note
@@ -95,6 +100,8 @@ create_golem <- function(
 	without_comments = FALSE,
 	project_hook = golem::project_hook,
 	with_git = FALSE,
+	with_agents = FALSE,
+	with_agents_options = NULL,
 	...
 ) {
 	path_to_golem <- normalizePath(path, mustWork = FALSE)
@@ -126,6 +133,7 @@ create_golem <- function(
 			fs_dir_delete(path_to_golem)
 		}
 	}
+	check_arg_with_agents_options(with_agents_options)
 
 	copy_golem_skeleton_and_replace_name(path_to_golem, package_name)
 
@@ -173,6 +181,16 @@ create_golem <- function(
 		} else {
 			cli_alert_success("Initialized git repository.")
 		}
+	}
+
+	if (isTRUE(with_agents)) {
+		cli_alert_info("Initializing agent skills ...")
+		check_is_interactive <- rlang_is_interactive()
+		create_golem_use_agents(
+			path_to_golem = path_to_golem,
+			with_agents_options = with_agents_options,
+			should_prompt = check_is_interactive
+		)
 	}
 
 	setwd(old)
