@@ -93,7 +93,6 @@ use_agent_implement <- function(
 		cli_alert_warning("Abort selection.")
 		return(invisible(NULL))
 	}
-
 	if (is.null(skills)) {
 		skills <- ask_agent_skills_selection(manifest$skills_available)
 	} else {

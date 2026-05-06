@@ -486,10 +486,12 @@ test_that("create_golem_use_agents dispatches through use_skills", {
 })
 
 test_that("create_golem_gui works", {
+	create_golem_args <- NULL
 	testthat::with_mocked_bindings(
 		create_golem = function(
 			...
 		) {
+			create_golem_args <<- list(...)
 			return(
 				TRUE
 			)
@@ -500,9 +502,31 @@ test_that("create_golem_gui works", {
 			)
 			expect_true(
 				create_golem_gui(
+					path = "/tmp/project",
 					project_hook = "golem::project_hook"
 				)
 			)
+			expect_true(
+				create_golem_gui(
+					path = "/tmp/project",
+					project_hook = "golem::project_hook",
+					with_agents = TRUE,
+					with_agents_source = "remote",
+					with_agents_agent_specs = "agents",
+					with_agents_main_md_files = "no"
+				)
+			)
 		}
+	)
+	expect_equal(create_golem_args$with_agents, TRUE)
+	expect_equal(
+		create_golem_args$with_agents_options,
+		list(
+			source = "remote",
+			agent_specs = "agents",
+			skills = "all",
+			main_md_files = "no",
+			overwrite = "overwrite"
+		)
 	)
 })
