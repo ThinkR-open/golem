@@ -247,6 +247,14 @@ create_golem_gui <- function(path, ...) {
 		without_comments = dots$without_comments,
 		project_hook = project_hook,
 		check_name = dots$check_name,
-		with_git = dots$with_git
+		with_git = dots$with_git,
+		with_agents = dots$with_agents,
+		with_agents_options = list(
+			source = "local",
+			agent_specs = "both",
+			skills = "all",
+			main_md_files = "yes",
+			overwrite = "skip"
+		)
 	)
 }
