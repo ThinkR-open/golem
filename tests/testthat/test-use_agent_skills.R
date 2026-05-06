@@ -234,7 +234,8 @@ test_that("use_agent_implement() supports non-interactive skills and overwrite",
 				skills = "all",
 				main_md_files = "yes",
 				overwrite = "skip",
-				golem_wd = "/tmp/project"
+				golem_wd = "/tmp/project",
+				interactive = FALSE
 			)
 		}
 	)
@@ -250,6 +251,72 @@ test_that("use_agent_implement() supports non-interactive skills and overwrite",
 			skills = c("skill-a", "skill-b"),
 			copy_main_files = TRUE,
 			targets = file.path("/tmp/project", c("skill-a", "skill-b"))
+		)
+	)
+})
+
+test_that("use_agent_implement() uses safe defaults when non-interactive", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+
+	result <- testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		copy_agent_skills = function(
+			source,
+			root,
+			manifest,
+			settings,
+			selected_agent_specs,
+			skills,
+			overwrite,
+			golem_wd,
+			copy_main_files
+		) {
+			list(
+				selected_agent_specs = selected_agent_specs,
+				skills = skills,
+				overwrite = overwrite,
+				copy_main_files = copy_main_files
+			)
+		},
+		{
+			use_skills(
+				golem_wd = "/tmp/project",
+				interactive = FALSE
+			)
+		}
+	)
+
+	expect_equal(result$source, "local")
+	expect_equal(result$agent_specs, "both")
+	expect_equal(result$selected_agent_specs, c("claude", "agents"))
+	expect_equal(result$skills, c("skill-a", "skill-b"))
+	expect_equal(result$main_md_files, "yes")
+	expect_equal(result$overwrite, "skip")
+	expect_equal(
+		result$copied,
+		list(
+			selected_agent_specs = c("claude", "agents"),
+			skills = c("skill-a", "skill-b"),
+			overwrite = "skip",
+			copy_main_files = TRUE
 		)
 	)
 })
@@ -329,7 +396,8 @@ test_that("use_agent_implement() returns invisibly when specs selection is cance
 				source = "local",
 				agent_specs = "ask",
 				main_md_files = "ask",
-				golem_wd = "/tmp/project"
+				golem_wd = "/tmp/project",
+				interactive = TRUE
 			)
 		}
 	)
@@ -364,7 +432,8 @@ test_that("use_agent_implement() returns invisibly when main file selection is c
 				source = "local",
 				agent_specs = "claude",
 				main_md_files = "ask",
-				golem_wd = "/tmp/project"
+				golem_wd = "/tmp/project",
+				interactive = TRUE
 			)
 		}
 	)
@@ -423,7 +492,8 @@ test_that("use_agent_implement() defers remote archive fetch until after prompts
 				skills = NULL,
 				main_md_files = "ask",
 				overwrite = "skip",
-				golem_wd = "/tmp/project"
+				golem_wd = "/tmp/project",
+				interactive = TRUE
 			)
 		}
 	)
@@ -491,7 +561,8 @@ test_that("wrappers forward the expected agent_specs", {
 				skills,
 				main_md_files,
 				overwrite,
-				golem_wd
+				golem_wd,
+				interactive
 			) {
 				list(
 					source = source,
@@ -499,7 +570,8 @@ test_that("wrappers forward the expected agent_specs", {
 					skills = skills,
 					main_md_files = main_md_files,
 					overwrite = overwrite,
-					golem_wd = golem_wd
+					golem_wd = golem_wd,
+					interactive = interactive
 				)
 			},
 			{
@@ -523,7 +595,8 @@ test_that("wrappers forward the expected agent_specs", {
 				skills,
 				main_md_files,
 				overwrite,
-				golem_wd
+				golem_wd,
+				interactive
 			) {
 				list(
 					source = source,
@@ -531,7 +604,8 @@ test_that("wrappers forward the expected agent_specs", {
 					skills = skills,
 					main_md_files = main_md_files,
 					overwrite = overwrite,
-					golem_wd = golem_wd
+					golem_wd = golem_wd,
+					interactive = interactive
 				)
 			},
 			{
@@ -555,7 +629,8 @@ test_that("wrappers forward the expected agent_specs", {
 				skills,
 				main_md_files,
 				overwrite,
-				golem_wd
+				golem_wd,
+				interactive
 			) {
 				list(
 					source = source,
@@ -563,7 +638,8 @@ test_that("wrappers forward the expected agent_specs", {
 					skills = skills,
 					main_md_files = main_md_files,
 					overwrite = overwrite,
-					golem_wd = golem_wd
+					golem_wd = golem_wd,
+					interactive = interactive
 				)
 			},
 			{
