@@ -250,11 +250,11 @@ create_golem_gui <- function(path, ...) {
 		with_git = dots$with_git,
 		with_agents = dots$with_agents,
 		with_agents_options = list(
-			source = "local",
-			agent_specs = "both",
+			source = dots$with_agents_source %||% "local",
+			agent_specs = dots$with_agents_agent_specs %||% "both",
 			skills = "all",
-			main_md_files = "yes",
-			overwrite = "skip"
+			main_md_files = dots$with_agents_main_md_files %||% "yes",
+			overwrite = "overwrite"
 		)
 	)
 }
