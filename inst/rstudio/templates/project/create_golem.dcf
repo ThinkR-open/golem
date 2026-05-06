@@ -26,3 +26,9 @@ Widget: CheckboxInput
 Label: Create a git repository
 Default: Off
 Position: left
+
+Parameter: with_agents
+Widget: CheckboxInput
+Label: Create subdirectories for agent skill and `.md`-files 
+Default: Off
+Position: left
