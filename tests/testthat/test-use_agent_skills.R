@@ -857,8 +857,13 @@ test_that("use_skill() validates the requested skill name", {
 test_that("copy_agent_skill_path() respects non-interactive overwrite modes", {
 	source <- tempfile()
 	target <- tempfile()
+	source_dir <- tempfile()
+	target_dir <- tempfile()
 	file.create(source)
 	file.create(target)
+	dir.create(source_dir)
+	dir.create(target_dir)
+	new_target <- tempfile()
 
 	expect_equal(
 		testthat::with_mocked_bindings(
@@ -874,6 +879,39 @@ test_that("copy_agent_skill_path() respects non-interactive overwrite modes", {
 		),
 		NA_character_
 	)
+
+	expect_equal(
+		testthat::with_mocked_bindings(
+			fs_dir_copy = function(...) stop("should not copy"),
+			{
+				copy_agent_skill_path(
+					source = source_dir,
+					target = target_dir,
+					overwrite = "skip",
+					type = "dir"
+				)
+			}
+		),
+		NA_character_
+	)
+
+	expect_equal(
+		testthat::with_mocked_bindings(
+			fs_dir_create = function(...) NULL,
+			fs_file_copy = function(source, target, overwrite) {
+				file.create(target)
+			},
+			{
+				copy_agent_skill_path(
+					source = source,
+					target = new_target,
+					overwrite = "skip"
+				)
+			}
+		),
+		new_target
+	)
+	expect_true(file.exists(new_target))
 
 	expect_error(
 		testthat::with_mocked_bindings(
@@ -944,4 +982,16 @@ test_that("resolve_agent_skill_overwrite() resolves ask mode before copy", {
 	)
 
 	expect_equal(resolved, "skip")
+})
+
+test_that("resolve_agent_skill_overwrite() copies missing targets in skip mode", {
+	target <- tempfile()
+
+	expect_equal(
+		resolve_agent_skill_overwrite(
+			target = target,
+			overwrite = "skip"
+		),
+		"overwrite"
+	)
 })

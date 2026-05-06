@@ -724,7 +724,7 @@ resolve_agent_skill_overwrite <- function(
 	overwrite <- match.arg(overwrite)
 
 	if (!file.exists(target)) {
-		return(overwrite)
+		return("overwrite")
 	}
 
 	action <- switch(
