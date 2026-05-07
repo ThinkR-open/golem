@@ -39,7 +39,6 @@ Suggests:
     callr,
     cli (>= 2.0.0),
     covr,
-    crayon,
     desc,
     devtools,
     dockerfiler (>= 0.2.5),
