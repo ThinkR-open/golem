@@ -39,6 +39,19 @@ desc_get_deps <- function(
 	)
 }
 
+desc_set_dep <- function(
+	package,
+	type = "Imports",
+	file = NULL
+) {
+	check_desc_installed()
+	desc::desc_set_dep(
+		package = package,
+		type = type,
+		file = file
+	)
+}
+
 desc_get_field <- function(
 	key
 ) {

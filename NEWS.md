@@ -4,6 +4,11 @@
 
 ## New features / user-visible changes
 
+- New `add_github_action()` and `add_gitlab_ci()` helpers generate minimal
+  deployment CI for fresh `{golem}` apps.
+- The deployment CI helpers restore `renv.lock` when it is present, fall back
+  to `DESCRIPTION` when it is not, and declare `{pkgload}` for the generated
+  Posit Connect entrypoint.
 - The `add_dockerfile_with_renv_*` function now generates a multi-stage Dockerfile by default (use `single_file = FALSE` to retain the previous behavior).
 - The `add_dockerfile_with_renv_*` function now creates a Dockerfile that sets `golem.app.prod = TRUE` by default (use `set_golem.app.prod = FALSE` to retain the previous behavior).
 - Print functions have be reworked standardized using the `{cli}` package (@ilyaZar, #89)
