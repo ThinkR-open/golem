@@ -50,6 +50,7 @@ add_gitlab_ci <- function(golem_wd = get_golem_wd(), open = TRUE) {
 	)
 }
 
+#' @noRd
 add_deploy_ci_ <- function(
 	template,
 	output,
@@ -84,6 +85,7 @@ add_deploy_ci_ <- function(
 	open_or_go_to(output, open)
 }
 
+#' @noRd
 render_ci_template_ <- function(template, golem_wd = get_golem_wd()) {
 	app_name <- get_golem_name(golem_wd = golem_wd)
 
@@ -95,6 +97,7 @@ render_ci_template_ <- function(template, golem_wd = get_golem_wd()) {
 	gsub("__APPNAME__", app_name, template_lines, fixed = TRUE)
 }
 
+#' @noRd
 ensure_deploy_entrypoint_ <- function(golem_wd = get_golem_wd()) {
 	app_file <- fs_path(golem_wd, "app.R")
 	rscignore_file <- fs_path(golem_wd, ".rscignore")
@@ -111,6 +114,7 @@ ensure_deploy_entrypoint_ <- function(golem_wd = get_golem_wd()) {
 	return(invisible(golem_wd))
 }
 
+#' @noRd
 ensure_deploy_dependencies_ <- function(golem_wd = get_golem_wd()) {
 	desc_file <- fs_path(golem_wd, "DESCRIPTION")
 	deps <- desc_get_deps(file = desc_file)
@@ -120,12 +124,13 @@ ensure_deploy_dependencies_ <- function(golem_wd = get_golem_wd()) {
 	)
 
 	if (!has_pkgload) {
-		desc::desc_set_dep("pkgload", type = "Imports", file = desc_file)
+		desc_set_dep("pkgload", type = "Imports", file = desc_file)
 	}
 
 	return(invisible(golem_wd))
 }
 
+#' @noRd
 ensure_github_gitignore_ <- function(golem_wd = get_golem_wd()) {
 	where <- fs_path(golem_wd, ".github", ".gitignore")
 

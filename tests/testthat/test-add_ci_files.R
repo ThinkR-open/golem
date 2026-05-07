@@ -330,3 +330,57 @@ test_that("add_github_action backfills .rscignore when app.R already exists", {
 		)
 	})
 })
+
+test_that("add_github_action is idempotent on a second call", {
+	run_quietly_in_a_dummy_golem({
+		add_github_action(golem_wd = ".", open = FALSE)
+
+		first <- readLines(
+			".github/workflows/shiny-deploy.yaml",
+			warn = FALSE
+		)
+
+		expect_no_error(
+			add_github_action(golem_wd = ".", open = FALSE)
+		)
+
+		second <- readLines(
+			".github/workflows/shiny-deploy.yaml",
+			warn = FALSE
+		)
+		expect_identical(first, second)
+
+		pkgload_rows <- subset(
+			desc::desc_get_deps("DESCRIPTION"),
+			package == "pkgload"
+		)
+		expect_equal(nrow(pkgload_rows), 1)
+	})
+})
+
+test_that("add_gitlab_ci is idempotent on a second call", {
+	run_quietly_in_a_dummy_golem({
+		add_gitlab_ci(golem_wd = ".", open = FALSE)
+
+		first <- readLines(".gitlab-ci.yml", warn = FALSE)
+
+		expect_no_error(
+			add_gitlab_ci(golem_wd = ".", open = FALSE)
+		)
+
+		second <- readLines(".gitlab-ci.yml", warn = FALSE)
+		expect_identical(first, second)
+	})
+})
+
+test_that("add_github_action leaves DESCRIPTION untouched when pkgload is already in Imports", {
+	run_quietly_in_a_dummy_golem({
+		desc::desc_set_dep("pkgload", type = "Imports", file = "DESCRIPTION")
+		before <- readLines("DESCRIPTION", warn = FALSE)
+
+		add_github_action(golem_wd = ".", open = FALSE)
+
+		after <- readLines("DESCRIPTION", warn = FALSE)
+		expect_identical(before, after)
+	})
+})
