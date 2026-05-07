@@ -6,7 +6,7 @@
 #'
 
 #' @param golem_wd The working directory of the `{golem}` application.
-#' @param wd Deperecated. Use `golem_wd` instead.
+#' @param wd Deprecated. Use `golem_wd` instead.
 #'
 #' @importFrom attempt stop_if_not
 #'

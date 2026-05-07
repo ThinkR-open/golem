@@ -128,9 +128,9 @@ use_favicon <- function(
 			to,
 			overwrite = TRUE
 		)
-		cat_green_tick(
+		cli_alert_success(
 			sprintf(
-				"favicon.%s created at %s",
+				"favicon.%s created at %s.",
 				ext,
 				to
 			)
@@ -138,12 +138,12 @@ use_favicon <- function(
 	}
 
 	if (ext == "png") {
-		cat_red_bullet(
-			"You choose a png favicon, please add `ext = 'png'` to `favicon()` within the `golem_add_external_resources()` function in 'app_ui.R'."
+		cli_alert_warning(
+			"You've chosen a png favicon, please add `ext = 'png'` to `favicon()` within the `golem_add_external_resources()` function in 'app_ui.R'."
 		)
 	} else {
-		cli_cat_line(
-			"Favicon is automatically linked in app_ui via `golem_add_external_resources()`"
+		cli_alert_success(
+			"Favicon is automatically linked in app_ui via `golem_add_external_resources()`."
 		)
 	}
 }
@@ -158,9 +158,9 @@ remove_favicon <- function(
 			path
 		)
 	) {
-		cat_green_tick(
+		cli_alert_success(
 			sprintf(
-				"Removing favicon at %s",
+				"Removed favicon at %s.",
 				path
 			)
 		)
@@ -168,9 +168,9 @@ remove_favicon <- function(
 			path
 		)
 	} else {
-		cat_red_bullet(
+		cli_alert_warning(
 			sprintf(
-				"No file found at %s",
+				"No file found at %s.",
 				path
 			)
 		)

@@ -15,81 +15,90 @@ test_that("rlang_is_interactive() works", {
 })
 
 test_that("create_if_needed creates a file if required", {
-	expect_error(
+	# Test: non-interactive mode creates file silently
+	temp_file <- tempfile()
+	expect_true(
 		testthat::with_mocked_bindings(
 			rlang_is_interactive = function() {
-				return(
-					FALSE
-				)
+				return(FALSE)
 			},
 			code = {
-				create_if_needed(
-					tempfile()
-				)
+				create_if_needed(temp_file)
 			}
 		)
 	)
+	expect_true(file.exists(temp_file))
+	unlink(temp_file)
+
+	# Test: interactive mode, user says no
 	expect_false(
 		testthat::with_mocked_bindings(
 			rlang_is_interactive = function() {
-				return(
-					TRUE
-				)
+				return(TRUE)
 			},
-			ask_golem_creation_file = function(
-				path,
-				type
-			) {
-				return(
-					FALSE
-				)
+			ask_golem_creation_file = function(path, type) {
+				return(FALSE)
 			},
 			code = {
-				create_if_needed(
-					tempfile()
-				)
+				create_if_needed(tempfile())
 			}
 		)
 	)
+
+	# Test: interactive mode, user says yes to file
+	temp_file <- tempfile()
 	expect_true(
 		testthat::with_mocked_bindings(
 			rlang_is_interactive = function() {
-				return(
-					TRUE
-				)
+				return(TRUE)
 			},
 			ask_golem_creation_file = function(path, type) {
-				return(
-					TRUE
-				)
+				return(TRUE)
 			},
 			code = {
-				create_if_needed(
-					tempfile()
-				)
+				create_if_needed(temp_file)
 			}
 		)
 	)
+	expect_true(file.exists(temp_file))
+	unlink(temp_file)
+
+	# Test: interactive mode, user says yes to directory
+	temp_dir <- tempfile()
 	expect_true(
 		testthat::with_mocked_bindings(
 			rlang_is_interactive = function() {
-				return(
-					TRUE
-				)
+				return(TRUE)
 			},
 			ask_golem_creation_file = function(path, type) {
-				return(
-					TRUE
-				)
+				return(TRUE)
 			},
 			code = {
-				create_if_needed(
-					tempfile(),
-					type = "dir"
-				)
+				create_if_needed(temp_dir, type = "directory")
 			}
 		)
 	)
+	expect_true(dir.exists(temp_dir))
+	unlink(temp_dir, recursive = TRUE)
+
+	# Test: file already exists, should return TRUE without asking
+	temp_file <- tempfile()
+	file.create(temp_file)
+	expect_true(
+		testthat::with_mocked_bindings(
+			rlang_is_interactive = function() {
+				return(TRUE)
+			},
+			ask_golem_creation_file = function(path, type) {
+				# This should NOT be called when file exists
+				stop("ask_golem_creation_file should not be called")
+			},
+			code = {
+				create_if_needed(temp_file)
+			}
+		)
+	)
+	unlink(temp_file)
 })
 
 test_that("ask_golem_creation_file works", {
@@ -166,7 +175,7 @@ test_that("remove_comments works", {
 })
 
 test_that("open_or_go_to works", {
-	res <- testthat::capture_output_lines({
+	res <- testthat::capture_messages({
 		open_or_go_to(
 			"jurek",
 			FALSE
@@ -281,6 +290,20 @@ test_that("yesno works", {
 			},
 			yesno()
 		)
+	)
+})
+
+test_that("cat_yes_no_or_cancel works", {
+	expect_equal(
+		testthat::with_mocked_bindings(
+			utils_menu = function(
+				...
+			) {
+				3
+			},
+			cat_yes_no_or_cancel()
+		),
+		"cancel"
 	)
 })
 

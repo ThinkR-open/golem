@@ -92,17 +92,18 @@ add_rstudio_files <- function(
 		cat_created(
 			where
 		)
-		cli_cat_line(
-			"To deploy, run:"
-		)
-		cli_cat_bullet(
-			crayon_darkgrey(
-				"rsconnect::deployApp()\n"
+		cli_alert_info(
+			paste0(
+				"To deploy, run: ",
+				cli::style_bold(
+					cli::col_yellow("rsconnect::deployApp()")
+				),
+				"."
 			)
 		)
-		cat_red_bullet(
+		cli_alert_info(
 			sprintf(
-				"Note that you'll need to upload the whole package to %s",
+				"Note that you'll need to upload the whole package to %s.",
 				service
 			)
 		)
@@ -117,7 +118,7 @@ add_rstudio_files <- function(
 			open
 		)
 	} else {
-		cat_green_tick(
+		cli_alert_info(
 			"The 'app.R'-file already exists."
 		)
 		open_or_go_to(
@@ -149,7 +150,7 @@ add_rstudio_files <- function(
 #'
 #'
 #' @inheritParams add_module
-#' @aliases add_rconnect_file add_rstudioconnect_file add_positconnect_file
+#' @aliases add_rconnect_file add_positconnect_file
 #' @export
 #'
 #' @rdname rstudio_deploy
@@ -186,30 +187,6 @@ add_positconnect_file <- function(
 		golem_wd = golem_wd,
 		open = open,
 		service = "RStudio Connect"
-	)
-}
-
-#' @rdname rstudio_deploy
-#' @note `add_rstudioconnect_file` is now deprecated; replace by [add_positconnect_file()].
-#' @export
-add_rstudioconnect_file <- function(
-	golem_wd = get_golem_wd(),
-	open = TRUE,
-	pkg
-) {
-	signal_arg_is_deprecated(
-		pkg,
-		fun = as.character(
-			sys.call()[[1]]
-		),
-		"pkg"
-	)
-	.Deprecated(
-		"add_positconnect_file"
-	)
-	add_positconnect_file(
-		golem_wd = get_golem_wd(),
-		open = TRUE
 	)
 }
 
@@ -279,7 +256,7 @@ add_rscignore_file <- function(
 			check_min_rsc
 		)
 	) {
-		cat_red_bullet(
+		cli_alert_warning(
 			sprintf(
 				"Not creating '.rscignore'. Required 'rsconnect' version >= %s!",
 				min_rsc
@@ -303,7 +280,7 @@ add_rscignore_file <- function(
 			)
 		)
 	) {
-		cat_green_tick(
+		cli_alert_info(
 			"The '.rscignore'-file already exists."
 		)
 		open_or_go_to(

@@ -101,7 +101,6 @@ dev_deps <- unique(
 	c(
 		"attachment",
 		"cli",
-		"crayon",
 		"desc",
 		"devtools",
 		"dockerfiler",

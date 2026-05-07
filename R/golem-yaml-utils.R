@@ -110,7 +110,7 @@ amend_golem_config <- function(
 
 	cat_if_talk <- function(
 		...,
-		fun = cat_green_tick
+		fun = cli_alert_success
 	) {
 		if (talkative) {
 			fun(

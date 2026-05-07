@@ -227,9 +227,7 @@ document_and_reload <- function(
 			roxed
 		)
 	) {
-		cli_cat_rule(
-			"Error documenting your package"
-		)
+		cli_alert_danger("Error documenting your package.")
 		dialog_if_has(
 			"Alert",
 			"Error documenting your package"
@@ -256,9 +254,7 @@ document_and_reload <- function(
 			loaded
 		)
 	) {
-		cli_cat_rule(
-			"Error loading your package"
-		)
+		cli_alert_danger("Error loading your package.")
 		dialog_if_has(
 			"Alert",
 			"Error loading your package"

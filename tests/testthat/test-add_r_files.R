@@ -32,6 +32,62 @@ test_that("add_fct and add_utils", {
 					open = FALSE,
 					with_test = TRUE
 				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand.R"
+					)
+				)
+				add_module(
+					"rand2",
+					open = FALSE,
+					with_test = TRUE,
+					fct = "test",
+					utils = "test"
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand2.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand2_fct_test.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand2_utils_test.R"
+					)
+				)
+				add_module(
+					"rand3",
+					open = FALSE,
+					with_test = TRUE,
+					fct = "",
+					utils = ""
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand3.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand3_fct.R"
+					)
+				)
+				expect_exists(
+					file.path(
+						"R",
+						"mod_rand3_utils.R"
+					)
+				)
 				add_fct(
 					"ui",
 					"rand",
@@ -48,6 +104,7 @@ test_that("add_fct and add_utils", {
 						"fct_ui.R"
 					)
 				)
+
 				expect_exists(
 					file.path(
 						"R",
@@ -176,6 +233,142 @@ test_that("add_fct sanitizes names correctly", {
 		)
 		expect_true(
 			any(grepl("x123function <- function", file_content3, fixed = TRUE))
+		)
+
+		# Name with accented latin characters
+
+		add_fct(
+			"éclair",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"fct_eclair.R"
+			)
+		)
+	})
+})
+
+test_that("add_module with empty fct or utils does not create trailing underscore filenames", {
+	run_quietly_in_a_dummy_golem({
+		add_module(
+			"FixHumanity",
+			fct = "",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"mod_FixHumanity_fct.R"
+			)
+		)
+		expect_false(
+			file.exists(file.path(
+				"R",
+				"mod_FixHumanity_fct_.R"
+			))
+		)
+
+		add_module(
+			"FixCompassion",
+			utils = "",
+			open = FALSE
+		)
+		expect_exists(
+			file.path(
+				"R",
+				"mod_FixCompassion_utils.R"
+			)
+		)
+		expect_false(
+			file.exists(file.path(
+				"R",
+				"mod_FixCompassion_utils_.R"
+			))
+		)
+	})
+})
+
+test_that("fct_template works", {
+	fct_template(
+		"my_fun",
+		path <- tempfile(),
+		export = TRUE
+	)
+	on.exit({
+		unlink(
+			path,
+			recursive = TRUE,
+			force = TRUE
+		)
+	})
+	fct_read <- paste(
+		readLines(
+			path
+		),
+		collapse = " "
+	)
+	expect_true(
+		grepl(
+			"my_fun <- function",
+			fct_read
+		)
+	)
+	expect_true(
+		grepl(
+			"@export",
+			fct_read
+		)
+	)
+})
+
+test_that("add_fct accepts a template", {
+	run_quietly_in_a_dummy_golem({
+		add_fct(
+			"custom",
+			open = FALSE,
+			template = function(
+				name,
+				path,
+				export = FALSE,
+				...
+			) {
+				writeLines(
+					c(
+						"#' custom function",
+						if (export) "#' @export" else "#' @noRd",
+						sprintf(
+							"%s <- function() \"ok\"",
+							name
+						)
+					),
+					con = path
+				)
+			}
+		)
+
+		expect_exists(
+			file.path(
+				"R",
+				"fct_custom.R"
+			)
+		)
+
+		file_content <- paste(
+			readLines(
+				file.path(
+					"R",
+					"fct_custom.R"
+				)
+			),
+			collapse = " "
+		)
+		expect_true(
+			grepl(
+				'custom <- function\\(\\) "ok"',
+				file_content
+			)
 		)
 	})
 })

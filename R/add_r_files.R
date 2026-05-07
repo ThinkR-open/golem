@@ -9,6 +9,8 @@ add_r_files <- function(
 	open = TRUE,
 	dir_create = TRUE,
 	with_test = FALSE,
+	template = NULL,
+	...,
 	pkg
 ) {
 	signal_arg_is_deprecated(
@@ -18,13 +20,13 @@ add_r_files <- function(
 		),
 		"pkg"
 	)
-	name <- sanitize_r_name(file_path_sans_ext(
-		name
-	))
-
 	check_name_length_is_one(
 		name
 	)
+
+	name <- sanitize_r_name(file_path_sans_ext(
+		name
+	))
 
 	old <- setwd(
 		fs_path_abs(
@@ -101,16 +103,28 @@ add_r_files <- function(
 		)
 	}
 
-	where <- fs_path(
-		"R",
-		paste0(
-			module,
-			ext,
-			"_",
-			name,
-			".R"
-		)
+	tmp_name <- paste0(
+		module,
+		ext,
+		"_",
+		name,
+		".R"
 	)
+	# Only if the fct. name is "".
+	if (
+		name == "" &&
+			grepl(
+				"_\\.R$",
+				tmp_name
+			)
+	) {
+		tmp_name <- sub(
+			"_\\.R$",
+			".R",
+			tmp_name
+		)
+	}
+	where <- fs_path("R", tmp_name)
 
 	if (
 		!fs_file_exists(
@@ -129,12 +143,26 @@ add_r_files <- function(
 					module
 				)
 		) {
-			# Must be a function or utility file being created
-			append_roxygen_comment(
-				name = name,
-				path = where,
-				ext = ext
-			)
+			if (
+				ext == "fct" &&
+					!is.null(
+						template
+					)
+			) {
+				template(
+					name = name,
+					path = where,
+					export = FALSE,
+					...
+				)
+			} else {
+				# Must be a function or utility file being created
+				append_roxygen_comment(
+					name = name,
+					path = where,
+					ext = ext
+				)
+			}
 		}
 
 		cat_created(
@@ -173,6 +201,10 @@ add_r_files <- function(
 #' @param name The name of the file
 #' @param module If not NULL, the file will be module specific
 #'     in the naming (you don't need to add the leading `mod_`).
+#' @param template Function writing the default contents of a function file.
+#'     Defaults to the built-in function template. Ignored for
+#'     module-specific files.
+#' @param ... Arguments passed to the `template` function.
 #' @inheritParams  add_module
 #'
 #' @rdname file_creation
@@ -186,6 +218,8 @@ add_fct <- function(
 	open = TRUE,
 	dir_create = TRUE,
 	with_test = FALSE,
+	template = fct_template,
+	...,
 	pkg
 ) {
 	signal_arg_is_deprecated(
@@ -196,13 +230,15 @@ add_fct <- function(
 		"pkg"
 	)
 	add_r_files(
-		name,
-		module,
+		name = name,
 		ext = "fct",
+		module = module,
 		golem_wd = golem_wd,
 		open = open,
 		dir_create = dir_create,
-		with_test = with_test
+		with_test = with_test,
+		template = template,
+		...
 	)
 }
 
@@ -225,9 +261,9 @@ add_utils <- function(
 		"pkg"
 	)
 	add_r_files(
-		name,
-		module,
+		name = name,
 		ext = "utils",
+		module = module,
 		golem_wd = golem_wd,
 		open = open,
 		dir_create = dir_create,
@@ -254,15 +290,104 @@ add_r6 <- function(
 		"pkg"
 	)
 	add_r_files(
-		name,
-		module,
+		name = name,
 		ext = "class",
+		module = module,
 		golem_wd = golem_wd,
 		open = open,
 		dir_create = dir_create,
 		with_test = with_test
 	)
 }
+
+#' Golem Function Template
+#'
+#' Function templates can be used to extend the `add_fct()` creation
+#' mechanism with your own template, so that you can be even more
+#' productive when building your `{shiny}` app.
+#' Function template functions do not aim at being called as is by
+#' users, but to be passed as an argument to the `add_fct()` function.
+#'
+#' A template function can take the following arguments to be passed
+#' from `add_fct()`:
+#' + name: the name of the function
+#' + path: the path to the file in R/
+#' + export: a TRUE/FALSE value
+#'
+#' If you want your function to ignore these parameters, set `...` as
+#' the last argument of your function, then these will be ignored. See
+#' the examples section of this help.
+#'
+#' @examples
+#' if (interactive()) {
+#'   my_tmpl <- function(name, path, ...) {
+#'     # Define a template that writes to the function file
+#'     write(name, path)
+#'   }
+#'   golem::add_fct(name = "custom", template = my_tmpl)
+#' }
+#'
+#' @param name The name of the generated function.
+#' @param path The path to the R script where the function will be written.
+#'     Note that this path will not be set by the user but via
+#'     `add_fct()`.
+#' @param export Whether the generated function should be exported.
+#' @param ... Extra arguments, ignored by the default template.
+#'
+#' @return Used for side effect
+#' @export
+#' @seealso [add_fct()]
+fct_template <- function(
+	name,
+	path,
+	export = FALSE,
+	...
+) {
+	write_there <- write_there_builder(
+		path
+	)
+
+	write_there(
+		sprintf(
+			"#' %s ",
+			name
+		)
+	)
+	write_there(
+		"#'"
+	)
+	write_there(
+		"#' @description A fct function"
+	)
+	write_there(
+		"#'"
+	)
+	write_there(
+		"#' @return The return value, if any, from executing the function."
+	)
+	write_there(
+		"#'"
+	)
+	if (export) {
+		write_there(
+			"#' @export"
+		)
+	} else {
+		write_there(
+			"#' @noRd"
+		)
+	}
+	write_there(
+		paste(
+			name,
+			"<- function() {"
+		)
+	)
+	write_there(
+		"}"
+	)
+}
+
 #' Append roxygen comments to `fct_` and `utils_` files
 #'
 #' This function add boilerplate roxygen comments

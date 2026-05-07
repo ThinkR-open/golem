@@ -44,7 +44,7 @@ test_that("enable_roxygenize function updates the .Rproj file correctly", {
 
 test_that("enable_roxygenize function prints correct messages", {
 	temp_rproj <- create_temp_rproj()
-	output <- capture.output(
+	output <- testthat::capture_messages(
 		enable_roxygenize(path = temp_rproj)
 	)
 	expect_true(

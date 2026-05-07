@@ -31,7 +31,7 @@ go_to_run_app(golem_wd = golem::get_golem_wd(), wd)
 \arguments{
 \item{golem_wd}{The working directory of the \code{{golem}} application.}
 
-\item{wd}{Deperecated. Use \code{golem_wd} instead.}
+\item{wd}{Deprecated. Use \code{golem_wd} instead.}
 }
 \description{
 \code{insert_ns()} takes a selected character vector and wrap it in \code{ns()}

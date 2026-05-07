@@ -115,3 +115,45 @@ fs_dir_copy <- function(
 		overwrite
 	)
 }
+
+fs_dir_ls <- function(
+	path = ".",
+	...,
+	all = FALSE
+) {
+	check_fs_installed()
+	fs::dir_ls(
+		path,
+		...,
+		all = all
+	)
+}
+
+fs_file_move <- function(
+	path,
+	new_path
+) {
+	check_fs_installed()
+	fs::file_move(
+		path,
+		new_path
+	)
+}
+
+fs_path_file <- function(
+	path
+) {
+	check_fs_installed()
+	fs::path_file(
+		path
+	)
+}
+
+fs_path_dir <- function(
+	path
+) {
+	check_fs_installed()
+	fs::path_dir(
+		path
+	)
+}

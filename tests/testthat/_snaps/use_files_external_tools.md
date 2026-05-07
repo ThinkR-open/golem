@@ -15,10 +15,11 @@
       }, {
         download_external("https://www.google.com", "inst/app/www/google.html")
       })
+    Message
+      > Initiating file download.
     Output
-      
-      Initiating file download
       [1] "https://www.google.com"
       [1] "inst/app/www/google.html"
-      v File downloaded at inst/app/www/google.html
+    Message
+      v File downloaded at inst/app/www/google.html.
 

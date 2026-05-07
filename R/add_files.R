@@ -149,6 +149,192 @@ add_js_handler <- function(
 	)
 }
 
+binding_base_name <- function(name) {
+	name <- sanitize_r_name(
+		file_path_sans_ext(
+			name
+		)
+	)
+
+	stop_if(
+		name == "",
+		msg = "`name` must contain at least one alphanumeric character."
+	)
+
+	name
+}
+
+binding_name_parts <- function(name) {
+	base_name <- binding_base_name(
+		name
+	)
+
+	# Derive pascal from original name before lowercasing so that
+	# "MyWidget" and "my_widget" both yield "MyWidget".
+	raw <- file_path_sans_ext(
+		name
+	)
+	raw <- gsub(
+		"([a-z])([A-Z])",
+		"\\1_\\2",
+		raw
+	)
+	raw_parts <- unlist(
+		strsplit(
+			raw,
+			"[^a-zA-Z0-9]+"
+		)
+	)
+	raw_parts <- raw_parts[
+		nzchar(
+			raw_parts
+		)
+	]
+	if (
+		length(
+			raw_parts
+		) ==
+			0
+	) {
+		raw_parts <- base_name
+	}
+
+	pascal <- paste0(
+		toupper(
+			substring(
+				raw_parts,
+				1,
+				1
+			)
+		),
+		substring(
+			raw_parts,
+			2
+		),
+		collapse = ""
+	)
+
+	list(
+		base = base_name,
+		pascal = pascal,
+		file = gsub(
+			"_",
+			"-",
+			base_name,
+			fixed = TRUE
+		),
+		input_js = paste0(
+			base_name,
+			"-input"
+		),
+		output_js = paste0(
+			base_name,
+			"-output"
+		),
+		input_binding = paste0(
+			base_name,
+			"Input"
+		),
+		output_binding = paste0(
+			base_name,
+			"OutputBinding"
+		),
+		input_registration = paste0(
+			"golem.",
+			base_name,
+			"Input"
+		),
+		output_registration = paste0(
+			"golem.",
+			base_name,
+			"Output"
+		),
+		input_constructor = paste0(
+			base_name,
+			"Input"
+		),
+		update_input = paste0(
+			"update",
+			pascal,
+			"Input"
+		),
+		output_constructor = paste0(
+			base_name,
+			"Output"
+		),
+		render_output = paste0(
+			"render",
+			pascal
+		),
+		input_type = base_name,
+		output_type = base_name
+	)
+}
+
+write_binding_r_file <- function(
+	where,
+	lines,
+	open = FALSE
+) {
+	writeLines(
+		lines,
+		con = where
+	)
+	cat_created(
+		where
+	)
+	open_or_go_to(
+		where,
+		open
+	)
+}
+
+input_binding_r_lines <- function(parts) {
+	template <- readLines(
+		system.file(
+			"bindings/input_binding.R",
+			package = "golem"
+		),
+		warn = FALSE
+	)
+	for (nm in names(parts)) {
+		template <- gsub(
+			paste0(
+				"{",
+				nm,
+				"}"
+			),
+			parts[[nm]],
+			template,
+			fixed = TRUE
+		)
+	}
+	template
+}
+
+output_binding_r_lines <- function(parts) {
+	template <- readLines(
+		system.file(
+			"bindings/output_binding.R",
+			package = "golem"
+		),
+		warn = FALSE
+	)
+	for (nm in names(parts)) {
+		template <- gsub(
+			paste0(
+				"{",
+				nm,
+				"}"
+			),
+			parts[[nm]],
+			fixed = TRUE,
+			x = template
+		)
+	}
+	template
+}
+
 #' @export
 #' @rdname add_files
 add_js_input_binding <- function(
@@ -160,8 +346,14 @@ add_js_input_binding <- function(
 	initialize = FALSE,
 	dev = FALSE,
 	events = list(
-		name = "click",
-		rate_policy = FALSE
+		name = c(
+			"change",
+			"input"
+		),
+		rate_policy = c(
+			FALSE,
+			FALSE
+		)
 	),
 	pkg
 ) {
@@ -205,19 +397,9 @@ add_js_input_binding <- function(
 		msg = "Incomplete events list"
 	)
 
-	temp_js <- tempfile(
-		fileext = ".js"
+	parts <- binding_name_parts(
+		name
 	)
-
-	raw_name <- name
-
-	name <- file_path_sans_ext(
-		sprintf(
-			"input-%s",
-			name
-		)
-	)
-
 	temp_js <- tempfile(
 		fileext = ".js"
 	)
@@ -240,87 +422,107 @@ add_js_input_binding <- function(
 	write_there(
 		sprintf(
 			"var %s = new Shiny.InputBinding();",
-			raw_name
+			parts$input_binding
 		)
 	)
 	write_there(
 		sprintf(
 			"$.extend(%s, {",
-			raw_name
+			parts$input_binding
 		)
 	)
-	# find
 	write_there(
 		"  find: function(scope) {"
 	)
 	write_there(
-		"    // JS logic $(scope).find('whatever')"
+		sprintf(
+			"    return $(scope).find('[data-input-type=\"%s\"]');",
+			parts$input_type
+		)
 	)
 	write_there(
 		"  },"
 	)
-	# initialize
+
 	if (initialize) {
 		write_there(
 			"  initialize: function(el) {"
 		)
 		write_there(
-			"    // optional part. Only if the input relies on a JS API with specific initialization."
+			"    $(el).trigger('change');"
 		)
 		write_there(
 			"  },"
 		)
 	}
-	# get value
+
 	write_there(
 		"  getValue: function(el) {"
 	)
 	if (dev) {
 		write_there(
-			"    console.log($(el));"
+			"    console.log('Reading value from custom input binding');"
 		)
 	}
 	write_there(
-		"    // JS code to get value"
+		"    return $(el).val();"
 	)
 	write_there(
 		"  },"
 	)
-	# set value
+
 	write_there(
 		"  setValue: function(el, value) {"
 	)
 	if (dev) {
 		write_there(
-			"    console.log('New value is: ' + value);"
+			"    console.log('Setting custom input value', value);"
 		)
 	}
 	write_there(
-		"    // JS code to set value"
+		"    $(el).val(value);"
 	)
 	write_there(
 		"  },"
 	)
-	# receive
+
 	write_there(
 		"  receiveMessage: function(el, data) {"
 	)
 	write_there(
-		"    // this.setValue(el, data);"
+		"    if (data.hasOwnProperty('value')) {"
+	)
+	write_there(
+		"      this.setValue(el, data.value);"
+	)
+	write_there(
+		"    }"
+	)
+	write_there(
+		"    if (data.hasOwnProperty('label')) {"
+	)
+	write_there(
+		"      $(el).prev('label').text(data.label);"
+	)
+	write_there(
+		"    }"
+	)
+	write_there(
+		"    $(el).trigger('change');"
 	)
 	if (dev) {
 		write_there(
-			"    console.log('Updated ...');"
+			"    console.log('Received message for custom input binding');"
 		)
 	}
 	write_there(
 		"  },"
 	)
-	# subscribe
+
 	write_there(
 		"  subscribe: function(el, callback) {"
 	)
-	# list of event listeners
+
 	lapply(
 		seq_along(
 			events$name
@@ -332,7 +534,7 @@ add_js_input_binding <- function(
 				sprintf(
 					"    $(el).on('%s.%s', function(e) {",
 					events$name[i],
-					raw_name
+					parts$input_binding
 				)
 			)
 			if (events$rate_policy[i]) {
@@ -346,7 +548,7 @@ add_js_input_binding <- function(
 			}
 			if (dev) {
 				write_there(
-					"      console.log('Subscribe ...');"
+					"      console.log('Custom input event fired');"
 				)
 			}
 			write_there(
@@ -361,7 +563,6 @@ add_js_input_binding <- function(
 		"  },"
 	)
 
-	# rate policy if any
 	if (global_rate_policy) {
 		write_there(
 			"  getRatePolicy: function() {"
@@ -383,34 +584,69 @@ add_js_input_binding <- function(
 		)
 	}
 
-	# unsubscribe
 	write_there(
 		"  unsubscribe: function(el) {"
 	)
 	write_there(
 		sprintf(
 			"    $(el).off('.%s');",
-			raw_name
+			parts$input_binding
 		)
 	)
 	write_there(
 		"  }"
 	)
 
-	# end
 	write_there(
 		"});"
 	)
 	write_there(
 		sprintf(
-			"Shiny.inputBindings.register(%s, 'shiny.whatever');",
-			raw_name
+			"Shiny.inputBindings.register(%s, '%s');",
+			parts$input_binding,
+			parts$input_registration
 		)
 	)
 
+	r_file <- fs_path(
+		golem_wd,
+		"R",
+		sprintf(
+			"fct_%s_input_binding.R",
+			parts$base
+		)
+	)
+
+	old <- setwd(
+		fs_path_abs(
+			golem_wd
+		)
+	)
+	on.exit(
+		setwd(
+			old
+		),
+		add = TRUE
+	)
+	create_if_needed(
+		"R",
+		type = "directory"
+	)
+	check_file_exists(
+		r_file
+	)
+	write_binding_r_file(
+		r_file,
+		input_binding_r_lines(
+			parts
+		),
+		open = open
+	)
+	cat_document_reminder()
+
 	use_internal_js_file(
 		path = temp_js,
-		name = name,
+		name = parts$input_js,
 		golem_wd = golem_wd,
 		dir = dir,
 		open = open
@@ -449,13 +685,8 @@ add_js_output_binding <- function(
 		cli_abort_dir_create()
 	}
 
-	raw_name <- name
-
-	name <- file_path_sans_ext(
-		sprintf(
-			"output-%s",
-			name
-		)
+	parts <- binding_name_parts(
+		name
 	)
 
 	temp_js <- tempfile(
@@ -469,49 +700,116 @@ add_js_output_binding <- function(
 	write_there(
 		sprintf(
 			"var %s = new Shiny.OutputBinding();",
-			raw_name
+			parts$output_binding
 		)
 	)
 	write_there(
 		sprintf(
 			"$.extend(%s, {",
-			raw_name
+			parts$output_binding
 		)
 	)
-	# find
 	write_there(
 		"  find: function(scope) {"
 	)
 	write_there(
-		"    // JS logic $(scope).find('whatever')"
+		sprintf(
+			"    return $(scope).find('[data-output-type=\"%s\"]');",
+			parts$output_type
+		)
 	)
 	write_there(
 		"  },"
 	)
-	# renderValue
 	write_there(
 		"  renderValue: function(el, data) {"
 	)
 	write_there(
-		"    // JS logic"
+		"    if (data && data.hasOwnProperty('value')) {"
+	)
+	write_there(
+		"      $(el).text(data.value);"
+	)
+	write_there(
+		"    } else {"
+	)
+	write_there(
+		"      $(el).text('');"
+	)
+	write_there(
+		"    }"
+	)
+	write_there(
+		"  },"
+	)
+	write_there(
+		"  renderError: function(el, err) {"
+	)
+	write_there(
+		"    $(el).text(err.message);"
+	)
+	write_there(
+		"  },"
+	)
+	write_there(
+		"  clearError: function(el) {"
+	)
+	write_there(
+		"    $(el).text('');"
 	)
 	write_there(
 		"  }"
 	)
-	# end
 	write_there(
 		"});"
 	)
 	write_there(
 		sprintf(
-			"Shiny.outputBindings.register(%s, 'shiny.whatever');",
-			raw_name
+			"Shiny.outputBindings.register(%s, '%s');",
+			parts$output_binding,
+			parts$output_registration
 		)
 	)
 
+	r_file <- fs_path(
+		golem_wd,
+		"R",
+		sprintf(
+			"fct_%s_output_binding.R",
+			parts$base
+		)
+	)
+
+	old <- setwd(
+		fs_path_abs(
+			golem_wd
+		)
+	)
+	on.exit(
+		setwd(
+			old
+		),
+		add = TRUE
+	)
+	create_if_needed(
+		"R",
+		type = "directory"
+	)
+	check_file_exists(
+		r_file
+	)
+	write_binding_r_file(
+		r_file,
+		output_binding_r_lines(
+			parts
+		),
+		open = open
+	)
+	cat_document_reminder()
+
 	use_internal_js_file(
 		path = temp_js,
-		name = name,
+		name = parts$output_js,
 		golem_wd = golem_wd,
 		dir = dir,
 		open = open
@@ -628,8 +926,8 @@ add_sass_file <- function(
 	)
 
 	on.exit({
-		cat_green_tick(
-			"After running the compilation, your CSS file will be automatically link in `golem_add_external_resources()`."
+		cli_alert_success(
+			"After running the compilation, the generated CSS file will be automatically linked in `golem_add_external_resources()`."
 		)
 	})
 }
@@ -666,7 +964,7 @@ add_sass_code_to_dev_script <- function(
 			con = "dev/run_dev.R"
 		)
 
-		cat_green_tick(
+		cli_alert_success(
 			"Code added in run_dev.R to compile your Sass file to CSS file."
 		)
 	}
@@ -989,7 +1287,7 @@ add_ui_server_files <- function(
 			"ui file"
 		)
 	} else {
-		cat_green_tick(
+		cli_alert_info(
 			"UI file already exists."
 		)
 	}
@@ -1024,8 +1322,8 @@ add_ui_server_files <- function(
 			"server file"
 		)
 	} else {
-		cat_green_tick(
-			"server file already exists."
+		cli_alert_info(
+			"Server file already exists."
 		)
 	}
 }

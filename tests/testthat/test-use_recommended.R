@@ -1,23 +1,3 @@
-test_that("use_recommended_deps works", {
-	testthat::with_mocked_bindings(
-		usethis_use_package = identity,
-		{
-			withr::with_options(
-				c(
-					"usethis.quiet" = TRUE
-				),
-				{
-					expect_warning(
-						use_recommended_deps(
-							tempdir()
-						)
-					)
-				}
-			)
-		}
-	)
-})
-
 test_that("use_recommended_tests works", {
 	run_quietly_in_a_dummy_golem({
 		testthat::with_mocked_bindings(

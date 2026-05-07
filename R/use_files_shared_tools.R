@@ -35,7 +35,7 @@ check_directory_exists <- function(
 			dir
 		)
 	) {
-		cli_cli_abort(
+		cli_abort(
 			sprintf(
 				"The %s directory is required but does not exist.\n\nYou can create it with:\ndir.create('%s', recursive = TRUE)",
 				dir,
@@ -53,7 +53,7 @@ check_file_exists <- function(
 			where
 		)
 	) {
-		cli_cli_abort(
+		cli_abort(
 			sprintf(
 				"%s already exists.\n\nYou can delete it with:\nunlink('%s', recursive = TRUE).",
 				where,

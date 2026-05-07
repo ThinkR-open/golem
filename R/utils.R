@@ -17,7 +17,8 @@ create_if_needed <- function(
 		"file",
 		"directory"
 	),
-	content = NULL
+	content = NULL,
+	overwrite = FALSE
 ) {
 	type <- match.arg(
 		type
@@ -25,65 +26,58 @@ create_if_needed <- function(
 
 	# Check if file or dir already exist
 	if (type == "file") {
-		dont_exist <- Negate(
-			fs_file_exists
-		)(
-			path
-		)
+		already_exists <- fs_file_exists(path)
 	} else if (type == "directory") {
-		dont_exist <- Negate(
-			fs_dir_exists
-		)(
-			path
-		)
+		already_exists <- fs_dir_exists(path)
 	}
-	# If it doesn't exist, ask if we are allowed to create it
-	if (dont_exist) {
+
+	# If it already exists and overwrite is FALSE, do nothing
+	if (already_exists && !overwrite) {
+		return(TRUE)
+	}
+
+	# File doesn't exist (or we're overwriting) - need to create it
+	if (!already_exists) {
 		if (rlang_is_interactive()) {
+			# In interactive mode, ask user for permission
 			ask <- ask_golem_creation_file(
 				path,
 				type
 			)
-			# Return early if the user doesn't allow
 			if (!ask) {
-				return(
-					FALSE
-				)
-			}
-			# Create the file
-			if (type == "file") {
-				fs_file_create(
-					path
-				)
-				write(
-					content,
-					path,
-					append = TRUE
-				)
-			} else if (type == "directory") {
-				fs_dir_create(
-					path,
-					recurse = TRUE
-				)
+				return(FALSE)
 			}
 		} else {
-			# We don't create the file if we are not in
-			# interactive mode
-			stop(
+			# In non-interactive mode, inform user of creation
+			message(
 				sprintf(
-					"The %s %s doesn't exist.",
-					basename(
-						path
-					),
-					type
+					"Creating %s %s",
+					type,
+					path
 				)
 			)
 		}
 	}
+
+	# Create the file or directory
+	if (type == "file") {
+		fs_file_create(path)
+		if (!is.null(content)) {
+			write(
+				content,
+				path,
+				append = !overwrite
+			)
+		}
+	} else if (type == "directory") {
+		fs_dir_create(
+			path,
+			recurse = TRUE
+		)
+	}
+
 	# TRUE means that file exists (either created or already there)
-	return(
-		TRUE
-	)
+	return(TRUE)
 }
 
 ask_golem_creation_file <- function(
@@ -159,9 +153,9 @@ open_or_go_to <- function(
 			where
 		)
 	} else {
-		cat_red_bullet(
+		cli_alert_info(
 			sprintf(
-				"Go to %s",
+				"Go to %s.",
 				where
 			)
 		)
@@ -263,6 +257,17 @@ yesno <- function(
 		1
 }
 
+cat_yes_no_or_cancel <- function(
+	...
+) {
+	cat(paste0(..., collapse = ""))
+	c("yes", "no", "cancel")[
+		utils_menu(
+			c("Yes", "No", "Cancel")
+		)
+	]
+}
+
 #' Check if a module (`R`-file) already exists
 #'
 #' Should be called at the root of a `{golem}` project; but an error is thrown
@@ -334,6 +339,8 @@ check_name_length_is_one <- function(
 # Convert filename to lowercase and replace space/special with underscores
 # Similar to janitor::make_clean_names() but without the dependency
 sanitize_r_name <- function(name) {
+	transliterated <- iconv(name, to = "ASCII//TRANSLIT")
+	name[!is.na(transliterated)] <- transliterated[!is.na(transliterated)]
 	name <- tolower(name)
 	name <- gsub("[^a-z0-9_]", "_", name)
 	name <- gsub("^_+|_+$", "", name)
@@ -342,7 +349,7 @@ sanitize_r_name <- function(name) {
 		name <- paste0("x", name)
 	}
 	if (name == "" || is.na(name)) {
-		name <- "unnamed"
+		name <- ""
 	}
 	name
 }
@@ -379,10 +386,10 @@ check_name_syntax <- function(
 			)
 		)
 	) {
-		cli_cli_alert_info(
+		cli_alert_info(
 			"You set a 'name' that starts with 'mod_'."
 		)
-		cli_cli_alert_info(
+		cli_alert_info(
 			"This is not necessary as golem will prepend 'mod_' to your module name automatically."
 		)
 	}

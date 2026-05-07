@@ -16,7 +16,7 @@ jobs:
     steps:
     # Checks-out golem repo so the job can access it
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: r-lib/actions/setup-pandoc@v2

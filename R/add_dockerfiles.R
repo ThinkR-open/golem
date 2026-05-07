@@ -8,7 +8,7 @@ talk_once <- function(
 	) {
 		if (talk) {
 			talk <<- FALSE
-			cat_red_bullet(
+			cli_alert_warning(
 				msg
 			)
 		}
@@ -52,6 +52,10 @@ talk_once <- function(
 #' @param update_tar_gz boolean. If `TRUE` and `build_golem_from_source` is also `TRUE`,
 #'     an updated tar.gz is created.
 #' @param extra_sysreqs character vector. Extra debian system requirements.
+#'
+#' @note `add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
+#' `add_dockerfile_heroku()` are now soft deprecated; use the corresponding
+#' `add_dockerfile_with_renv_*()` functions instead.
 #'
 #' @export
 #' @rdname dockerfiles
@@ -121,6 +125,10 @@ add_dockerfile <- function(
 			sys.call()[[1]]
 		),
 		"pkg"
+	)
+	.Deprecated(
+		old = "add_dockerfile",
+		msg = "add_dockerfile() is currently soft deprecated and will be removed in future versions of {golem}.\nPlease use add_dockerfile_with_renv() instead."
 	)
 	add_dockerfile_(
 		path = path,
@@ -257,6 +265,10 @@ add_dockerfile_shinyproxy <- function(
 		),
 		"pkg"
 	)
+	.Deprecated(
+		old = "add_dockerfile_shinyproxy",
+		msg = "add_dockerfile_shinyproxy() is currently soft deprecated and will be removed in future versions of {golem}.\nPlease use add_dockerfile_with_renv_shinyproxy() instead."
+	)
 	add_dockerfile_shinyproxy_(
 		path = path,
 		output = output,
@@ -382,6 +394,10 @@ add_dockerfile_heroku <- function(
 		),
 		"pkg"
 	)
+	.Deprecated(
+		old = "add_dockerfile_heroku",
+		msg = "add_dockerfile_heroku() is currently soft deprecated and will be removed in future versions of {golem}.\nPlease use add_dockerfile_with_renv_heroku() instead."
+	)
 	add_dockerfile_heroku_(
 		path = path,
 		output = output,
@@ -501,10 +517,10 @@ add_dockerfile_heroku_ <- talk_once(
 				apps_h
 			)
 		)
-		cat_red_bullet(
+		cli_alert_warning(
 			"Be sure to have the heroku CLI installed."
 		)
-		cat_red_bullet(
+		cli_alert_info(
 			sprintf(
 				"You can replace %s with another app name.",
 				apps_h
@@ -541,7 +557,7 @@ alert_build <- function(
 		dcf_read <- read.dcf(
 			path
 		)
-		cat_red_bullet(
+		cli_alert_warning(
 			sprintf(
 				"Be sure to keep your %s_%s.tar.gz file (generated using `pkgbuild::build(vignettes = FALSE)` ) in the same folder as the %s file generated",
 				dcf_read[1],

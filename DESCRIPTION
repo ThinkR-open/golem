@@ -1,6 +1,6 @@
 Package: golem
 Title: A Framework for Robust Shiny Applications
-Version: 0.5.1.9015
+Version: 0.5.1.9016
 Authors@R: c(
     person("Colin", "Fay", , "contact@colinfay.me", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0001-7343-1846")),
@@ -39,7 +39,6 @@ Suggests:
     callr,
     cli (>= 2.0.0),
     covr,
-    crayon,
     desc,
     devtools,
     dockerfiler (>= 0.2.5),
@@ -72,4 +71,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
