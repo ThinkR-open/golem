@@ -10,7 +10,8 @@ use_skills(
   skills = NULL,
   main_md_files = c("ask", "yes", "no"),
   overwrite = c("ask", "overwrite", "skip", "abort"),
-  golem_wd = get_golem_wd()
+  golem_wd = get_golem_wd(),
+  interactive = rlang_is_interactive()
 )
 }
 \arguments{
@@ -30,6 +31,9 @@ interactive menu.}
 interactive menu.}
 
 \item{golem_wd}{Path to the golem project where files should be copied.}
+
+\item{interactive}{Whether \code{"ask"} values and \code{skills = NULL} should prompt.
+In non-interactive mode, those values use local defaults.}
 }
 \value{
 A list of selected options and copied paths, invisibly.
