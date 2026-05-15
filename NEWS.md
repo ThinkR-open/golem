@@ -13,6 +13,10 @@
   to optionally install agent skills during project creation, and the
   RStudio "New Project" wizard exposes a matching set of options
   (@ilyaZar, #1233).
+- Installing agent skills now appends the corresponding entries
+  (`^\.claude$`, `^CLAUDE\.md$`, `^\.agents$`, `^AGENTS\.md$`) to the
+  project's `.Rbuildignore` so `R CMD check` no longer flags them as
+  non-standard top-level files.
 - New `add_github_action()` and `add_gitlab_ci()` helpers generate minimal
   deployment CI for fresh `{golem}` apps.
 - The deployment CI helpers restore `renv.lock` when it is present, fall back

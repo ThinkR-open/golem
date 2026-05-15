@@ -737,7 +737,63 @@ copy_agent_skills <- function(
 		cli_progress_update(id = progress_id)
 	}
 
+	ensure_agent_skills_buildignore(
+		golem_wd = golem_wd,
+		selected_agent_specs = selected_agent_specs,
+		settings = settings,
+		copy_main_files = copy_main_files
+	)
+
 	copied[!is.na(copied)]
+}
+
+ensure_agent_skills_buildignore <- function(
+	golem_wd,
+	selected_agent_specs,
+	settings,
+	copy_main_files
+) {
+	if (!file.exists(file.path(golem_wd, "DESCRIPTION"))) {
+		return(invisible(NULL))
+	}
+
+	patterns <- character()
+	for (agent_spec in selected_agent_specs) {
+		spec_settings <- settings[[agent_spec]]
+		dir_root <- strsplit(spec_settings$path, "/", fixed = TRUE)[[1]][[1]]
+		patterns <- c(
+			patterns,
+			sprintf("^%s$", gsub(".", "\\.", dir_root, fixed = TRUE))
+		)
+		if (isTRUE(copy_main_files)) {
+			patterns <- c(
+				patterns,
+				sprintf(
+					"^%s$",
+					gsub(".", "\\.", spec_settings$main_file_name, fixed = TRUE)
+				)
+			)
+		}
+	}
+	patterns <- unique(patterns)
+
+	rbuildignore_path <- file.path(golem_wd, ".Rbuildignore")
+	existing <- if (file.exists(rbuildignore_path)) {
+		readLines(rbuildignore_path, warn = FALSE)
+	} else {
+		character()
+	}
+	to_add <- setdiff(patterns, existing)
+
+	if (length(to_add)) {
+		writeLines(c(existing, to_add), rbuildignore_path)
+		cli_alert_success(sprintf(
+			".Rbuildignore updated: %s.",
+			paste(sprintf("`%s`", to_add), collapse = ", ")
+		))
+	}
+
+	invisible(to_add)
 }
 
 resolve_agent_skill_overwrite <- function(

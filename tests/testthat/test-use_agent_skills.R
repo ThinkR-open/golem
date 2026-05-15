@@ -1086,3 +1086,85 @@ test_that("use_skill() uses safe defaults when non-interactive", {
 	expect_equal(captured$overwrite, "skip")
 	expect_false(captured$copy_main_files)
 })
+
+test_that("ensure_agent_skills_buildignore() appends missing entries", {
+	tmp <- withr::local_tempdir()
+	file.create(file.path(tmp, "DESCRIPTION"))
+	writeLines(c("^dev$", "^data-raw$"), file.path(tmp, ".Rbuildignore"))
+
+	settings <- list(
+		claude = list(path = ".claude/skills", main_file_name = "CLAUDE.md"),
+		agents = list(path = ".agents/skills", main_file_name = "AGENTS.md")
+	)
+
+	added <- ensure_agent_skills_buildignore(
+		golem_wd = tmp,
+		selected_agent_specs = c("claude", "agents"),
+		settings = settings,
+		copy_main_files = TRUE
+	)
+
+	expect_setequal(
+		added,
+		c("^\\.claude$", "^CLAUDE\\.md$", "^\\.agents$", "^AGENTS\\.md$")
+	)
+	expect_true(all(
+		c(
+			"^dev$",
+			"^data-raw$",
+			"^\\.claude$",
+			"^CLAUDE\\.md$",
+			"^\\.agents$",
+			"^AGENTS\\.md$"
+		) %in%
+			readLines(file.path(tmp, ".Rbuildignore"))
+	))
+})
+
+test_that("ensure_agent_skills_buildignore() is idempotent and skips non-packages", {
+	tmp <- withr::local_tempdir()
+	settings <- list(
+		claude = list(path = ".claude/skills", main_file_name = "CLAUDE.md")
+	)
+
+	# Without DESCRIPTION: no-op
+	expect_null(ensure_agent_skills_buildignore(
+		golem_wd = tmp,
+		selected_agent_specs = "claude",
+		settings = settings,
+		copy_main_files = TRUE
+	))
+	expect_false(file.exists(file.path(tmp, ".Rbuildignore")))
+
+	# With DESCRIPTION + existing entries: only adds what is missing
+	file.create(file.path(tmp, "DESCRIPTION"))
+	writeLines(
+		c("^dev$", "^\\.claude$"),
+		file.path(tmp, ".Rbuildignore")
+	)
+	added <- ensure_agent_skills_buildignore(
+		golem_wd = tmp,
+		selected_agent_specs = "claude",
+		settings = settings,
+		copy_main_files = TRUE
+	)
+	expect_equal(added, "^CLAUDE\\.md$")
+})
+
+test_that("ensure_agent_skills_buildignore() omits main files when copy_main_files = FALSE", {
+	tmp <- withr::local_tempdir()
+	file.create(file.path(tmp, "DESCRIPTION"))
+
+	settings <- list(
+		agents = list(path = ".agents/skills", main_file_name = "AGENTS.md")
+	)
+
+	added <- ensure_agent_skills_buildignore(
+		golem_wd = tmp,
+		selected_agent_specs = "agents",
+		settings = settings,
+		copy_main_files = FALSE
+	)
+
+	expect_equal(added, "^\\.agents$")
+})
