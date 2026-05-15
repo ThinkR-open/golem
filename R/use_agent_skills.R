@@ -17,8 +17,6 @@
 #' @seealso [use_skills()], [use_agent_skills()], [use_claude_skills()],
 #'   [use_skill()]
 #'
-#' @keywords internal
-#'
 #' @return A list of selected options and copied paths, invisibly.
 use_agent_implement <- function(
 	source = c("ask", "local", "remote"),
@@ -154,6 +152,15 @@ use_agent_implement <- function(
 #'
 #' @inheritParams use_agent_implement
 #'
+#' @section Variants:
+#' - `use_skills()` is the main entry point — pick the agent target via
+#'   `agent_specs` (`"claude"`, `"agents"`, or `"both"`).
+#' - `use_agent_skills()` and `use_claude_skills()` are convenience wrappers
+#'   for `use_skills(agent_specs = "agents")` and
+#'   `use_skills(agent_specs = "claude")`.
+#' - `use_skill()` adds a single skill to an already-installed agent target,
+#'   without touching `CLAUDE.md` / `AGENTS.md`.
+#'
 #' @seealso [use_agent_implement()], [use_agent_skills()],
 #'   [use_claude_skills()], [use_skill()]
 #'
@@ -239,7 +246,7 @@ use_claude_skills <- function(
 #'
 #' @param name Skill name to install.
 #' @param source Where to install agent skills from. If `NULL`, prompt
-#'   interactively.
+#'   interactively; falls back to `"local"` in non-interactive mode.
 #' @param overwrite How to handle existing files. Use `"ask"` for the
 #'   interactive menu.
 #' @param golem_wd Path to the golem project where files should be copied.
@@ -346,11 +353,7 @@ use_skill <- function(
 }
 
 get_agent_skills_golem_root <- function() {
-	root <- golem_sys("agent-skills", mustWork = FALSE)
-	if (nzchar(root)) {
-		return(root)
-	}
-	file.path("inst", "agent-skills")
+	golem_sys("agent-skills", mustWork = TRUE)
 }
 
 get_agent_skills_golem_github <- function(

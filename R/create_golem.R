@@ -193,8 +193,6 @@ create_golem <- function(
 		)
 	}
 
-	setwd(old)
-
 	cli_alert_success("Done.")
 
 	cli_cat_line(

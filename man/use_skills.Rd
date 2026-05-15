@@ -41,6 +41,19 @@ A list of selected options and copied paths, invisibly.
 \description{
 Add Skills to a golem Project
 }
+\section{Variants}{
+
+\itemize{
+\item \code{use_skills()} is the main entry point — pick the agent target via
+\code{agent_specs} (\code{"claude"}, \code{"agents"}, or \code{"both"}).
+\item \code{use_agent_skills()} and \code{use_claude_skills()} are convenience wrappers
+for \code{use_skills(agent_specs = "agents")} and
+\code{use_skills(agent_specs = "claude")}.
+\item \code{use_skill()} adds a single skill to an already-installed agent target,
+without touching \code{CLAUDE.md} / \code{AGENTS.md}.
+}
+}
+
 \seealso{
 \code{\link[=use_agent_implement]{use_agent_implement()}}, \code{\link[=use_agent_skills]{use_agent_skills()}},
 \code{\link[=use_claude_skills]{use_claude_skills()}}, \code{\link[=use_skill]{use_skill()}}

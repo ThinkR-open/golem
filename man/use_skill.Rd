@@ -16,7 +16,7 @@ use_skill(
 \item{name}{Skill name to install.}
 
 \item{source}{Where to install agent skills from. If \code{NULL}, prompt
-interactively.}
+interactively; falls back to \code{"local"} in non-interactive mode.}
 
 \item{overwrite}{How to handle existing files. Use \code{"ask"} for the
 interactive menu.}
