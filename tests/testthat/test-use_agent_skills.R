@@ -1151,6 +1151,177 @@ test_that("ensure_agent_skills_buildignore() is idempotent and skips non-package
 	expect_equal(added, "^CLAUDE\\.md$")
 })
 
+test_that("ask_agent_skills_source() maps menu choices", {
+	for (case in list(
+		list(choice = "1", expected = "local"),
+		list(choice = "2", expected = "remote"),
+		list(choice = "3", expected = NULL),
+		list(choice = "99", expected = NULL)
+	)) {
+		expect_identical(
+			testthat::with_mocked_bindings(
+				utils_menu = function(...) case$choice,
+				ask_agent_skills_source()
+			),
+			case$expected
+		)
+	}
+})
+
+test_that("ask_agent_skills_specs() maps menu choices", {
+	for (case in list(
+		list(choice = "1", expected = "claude"),
+		list(choice = "2", expected = "agents"),
+		list(choice = "3", expected = "both"),
+		list(choice = "4", expected = NULL),
+		list(choice = "99", expected = NULL)
+	)) {
+		expect_identical(
+			testthat::with_mocked_bindings(
+				utils_menu = function(...) case$choice,
+				ask_agent_skills_specs()
+			),
+			case$expected
+		)
+	}
+})
+
+test_that("ask_agent_skills_overwrite() maps menu choices and falls back to cancel", {
+	for (case in list(
+		list(choice = "1", expected = "overwrite"),
+		list(choice = "2", expected = "skip"),
+		list(choice = "3", expected = "cancel"),
+		list(choice = "99", expected = "cancel")
+	)) {
+		expect_identical(
+			testthat::with_mocked_bindings(
+				utils_menu = function(...) case$choice,
+				ask_agent_skills_overwrite("/tmp/skill")
+			),
+			case$expected
+		)
+	}
+})
+
+test_that("normalize_agent_skills_selection() handles all, cancel, empty and explicit", {
+	skills <- c("a", "b", "c")
+	expect_null(normalize_agent_skills_selection(character(), skills))
+	expect_null(normalize_agent_skills_selection("Cancel.", skills))
+	expect_null(normalize_agent_skills_selection(c("a", "Cancel."), skills))
+	expect_equal(normalize_agent_skills_selection("All.", skills), skills)
+	expect_equal(
+		normalize_agent_skills_selection(c("a", "c"), skills),
+		c("a", "c")
+	)
+})
+
+test_that("ask_agent_skills_selection() forwards select.list output", {
+	expect_equal(
+		testthat::with_mocked_bindings(
+			.package = "utils",
+			select.list = function(...) "All.",
+			ask_agent_skills_selection(c("a", "b"))
+		),
+		c("a", "b")
+	)
+
+	expect_null(
+		testthat::with_mocked_bindings(
+			.package = "utils",
+			select.list = function(...) "Cancel.",
+			ask_agent_skills_selection(c("a", "b"))
+		)
+	)
+})
+
+test_that("normalize_agent_skills_specs() aborts when a target is missing in settings", {
+	expect_error(
+		normalize_agent_skills_specs(
+			agent_specs = "both",
+			settings = list(claude = list(path = ".claude/skills"))
+		),
+		"missing target"
+	)
+})
+
+test_that("get_agent_skills_settings() supports targets, settings, and aborts otherwise", {
+	expect_equal(
+		get_agent_skills_settings(list(targets = list(claude = list(path = "x")))),
+		list(claude = list(path = "x"))
+	)
+	expect_equal(
+		get_agent_skills_settings(list(settings = list(agents = list(path = "y")))),
+		list(agents = list(path = "y"))
+	)
+	expect_error(
+		get_agent_skills_settings(list(skills_root = "skills")),
+		"targets.*settings"
+	)
+})
+
+test_that("get_agent_skills_golem_manifest() reads yaml and aborts when missing", {
+	tmp <- withr::local_tempdir()
+	writeLines(
+		c("skills_root: skills", "skills_available:", "  - a"),
+		file.path(tmp, "manifest.yml")
+	)
+	result <- get_agent_skills_golem_manifest(tmp)
+	expect_equal(result$skills_available, "a")
+
+	expect_error(
+		get_agent_skills_golem_manifest(withr::local_tempdir()),
+		"manifest not found"
+	)
+})
+
+test_that("get_agent_skills_golem_root() returns the packaged path", {
+	root <- get_agent_skills_golem_root()
+	expect_true(nzchar(root))
+	expect_true(file.exists(file.path(root, "manifest.yml")))
+})
+
+test_that("copy_agent_skills() copies a real skill tree end-to-end", {
+	tmp_root <- withr::local_tempdir()
+	tmp_wd <- withr::local_tempdir()
+	file.create(file.path(tmp_wd, "DESCRIPTION"))
+
+	# Build a fake skill layout mirroring the bundled one
+	skill_dir <- file.path(tmp_root, "skills", "skill-a")
+	dir.create(skill_dir, recursive = TRUE)
+	writeLines("# skill-a", file.path(skill_dir, "SKILL.md"))
+	writeLines("# CLAUDE.md", file.path(tmp_root, "CLAUDE.md"))
+
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = "skill-a"
+	)
+	settings <- list(
+		claude = list(path = ".claude/skills", main_file_name = "CLAUDE.md")
+	)
+
+	copied <- copy_agent_skills(
+		source = "local",
+		root = tmp_root,
+		manifest = manifest,
+		settings = settings,
+		selected_agent_specs = "claude",
+		skills = "skill-a",
+		overwrite = "overwrite",
+		golem_wd = tmp_wd,
+		copy_main_files = TRUE
+	)
+
+	expect_true(file.exists(file.path(tmp_wd, "CLAUDE.md")))
+	expect_true(file.exists(
+		file.path(tmp_wd, ".claude", "skills", "skill-a", "SKILL.md")
+	))
+	expect_length(copied, 2)
+	expect_true(all(c(
+		"^\\.claude$",
+		"^CLAUDE\\.md$"
+	) %in% readLines(file.path(tmp_wd, ".Rbuildignore"))))
+})
+
 test_that("ensure_agent_skills_buildignore() omits main files when copy_main_files = FALSE", {
 	tmp <- withr::local_tempdir()
 	file.create(file.path(tmp, "DESCRIPTION"))
