@@ -1316,10 +1316,13 @@ test_that("copy_agent_skills() copies a real skill tree end-to-end", {
 		file.path(tmp_wd, ".claude", "skills", "skill-a", "SKILL.md")
 	))
 	expect_length(copied, 2)
-	expect_true(all(c(
-		"^\\.claude$",
-		"^CLAUDE\\.md$"
-	) %in% readLines(file.path(tmp_wd, ".Rbuildignore"))))
+	expect_true(all(
+		c(
+			"^\\.claude$",
+			"^CLAUDE\\.md$"
+		) %in%
+			readLines(file.path(tmp_wd, ".Rbuildignore"))
+	))
 })
 
 test_that("ensure_agent_skills_buildignore() omits main files when copy_main_files = FALSE", {
