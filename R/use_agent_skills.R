@@ -243,6 +243,8 @@ use_claude_skills <- function(
 #' @param overwrite How to handle existing files. Use `"ask"` for the
 #'   interactive menu.
 #' @param golem_wd Path to the golem project where files should be copied.
+#' @param interactive Whether `"ask"` values and `source = NULL` should
+#'   prompt. In non-interactive mode, those values use local defaults.
 #'
 #' @seealso [use_skills()], [use_agent_implement()], [use_agent_skills()],
 #'   [use_claude_skills()]
@@ -253,7 +255,8 @@ use_skill <- function(
 	name,
 	source = NULL,
 	overwrite = c("ask", "overwrite", "skip", "abort"),
-	golem_wd = get_golem_wd()
+	golem_wd = get_golem_wd(),
+	interactive = rlang_is_interactive()
 ) {
 	if (missing(name) || length(name) != 1 || !nzchar(name)) {
 		cli_abort("`name` must be a single non-empty skill name.")
@@ -264,6 +267,16 @@ use_skill <- function(
 	}
 	source <- match.arg(source, c("ask", "local", "remote"))
 	overwrite <- match.arg(overwrite)
+	interactive <- isTRUE(interactive)
+
+	if (!interactive) {
+		if (identical(source, "ask")) {
+			source <- "local"
+		}
+		if (identical(overwrite, "ask")) {
+			overwrite <- "skip"
+		}
+	}
 
 	if (identical(source, "ask")) {
 		source <- ask_agent_skills_source()

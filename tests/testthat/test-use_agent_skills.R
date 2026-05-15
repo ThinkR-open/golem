@@ -995,3 +995,94 @@ test_that("resolve_agent_skill_overwrite() copies missing targets in skip mode",
 		"overwrite"
 	)
 })
+
+test_that("copy_agent_skills() aborts when a manifest skill is missing on disk", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "ghost"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			)
+		)
+	)
+	root <- tempfile("agent-skills-root-")
+	dir.create(file.path(root, "skills", "skill-a"), recursive = TRUE)
+
+	expect_error(
+		copy_agent_skills(
+			source = "local",
+			root = root,
+			manifest = manifest,
+			settings = manifest$targets,
+			selected_agent_specs = "claude",
+			skills = c("skill-a", "ghost"),
+			overwrite = "overwrite",
+			golem_wd = tempfile("golem-project-"),
+			copy_main_files = FALSE
+		),
+		"Agent skill `ghost` is listed in the manifest but missing"
+	)
+})
+
+test_that("use_skill() uses safe defaults when non-interactive", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = "skill-a",
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			)
+		)
+	)
+	captured <- list()
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		get_installed_agent_skills_specs = function(golem_wd, settings) {
+			"claude"
+		},
+		ask_agent_skills_source = function() {
+			stop("should not prompt when non-interactive")
+		},
+		ask_agent_skills_overwrite = function(target) {
+			stop("should not prompt when non-interactive")
+		},
+		copy_agent_skills = function(
+			source,
+			root,
+			manifest,
+			settings,
+			selected_agent_specs,
+			skills,
+			overwrite,
+			golem_wd,
+			copy_main_files
+		) {
+			captured <<- list(
+				source = source,
+				overwrite = overwrite,
+				copy_main_files = copy_main_files
+			)
+			"/tmp/project/.claude/skills/skill-a"
+		},
+		{
+			use_skill(
+				name = "skill-a",
+				golem_wd = "/tmp/project",
+				interactive = FALSE
+			)
+		}
+	)
+
+	expect_equal(captured$source, "local")
+	expect_equal(captured$overwrite, "skip")
+	expect_false(captured$copy_main_files)
+})
