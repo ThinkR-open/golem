@@ -11,7 +11,8 @@ test_that("with_golem_options() returns the maintenance page", {
 						input,
 						output,
 						session
-					) {}
+					) {
+					}
 				),
 				golem_opts = list()
 			)
@@ -52,7 +53,8 @@ test_that("We can explicitely print the golem app", {
 						input,
 						output,
 						session
-					) {}
+					) {
+					}
 				),
 				golem_opts = list()
 			)
@@ -82,7 +84,8 @@ test_that("with_golem_options() disables 'print'-flag on Posit for SHINY_PORT", 
 						input,
 						output,
 						session
-					) {}
+					) {
+					}
 				),
 				golem_opts = list()
 			)
