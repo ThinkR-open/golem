@@ -4,6 +4,15 @@
 
 ## New features / user-visible changes
 
+- New `use_skills()`, `use_agent_skills()`, `use_claude_skills()` and
+  `use_skill()` helpers install agent skills (Claude Code / AGENTS.md
+  layouts) into a `{golem}` project, from the package's bundled skills or
+  from the upstream `ThinkR-open/golem-agent-skills` repository
+  (@ilyaZar, #1233).
+- `create_golem()` gains `with_agents` and `with_agents_options` arguments
+  to optionally install agent skills during project creation, and the
+  RStudio "New Project" wizard exposes a matching set of options
+  (@ilyaZar, #1233).
 - New `add_github_action()` and `add_gitlab_ci()` helpers generate minimal
   deployment CI for fresh `{golem}` apps.
 - The deployment CI helpers restore `renv.lock` when it is present, fall back
