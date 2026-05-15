@@ -18,3 +18,4 @@
       By default, this button will be hidden.
       To show it, open your web browser JavaScript console
       And run $('#browser').show();
+
