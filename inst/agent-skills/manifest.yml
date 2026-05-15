@@ -8,6 +8,7 @@ targets:
     path: .agents/skills
     main_file_name: AGENTS.md
 skills_available:
+  - golem-app-builder
   - golem-create-golem
   - golem-add-module
   - golem-add-function
