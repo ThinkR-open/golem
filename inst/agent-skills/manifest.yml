@@ -13,6 +13,5 @@ skills_available:
   - golem-add-function
   - golem-check-app
   - golem-run-tests
-  - golem-fix-missing-ns-colin
   - golem-upgrade
   - golem-fix-missing-ns

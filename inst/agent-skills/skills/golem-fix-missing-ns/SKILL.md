@@ -1,59 +1,126 @@
 ---
 name: golem-fix-missing-ns
 description: |
-  Finds missing ns() local scope calls inside Shiny modules.
+  Validate that all module input/output IDs are properly namespaced.
   Triggers on:
-    - "find missing ns"
-    - "find missing ns()"
+    - "check my modules for missing ns"
+    - "find missing ns in modules"
+    - "validate module namespaces"
   Do not trigger on:
-    - if outside an R Shiny app
-    - if outside an R Shiny app which is not golem based
+    - when the user is not working inside a golem app
 ---
 
-## Context
+# Check for Missing `ns()` in Modules
 
-Shiny applications use IDs to identify inputs and outputs. These IDs must be
-unique within an application, as accidentally using the same input/output ID
-more than once will result in unexpected behavior. The traditional solution for
-preventing name collisions is namespaces; a namespace is to an ID as a directory
-is to a file. The `NS()` function turns a bare ID into a namespaced one.
+Validate that all module input/output IDs are properly namespaced.
 
-**However**:
+## Why Namespacing Matters
 
-In module files, living under R/ and which typically start with
-`mod_MODULE_NAME.R`, the code part `ns <- NS(id)` (often at the very top of
-the module) defines a local function for Shiny module namespacing which makes
-this easier to re-use in subsequent code parts of the module.
+In Shiny modules, all input and output IDs must be namespaced using the `ns()` function. This prevents ID conflicts when the same module is used multiple times in an app.
 
-Thus, it is common practice to refer to `ns("some_id_as_string")` to refer to
-UI/server ID pairs.
+## Correct vs Incorrect
 
-## Main task
+### ✅ Correct
 
-Find missing or bad `ns()` calls inside modules by screening all `R/mod_XXX.R`
-files, and possibly other files that are named differently but work as a module.
+```r
+mod_analytics_ui <- function(id) {
+  ns <- NS(id)
+  tagList(
+    selectInput(
+      ns("type_filter"),
+      label = NULL,
+      choices = c("All", "None")
+    )
+  )
+}
+```
 
-1. Run the bundled script from the project root:
+### ❌ Incorrect
 
-   ```sh
-   Rscript .agents/skills/golem-fix-missing-ns/scripts/find_missing_ns.R --format tsv
-   ```
+```r
+mod_analytics_ui <- function(id) {
+  ns <- NS(id)
+  tagList(
+    selectInput(
+      "type_filter",  # Missing ns()!
+      label = NULL,
+      choices = c("All", "None")
+    )
+  )
+}
+```
 
-   For Claude Code installations, use:
+## What to Check
 
-   ```sh
-   Rscript .claude/skills/golem-fix-missing-ns/scripts/find_missing_ns.R --format tsv
-   ```
+### In Module UI Functions
+- All input IDs: `textInput()`, `selectInput()`, `actionButton()`, etc.
+- All output IDs: `plotOutput()`, `tableOutput()`, `uiOutput()`, etc.
+- All input control IDs used in `ns()` calls
 
-2. If the golem app uses module files that are not named `R/mod_*.R`, rerun
-   with `--all-files`.
-3. If the app uses custom input helper functions, rerun with `--functions`.
-   Example: `--functions '^sk_.*_input$'`.
-4. Use the reported file, line, column, function, argument, and suggested
-   `ns()` wrapper to inspect the code before editing.
+### In Module Server Functions
+- JavaScript handler IDs that reference the module namespace
+- `observeEvent(input$...)` references
+- `output$...` definitions
+- `renderUI()` generated element IDs
 
-## Usage
+### Places to Look
+- Any file starting with `mod_` in the `R/` directory
+- Both UI and server functions within modules
 
-Use this skill when creating, reviewing, or modifying a golem-based Shiny
-application, and it is clear that the user wants to find, review, or fix
-missing `ns()` calls in module UI code.
+## How Claude Checks
+
+1. **Locate all IDs** in module files (files starting with `mod_`)
+   - Search for common patterns: `Input()`, `Output()`, input/output IDs
+
+2. **Verify namespacing** by checking each ID is wrapped in `ns()`
+   - Exception: Only the first `NS(id)` definition doesn't need wrapping
+
+3. **Report findings**
+   - If all IDs are properly namespaced: ✅ All good
+   - If missing IDs found: ❌ List them and ask for permission to fix
+
+4. **Fix if approved**
+   - Wrap missing IDs in `ns()`
+   - Preserve code structure and formatting
+
+## Common Mistakes
+
+| Mistake | Fix |
+|---------|-----|
+| `selectInput("myid", ...)` | `selectInput(ns("myid"), ...)` |
+| `plotOutput("plot")` | `plotOutput(ns("plot"))` |
+| `observeEvent(input$button)` | `observeEvent(input$submit, ...)` with ID properly namespaced |
+| `uiOutput("dynamic")` | `uiOutput(ns("dynamic"))` |
+
+## When to Run
+
+- After creating or modifying module UI functions
+- Before running `devtools::check()`
+- When adding new inputs/outputs to modules
+- Before deploying to production
+
+## Example Workflow
+
+```
+User: Check my modules for missing ns()
+
+Claude:
+1. Scans all mod_*.R files
+2. Identifies 3 missing ns() wrappings
+3. Shows the issues with line numbers
+4. Asks: "Should I fix these?"
+
+User: Yes, fix them
+
+Claude:
+- Updates the files
+- Runs the check again to verify
+- Confirms: "All fixed! ✅"
+```
+
+## Notes
+
+- This check is for UI and reactive server code, not data processing functions
+- Only module files (`mod_*.R`) need this check
+- Regular functions (`fct_*.R`, `utils_*.R`) don't need namespace wrapping
+- Module server functions are called with the module ID, which handles the namespacing
