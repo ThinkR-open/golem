@@ -1,5 +1,19 @@
 # Changelog
 
+## golem (development version)
+
+### New features
+
+- [`use_external_js_file()`](https://thinkr-open.github.io/golem/reference/use_files.md),
+  [`use_external_css_file()`](https://thinkr-open.github.io/golem/reference/use_files.md),
+  [`use_external_html_template()`](https://thinkr-open.github.io/golem/reference/use_files.md),
+  [`use_external_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  and
+  [`use_bundled_html()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  gain a `replace` argument. When `TRUE`, an existing file (or bundle
+  directory) at the target location is overwritten instead of aborting
+  ([\#819](https://github.com/ThinkR-open/golem/issues/819)).
+
 ## golem 0.5.1 to 0.6.0
 
 CRAN release: 2024-08-27

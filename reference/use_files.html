@@ -11,7 +11,7 @@ from a remote location."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,8 @@ from a remote location.</p>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
-<span>  <span class="va">pkg</span></span>
+<span>  <span class="va">pkg</span>,</span>
+<span>  replace <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">use_external_css_file</span><span class="op">(</span></span>
@@ -73,7 +74,8 @@ from a remote location.</p>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
-<span>  <span class="va">pkg</span></span>
+<span>  <span class="va">pkg</span>,</span>
+<span>  replace <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">use_external_html_template</span><span class="op">(</span></span>
@@ -84,7 +86,8 @@ from a remote location.</p>
 <span>  open <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
 <span>  extract <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ask"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span>,</span>
-<span>  delete_zip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ask"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span></span>
+<span>  delete_zip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ask"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span>,</span>
+<span>  replace <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">use_external_file</span><span class="op">(</span></span>
@@ -94,7 +97,8 @@ from a remote location.</p>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">dir_create</span>,</span>
-<span>  <span class="va">pkg</span></span>
+<span>  <span class="va">pkg</span>,</span>
+<span>  replace <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">use_bundled_html</span><span class="op">(</span></span>
@@ -104,7 +108,8 @@ from a remote location.</p>
 <span>  dir <span class="op">=</span> <span class="st">"inst/app/www"</span>,</span>
 <span>  open <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  extract <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ask"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span>,</span>
-<span>  delete_zip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ask"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span></span>
+<span>  delete_zip <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ask"</span>, <span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span>,</span>
+<span>  replace <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">use_internal_js_file</span><span class="op">(</span></span>
@@ -178,6 +183,13 @@ from a remote location.</p>
 
 <dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
 <dd><p>Deprecated, please use golem_wd instead</p></dd>
+
+
+<dt id="arg-replace">replace<a class="anchor" aria-label="anchor" href="#arg-replace"></a></dt>
+<dd><p>Boolean. If <code>TRUE</code>, an existing file (or, for
+<code>use_bundled_html()</code>, an existing bundle directory) at the target location
+is overwritten. Defaults to <code>FALSE</code>, in which case the function aborts if
+the target already exists.</p></dd>
 
 
 <dt id="arg-extract">extract<a class="anchor" aria-label="anchor" href="#arg-extract"></a></dt>
