@@ -94,6 +94,7 @@ perform_checks_and_download_if_everything_is_ok <- function(
 	golem_wd,
 	name,
 	open,
+	replace = FALSE,
 	pkg
 ) {
 	signal_arg_is_deprecated(
@@ -144,7 +145,9 @@ perform_checks_and_download_if_everything_is_ok <- function(
 		directory_to_download_to
 	)
 	check_file_exists(
-		where_to_download_to
+		where_to_download_to,
+		replace = replace,
+		with_replace_hint = TRUE
 	)
 	download_external(
 		url_to_download_from = url_to_download_from,
