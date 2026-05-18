@@ -64,9 +64,12 @@
 
 - `browser_button()` is now soft deprecated (#1155)
 
+## Hard deprecated
+
 - `add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
-  `add_dockerfile_heroku()` are now explicitly soft deprecated; use the
-  corresponding `add_dockerfile_with_renv_*()` functions.
+  `add_dockerfile_heroku()` are now hard deprecated and will error when
+  called; use the corresponding `add_dockerfile_with_renv_*()` functions
+  instead (#1244).
 
 ## Bug fix
 

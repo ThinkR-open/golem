@@ -9,55 +9,11 @@
 \alias{add_dockerfile_with_renv_heroku}
 \title{Create a Dockerfile for your App}
 \usage{
-add_dockerfile(
-  path = "DESCRIPTION",
-  output = "Dockerfile",
-  golem_wd = get_golem_wd(),
-  from = paste0("rocker/verse:", R.Version()$major, ".", R.Version()$minor),
-  as = NULL,
-  port = 80,
-  host = "0.0.0.0",
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  update_tar_gz = TRUE,
-  build_golem_from_source = TRUE,
-  extra_sysreqs = NULL,
-  pkg
-)
+add_dockerfile(...)
 
-add_dockerfile_shinyproxy(
-  path = "DESCRIPTION",
-  output = "Dockerfile",
-  golem_wd = get_golem_wd(),
-  from = paste0("rocker/verse:", R.Version()$major, ".", R.Version()$minor),
-  as = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  update_tar_gz = TRUE,
-  build_golem_from_source = TRUE,
-  extra_sysreqs = NULL,
-  pkg
-)
+add_dockerfile_shinyproxy(...)
 
-add_dockerfile_heroku(
-  path = "DESCRIPTION",
-  output = "Dockerfile",
-  golem_wd = get_golem_wd(),
-  from = paste0("rocker/verse:", R.Version()$major, ".", R.Version()$minor),
-  as = NULL,
-  sysreqs = TRUE,
-  repos = c(CRAN = "https://cran.rstudio.com/"),
-  expand = FALSE,
-  open = TRUE,
-  update_tar_gz = TRUE,
-  build_golem_from_source = TRUE,
-  extra_sysreqs = NULL,
-  pkg
-)
+add_dockerfile_heroku(...)
 
 add_dockerfile_with_renv(
   golem_wd = get_golem_wd(),
@@ -126,12 +82,17 @@ add_dockerfile_with_renv_heroku(
 )
 }
 \arguments{
-\item{path}{path to the DESCRIPTION file to use as an input.}
-
-\item{output}{name of the Dockerfile output.}
+\item{...}{Other arguments to pass to \code{\link[renv:snapshot]{renv::snapshot()}}.}
 
 \item{golem_wd}{path to the Package/golem source folder to deploy.
 default is retrieved via \code{\link[=get_golem_wd]{get_golem_wd()}}.}
+
+\item{lockfile}{path to the renv.lock file to use. default is \code{NULL}.}
+
+\item{output_dir}{folder to export everything deployment related.}
+
+\item{distro}{One of "focal", "bionic", "xenial", "centos7", or "centos8".
+See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
 
 \item{from}{The FROM of the Dockerfile. Default is
 
@@ -143,14 +104,14 @@ without renv.lock file passed
 
 \item{as}{The AS of the Dockerfile. Default it NULL.}
 
+\item{sysreqs}{boolean. If TRUE, RUN statements to install packages
+system requirements will be included in the Dockerfile.}
+
 \item{port}{The \code{options('shiny.port')} on which to run the App.
 Default is 80.}
 
 \item{host}{The \code{options('shiny.host')} on which to run the App.
 Default is 0.0.0.0.}
-
-\item{sysreqs}{boolean. If TRUE, RUN statements to install packages
-system requirements will be included in the Dockerfile.}
 
 \item{repos}{character. The URL(s) of the repositories to use for \code{options("repos")}.}
 
@@ -158,24 +119,12 @@ system requirements will be included in the Dockerfile.}
 
 \item{open}{boolean. Should the Dockerfile/README/README be open after creation? Default is \code{TRUE}.}
 
-\item{update_tar_gz}{boolean. If \code{TRUE} and \code{build_golem_from_source} is also \code{TRUE},
-an updated tar.gz is created.}
-
-\item{build_golem_from_source}{boolean. If \code{TRUE} no tar.gz is created and
-the Dockerfile directly mount the source folder.}
+\item{document}{boolean. If TRUE (by default), DESCRIPTION file is updated using \code{\link[attachment:att_amend_desc]{attachment::att_amend_desc()}} before creating the renv.lock file}
 
 \item{extra_sysreqs}{character vector. Extra debian system requirements.}
 
-\item{pkg}{Deprecated, please use golem_wd instead}
-
-\item{lockfile}{path to the renv.lock file to use. default is \code{NULL}.}
-
-\item{output_dir}{folder to export everything deployment related.}
-
-\item{distro}{One of "focal", "bionic", "xenial", "centos7", or "centos8".
-See available distributions at https://hub.docker.com/r/rstudio/r-base/.}
-
-\item{document}{boolean. If TRUE (by default), DESCRIPTION file is updated using \code{\link[attachment:att_amend_desc]{attachment::att_amend_desc()}} before creating the renv.lock file}
+\item{update_tar_gz}{boolean. If \code{TRUE} and \code{build_golem_from_source} is also \code{TRUE},
+an updated tar.gz is created.}
 
 \item{dockerfile_cmd}{What is the CMD to add to the Dockerfile. If NULL, the default,
 the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}',golem.app.prod = \{set_golem.app.prod\});library(\{appname\});\{appname\}::run_app()\\}.}
@@ -189,56 +138,40 @@ for the build and production phases.}
 
 \item{set_golem.app.prod}{boolean If \code{TRUE} (by default) set options(golem.app.prod = TRUE) in dockerfile_cmd.}
 
-\item{...}{Other arguments to pass to \code{\link[renv:snapshot]{renv::snapshot()}}.}
-
 \item{source_folder}{deprecated, use golem_wd instead}
+
+\item{path}{path to the DESCRIPTION file to use as an input.}
+
+\item{output}{name of the Dockerfile output.}
+
+\item{build_golem_from_source}{boolean. If \code{TRUE} no tar.gz is created and
+the Dockerfile directly mount the source folder.}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.
 }
 \description{
-Build a container containing your Shiny App. \code{add_dockerfile()} and
-\code{add_dockerfile_with_renv()} and \code{add_dockerfile_with_renv()} creates
-a generic Dockerfile, while \code{add_dockerfile_shinyproxy()},
-\code{add_dockerfile_with_renv_shinyproxy()} , \code{add_dockerfile_with_renv_shinyproxy()} and
-\code{add_dockerfile_heroku()} creates platform specific Dockerfile.
+Build a container containing your Shiny App.
+\code{add_dockerfile_with_renv()} creates a generic Dockerfile based on
+\code{{renv}}, while \code{add_dockerfile_with_renv_shinyproxy()} and
+\code{add_dockerfile_with_renv_heroku()} create platform-specific
+Dockerfiles.
 }
 \note{
 \code{add_dockerfile()}, \code{add_dockerfile_shinyproxy()}, and
-\code{add_dockerfile_heroku()} are now soft deprecated; use the corresponding
-\verb{add_dockerfile_with_renv_*()} functions instead.
+\code{add_dockerfile_heroku()} are now hard deprecated and will error when
+called; use the corresponding \verb{add_dockerfile_with_renv_*()} functions
+instead.
 }
 \examples{
 \donttest{
-# Add a standard Dockerfile
-if (interactive() & requireNamespace("dockerfiler")) {
-  add_dockerfile()
-}
-# Crete a 'deploy' folder containing everything needed to deploy
+# Create a 'deploy' folder containing everything needed to deploy
 # the golem using docker based on {renv}
 if (interactive() & requireNamespace("dockerfiler")) {
   add_dockerfile_with_renv(
     # lockfile = "renv.lock", # uncomment to use existing renv.lock file
     output_dir = "deploy"
   )
-}
-# Add a Dockerfile for ShinyProxy
-if (interactive() & requireNamespace("dockerfiler")) {
-  add_dockerfile_shinyproxy()
-}
-
-# Crete a 'deploy' folder containing everything needed to deploy
-# the golem with ShinyProxy using docker based on {renv}
-if (interactive() & requireNamespace("dockerfiler")) {
-  add_dockerfile_with_renv(
-    # lockfile = "renv.lock",# uncomment to use existing renv.lock file
-    output_dir = "deploy"
-  )
-}
-
-# Add a Dockerfile for Heroku
-if (interactive() & requireNamespace("dockerfiler")) {
-  add_dockerfile_heroku()
 }
 }
 }
