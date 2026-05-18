@@ -1,35 +1,12 @@
-talk_once <- function(
-	.f,
-	msg = ""
-) {
-	talk <- TRUE
-	function(
-		...
-	) {
-		if (talk) {
-			talk <<- FALSE
-			cli_alert_warning(
-				msg
-			)
-		}
-		.f(
-			...
-		)
-	}
-}
-
 #' Create a Dockerfile for your App
 #'
-#' Build a container containing your Shiny App. `add_dockerfile()` and
-#' `add_dockerfile_with_renv()` and `add_dockerfile_with_renv()` creates
-#' a generic Dockerfile, while `add_dockerfile_shinyproxy()`,
-#' `add_dockerfile_with_renv_shinyproxy()` , `add_dockerfile_with_renv_shinyproxy()` and
-#' `add_dockerfile_heroku()` creates platform specific Dockerfile.
-#'
-#' @inheritParams add_module
+#' Build a container containing your Shiny App.
+#' `add_dockerfile_with_renv()` creates a generic Dockerfile based on
+#' `{renv}`, while `add_dockerfile_with_renv_shinyproxy()` and
+#' `add_dockerfile_with_renv_heroku()` create platform-specific
+#' Dockerfiles.
 #'
 #' @param path path to the DESCRIPTION file to use as an input.
-#' @param output name of the Dockerfile output.
 #' @param from The FROM of the Dockerfile. Default is
 #'
 #'     FROM rocker/verse
@@ -47,15 +24,13 @@ talk_once <- function(
 #' @param repos character. The URL(s) of the repositories to use for `options("repos")`.
 #' @param expand boolean. If `TRUE` each system requirement will have its own `RUN` line.
 #' @param open boolean. Should the Dockerfile/README/README be open after creation? Default is `TRUE`.
-#' @param build_golem_from_source boolean. If `TRUE` no tar.gz is created and
-#'     the Dockerfile directly mount the source folder.
-#' @param update_tar_gz boolean. If `TRUE` and `build_golem_from_source` is also `TRUE`,
-#'     an updated tar.gz is created.
+#' @param update_tar_gz boolean. If `TRUE` an updated tar.gz is created.
 #' @param extra_sysreqs character vector. Extra debian system requirements.
 #'
 #' @note `add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
-#' `add_dockerfile_heroku()` are now soft deprecated; use the corresponding
-#' `add_dockerfile_with_renv_*()` functions instead.
+#' `add_dockerfile_heroku()` are now hard deprecated and will error when
+#' called; use the corresponding `add_dockerfile_with_renv_*()` functions
+#' instead.
 #'
 #' @export
 #' @rdname dockerfiles
@@ -63,11 +38,7 @@ talk_once <- function(
 #'
 #' @examples
 #' \donttest{
-#' # Add a standard Dockerfile
-#' if (interactive() & requireNamespace("dockerfiler")) {
-#'   add_dockerfile()
-#' }
-#' # Crete a 'deploy' folder containing everything needed to deploy
+#' # Create a 'deploy' folder containing everything needed to deploy
 #' # the golem using docker based on {renv}
 #' if (interactive() & requireNamespace("dockerfiler")) {
 #'   add_dockerfile_with_renv(
@@ -75,497 +46,35 @@ talk_once <- function(
 #'     output_dir = "deploy"
 #'   )
 #' }
-#' # Add a Dockerfile for ShinyProxy
-#' if (interactive() & requireNamespace("dockerfiler")) {
-#'   add_dockerfile_shinyproxy()
-#' }
-#'
-#' # Crete a 'deploy' folder containing everything needed to deploy
-#' # the golem with ShinyProxy using docker based on {renv}
-#' if (interactive() & requireNamespace("dockerfiler")) {
-#'   add_dockerfile_with_renv(
-#'     # lockfile = "renv.lock",# uncomment to use existing renv.lock file
-#'     output_dir = "deploy"
-#'   )
-#' }
-#'
-#' # Add a Dockerfile for Heroku
-#' if (interactive() & requireNamespace("dockerfiler")) {
-#'   add_dockerfile_heroku()
-#' }
 #' }
 #' @return The `{dockerfiler}` object, invisibly.
 add_dockerfile <- function(
-	path = "DESCRIPTION",
-	output = "Dockerfile",
-	golem_wd = get_golem_wd(),
-	from = paste0(
-		"rocker/verse:",
-		R.Version()$major,
-		".",
-		R.Version()$minor
-	),
-	as = NULL,
-	port = 80,
-	host = "0.0.0.0",
-	sysreqs = TRUE,
-	repos = c(
-		CRAN = "https://cran.rstudio.com/"
-	),
-	expand = FALSE,
-	open = TRUE,
-	update_tar_gz = TRUE,
-	build_golem_from_source = TRUE,
-	extra_sysreqs = NULL,
-	pkg
+	...
 ) {
-	signal_arg_is_deprecated(
-		pkg,
-		fun = as.character(
-			sys.call()[[1]]
-		),
-		"pkg"
-	)
-	.Deprecated(
-		old = "add_dockerfile",
-		msg = "add_dockerfile() is currently soft deprecated and will be removed in future versions of {golem}.\nPlease use add_dockerfile_with_renv() instead."
-	)
-	add_dockerfile_(
-		path = path,
-		output = output,
-		golem_wd = golem_wd,
-		from = from,
-		as = as,
-		port = port,
-		host = host,
-		sysreqs = sysreqs,
-		repos = repos,
-		expand = expand,
-		open = open,
-		update_tar_gz = update_tar_gz,
-		build_golem_from_source = build_golem_from_source,
-		extra_sysreqs = extra_sysreqs
+	.Defunct(
+		new = "add_dockerfile_with_renv",
+		msg = "add_dockerfile() is defunct. Please use add_dockerfile_with_renv() instead."
 	)
 }
-
-add_dockerfile_ <- talk_once(
-	function(
-		path = "DESCRIPTION",
-		output = "Dockerfile",
-		golem_wd = get_golem_wd(),
-		from = paste0(
-			"rocker/verse:",
-			R.Version()$major,
-			".",
-			R.Version()$minor
-		),
-		as = NULL,
-		port = 80,
-		host = "0.0.0.0",
-		sysreqs = TRUE,
-		repos = c(
-			CRAN = "https://cran.rstudio.com/"
-		),
-		expand = FALSE,
-		open = TRUE,
-		update_tar_gz = TRUE,
-		build_golem_from_source = TRUE,
-		extra_sysreqs = NULL
-	) {
-		where <- fs_path(
-			golem_wd,
-			output
-		)
-
-		usethis_use_build_ignore(
-			basename(
-				where
-			)
-		)
-
-		dock <- dockerfiler_dock_from_desc(
-			path = path,
-			FROM = from,
-			AS = as,
-			sysreqs = sysreqs,
-			repos = repos,
-			expand = expand,
-			build_from_source = build_golem_from_source,
-			update_tar_gz = update_tar_gz,
-			extra_sysreqs = extra_sysreqs
-		)
-
-		dock$EXPOSE(
-			port
-		)
-
-		dock$CMD(
-			sprintf(
-				"R -e \"options('shiny.port'=%s,shiny.host='%s');library(%3$s);%3$s::run_app()\"",
-				port,
-				host,
-				read.dcf(
-					path
-				)[1]
-			)
-		)
-
-		dock$write(
-			output
-		)
-
-		if (open) {
-			rstudioapi_navigateToFile(
-				output
-			)
-		}
-		alert_build(
-			path = path,
-			output = output,
-			build_golem_from_source = build_golem_from_source
-		)
-
-		return(
-			invisible(
-				dock
-			)
-		)
-	},
-	"golem::add_dockerfile() is not recommended anymore.\nPlease use golem::add_dockerfile_with_renv() instead."
-)
 
 #' @export
 #' @rdname dockerfiles
 add_dockerfile_shinyproxy <- function(
-	path = "DESCRIPTION",
-	output = "Dockerfile",
-	golem_wd = get_golem_wd(),
-	from = paste0(
-		"rocker/verse:",
-		R.Version()$major,
-		".",
-		R.Version()$minor
-	),
-	as = NULL,
-	sysreqs = TRUE,
-	repos = c(
-		CRAN = "https://cran.rstudio.com/"
-	),
-	expand = FALSE,
-	open = TRUE,
-	update_tar_gz = TRUE,
-	build_golem_from_source = TRUE,
-	extra_sysreqs = NULL,
-	pkg
+	...
 ) {
-	signal_arg_is_deprecated(
-		pkg,
-		fun = as.character(
-			sys.call()[[1]]
-		),
-		"pkg"
-	)
-	.Deprecated(
-		old = "add_dockerfile_shinyproxy",
-		msg = "add_dockerfile_shinyproxy() is currently soft deprecated and will be removed in future versions of {golem}.\nPlease use add_dockerfile_with_renv_shinyproxy() instead."
-	)
-	add_dockerfile_shinyproxy_(
-		path = path,
-		output = output,
-		golem_wd = golem_wd,
-		from = from,
-		as = as,
-		sysreqs = sysreqs,
-		repos = repos,
-		expand = expand,
-		open = open,
-		update_tar_gz = update_tar_gz,
-		build_golem_from_source = build_golem_from_source,
-		extra_sysreqs = extra_sysreqs
+	.Defunct(
+		new = "add_dockerfile_with_renv_shinyproxy",
+		msg = "add_dockerfile_shinyproxy() is defunct. Please use add_dockerfile_with_renv_shinyproxy() instead."
 	)
 }
-
-add_dockerfile_shinyproxy_ <- talk_once(
-	function(
-		path = "DESCRIPTION",
-		output = "Dockerfile",
-		golem_wd = get_golem_wd(),
-		from = paste0(
-			"rocker/verse:",
-			R.Version()$major,
-			".",
-			R.Version()$minor
-		),
-		as = NULL,
-		sysreqs = TRUE,
-		repos = c(
-			CRAN = "https://cran.rstudio.com/"
-		),
-		expand = FALSE,
-		open = TRUE,
-		update_tar_gz = TRUE,
-		build_golem_from_source = TRUE,
-		extra_sysreqs = NULL
-	) {
-		where <- fs_path(
-			golem_wd,
-			output
-		)
-
-		usethis_use_build_ignore(
-			output
-		)
-
-		dock <- dockerfiler_dock_from_desc(
-			path = path,
-			FROM = from,
-			AS = as,
-			sysreqs = sysreqs,
-			repos = repos,
-			expand = expand,
-			build_from_source = build_golem_from_source,
-			update_tar_gz = update_tar_gz,
-			extra_sysreqs = extra_sysreqs
-		)
-
-		dock$EXPOSE(
-			3838
-		)
-		dock$CMD(
-			sprintf(
-				" [\"R\", \"-e\", \"options('shiny.port'=3838,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"]",
-				read.dcf(
-					path
-				)[1]
-			)
-		)
-		dock$write(
-			output
-		)
-
-		if (open) {
-			rstudioapi_navigateToFile(
-				output
-			)
-		}
-		alert_build(
-			path,
-			output,
-			build_golem_from_source = build_golem_from_source
-		)
-
-		return(
-			invisible(
-				dock
-			)
-		)
-	},
-	"golem::add_dockerfile_shinyproxy() is not recommended anymore.\nPlease use golem::add_dockerfile_with_renv_shinyproxy() instead."
-)
 
 #' @export
 #' @rdname dockerfiles
 add_dockerfile_heroku <- function(
-	path = "DESCRIPTION",
-	output = "Dockerfile",
-	golem_wd = get_golem_wd(),
-	from = paste0(
-		"rocker/verse:",
-		R.Version()$major,
-		".",
-		R.Version()$minor
-	),
-	as = NULL,
-	sysreqs = TRUE,
-	repos = c(
-		CRAN = "https://cran.rstudio.com/"
-	),
-	expand = FALSE,
-	open = TRUE,
-	update_tar_gz = TRUE,
-	build_golem_from_source = TRUE,
-	extra_sysreqs = NULL,
-	pkg
+	...
 ) {
-	signal_arg_is_deprecated(
-		pkg,
-		fun = as.character(
-			sys.call()[[1]]
-		),
-		"pkg"
+	.Defunct(
+		new = "add_dockerfile_with_renv_heroku",
+		msg = "add_dockerfile_heroku() is defunct. Please use add_dockerfile_with_renv_heroku() instead."
 	)
-	.Deprecated(
-		old = "add_dockerfile_heroku",
-		msg = "add_dockerfile_heroku() is currently soft deprecated and will be removed in future versions of {golem}.\nPlease use add_dockerfile_with_renv_heroku() instead."
-	)
-	add_dockerfile_heroku_(
-		path = path,
-		output = output,
-		golem_wd = golem_wd,
-		from = from,
-		as = as,
-		sysreqs = sysreqs,
-		repos = repos,
-		expand = expand,
-		open = open,
-		update_tar_gz = update_tar_gz,
-		build_golem_from_source = build_golem_from_source,
-		extra_sysreqs = extra_sysreqs
-	)
-}
-
-add_dockerfile_heroku_ <- talk_once(
-	function(
-		path = "DESCRIPTION",
-		output = "Dockerfile",
-		golem_wd = get_golem_wd(),
-		from = paste0(
-			"rocker/verse:",
-			R.Version()$major,
-			".",
-			R.Version()$minor
-		),
-		as = NULL,
-		sysreqs = TRUE,
-		repos = c(
-			CRAN = "https://cran.rstudio.com/"
-		),
-		expand = FALSE,
-		open = TRUE,
-		update_tar_gz = TRUE,
-		build_golem_from_source = TRUE,
-		extra_sysreqs = NULL
-	) {
-		where <- fs_path(
-			golem_wd,
-			output
-		)
-
-		usethis_use_build_ignore(
-			output
-		)
-
-		dock <- dockerfiler_dock_from_desc(
-			path = path,
-			FROM = from,
-			AS = as,
-			sysreqs = sysreqs,
-			repos = repos,
-			expand = expand,
-			build_from_source = build_golem_from_source,
-			update_tar_gz = update_tar_gz,
-			extra_sysreqs = extra_sysreqs
-		)
-
-		dock$CMD(
-			sprintf(
-				"R -e \"options('shiny.port'=$PORT,shiny.host='0.0.0.0');library(%1$s);%1$s::run_app()\"",
-				read.dcf(
-					path
-				)[1]
-			)
-		)
-		dock$write(
-			output
-		)
-
-		alert_build(
-			path = path,
-			output = output,
-			build_golem_from_source = build_golem_from_source
-		)
-		dcf_read <- read.dcf(
-			path
-		)
-		apps_h <- gsub(
-			"\\.",
-			"-",
-			sprintf(
-				"%s-%s",
-				dcf_read[1],
-				dcf_read[1, ][["Version"]]
-			)
-		)
-
-		cli_cat_rule(
-			"From your command line, run:"
-		)
-		cli_cat_line(
-			"heroku container:login"
-		)
-		cli_cat_line(
-			sprintf(
-				"heroku create %s",
-				apps_h
-			)
-		)
-		cli_cat_line(
-			sprintf(
-				"heroku container:push web --app %s",
-				apps_h
-			)
-		)
-		cli_cat_line(
-			sprintf(
-				"heroku container:release web --app %s",
-				apps_h
-			)
-		)
-		cli_cat_line(
-			sprintf(
-				"heroku open --app %s",
-				apps_h
-			)
-		)
-		cli_alert_warning(
-			"Be sure to have the heroku CLI installed."
-		)
-		cli_alert_info(
-			sprintf(
-				"You can replace %s with another app name.",
-				apps_h
-			)
-		)
-		if (open) {
-			rstudioapi_navigateToFile(
-				output
-			)
-		}
-		usethis_use_build_ignore(
-			files = output
-		)
-		return(
-			invisible(
-				dock
-			)
-		)
-	},
-	"golem::add_dockerfile_heroku() is not recommended anymore.\nPlease use golem::add_dockerfile_with_renv_heroku() instead.
-"
-)
-
-alert_build <- function(
-	path,
-	output,
-	build_golem_from_source
-) {
-	cat_created(
-		output,
-		"Dockerfile"
-	)
-	if (!build_golem_from_source) {
-		dcf_read <- read.dcf(
-			path
-		)
-		cli_alert_warning(
-			sprintf(
-				"Be sure to keep your %s_%s.tar.gz file (generated using `pkgbuild::build(vignettes = FALSE)` ) in the same folder as the %s file generated",
-				dcf_read[1],
-				dcf_read[1, ][["Version"]],
-				basename(
-					output
-				)
-			)
-		)
-	}
 }
