@@ -123,8 +123,7 @@ Default is 0.0.0.0.}
 
 \item{extra_sysreqs}{character vector. Extra debian system requirements.}
 
-\item{update_tar_gz}{boolean. If \code{TRUE} and \code{build_golem_from_source} is also \code{TRUE},
-an updated tar.gz is created.}
+\item{update_tar_gz}{boolean. If \code{TRUE} an updated tar.gz is created.}
 
 \item{dockerfile_cmd}{What is the CMD to add to the Dockerfile. If NULL, the default,
 the CMD will be \verb{R -e "options('shiny.port'=\{port\},shiny.host='\{host\}',golem.app.prod = \{set_golem.app.prod\});library(\{appname\});\{appname\}::run_app()\\}.}
@@ -141,11 +140,6 @@ for the build and production phases.}
 \item{source_folder}{deprecated, use golem_wd instead}
 
 \item{path}{path to the DESCRIPTION file to use as an input.}
-
-\item{output}{name of the Dockerfile output.}
-
-\item{build_golem_from_source}{boolean. If \code{TRUE} no tar.gz is created and
-the Dockerfile directly mount the source folder.}
 }
 \value{
 The \code{{dockerfiler}} object, invisibly.

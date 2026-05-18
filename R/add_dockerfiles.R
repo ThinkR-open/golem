@@ -7,7 +7,6 @@
 #' Dockerfiles.
 #'
 #' @param path path to the DESCRIPTION file to use as an input.
-#' @param output name of the Dockerfile output.
 #' @param from The FROM of the Dockerfile. Default is
 #'
 #'     FROM rocker/verse
@@ -25,10 +24,7 @@
 #' @param repos character. The URL(s) of the repositories to use for `options("repos")`.
 #' @param expand boolean. If `TRUE` each system requirement will have its own `RUN` line.
 #' @param open boolean. Should the Dockerfile/README/README be open after creation? Default is `TRUE`.
-#' @param build_golem_from_source boolean. If `TRUE` no tar.gz is created and
-#'     the Dockerfile directly mount the source folder.
-#' @param update_tar_gz boolean. If `TRUE` and `build_golem_from_source` is also `TRUE`,
-#'     an updated tar.gz is created.
+#' @param update_tar_gz boolean. If `TRUE` an updated tar.gz is created.
 #' @param extra_sysreqs character vector. Extra debian system requirements.
 #'
 #' @note `add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
