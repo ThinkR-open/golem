@@ -98,3 +98,11 @@ test_that("check_file_exists works as expected", {
 		file
 	)
 })
+
+test_that("check_file_exists is a no-op when replace = TRUE", {
+	file <- tempfile(fileext = ".txt")
+	file.create(file)
+	on.exit(unlink(file))
+	expect_no_error(check_file_exists(file, replace = TRUE))
+	expect_null(check_file_exists(file, replace = TRUE))
+})

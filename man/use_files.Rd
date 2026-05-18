@@ -18,6 +18,7 @@ use_external_js_file(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
+  replace = FALSE,
   dir_create,
   pkg
 )
@@ -28,6 +29,7 @@ use_external_css_file(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
+  replace = FALSE,
   dir_create,
   pkg
 )
@@ -38,6 +40,7 @@ use_external_html_template(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
+  replace = FALSE,
   dir_create,
   extract = c("ask", "yes", "no"),
   delete_zip = c("ask", "yes", "no")
@@ -49,6 +52,7 @@ use_external_file(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
+  replace = FALSE,
   dir_create,
   pkg
 )
@@ -59,6 +63,7 @@ use_bundled_html(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
+  replace = FALSE,
   extract = c("ask", "yes", "no"),
   delete_zip = c("ask", "yes", "no")
 )
@@ -113,6 +118,10 @@ use_internal_file(
 \item{dir}{Path to the dir where the file while be created.}
 
 \item{open}{Should the created file be opened?}
+
+\item{replace}{Boolean. If \code{TRUE}, an existing file at the target location is
+overwritten. Defaults to \code{FALSE}, in which case the function aborts if the
+target file already exists.}
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 

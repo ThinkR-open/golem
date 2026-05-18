@@ -1,5 +1,15 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
+# golem (development version)
+
+## New features
+
+- `use_external_js_file()`, `use_external_css_file()`,
+  `use_external_html_template()`, `use_external_file()` and
+  `use_bundled_html()` gain a `replace` argument. When `TRUE`, an existing
+  file (or bundle directory) at the target location is overwritten instead
+  of aborting (#819).
+
 # golem 0.5.1 to 0.6.0
 
 ## New features / user-visible changes

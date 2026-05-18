@@ -58,6 +58,51 @@ test_that("use_external_*_file works", {
 	})
 })
 
+test_that("use_external_*_file replaces existing files when replace = TRUE", {
+	run_quietly_in_a_dummy_golem({
+		testthat::with_mocked_bindings(
+			utils_download_file = function(url, there) {
+				file.create(there)
+			},
+			{
+				funs_and_ext <- list(
+					js = use_external_js_file,
+					css = use_external_css_file,
+					html = use_external_html_template,
+					txt = use_external_file
+				)
+				mapply(
+					function(fun, ext) {
+						url <- paste0("this.", ext)
+						# First call creates the file.
+						path_to_file <- fun(
+							url = url,
+							golem_wd = "."
+						)
+						expect_exists(path_to_file)
+						# Default behavior: error if the file already exists.
+						expect_error(
+							fun(url = url, golem_wd = "."),
+							"already exists"
+						)
+						# With replace = TRUE: no error, file is overwritten.
+						expect_no_error(
+							fun(
+								url = url,
+								golem_wd = ".",
+								replace = TRUE
+							)
+						)
+						expect_exists(path_to_file)
+					},
+					funs_and_ext,
+					names(funs_and_ext)
+				)
+			}
+		)
+	})
+})
+
 test_that("use_internal_*_file works", {
 	run_quietly_in_a_dummy_golem({
 		testthat::with_mocked_bindings(
