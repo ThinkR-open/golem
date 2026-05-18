@@ -258,6 +258,12 @@ add_dockerfile_with_renv_heroku(
 
 The `{dockerfiler}` object, invisibly.
 
+## Note
+
+`add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
+`add_dockerfile_heroku()` are now soft deprecated; use the corresponding
+`add_dockerfile_with_renv_*()` functions instead.
+
 ## Examples
 
 ``` r

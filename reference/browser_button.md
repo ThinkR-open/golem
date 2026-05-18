@@ -12,3 +12,8 @@ browser_button()
 ## Value
 
 Used for side effects. Prints the code to the console.
+
+## Note
+
+`browser_button()` is now soft deprecated and will be removed in a
+future version of `{golem}`.

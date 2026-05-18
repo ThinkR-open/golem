@@ -1,6 +1,7 @@
 # 05. Configuration
 
 ``` r
+
 library(golem)
 ```
 
@@ -83,6 +84,7 @@ file, **just leave it where it is: it is used internally by the
 These options are globally set with:
 
 ``` r
+
 set_golem_options()
 #> ── Setting {golem} options in `golem-config.yml` ───────────────────────────────
 #> ✔ Setting `golem_name` to golex
@@ -91,7 +93,7 @@ set_golem_options()
 #> ✔ Setting `golem_version` to 0.0.0.9000
 #> ✔ Setting `app_prod` to FALSE
 #> ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────
-#> ✔ Setting active project to "/tmp/RtmpETJnKM/golex".
+#> ✔ Setting active project to "/tmp/Rtmp4bz9hX/golex".
 ```
 
     default:
@@ -106,10 +108,11 @@ set_golem_options()
 The functions reading the options in this config file are:
 
 ``` r
+
 get_golem_name()
 #> [1] "golex"
 get_golem_wd()
-#> [1] "/tmp/RtmpETJnKM/golex"
+#> [1] "/tmp/Rtmp4bz9hX/golex"
 get_golem_version()
 #> [1] "0.0.0.9000"
 ```
@@ -117,6 +120,7 @@ get_golem_version()
 You can set these with:
 
 ``` r
+
 set_golem_name("this")
 set_golem_wd(".")
 set_golem_version("0.0.1")
@@ -142,6 +146,7 @@ file just as any config file.
 function to add elements to it.
 
 ``` r
+
 amend_golem_config(
   key = "where",
   value = "indev"
@@ -174,6 +179,7 @@ In `R/app_config.R`, you’ll find a `get_golem_config()` function that
 allows you to retrieve config from this config file:
 
 ``` r
+
 pkgload::load_all()
 #> ℹ Loading golex
 get_golem_config(
@@ -191,6 +197,7 @@ Or using the env var (default
 [config](https://rstudio.github.io/config/) behavior):
 
 ``` r
+
 Sys.setenv("R_CONFIG_ACTIVE" = "production")
 get_golem_config("where")
 #> [1] "inprod"
@@ -283,6 +290,7 @@ synchronized**. They serve different purposes:
   function, you could set the option based on the config value:
 
 ``` r
+
 # Example: sync config to R option (optional)
 if (get_golem_config("app_prod")) {
   options(golem.app.prod = TRUE)

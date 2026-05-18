@@ -8,8 +8,6 @@ if the `rsconnect` package version is `>= 0.8.25`.
 ``` r
 add_positconnect_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 
-add_rstudioconnect_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
-
 add_shinyappsio_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 
 add_shinyserver_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
@@ -40,9 +38,6 @@ invisibly.
 ## Note
 
 In previous versions, this function was called add_rconnect_file.
-
-`add_rstudioconnect_file` is now deprecated; replace by
-`add_positconnect_file()`.
 
 ## List of excluded files in `.rscignore`
 

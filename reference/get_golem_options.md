@@ -22,6 +22,7 @@ The value of the option.
 ## Examples
 
 ``` r
+
 # Define and use golem_options
 if (interactive()) {
   # 1. Pass parameters directly to `run_app`

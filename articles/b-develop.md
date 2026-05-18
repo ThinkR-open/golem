@@ -25,6 +25,7 @@ Note that the [attachment](https://thinkr-open.github.io/attachment/)
 package should be installed on your machine.
 
 ``` r
+
 attachment::att_amend_desc()
 ```
 
@@ -40,12 +41,14 @@ will be named after the `name` parameter, by adding `mod_` to the R
 file, and `mod_*_ui` and `mod_*_server` to the UI and server functions.
 
 ``` r
+
 golem::add_module(name = "my_first_module") # Name of the module
 ```
 
 The new file will contain:
 
 ``` r
+
 # mod_UI
 mod_my_first_module_ui <- function(id) {
   ns <- NS(id)
@@ -69,6 +72,7 @@ copied and pasted inside your UI and server functions.
 ## Add function files
 
 ``` r
+
 golem::add_fct("helpers")
 golem::add_utils("helpers")
 ```
@@ -85,6 +89,7 @@ creates a simple JavaScript file, while
 adds a file with a skeleton for shiny custom handlers.
 
 ``` r
+
 golem::add_js_file("script")
 golem::add_js_handler("script")
 golem::add_css_file("custom")
@@ -99,6 +104,7 @@ that you’re building a package, these functions can be used outside of a
 Note that you can also download external CSS and JavaScript files with:
 
 ``` r
+
 golem::use_external_css_file(url = "url", name = "your_provided_name")
 golem::use_external_js_file(url = "url", name = "your_provided_name")
 ```
@@ -121,6 +127,7 @@ JavaScript and CSS are automatically linked in the
 (example images), you can link them in the app with the `www` prefix:
 
 ``` r
+
 tags$img(src = "www/my.png")
 ```
 
@@ -133,6 +140,7 @@ You can also list here the use of other packages, for example
 If you have data in your package:
 
 ``` r
+
 usethis::use_data_raw()
 ```
 
@@ -143,6 +151,7 @@ About [data in a package](https://r-pkgs.org/data.html).
 Add more tests to your application:
 
 ``` r
+
 usethis::use_test("app")
 ```
 
@@ -153,6 +162,7 @@ About [testing a package](https://r-pkgs.org/testing-basics.html).
 ### Vignette
 
 ``` r
+
 usethis::use_vignette("shinyexample")
 devtools::build_vignettes()
 ```
@@ -162,6 +172,7 @@ About [package Vignette](https://r-pkgs.org/vignettes.html).
 ### Code coverage
 
 ``` r
+
 usethis::use_coverage()
 ```
 
@@ -180,6 +191,7 @@ printing message to the console with
 [`cat_dev()`](https://thinkr-open.github.io/golem/reference/made_dev.md).
 
 ``` r
+
 options("golem.app.prod" = TRUE)
 golem::cat_dev("hey\n")
 options("golem.app.prod" = FALSE)
@@ -192,6 +204,7 @@ You can then make any function being “dev-dependent” with the
 function:
 
 ``` r
+
 log_dev <- golem::make_dev(log)
 log_dev(10)
 #> [1] 2.302585

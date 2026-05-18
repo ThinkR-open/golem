@@ -54,6 +54,7 @@ Or use the Git panel from RStudio
     that return 0 errors, 0 warnings and 0 mistakes
 
 ``` r
+
 devtools::check()
 ```
 

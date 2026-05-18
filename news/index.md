@@ -6,16 +6,83 @@ CRAN release: 2024-08-27
 
 ### New features / user-visible changes
 
+- New
+  [`use_skills()`](https://thinkr-open.github.io/golem/reference/use_skills.md),
+  [`use_agent_skills()`](https://thinkr-open.github.io/golem/reference/use_agent_skills.md),
+  [`use_claude_skills()`](https://thinkr-open.github.io/golem/reference/use_claude_skills.md)
+  and
+  [`use_skill()`](https://thinkr-open.github.io/golem/reference/use_skill.md)
+  helpers install agent skills (Claude Code / AGENTS.md layouts) into a
+  [golem](https://thinkr-open.github.io/golem/) project, from the
+  package’s bundled skills or from the upstream
+  `ThinkR-open/golem-agent-skills` repository
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#1233](https://github.com/ThinkR-open/golem/issues/1233)).
+
+- [`create_golem()`](https://thinkr-open.github.io/golem/reference/create_golem.md)
+  gains `with_agents` and `with_agents_options` arguments to optionally
+  install agent skills during project creation, and the RStudio “New
+  Project” wizard exposes a matching set of options
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#1233](https://github.com/ThinkR-open/golem/issues/1233)).
+
+- Installing agent skills now appends the corresponding entries
+  (`^\.claude$`, `^CLAUDE\.md$`, `^\.agents$`, `^AGENTS\.md$`) to the
+  project’s `.Rbuildignore` so `R CMD check` no longer flags them as
+  non-standard top-level files.
+
+- New
+  [`add_github_action()`](https://thinkr-open.github.io/golem/reference/add_github_action.md)
+  and
+  [`add_gitlab_ci()`](https://thinkr-open.github.io/golem/reference/add_gitlab_ci.md)
+  helpers generate minimal deployment CI for fresh
+  [golem](https://thinkr-open.github.io/golem/) apps.
+
+- The deployment CI helpers restore `renv.lock` when it is present, fall
+  back to `DESCRIPTION` when it is not, and declare
+  [pkgload](https://github.com/r-lib/pkgload) for the generated Posit
+  Connect entrypoint.
+
 - The `add_dockerfile_with_renv_*` function now generates a multi-stage
   Dockerfile by default (use `single_file = FALSE` to retain the
   previous behavior).
+
 - The `add_dockerfile_with_renv_*` function now creates a Dockerfile
   that sets `golem.app.prod = TRUE` by default (use
   `set_golem.app.prod = FALSE` to retain the previous behavior).
+
 - Print functions have be reworked standardized using the
   [cli](https://cli.r-lib.org) package
   ([@ilyaZar](https://github.com/ilyaZar),
   [\#89](https://github.com/ThinkR-open/golem/issues/89))
+
+- [`use_bundled_html()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  downloads bundled HTML templates as zip archives, optionally extracts
+  them into `inst/app/www`, and can remove the raw zip afterwards
+  ([\#848](https://github.com/ThinkR-open/golem/issues/848))
+
+- [`add_fct()`](https://thinkr-open.github.io/golem/reference/file_creation.md)
+  gains a `template` argument to customize the content of the generated
+  file; the default template is now exposed as the exported
+  [`fct_template()`](https://thinkr-open.github.io/golem/reference/fct_template.md)
+  function, mirroring the
+  [`module_template()`](https://thinkr-open.github.io/golem/reference/module_template.md)
+  /
+  [`add_module()`](https://thinkr-open.github.io/golem/reference/add_module.md)
+  pattern ([@ilyaZar](https://github.com/ilyaZar),
+  [\#838](https://github.com/ThinkR-open/golem/issues/838))
+
+- [`add_js_input_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  and
+  [`add_js_output_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  now generate a functional binding: the JS file contains working
+  `find`, `getValue`/`renderValue`, `setValue`, `receiveMessage`, and
+  `subscribe` implementations, and an R companion file
+  (`fct_<name>_input_binding.R` / `fct_<name>_output_binding.R`) is
+  created alongside it with ready-to-use UI constructor, update, and
+  render functions ([@ilyaZar](https://github.com/ilyaZar),
+  [\#868](https://github.com/ThinkR-open/golem/issues/868),
+  [\#869](https://github.com/ThinkR-open/golem/issues/869))
 
 ### Breaking change
 
@@ -37,6 +104,16 @@ CRAN release: 2024-08-27
   ([@ilyaZar](https://github.com/ilyaZar),
   [\#845](https://github.com/ThinkR-open/golem/issues/845))
 
+- `get_sysreqs()` has been removed; use
+  [`dockerfiler::get_sysreqs()`](https://thinkr-open.github.io/dockerfiler/reference/get_sysreqs.html)
+  instead.
+
+- `use_recommended_deps()` has been removed.
+
+- `add_rstudioconnect_file()` has been removed; use
+  [`add_positconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
+  instead.
+
 - Creating a `golem` doesn’t call `set_here()` nor
   [`usethis::create_project()`](https://usethis.r-lib.org/reference/create_package.html)
   anymore. It used to be because we wanted to be able to use
@@ -50,11 +127,29 @@ CRAN release: 2024-08-27
   - The directory where the user tries to add the file doesn’t exist.
     [golem](https://thinkr-open.github.io/golem/) used to try to create
     the directory but that’s not the function job — use\_\*\_file
-    functions should only be there to add file (Singe responsabily )
+    functions should only be there to add file (Single responsibility)
   - The file that the user tries to create already exists
 
 - Creating a golem with `create_golem(overwrite = TRUE)` will now
   **delete the old folder** and replace with the golem skeleton.
+
+- [`add_js_input_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  and
+  [`add_js_output_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  generate JS files with a new naming scheme: `<name>-input.js` /
+  `<name>-output.js` (previously `input-<name>.js` /
+  `output-<name>.js`). Manually rename or delete any old binding files
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#868](https://github.com/ThinkR-open/golem/issues/868),
+  [\#869](https://github.com/ThinkR-open/golem/issues/869))
+
+- The default `events` argument of
+  [`add_js_input_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  has changed from `list(name = "click", rate_policy = FALSE)` to
+  `list(name = c("change", "input"), rate_policy = c(FALSE, FALSE))` to
+  produce a functional input binding out of the box
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#868](https://github.com/ThinkR-open/golem/issues/868))
 
 ### User visible change
 
@@ -62,6 +157,19 @@ CRAN release: 2024-08-27
   only prints one message
   ([\#1191](https://github.com/ThinkR-open/golem/issues/1191) /
   [@howardbaik](https://github.com/howardbaik))
+
+### Soft deprecated
+
+- [`browser_button()`](https://thinkr-open.github.io/golem/reference/browser_button.md)
+  is now soft deprecated
+  ([\#1155](https://github.com/ThinkR-open/golem/issues/1155))
+
+- [`add_dockerfile()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md),
+  [`add_dockerfile_shinyproxy()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md),
+  and
+  [`add_dockerfile_heroku()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md)
+  are now explicitly soft deprecated; use the corresponding
+  `add_dockerfile_with_renv_*()` functions.
 
 ### Bug fix
 
@@ -76,6 +184,11 @@ CRAN release: 2024-08-27
   [@pachadotdev](https://github.com/pachadotdev))
 
 ### Internal changes
+
+- Added internal `cli_progress_bar()`, `cli_progress_update()`,
+  `cli_progress_done()` wrappers and `cat_start_unzip()` /
+  `cat_unzipped()` helpers ([@ilyaZar](https://github.com/ilyaZar),
+  [\#1234](https://github.com/ThinkR-open/golem/issues/1234))
 
 - [golem](https://thinkr-open.github.io/golem/) now embarks a
   `claude.md` file and a series of skills
@@ -116,9 +229,7 @@ CRAN release: 2024-08-19
   `README.Rmd` ([@ilyaZar](https://github.com/ilyaZar),
   [\#1011](https://github.com/ThinkR-open/golem/issues/1011))
 
-- rename
-  [`add_rstudioconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
-  to
+- rename `add_rstudioconnect_file()` to
   [`add_positconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
   ([@ilyaZar](https://github.com/ilyaZar),
   [\#1017](https://github.com/ThinkR-open/golem/issues/1017))
@@ -326,8 +437,7 @@ CRAN release: 2022-03-04
 
 #### Soft deprecated
 
-- [`use_recommended_deps()`](https://thinkr-open.github.io/golem/reference/use_recommended.md)
-  is now soft deprecated
+- `use_recommended_deps()` is now soft deprecated
   ([\#786](https://github.com/ThinkR-open/golem/issues/786))
 
 #### Hard deprecated
@@ -960,14 +1070,12 @@ CRAN release: 2020-03-05
 
 - Renamed
   [`add_rconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
-  to
-  [`add_rstudioconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
+  to `add_rstudioconnect_file()`
 - Renamed `create_shiny_template()` to
   [`create_golem()`](https://thinkr-open.github.io/golem/reference/create_golem.md)
 - Renamed `js()` to
   [`activate_js()`](https://thinkr-open.github.io/golem/reference/golem_js.md)
-- Renamed `use_recommended_dep()` to
-  [`use_recommended_deps()`](https://thinkr-open.github.io/golem/reference/use_recommended.md)
+- Renamed `use_recommended_dep()` to `use_recommended_deps()`
 
 ### New functions
 

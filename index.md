@@ -24,6 +24,7 @@ step of the development process.
 - You can install the stable version from CRAN with:
 
 ``` r
+
 install.packages("golem")
 ```
 
@@ -31,6 +32,7 @@ install.packages("golem")
   [GitHub](https://github.com/Thinkr-open/golem) with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("Thinkr-open/golem") # Stable development version
 # remotes::install_github("Thinkr-open/golem@dev") # Bleeding edge development version
@@ -47,6 +49,7 @@ Or use the
 function:
 
 ``` r
+
 golem::create_golem("myapp")
 ```
 
@@ -78,6 +81,7 @@ links to other packages of the `golemverse`.
 This `README` has been compiled on the
 
 ``` r
+
 Sys.time()
 #> [1] "2026-04-13 10:36:56 CEST"
 ```
@@ -85,6 +89,7 @@ Sys.time()
 Here are the test & coverage results:
 
 ``` r
+
 devtools::check(quiet = TRUE)
 #> ℹ Loading golem
 #> ── R CMD check results ─────────────────────────────────── golem 0.5.1.9015 ────
@@ -97,6 +102,7 @@ devtools::check(quiet = TRUE)
 ```
 
 ``` r
+
 Sys.setenv("NOT_CRAN" = TRUE)
 covr::package_coverage()
 #> golem Coverage: 87.99%
@@ -172,6 +178,7 @@ By participating in this project you agree to abide by its terms.
 Please style the files according to `grkstyle::grk_style_transformer()`
 
 ``` r
+
 # If you work in RStudio
 options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
 

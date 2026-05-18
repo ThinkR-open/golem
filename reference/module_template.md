@@ -66,6 +66,7 @@ examples section of this help.
 ## Examples
 
 ``` r
+
 if (interactive()) {
   my_tmpl <- function(name, path, ...) {
     # Define a template that write to the

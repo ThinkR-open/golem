@@ -60,22 +60,19 @@ fill_desc(
 
 - author_first_name:
 
-  to be deprecated: use character for first name via
-  `authors = person(given = "authors_first_name")` instead
+  Deprecated: use `authors = person(given = ...)` instead
 
 - author_last_name:
 
-  to be deprecated: use character for last name via
-  `authors = person(given = "authors_last_name")` instead
+  Deprecated: use `authors = person(family = ...)` instead
 
 - author_email:
 
-  to be deprecated: use character for first name via
-  `authors = person(email = "author_email")` instead
+  Deprecated: use `authors = person(email = ...)` instead
 
 - author_orcid:
 
-  to be deprecated
+  Deprecated: use `authors = person(comment = c(ORCID = ...))` instead
 
 - set_options:
 

@@ -46,19 +46,21 @@ is structured as follows:
 Golem package follows the `grkstyle` style guide. Please make sure to
 follow the same style when contributing to the package.
 
-If your are using RStudio, you can set the `grkstyle` style guide as the
+If you are using RStudio, you can set the `grkstyle` style guide as the
 default style guide for the package by running the following code:
 
 ``` r
+
 options(
   styler.addins_style_transformer = "grkstyle::grk_style_transformer()"
 )
 ```
 
-If your are using VSCode, you can set the `grkstyle` style guide as the
+If you are using VSCode, you can set the `grkstyle` style guide as the
 default style guide for the package by running the following code:
 
 ``` r
+
 options(languageserver.formatting_style = function(options) {
   grkstyle::grk_style_transformer()
 })
@@ -68,6 +70,7 @@ It’s also possible to style one file at a time by running the following
 code:
 
 ``` r
+
 grkstyle::grk_style_file("README.Rmd")
 ```
 
@@ -81,6 +84,7 @@ Please make sure that your contribution does not break the package. You
 can run the checks locally by running the following code:
 
 ``` r
+
 devtools::check()
 ```
 

@@ -13,6 +13,8 @@ add_fct(
   open = TRUE,
   dir_create = TRUE,
   with_test = FALSE,
+  template = fct_template,
+  ...,
   pkg
 )
 
@@ -64,6 +66,15 @@ add_r6(
 - with_test:
 
   should the module be created with tests?
+
+- template:
+
+  Function writing the default contents of a function file. Defaults to
+  the built-in function template. Ignored for module-specific files.
+
+- ...:
+
+  Arguments passed to the `template` function.
 
 - pkg:
 

@@ -1,22 +1,10 @@
 # Add recommended elements
 
-- use_recommended_deps:
-
-  Adds `shiny`, `DT`, `attempt`, `glue`, `golem`, `htmltools` to
-  dependencies
-
-- use_recommended_tests:
-
-  Adds a test folder and copy the golem tests
+Add recommended elements
 
 ## Usage
 
 ``` r
-use_recommended_deps(
-  pkg = get_golem_wd(),
-  recommended = c("shiny", "DT", "attempt", "glue", "htmltools", "golem")
-)
-
 use_recommended_tests(
   golem_wd = get_golem_wd(),
   spellcheck = TRUE,
@@ -28,14 +16,6 @@ use_recommended_tests(
 ```
 
 ## Arguments
-
-- pkg:
-
-  Deprecated, please use golem_wd instead
-
-- recommended:
-
-  A vector of recommended packages.
 
 - golem_wd:
 
@@ -60,6 +40,10 @@ use_recommended_tests(
   Logical, indicating whether the unit test should fail if spelling
   errors are found. Defaults to `FALSE`, which does not error, but
   prints potential spelling errors
+
+- pkg:
+
+  Deprecated, please use golem_wd instead
 
 ## Value
 

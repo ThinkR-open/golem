@@ -6,6 +6,7 @@ When launching the app, you might have noticed that the `dev/run_dev.R`
 function calls `run_app()`, which has the following structure:
 
 ``` r
+
 run_app <- function(...) {
   with_golem_options(
     app = shinyApp(
@@ -28,6 +29,7 @@ can get with
 [`get_golem_options()`](https://thinkr-open.github.io/golem/reference/get_golem_options.md).
 
 ``` r
+
 run_app(this = "that")
 # And in the app
 this <- get_golem_options("this")
@@ -44,6 +46,7 @@ platforms.
 ### Posit Products
 
 ``` r
+
 golem::add_positconnect_file()
 golem::add_shinyappsio_file()
 golem::add_shinyserver_file()
@@ -54,6 +57,7 @@ For Git backed deployment on Posit (for
 a `manifest.json` file is required which can be added (or updated) via:
 
 ``` r
+
 rsconnect::writeManifest()
 ```
 
@@ -62,6 +66,7 @@ rsconnect::writeManifest()
 #### Without using `{renv}`
 
 ``` r
+
 # If you want to deploy via a generic Dockerfile
 golem::add_dockerfile()
 
@@ -86,6 +91,7 @@ golem::add_dockerfile_heroku()
 then follow the `README` file.
 
 ``` r
+
 # If you want to deploy via a generic Dockerfile
 golem::add_dockerfile_with_renv(output_dir = "deploy")
 
@@ -97,6 +103,7 @@ If you would like to use [renv](https://rstudio.github.io/renv/) during
 development, you can init a `renv.lock` file with
 
 ``` r
+
 attachment::create_renv_for_dev(dev_pkg = c(
   "renv",
   "devtools",
@@ -116,12 +123,14 @@ attachment::create_renv_for_dev(dev_pkg = c(
 and activate [renv](https://rstudio.github.io/renv/) with
 
 ``` r
+
 renv::activate()
 ```
 
 #### Using `{renv}` - CASE 2: you already have a `renv.lock` file for your project
 
 ``` r
+
 # If you want to deploy via a generic Dockerfile
 golem::add_dockerfile_with_renv(output_dir = "deploy", lockfile = "renv.lock")
 

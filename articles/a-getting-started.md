@@ -6,6 +6,7 @@ You can install the stable version of
 [golem](https://thinkr-open.github.io/golem/) from CRAN:
 
 ``` r
+
 install.packages("golem")
 ```
 
@@ -14,6 +15,7 @@ can be installed from GitHub using the
 [remotes](https://remotes.r-lib.org) package:
 
 ``` r
+
 remotes::install_github("Thinkr-open/golem")
 ```
 
@@ -43,6 +45,7 @@ RStudio, and choose *“Package for Shiny App Using golem”* input:
 If you want to do it directly via the command line, use:
 
 ``` r
+
 golem::create_golem(path = "path/to/package")
 ```
 
@@ -117,6 +120,7 @@ that will contain your app. The first function,
 can be used to fill your `DESCRIPTION` file:
 
 ``` r
+
 golem::fill_desc(
   pkg_name = "shinyexample", # The name of the golem package containing the app (typically lowercase, no underscore or periods)
   pkg_title = "PKG_TITLE", # What the Package Does (One Line, Title Case, No Period)
@@ -146,6 +150,7 @@ If you want to use the MIT license, README, code of conduct, lifecycle
 badge, a news file, etc.
 
 ``` r
+
 ## See ?usethis for more information
 usethis::use_mit_license("Golem User") # You can set another license here
 usethis::use_readme_rmd(open = FALSE)
@@ -162,30 +167,18 @@ functions.
 Create a template for tests:
 
 ``` r
+
 golem::use_recommended_tests()
 ```
 
 About [tests in a package](https://r-pkgs.org/testing-basics.html).
-
-### Use Recommended Packages
-
-This will add [shiny](https://shiny.posit.co/),
-[DT](https://github.com/rstudio/DT),
-[attempt](https://github.com/ColinFay/attempt),
-[glue](https://glue.tidyverse.org/),
-[htmltools](https://github.com/rstudio/htmltools), and
-[golem](https://thinkr-open.github.io/golem/) as dependencies to your
-package:
-
-``` r
-golem::use_recommended_deps()
-```
 
 ### Add various tools
 
 - If you want to change the default favicon:
 
   ``` r
+
   # Remove current favicon
   golem::remove_favicon()
   # Add a new one
@@ -204,6 +197,7 @@ golem::use_recommended_deps()
   project. They can be used along the process of building your app:
 
   ``` r
+
   golem::use_utils_ui(with_test = TRUE)
   golem::use_utils_server(with_test = TRUE)
   ```
@@ -218,6 +212,7 @@ golem::use_recommended_deps()
 To launch the app run:
 
 ``` r
+
 golem::run_dev()
 ```
 
@@ -225,5 +220,6 @@ You’re now set! You’ve successfully initiated the project and can go to
 `dev/02_dev.R`:
 
 ``` r
+
 rstudioapi::navigateToFile("dev/02_dev.R")
 ```

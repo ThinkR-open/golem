@@ -14,6 +14,12 @@
   [`add_ui_server_files()`](https://thinkr-open.github.io/golem/reference/add_files.md)
   : Create Files
 
+- [`add_github_action()`](https://thinkr-open.github.io/golem/reference/add_github_action.md)
+  : Add deployment CI for GitHub Actions
+
+- [`add_gitlab_ci()`](https://thinkr-open.github.io/golem/reference/add_gitlab_ci.md)
+  : Add deployment CI for GitLab
+
 - [`add_module()`](https://thinkr-open.github.io/golem/reference/add_module.md)
   : Create a module
 
@@ -69,6 +75,9 @@
   [`favicon()`](https://thinkr-open.github.io/golem/reference/favicon.md)
   : Add a favicon to your shinyapp
 
+- [`fct_template()`](https://thinkr-open.github.io/golem/reference/fct_template.md)
+  : Golem Function Template
+
 - [`add_fct()`](https://thinkr-open.github.io/golem/reference/file_creation.md)
   [`add_utils()`](https://thinkr-open.github.io/golem/reference/file_creation.md)
   [`add_r6()`](https://thinkr-open.github.io/golem/reference/file_creation.md)
@@ -87,9 +96,6 @@
 
 - [`get_golem_options()`](https://thinkr-open.github.io/golem/reference/get_golem_options.md)
   : Get all or one golem options
-
-- [`get_sysreqs()`](https://thinkr-open.github.io/golem/reference/get_sysreqs.md)
-  : Get system requirements (Deprecated)
 
 - [`golem-package`](https://thinkr-open.github.io/golem/reference/golem.md)
   [`golem`](https://thinkr-open.github.io/golem/reference/golem.md) : A
@@ -153,7 +159,6 @@
   : Project Hook
 
 - [`add_positconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
-  [`add_rstudioconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
   [`add_shinyappsio_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
   [`add_shinyserver_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
   [`add_rscignore_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
@@ -183,10 +188,20 @@
   [`expect_running()`](https://thinkr-open.github.io/golem/reference/testhelpers.md)
   : Test helpers
 
+- [`use_agent_implement()`](https://thinkr-open.github.io/golem/reference/use_agent_implement.md)
+  : Implement Agent Skills in a golem Project
+
+- [`use_agent_skills()`](https://thinkr-open.github.io/golem/reference/use_agent_skills.md)
+  : Add Agent Skills to a golem Project
+
+- [`use_claude_skills()`](https://thinkr-open.github.io/golem/reference/use_claude_skills.md)
+  : Add Claude Skills to a golem Project
+
 - [`use_external_js_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
   [`use_external_css_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
   [`use_external_html_template()`](https://thinkr-open.github.io/golem/reference/use_files.md)
   [`use_external_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
+  [`use_bundled_html()`](https://thinkr-open.github.io/golem/reference/use_files.md)
   [`use_internal_js_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
   [`use_internal_css_file()`](https://thinkr-open.github.io/golem/reference/use_files.md)
   [`use_internal_html_template()`](https://thinkr-open.github.io/golem/reference/use_files.md)
@@ -199,9 +214,14 @@
 - [`use_readme_rmd()`](https://thinkr-open.github.io/golem/reference/use_readme_rmd.md)
   : Generate a README.Rmd
 
-- [`use_recommended_deps()`](https://thinkr-open.github.io/golem/reference/use_recommended.md)
-  [`use_recommended_tests()`](https://thinkr-open.github.io/golem/reference/use_recommended.md)
+- [`use_recommended_tests()`](https://thinkr-open.github.io/golem/reference/use_recommended.md)
   : Add recommended elements
+
+- [`use_skill()`](https://thinkr-open.github.io/golem/reference/use_skill.md)
+  : Add a Single Skill to Installed Agent Specifications
+
+- [`use_skills()`](https://thinkr-open.github.io/golem/reference/use_skills.md)
+  : Add Skills to a golem Project
 
 - [`use_utils_ui()`](https://thinkr-open.github.io/golem/reference/utils_files.md)
   [`use_utils_test_ui()`](https://thinkr-open.github.io/golem/reference/utils_files.md)

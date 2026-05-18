@@ -14,6 +14,8 @@ create_golem(
   without_comments = FALSE,
   project_hook = golem::project_hook,
   with_git = FALSE,
+  with_agents = FALSE,
+  with_agents_options = NULL,
   ...
 )
 ```
@@ -57,6 +59,19 @@ create_golem(
 - with_git:
 
   Boolean. Initialize git repository
+
+- with_agents:
+
+  Boolean. If `TRUE`, the fresh package is initialized with skills files
+  and `CLAUDE/AGENTS.md`
+
+- with_agents_options:
+
+  named list of options passed to
+  [`use_skills()`](https://thinkr-open.github.io/golem/reference/use_skills.md);
+  list names must match
+  [`use_skills()`](https://thinkr-open.github.io/golem/reference/use_skills.md)
+  argument names except `golem_wd` and `interactive`.
 
 - ...:
 

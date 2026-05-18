@@ -18,6 +18,8 @@
 <url><loc>https://thinkr-open.github.io/golem/index.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/news/index.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/add_files.html</loc></url>
+<url><loc>https://thinkr-open.github.io/golem/reference/add_github_action.html</loc></url>
+<url><loc>https://thinkr-open.github.io/golem/reference/add_gitlab_ci.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/add_module.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/add_resource_path.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/addins.html</loc></url>
@@ -30,11 +32,11 @@
 <url><loc>https://thinkr-open.github.io/golem/reference/dockerfiles.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/document_and_reload.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/favicon.html</loc></url>
+<url><loc>https://thinkr-open.github.io/golem/reference/fct_template.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/file_creation.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/fill_desc.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/get_current_config.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/get_golem_options.html</loc></url>
-<url><loc>https://thinkr-open.github.io/golem/reference/get_sysreqs.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/golem.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/golem_js.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/golem_opts.html</loc></url>
@@ -55,10 +57,15 @@
 <url><loc>https://thinkr-open.github.io/golem/reference/sanity_check.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/template.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/testhelpers.html</loc></url>
+<url><loc>https://thinkr-open.github.io/golem/reference/use_agent_implement.html</loc></url>
+<url><loc>https://thinkr-open.github.io/golem/reference/use_agent_skills.html</loc></url>
+<url><loc>https://thinkr-open.github.io/golem/reference/use_claude_skills.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/use_files.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/use_module_test.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/use_readme_rmd.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/use_recommended.html</loc></url>
+<url><loc>https://thinkr-open.github.io/golem/reference/use_skill.html</loc></url>
+<url><loc>https://thinkr-open.github.io/golem/reference/use_skills.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/utils_files.html</loc></url>
 <url><loc>https://thinkr-open.github.io/golem/reference/with_golem_options.html</loc></url>
 </urlset>

@@ -35,7 +35,8 @@ use_external_html_template(
   dir = "inst/app/www",
   open = FALSE,
   dir_create,
-  pkg
+  extract = c("ask", "yes", "no"),
+  delete_zip = c("ask", "yes", "no")
 )
 
 use_external_file(
@@ -46,6 +47,16 @@ use_external_file(
   open = FALSE,
   dir_create,
   pkg
+)
+
+use_bundled_html(
+  url,
+  name = NULL,
+  golem_wd = get_golem_wd(),
+  dir = "inst/app/www",
+  open = FALSE,
+  extract = c("ask", "yes", "no"),
+  delete_zip = c("ask", "yes", "no")
 )
 
 use_internal_js_file(
@@ -119,6 +130,18 @@ use_internal_file(
 - pkg:
 
   Deprecated, please use golem_wd instead
+
+- extract:
+
+  Whether to extract a downloaded HTML zip bundle. Use `"ask"` to
+  prompt. Only used by `use_bundled_html()` and by
+  `use_external_html_template()` when `url` points to a `.zip` archive.
+
+- delete_zip:
+
+  Whether to delete the raw HTML zip after extraction. Use `"ask"` to
+  prompt. Only used by `use_bundled_html()` and by
+  `use_external_html_template()` when `url` points to a `.zip` archive.
 
 - path:
 

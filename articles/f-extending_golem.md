@@ -55,7 +55,7 @@ project creation widget:
 
 ![](rstudioprojecthook.png)
 
-> Note that inside this widget, the function should be explicitely
+> Note that inside this widget, the function should be explicitly
 > namespaced (pkg::fun)
 
 The `project_hook` function takes three mandatory parameters, which are
@@ -74,6 +74,7 @@ Here is an example of a function that can be used to remove the `dev/`
 folder:
 
 ``` r
+
 no_dev <- function(path, package_name, ...) {
   fs::dir_delete("dev")
 }
@@ -83,6 +84,7 @@ create_golem("ici", project_hook = no_dev)
 This one will create a CSS:
 
 ``` r
+
 new_css <- function(path, package_name, ...) {
   css_path <- fs::path_abs("inst/app/www/custom.css")
 
@@ -148,6 +150,7 @@ need to be set in the function skeleton**, for compatibility reasons.
 ### Example
 
 ``` r
+
 my_tmpl <- function(name, path, export, ...) {
   # Define a template that only write the name of the
   # module in the file
@@ -208,6 +211,7 @@ need to be set in the function skeleton**, for compatibility reasons.
 ### Example
 
 ``` r
+
 my_tmpl <- function(path, ...) {
   # Define a template that only write the name of the
   # module in the file
@@ -233,7 +237,7 @@ mode is turned on, your application will be paused and a specific page
 will be displayed to your users.
 
 [golem](https://thinkr-open.github.io/golem/) comes with a default
-maintenance page, and you can replace it with you own page.
+maintenance page, and you can replace it with your own page.
 
 ### How to set the maintenance mode
 
@@ -243,6 +247,7 @@ that the `GOLEM_MAINTENANCE_ACTIVE` environment variable is set to TRUE.
 To visualize the maintenance page locally, you can run the following:
 
 ``` r
+
 withr::with_envvar(
   c("GOLEM_MAINTENANCE_ACTIVE" = TRUE),
   {
@@ -254,6 +259,7 @@ withr::with_envvar(
 or
 
 ``` r
+
 Sys.setenv("GOLEM_MAINTENANCE_ACTIVE" = TRUE)
 golem::run_dev()
 ```
@@ -275,6 +281,7 @@ In order to use your own page, you need to pass either an
 `run_app.R`:
 
 ``` r
+
 run_app <- function(
   onStart = NULL,
   options = list(),
@@ -305,6 +312,7 @@ run_app <- function(
 or:
 
 ``` r
+
 run_app <- function(
   onStart = NULL,
   options = list(),

@@ -26,6 +26,7 @@ that you can build with
   through their id or class.
 
 ``` r
+
 golem::invoke_js("showid", ns("plot"))
 ```
 
@@ -33,6 +34,7 @@ golem::invoke_js("showid", ns("plot"))
   `href` content.
 
 ``` r
+
 golem::invoke_js("showhref", "panel2")
 ```
 
