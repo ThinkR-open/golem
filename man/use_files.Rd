@@ -18,9 +18,9 @@ use_external_js_file(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  replace = FALSE,
   dir_create,
-  pkg
+  pkg,
+  replace = FALSE
 )
 
 use_external_css_file(
@@ -29,9 +29,9 @@ use_external_css_file(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  replace = FALSE,
   dir_create,
-  pkg
+  pkg,
+  replace = FALSE
 )
 
 use_external_html_template(
@@ -40,10 +40,10 @@ use_external_html_template(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  replace = FALSE,
   dir_create,
   extract = c("ask", "yes", "no"),
-  delete_zip = c("ask", "yes", "no")
+  delete_zip = c("ask", "yes", "no"),
+  replace = FALSE
 )
 
 use_external_file(
@@ -52,9 +52,9 @@ use_external_file(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  replace = FALSE,
   dir_create,
-  pkg
+  pkg,
+  replace = FALSE
 )
 
 use_bundled_html(
@@ -63,9 +63,9 @@ use_bundled_html(
   golem_wd = get_golem_wd(),
   dir = "inst/app/www",
   open = FALSE,
-  replace = FALSE,
   extract = c("ask", "yes", "no"),
-  delete_zip = c("ask", "yes", "no")
+  delete_zip = c("ask", "yes", "no"),
+  replace = FALSE
 )
 
 use_internal_js_file(
@@ -119,13 +119,14 @@ use_internal_file(
 
 \item{open}{Should the created file be opened?}
 
-\item{replace}{Boolean. If \code{TRUE}, an existing file at the target location is
-overwritten. Defaults to \code{FALSE}, in which case the function aborts if the
-target file already exists.}
-
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
 \item{pkg}{Deprecated, please use golem_wd instead}
+
+\item{replace}{Boolean. If \code{TRUE}, an existing file (or, for
+\code{use_bundled_html()}, an existing bundle directory) at the target location
+is overwritten. Defaults to \code{FALSE}, in which case the function aborts if
+the target already exists.}
 
 \item{extract}{Whether to extract a downloaded HTML zip bundle. Use \code{"ask"} to prompt.
 Only used by \code{use_bundled_html()} and by \code{use_external_html_template()}

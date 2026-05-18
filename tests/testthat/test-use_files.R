@@ -244,6 +244,68 @@ test_that("use_external_html_template keeps expected archive name when not extra
 	})
 })
 
+test_that("use_bundled_html replaces existing bundle dir or stale file", {
+	skip_if(Sys.which("zip") == "")
+	make_bundle <- function() {
+		src <- tempfile()
+		dir.create(src)
+		dir.create(file.path(src, "resume"))
+		writeLines("<html></html>", file.path(src, "resume", "index.html"))
+		zipfile <- tempfile(fileext = ".zip")
+		old <- setwd(src)
+		on.exit(setwd(old), add = TRUE)
+		utils::zip(zipfile = zipfile, files = "resume/index.html")
+		zipfile
+	}
+
+	run_in_bundled_html <- function() {
+		zipfile <- make_bundle()
+		testthat::with_mocked_bindings(
+			utils_download_file = function(url, where) {
+				file.copy(zipfile, where, overwrite = TRUE)
+			},
+			cli_progress_bar = function(...) 1,
+			cli_progress_update = function(...) invisible(NULL),
+			cli_progress_done = function(...) invisible(NULL),
+			{
+				use_bundled_html(
+					url = "https://example.com/template.zip",
+					name = "resume",
+					golem_wd = ".",
+					extract = "yes",
+					delete_zip = "yes",
+					replace = TRUE
+				)
+			}
+		)
+	}
+
+	# Case 1: existing bundle directory is removed and re-extracted.
+	run_quietly_in_a_dummy_golem({
+		bundle_dir <- "inst/app/www/resume"
+		dir.create(bundle_dir, recursive = TRUE)
+		writeLines("stale", file.path(bundle_dir, "old.txt"))
+		out <- run_in_bundled_html()
+		expect_equal(
+			as.character(out),
+			as.character(fs_path_abs(bundle_dir))
+		)
+		expect_true(file.exists(file.path(bundle_dir, "index.html")))
+		expect_false(file.exists(file.path(bundle_dir, "old.txt")))
+	})
+
+	# Case 2: stale file at the bundle path is removed before extraction.
+	run_quietly_in_a_dummy_golem({
+		bundle_path <- "inst/app/www/resume"
+		dir.create(dirname(bundle_path), recursive = TRUE, showWarnings = FALSE)
+		writeLines("stale", bundle_path)
+		expect_true(file.exists(bundle_path) && !dir.exists(bundle_path))
+		out <- run_in_bundled_html()
+		expect_true(dir.exists(bundle_path))
+		expect_true(file.exists(file.path(bundle_path, "index.html")))
+	})
+})
+
 test_that("use_external_html_template cancels and removes downloaded zip", {
 	run_quietly_in_a_dummy_golem({
 		out <- testthat::with_mocked_bindings(

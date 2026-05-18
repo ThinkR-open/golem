@@ -14,9 +14,10 @@
 #' @param delete_zip Whether to delete the raw HTML zip after extraction. Use `"ask"` to prompt.
 #'   Only used by `use_bundled_html()` and by `use_external_html_template()`
 #'   when `url` points to a `.zip` archive.
-#' @param replace Boolean. If `TRUE`, an existing file at the target location is
-#'   overwritten. Defaults to `FALSE`, in which case the function aborts if the
-#'   target file already exists.
+#' @param replace Boolean. If `TRUE`, an existing file (or, for
+#'   `use_bundled_html()`, an existing bundle directory) at the target location
+#'   is overwritten. Defaults to `FALSE`, in which case the function aborts if
+#'   the target already exists.
 #'
 #' @note See `?htmltools::htmlTemplate` and `https://shiny.rstudio.com/articles/templates.html`
 #'     for more information about `htmlTemplate`.
@@ -31,9 +32,9 @@ use_external_js_file <- function(
 	golem_wd = get_golem_wd(),
 	dir = "inst/app/www",
 	open = FALSE,
-	replace = FALSE,
 	dir_create,
-	pkg
+	pkg,
+	replace = FALSE
 ) {
 	signal_arg_is_deprecated(
 		pkg,
@@ -70,9 +71,9 @@ use_external_css_file <- function(
 	golem_wd = get_golem_wd(),
 	dir = "inst/app/www",
 	open = FALSE,
-	replace = FALSE,
 	dir_create,
-	pkg
+	pkg,
+	replace = FALSE
 ) {
 	signal_arg_is_deprecated(
 		pkg,
@@ -109,10 +110,10 @@ use_external_html_template <- function(
 	golem_wd = get_golem_wd(),
 	dir = "inst/app/www",
 	open = FALSE,
-	replace = FALSE,
 	dir_create,
 	extract = c("ask", "yes", "no"),
-	delete_zip = c("ask", "yes", "no")
+	delete_zip = c("ask", "yes", "no"),
+	replace = FALSE
 ) {
 	if (!missing(dir_create)) {
 		cli_abort_dir_create()
@@ -160,9 +161,9 @@ use_external_file <- function(
 	golem_wd = get_golem_wd(),
 	dir = "inst/app/www",
 	open = FALSE,
-	replace = FALSE,
 	dir_create,
-	pkg
+	pkg,
+	replace = FALSE
 ) {
 	signal_arg_is_deprecated(
 		pkg,
@@ -199,9 +200,9 @@ use_bundled_html <- function(
 	golem_wd = get_golem_wd(),
 	dir = "inst/app/www",
 	open = FALSE,
-	replace = FALSE,
 	extract = c("ask", "yes", "no"),
-	delete_zip = c("ask", "yes", "no")
+	delete_zip = c("ask", "yes", "no"),
+	replace = FALSE
 ) {
 	extract <- match.arg(extract)
 	delete_zip <- match.arg(delete_zip)
@@ -223,7 +224,7 @@ use_bundled_html <- function(
 			sprintf("%s_bundle.zip", name_bundle)
 		)
 	}
-	check_file_exists(where_zip, replace = replace)
+	check_file_exists(where_zip, replace = replace, with_replace_hint = TRUE)
 	check_directory_exists(dir)
 
 	where_bundle <- fs_path(dir, name_bundle)

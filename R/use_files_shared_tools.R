@@ -47,7 +47,8 @@ check_directory_exists <- function(
 
 check_file_exists <- function(
 	where,
-	replace = FALSE
+	replace = FALSE,
+	with_replace_hint = FALSE
 ) {
 	if (isTRUE(replace)) {
 		return(invisible(NULL))
@@ -57,12 +58,17 @@ check_file_exists <- function(
 			where
 		)
 	) {
-		cli_abort(
-			sprintf(
-				"%s already exists.\n\nYou can delete it with:\nunlink('%s', recursive = TRUE).\n\nAlternatively, call this function again with `replace = TRUE`.",
-				where,
-				where
-			)
+		msg <- sprintf(
+			"%s already exists.\n\nYou can delete it with:\nunlink('%s', recursive = TRUE).",
+			where,
+			where
 		)
+		if (isTRUE(with_replace_hint)) {
+			msg <- paste0(
+				msg,
+				"\n\nAlternatively, call this function again with `replace = TRUE`."
+			)
+		}
+		cli_abort(msg)
 	}
 }

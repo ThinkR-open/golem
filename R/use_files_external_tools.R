@@ -146,7 +146,8 @@ perform_checks_and_download_if_everything_is_ok <- function(
 	)
 	check_file_exists(
 		where_to_download_to,
-		replace = replace
+		replace = replace,
+		with_replace_hint = TRUE
 	)
 	download_external(
 		url_to_download_from = url_to_download_from,
