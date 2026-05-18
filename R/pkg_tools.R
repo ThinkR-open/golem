@@ -74,8 +74,6 @@ pkg_version <- function(
 }
 #' @export
 #' @rdname pkg_tools
-pkg_path <- function() {
-	# rlang::check_installed("here")
-	# here::here()
-	getwd()
+pkg_path <- function(golem_wd = getwd()) {
+	golem_wd
 }

@@ -9,6 +9,7 @@ DataFrame
 Dev
 Dockerfile
 Dockerfiles
+GitLab
 Golem's
 Hotfixing
 JS
@@ -51,6 +52,7 @@ dev
 devtools
 dockerfile
 dockerfiler
+entrypoint
 env
 exe
 explicitely

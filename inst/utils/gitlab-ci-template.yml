@@ -1,0 +1,93 @@
+stages:
+  - deploy
+
+deploy-shiny:
+  stage: deploy
+  image: rocker/verse:4.5.3
+  variables:
+    APPNAME: __APPNAME__
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  before_script:
+    - |
+      Rscript - <<'RSCRIPT'
+      if (file.exists("renv.lock")) {
+        install.packages("renv", repos = "https://cran.rstudio.com")
+        renv::restore(prompt = FALSE)
+        install.packages("rsconnect", repos = "https://cran.rstudio.com")
+      } else {
+        install.packages(
+          c("remotes", "rsconnect"),
+          repos = "https://cran.rstudio.com"
+        )
+        remotes::install_deps(
+          dependencies = TRUE,
+          repos = "https://cran.rstudio.com"
+        )
+        remotes::install_local(
+          ".",
+          dependencies = FALSE,
+          upgrade = "never",
+          repos = "https://cran.rstudio.com"
+        )
+      }
+      RSCRIPT
+  script:
+    - |
+      Rscript - <<'RSCRIPT'
+      required <- c("pkgload", "rsconnect")
+      missing <- required[
+        !vapply(required, requireNamespace, logical(1), quietly = TRUE)
+      ]
+      if (length(missing) > 0) {
+        stop(
+          sprintf(
+            paste(
+              "Missing deployment packages: %s.",
+              "Run renv::snapshot() after generating this workflow",
+              "if you use renv."
+            ),
+            paste(missing, collapse = ", ")
+          ),
+          call. = FALSE
+        )
+      }
+      RSCRIPT
+    - |
+      Rscript - <<'RSCRIPT'
+      required <- c("CONNECT_SERVER", "CONNECT_API_KEY")
+      missing <- required[
+        vapply(required, function(x) Sys.getenv(x) == "", logical(1))
+      ]
+      if (length(missing) > 0) {
+        stop(
+          sprintf(
+            "Missing CI variables: %s",
+            paste(missing, collapse = ", ")
+          ),
+          call. = FALSE
+        )
+      }
+      if (Sys.getenv("APPNAME") == "") {
+        stop("Set APPNAME before deploying.", call. = FALSE)
+      }
+      RSCRIPT
+    - |
+      Rscript - <<'RSCRIPT'
+      rsconnect::writeManifest(appDir = ".", appPrimaryDoc = "app.R")
+      RSCRIPT
+    - |
+      Rscript - <<'RSCRIPT'
+      rsconnect::connectApiUser(
+        server = Sys.getenv("CONNECT_SERVER"),
+        apiKey = Sys.getenv("CONNECT_API_KEY"),
+        quiet = TRUE
+      )
+      rsconnect::deployApp(
+        appDir = ".",
+        appPrimaryDoc = "app.R",
+        appName = Sys.getenv("APPNAME"),
+        server = Sys.getenv("CONNECT_SERVER"),
+        forceUpdate = TRUE
+      )
+      RSCRIPT

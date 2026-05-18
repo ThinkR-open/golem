@@ -433,11 +433,65 @@ test_that("create_golem with git works", {
 	)
 })
 
+test_that("check_arg_with_agents_options validates option names", {
+	expect_null(check_arg_with_agents_options(NULL))
+	expect_null(check_arg_with_agents_options(list()))
+	expect_null(check_arg_with_agents_options(list(skills = "all")))
+
+	expect_error(
+		check_arg_with_agents_options("all"),
+		"`with_agents_options` must be `NULL` or a named list",
+		fixed = TRUE
+	)
+	expect_error(
+		check_arg_with_agents_options(list("all")),
+		"`with_agents_options` must be a named list",
+		fixed = TRUE
+	)
+	expect_error(
+		check_arg_with_agents_options(
+			list(skills = "all", skills = "golem-run-tests")
+		),
+		"Duplicated names"
+	)
+	expect_error(
+		check_arg_with_agents_options(list(golem_wd = "/tmp/project")),
+		"Names in `with_agents_options` are wrong",
+		fixed = TRUE
+	)
+})
+
+test_that("create_golem_use_agents dispatches through use_skills", {
+	result <- testthat::with_mocked_bindings(
+		use_skills = function(...) {
+			list(...)
+		},
+		{
+			create_golem_use_agents(
+				path_to_golem = "/tmp/project",
+				with_agents_options = list(skills = "all"),
+				should_prompt = FALSE
+			)
+		}
+	)
+
+	expect_equal(
+		result,
+		list(
+			skills = "all",
+			golem_wd = "/tmp/project",
+			interactive = FALSE
+		)
+	)
+})
+
 test_that("create_golem_gui works", {
+	create_golem_args <- NULL
 	testthat::with_mocked_bindings(
 		create_golem = function(
 			...
 		) {
+			create_golem_args <<- list(...)
 			return(
 				TRUE
 			)
@@ -448,9 +502,31 @@ test_that("create_golem_gui works", {
 			)
 			expect_true(
 				create_golem_gui(
+					path = "/tmp/project",
 					project_hook = "golem::project_hook"
 				)
 			)
+			expect_true(
+				create_golem_gui(
+					path = "/tmp/project",
+					project_hook = "golem::project_hook",
+					with_agents = TRUE,
+					with_agents_source = "remote",
+					with_agents_agent_specs = "agents",
+					with_agents_main_md_files = "no"
+				)
+			)
 		}
+	)
+	expect_equal(create_golem_args$with_agents, TRUE)
+	expect_equal(
+		create_golem_args$with_agents_options,
+		list(
+			source = "remote",
+			agent_specs = "agents",
+			skills = "all",
+			main_md_files = "no",
+			overwrite = "overwrite"
+		)
 	)
 })

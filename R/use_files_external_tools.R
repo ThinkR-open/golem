@@ -40,6 +40,52 @@ download_external <- function(
 	)
 }
 
+unzip_bundled_html <- function(
+	path_from,
+	path_to
+) {
+	cat_start_unzip()
+	utils::unzip(
+		zipfile = path_from,
+		exdir = path_to
+	)
+	bundle_file_entries <- fs_dir_ls(path_to)
+	# the following condition checks: exactly one file/dir exist
+	# and what exist is really a dir (not, e.g. index.html)
+	if (
+		length(bundle_file_entries) == 1 &&
+			fs_dir_exists(bundle_file_entries[[1]])
+	) {
+		# Move one level up when the archive wraps everything in a single dir.
+		wrapper_dir <- bundle_file_entries[[1]]
+		wrapper_entries <- fs_dir_ls(wrapper_dir, all = TRUE)
+		for (entry in wrapper_entries) {
+			fs_file_move(
+				entry,
+				fs_path(path_to, fs_path_file(entry))
+			)
+		}
+		fs_dir_delete(wrapper_dir)
+		# When the default target dir is "template", prefer the wrapper dir name.
+		if (fs_path_file(path_to) == "template") {
+			# make sure that, whenever does not supply a 'name' arg, i.e.,
+			# name defaults to "template" **and** there is a top level dir
+			# in the bundle itself, use the top-level dir:
+			path_new <- fs_path(
+				fs_path_dir(path_to),
+				fs_path_file(wrapper_dir)
+			)
+			fs_file_move(path_to, path_new)
+			path_to <- path_new
+		}
+	}
+	cat_unzipped(
+		path_to,
+		"Bundle"
+	)
+	return(path_to)
+}
+
 perform_checks_and_download_if_everything_is_ok <- function(
 	url_to_download_from,
 	directory_to_download_to,

@@ -13,3 +13,4 @@ README.html
 *.Rproj
 /doc/
 /Meta/
+.claude/settings.local.json

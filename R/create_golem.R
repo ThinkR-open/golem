@@ -5,44 +5,20 @@ replace_package_name <- function(
 ) {
 	# Going through copied files to replace package name
 	for (f in copied_files) {
-		copied_file <- file.path(
-			path_to_golem,
-			f
-		)
+		copied_file <- file.path(path_to_golem, f)
 
-		if (
-			grepl(
-				"^REMOVEME",
-				f
-			)
-		) {
+		if (grepl("^REMOVEME", f)) {
 			file.rename(
 				from = copied_file,
-				to = file.path(
-					path_to_golem,
-					gsub(
-						"REMOVEME",
-						"",
-						f
-					)
-				)
+				to = file.path(path_to_golem, gsub("REMOVEME", "", f))
 			)
 			copied_file <- file.path(
 				path_to_golem,
-				gsub(
-					"REMOVEME",
-					"",
-					f
-				)
+				gsub("REMOVEME", "", f)
 			)
 		}
 
-		if (
-			!grepl(
-				"ico$",
-				copied_file
-			)
-		) {
+		if (!grepl("ico$", copied_file)) {
 			try(
 				{
 					replace_word(
@@ -57,23 +33,12 @@ replace_package_name <- function(
 	}
 }
 
-copy_golem_skeleton_and_replace_name <- function(
-	path_to_golem,
-	package_name
-) {
-	cli_cat_rule(
-		"Copying package skeleton"
-	)
-	from <- golem_sys(
-		"shinyexample"
-	)
+copy_golem_skeleton_and_replace_name <- function(path_to_golem, package_name) {
+	cli_cat_rule("Copying package skeleton")
+	from <- golem_sys("shinyexample")
 
 	# Copy over whole directory
-	fs_dir_copy(
-		path = from,
-		new_path = path_to_golem,
-		overwrite = TRUE
-	)
+	fs_dir_copy(path = from, new_path = path_to_golem, overwrite = TRUE)
 
 	# Listing copied files ***from source directory***
 	copied_files <- list.files(
@@ -83,14 +48,8 @@ copy_golem_skeleton_and_replace_name <- function(
 		recursive = TRUE
 	)
 
-	replace_package_name(
-		copied_files,
-		package_name,
-		path_to_golem
-	)
-	cli_alert_success(
-		"Copied app skeleton."
-	)
+	replace_package_name(copied_files, package_name, path_to_golem)
+	cli_alert_success("Copied app skeleton.")
 }
 
 #' Create a package for a Shiny App using `{golem}`
@@ -110,6 +69,11 @@ copy_golem_skeleton_and_replace_name <- function(
 #'     to override the files and content. This function is executed just
 #'     after the project is created.
 #' @param with_git Boolean. Initialize git repository
+#' @param with_agents Boolean. If `TRUE`, the fresh package is initialized with skills
+#'     files and `CLAUDE/AGENTS.md`
+#' @param with_agents_options named list of options passed to [use_skills()];
+#'     list names must match `use_skills()` argument names except `golem_wd`
+#'     and `interactive`.
 #' @param ... Arguments passed to the `project_hook()` function.
 #'
 #' @note
@@ -136,43 +100,25 @@ create_golem <- function(
 	without_comments = FALSE,
 	project_hook = golem::project_hook,
 	with_git = FALSE,
+	with_agents = FALSE,
+	with_agents_options = NULL,
 	...
 ) {
-	path_to_golem <- normalizePath(
-		path,
-		mustWork = FALSE
-	)
+	path_to_golem <- normalizePath(path, mustWork = FALSE)
 
 	if (check_name) {
-		cli_cat_rule(
-			"Checking package name"
-		)
+		cli_cat_rule("Checking package name")
 		rlang::check_installed(
 			"usethis",
 			version = "1.6.0",
 			reason = "to check the package name."
 		)
-		getFromNamespace(
-			"check_package_name",
-			"usethis"
-		)(
-			package_name
-		)
-		cli_alert_success(
-			"Valid package name."
-		)
+		getFromNamespace("check_package_name", "usethis")(package_name)
+		cli_alert_success("Valid package name.")
 	}
 
-	if (
-		fs_dir_exists(
-			path_to_golem
-		)
-	) {
-		if (
-			!isTRUE(
-				overwrite
-			)
-		) {
+	if (fs_dir_exists(path_to_golem)) {
+		if (!isTRUE(overwrite)) {
 			stop(
 				paste(
 					"The directory already exists.\n",
@@ -183,110 +129,69 @@ create_golem <- function(
 				call. = FALSE
 			)
 		} else {
-			cli_alert_success(
-				"Deleting existing project."
-			)
-			fs_dir_delete(
-				path_to_golem
-			)
+			cli_alert_success("Deleting existing project.")
+			fs_dir_delete(path_to_golem)
 		}
 	}
+	check_arg_with_agents_options(with_agents_options)
 
-	copy_golem_skeleton_and_replace_name(
-		path_to_golem,
-		package_name
-	)
+	copy_golem_skeleton_and_replace_name(path_to_golem, package_name)
 
-	old <- setwd(
-		path_to_golem
-	)
+	old <- setwd(path_to_golem)
 
-	cli_cat_rule(
-		"Running project hook function"
-	)
+	cli_cat_rule("Running project hook function")
 
 	# TODO fix
 	# for some weird reason test() fails here when using golem::create_golem
 	# and I don't have time to search why rn
-	if (
-		substitute(
-			project_hook
-		) ==
-			"golem::project_hook"
-	) {
+	if (substitute(project_hook) == "golem::project_hook") {
 		project_hook <- getFromNamespace(
 			"project_hook",
 			"golem"
 		)
 	}
-	project_hook(
-		path = path_to_golem,
-		package_name = package_name,
-		...
-	)
+	project_hook(path = path_to_golem, package_name = package_name, ...)
 
-	setwd(
-		old
-	)
+	setwd(old)
 
-	cli_alert_success
-	("All set.")
+	cli_alert_success("All set.")
 
-	if (
-		isTRUE(
-			without_comments
-		)
-	) {
+	if (isTRUE(without_comments)) {
 		files <- list.files(
 			path = c(
-				file.path(
-					path_to_golem,
-					"dev"
-				),
-				file.path(
-					path_to_golem,
-					"R"
-				)
+				file.path(path_to_golem, "dev"),
+				file.path(path_to_golem, "R")
 			),
 			full.names = TRUE
 		)
 		for (file in files) {
-			remove_comments(
-				file
-			)
+			remove_comments(file)
 		}
 	}
 
-	if (
-		isTRUE(
-			with_git
-		)
-	) {
-		cli_cat_rule(
-			"Initializing git repository"
-		)
+	if (isTRUE(with_git)) {
+		cli_cat_rule("Initializing git repository")
 		git_output <- system(
-			command = paste(
-				"git init",
-				path_to_golem
-			),
+			command = paste("git init", path_to_golem),
 			ignore.stdout = TRUE,
 			ignore.stderr = TRUE
 		)
 		if (git_output) {
-			cli_alert_danger(
-				"Error initializing git repository."
-			)
+			cli_alert_danger("Error initializing git repository.")
 		} else {
-			cli_alert_success(
-				"Initialized git repository."
-			)
+			cli_alert_success("Initialized git repository.")
 		}
 	}
 
-	setwd(
-		old
-	)
+	if (isTRUE(with_agents)) {
+		cli_alert_info("Initializing agent skills ...")
+		check_is_interactive <- rlang_is_interactive()
+		create_golem_use_agents(
+			path_to_golem = path_to_golem,
+			with_agents_options = with_agents_options,
+			should_prompt = check_is_interactive
+		)
+	}
 
 	cli_alert_success("Done.")
 
@@ -303,35 +208,19 @@ create_golem <- function(
 
 	check_dev_deps_are_installed()
 
-	if (
-		isTRUE(
-			open
-		)
-	) {
+	if (isTRUE(open)) {
 		if (
-			rlang::is_installed(
-				"rstudioapi"
-			) &&
+			rlang::is_installed("rstudioapi") &&
 				rstudioapi::isAvailable() &&
-				rstudioapi::hasFun(
-					"openProject"
-				)
+				rstudioapi::hasFun("openProject")
 		) {
-			rstudioapi::openProject(
-				path = path
-			)
+			rstudioapi::openProject(path = path)
 		} else {
-			setwd(
-				path
-			)
+			setwd(path)
 		}
 	}
 
-	return(
-		invisible(
-			path_to_golem
-		)
-	)
+	return(invisible(path_to_golem))
 }
 
 # to be used in RStudio "new project" GUI
@@ -356,6 +245,14 @@ create_golem_gui <- function(path, ...) {
 		without_comments = dots$without_comments,
 		project_hook = project_hook,
 		check_name = dots$check_name,
-		with_git = dots$with_git
+		with_git = dots$with_git,
+		with_agents = dots$with_agents,
+		with_agents_options = list(
+			source = dots$with_agents_source %||% "local",
+			agent_specs = dots$with_agents_agent_specs %||% "both",
+			skills = "all",
+			main_md_files = dots$with_agents_main_md_files %||% "yes",
+			overwrite = "overwrite"
+		)
 	)
 }

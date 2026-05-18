@@ -13,6 +13,8 @@ create_golem(
   without_comments = FALSE,
   project_hook = golem::project_hook,
   with_git = FALSE,
+  with_agents = FALSE,
+  with_agents_options = NULL,
   ...
 )
 }
@@ -39,6 +41,13 @@ to override the files and content. This function is executed just
 after the project is created.}
 
 \item{with_git}{Boolean. Initialize git repository}
+
+\item{with_agents}{Boolean. If \code{TRUE}, the fresh package is initialized with skills
+files and \code{CLAUDE/AGENTS.md}}
+
+\item{with_agents_options}{named list of options passed to \code{\link[=use_skills]{use_skills()}};
+list names must match \code{use_skills()} argument names except \code{golem_wd}
+and \code{interactive}.}
 
 \item{...}{Arguments passed to the \code{project_hook()} function.}
 }

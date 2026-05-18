@@ -43,43 +43,52 @@ test_that("add_dockerfile works", {
 					"usethis.quiet" = TRUE
 				),
 				{
-					dockerfile_with_add_dockerfile <- add_dockerfile(
-						path = file.path(
-							dummy_golem,
-							"DESCRIPTION"
+					expect_warning(
+						dockerfile_with_add_dockerfile <- add_dockerfile(
+							path = file.path(
+								dummy_golem,
+								"DESCRIPTION"
+							),
+							golem_wd = dummy_golem,
+							output = file.path(
+								dummy_golem,
+								"Dockerfile_add_dockerfile"
+							),
+							open = FALSE
 						),
-						golem_wd = dummy_golem,
-						output = file.path(
-							dummy_golem,
-							"Dockerfile_add_dockerfile"
-						),
-						open = FALSE
+						"add_dockerfile\\(\\) is currently soft deprecated"
 					)
-					dockerfile_with_add_dockerfile_shinyproxy <- add_dockerfile_shinyproxy(
-						path = file.path(
-							dummy_golem,
-							"DESCRIPTION"
+					expect_warning(
+						dockerfile_with_add_dockerfile_shinyproxy <- add_dockerfile_shinyproxy(
+							path = file.path(
+								dummy_golem,
+								"DESCRIPTION"
+							),
+							golem_wd = dummy_golem,
+							output = file.path(
+								dummy_golem,
+								"Dockerfile_add_dockerfile_shinyproxy"
+							),
+							open = FALSE
 						),
-						golem_wd = dummy_golem,
-						output = file.path(
-							dummy_golem,
-							"Dockerfile_add_dockerfile_shinyproxy"
-						),
-						open = FALSE
+						"add_dockerfile_shinyproxy\\(\\) is currently soft deprecated"
 					)
 
-					dockerfile_with_add_dockerfile_heroku <- add_dockerfile_heroku(
-						path = file.path(
-							dummy_golem,
-							"DESCRIPTION"
+					expect_warning(
+						dockerfile_with_add_dockerfile_heroku <- add_dockerfile_heroku(
+							path = file.path(
+								dummy_golem,
+								"DESCRIPTION"
+							),
+							golem_wd = dummy_golem,
+							,
+							output = file.path(
+								dummy_golem,
+								"Dockerfile_add_dockerfile_heroku"
+							),
+							open = FALSE
 						),
-						golem_wd = dummy_golem,
-						,
-						output = file.path(
-							dummy_golem,
-							"Dockerfile_add_dockerfile_heroku"
-						),
-						open = FALSE
+						"add_dockerfile_heroku\\(\\) is currently soft deprecated"
 					)
 				}
 			)

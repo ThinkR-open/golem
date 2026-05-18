@@ -1,0 +1,1344 @@
+test_that("normalize_agent_skills_argument() expands all and validates names", {
+	expect_equal(
+		normalize_agent_skills_argument(
+			skills = "all",
+			skills_available = c("a", "b")
+		),
+		c("a", "b")
+	)
+
+	expect_equal(
+		normalize_agent_skills_argument(
+			skills = c("a", "b"),
+			skills_available = c("a", "b")
+		),
+		c("a", "b")
+	)
+
+	expect_error(
+		normalize_agent_skills_argument(
+			skills = c("a", "missing"),
+			skills_available = c("a", "b")
+		),
+		"Unknown agent skill"
+	)
+})
+
+test_that("get_agent_skill_source_dir() resolves local and remote layouts", {
+	settings <- list(
+		path = ".claude/skills",
+		main_file_name = "CLAUDE.md"
+	)
+	legacy_manifest <- list()
+	canonical_manifest <- list(skills_root = "skills")
+	override_settings <- list(
+		path = ".claude/skills",
+		main_file_name = "CLAUDE.md",
+		source_path = "plugins/claude/skills"
+	)
+
+	expect_equal(
+		get_agent_skill_source_dir(
+			source = "local",
+			root = "/tmp/root",
+			manifest = legacy_manifest,
+			settings = settings,
+			skill = "golem-upgrade"
+		),
+		"/tmp/root/skills/golem-upgrade"
+	)
+
+	expect_equal(
+		get_agent_skill_source_dir(
+			source = "remote",
+			root = "/tmp/root",
+			manifest = legacy_manifest,
+			settings = settings,
+			skill = "golem-upgrade"
+		),
+		"/tmp/root/.claude/skills/golem-upgrade"
+	)
+
+	expect_equal(
+		get_agent_skill_source_dir(
+			source = "remote",
+			root = "/tmp/root",
+			manifest = canonical_manifest,
+			settings = settings,
+			skill = "golem-upgrade"
+		),
+		"/tmp/root/skills/golem-upgrade"
+	)
+
+	expect_equal(
+		get_agent_skill_source_dir(
+			source = "remote",
+			root = "/tmp/root",
+			manifest = canonical_manifest,
+			settings = override_settings,
+			skill = "golem-upgrade"
+		),
+		"/tmp/root/plugins/claude/skills/golem-upgrade"
+	)
+})
+
+test_that("normalize_agent_skills_specs() supports claude, agents and both", {
+	expect_equal(
+		normalize_agent_skills_specs(
+			agent_specs = "agents",
+			settings = list(agents = list(path = ".agents/skills"))
+		),
+		"agents"
+	)
+
+	expect_equal(
+		normalize_agent_skills_specs(
+			agent_specs = "both",
+			settings = list(
+				claude = list(path = ".claude/skills"),
+				agents = list(path = ".agents/skills")
+			)
+		),
+		c("claude", "agents")
+	)
+})
+
+test_that("ask_agent_skills_main_files() returns yes, no and cancel", {
+	settings <- list(
+		claude = list(main_file_name = "CLAUDE.md"),
+		agents = list(main_file_name = "AGENTS.md")
+	)
+
+	expect_true(
+		testthat::with_mocked_bindings(
+			utils_menu = function(...) "1",
+			{
+				ask_agent_skills_main_files(
+					selected_agent_specs = "agents",
+					settings = settings
+				)
+			}
+		)
+	)
+
+	expect_false(
+		testthat::with_mocked_bindings(
+			utils_menu = function(...) "2",
+			{
+				ask_agent_skills_main_files(
+					selected_agent_specs = c("claude", "agents"),
+					settings = settings
+				)
+			}
+		)
+	)
+
+	expect_null(
+		testthat::with_mocked_bindings(
+			utils_menu = function(...) "3",
+			{
+				ask_agent_skills_main_files(
+					selected_agent_specs = "claude",
+					settings = settings
+				)
+			}
+		)
+	)
+})
+
+test_that("normalize_agent_skills_main_files() supports ask, yes and no", {
+	settings <- list(
+		agents = list(main_file_name = "AGENTS.md")
+	)
+
+	expect_true(
+		normalize_agent_skills_main_files(
+			main_md_files = "yes",
+			selected_agent_specs = "agents",
+			settings = settings
+		)
+	)
+
+	expect_false(
+		normalize_agent_skills_main_files(
+			main_md_files = "no",
+			selected_agent_specs = "agents",
+			settings = settings
+		)
+	)
+
+	expect_true(
+		testthat::with_mocked_bindings(
+			ask_agent_skills_main_files = function(selected_agent_specs, settings) {
+				TRUE
+			},
+			{
+				normalize_agent_skills_main_files(
+					main_md_files = "ask",
+					selected_agent_specs = "agents",
+					settings = settings
+				)
+			}
+		)
+	)
+})
+
+test_that("use_agent_implement() supports non-interactive skills and overwrite", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+
+	result <- testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		ask_agent_skills_main_files = function(selected_agent_specs, settings) {
+			TRUE
+		},
+		copy_agent_skills = function(
+			source,
+			root,
+			manifest,
+			settings,
+			selected_agent_specs,
+			skills,
+			overwrite,
+			golem_wd,
+			copy_main_files
+		) {
+			list(
+				selected_agent_specs = selected_agent_specs,
+				skills = skills,
+				copy_main_files = copy_main_files,
+				targets = file.path(golem_wd, skills)
+			)
+		},
+		{
+			use_agent_implement(
+				source = "local",
+				agent_specs = "both",
+				skills = "all",
+				main_md_files = "yes",
+				overwrite = "skip",
+				golem_wd = "/tmp/project",
+				interactive = FALSE
+			)
+		}
+	)
+
+	expect_equal(result$source, "local")
+	expect_equal(result$selected_agent_specs, c("claude", "agents"))
+	expect_equal(result$skills, c("skill-a", "skill-b"))
+	expect_equal(result$overwrite, "skip")
+	expect_equal(
+		result$copied,
+		list(
+			selected_agent_specs = c("claude", "agents"),
+			skills = c("skill-a", "skill-b"),
+			copy_main_files = TRUE,
+			targets = file.path("/tmp/project", c("skill-a", "skill-b"))
+		)
+	)
+})
+
+test_that("use_agent_implement() uses safe defaults when non-interactive", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+
+	result <- testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		copy_agent_skills = function(
+			source,
+			root,
+			manifest,
+			settings,
+			selected_agent_specs,
+			skills,
+			overwrite,
+			golem_wd,
+			copy_main_files
+		) {
+			list(
+				selected_agent_specs = selected_agent_specs,
+				skills = skills,
+				overwrite = overwrite,
+				copy_main_files = copy_main_files
+			)
+		},
+		{
+			use_skills(
+				golem_wd = "/tmp/project",
+				interactive = FALSE
+			)
+		}
+	)
+
+	expect_equal(result$source, "local")
+	expect_equal(result$agent_specs, "both")
+	expect_equal(result$selected_agent_specs, c("claude", "agents"))
+	expect_equal(result$skills, c("skill-a", "skill-b"))
+	expect_equal(result$main_md_files, "yes")
+	expect_equal(result$overwrite, "skip")
+	expect_equal(
+		result$copied,
+		list(
+			selected_agent_specs = c("claude", "agents"),
+			skills = c("skill-a", "skill-b"),
+			overwrite = "skip",
+			copy_main_files = TRUE
+		)
+	)
+})
+
+test_that("use_agent_implement() prints a final success message for selected targets", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+	success <- character()
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		copy_agent_skills = function(...) {
+			"/tmp/project/.claude/skills/skill-a"
+		},
+		cli_alert_success = function(message) {
+			success <<- c(success, message)
+		},
+		{
+			use_agent_implement(
+				source = "local",
+				agent_specs = "claude",
+				skills = "skill-a",
+				main_md_files = "yes",
+				overwrite = "skip",
+				golem_wd = "/tmp/project"
+			)
+		}
+	)
+
+	expect_equal(
+		tail(success, 1),
+		"Skills installed under `.claude/skills`."
+	)
+})
+
+test_that("use_agent_implement() returns invisibly when specs selection is cancelled", {
+	manifest <- list(
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			)
+		)
+	)
+
+	result <- testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		ask_agent_skills_specs = function() {
+			NULL
+		},
+		cli_alert_warning = function(...) NULL,
+		{
+			use_agent_implement(
+				source = "local",
+				agent_specs = "ask",
+				main_md_files = "ask",
+				golem_wd = "/tmp/project",
+				interactive = TRUE
+			)
+		}
+	)
+
+	expect_null(result)
+})
+
+test_that("use_agent_implement() returns invisibly when main file selection is cancelled", {
+	manifest <- list(
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			)
+		)
+	)
+
+	result <- testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		ask_agent_skills_main_files = function(selected_agent_specs, settings) {
+			NULL
+		},
+		cli_alert_warning = function(...) NULL,
+		{
+			use_agent_implement(
+				source = "local",
+				agent_specs = "claude",
+				main_md_files = "ask",
+				golem_wd = "/tmp/project",
+				interactive = TRUE
+			)
+		}
+	)
+
+	expect_null(result)
+})
+
+test_that("use_agent_implement() defers remote archive fetch until after prompts", {
+	events <- character()
+	manifest <- list(
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_github_manifest = function() {
+			events <<- c(events, "manifest")
+			manifest
+		},
+		ask_agent_skills_specs = function() {
+			events <<- c(events, "specs")
+			"agents"
+		},
+		ask_agent_skills_main_files = function(selected_agent_specs, settings) {
+			events <<- c(events, "main_md")
+			FALSE
+		},
+		ask_agent_skills_selection = function(skills) {
+			events <<- c(events, "skills")
+			"skill-a"
+		},
+		get_agent_skills_golem_github = function() {
+			events <<- c(events, "archive")
+			list(
+				root = "/tmp/agent-skills",
+				cleanup = character()
+			)
+		},
+		copy_agent_skills = function(...) {
+			events <<- c(events, "copy")
+			character()
+		},
+		{
+			use_agent_implement(
+				source = "remote",
+				agent_specs = "ask",
+				skills = NULL,
+				main_md_files = "ask",
+				overwrite = "skip",
+				golem_wd = "/tmp/project",
+				interactive = TRUE
+			)
+		}
+	)
+
+	expect_equal(
+		events,
+		c("manifest", "specs", "main_md", "skills", "archive", "copy")
+	)
+})
+
+test_that("use_skill() fetches remote archive before reading remote manifest", {
+	events <- character()
+	manifest <- list(
+		skills_available = "skill-a",
+		targets = list(
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_golem_github = function() {
+			events <<- c(events, "archive")
+			list(
+				root = "/tmp/agent-skills",
+				cleanup = character()
+			)
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			events <<- c(events, paste("manifest", root))
+			manifest
+		},
+		get_installed_agent_skills_specs = function(golem_wd, settings) {
+			events <<- c(events, "installed")
+			"agents"
+		},
+		copy_agent_skills = function(...) {
+			events <<- c(events, "copy")
+			character()
+		},
+		{
+			use_skill(
+				name = "skill-a",
+				source = "remote",
+				overwrite = "skip",
+				golem_wd = "/tmp/project"
+			)
+		}
+	)
+
+	expect_equal(
+		events,
+		c("archive", "manifest /tmp/agent-skills", "installed", "copy")
+	)
+})
+
+test_that("wrappers forward the expected agent_specs", {
+	expect_equal(
+		testthat::with_mocked_bindings(
+			use_agent_implement = function(
+				source,
+				agent_specs,
+				skills,
+				main_md_files,
+				overwrite,
+				golem_wd,
+				interactive
+			) {
+				list(
+					source = source,
+					agent_specs = agent_specs,
+					skills = skills,
+					main_md_files = main_md_files,
+					overwrite = overwrite,
+					golem_wd = golem_wd,
+					interactive = interactive
+				)
+			},
+			{
+				use_agent_skills(
+					source = "local",
+					skills = "skill-a",
+					main_md_files = "no",
+					overwrite = "skip",
+					golem_wd = "/tmp/project"
+				)
+			}
+		)$agent_specs,
+		"agents"
+	)
+
+	expect_equal(
+		testthat::with_mocked_bindings(
+			use_agent_implement = function(
+				source,
+				agent_specs,
+				skills,
+				main_md_files,
+				overwrite,
+				golem_wd,
+				interactive
+			) {
+				list(
+					source = source,
+					agent_specs = agent_specs,
+					skills = skills,
+					main_md_files = main_md_files,
+					overwrite = overwrite,
+					golem_wd = golem_wd,
+					interactive = interactive
+				)
+			},
+			{
+				use_claude_skills(
+					source = "remote",
+					skills = "skill-a",
+					main_md_files = "yes",
+					overwrite = "overwrite",
+					golem_wd = "/tmp/project"
+				)
+			}
+		)$agent_specs,
+		"claude"
+	)
+
+	expect_equal(
+		testthat::with_mocked_bindings(
+			use_agent_implement = function(
+				source,
+				agent_specs,
+				skills,
+				main_md_files,
+				overwrite,
+				golem_wd,
+				interactive
+			) {
+				list(
+					source = source,
+					agent_specs = agent_specs,
+					skills = skills,
+					main_md_files = main_md_files,
+					overwrite = overwrite,
+					golem_wd = golem_wd,
+					interactive = interactive
+				)
+			},
+			{
+				use_skills(
+					source = "local",
+					agent_specs = "both",
+					skills = c("skill-a", "skill-b"),
+					main_md_files = "ask",
+					overwrite = "ask",
+					golem_wd = "/tmp/project"
+				)
+			}
+		)$agent_specs,
+		"both"
+	)
+})
+
+test_that("get_installed_agent_skills_specs() detects installed targets", {
+	root <- tempfile("golem-agent-targets-")
+	dir.create(root)
+	dir.create(file.path(root, ".claude", "skills"), recursive = TRUE)
+	dir.create(file.path(root, ".agents", "skills"), recursive = TRUE)
+
+	settings <- list(
+		claude = list(path = ".claude/skills"),
+		agents = list(path = ".agents/skills")
+	)
+
+	expect_equal(
+		get_installed_agent_skills_specs(
+			golem_wd = root,
+			settings = settings
+		),
+		c("claude", "agents")
+	)
+
+	expect_error(
+		get_installed_agent_skills_specs(
+			golem_wd = tempfile("golem-empty-"),
+			settings = settings
+		),
+		"No installed agent specifications found"
+	)
+})
+
+test_that("get_installed_agent_skills_specs() reports configured target paths", {
+	settings <- list(
+		claude = list(path = "custom/claude"),
+		agents = list(path = "custom/agents")
+	)
+
+	expect_error(
+		get_installed_agent_skills_specs(
+			golem_wd = tempfile("golem-empty-"),
+			settings = settings
+		),
+		"custom/claude.*custom/agents"
+	)
+})
+
+test_that("use_skill() installs into pre-existing agent targets only", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+
+	result <- testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		get_installed_agent_skills_specs = function(golem_wd, settings) {
+			c("claude", "agents")
+		},
+		copy_agent_skills = function(
+			source,
+			root,
+			manifest,
+			settings,
+			selected_agent_specs,
+			skills,
+			overwrite,
+			golem_wd,
+			copy_main_files
+		) {
+			list(
+				selected_agent_specs = selected_agent_specs,
+				skills = skills,
+				copy_main_files = copy_main_files
+			)
+		},
+		{
+			use_skill(
+				name = "skill-a",
+				source = "local",
+				overwrite = "skip",
+				golem_wd = "/tmp/project"
+			)
+		}
+	)
+
+	expect_equal(result$agent_specs, c("claude", "agents"))
+	expect_equal(result$skills, "skill-a")
+	expect_equal(
+		result$copied,
+		list(
+			selected_agent_specs = c("claude", "agents"),
+			skills = "skill-a",
+			copy_main_files = FALSE
+		)
+	)
+})
+
+test_that("use_skill() prints a final success message for installed targets", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "skill-b"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			),
+			agents = list(
+				path = ".agents/skills",
+				main_file_name = "AGENTS.md"
+			)
+		)
+	)
+	success <- character()
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		get_installed_agent_skills_specs = function(golem_wd, settings) {
+			c("claude", "agents")
+		},
+		copy_agent_skills = function(...) {
+			c(
+				"/tmp/project/.claude/skills/skill-a",
+				"/tmp/project/.agents/skills/skill-a"
+			)
+		},
+		cli_alert_success = function(message) {
+			success <<- c(success, message)
+		},
+		{
+			use_skill(
+				name = "skill-a",
+				source = "local",
+				overwrite = "skip",
+				golem_wd = "/tmp/project"
+			)
+		}
+	)
+
+	expect_equal(
+		tail(success, 1),
+		"Skills installed under `.claude/skills` and `.agents/skills`."
+	)
+})
+
+test_that("use_skill() validates the requested skill name", {
+	manifest <- list(
+		skills_available = c("skill-a"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			)
+		)
+	)
+
+	expect_error(
+		testthat::with_mocked_bindings(
+			get_agent_skills_golem_root = function() {
+				"/tmp/agent-skills"
+			},
+			get_agent_skills_golem_manifest = function(root) {
+				manifest
+			},
+			get_installed_agent_skills_specs = function(golem_wd, settings) {
+				"claude"
+			},
+			copy_agent_skills = function(...) {
+				stop("should not copy")
+			},
+			{
+				use_skill(
+					name = "missing",
+					source = "local",
+					golem_wd = "/tmp/project"
+				)
+			}
+		),
+		"Unknown agent skill"
+	)
+})
+
+test_that("copy_agent_skill_path() respects non-interactive overwrite modes", {
+	source <- tempfile()
+	target <- tempfile()
+	source_dir <- tempfile()
+	target_dir <- tempfile()
+	file.create(source)
+	file.create(target)
+	dir.create(source_dir)
+	dir.create(target_dir)
+	new_target <- tempfile()
+
+	expect_equal(
+		testthat::with_mocked_bindings(
+			fs_dir_create = function(...) NULL,
+			fs_file_copy = function(...) stop("should not copy"),
+			{
+				copy_agent_skill_path(
+					source = source,
+					target = target,
+					overwrite = "skip"
+				)
+			}
+		),
+		NA_character_
+	)
+
+	expect_equal(
+		testthat::with_mocked_bindings(
+			fs_dir_copy = function(...) stop("should not copy"),
+			{
+				copy_agent_skill_path(
+					source = source_dir,
+					target = target_dir,
+					overwrite = "skip",
+					type = "dir"
+				)
+			}
+		),
+		NA_character_
+	)
+
+	expect_equal(
+		testthat::with_mocked_bindings(
+			fs_dir_create = function(...) NULL,
+			fs_file_copy = function(source, target, overwrite) {
+				file.create(target)
+			},
+			{
+				copy_agent_skill_path(
+					source = source,
+					target = new_target,
+					overwrite = "skip"
+				)
+			}
+		),
+		new_target
+	)
+	expect_true(file.exists(new_target))
+
+	expect_error(
+		testthat::with_mocked_bindings(
+			fs_dir_create = function(...) NULL,
+			fs_file_copy = function(...) NULL,
+			{
+				copy_agent_skill_path(
+					source = source,
+					target = target,
+					overwrite = "abort"
+				)
+			}
+		),
+		"already exists"
+	)
+
+	expect_equal(
+		testthat::with_mocked_bindings(
+			fs_dir_create = function(...) NULL,
+			fs_file_copy = function(...) NULL,
+			ask_agent_skills_overwrite = function(target) {
+				"skip"
+			},
+			{
+				copy_agent_skill_path(
+					source = source,
+					target = target,
+					overwrite = "ask"
+				)
+			}
+		),
+		NA_character_
+	)
+
+	expect_null(
+		testthat::with_mocked_bindings(
+			fs_dir_create = function(...) NULL,
+			fs_file_copy = function(...) NULL,
+			ask_agent_skills_overwrite = function(target) {
+				"cancel"
+			},
+			cli_alert_warning = function(...) NULL,
+			{
+				copy_agent_skill_path(
+					source = source,
+					target = target,
+					overwrite = "ask"
+				)
+			}
+		)
+	)
+})
+
+test_that("resolve_agent_skill_overwrite() resolves ask mode before copy", {
+	target <- tempfile()
+	file.create(target)
+
+	resolved <- testthat::with_mocked_bindings(
+		ask_agent_skills_overwrite = function(target) {
+			"skip"
+		},
+		{
+			resolve_agent_skill_overwrite(
+				target = target,
+				overwrite = "ask"
+			)
+		}
+	)
+
+	expect_equal(resolved, "skip")
+})
+
+test_that("resolve_agent_skill_overwrite() copies missing targets in skip mode", {
+	target <- tempfile()
+
+	expect_equal(
+		resolve_agent_skill_overwrite(
+			target = target,
+			overwrite = "skip"
+		),
+		"overwrite"
+	)
+})
+
+test_that("copy_agent_skills() aborts when a manifest skill is missing on disk", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = c("skill-a", "ghost"),
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			)
+		)
+	)
+	root <- tempfile("agent-skills-root-")
+	dir.create(file.path(root, "skills", "skill-a"), recursive = TRUE)
+
+	expect_error(
+		copy_agent_skills(
+			source = "local",
+			root = root,
+			manifest = manifest,
+			settings = manifest$targets,
+			selected_agent_specs = "claude",
+			skills = c("skill-a", "ghost"),
+			overwrite = "overwrite",
+			golem_wd = tempfile("golem-project-"),
+			copy_main_files = FALSE
+		),
+		"Agent skill `ghost` is listed in the manifest but missing"
+	)
+})
+
+test_that("use_skill() uses safe defaults when non-interactive", {
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = "skill-a",
+		targets = list(
+			claude = list(
+				path = ".claude/skills",
+				main_file_name = "CLAUDE.md"
+			)
+		)
+	)
+	captured <- list()
+
+	testthat::with_mocked_bindings(
+		get_agent_skills_golem_root = function() {
+			"/tmp/agent-skills"
+		},
+		get_agent_skills_golem_manifest = function(root) {
+			manifest
+		},
+		get_installed_agent_skills_specs = function(golem_wd, settings) {
+			"claude"
+		},
+		ask_agent_skills_source = function() {
+			stop("should not prompt when non-interactive")
+		},
+		ask_agent_skills_overwrite = function(target) {
+			stop("should not prompt when non-interactive")
+		},
+		copy_agent_skills = function(
+			source,
+			root,
+			manifest,
+			settings,
+			selected_agent_specs,
+			skills,
+			overwrite,
+			golem_wd,
+			copy_main_files
+		) {
+			captured <<- list(
+				source = source,
+				overwrite = overwrite,
+				copy_main_files = copy_main_files
+			)
+			"/tmp/project/.claude/skills/skill-a"
+		},
+		{
+			use_skill(
+				name = "skill-a",
+				golem_wd = "/tmp/project",
+				interactive = FALSE
+			)
+		}
+	)
+
+	expect_equal(captured$source, "local")
+	expect_equal(captured$overwrite, "skip")
+	expect_false(captured$copy_main_files)
+})
+
+test_that("ensure_agent_skills_buildignore() appends missing entries", {
+	tmp <- withr::local_tempdir()
+	file.create(file.path(tmp, "DESCRIPTION"))
+	writeLines(c("^dev$", "^data-raw$"), file.path(tmp, ".Rbuildignore"))
+
+	settings <- list(
+		claude = list(path = ".claude/skills", main_file_name = "CLAUDE.md"),
+		agents = list(path = ".agents/skills", main_file_name = "AGENTS.md")
+	)
+
+	added <- ensure_agent_skills_buildignore(
+		golem_wd = tmp,
+		selected_agent_specs = c("claude", "agents"),
+		settings = settings,
+		copy_main_files = TRUE
+	)
+
+	expect_setequal(
+		added,
+		c("^\\.claude$", "^CLAUDE\\.md$", "^\\.agents$", "^AGENTS\\.md$")
+	)
+	expect_true(all(
+		c(
+			"^dev$",
+			"^data-raw$",
+			"^\\.claude$",
+			"^CLAUDE\\.md$",
+			"^\\.agents$",
+			"^AGENTS\\.md$"
+		) %in%
+			readLines(file.path(tmp, ".Rbuildignore"))
+	))
+})
+
+test_that("ensure_agent_skills_buildignore() is idempotent and skips non-packages", {
+	tmp <- withr::local_tempdir()
+	settings <- list(
+		claude = list(path = ".claude/skills", main_file_name = "CLAUDE.md")
+	)
+
+	# Without DESCRIPTION: no-op
+	expect_null(ensure_agent_skills_buildignore(
+		golem_wd = tmp,
+		selected_agent_specs = "claude",
+		settings = settings,
+		copy_main_files = TRUE
+	))
+	expect_false(file.exists(file.path(tmp, ".Rbuildignore")))
+
+	# With DESCRIPTION + existing entries: only adds what is missing
+	file.create(file.path(tmp, "DESCRIPTION"))
+	writeLines(
+		c("^dev$", "^\\.claude$"),
+		file.path(tmp, ".Rbuildignore")
+	)
+	added <- ensure_agent_skills_buildignore(
+		golem_wd = tmp,
+		selected_agent_specs = "claude",
+		settings = settings,
+		copy_main_files = TRUE
+	)
+	expect_equal(added, "^CLAUDE\\.md$")
+})
+
+test_that("ask_agent_skills_source() maps menu choices", {
+	for (case in list(
+		list(choice = "1", expected = "local"),
+		list(choice = "2", expected = "remote"),
+		list(choice = "3", expected = NULL),
+		list(choice = "99", expected = NULL)
+	)) {
+		expect_identical(
+			testthat::with_mocked_bindings(
+				utils_menu = function(...) case$choice,
+				ask_agent_skills_source()
+			),
+			case$expected
+		)
+	}
+})
+
+test_that("ask_agent_skills_specs() maps menu choices", {
+	for (case in list(
+		list(choice = "1", expected = "claude"),
+		list(choice = "2", expected = "agents"),
+		list(choice = "3", expected = "both"),
+		list(choice = "4", expected = NULL),
+		list(choice = "99", expected = NULL)
+	)) {
+		expect_identical(
+			testthat::with_mocked_bindings(
+				utils_menu = function(...) case$choice,
+				ask_agent_skills_specs()
+			),
+			case$expected
+		)
+	}
+})
+
+test_that("ask_agent_skills_overwrite() maps menu choices and falls back to cancel", {
+	for (case in list(
+		list(choice = "1", expected = "overwrite"),
+		list(choice = "2", expected = "skip"),
+		list(choice = "3", expected = "cancel"),
+		list(choice = "99", expected = "cancel")
+	)) {
+		expect_identical(
+			testthat::with_mocked_bindings(
+				utils_menu = function(...) case$choice,
+				ask_agent_skills_overwrite("/tmp/skill")
+			),
+			case$expected
+		)
+	}
+})
+
+test_that("normalize_agent_skills_selection() handles all, cancel, empty and explicit", {
+	skills <- c("a", "b", "c")
+	expect_null(normalize_agent_skills_selection(character(), skills))
+	expect_null(normalize_agent_skills_selection("Cancel.", skills))
+	expect_null(normalize_agent_skills_selection(c("a", "Cancel."), skills))
+	expect_equal(normalize_agent_skills_selection("All.", skills), skills)
+	expect_equal(
+		normalize_agent_skills_selection(c("a", "c"), skills),
+		c("a", "c")
+	)
+})
+
+test_that("ask_agent_skills_selection() forwards select.list output", {
+	expect_equal(
+		testthat::with_mocked_bindings(
+			.package = "utils",
+			select.list = function(...) "All.",
+			ask_agent_skills_selection(c("a", "b"))
+		),
+		c("a", "b")
+	)
+
+	expect_null(
+		testthat::with_mocked_bindings(
+			.package = "utils",
+			select.list = function(...) "Cancel.",
+			ask_agent_skills_selection(c("a", "b"))
+		)
+	)
+})
+
+test_that("normalize_agent_skills_specs() aborts when a target is missing in settings", {
+	expect_error(
+		normalize_agent_skills_specs(
+			agent_specs = "both",
+			settings = list(claude = list(path = ".claude/skills"))
+		),
+		"missing target"
+	)
+})
+
+test_that("get_agent_skills_settings() supports targets, settings, and aborts otherwise", {
+	expect_equal(
+		get_agent_skills_settings(list(targets = list(claude = list(path = "x")))),
+		list(claude = list(path = "x"))
+	)
+	expect_equal(
+		get_agent_skills_settings(list(settings = list(agents = list(path = "y")))),
+		list(agents = list(path = "y"))
+	)
+	expect_error(
+		get_agent_skills_settings(list(skills_root = "skills")),
+		"targets.*settings"
+	)
+})
+
+test_that("get_agent_skills_golem_manifest() reads yaml and aborts when missing", {
+	tmp <- withr::local_tempdir()
+	writeLines(
+		c("skills_root: skills", "skills_available:", "  - a"),
+		file.path(tmp, "manifest.yml")
+	)
+	result <- get_agent_skills_golem_manifest(tmp)
+	expect_equal(result$skills_available, "a")
+
+	expect_error(
+		get_agent_skills_golem_manifest(withr::local_tempdir()),
+		"manifest not found"
+	)
+})
+
+test_that("get_agent_skills_golem_root() returns the packaged path", {
+	root <- get_agent_skills_golem_root()
+	expect_true(nzchar(root))
+	expect_true(file.exists(file.path(root, "manifest.yml")))
+})
+
+test_that("copy_agent_skills() copies a real skill tree end-to-end", {
+	tmp_root <- withr::local_tempdir()
+	tmp_wd <- withr::local_tempdir()
+	file.create(file.path(tmp_wd, "DESCRIPTION"))
+
+	# Build a fake skill layout mirroring the bundled one
+	skill_dir <- file.path(tmp_root, "skills", "skill-a")
+	dir.create(skill_dir, recursive = TRUE)
+	writeLines("# skill-a", file.path(skill_dir, "SKILL.md"))
+	writeLines("# CLAUDE.md", file.path(tmp_root, "CLAUDE.md"))
+
+	manifest <- list(
+		skills_root = "skills",
+		skills_available = "skill-a"
+	)
+	settings <- list(
+		claude = list(path = ".claude/skills", main_file_name = "CLAUDE.md")
+	)
+
+	copied <- copy_agent_skills(
+		source = "local",
+		root = tmp_root,
+		manifest = manifest,
+		settings = settings,
+		selected_agent_specs = "claude",
+		skills = "skill-a",
+		overwrite = "overwrite",
+		golem_wd = tmp_wd,
+		copy_main_files = TRUE
+	)
+
+	expect_true(file.exists(file.path(tmp_wd, "CLAUDE.md")))
+	expect_true(file.exists(
+		file.path(tmp_wd, ".claude", "skills", "skill-a", "SKILL.md")
+	))
+	expect_length(copied, 2)
+	expect_true(all(
+		c(
+			"^\\.claude$",
+			"^CLAUDE\\.md$"
+		) %in%
+			readLines(file.path(tmp_wd, ".Rbuildignore"))
+	))
+})
+
+test_that("ensure_agent_skills_buildignore() omits main files when copy_main_files = FALSE", {
+	tmp <- withr::local_tempdir()
+	file.create(file.path(tmp, "DESCRIPTION"))
+
+	settings <- list(
+		agents = list(path = ".agents/skills", main_file_name = "AGENTS.md")
+	)
+
+	added <- ensure_agent_skills_buildignore(
+		golem_wd = tmp,
+		selected_agent_specs = "agents",
+		settings = settings,
+		copy_main_files = FALSE
+	)
+
+	expect_equal(added, "^\\.agents$")
+})

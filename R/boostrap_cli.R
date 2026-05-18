@@ -94,6 +94,60 @@ cli_alert_warning <- function(
 	})
 }
 
+cli_progress_bar <- function(
+	...
+) {
+	do_if_unquiet({
+		check_cli_installed()
+
+		cli::cli_progress_bar(
+			...
+		)
+	})
+}
+
+cli_progress_update <- function(
+	id = NULL,
+	...
+) {
+	if (is.null(id)) {
+		return(invisible(NULL))
+	}
+
+	do_if_unquiet({
+		check_cli_installed()
+
+		try(
+			cli::cli_progress_update(
+				id = id,
+				...
+			),
+			silent = TRUE
+		)
+	})
+}
+
+cli_progress_done <- function(
+	id = NULL,
+	...
+) {
+	if (is.null(id)) {
+		return(invisible(NULL))
+	}
+
+	do_if_unquiet({
+		check_cli_installed()
+
+		try(
+			cli::cli_progress_done(
+				id = id,
+				...
+			),
+			silent = TRUE
+		)
+	})
+}
+
 cli_abort <- function(
 	message
 ) {
@@ -111,4 +165,14 @@ cli_abort <- function(
 			message
 		)
 	}
+}
+
+cli_darkgrey <- function(
+	...
+) {
+	check_cli_installed()
+	tmp_fun <- cli::make_ansi_style(
+		"darkgrey"
+	)
+	tmp_fun(...)
 }

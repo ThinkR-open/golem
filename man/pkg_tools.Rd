@@ -10,7 +10,7 @@ pkg_name(golem_wd = get_golem_wd(), path)
 
 pkg_version(golem_wd = get_golem_wd(), path)
 
-pkg_path()
+pkg_path(golem_wd = getwd())
 }
 \arguments{
 \item{golem_wd}{Path to use to read the DESCRIPTION}

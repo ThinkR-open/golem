@@ -32,6 +32,12 @@ cat_start_copy <- function() {
 	)
 }
 
+cat_start_unzip <- function() {
+	cli_alert(
+		"Unzipping file."
+	)
+}
+
 cat_copied <- function(
 	where,
 	file = "File"
@@ -58,9 +64,28 @@ cat_created <- function(
 	)
 }
 
+cat_unzipped <- function(
+	where,
+	file = "File"
+) {
+	cli_alert_success(
+		sprintf(
+			"%s unzipped to %s.",
+			file,
+			where
+		)
+	)
+}
+
 cat_automatically_linked <- function() {
 	cli_alert_success(
 		"File automatically linked in `golem_add_external_resources()`."
+	)
+}
+
+cat_document_reminder <- function() {
+	cli_alert_info(
+		"Run `devtools::document()` to register the new exported functions in NAMESPACE."
 	)
 }
 
@@ -122,10 +147,10 @@ after_creation_message_html_template <- function(
 			"To use this html file as a template, add the following code in your UI:"
 		)
 		cli_cat_line(
-			crayon_darkgrey("htmlTemplate(")
+			cli_darkgrey("htmlTemplate(")
 		)
 		cli_cat_line(
-			crayon_darkgrey(
+			cli_darkgrey(
 				sprintf(
 					'    app_sys("app/www/%s.html"),',
 					file_path_sans_ext(name)
@@ -133,13 +158,13 @@ after_creation_message_html_template <- function(
 			)
 		)
 		cli_cat_line(
-			crayon_darkgrey("    body = tagList()")
+			cli_darkgrey("    body = tagList()")
 		)
 		cli_cat_line(
-			crayon_darkgrey("    # add here other template arguments")
+			cli_darkgrey("    # add here other template arguments")
 		)
 		cli_cat_line(
-			crayon_darkgrey(")")
+			cli_darkgrey(")")
 		)
 	})
 }

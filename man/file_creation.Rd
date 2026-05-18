@@ -13,6 +13,8 @@ add_fct(
   open = TRUE,
   dir_create = TRUE,
   with_test = FALSE,
+  template = fct_template,
+  ...,
   pkg
 )
 
@@ -49,6 +51,12 @@ in the naming (you don't need to add the leading \code{mod_}).}
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
 \item{with_test}{should the module be created with tests?}
+
+\item{template}{Function writing the default contents of a function file.
+Defaults to the built-in function template. Ignored for
+module-specific files.}
+
+\item{...}{Arguments passed to the \code{template} function.}
 
 \item{pkg}{Deprecated, please use golem_wd instead}
 }

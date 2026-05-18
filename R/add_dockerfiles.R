@@ -53,6 +53,10 @@ talk_once <- function(
 #'     an updated tar.gz is created.
 #' @param extra_sysreqs character vector. Extra debian system requirements.
 #'
+#' @note `add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
+#' `add_dockerfile_heroku()` are now soft deprecated; use the corresponding
+#' `add_dockerfile_with_renv_*()` functions instead.
+#'
 #' @export
 #' @rdname dockerfiles
 #'
@@ -121,6 +125,10 @@ add_dockerfile <- function(
 			sys.call()[[1]]
 		),
 		"pkg"
+	)
+	.Deprecated(
+		old = "add_dockerfile",
+		msg = "add_dockerfile() is currently soft deprecated and will be removed in future versions of {golem}.\nPlease use add_dockerfile_with_renv() instead."
 	)
 	add_dockerfile_(
 		path = path,
@@ -257,6 +265,10 @@ add_dockerfile_shinyproxy <- function(
 		),
 		"pkg"
 	)
+	.Deprecated(
+		old = "add_dockerfile_shinyproxy",
+		msg = "add_dockerfile_shinyproxy() is currently soft deprecated and will be removed in future versions of {golem}.\nPlease use add_dockerfile_with_renv_shinyproxy() instead."
+	)
 	add_dockerfile_shinyproxy_(
 		path = path,
 		output = output,
@@ -381,6 +393,10 @@ add_dockerfile_heroku <- function(
 			sys.call()[[1]]
 		),
 		"pkg"
+	)
+	.Deprecated(
+		old = "add_dockerfile_heroku",
+		msg = "add_dockerfile_heroku() is currently soft deprecated and will be removed in future versions of {golem}.\nPlease use add_dockerfile_with_renv_heroku() instead."
 	)
 	add_dockerfile_heroku_(
 		path = path,

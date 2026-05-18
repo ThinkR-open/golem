@@ -4,9 +4,32 @@
 
 ## New features / user-visible changes
 
+- New `use_skills()`, `use_agent_skills()`, `use_claude_skills()` and
+  `use_skill()` helpers install agent skills (Claude Code / AGENTS.md
+  layouts) into a `{golem}` project, from the package's bundled skills or
+  from the upstream `ThinkR-open/golem-agent-skills` repository
+  (@ilyaZar, #1233).
+- `create_golem()` gains `with_agents` and `with_agents_options` arguments
+  to optionally install agent skills during project creation, and the
+  RStudio "New Project" wizard exposes a matching set of options
+  (@ilyaZar, #1233).
+- Installing agent skills now appends the corresponding entries
+  (`^\.claude$`, `^CLAUDE\.md$`, `^\.agents$`, `^AGENTS\.md$`) to the
+  project's `.Rbuildignore` so `R CMD check` no longer flags them as
+  non-standard top-level files.
+- New `add_github_action()` and `add_gitlab_ci()` helpers generate minimal
+  deployment CI for fresh `{golem}` apps.
+- The deployment CI helpers restore `renv.lock` when it is present, fall back
+  to `DESCRIPTION` when it is not, and declare `{pkgload}` for the generated
+  Posit Connect entrypoint.
 - The `add_dockerfile_with_renv_*` function now generates a multi-stage Dockerfile by default (use `single_file = FALSE` to retain the previous behavior).
 - The `add_dockerfile_with_renv_*` function now creates a Dockerfile that sets `golem.app.prod = TRUE` by default (use `set_golem.app.prod = FALSE` to retain the previous behavior).
 - Print functions have be reworked standardized using the `{cli}` package (@ilyaZar, #89)
+- `use_bundled_html()` downloads bundled HTML templates as zip archives, optionally extracts them into `inst/app/www`, and can remove the raw zip afterwards (#848)
+
+- `add_fct()` gains a `template` argument to customize the content of the generated file; the default template is now exposed as the exported `fct_template()` function, mirroring the `module_template()` / `add_module()` pattern (@ilyaZar, #838)
+
+- `add_js_input_binding()` and `add_js_output_binding()` now generate a functional binding: the JS file contains working `find`, `getValue`/`renderValue`, `setValue`, `receiveMessage`, and `subscribe` implementations, and an R companion file (`fct_<name>_input_binding.R` / `fct_<name>_output_binding.R`) is created alongside it with ready-to-use UI constructor, update, and render functions (@ilyaZar, #868, #869)
 
 ## Breaking change
 
@@ -14,17 +37,36 @@
 
 - `{golem}` functions used to rely on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This has now been standardized and all functions rely on `golem_wd` now (@ilyaZar, #845)
 
+- `get_sysreqs()` has been removed; use `dockerfiler::get_sysreqs()` instead.
+
+- `use_recommended_deps()` has been removed.
+
+- `add_rstudioconnect_file()` has been removed; use `add_positconnect_file()` instead.
+
 - Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
 
 - The `add_*_files` and `use_*_files` now fail when:
-  - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use\_\*\_file functions should only be there to add file (Singe responsabily )
+
+  - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use\_\*\_file functions should only be there to add file (Single responsibility)
   - The file that the user tries to create already exists
 
 - Creating a golem with `create_golem(overwrite = TRUE)` will now **delete the old folder** and replace with the golem skeleton.
 
+- `add_js_input_binding()` and `add_js_output_binding()` generate JS files with a new naming scheme: `<name>-input.js` / `<name>-output.js` (previously `input-<name>.js` / `output-<name>.js`). Manually rename or delete any old binding files (@ilyaZar, #868, #869)
+
+- The default `events` argument of `add_js_input_binding()` has changed from `list(name = "click", rate_policy = FALSE)` to `list(name = c("change", "input"), rate_policy = c(FALSE, FALSE))` to produce a functional input binding out of the box (@ilyaZar, #868)
+
 ## User visible change
 
 - `run_dev()` only prints one message (#1191 / @howardbaik)
+
+## Soft deprecated
+
+- `browser_button()` is now soft deprecated (#1155)
+
+- `add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
+  `add_dockerfile_heroku()` are now explicitly soft deprecated; use the
+  corresponding `add_dockerfile_with_renv_*()` functions.
 
 ## Bug fix
 
@@ -35,6 +77,8 @@
 - The `create_if_needed()` function has been fixed to work in non interactive mode (#1154, @pachadotdev)
 
 ## Internal changes
+
+- Added internal `cli_progress_bar()`, `cli_progress_update()`, `cli_progress_done()` wrappers and `cat_start_unzip()` / `cat_unzipped()` helpers (@ilyaZar, #1234)
 
 - `{golem}` now embarks a `claude.md` file and a series of skills
 

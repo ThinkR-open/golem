@@ -65,8 +65,10 @@ covrpage::covrpage()
 usethis::use_github()
 
 # GitHub Actions
-usethis::use_github_action()
-# Chose one of the three
+# Add a Posit Connect deployment workflow for Shiny apps
+golem::add_github_action()
+# Or use the generic usethis GitHub Actions helpers
+# Choose one of the three
 # See https://usethis.r-lib.org/reference/use_github_action.html
 usethis::use_github_action_check_release()
 usethis::use_github_action_check_standard()
@@ -82,7 +84,8 @@ usethis::use_circleci_badge()
 usethis::use_jenkins()
 
 # GitLab CI
-usethis::use_gitlab_ci()
+# Add a Posit Connect deployment pipeline for Shiny apps
+golem::add_gitlab_ci()
 
 # You're now set! ----
 # go to dev/03_deploy.R
