@@ -13,7 +13,10 @@ warn_if_in_prod_mode <- function() {
 	}
 	fun_call <- sys.call(-1)
 	fun_name <- if (length(fun_call)) {
-		as.character(fun_call[[1L]])
+		# deparse() (rather than as.character()) keeps the call's textual
+		# form intact for namespaced invocations like `golem::use_*()`,
+		# which would otherwise be returned as c("::", "golem", "use_*").
+		deparse(fun_call[[1L]])
 	} else {
 		"This function"
 	}

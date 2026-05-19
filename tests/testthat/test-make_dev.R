@@ -109,10 +109,31 @@ test_that("warn_if_in_prod_mode warns only when golem.app.prod is TRUE", {
 	)
 })
 
+test_that("warn_if_in_prod_mode preserves the caller name for `pkg::fun` calls", {
+	withr::with_options(
+		c(golem.app.prod = TRUE),
+		{
+			# The real body errors out further down (no real golem project
+			# under the tempdir); we only care about the warning text.
+			expect_warning(
+				try(
+					golem::use_external_file(
+						url = "http://example.com/x.txt",
+						golem_wd = withr::local_tempdir()
+					),
+					silent = TRUE
+				),
+				"`golem::use_external_file\\(\\)` is a development function"
+			)
+		}
+	)
+})
+
 test_that("dev scaffolding functions warn when called in prod mode", {
 	# Representative samples from each in-scope family. We don't run the
 	# real bodies — we only assert that the prod-mode warning fires at the
-	# entry of the function.
+	# entry of the function. Each call runs against an isolated tempdir so
+	# we don't leak files between tests.
 	check_warns <- function(expr) {
 		withr::with_options(
 			c(golem.app.prod = TRUE),
@@ -124,16 +145,16 @@ test_that("dev scaffolding functions warn when called in prod mode", {
 	}
 	check_warns(use_external_file(
 		url = "http://example.com/x.txt",
-		golem_wd = tempdir()
+		golem_wd = withr::local_tempdir()
 	))
 	check_warns(add_module(
 		name = "foo",
-		golem_wd = tempdir(),
+		golem_wd = withr::local_tempdir(),
 		open = FALSE
 	))
 	check_warns(set_golem_name(
 		name = "foo",
-		golem_wd = tempdir()
+		golem_wd = withr::local_tempdir()
 	))
 })
 
