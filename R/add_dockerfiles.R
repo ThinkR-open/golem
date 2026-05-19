@@ -51,6 +51,7 @@
 add_dockerfile <- function(
 	...
 ) {
+	warn_if_in_prod_mode()
 	.Defunct(
 		new = "add_dockerfile_with_renv",
 		msg = "add_dockerfile() is defunct. Please use add_dockerfile_with_renv() instead."
@@ -62,6 +63,7 @@ add_dockerfile <- function(
 add_dockerfile_shinyproxy <- function(
 	...
 ) {
+	warn_if_in_prod_mode()
 	.Defunct(
 		new = "add_dockerfile_with_renv_shinyproxy",
 		msg = "add_dockerfile_shinyproxy() is defunct. Please use add_dockerfile_with_renv_shinyproxy() instead."
@@ -73,6 +75,7 @@ add_dockerfile_shinyproxy <- function(
 add_dockerfile_heroku <- function(
 	...
 ) {
+	warn_if_in_prod_mode()
 	.Defunct(
 		new = "add_dockerfile_with_renv_heroku",
 		msg = "add_dockerfile_heroku() is defunct. Please use add_dockerfile_with_renv_heroku() instead."

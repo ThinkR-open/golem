@@ -82,6 +82,61 @@ test_that("test make_dev", {
 	)
 })
 
+test_that("warn_if_in_prod_mode warns only when golem.app.prod is TRUE", {
+	withr::with_options(
+		c(golem.app.prod = TRUE),
+		{
+			caller <- function() warn_if_in_prod_mode()
+			expect_warning(
+				caller(),
+				"`caller\\(\\)` is a development function"
+			)
+		}
+	)
+	withr::with_options(
+		c(golem.app.prod = FALSE),
+		{
+			caller <- function() warn_if_in_prod_mode()
+			expect_no_warning(caller())
+		}
+	)
+	withr::with_options(
+		c(golem.app.prod = NULL),
+		{
+			caller <- function() warn_if_in_prod_mode()
+			expect_no_warning(caller())
+		}
+	)
+})
+
+test_that("dev scaffolding functions warn when called in prod mode", {
+	# Representative samples from each in-scope family. We don't run the
+	# real bodies — we only assert that the prod-mode warning fires at the
+	# entry of the function.
+	check_warns <- function(expr) {
+		withr::with_options(
+			c(golem.app.prod = TRUE),
+			expect_warning(
+				suppressMessages(try(expr, silent = TRUE)),
+				"development function"
+			)
+		)
+	}
+	check_warns(use_external_file(
+		url = "http://example.com/x.txt",
+		golem_wd = tempdir()
+	))
+	check_warns(add_module(
+		name = "foo",
+		golem_wd = tempdir(),
+		open = FALSE
+	))
+	check_warns(set_golem_name(
+		name = "foo",
+		golem_wd = tempdir()
+	))
+})
+
 test_that("test browser_button", {
 	withr::with_options(
 		c("golem.quiet" = FALSE),

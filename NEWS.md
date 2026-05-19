@@ -1,5 +1,14 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
+# golem (development version)
+
+## New features
+
+- Development-time scaffolding helpers (`use_*`, `add_*`, `set_golem_*`)
+  now emit a warning when they are called while `{golem}` is in
+  production mode (`options('golem.app.prod' = TRUE)`), helping catch
+  accidental invocations from a deployed app (#808).
+
 # golem 0.5.1 to 0.6.0
 
 ## New features / user-visible changes

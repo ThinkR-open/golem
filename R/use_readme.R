@@ -14,6 +14,7 @@ use_readme_rmd <- function(
 	golem_wd = golem::get_golem_wd(),
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(

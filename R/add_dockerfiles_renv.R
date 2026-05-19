@@ -270,6 +270,7 @@ add_dockerfile_with_renv <- function(
 	...,
 	source_folder
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		source_folder,
 		fun = as.character(sys.call()[[1]]),
@@ -414,6 +415,7 @@ add_dockerfile_with_renv_shinyproxy <- function(
 	...,
 	source_folder
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		source_folder,
 		fun = as.character(sys.call()[[1]]),
@@ -474,6 +476,7 @@ add_dockerfile_with_renv_heroku <- function(
 	...,
 	source_folder
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		source_folder,
 		fun = as.character(sys.call()[[1]]),
