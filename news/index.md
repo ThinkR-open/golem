@@ -13,6 +13,12 @@
   gain a `replace` argument. When `TRUE`, an existing file (or bundle
   directory) at the target location is overwritten instead of aborting
   ([\#819](https://github.com/ThinkR-open/golem/issues/819)).
+- Development-time scaffolding helpers (`use_*`, `add_*`, `set_golem_*`)
+  now emit a warning when they are called while
+  [golem](https://thinkr-open.github.io/golem/) is in production mode
+  (`options('golem.app.prod' = TRUE)`), helping catch accidental
+  invocations from a deployed app
+  ([\#808](https://github.com/ThinkR-open/golem/issues/808)).
 
 ## golem 0.5.1 to 0.6.0
 

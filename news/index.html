@@ -49,6 +49,7 @@
 <h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li>
 <code><a href="../reference/use_files.html">use_external_js_file()</a></code>, <code><a href="../reference/use_files.html">use_external_css_file()</a></code>, <code><a href="../reference/use_files.html">use_external_html_template()</a></code>, <code><a href="../reference/use_files.html">use_external_file()</a></code> and <code><a href="../reference/use_files.html">use_bundled_html()</a></code> gain a <code>replace</code> argument. When <code>TRUE</code>, an existing file (or bundle directory) at the target location is overwritten instead of aborting (<a href="https://github.com/ThinkR-open/golem/issues/819" class="external-link">#819</a>).</li>
+<li>Development-time scaffolding helpers (<code>use_*</code>, <code>add_*</code>, <code>set_golem_*</code>) now emit a warning when they are called while <a href="https://thinkr-open.github.io/golem/">golem</a> is in production mode (<code>options('golem.app.prod' = TRUE)</code>), helping catch accidental invocations from a deployed app (<a href="https://github.com/ThinkR-open/golem/issues/808" class="external-link">#808</a>).</li>
 </ul></div>
 </div>
     <div class="section level2">
