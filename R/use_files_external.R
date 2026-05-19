@@ -36,6 +36,7 @@ use_external_js_file <- function(
 	pkg,
 	replace = FALSE
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -75,6 +76,7 @@ use_external_css_file <- function(
 	pkg,
 	replace = FALSE
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -115,6 +117,7 @@ use_external_html_template <- function(
 	delete_zip = c("ask", "yes", "no"),
 	replace = FALSE
 ) {
+	warn_if_in_prod_mode()
 	if (!missing(dir_create)) {
 		cli_abort_dir_create()
 	}
@@ -165,6 +168,7 @@ use_external_file <- function(
 	pkg,
 	replace = FALSE
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -204,6 +208,7 @@ use_bundled_html <- function(
 	delete_zip = c("ask", "yes", "no"),
 	replace = FALSE
 ) {
+	warn_if_in_prod_mode()
 	extract <- match.arg(extract)
 	delete_zip <- match.arg(delete_zip)
 	old <- setwd(fs_path_abs(golem_wd))

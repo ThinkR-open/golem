@@ -42,6 +42,7 @@ add_module <- function(
 	...,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(

@@ -15,6 +15,7 @@ add_github_action <- function(
 	golem_wd = get_golem_wd(),
 	open = TRUE
 ) {
+	warn_if_in_prod_mode()
 	add_deploy_ci_(
 		template = "github-action-template.yml",
 		output = fs_path(
@@ -42,6 +43,7 @@ add_github_action <- function(
 #'
 #' @return The path to the created GitLab CI file, invisibly.
 add_gitlab_ci <- function(golem_wd = get_golem_wd(), open = TRUE) {
+	warn_if_in_prod_mode()
 	add_deploy_ci_(
 		template = "gitlab-ci-template.yml",
 		output = fs_path(golem_wd, ".gitlab-ci.yml"),

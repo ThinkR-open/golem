@@ -176,6 +176,7 @@ add_positconnect_file <- function(
 	open = TRUE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -197,6 +198,7 @@ add_shinyappsio_file <- function(
 	open = TRUE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -218,6 +220,7 @@ add_shinyserver_file <- function(
 	open = TRUE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -239,6 +242,7 @@ add_rscignore_file <- function(
 	open = TRUE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(

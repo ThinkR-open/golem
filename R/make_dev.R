@@ -1,3 +1,32 @@
+#' Warn if called while {golem} is in production mode
+#'
+#' Helper used by development-time scaffolding functions (`use_*`,
+#' `add_*`, `set_golem_*`) to alert the user when they are accidentally
+#' invoked from a running app (i.e. when `options('golem.app.prod')` is
+#' `TRUE`).
+#'
+#' @return Used for its side-effect (prints a `cli` warning).
+#' @noRd
+warn_if_in_prod_mode <- function() {
+	if (!isTRUE(getOption("golem.app.prod"))) {
+		return(invisible(NULL))
+	}
+	fun_call <- sys.call(-1)
+	fun_name <- if (length(fun_call)) {
+		as.character(fun_call[[1L]])
+	} else {
+		"This function"
+	}
+	warning(
+		sprintf(
+			"`%s()` is a development function and should not be called when {golem} is in production mode (`options('golem.app.prod' = TRUE)`).",
+			fun_name
+		),
+		call. = FALSE
+	)
+	invisible(NULL)
+}
+
 #' Make a function dependent to dev mode
 #'
 #' The function returned will be run only if `golem::app_dev()`

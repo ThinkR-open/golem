@@ -7,6 +7,7 @@ set_golem_wd <- function(
 	golem_wd,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		golem_wd,
 		fun = as.character(
@@ -65,6 +66,7 @@ set_golem_name <- function(
 	old_name = golem::pkg_name(),
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -237,6 +239,7 @@ set_golem_version <- function(
 	talkative = TRUE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
