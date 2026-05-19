@@ -21,6 +21,7 @@ use_recommended_tests <- function(
 	error = FALSE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(

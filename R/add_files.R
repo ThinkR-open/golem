@@ -41,6 +41,7 @@ add_js_file <- function(
 	...,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -109,6 +110,7 @@ add_js_handler <- function(
 	...,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -357,6 +359,7 @@ add_js_input_binding <- function(
 	),
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -663,6 +666,7 @@ add_js_output_binding <- function(
 	dir_create,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -828,6 +832,7 @@ add_css_file <- function(
 	...,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -879,6 +884,7 @@ add_sass_file <- function(
 	...,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -983,6 +989,7 @@ add_empty_file <- function(
 	...,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -1092,6 +1099,7 @@ add_html_template <- function(
 	dir_create,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -1167,6 +1175,7 @@ add_partial_html_template <- function(
 	dir_create,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -1218,6 +1227,7 @@ add_ui_server_files <- function(
 	dir_create,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(

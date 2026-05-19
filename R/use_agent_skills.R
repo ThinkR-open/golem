@@ -175,6 +175,7 @@ use_skills <- function(
 	golem_wd = get_golem_wd(),
 	interactive = rlang_is_interactive()
 ) {
+	warn_if_in_prod_mode()
 	use_agent_implement(
 		source = source,
 		agent_specs = agent_specs,
@@ -203,6 +204,7 @@ use_agent_skills <- function(
 	golem_wd = get_golem_wd(),
 	interactive = rlang_is_interactive()
 ) {
+	warn_if_in_prod_mode()
 	use_agent_implement(
 		source = source,
 		agent_specs = "agents",
@@ -231,6 +233,7 @@ use_claude_skills <- function(
 	golem_wd = get_golem_wd(),
 	interactive = rlang_is_interactive()
 ) {
+	warn_if_in_prod_mode()
 	use_agent_implement(
 		source = source,
 		agent_specs = "claude",
@@ -265,6 +268,7 @@ use_skill <- function(
 	golem_wd = get_golem_wd(),
 	interactive = rlang_is_interactive()
 ) {
+	warn_if_in_prod_mode()
 	if (missing(name) || length(name) != 1 || !nzchar(name)) {
 		cli_abort("`name` must be a single non-empty skill name.")
 	}

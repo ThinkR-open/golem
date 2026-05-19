@@ -119,6 +119,7 @@ add_dockerfile <- function(
 	extra_sysreqs = NULL,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -258,6 +259,7 @@ add_dockerfile_shinyproxy <- function(
 	extra_sysreqs = NULL,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -387,6 +389,7 @@ add_dockerfile_heroku <- function(
 	extra_sysreqs = NULL,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(

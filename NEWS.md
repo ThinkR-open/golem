@@ -9,6 +9,10 @@
   `use_bundled_html()` gain a `replace` argument. When `TRUE`, an existing
   file (or bundle directory) at the target location is overwritten instead
   of aborting (#819).
+- Development-time scaffolding helpers (`use_*`, `add_*`, `set_golem_*`)
+  now emit a warning when they are called while `{golem}` is in
+  production mode (`options('golem.app.prod' = TRUE)`), helping catch
+  accidental invocations from a deployed app (#808).
 
 # golem 0.5.1 to 0.6.0
 

@@ -18,6 +18,7 @@ use_utils_ui <- function(
 	with_test = FALSE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -76,6 +77,7 @@ use_utils_test_ui <- function(
 	golem_wd = get_golem_wd(),
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -103,6 +105,7 @@ use_utils_server <- function(
 	with_test = FALSE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -204,6 +207,7 @@ use_utils_test_server <- function(
 	golem_wd = get_golem_wd(),
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(

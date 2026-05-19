@@ -222,6 +222,7 @@ add_fct <- function(
 	...,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -253,6 +254,7 @@ add_utils <- function(
 	with_test = FALSE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -282,6 +284,7 @@ add_r6 <- function(
 	with_test = FALSE,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(

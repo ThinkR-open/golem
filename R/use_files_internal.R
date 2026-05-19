@@ -9,6 +9,7 @@ use_internal_js_file <- function(
 	dir_create,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -48,6 +49,7 @@ use_internal_css_file <- function(
 	dir_create,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -87,6 +89,7 @@ use_internal_html_template <- function(
 	dir_create,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
@@ -124,6 +127,7 @@ use_internal_file <- function(
 	dir_create,
 	pkg
 ) {
+	warn_if_in_prod_mode()
 	signal_arg_is_deprecated(
 		pkg,
 		fun = as.character(
