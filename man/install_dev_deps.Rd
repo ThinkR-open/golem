@@ -21,20 +21,19 @@ Used for side-effects
 \description{
 This function will run rlang::check_installed() on:
 \itemize{
-\item {usethis}
-\item {pkgload}
-\item {dockerfiler}
-\item {devtools}
-\item {roxygen2}
-\item {attachment}
-\item {rstudioapi}
-\item {fs}
-\item {desc}
-\item {pkgbuild}
-\item {processx}
-\item {rsconnect}
-\item {testthat}
-\item {rstudioapi}
+\item \code{usethis}
+\item \code{pkgload}
+\item \code{dockerfiler}
+\item \code{devtools}
+\item \code{roxygen2}
+\item \code{attachment}
+\item \code{rstudioapi}
+\item \code{fs}
+\item \code{desc}
+\item \code{pkgbuild}
+\item \code{processx}
+\item \code{rsconnect}
+\item \code{testthat}
 }
 }
 \examples{

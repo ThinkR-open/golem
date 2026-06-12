@@ -1,20 +1,19 @@
 #' Install `{golem}` dev dependencies
 #'
 #' This function will run rlang::check_installed() on:
-#' + {usethis}
-#' + {pkgload}
-#' + {dockerfiler}
-#' + {devtools}
-#' + {roxygen2}
-#' + {attachment}
-#' + {rstudioapi}
-#' + {fs}
-#' + {desc}
-#' + {pkgbuild}
-#' + {processx}
-#' + {rsconnect}
-#' + {testthat}
-#' + {rstudioapi}
+#' + `usethis`
+#' + `pkgload`
+#' + `dockerfiler`
+#' + `devtools`
+#' + `roxygen2`
+#' + `attachment`
+#' + `rstudioapi`
+#' + `fs`
+#' + `desc`
+#' + `pkgbuild`
+#' + `processx`
+#' + `rsconnect`
+#' + `testthat`
 #'
 #' @param force_install If force_install is TRUE,
 #'  then the user is not interactively asked
