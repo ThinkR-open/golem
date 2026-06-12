@@ -7,10 +7,13 @@ Legend:
 
 | Function/feature name        | Dpr.since| Notes                                                         |
 | ---                          | ---       | ---                                                          |
-| `add_dockerfile()`           | 0.3.3     | Soft depr; use `add_dockerfile_with_renv()`                  |
-| `add_dockerfile_shinyproxy()`| 0.3.3     | Soft depr; use `add_dockerfile_with_renv_shinyproxy()`       |
-| `add_dockerfile_heroku()`    | 0.3.3     | Soft depr; use `add_dockerfile_with_renv_heroku()`           |
-| `use_recommended_deps()`     | 0.3.2     | Soft depr; earlier `use_recommended_dep()`renamed to this    |
+| `get_sysreqs()`              | 1.0.0     | Removed; use `dockerfiler::get_sysreqs()` instead.          |
+| `use_recommended_deps()`     | 1.0.0     | Removed (was soft depr since 0.3.2); no replacement.         |
+| `add_rstudioconnect_file()`  | 1.0.0     | Removed; use `add_positconnect_file()` instead.             |
+| `browser_button()`           | 1.0.0     | Soft depr (#1155).                                          |
+| `add_dockerfile()`           | 1.0.0     | Soft depr; use `add_dockerfile_with_renv()`                  |
+| `add_dockerfile_shinyproxy()`| 1.0.0     | Soft depr; use `add_dockerfile_with_renv_shinyproxy()`       |
+| `add_dockerfile_heroku()`    | 1.0.0     | Soft depr; use `add_dockerfile_with_renv_heroku()`           |
 | `expect_html_equal(html = )` | 0.3.2     | Hard depr; `html` parameter is no longer in use              |
 | `add_ui_server_files()`      | 0.3.1     | Soft depr; use only if `ui.R` and `server.R` files are needed|
 | `get_dependencies`           | 0.2.1     | Removed; use `desc::desc_get_deps()` instead.                |

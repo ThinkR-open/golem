@@ -1,22 +1,59 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
-# golem (development version)
+# golem 1.0.0
+
+This is a major release. It brings the agent-skills tooling, a reworked
+Dockerfile/`{renv}` deployment story, and `{cli}`-based console output, together
+with a number of **breaking changes** (listed first below). Please read the
+breaking changes before upgrading an existing `{golem}` project.
+
+## Breaking changes
+
+- `get_current_config()` has been reworked in two ways: (1) it now reads either
+  the `GOLEM_CONFIG_PATH` environment variable or the default path
+  (`inst/golem-config.yml`) — `{golem}` no longer tries to guess non-standard
+  paths, and hard-fails if the file doesn't exist; (2) the function no longer
+  copies the `config` files from the skeleton when they are missing
+  (@ilyaZar, @LDSamson, #1178).
+
+- `{golem}` functions used to rely on arguments that were either `wd`, `path`,
+  `pkg` or `golem_wd`. This has now been standardized and all functions rely on
+  `golem_wd` (@ilyaZar, #845).
+
+- `get_sysreqs()` has been removed; use `dockerfiler::get_sysreqs()` instead.
+
+- `use_recommended_deps()` has been removed.
+
+- `add_rstudioconnect_file()` has been removed; use `add_positconnect_file()`
+  instead.
+
+- Creating a `golem` no longer calls `set_here()` nor
+  `usethis::create_project()`. It used to, so that `here::here()` could be used,
+  but the package is able to find its way using `DESCRIPTION`. This gives a
+  lighter golem project creation that no longer interferes with where `here()`
+  resolves.
+
+- The `add_*_files` and `use_*_files` functions now fail when:
+
+  - The directory where the file would be created doesn't exist. `{golem}` used
+    to create the directory, but that is not the function's job — the
+    `use_*_file` functions should only add a file (single responsibility).
+  - The file the user tries to create already exists.
+
+- Creating a golem with `create_golem(overwrite = TRUE)` will now **delete the
+  old folder** and replace it with the golem skeleton.
+
+- `add_js_input_binding()` and `add_js_output_binding()` generate JS files with
+  a new naming scheme: `<name>-input.js` / `<name>-output.js` (previously
+  `input-<name>.js` / `output-<name>.js`). Manually rename or delete any old
+  binding files (@ilyaZar, #868, #869).
+
+- The default `events` argument of `add_js_input_binding()` has changed from
+  `list(name = "click", rate_policy = FALSE)` to
+  `list(name = c("change", "input"), rate_policy = c(FALSE, FALSE))` to produce
+  a functional input binding out of the box (@ilyaZar, #868).
 
 ## New features
-
-- `use_external_js_file()`, `use_external_css_file()`,
-  `use_external_html_template()`, `use_external_file()` and
-  `use_bundled_html()` gain a `replace` argument. When `TRUE`, an existing
-  file (or bundle directory) at the target location is overwritten instead
-  of aborting (#819).
-- Development-time scaffolding helpers (`use_*`, `add_*`, `set_golem_*`)
-  now emit a warning when they are called while `{golem}` is in
-  production mode (`options('golem.app.prod' = TRUE)`), helping catch
-  accidental invocations from a deployed app (#808).
-
-# golem 0.5.1 to 0.6.0
-
-## New features / user-visible changes
 
 - New `use_skills()`, `use_agent_skills()`, `use_claude_skills()` and
   `use_skill()` helpers install agent skills (Claude Code / AGENTS.md
@@ -36,73 +73,79 @@
 - The deployment CI helpers restore `renv.lock` when it is present, fall back
   to `DESCRIPTION` when it is not, and declare `{pkgload}` for the generated
   Posit Connect entrypoint.
-- The `add_dockerfile_with_renv_*` function now generates a multi-stage Dockerfile by default (use `single_file = FALSE` to retain the previous behavior).
-- The `add_dockerfile_with_renv_*` function now creates a Dockerfile that sets `golem.app.prod = TRUE` by default (use `set_golem.app.prod = FALSE` to retain the previous behavior).
-- Print functions have be reworked standardized using the `{cli}` package (@ilyaZar, #89)
-- `use_bundled_html()` downloads bundled HTML templates as zip archives, optionally extracts them into `inst/app/www`, and can remove the raw zip afterwards (#848)
-
-- `add_fct()` gains a `template` argument to customize the content of the generated file; the default template is now exposed as the exported `fct_template()` function, mirroring the `module_template()` / `add_module()` pattern (@ilyaZar, #838)
-
-- `add_js_input_binding()` and `add_js_output_binding()` now generate a functional binding: the JS file contains working `find`, `getValue`/`renderValue`, `setValue`, `receiveMessage`, and `subscribe` implementations, and an R companion file (`fct_<name>_input_binding.R` / `fct_<name>_output_binding.R`) is created alongside it with ready-to-use UI constructor, update, and render functions (@ilyaZar, #868, #869)
-
-## Breaking change
-
-- The `get_current_config()` has been rework in two ways: (1) it now either check the `GOLEM_CONFIG_PATH` env var or the default path (inst/golem-config.yml). `{golem}` no longer tries to guess non standard paths, and does a hard fail if the file doesn't exist, (2) the function no longer copy the `config` files from the skeleton if ever the files are not there (@ilyaZar, @LDSamson, #1178)
-
-- `{golem}` functions used to rely on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This has now been standardized and all functions rely on `golem_wd` now (@ilyaZar, #845)
-
-- `get_sysreqs()` has been removed; use `dockerfiler::get_sysreqs()` instead.
-
-- `use_recommended_deps()` has been removed.
-
-- `add_rstudioconnect_file()` has been removed; use `add_positconnect_file()` instead.
-
-- Creating a `golem` doesn't call `set_here()` nor `usethis::create_project()` anymore. It used to be because we wanted to be able to use `here::here()`, but the function should be able to find its way based using `DESCRIPTION`. It gives a lighter implementation of golem projects creation as it doesn't mess up with where `here()` is anymore.
-
-- The `add_*_files` and `use_*_files` now fail when:
-
-  - The directory where the user tries to add the file doesn't exist. `{golem}` used to try to create the directory but that's not the function job — use\_\*\_file functions should only be there to add file (Single responsibility)
-  - The file that the user tries to create already exists
-
-- Creating a golem with `create_golem(overwrite = TRUE)` will now **delete the old folder** and replace with the golem skeleton.
-
-- `add_js_input_binding()` and `add_js_output_binding()` generate JS files with a new naming scheme: `<name>-input.js` / `<name>-output.js` (previously `input-<name>.js` / `output-<name>.js`). Manually rename or delete any old binding files (@ilyaZar, #868, #869)
-
-- The default `events` argument of `add_js_input_binding()` has changed from `list(name = "click", rate_policy = FALSE)` to `list(name = c("change", "input"), rate_policy = c(FALSE, FALSE))` to produce a functional input binding out of the box (@ilyaZar, #868)
-
-## User visible change
-
-- `run_dev()` only prints one message (#1191 / @howardbaik)
+- `use_external_js_file()`, `use_external_css_file()`,
+  `use_external_html_template()`, `use_external_file()` and
+  `use_bundled_html()` gain a `replace` argument. When `TRUE`, an existing
+  file (or bundle directory) at the target location is overwritten instead
+  of aborting (#819).
+- Development-time scaffolding helpers (`use_*`, `add_*`, `set_golem_*`)
+  now emit a warning when they are called while `{golem}` is in
+  production mode (`options('golem.app.prod' = TRUE)`), helping catch
+  accidental invocations from a deployed app (#808).
+- The `add_dockerfile_with_renv*()` functions now generate a multi-stage
+  Dockerfile by default (use `single_file = FALSE` to keep the previous
+  two-file behavior).
+- The `add_dockerfile_with_renv*()` functions now create a Dockerfile that
+  sets `golem.app.prod = TRUE` by default (use `set_golem.app.prod = FALSE`
+  to keep the previous behavior).
+- Print functions have been reworked and standardized using the `{cli}`
+  package (@ilyaZar, #89).
+- `use_bundled_html()` downloads bundled HTML templates as zip archives,
+  optionally extracts them into `inst/app/www`, and can remove the raw zip
+  afterwards (#848).
+- `add_fct()` gains a `template` argument to customize the content of the
+  generated file; the default template is now exposed as the exported
+  `fct_template()` function, mirroring the `module_template()` /
+  `add_module()` pattern (@ilyaZar, #838).
+- `add_js_input_binding()` and `add_js_output_binding()` now generate a
+  functional binding: the JS file contains working `find`,
+  `getValue`/`renderValue`, `setValue`, `receiveMessage`, and `subscribe`
+  implementations, and an R companion file
+  (`fct_<name>_input_binding.R` / `fct_<name>_output_binding.R`) is created
+  alongside it with ready-to-use UI constructor, update, and render functions
+  (@ilyaZar, #868, #869).
+- `run_dev()` only prints one message (#1191 / @howardbaik).
 
 ## Soft deprecated
 
-- `browser_button()` is now soft deprecated (#1155)
+- `browser_button()` is now soft deprecated (#1155).
 
 - `add_dockerfile()`, `add_dockerfile_shinyproxy()`, and
   `add_dockerfile_heroku()` are now explicitly soft deprecated; use the
   corresponding `add_dockerfile_with_renv_*()` functions.
 
-## Bug fix
+## Bug fixes
 
-- Removing the comments on golem creation didn't work fully, this has been fixed.
+- Removing the comments on golem creation didn't work fully; this has been
+  fixed.
 
-- Renamed a function in 02_dev.R (add_any_file => add_empty_file)
+- Renamed a function in `02_dev.R` (`add_any_file` => `add_empty_file`).
 
-- The `create_if_needed()` function has been fixed to work in non interactive mode (#1154, @pachadotdev)
+- The `create_if_needed()` function has been fixed to work in non-interactive
+  mode (#1154, @pachadotdev).
 
 ## Internal changes
 
-- Added internal `cli_progress_bar()`, `cli_progress_update()`, `cli_progress_done()` wrappers and `cat_start_unzip()` / `cat_unzipped()` helpers (@ilyaZar, #1234)
+- The package now uses the [air](https://posit-dev.github.io/air/) formatter
+  (with a pre-commit hook) for code styling, replacing grkstyle.
 
-- `{golem}` now embarks a `claude.md` file and a series of skills
+- Added internal `cli_progress_bar()`, `cli_progress_update()`,
+  `cli_progress_done()` wrappers and `cat_start_unzip()` / `cat_unzipped()`
+  helpers (@ilyaZar, #1234).
 
-- Full refactoring of the `add_*_files` and `use_*_files` functions that now all share the same behavior
+- `{golem}` now ships a `CLAUDE.md` file and a series of skills.
 
-- The internal `check_name_consistency()` now parses the code of `app_config.R` and get the `package` arg of `system.file`, instead of doing a text based search. This allows the function to detect several calls to `system.file` and fixes the bug from #1179
+- Full refactoring of the `add_*_files` and `use_*_files` functions, which now
+  all share the same behavior.
 
-## Doc
+- The internal `check_name_consistency()` now parses the code of
+  `app_config.R` and gets the `package` argument of `system.file()`, instead
+  of doing a text-based search. This allows the function to detect several
+  calls to `system.file()` and fixes the bug from #1179.
 
-- Vignettes have been renamed
+## Documentation
+
+- Vignettes have been renamed.
 
 # golem 0.5.1
 
