@@ -19,7 +19,7 @@
 #'   is overwritten. Defaults to `FALSE`, in which case the function aborts if
 #'   the target already exists.
 #'
-#' @note See `?htmltools::htmlTemplate` and `https://shiny.rstudio.com/articles/templates.html`
+#' @note See `?htmltools::htmlTemplate` and `https://shiny.posit.co/r/articles/build/templates/`
 #'     for more information about `htmlTemplate`.
 #'
 #' @export

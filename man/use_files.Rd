@@ -147,6 +147,6 @@ The \code{use_internal_} functions will copy internal files, while \code{use_ext
 from a remote location.
 }
 \note{
-See \code{?htmltools::htmlTemplate} and \verb{https://shiny.rstudio.com/articles/templates.html}
+See \code{?htmltools::htmlTemplate} and \verb{https://shiny.posit.co/r/articles/build/templates/}
 for more information about \code{htmlTemplate}.
 }

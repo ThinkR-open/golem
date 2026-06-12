@@ -19,7 +19,7 @@
 #'     For instance, `list(name = c("click", "keyup"), rate_policy = c(FALSE, TRUE))`.
 #'     The list contain names and rate policies to apply to each event. If a rate policy is found,
 #'     the debounce method with a default delay of 250 ms is applied. You may edit manually according to
-#'     <https://shiny.rstudio.com/articles/building-inputs.html>
+#'     <https://shiny.posit.co/r/articles/build/building-inputs/>
 #' @export
 #' @rdname add_files
 #' @importFrom attempt stop_if
