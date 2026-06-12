@@ -59,9 +59,11 @@ explicitely
 favicon
 fct
 filesystem
+formatter
 fs
 getters
 github
+grkstyle
 gz
 hideid
 htmlDependency
@@ -85,6 +87,7 @@ pkgbuild
 pkgdown
 pkgload
 png
+pre
 preconfigured
 preload
 processx

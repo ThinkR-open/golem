@@ -57,12 +57,12 @@ With `{golem}`, developers can focus on creating high-quality, robust `{shiny}` 
 install.packages("golem")
 ```
 
--   You can install the development version from [GitHub](https://github.com/Thinkr-open/golem) with:
+-   You can install the development version from [GitHub](https://github.com/ThinkR-open/golem) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("Thinkr-open/golem") # Stable development version
-# remotes::install_github("Thinkr-open/golem@dev") # Bleeding edge development version
+remotes::install_github("ThinkR-open/golem") # Stable development version
+# remotes::install_github("ThinkR-open/golem@dev") # Bleeding edge development version
 ```
 
 ## Get Started
@@ -125,14 +125,10 @@ Please note that this project is released with a [Contributor Code of Conduct](h
 
 ## Note for the contributors
 
-Please style the files according to `grkstyle::grk_style_transformer()`
+Please format the files with [`air`](https://posit-dev.github.io/air/) before submitting a contribution:
 
-```{r eval = FALSE}
-# If you work in RStudio
-options(styler.addins_style_transformer = "grkstyle::grk_style_transformer()")
-
-# If you work in VSCode
-options(languageserver.formatting_style = function(options) {
-  grkstyle::grk_style_transformer()
-})
+``` sh
+air format .
 ```
+
+The repository also ships a pre-commit hook that runs `air` automatically (see `.pre-commit-config.yaml`).
