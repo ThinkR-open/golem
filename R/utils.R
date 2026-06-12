@@ -49,7 +49,7 @@ create_if_needed <- function(
 			}
 		} else {
 			# In non-interactive mode, inform user of creation
-			message(
+			cli_alert_info(
 				sprintf(
 					"Creating %s %s",
 					type,

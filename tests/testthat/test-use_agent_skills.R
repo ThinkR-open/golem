@@ -1,3 +1,8 @@
+# Silence golem's console output for this whole file (file-scoped, restored at
+# end of file by testthat 3e), matching how the rest of the suite stays quiet
+# via create_dummy_golem() / run_quietly_in_a_dummy_golem().
+withr::local_options(usethis.quiet = TRUE)
+
 test_that("normalize_agent_skills_argument() expands all and validates names", {
 	expect_equal(
 		normalize_agent_skills_argument(

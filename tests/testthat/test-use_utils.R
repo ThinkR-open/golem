@@ -1,3 +1,5 @@
+withr::local_options(usethis.quiet = TRUE)
+
 test_that("use_utils_ui works", {
 	run_quietly_in_a_dummy_golem({
 		use_utils_ui(

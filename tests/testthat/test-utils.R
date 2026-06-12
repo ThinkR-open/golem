@@ -23,7 +23,14 @@ test_that("create_if_needed creates a file if required", {
 				return(FALSE)
 			},
 			code = {
-				create_if_needed(temp_file)
+				withr::with_options(
+					c(
+						"usethis.quiet" = TRUE
+					),
+					{
+						create_if_needed(temp_file)
+					}
+				)
 			}
 		)
 	)
@@ -40,7 +47,14 @@ test_that("create_if_needed creates a file if required", {
 				return(FALSE)
 			},
 			code = {
-				create_if_needed(tempfile())
+				withr::with_options(
+					c(
+						"usethis.quiet" = TRUE
+					),
+					{
+						create_if_needed(tempfile())
+					}
+				)
 			}
 		)
 	)
@@ -56,7 +70,14 @@ test_that("create_if_needed creates a file if required", {
 				return(TRUE)
 			},
 			code = {
-				create_if_needed(temp_file)
+				withr::with_options(
+					c(
+						"usethis.quiet" = TRUE
+					),
+					{
+						create_if_needed(temp_file)
+					}
+				)
 			}
 		)
 	)
@@ -74,7 +95,14 @@ test_that("create_if_needed creates a file if required", {
 				return(TRUE)
 			},
 			code = {
-				create_if_needed(temp_dir, type = "directory")
+				withr::with_options(
+					c(
+						"usethis.quiet" = TRUE
+					),
+					{
+						create_if_needed(temp_dir, type = "directory")
+					}
+				)
 			}
 		)
 	)
@@ -94,7 +122,14 @@ test_that("create_if_needed creates a file if required", {
 				stop("ask_golem_creation_file should not be called")
 			},
 			code = {
-				create_if_needed(temp_file)
+				withr::with_options(
+					c(
+						"usethis.quiet" = TRUE
+					),
+					{
+						create_if_needed(temp_file)
+					}
+				)
 			}
 		)
 	)
