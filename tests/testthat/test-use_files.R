@@ -171,7 +171,11 @@ test_that("use_external_html_template extracts bundle into named dir", {
 		zipfile <- tempfile(fileext = ".zip")
 		old <- setwd(src)
 		on.exit(setwd(old), add = TRUE)
-		utils::zip(zipfile = zipfile, files = "resume/index.html")
+		utils::zip(
+			zipfile = zipfile,
+			files = "resume/index.html",
+			flags = "-r9Xq"
+		)
 		zipfile
 	}
 
@@ -254,7 +258,11 @@ test_that("use_bundled_html replaces existing bundle dir or stale file", {
 		zipfile <- tempfile(fileext = ".zip")
 		old <- setwd(src)
 		on.exit(setwd(old), add = TRUE)
-		utils::zip(zipfile = zipfile, files = "resume/index.html")
+		utils::zip(
+			zipfile = zipfile,
+			files = "resume/index.html",
+			flags = "-r9Xq"
+		)
 		zipfile
 	}
 

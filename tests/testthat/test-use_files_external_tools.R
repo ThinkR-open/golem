@@ -58,7 +58,8 @@ test_that("unzip_bundled_html(from, to) flattens a single wrapper dir", {
 	on.exit(setwd(old), add = TRUE)
 	utils::zip(
 		zipfile = zipfile,
-		files = "bundle/index.html"
+		files = "bundle/index.html",
+		flags = "-r9Xq"
 	)
 	dest <- file.path(tempdir(), "bundle-unzip-dest")
 	unlink(dest, recursive = TRUE, force = TRUE)
