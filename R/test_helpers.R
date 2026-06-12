@@ -112,6 +112,13 @@ expect_html_equal <- function(
 #' @rdname testhelpers
 #' @param sleep number of seconds
 #' @param R_path path to R. If NULL, the function will try to guess where R is.
+#' @details
+#' `expect_running()` only checks that an app can be **launched**: it starts a
+#' background R process that runs `run_app()` and verifies that the process is
+#' still alive after `sleep` seconds. It does **not** request any page, exercise
+#' the server logic, or detect runtime errors that happen after start-up. A
+#' passing `expect_running()` therefore means "the app starts and stays up", not
+#' "the app works".
 expect_running <- function(
 	sleep,
 	R_path = NULL

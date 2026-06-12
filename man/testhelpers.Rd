@@ -35,3 +35,11 @@ A testthat result.
 These functions are designed to be used inside the tests
 in your Shiny app package.
 }
+\details{
+\code{expect_running()} only checks that an app can be \strong{launched}: it starts a
+background R process that runs \code{run_app()} and verifies that the process is
+still alive after \code{sleep} seconds. It does \strong{not} request any page, exercise
+the server logic, or detect runtime errors that happen after start-up. A
+passing \code{expect_running()} therefore means "the app starts and stays up", not
+"the app works".
+}
