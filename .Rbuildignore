@@ -23,6 +23,7 @@
 ^\.github$
 ^revdep$
 README.html
+^vignettes/.*\.html$
 ^CRAN-SUBMISSION$
 ^dev$
 ^pkgdown$
