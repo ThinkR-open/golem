@@ -20,6 +20,9 @@ Useful links:
 
 Authors:
 
+- Colin Fay <contact@colinfay.me>
+  ([ORCID](https://orcid.org/0000-0001-7343-1846))
+
 - Vincent Guyader <vincent@thinkr.fr>
   ([ORCID](https://orcid.org/0000-0003-0671-9270)) (previous maintainer)
 

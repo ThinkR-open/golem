@@ -168,5 +168,5 @@ The path to the file, invisibly.
 
 See
 [`?htmltools::htmlTemplate`](https://rstudio.github.io/htmltools/reference/htmlTemplate.html)
-and `https://shiny.rstudio.com/articles/templates.html` for more
+and `https://shiny.posit.co/r/articles/build/templates/` for more
 information about `htmlTemplate`.

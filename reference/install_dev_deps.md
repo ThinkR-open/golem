@@ -2,33 +2,31 @@
 
 This function will run rlang::check_installed() on:
 
-- usethis
+- `usethis`
 
-- pkgload
+- `pkgload`
 
-- dockerfiler
+- `dockerfiler`
 
-- devtools
+- `devtools`
 
-- roxygen2
+- `roxygen2`
 
-- attachment
+- `attachment`
 
-- rstudioapi
+- `rstudioapi`
 
-- fs
+- `fs`
 
-- desc
+- `desc`
 
-- pkgbuild
+- `pkgbuild`
 
-- processx
+- `processx`
 
-- rsconnect
+- `rsconnect`
 
-- testthat
-
-- rstudioapi
+- `testthat`
 
 ## Usage
 

@@ -9,7 +9,7 @@ in your Shiny app package."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,6 +93,15 @@ in your Shiny app package.</p>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A testthat result.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>expect_running()</code> only checks that an app can be <strong>launched</strong>: it starts a
+background R process that runs <code>run_app()</code> and verifies that the process is
+still alive after <code>sleep</code> seconds. It does <strong>not</strong> request any page, exercise
+the server logic, or detect runtime errors that happen after start-up. A
+passing <code>expect_running()</code> therefore means "the app starts and stays up", not
+"the app works".</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,26 +110,16 @@ folder.</p></li>
 <div class="section level2">
 <h2 id="code-style">Code style<a class="anchor" aria-label="anchor" href="#code-style"></a>
 </h2>
-<p>Golem package follows the <code>grkstyle</code> style guide. Please
-make sure to follow the same style when contributing to the package.</p>
-<p>If you are using RStudio, you can set the <code>grkstyle</code> style
-guide as the default style guide for the package by running the
-following code:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span></span>
-<span>  styler.addins_style_transformer <span class="op">=</span> <span class="st">"grkstyle::grk_style_transformer()"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>If you are using VSCode, you can set the <code>grkstyle</code> style
-guide as the default style guide for the package by running the
-following code:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>languageserver.formatting_style <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">options</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">grkstyle</span><span class="fu">::</span><span class="fu">grk_style_transformer</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<p>It’s also possible to style one file at a time by running the
-following code:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">grkstyle</span><span class="fu">::</span><span class="fu">grk_style_file</span><span class="op">(</span><span class="st">"README.Rmd"</span><span class="op">)</span></span></code></pre></div>
+<p>Golem is formatted with <a href="https://posit-dev.github.io/air/" class="external-link"><code>air</code></a>. Please
+make sure to format your code with <code>air</code> before contributing
+to the package.</p>
+<p>To format the whole package from the command line, run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">air</span> format .</span></code></pre></div>
+<p><code>air</code> integrates with RStudio and VSCode; see the <a href="https://posit-dev.github.io/air/editors.html" class="external-link">air editor setup
+documentation</a> to enable format-on-save in your editor.</p>
+<p>The repository also ships a pre-commit hook that runs
+<code>air format</code> automatically (see
+<code>.pre-commit-config.yaml</code>).</p>
 </div>
 <div class="section level2">
 <h2 id="actual-state-of-the-package">Actual state of the package<a class="anchor" aria-label="anchor" href="#actual-state-of-the-package"></a>
@@ -139,7 +129,7 @@ for <code>master</code> is available on <a href="https://github.com/ThinkR-open/
 Actions</a>.</p>
 <p>Please make sure that your contribution does not break the package.
 You can run the checks locally by running the following code:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">

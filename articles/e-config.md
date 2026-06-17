@@ -93,7 +93,7 @@ set_golem_options()
 #> ✔ Setting `golem_version` to 0.0.0.9000
 #> ✔ Setting `app_prod` to FALSE
 #> ── Setting {usethis} project as `golem_wd` ─────────────────────────────────────
-#> ✔ Setting active project to "/tmp/RtmpTUTQim/golex".
+#> ✔ Setting active project to "/tmp/RtmppR6DfA/golex".
 ```
 
     default:
@@ -112,7 +112,7 @@ The functions reading the options in this config file are:
 get_golem_name()
 #> [1] "golex"
 get_golem_wd()
-#> [1] "/tmp/RtmpTUTQim/golex"
+#> [1] "/tmp/RtmppR6DfA/golex"
 get_golem_version()
 #> [1] "0.0.0.9000"
 ```

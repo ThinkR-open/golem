@@ -1,9 +1,119 @@
 # Changelog
 
-## golem (development version)
+## golem 1.0.0
+
+This is a major release. It brings the agent-skills tooling, a reworked
+Dockerfile/[renv](https://rstudio.github.io/renv/) deployment story, and
+[cli](https://cli.r-lib.org)-based console output, together with a
+number of **breaking changes** (listed first below). Please read the
+breaking changes before upgrading an existing
+[golem](https://thinkr-open.github.io/golem/) project.
+
+### Breaking changes
+
+- [`get_current_config()`](https://thinkr-open.github.io/golem/reference/get_current_config.md)
+  has been reworked in two ways: (1) it now reads either the
+  `GOLEM_CONFIG_PATH` environment variable or the default path
+  (`inst/golem-config.yml`) —
+  [golem](https://thinkr-open.github.io/golem/) no longer tries to guess
+  non-standard paths, and hard-fails if the file doesn’t exist; (2) the
+  function no longer copies the `config` files from the skeleton when
+  they are missing ([@ilyaZar](https://github.com/ilyaZar),
+  [@LDSamson](https://github.com/LDSamson),
+  [\#1178](https://github.com/ThinkR-open/golem/issues/1178)).
+
+- [golem](https://thinkr-open.github.io/golem/) functions used to rely
+  on path-style arguments that were either `wd`, `path` or `pkg`. These
+  have now been standardized to a single `golem_wd` argument; the legacy
+  `wd`/`path`/`pkg` arguments are kept as deprecated aliases that emit a
+  warning. The file/new-project target helpers and
+  [`get_current_config()`](https://thinkr-open.github.io/golem/reference/get_current_config.md)
+  /
+  [`is_golem()`](https://thinkr-open.github.io/golem/reference/is_golem.md)
+  retain their own `path` argument
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#845](https://github.com/ThinkR-open/golem/issues/845)).
+
+- `get_sysreqs()` has been removed; use
+  [`dockerfiler::get_sysreqs()`](https://thinkr-open.github.io/dockerfiler/reference/get_sysreqs.html)
+  instead.
+
+- `use_recommended_deps()` has been removed.
+
+- `add_rstudioconnect_file()` has been removed; use
+  [`add_positconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
+  instead.
+
+- Creating a `golem` no longer calls `set_here()` nor
+  [`usethis::create_project()`](https://usethis.r-lib.org/reference/create_package.html).
+  It used to, so that `here::here()` could be used, but the package is
+  able to find its way using `DESCRIPTION`. This gives a lighter golem
+  project creation that no longer interferes with where `here()`
+  resolves.
+
+- The `add_*_files` and `use_*_files` functions now fail when:
+
+  - The directory where the file would be created doesn’t exist.
+    [golem](https://thinkr-open.github.io/golem/) used to create the
+    directory, but that is not the function’s job — the `use_*_file`
+    functions should only add a file (single responsibility).
+  - The file the user tries to create already exists.
+
+- Creating a golem with `create_golem(overwrite = TRUE)` will now
+  **delete the old folder** and replace it with the golem skeleton.
+
+- [`add_js_input_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  and
+  [`add_js_output_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  generate JS files with a new naming scheme: `<name>-input.js` /
+  `<name>-output.js` (previously `input-<name>.js` /
+  `output-<name>.js`). Manually rename or delete any old binding files
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#868](https://github.com/ThinkR-open/golem/issues/868),
+  [\#869](https://github.com/ThinkR-open/golem/issues/869)).
+
+- The default `events` argument of
+  [`add_js_input_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
+  has changed from `list(name = "click", rate_policy = FALSE)` to
+  `list(name = c("change", "input"), rate_policy = c(FALSE, FALSE))` to
+  produce a functional input binding out of the box
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#868](https://github.com/ThinkR-open/golem/issues/868)).
 
 ### New features
 
+- New
+  [`use_skills()`](https://thinkr-open.github.io/golem/reference/use_skills.md),
+  [`use_agent_skills()`](https://thinkr-open.github.io/golem/reference/use_agent_skills.md),
+  [`use_claude_skills()`](https://thinkr-open.github.io/golem/reference/use_claude_skills.md)
+  and
+  [`use_skill()`](https://thinkr-open.github.io/golem/reference/use_skill.md)
+  helpers install agent skills (Claude Code / AGENTS.md layouts) into a
+  [golem](https://thinkr-open.github.io/golem/) project, from the
+  package’s bundled skills or from the upstream
+  `ThinkR-open/golem-agent-skills` repository
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#1233](https://github.com/ThinkR-open/golem/issues/1233)).
+- [`create_golem()`](https://thinkr-open.github.io/golem/reference/create_golem.md)
+  gains `with_agents` and `with_agents_options` arguments to optionally
+  install agent skills during project creation, and the RStudio “New
+  Project” wizard exposes a matching set of options
+  ([@ilyaZar](https://github.com/ilyaZar),
+  [\#1233](https://github.com/ThinkR-open/golem/issues/1233)).
+- Installing agent skills now appends the corresponding entries
+  (`^\.claude$`, `^CLAUDE\.md$`, `^\.agents$`, `^AGENTS\.md$`) to the
+  project’s `.Rbuildignore` so `R CMD check` no longer flags them as
+  non-standard top-level files.
+- New
+  [`add_github_action()`](https://thinkr-open.github.io/golem/reference/add_github_action.md)
+  and
+  [`add_gitlab_ci()`](https://thinkr-open.github.io/golem/reference/add_gitlab_ci.md)
+  helpers generate minimal deployment CI for fresh
+  [golem](https://thinkr-open.github.io/golem/) apps.
+- The deployment CI helpers restore `renv.lock` when it is present, fall
+  back to `DESCRIPTION` when it is not, and declare
+  [pkgload](https://github.com/r-lib/pkgload) for the generated Posit
+  Connect entrypoint.
 - [`use_external_js_file()`](https://thinkr-open.github.io/golem/reference/use_files.md),
   [`use_external_css_file()`](https://thinkr-open.github.io/golem/reference/use_files.md),
   [`use_external_html_template()`](https://thinkr-open.github.io/golem/reference/use_files.md),
@@ -19,68 +129,20 @@
   (`options('golem.app.prod' = TRUE)`), helping catch accidental
   invocations from a deployed app
   ([\#808](https://github.com/ThinkR-open/golem/issues/808)).
-
-## golem 0.5.1 to 0.6.0
-
-CRAN release: 2024-08-27
-
-### New features / user-visible changes
-
-- New
-  [`use_skills()`](https://thinkr-open.github.io/golem/reference/use_skills.md),
-  [`use_agent_skills()`](https://thinkr-open.github.io/golem/reference/use_agent_skills.md),
-  [`use_claude_skills()`](https://thinkr-open.github.io/golem/reference/use_claude_skills.md)
-  and
-  [`use_skill()`](https://thinkr-open.github.io/golem/reference/use_skill.md)
-  helpers install agent skills (Claude Code / AGENTS.md layouts) into a
-  [golem](https://thinkr-open.github.io/golem/) project, from the
-  package’s bundled skills or from the upstream
-  `ThinkR-open/golem-agent-skills` repository
-  ([@ilyaZar](https://github.com/ilyaZar),
-  [\#1233](https://github.com/ThinkR-open/golem/issues/1233)).
-
-- [`create_golem()`](https://thinkr-open.github.io/golem/reference/create_golem.md)
-  gains `with_agents` and `with_agents_options` arguments to optionally
-  install agent skills during project creation, and the RStudio “New
-  Project” wizard exposes a matching set of options
-  ([@ilyaZar](https://github.com/ilyaZar),
-  [\#1233](https://github.com/ThinkR-open/golem/issues/1233)).
-
-- Installing agent skills now appends the corresponding entries
-  (`^\.claude$`, `^CLAUDE\.md$`, `^\.agents$`, `^AGENTS\.md$`) to the
-  project’s `.Rbuildignore` so `R CMD check` no longer flags them as
-  non-standard top-level files.
-
-- New
-  [`add_github_action()`](https://thinkr-open.github.io/golem/reference/add_github_action.md)
-  and
-  [`add_gitlab_ci()`](https://thinkr-open.github.io/golem/reference/add_gitlab_ci.md)
-  helpers generate minimal deployment CI for fresh
-  [golem](https://thinkr-open.github.io/golem/) apps.
-
-- The deployment CI helpers restore `renv.lock` when it is present, fall
-  back to `DESCRIPTION` when it is not, and declare
-  [pkgload](https://github.com/r-lib/pkgload) for the generated Posit
-  Connect entrypoint.
-
-- The `add_dockerfile_with_renv_*` function now generates a multi-stage
-  Dockerfile by default (use `single_file = FALSE` to retain the
-  previous behavior).
-
-- The `add_dockerfile_with_renv_*` function now creates a Dockerfile
+- The `add_dockerfile_with_renv*()` functions now generate a multi-stage
+  Dockerfile by default (use `single_file = FALSE` to keep the previous
+  two-file behavior).
+- The `add_dockerfile_with_renv*()` functions now create a Dockerfile
   that sets `golem.app.prod = TRUE` by default (use
-  `set_golem.app.prod = FALSE` to retain the previous behavior).
-
-- Print functions have be reworked standardized using the
+  `set_golem.app.prod = FALSE` to keep the previous behavior).
+- Print functions have been reworked and standardized using the
   [cli](https://cli.r-lib.org) package
   ([@ilyaZar](https://github.com/ilyaZar),
-  [\#89](https://github.com/ThinkR-open/golem/issues/89))
-
+  [\#89](https://github.com/ThinkR-open/golem/issues/89)).
 - [`use_bundled_html()`](https://thinkr-open.github.io/golem/reference/use_files.md)
   downloads bundled HTML templates as zip archives, optionally extracts
   them into `inst/app/www`, and can remove the raw zip afterwards
-  ([\#848](https://github.com/ThinkR-open/golem/issues/848))
-
+  ([\#848](https://github.com/ThinkR-open/golem/issues/848)).
 - [`add_fct()`](https://thinkr-open.github.io/golem/reference/file_creation.md)
   gains a `template` argument to customize the content of the generated
   file; the default template is now exposed as the exported
@@ -90,8 +152,7 @@ CRAN release: 2024-08-27
   /
   [`add_module()`](https://thinkr-open.github.io/golem/reference/add_module.md)
   pattern ([@ilyaZar](https://github.com/ilyaZar),
-  [\#838](https://github.com/ThinkR-open/golem/issues/838))
-
+  [\#838](https://github.com/ThinkR-open/golem/issues/838)).
 - [`add_js_input_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
   and
   [`add_js_output_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
@@ -102,87 +163,17 @@ CRAN release: 2024-08-27
   created alongside it with ready-to-use UI constructor, update, and
   render functions ([@ilyaZar](https://github.com/ilyaZar),
   [\#868](https://github.com/ThinkR-open/golem/issues/868),
-  [\#869](https://github.com/ThinkR-open/golem/issues/869))
-
-### Breaking change
-
-- The
-  [`get_current_config()`](https://thinkr-open.github.io/golem/reference/get_current_config.md)
-  has been rework in two ways: (1) it now either check the
-  `GOLEM_CONFIG_PATH` env var or the default path
-  (inst/golem-config.yml). [golem](https://thinkr-open.github.io/golem/)
-  no longer tries to guess non standard paths, and does a hard fail if
-  the file doesn’t exist, (2) the function no longer copy the `config`
-  files from the skeleton if ever the files are not there
-  ([@ilyaZar](https://github.com/ilyaZar),
-  [@LDSamson](https://github.com/LDSamson),
-  [\#1178](https://github.com/ThinkR-open/golem/issues/1178))
-
-- [golem](https://thinkr-open.github.io/golem/) functions used to rely
-  on arguments that where either `wd`, `path`, `pkg` or `golem_wd`. This
-  has now been standardized and all functions rely on `golem_wd` now
-  ([@ilyaZar](https://github.com/ilyaZar),
-  [\#845](https://github.com/ThinkR-open/golem/issues/845))
-
-- `get_sysreqs()` has been removed; use
-  [`dockerfiler::get_sysreqs()`](https://thinkr-open.github.io/dockerfiler/reference/get_sysreqs.html)
-  instead.
-
-- `use_recommended_deps()` has been removed.
-
-- `add_rstudioconnect_file()` has been removed; use
-  [`add_positconnect_file()`](https://thinkr-open.github.io/golem/reference/rstudio_deploy.md)
-  instead.
-
-- Creating a `golem` doesn’t call `set_here()` nor
-  [`usethis::create_project()`](https://usethis.r-lib.org/reference/create_package.html)
-  anymore. It used to be because we wanted to be able to use
-  `here::here()`, but the function should be able to find its way based
-  using `DESCRIPTION`. It gives a lighter implementation of golem
-  projects creation as it doesn’t mess up with where `here()` is
-  anymore.
-
-- The `add_*_files` and `use_*_files` now fail when:
-
-  - The directory where the user tries to add the file doesn’t exist.
-    [golem](https://thinkr-open.github.io/golem/) used to try to create
-    the directory but that’s not the function job — use\_\*\_file
-    functions should only be there to add file (Single responsibility)
-  - The file that the user tries to create already exists
-
-- Creating a golem with `create_golem(overwrite = TRUE)` will now
-  **delete the old folder** and replace with the golem skeleton.
-
-- [`add_js_input_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
-  and
-  [`add_js_output_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
-  generate JS files with a new naming scheme: `<name>-input.js` /
-  `<name>-output.js` (previously `input-<name>.js` /
-  `output-<name>.js`). Manually rename or delete any old binding files
-  ([@ilyaZar](https://github.com/ilyaZar),
-  [\#868](https://github.com/ThinkR-open/golem/issues/868),
-  [\#869](https://github.com/ThinkR-open/golem/issues/869))
-
-- The default `events` argument of
-  [`add_js_input_binding()`](https://thinkr-open.github.io/golem/reference/add_files.md)
-  has changed from `list(name = "click", rate_policy = FALSE)` to
-  `list(name = c("change", "input"), rate_policy = c(FALSE, FALSE))` to
-  produce a functional input binding out of the box
-  ([@ilyaZar](https://github.com/ilyaZar),
-  [\#868](https://github.com/ThinkR-open/golem/issues/868))
-
-### User visible change
-
+  [\#869](https://github.com/ThinkR-open/golem/issues/869)).
 - [`run_dev()`](https://thinkr-open.github.io/golem/reference/run_dev.md)
   only prints one message
   ([\#1191](https://github.com/ThinkR-open/golem/issues/1191) /
-  [@howardbaik](https://github.com/howardbaik))
+  [@howardbaik](https://github.com/howardbaik)).
 
 ### Soft deprecated
 
 - [`browser_button()`](https://thinkr-open.github.io/golem/reference/browser_button.md)
   is now soft deprecated
-  ([\#1155](https://github.com/ThinkR-open/golem/issues/1155))
+  ([\#1155](https://github.com/ThinkR-open/golem/issues/1155)).
 
 - [`add_dockerfile()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md),
   [`add_dockerfile_shinyproxy()`](https://thinkr-open.github.io/golem/reference/dockerfiles.md),
@@ -191,40 +182,47 @@ CRAN release: 2024-08-27
   are now explicitly soft deprecated; use the corresponding
   `add_dockerfile_with_renv_*()` functions.
 
-### Bug fix
+### Bug fixes
 
-- Removing the comments on golem creation didn’t work fully, this has
+- Removing the comments on golem creation didn’t work fully; this has
   been fixed.
 
-- Renamed a function in 02_dev.R (add_any_file =\> add_empty_file)
+- Renamed a function in `02_dev.R` (`add_any_file` =\>
+  `add_empty_file`).
 
-- The `create_if_needed()` function has been fixed to work in non
-  interactive mode
+- The `create_if_needed()` function has been fixed to work in
+  non-interactive mode
   ([\#1154](https://github.com/ThinkR-open/golem/issues/1154),
-  [@pachadotdev](https://github.com/pachadotdev))
+  [@pachadotdev](https://github.com/pachadotdev)).
 
 ### Internal changes
+
+- The package now uses the [air](https://posit-dev.github.io/air/)
+  formatter (with a pre-commit hook) for code styling, replacing
+  grkstyle.
 
 - Added internal `cli_progress_bar()`, `cli_progress_update()`,
   `cli_progress_done()` wrappers and `cat_start_unzip()` /
   `cat_unzipped()` helpers ([@ilyaZar](https://github.com/ilyaZar),
-  [\#1234](https://github.com/ThinkR-open/golem/issues/1234))
+  [\#1234](https://github.com/ThinkR-open/golem/issues/1234)).
 
-- [golem](https://thinkr-open.github.io/golem/) now embarks a
-  `claude.md` file and a series of skills
+- [golem](https://thinkr-open.github.io/golem/) now ships a `CLAUDE.md`
+  file and a series of skills.
 
-- Full refactoring of the `add_*_files` and `use_*_files` functions that
-  now all share the same behavior
+- Full refactoring of the `add_*_files` and `use_*_files` functions,
+  which now all share the same behavior.
 
 - The internal `check_name_consistency()` now parses the code of
-  `app_config.R` and get the `package` arg of `system.file`, instead of
-  doing a text based search. This allows the function to detect several
-  calls to `system.file` and fixes the bug from
-  [\#1179](https://github.com/ThinkR-open/golem/issues/1179)
+  `app_config.R` and gets the `package` argument of
+  [`system.file()`](https://rdrr.io/r/base/system.file.html), instead of
+  doing a text-based search. This allows the function to detect several
+  calls to [`system.file()`](https://rdrr.io/r/base/system.file.html)
+  and fixes the bug from
+  [\#1179](https://github.com/ThinkR-open/golem/issues/1179).
 
-### Doc
+### Documentation
 
-- Vignettes have been renamed
+- Vignettes have been renamed.
 
 ## golem 0.5.1
 

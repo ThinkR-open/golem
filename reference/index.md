@@ -188,9 +188,6 @@
   [`expect_running()`](https://thinkr-open.github.io/golem/reference/testhelpers.md)
   : Test helpers
 
-- [`use_agent_implement()`](https://thinkr-open.github.io/golem/reference/use_agent_implement.md)
-  : Implement Agent Skills in a golem Project
-
 - [`use_agent_skills()`](https://thinkr-open.github.io/golem/reference/use_agent_skills.md)
   : Add Agent Skills to a golem Project
 

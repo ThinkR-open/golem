@@ -45,3 +45,12 @@ expect_running(sleep, R_path = NULL)
 ## Value
 
 A testthat result.
+
+## Details
+
+`expect_running()` only checks that an app can be **launched**: it
+starts a background R process that runs `run_app()` and verifies that
+the process is still alive after `sleep` seconds. It does **not**
+request any page, exercise the server logic, or detect runtime errors
+that happen after start-up. A passing `expect_running()` therefore means
+"the app starts and stays up", not "the app works".

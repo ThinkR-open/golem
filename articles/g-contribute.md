@@ -43,36 +43,22 @@ is structured as follows:
 
 ## Code style
 
-Golem package follows the `grkstyle` style guide. Please make sure to
-follow the same style when contributing to the package.
+Golem is formatted with [`air`](https://posit-dev.github.io/air/).
+Please make sure to format your code with `air` before contributing to
+the package.
 
-If you are using RStudio, you can set the `grkstyle` style guide as the
-default style guide for the package by running the following code:
+To format the whole package from the command line, run:
 
-``` r
-
-options(
-  styler.addins_style_transformer = "grkstyle::grk_style_transformer()"
-)
+``` sh
+air format .
 ```
 
-If you are using VSCode, you can set the `grkstyle` style guide as the
-default style guide for the package by running the following code:
+`air` integrates with RStudio and VSCode; see the [air editor setup
+documentation](https://posit-dev.github.io/air/editors.html) to enable
+format-on-save in your editor.
 
-``` r
-
-options(languageserver.formatting_style = function(options) {
-  grkstyle::grk_style_transformer()
-})
-```
-
-It’s also possible to style one file at a time by running the following
-code:
-
-``` r
-
-grkstyle::grk_style_file("README.Rmd")
-```
+The repository also ships a pre-commit hook that runs `air format`
+automatically (see `.pre-commit-config.yaml`).
 
 ## Actual state of the package
 
