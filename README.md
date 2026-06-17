@@ -5,7 +5,7 @@
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)[![R-CMD-check](https://github.com/ThinkR-open/golem/workflows/R-CMD-check/badge.svg)](https://github.com/ThinkR-open/golem/actions)
 [![Coverage
-status](https://codecov.io/gh/ThinkR-open/golem/branch/prep-release-1.0.0/graph/badge.svg)](https://app.codecov.io/github/ThinkR-open/golem/tree/prep-release-1.0.0)[![CRAN
+status](https://codecov.io/gh/ThinkR-open/golem/branch/master/graph/badge.svg)](https://app.codecov.io/github/ThinkR-open/golem/tree/master)[![CRAN
 status](https://www.r-pkg.org/badges/version/golem)](https://cran.r-project.org/package=golem)
 
 <!-- badges: end -->
@@ -82,7 +82,7 @@ This `README` has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2026-06-17 14:29:14 CEST"
+#> [1] "2026-06-17 15:41:54 CEST"
 ```
 
 Here are the test & coverage results:
@@ -90,7 +90,7 @@ Here are the test & coverage results:
 ``` r
 devtools::check(quiet = TRUE)
 #> ── R CMD check results ──────────────────────────────────────── golem 1.0.0 ────
-#> Duration: 54.5s
+#> Duration: 47.7s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
