@@ -3,7 +3,7 @@
 check_dockerfiler_installed <- function() {
 	rlang::check_installed(
 		"dockerfiler",
-		version = "0.2.0",
+		version = "0.2.5",
 		reason = "to build a Dockerfile."
 	)
 }
