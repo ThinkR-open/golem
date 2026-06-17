@@ -978,7 +978,6 @@ add_sass_code_to_dev_script <- function(
 
 #' @export
 #' @rdname add_files
-#' @importFrom tools file_ext
 add_empty_file <- function(
 	name,
 	golem_wd = get_golem_wd(),
