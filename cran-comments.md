@@ -16,9 +16,15 @@ changes, which are listed first in `NEWS.md`. The most user-visible ones are:
 
 # Reverse dependencies
 
-We ran R CMD check on the reverse dependencies of golem with revdepcheck.
+We ran R CMD check on the reverse dependencies of golem with revdepcheck
+(62 packages: 54 from CRAN + 8 from Bioconductor).
 
-The only package that fails to check is `spatialLIBD`. This failure is
-pre-existing and unrelated to this release of golem: it is caused by that
-package's own (Bioconductor) dependencies failing to install in the check
-environment, not by any change introduced here.
+* We saw 0 new problems.
+* Five packages failed to check: `AbSolution`, `iModMix`, `spatialLIBD`,
+  `SVMDO` and `wpm`. None of these failures is caused by golem: each one fails
+  *before installation* because its own Bioconductor dependencies (e.g.
+  `Biostrings`, `HDF5Array`, `Rhdf5lib`, `org.Hs.eg.db`, `SpatialExperiment`)
+  could not be downloaded/installed in the check environment. The failures
+  reproduce identically against the current CRAN version of golem (0.5.1) and
+  the dev version, confirming they are pre-existing and unrelated to this
+  release.
