@@ -19,9 +19,16 @@ document_and_reload(
 \arguments{
 \item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
-\item{roclets}{Character vector of roclet names to use with package.
+\item{roclets}{Character vector of \link[roxygen2:roclet]{roclets} to use.
+
 The default, \code{NULL}, uses the roxygen \code{roclets} option,
-which defaults to \code{c("collate", "namespace", "rd")}.}
+which defaults to \code{c("collate", "namespace", "rd")}. This will update
+(if needed) the \code{Collate} field with \code{\link[roxygen2:update_collate]{update_collate()}},
+produce the \code{NAMESPACE} file with \code{\link[roxygen2:namespace_roclet]{namespace_roclet()}}, and
+produce the Rd files with \code{\link[roxygen2:rd_roclet]{rd_roclet()}}.
+
+(Note that \code{update_collate()} is not technically a roclet but is still
+controlled with this argument for historical reasons.)}
 
 \item{load_code}{A function used to load all the R code in the package
 directory. The default, \code{NULL}, uses the strategy defined by
