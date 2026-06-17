@@ -45,3 +45,4 @@ Implement Agent Skills in a golem Project
 \code{\link[=use_skills]{use_skills()}}, \code{\link[=use_agent_skills]{use_agent_skills()}}, \code{\link[=use_claude_skills]{use_claude_skills()}},
 \code{\link[=use_skill]{use_skill()}}
 }
+\keyword{internal}

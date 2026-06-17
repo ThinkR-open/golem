@@ -18,6 +18,8 @@
 #'   [use_skill()]
 #'
 #' @return A list of selected options and copied paths, invisibly.
+#'
+#' @keywords internal
 use_agent_implement <- function(
 	source = c("ask", "local", "remote"),
 	agent_specs = c("ask", "claude", "agents", "both"),
