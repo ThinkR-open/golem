@@ -16,9 +16,12 @@ breaking changes before upgrading an existing `{golem}` project.
   copies the `config` files from the skeleton when they are missing
   (@ilyaZar, @LDSamson, #1178).
 
-- `{golem}` functions used to rely on arguments that were either `wd`, `path`,
-  `pkg` or `golem_wd`. This has now been standardized and all functions rely on
-  `golem_wd` (@ilyaZar, #845).
+- `{golem}` functions used to rely on path-style arguments that were either
+  `wd`, `path` or `pkg`. These have now been standardized to a single
+  `golem_wd` argument; the legacy `wd`/`path`/`pkg` arguments are kept as
+  deprecated aliases that emit a warning. The file/new-project target helpers
+  and `get_current_config()` / `is_golem()` retain their own `path` argument
+  (@ilyaZar, #845).
 
 - `get_sysreqs()` has been removed; use `dockerfiler::get_sysreqs()` instead.
 
