@@ -9,7 +9,10 @@ sanity_check(golem_wd = get_golem_wd(), pkg)
 \arguments{
 \item{golem_wd}{Path to the root of the package. Default is \code{get_golem_wd()}.}
 
-\item{pkg}{Deprecated, please use golem_wd instead}
+\item{pkg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument has been
+replaced by \code{golem_wd} and is kept here for backward compatibility.
+Providing a value to this argument has no effect: the value is silently
+ignored, and \code{golem_wd} is used instead.}
 }
 \value{
 A DataFrame if any of the words has been found.

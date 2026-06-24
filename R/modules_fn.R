@@ -16,7 +16,10 @@
 #' @param module_template Function that serves as a module template.
 #' @param with_test should the module be created with tests?
 #' @param ... Arguments to be passed to the `module_template` function.
-#' @param pkg Deprecated, please use golem_wd instead
+#' @param pkg `r lifecycle::badge("deprecated")` This argument has been
+#'   replaced by `golem_wd` and is kept here for backward compatibility.
+#'   Providing a value to this argument has no effect: the value is silently
+#'   ignored, and `golem_wd` is used instead.
 #'
 #' @note This function will prefix the `name` argument with `mod_`.
 #'

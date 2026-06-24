@@ -1,5 +1,22 @@
+#' Set the golem working directory
+#'
+#' Set the `golem_wd` value (the working directory of the current golem
+#' package) inside the `golem-config.yml` file.
+#'
+#' @param new_golem_wd,current_golem_wd New & current directory,
+#'     to be used in `set_golem_wd()`.
+#' @param talkative Should the messages be printed to the console?
+#' @param golem_wd `r lifecycle::badge("deprecated")` This argument has been
+#'     replaced by `new_golem_wd` and is kept here for backward compatibility.
+#'     Providing a value to this argument has no effect: the value is silently
+#'     ignored, and `new_golem_wd` is used instead.
+#' @param pkg `r lifecycle::badge("deprecated")` This argument has been
+#'     replaced by `current_golem_wd` and is kept here for backward
+#'     compatibility. Providing a value to this argument has no effect: the
+#'     value is silently ignored, and `current_golem_wd` is used instead.
+#'
+#' @return Used for side-effects, and returns the `golem_wd` path invisibly.
 #' @export
-#' @rdname golem_opts
 set_golem_wd <- function(
 	new_golem_wd = golem::pkg_path(),
 	current_golem_wd = golem::pkg_path(),
@@ -22,7 +39,7 @@ set_golem_wd <- function(
 			sys.call()[[1]]
 		),
 		"pkg",
-		"old_golem_wd"
+		"current_golem_wd"
 	)
 	if (
 		new_golem_wd == "golem::pkg_path()" ||

@@ -5,7 +5,6 @@
 \alias{get_golem_wd}
 \alias{get_golem_name}
 \alias{get_golem_version}
-\alias{set_golem_wd}
 \alias{set_golem_name}
 \alias{set_golem_version}
 \alias{set_golem_options}
@@ -24,14 +23,6 @@ get_golem_version(
   config = Sys.getenv("GOLEM_CONFIG_ACTIVE", Sys.getenv("R_CONFIG_ACTIVE", "default")),
   use_parent = TRUE,
   golem_wd = golem::pkg_path(),
-  pkg
-)
-
-set_golem_wd(
-  new_golem_wd = golem::pkg_path(),
-  current_golem_wd = golem::pkg_path(),
-  talkative = TRUE,
-  golem_wd,
   pkg
 )
 
@@ -65,19 +56,18 @@ configuration files if the specified config file isn't found.}
 
 \item{golem_wd}{Working directory of the current golem package.}
 
-\item{pkg}{The path to set the golem working directory.
-Note that it will be passed to \code{normalizePath}.}
+\item{pkg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument has been
+replaced by \code{golem_wd} and is kept here for backward compatibility.
+Providing a value to this argument has no effect: the value is silently
+ignored, and \code{golem_wd} is used instead.}
 
 \item{config}{Name of configuration to read from. Defaults to
 the value of the \code{R_CONFIG_ACTIVE} environment variable
 ("default" if the variable does not exist).}
 
-\item{new_golem_wd, current_golem_wd}{New & current directory,
-to be used in \code{set_golem_wd()}}
+\item{name}{The name of the app}
 
 \item{talkative}{Should the messages be printed to the console?}
-
-\item{name}{The name of the app}
 
 \item{old_name}{The old name of the app, used when changing the name}
 

@@ -45,6 +45,7 @@ Suggests:
     fs,
     httpuv,
     knitr,
+    lifecycle,
     mockery,
     pkgbuild,
     pkgdown,
@@ -72,3 +73,4 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 Config/roxygen2/version: 8.0.0
+RoxygenNote: 8.0.0

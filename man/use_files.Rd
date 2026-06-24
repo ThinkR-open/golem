@@ -121,7 +121,10 @@ use_internal_file(
 
 \item{dir_create}{Creates the directory if it doesn't exist, default is \code{TRUE}.}
 
-\item{pkg}{Deprecated, please use golem_wd instead}
+\item{pkg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument has been
+replaced by \code{golem_wd} and is kept here for backward compatibility.
+Providing a value to this argument has no effect: the value is silently
+ignored, and \code{golem_wd} is used instead.}
 
 \item{replace}{Boolean. If \code{TRUE}, an existing file (or, for
 \code{use_bundled_html()}, an existing bundle directory) at the target location

@@ -19,9 +19,11 @@ breaking changes before upgrading an existing `{golem}` project.
 - `{golem}` functions used to rely on path-style arguments that were either
   `wd`, `path` or `pkg`. These have now been standardized to a single
   `golem_wd` argument; the legacy `wd`/`path`/`pkg` arguments are kept as
-  deprecated aliases that emit a warning. The file/new-project target helpers
-  and `get_current_config()` / `is_golem()` retain their own `path` argument
-  (@ilyaZar, #845).
+  deprecated aliases that emit a warning. Note that any value passed to a
+  deprecated alias is **silently ignored**: the function reads `golem_wd`
+  instead, so callers that relied on a non-default path must switch to
+  `golem_wd`. The file/new-project target helpers and `get_current_config()` /
+  `is_golem()` retain their own `path` argument (@ilyaZar, #845).
 
 - `get_sysreqs()` has been removed; use `dockerfiler::get_sysreqs()` instead.
 
@@ -127,6 +129,10 @@ breaking changes before upgrading an existing `{golem}` project.
 - The `create_if_needed()` function has been fixed to work in non-interactive
   mode (#1154, @pachadotdev).
 
+- The deprecation warning of `set_golem_wd()` for the legacy `pkg` argument
+  pointed to a non-existent `old_golem_wd` argument; it now correctly refers to
+  `current_golem_wd`.
+
 ## Internal changes
 
 - The package now uses the [air](https://posit-dev.github.io/air/) formatter
@@ -149,6 +155,17 @@ breaking changes before upgrading an existing `{golem}` project.
 ## Documentation
 
 - Vignettes have been renamed.
+
+- The deprecated path-style arguments (`pkg`, `path`, `wd`, `source_folder`,
+  and the legacy `golem_wd`/`pkg` of `set_golem_wd()`) now carry an explicit
+  `lifecycle::badge("deprecated")` note in their documentation, making it clear
+  that any value passed is silently ignored in favor of the replacement
+  argument (`golem_wd` in most cases).
+
+- `set_golem_wd()` now has its own dedicated help page, split out from the
+  shared `golem_opts` page so that its deprecated `golem_wd`/`pkg` arguments can
+  be documented without conflicting with the active arguments of the other
+  `golem_opts` functions.
 
 # golem 0.5.1
 

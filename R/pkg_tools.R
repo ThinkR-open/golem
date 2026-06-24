@@ -34,7 +34,10 @@ daf_desc <- function(
 #' inside your project while developing
 #'
 #' @param golem_wd Path to use to read the DESCRIPTION
-#' @param path Deprecated, use golem_wd instead
+#' @param path `r lifecycle::badge("deprecated")` This argument has been
+#'   replaced by `golem_wd` and is kept here for backward compatibility.
+#'   Providing a value to this argument has no effect: the value is silently
+#'   ignored, and `golem_wd` is used instead.
 #'
 #' @export
 #' @rdname pkg_tools

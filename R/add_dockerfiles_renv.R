@@ -243,7 +243,10 @@ add_dockerfile_with_renv_ <- function(
 #'   for the build and production phases.
 #' @param set_golem.app.prod boolean If `TRUE` (by default) set options(golem.app.prod = TRUE) in dockerfile_cmd.
 #' @param ... Other arguments to pass to [renv::snapshot()].
-#' @param source_folder deprecated, use golem_wd instead
+#' @param source_folder `r lifecycle::badge("deprecated")` This argument has
+#'   been replaced by `golem_wd` and is kept here for backward compatibility.
+#'   Providing a value to this argument has no effect: the value is silently
+#'   ignored, and `golem_wd` is used instead.
 #' @inheritParams add_dockerfile
 #' @rdname dockerfiles
 #' @export

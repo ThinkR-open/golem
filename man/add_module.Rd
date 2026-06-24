@@ -46,7 +46,10 @@ add_module(
 
 \item{...}{Arguments to be passed to the \code{module_template} function.}
 
-\item{pkg}{Deprecated, please use golem_wd instead}
+\item{pkg}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This argument has been
+replaced by \code{golem_wd} and is kept here for backward compatibility.
+Providing a value to this argument has no effect: the value is silently
+ignored, and \code{golem_wd} is used instead.}
 }
 \value{
 The path to the file, invisibly.

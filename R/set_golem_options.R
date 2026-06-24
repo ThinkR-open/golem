@@ -17,13 +17,13 @@
 #' + `get_golem_version()`
 #'
 #' @param golem_name Name of the current golem.
-#' @param new_golem_wd,current_golem_wd New & current directory,
-#'     to be used in `set_golem_wd()`
 #' @param golem_version Version of the current golem.
 #' @param golem_wd Working directory of the current golem package.
 #' @param app_prod Is the `{golem}` in prod mode?
-#' @param pkg The path to set the golem working directory.
-#'     Note that it will be passed to `normalizePath`.
+#' @param pkg `r lifecycle::badge("deprecated")` This argument has been
+#'     replaced by `golem_wd` and is kept here for backward compatibility.
+#'     Providing a value to this argument has no effect: the value is silently
+#'     ignored, and `golem_wd` is used instead.
 #' @param talkative Should the messages be printed to the console?
 #' @param name The name of the app
 #' @param version The version of the app
