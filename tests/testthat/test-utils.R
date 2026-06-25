@@ -448,6 +448,15 @@ test_that("check_name_length_is_one works", {
 })
 
 test_that("do_if_unquiet works", {
+	# Make this block hermetic: `do_if_unquiet()` reads `golem.quiet` then falls
+	# back to `usethis.quiet`, both of which other test files set at top level.
+	# With the suite running sequentially in a single process, a leaked option
+	# would change which branch is taken here. Reset both to unset so each
+	# assertion below controls exactly the option it tests.
+	withr::local_options(
+		golem.quiet = NULL,
+		usethis.quiet = NULL
+	)
 	expect_null({
 		withr::with_options(
 			c(
