@@ -1,5 +1,18 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
+# golem 1.0.1
+
+## Bug fix
+
+- `favicon()` no longer depends on `{fs}`. `favicon()` runs at app _runtime_
+  (it is called by `golem_add_external_resources()` in the deployed
+  `app_ui.R`), but it used to build its href with the internal `fs_path()`
+  helper, which errors when `{fs}` is not installed. As `{fs}` is only a
+  `Suggests` dependency of `{golem}`, apps deployed to an environment where
+  `{fs}` was absent (e.g. a minimal Docker image installing only hard
+  dependencies) would crash at UI render time. The href is now built with base
+  R, so the deployed app carries no `{fs}` dependency (#1251).
+
 # golem 1.0.0
 
 This is a major release. It brings the agent-skills tooling, a reworked
@@ -39,7 +52,6 @@ breaking changes before upgrading an existing `{golem}` project.
   resolves.
 
 - The `add_*_files` and `use_*_files` functions now fail when:
-
   - The directory where the file would be created doesn't exist. `{golem}` used
     to create the directory, but that is not the function's job — the
     `use_*_file` functions should only add a file (single responsibility).
@@ -119,10 +131,10 @@ breaking changes before upgrading an existing `{golem}` project.
   `add_dockerfile_heroku()` are now explicitly soft deprecated; use the
   corresponding `add_dockerfile_with_renv_*()` functions.
 
-## Bug fixes
+## Bug fix
 
-- Removing the comments on golem creation didn't work fully; this has been
-  fixed.
+- `create_golem(without_comments = TRUE)` did not strip comment lines made up
+  only of `#` characters; these are now removed as well.
 
 - Renamed a function in `02_dev.R` (`add_any_file` => `add_empty_file`).
 

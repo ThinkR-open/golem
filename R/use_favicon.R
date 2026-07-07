@@ -197,11 +197,10 @@ favicon <- function(
 	resources_path = "www",
 	ext = "ico"
 ) {
-	ico <- fs_path(
-		resources_path,
-		ico,
-		ext = ext
-	)
+	ico <- sprintf("%s/%s", resources_path, ico)
+	if (nzchar(ext)) {
+		ico <- sprintf("%s.%s", ico, ext)
+	}
 
 	tags$head(
 		tags$link(
