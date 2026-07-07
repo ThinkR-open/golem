@@ -1,5 +1,24 @@
 # Changelog
 
+## golem 1.0.1
+
+### Bug fix
+
+- [`favicon()`](https://thinkr-open.github.io/golem/reference/favicon.md)
+  no longer depends on [fs](https://fs.r-lib.org).
+  [`favicon()`](https://thinkr-open.github.io/golem/reference/favicon.md)
+  runs at app *runtime* (it is called by
+  `golem_add_external_resources()` in the deployed `app_ui.R`), but it
+  used to build its href with the internal `fs_path()` helper, which
+  errors when [fs](https://fs.r-lib.org) is not installed. As
+  [fs](https://fs.r-lib.org) is only a `Suggests` dependency of
+  [golem](https://thinkr-open.github.io/golem/), apps deployed to an
+  environment where [fs](https://fs.r-lib.org) was absent (e.g. a
+  minimal Docker image installing only hard dependencies) would crash at
+  UI render time. The href is now built with base R, so the deployed app
+  carries no [fs](https://fs.r-lib.org) dependency
+  ([\#1251](https://github.com/ThinkR-open/golem/issues/1251)).
+
 ## golem 1.0.0
 
 CRAN release: 2026-06-26
@@ -187,10 +206,10 @@ breaking changes before upgrading an existing
   are now explicitly soft deprecated; use the corresponding
   `add_dockerfile_with_renv_*()` functions.
 
-### Bug fixes
+### Bug fix
 
-- Removing the comments on golem creation didn’t work fully; this has
-  been fixed.
+- `create_golem(without_comments = TRUE)` did not strip comment lines
+  made up only of `#` characters; these are now removed as well.
 
 - Renamed a function in `02_dev.R` (`add_any_file` =\>
   `add_empty_file`).

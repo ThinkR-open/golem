@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,14 @@
       <small>Source: <a href="https://github.com/ThinkR-open/golem/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.1" id="golem-101">golem 1.0.1<a class="anchor" aria-label="anchor" href="#golem-101"></a></h2>
+<div class="section level3">
+<h3 id="bug-fix-1-0-1">Bug fix<a class="anchor" aria-label="anchor" href="#bug-fix-1-0-1"></a></h3>
+<ul><li>
+<code><a href="../reference/favicon.html">favicon()</a></code> no longer depends on <a href="https://fs.r-lib.org" class="external-link">fs</a>. <code><a href="../reference/favicon.html">favicon()</a></code> runs at app <em>runtime</em> (it is called by <code>golem_add_external_resources()</code> in the deployed <code>app_ui.R</code>), but it used to build its href with the internal <code>fs_path()</code> helper, which errors when <a href="https://fs.r-lib.org" class="external-link">fs</a> is not installed. As <a href="https://fs.r-lib.org" class="external-link">fs</a> is only a <code>Suggests</code> dependency of <a href="https://thinkr-open.github.io/golem/">golem</a>, apps deployed to an environment where <a href="https://fs.r-lib.org" class="external-link">fs</a> was absent (e.g. a minimal Docker image installing only hard dependencies) would crash at UI render time. The href is now built with base R, so the deployed app carries no <a href="https://fs.r-lib.org" class="external-link">fs</a> dependency (<a href="https://github.com/ThinkR-open/golem/issues/1251" class="external-link">#1251</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="golem-100">golem 1.0.0<a class="anchor" aria-label="anchor" href="#golem-100"></a></h2><p class="text-muted">CRAN release: 2026-06-26</p>
 <p>This is a major release. It brings the agent-skills tooling, a reworked Dockerfile/<a href="https://rstudio.github.io/renv/" class="external-link">renv</a> deployment story, and <a href="https://cli.r-lib.org" class="external-link">cli</a>-based console output, together with a number of <strong>breaking changes</strong> (listed first below). Please read the breaking changes before upgrading an existing <a href="https://thinkr-open.github.io/golem/">golem</a> project.</p>
@@ -92,8 +100,8 @@
 <li><p><code><a href="../reference/dockerfiles.html">add_dockerfile()</a></code>, <code><a href="../reference/dockerfiles.html">add_dockerfile_shinyproxy()</a></code>, and <code><a href="../reference/dockerfiles.html">add_dockerfile_heroku()</a></code> are now explicitly soft deprecated; use the corresponding <code>add_dockerfile_with_renv_*()</code> functions.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-1-0-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-0"></a></h3>
-<ul><li><p>Removing the comments on golem creation didn’t work fully; this has been fixed.</p></li>
+<h3 id="bug-fix-1-0-0">Bug fix<a class="anchor" aria-label="anchor" href="#bug-fix-1-0-0"></a></h3>
+<ul><li><p><code>create_golem(without_comments = TRUE)</code> did not strip comment lines made up only of <code>#</code> characters; these are now removed as well.</p></li>
 <li><p>Renamed a function in <code>02_dev.R</code> (<code>add_any_file</code> =&gt; <code>add_empty_file</code>).</p></li>
 <li><p>The <code>create_if_needed()</code> function has been fixed to work in non-interactive mode (<a href="https://github.com/ThinkR-open/golem/issues/1154" class="external-link">#1154</a>, <a href="https://github.com/pachadotdev" class="external-link">@pachadotdev</a>).</p></li>
 <li><p>The deprecation warning of <code><a href="../reference/set_golem_wd.html">set_golem_wd()</a></code> for the legacy <code>pkg</code> argument pointed to a non-existent <code>old_golem_wd</code> argument; it now correctly refers to <code>current_golem_wd</code>.</p></li>

@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">golem</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,7 @@
 <div class="page-header"><h1 id="golem-">{golem} <img src="https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png" align="right" width="120"><a class="anchor" aria-label="anchor" href="#golem-"></a>
 </h1></div>
 <blockquote>
-<p>You’re reading the doc about version: 1.0.0. Note that <a href="https://thinkr-open.github.io/golem/">golem</a> follows the <a href="https://semver.org/" class="external-link">semantic versioning</a> scheme.</p>
+<p>You’re reading the doc about version: 1.0.1. Note that <a href="https://thinkr-open.github.io/golem/">golem</a> follows the <a href="https://semver.org/" class="external-link">semantic versioning</a> scheme.</p>
 </blockquote>
 <p>Production-grade <a href="https://shiny.posit.co/" class="external-link">shiny</a> applications, from creation to deployment.</p>
 <p><a href="https://thinkr-open.github.io/golem/">golem</a> is an opinionated framework that sets the standard for building production-grade <a href="https://shiny.posit.co/" class="external-link">shiny</a> applications. It provides a structured environment that enforces best practices, fosters maintainability, and ensures your applications are reliable, and ready for deployment in real-world environments.</p>
@@ -118,18 +118,19 @@
 <p>This <code>README</code> has been compiled on the</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2026-06-17 15:41:54 CEST"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2026-07-07 17:05:31 CEST"</span></span></code></pre></div>
 <p>Here are the test &amp; coverage results:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/check.html" class="external-link">check</a></span><span class="op">(</span>quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ── R CMD check results ──────────────────────────────────────── golem 1.0.0 ────</span></span>
-<span><span class="co">#&gt; Duration: 47.7s</span></span>
+<span><span class="co">#&gt; ℹ Loading golem</span></span>
+<span><span class="co">#&gt; ── R CMD check results ──────────────────────────────────────── golem 1.0.1 ────</span></span>
+<span><span class="co">#&gt; Duration: 42.6s</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 0 errors ✔ | 0 warnings ✔ | 0 notes ✔</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"NOT_CRAN"</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">covr</span><span class="fu">::</span><span class="fu"><a href="http://covr.r-lib.org/reference/package_coverage.html" class="external-link">package_coverage</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; golem Coverage: 88.92%</span></span>
+<span><span class="co">#&gt; golem Coverage: 88.91%</span></span>
 <span><span class="co">#&gt; R/boostrap_base.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/bootstrap_attachment.R: 0.00%</span></span>
 <span><span class="co">#&gt; R/bootstrap_pkgload.R: 0.00%</span></span>
@@ -156,7 +157,7 @@
 <span><span class="co">#&gt; R/use_agent_skills.R: 91.27%</span></span>
 <span><span class="co">#&gt; R/sanity_check.R: 91.86%</span></span>
 <span><span class="co">#&gt; R/disable_autoload.R: 91.89%</span></span>
-<span><span class="co">#&gt; R/use_favicon.R: 93.88%</span></span>
+<span><span class="co">#&gt; R/use_favicon.R: 93.84%</span></span>
 <span><span class="co">#&gt; R/add_files.R: 95.13%</span></span>
 <span><span class="co">#&gt; R/use_recommended.R: 95.89%</span></span>
 <span><span class="co">#&gt; R/use_files_internal.R: 96.00%</span></span>

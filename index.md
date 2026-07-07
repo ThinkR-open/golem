@@ -1,6 +1,6 @@
 # {golem} ![](https://raw.githubusercontent.com/ThinkR-open/golem/master/inst/rstudio/templates/project/golem.png)
 
-> You’re reading the doc about version: 1.0.0. Note that
+> You’re reading the doc about version: 1.0.1. Note that
 > [golem](https://thinkr-open.github.io/golem/) follows the [semantic
 > versioning](https://semver.org/) scheme.
 
@@ -83,7 +83,7 @@ This `README` has been compiled on the
 ``` r
 
 Sys.time()
-#> [1] "2026-06-17 15:41:54 CEST"
+#> [1] "2026-07-07 17:05:31 CEST"
 ```
 
 Here are the test & coverage results:
@@ -91,8 +91,9 @@ Here are the test & coverage results:
 ``` r
 
 devtools::check(quiet = TRUE)
-#> ── R CMD check results ──────────────────────────────────────── golem 1.0.0 ────
-#> Duration: 47.7s
+#> ℹ Loading golem
+#> ── R CMD check results ──────────────────────────────────────── golem 1.0.1 ────
+#> Duration: 42.6s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
@@ -101,7 +102,7 @@ devtools::check(quiet = TRUE)
 
 Sys.setenv("NOT_CRAN" = TRUE)
 covr::package_coverage()
-#> golem Coverage: 88.92%
+#> golem Coverage: 88.91%
 #> R/boostrap_base.R: 0.00%
 #> R/bootstrap_attachment.R: 0.00%
 #> R/bootstrap_pkgload.R: 0.00%
@@ -128,7 +129,7 @@ covr::package_coverage()
 #> R/use_agent_skills.R: 91.27%
 #> R/sanity_check.R: 91.86%
 #> R/disable_autoload.R: 91.89%
-#> R/use_favicon.R: 93.88%
+#> R/use_favicon.R: 93.84%
 #> R/add_files.R: 95.13%
 #> R/use_recommended.R: 95.89%
 #> R/use_files_internal.R: 96.00%
