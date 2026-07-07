@@ -23,14 +23,6 @@ get_golem_version(
   pkg
 )
 
-set_golem_wd(
-  new_golem_wd = golem::pkg_path(),
-  current_golem_wd = golem::pkg_path(),
-  talkative = TRUE,
-  golem_wd,
-  pkg
-)
-
 set_golem_name(
   name = golem::pkg_name(),
   golem_wd = golem::pkg_path(),
@@ -69,8 +61,10 @@ set_golem_options(
 
 - pkg:
 
-  The path to set the golem working directory. Note that it will be
-  passed to `normalizePath`.
+  **\[deprecated\]** This argument has been replaced by `golem_wd` and
+  is kept here for backward compatibility. Providing a value to this
+  argument has no effect: the value is silently ignored, and `golem_wd`
+  is used instead.
 
 - config:
 
@@ -78,17 +72,13 @@ set_golem_options(
   `R_CONFIG_ACTIVE` environment variable ("default" if the variable does
   not exist).
 
-- new_golem_wd, current_golem_wd:
+- name:
 
-  New & current directory, to be used in `set_golem_wd()`
+  The name of the app
 
 - talkative:
 
   Should the messages be printed to the console?
-
-- name:
-
-  The name of the app
 
 - old_name:
 
@@ -124,8 +114,9 @@ getters.
 - `set_golem_options()` sets all the options, with the defaults from the
   functions below.
 
-- `set_golem_wd()` defaults to `golem::golem_wd()`, which is the package
-  root when starting a golem.
+- [`set_golem_wd()`](https://thinkr-open.github.io/golem/reference/set_golem_wd.md)
+  defaults to `golem::golem_wd()`, which is the package root when
+  starting a golem.
 
 - `set_golem_name()` defaults
   [`golem::pkg_name()`](https://thinkr-open.github.io/golem/reference/pkg_tools.md)

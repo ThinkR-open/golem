@@ -72,14 +72,6 @@ inside the <code>inst</code> folder.</p>
 <span>  <span class="va">pkg</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">set_golem_wd</span><span class="op">(</span></span>
-<span>  new_golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="pkg_tools.html">pkg_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  current_golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="pkg_tools.html">pkg_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  talkative <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  <span class="va">golem_wd</span>,</span>
-<span>  <span class="va">pkg</span></span>
-<span><span class="op">)</span></span>
-<span></span>
 <span><span class="fu">set_golem_name</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="pkg_tools.html">pkg_name</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  golem_wd <span class="op">=</span> <span class="fu">golem</span><span class="fu">::</span><span class="fu"><a href="pkg_tools.html">pkg_path</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -119,8 +111,10 @@ configuration files if the specified config file isn't found.</p></dd>
 
 
 <dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
-<dd><p>The path to set the golem working directory.
-Note that it will be passed to <code>normalizePath</code>.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This argument has been
+replaced by <code>golem_wd</code> and is kept here for backward compatibility.
+Providing a value to this argument has no effect: the value is silently
+ignored, and <code>golem_wd</code> is used instead.</p></dd>
 
 
 <dt id="arg-config">config<a class="anchor" aria-label="anchor" href="#arg-config"></a></dt>
@@ -129,17 +123,12 @@ the value of the <code>R_CONFIG_ACTIVE</code> environment variable
 ("default" if the variable does not exist).</p></dd>
 
 
-<dt id="arg-new-golem-wd-current-golem-wd">new_golem_wd, current_golem_wd<a class="anchor" aria-label="anchor" href="#arg-new-golem-wd-current-golem-wd"></a></dt>
-<dd><p>New &amp; current directory,
-to be used in <code>set_golem_wd()</code></p></dd>
+<dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
+<dd><p>The name of the app</p></dd>
 
 
 <dt id="arg-talkative">talkative<a class="anchor" aria-label="anchor" href="#arg-talkative"></a></dt>
 <dd><p>Should the messages be printed to the console?</p></dd>
-
-
-<dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
-<dd><p>The name of the app</p></dd>
 
 
 <dt id="arg-old-name">old_name<a class="anchor" aria-label="anchor" href="#arg-old-name"></a></dt>
@@ -176,7 +165,7 @@ config in the getters.</p>
 
 
 <ul><li><p><code>set_golem_options()</code> sets all the options, with the defaults from the functions below.</p></li>
-<li><p><code>set_golem_wd()</code> defaults to <code>golem::golem_wd()</code>, which is the package root when starting a golem.</p></li>
+<li><p><code><a href="set_golem_wd.html">set_golem_wd()</a></code> defaults to <code>golem::golem_wd()</code>, which is the package root when starting a golem.</p></li>
 <li><p><code>set_golem_name()</code> defaults <code><a href="pkg_tools.html">golem::pkg_name()</a></code></p></li>
 <li><p><code>set_golem_version()</code> defaults <code><a href="pkg_tools.html">golem::pkg_version()</a></code></p></li>
 </ul></div>

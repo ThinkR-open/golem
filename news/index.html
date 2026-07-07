@@ -44,12 +44,12 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0" id="golem-100">golem 1.0.0<a class="anchor" aria-label="anchor" href="#golem-100"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="golem-100">golem 1.0.0<a class="anchor" aria-label="anchor" href="#golem-100"></a></h2><p class="text-muted">CRAN release: 2026-06-26</p>
 <p>This is a major release. It brings the agent-skills tooling, a reworked Dockerfile/<a href="https://rstudio.github.io/renv/" class="external-link">renv</a> deployment story, and <a href="https://cli.r-lib.org" class="external-link">cli</a>-based console output, together with a number of <strong>breaking changes</strong> (listed first below). Please read the breaking changes before upgrading an existing <a href="https://thinkr-open.github.io/golem/">golem</a> project.</p>
 <div class="section level3">
 <h3 id="breaking-changes-1-0-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-0-0"></a></h3>
 <ul><li><p><code><a href="../reference/get_current_config.html">get_current_config()</a></code> has been reworked in two ways: (1) it now reads either the <code>GOLEM_CONFIG_PATH</code> environment variable or the default path (<code>inst/golem-config.yml</code>) — <a href="https://thinkr-open.github.io/golem/">golem</a> no longer tries to guess non-standard paths, and hard-fails if the file doesn’t exist; (2) the function no longer copies the <code>config</code> files from the skeleton when they are missing (<a href="https://github.com/ilyaZar" class="external-link">@ilyaZar</a>, <a href="https://github.com/LDSamson" class="external-link">@LDSamson</a>, <a href="https://github.com/ThinkR-open/golem/issues/1178" class="external-link">#1178</a>).</p></li>
-<li><p><a href="https://thinkr-open.github.io/golem/">golem</a> functions used to rely on path-style arguments that were either <code>wd</code>, <code>path</code> or <code>pkg</code>. These have now been standardized to a single <code>golem_wd</code> argument; the legacy <code>wd</code>/<code>path</code>/<code>pkg</code> arguments are kept as deprecated aliases that emit a warning. The file/new-project target helpers and <code><a href="../reference/get_current_config.html">get_current_config()</a></code> / <code><a href="../reference/is_golem.html">is_golem()</a></code> retain their own <code>path</code> argument (<a href="https://github.com/ilyaZar" class="external-link">@ilyaZar</a>, <a href="https://github.com/ThinkR-open/golem/issues/845" class="external-link">#845</a>).</p></li>
+<li><p><a href="https://thinkr-open.github.io/golem/">golem</a> functions used to rely on path-style arguments that were either <code>wd</code>, <code>path</code> or <code>pkg</code>. These have now been standardized to a single <code>golem_wd</code> argument; the legacy <code>wd</code>/<code>path</code>/<code>pkg</code> arguments are kept as deprecated aliases that emit a warning. Note that any value passed to a deprecated alias is <strong>silently ignored</strong>: the function reads <code>golem_wd</code> instead, so callers that relied on a non-default path must switch to <code>golem_wd</code>. The file/new-project target helpers and <code><a href="../reference/get_current_config.html">get_current_config()</a></code> / <code><a href="../reference/is_golem.html">is_golem()</a></code> retain their own <code>path</code> argument (<a href="https://github.com/ilyaZar" class="external-link">@ilyaZar</a>, <a href="https://github.com/ThinkR-open/golem/issues/845" class="external-link">#845</a>).</p></li>
 <li><p><code>get_sysreqs()</code> has been removed; use <code><a href="https://thinkr-open.github.io/dockerfiler/reference/get_sysreqs.html" class="external-link">dockerfiler::get_sysreqs()</a></code> instead.</p></li>
 <li><p><code>use_recommended_deps()</code> has been removed.</p></li>
 <li><p><code>add_rstudioconnect_file()</code> has been removed; use <code><a href="../reference/rstudio_deploy.html">add_positconnect_file()</a></code> instead.</p></li>
@@ -96,6 +96,7 @@
 <ul><li><p>Removing the comments on golem creation didn’t work fully; this has been fixed.</p></li>
 <li><p>Renamed a function in <code>02_dev.R</code> (<code>add_any_file</code> =&gt; <code>add_empty_file</code>).</p></li>
 <li><p>The <code>create_if_needed()</code> function has been fixed to work in non-interactive mode (<a href="https://github.com/ThinkR-open/golem/issues/1154" class="external-link">#1154</a>, <a href="https://github.com/pachadotdev" class="external-link">@pachadotdev</a>).</p></li>
+<li><p>The deprecation warning of <code><a href="../reference/set_golem_wd.html">set_golem_wd()</a></code> for the legacy <code>pkg</code> argument pointed to a non-existent <code>old_golem_wd</code> argument; it now correctly refers to <code>current_golem_wd</code>.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="internal-changes-1-0-0">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-1-0-0"></a></h3>
@@ -107,7 +108,9 @@
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-1-0-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-0-0"></a></h3>
-<ul><li>Vignettes have been renamed.</li>
+<ul><li><p>Vignettes have been renamed.</p></li>
+<li><p>The deprecated path-style arguments (<code>pkg</code>, <code>path</code>, <code>wd</code>, <code>source_folder</code>, and the legacy <code>golem_wd</code>/<code>pkg</code> of <code><a href="../reference/set_golem_wd.html">set_golem_wd()</a></code>) now carry an explicit <code>lifecycle::badge("deprecated")</code> note in their documentation, making it clear that any value passed is silently ignored in favor of the replacement argument (<code>golem_wd</code> in most cases).</p></li>
+<li><p><code><a href="../reference/set_golem_wd.html">set_golem_wd()</a></code> now has its own dedicated help page, split out from the shared <code>golem_opts</code> page so that its deprecated <code>golem_wd</code>/<code>pkg</code> arguments can be documented without conflicting with the active arguments of the other <code>golem_opts</code> functions.</p></li>
 </ul></div>
 </div>
     <div class="section level2">

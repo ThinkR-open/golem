@@ -2,6 +2,8 @@
 
 ## golem 1.0.0
 
+CRAN release: 2026-06-26
+
 This is a major release. It brings the agent-skills tooling, a reworked
 Dockerfile/[renv](https://rstudio.github.io/renv/) deployment story, and
 [cli](https://cli.r-lib.org)-based console output, together with a
@@ -26,7 +28,10 @@ breaking changes before upgrading an existing
   on path-style arguments that were either `wd`, `path` or `pkg`. These
   have now been standardized to a single `golem_wd` argument; the legacy
   `wd`/`path`/`pkg` arguments are kept as deprecated aliases that emit a
-  warning. The file/new-project target helpers and
+  warning. Note that any value passed to a deprecated alias is
+  **silently ignored**: the function reads `golem_wd` instead, so
+  callers that relied on a non-default path must switch to `golem_wd`.
+  The file/new-project target helpers and
   [`get_current_config()`](https://thinkr-open.github.io/golem/reference/get_current_config.md)
   /
   [`is_golem()`](https://thinkr-open.github.io/golem/reference/is_golem.md)
@@ -195,6 +200,11 @@ breaking changes before upgrading an existing
   ([\#1154](https://github.com/ThinkR-open/golem/issues/1154),
   [@pachadotdev](https://github.com/pachadotdev)).
 
+- The deprecation warning of
+  [`set_golem_wd()`](https://thinkr-open.github.io/golem/reference/set_golem_wd.md)
+  for the legacy `pkg` argument pointed to a non-existent `old_golem_wd`
+  argument; it now correctly refers to `current_golem_wd`.
+
 ### Internal changes
 
 - The package now uses the [air](https://posit-dev.github.io/air/)
@@ -223,6 +233,20 @@ breaking changes before upgrading an existing
 ### Documentation
 
 - Vignettes have been renamed.
+
+- The deprecated path-style arguments (`pkg`, `path`, `wd`,
+  `source_folder`, and the legacy `golem_wd`/`pkg` of
+  [`set_golem_wd()`](https://thinkr-open.github.io/golem/reference/set_golem_wd.md))
+  now carry an explicit `lifecycle::badge("deprecated")` note in their
+  documentation, making it clear that any value passed is silently
+  ignored in favor of the replacement argument (`golem_wd` in most
+  cases).
+
+- [`set_golem_wd()`](https://thinkr-open.github.io/golem/reference/set_golem_wd.md)
+  now has its own dedicated help page, split out from the shared
+  `golem_opts` page so that its deprecated `golem_wd`/`pkg` arguments
+  can be documented without conflicting with the active arguments of the
+  other `golem_opts` functions.
 
 ## golem 0.5.1
 

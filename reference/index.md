@@ -108,7 +108,6 @@
 - [`get_golem_wd()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
   [`get_golem_name()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
   [`get_golem_version()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
-  [`set_golem_wd()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
   [`set_golem_name()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
   [`set_golem_version()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
   [`set_golem_options()`](https://thinkr-open.github.io/golem/reference/golem_opts.md)
@@ -174,6 +173,9 @@
 
 - [`sanity_check()`](https://thinkr-open.github.io/golem/reference/sanity_check.md)
   : Sanity check for R files in the project
+
+- [`set_golem_wd()`](https://thinkr-open.github.io/golem/reference/set_golem_wd.md)
+  : Set the golem working directory
 
 - [`js_handler_template()`](https://thinkr-open.github.io/golem/reference/template.md)
   [`js_template()`](https://thinkr-open.github.io/golem/reference/template.md)

@@ -28,7 +28,10 @@ add_rscignore_file(golem_wd = get_golem_wd(), open = TRUE, pkg)
 
 - pkg:
 
-  Deprecated, please use golem_wd instead
+  **\[deprecated\]** This argument has been replaced by `golem_wd` and
+  is kept here for backward compatibility. Providing a value to this
+  argument has no effect: the value is silently ignored, and `golem_wd`
+  is used instead.
 
 ## Value
 
