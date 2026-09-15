@@ -68,6 +68,7 @@ Suggests:
     withr
 VignetteBuilder:
     knitr
+Config/Needs/website: ThinkR-open/golemversetemplate
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US

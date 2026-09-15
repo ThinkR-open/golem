@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/colinfay/git/github/thinkr-open/golem log --oneline -5 -- R/with_opt.R)",
+      "Bash(git -C /Users/colinfay/git/github/thinkr-open/golem log -p --follow -- R/with_opt.R)",
+      "Bash(curl -sL --max-time 30 https://cran.r-project.org/src/contrib/Archive/dockerfiler/dockerfiler_0.2.5.tar.gz -o dockerfiler_0.2.5.tar.gz)",
+      "Bash(tar -xzf dockerfiler_0.2.5.tar.gz)"
+    ]
+  }
+}
