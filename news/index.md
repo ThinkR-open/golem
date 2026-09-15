@@ -2,6 +2,8 @@
 
 ## golem 1.0.1
 
+CRAN release: 2026-07-07
+
 ### Bug fix
 
 - [`favicon()`](https://thinkr-open.github.io/golem/reference/favicon.md)
