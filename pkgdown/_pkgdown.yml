@@ -2,43 +2,44 @@ url: https://thinkr-open.github.io/golem/
 
 template:
   bootstrap: 5
-  theme: github-dark
+  theme: nord
   bslib:
-    pkgdown-nav-height: 100px
-    primary: "#7176b8"
-    info: "#f15521"
-    bg: "#fafafa"
-    fg: "#38424f"
-    navbar-brand-font-size: 2rem
-    navbar-light-brand-color: "#fafafa"
-    navbar-light-brand-hover-color: "#fafafa"
-    navbar-light-color: "#fafafa"
-    navbar-light-hover-color: "#fafafa"
-    navbar-light-toggler-border-color: "#fafafa"
-    link-color: "#f15521"
-    link-decoration: underline dotted
-    dropdown-link-active-bg: "#f15521"
-    code-bg: "#f155212b"
-    base_font: { google: "Rubik" }
-    heading_font: { google: "Rubik" }
+    # Palette, fonts and shapes shared with golemverse.org
+    pkgdown-nav-height: 64px
+    bg: "#FAF9F7"
+    fg: "#1E252C"
+    primary: "#F15522"
+    secondary: "#38424F"
+    info: "#7176B8"
+    border-color: "#E7E3DD"
+    border-radius: "8px"
+    link-color: "#D9471A"
+    link-hover-color: "#F15522"
+    link-decoration: none
+    code-color: "#38424F"
+    code-bg: "#F0EDE8"
+    pkgdown-footer-bg: "#1E252C"
+    pkgdown-footer-color: "#B8C0C9"
+    pkgdown-footer-border-color: "#1E252C"
+    base_font: { google: "IBM Plex Sans" }
+    heading_font: { google: { family: "Bricolage Grotesque", wght: "500..800" } }
+    code_font: { google: "IBM Plex Mono" }
 
 navbar:
-  bg: info
-  type: light
   structure:
     left: [reference, articles, resources, news]
-    right: [github, golemverse]
+    right: [search, github, golemverse]
   components:
     contribute:
       text: Contribute
-      href: articles/contribute.html
+      href: articles/g-contribute.html
     golemverse:
       icon: fas fa-toolbox
       href: https://golemverse.org/
       aria-label: Golemverse
     resources:
       text: Resources
-      href: articles/resources.html
+      href: articles/h-resources.html
 
 footer:
   structure:
