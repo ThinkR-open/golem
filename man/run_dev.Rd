@@ -29,7 +29,8 @@ Providing a value to this argument has no effect: the value is silently
 ignored, and \code{golem_wd} is used instead.}
 }
 \value{
-pure side-effect function; returns invisibly
+The value of the last expression of the \code{run_dev}-file (e.g. a
+\code{ShinyAppHandle} when it ends with \code{shiny::startApp(run_app())}).
 }
 \description{
 The default \code{file="dev/run_dev.R"} launches your \code{{golem}} app with a bunch
@@ -44,4 +45,15 @@ the content of an appropriate \code{run_dev}-file. Carefully read the content of
 \code{dev/run_dev.R} when creating your custom \code{run_dev}-file. It has already
 many useful settings including a switch between production/development,
 reloading the package in a clean \code{R} environment before running the app etc.
+
+\subsection{Non-blocking apps with \code{shiny::startApp()}}{
+
+The value of the last expression of the \code{run_dev}-file is returned by
+\code{run_dev()}. So with \code{{shiny}} >= 1.14.0, you can replace the last line of
+\code{dev/run_dev.R} with \code{shiny::startApp(run_app())}: the app is then served in
+the background, the R console stays available, and \code{run_dev()} returns the
+\code{ShinyAppHandle} (use \code{handle$stop()} to stop the app). Calling \code{run_dev()}
+again restarts the app, as \code{startApp()} stops any app already running in the
+session.
+}
 }

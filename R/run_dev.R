@@ -12,6 +12,16 @@
 #' many useful settings including a switch between production/development,
 #' reloading the package in a clean `R` environment before running the app etc.
 #'
+#' ## Non-blocking apps with `shiny::startApp()`
+#'
+#' The value of the last expression of the `run_dev`-file is returned by
+#' `run_dev()`. So with `{shiny}` >= 1.14.0, you can replace the last line of
+#' `dev/run_dev.R` with `shiny::startApp(run_app())`: the app is then served in
+#' the background, the R console stays available, and `run_dev()` returns the
+#' `ShinyAppHandle` (use `handle$stop()` to stop the app). Calling `run_dev()`
+#' again restarts the app, as `startApp()` stops any app already running in the
+#' session.
+#'
 #' @param file String with (relative) file path to a `run_dev.R`-file
 #' @param install_required_packages Boolean; if `TRUE` install the packages
 #'     used in `run_dev.R`-file
@@ -21,7 +31,8 @@
 #'
 #' @export
 #'
-#' @return pure side-effect function; returns invisibly
+#' @return The value of the last expression of the `run_dev`-file (e.g. a
+#'     `ShinyAppHandle` when it ends with `shiny::startApp(run_app())`).
 run_dev <- function(
 	file = "dev/run_dev.R",
 	golem_wd = get_golem_wd(),

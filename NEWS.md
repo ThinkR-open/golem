@@ -2,6 +2,12 @@
 
 # golem 1.0.1
 
+## New features
+
+- `run_dev()` documents how to use it with the non-blocking `shiny::startApp()`
+  of `{shiny}` 1.14.0: ending `dev/run_dev.R` with `shiny::startApp(run_app())`
+  returns the `ShinyAppHandle` and keeps the console free (#1253).
+
 ## Bug fix
 
 - `favicon()` no longer depends on `{fs}`. `favicon()` runs at app _runtime_
