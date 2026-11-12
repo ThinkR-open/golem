@@ -61,7 +61,7 @@ breaking changes before upgrading an existing
   [\#845](https://github.com/ThinkR-open/golem/issues/845)).
 
 - `get_sysreqs()` has been removed; use
-  [`dockerfiler::get_sysreqs()`](https://thinkr-open.github.io/dockerfiler/reference/get_sysreqs.html)
+  [`dockerfiler::get_sysreqs()`](https://github.com/ThinkR-open/dockerfiler/reference/get_sysreqs.html)
   instead.
 
 - `use_recommended_deps()` has been removed.
