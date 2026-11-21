@@ -4,6 +4,9 @@
 
 ## Bug fix
 
+- `fill_desc()` now writes the DESCRIPTION file located in `pkg` instead of
+  the one in the working directory, and no longer overwrites the working
+  directory's DESCRIPTION when `pkg` is elsewhere (#1255).
 - `favicon()` no longer depends on `{fs}`. `favicon()` runs at app _runtime_
   (it is called by `golem_add_external_resources()` in the deployed
   `app_ui.R`), but it used to build its href with the internal `fs_path()`
