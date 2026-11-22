@@ -65,7 +65,7 @@ with_golem_options <- function(
 		print <- FALSE
 	}
 
-	# Almost all cases will be ok with not explicitely printing the
+	# Almost all cases will be ok with not explicitly printing the
 	# application object, but for corner cases like direct shinyApp
 	# object manipulation, this feature can be turned on
 	if (print) {
