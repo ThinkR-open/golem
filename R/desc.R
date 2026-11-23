@@ -142,7 +142,7 @@ fill_desc <- function(
 	)
 	change_app_config_name(
 		name = pkg_name,
-		golem_wd = pkg
+		golem_wd = path
 	)
 	set_golem_name(
 		pkg_name,
@@ -173,7 +173,7 @@ fill_desc <- function(
 		)
 	)
 
-	desc$write(file = "DESCRIPTION")
+	desc$write(file = fs_path(path, "DESCRIPTION"))
 
 	cli_alert_success("DESCRIPTION file modified.")
 

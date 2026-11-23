@@ -1,5 +1,14 @@
 > Notes: the # between parenthesis refers to the related issue on GitHub, and the @ refers to an external contributor solving this issue.
 
+# golem 1.0.2
+
+## Bug fix
+
+- `fill_desc()` now writes the DESCRIPTION located in `pkg` instead of the one
+  in the working directory, which used to be overwritten when `pkg` was not the
+  working directory. The normalized path is also passed to
+  `change_app_config_name()` (#1255).
+
 # golem 1.0.1
 
 ## Bug fix
